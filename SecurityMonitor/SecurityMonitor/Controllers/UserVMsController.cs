@@ -20,10 +20,11 @@ namespace SecurityMonitor.Controllers
         public ActionResult Index()
         {
 
+            //Create a Role 
             if (!Roles.RoleExists("Admin"))
                 Roles.CreateRole("Admin");
 
-
+            //Assign a Role
             if (!Roles.IsUserInRole("ctoonzofficial@gmail.com", "Admin"))
                 Roles.AddUserToRole("ctoonzofficial@gmail.com", "Admin");
             //Roles.Enabled = true;
