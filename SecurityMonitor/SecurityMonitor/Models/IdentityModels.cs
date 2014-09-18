@@ -28,5 +28,7 @@ namespace SecurityMonitor.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SecurityMonitor.Models.UserVM> UserVMs { get; set; }
     }
 }
