@@ -26,5 +26,15 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<aspnet_Applications> aspnet_Applications { get; set; }
+        public virtual DbSet<aspnet_Membership> aspnet_Membership { get; set; }
+        public virtual DbSet<aspnet_Paths> aspnet_Paths { get; set; }
+        public virtual DbSet<aspnet_PersonalizationAllUsers> aspnet_PersonalizationAllUsers { get; set; }
+        public virtual DbSet<aspnet_PersonalizationPerUser> aspnet_PersonalizationPerUser { get; set; }
+        public virtual DbSet<aspnet_Profile> aspnet_Profile { get; set; }
+        public virtual DbSet<aspnet_Roles> aspnet_Roles { get; set; }
+        public virtual DbSet<aspnet_SchemaVersions> aspnet_SchemaVersions { get; set; }
+        public virtual DbSet<aspnet_Users> aspnet_Users { get; set; }
+        public virtual DbSet<aspnet_WebEvent_Events> aspnet_WebEvent_Events { get; set; }
     }
 }

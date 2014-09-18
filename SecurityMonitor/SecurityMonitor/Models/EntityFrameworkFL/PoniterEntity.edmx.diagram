@@ -5,7 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="27244b3a752345eb8230be442ac4611e" Name="Diagram1">
-        <EntityTypeShape EntityType="PointersecurityModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.User" Width="1.5" PointX="9.5" PointY="5" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Applications" Width="1.5" PointX="3.75" PointY="7.875" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Membership" Width="1.5" PointX="6" PointY="6.5" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Paths" Width="1.5" PointX="6" PointY="12.625" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="8.25" PointY="16" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="8.25" PointY="12.625" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Profile" Width="1.5" PointX="10.5" PointY="8.875" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Roles" Width="1.5" PointX="6" PointY="15.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_SchemaVersions" Width="1.5" PointX="7.75" PointY="4.25" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Users" Width="1.5" PointX="8.25" PointY="8.375" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_WebEvent_Events" Width="1.5" PointX="11.75" PointY="4.625" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Me__Appli__2D27B809" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Pa__Appli__66603565" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Ro__Appli__4F7CD00D" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Us__Appli__1920BF5C" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Me__UserI__2E1BDC42" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Pe__PathI__6E01572D" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Pe__PathI__73BA3083" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Pe__UserI__74AE54BC" />
+        <AssociationConnector Association="PointersecurityModel.FK__aspnet_Pr__UserI__440B1D61" />
+        <AssociationConnector Association="PointersecurityModel.aspnet_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

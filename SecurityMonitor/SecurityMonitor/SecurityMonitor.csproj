@@ -162,11 +162,40 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Membership.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Paths.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationAllUsers.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationPerUser.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Profile.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Roles.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_SchemaVersions.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Users.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\PoniterEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -210,6 +239,7 @@
     </Content>
     <Content Include="Models\EntityFrameworkFL\PoniterEntity.edmx.diagram">
       <DependentUpon>PoniterEntity.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Models\EntityFrameworkFL\PoniterEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -228,7 +258,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -258,11 +290,6 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
