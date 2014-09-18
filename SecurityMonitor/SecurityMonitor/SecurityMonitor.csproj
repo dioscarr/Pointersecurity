@@ -167,6 +167,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EntityFrameworkFL\AspNetRole.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUser.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUserClaim.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUserLogin.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
       <DependentUpon>PoniterEntity.tt</DependentUpon>
     </Compile>
@@ -197,6 +209,9 @@
     <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
       <DependentUpon>PoniterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\PoniterEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,6 +226,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PoniterEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\sysdiagram.cs">
+      <DependentUpon>PoniterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\User.cs">
       <DependentUpon>PoniterEntity.tt</DependentUpon>
