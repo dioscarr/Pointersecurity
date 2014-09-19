@@ -1,0 +1,90 @@
+﻿@model IEnumerable<SecurityMonitor.Models.EntityFrameworkFL.AspNetUser>
+
+@{
+    ViewBag.Title = "Pointer Security";
+}
+
+<h2>Users Management Dashboard</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            <p>Roles</p>
+        </th>
+        <th>
+           
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+           
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @{//Roles Dropdown
+                IEnumerable<SelectListItem> ListOfRoles = ViewBag.ListOfRoles;
+                @Html.DropDownListFor(model => item.AspNetRoles, ListOfRoles,
+                "Choose Make", new { @class = "form-control  ", id = "DropMake" })
+                @Html.ValidationMessageFor(model => item.AspNetRoles)
+            }
+
+        </td>
+        <td>
+            <button type="button" class="btn btn-default datattribute-user" data-user-value="@item.Id">Save</button>
+            <button type="button" class="btn btn-default datattribute-user" data-user-value="@item.Id">Details</button>
+            <button type="button" class="btn btn-success datattribute-user" data-user-value="@item.Id">Edit</button>
+            <button type="button" class="btn btn-danger datattribute-user" data-user-value="@item.Id">Delete</button>
+        </td>
+    </tr>
+}
+
+</table>
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+  
+
+
+   <script type="text/javascript">
+    $(document).ready(function () {
+
+        
+
+        //alert($('button').data('data-mySaveID'));
+        //console.log($('button').data('mydetails-id'));
+
+        $('.datattribute-user').on('click', function () {
+            var items_id = $(this).attr('data-user-value');
+            alert(items_id);
+
+        });
+    });
+
+
+  
+
+    </script>
+    
+        }
