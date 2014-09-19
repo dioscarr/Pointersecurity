@@ -309,11 +309,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\UserVMs\Create.cshtml" />
-    <Content Include="Views\UserVMs\Delete.cshtml" />
-    <Content Include="Views\UserVMs\Details.cshtml" />
-    <Content Include="Views\UserVMs\Edit.cshtml" />
-    <Content Include="Views\UserVMs\Index.cshtml" />
+    <Content Include="Views\UserVMs\UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
