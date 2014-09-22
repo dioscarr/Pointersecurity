@@ -13,10 +13,10 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PointersecurityEntities : DbContext
+    public partial class PointersecurityEntities1 : DbContext
     {
-        public PointersecurityEntities()
-            : base("name=PointersecurityEntities")
+        public PointersecurityEntities1()
+            : base("name=PointersecurityEntities1")
         {
         }
     
@@ -42,5 +42,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }

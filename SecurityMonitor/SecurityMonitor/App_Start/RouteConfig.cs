@@ -19,6 +19,10 @@ namespace SecurityMonitor
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute("UserVMs",
+               "UserVMs/UpdateRole/{UserID}/{RoleID}",
+               new { controller = "UserVMs", action = "UpdateRole", UserID = "", RoleID="" });
+
             routes.MapRoute(
               name: "ManageUseslist",
               url: "{userVM}/{UserList}/{id}",

@@ -17,11 +17,13 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public AspNetRole()
         {
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.Roles = new HashSet<Role>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

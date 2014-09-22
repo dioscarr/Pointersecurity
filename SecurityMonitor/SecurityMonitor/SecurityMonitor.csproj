@@ -162,76 +162,80 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserVMsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EntityFrameworkFL\AspNetRole.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\AspNetUser.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\AspNetUserClaim.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\AspNetUserLogin.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Membership.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Paths.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationAllUsers.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationPerUser.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Profile.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Roles.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_SchemaVersions.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Users.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PoniterEntity.Context.cs">
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PoniterEntity.Context.tt</DependentUpon>
+      <DependentUpon>PointerEntity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PoniterEntity.cs">
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PoniterEntity.Designer.cs">
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PoniterEntity.edmx</DependentUpon>
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Role.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\sysdiagram.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\User.cs">
-      <DependentUpon>PoniterEntity.tt</DependentUpon>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\UserVM.cs" />
@@ -247,23 +251,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EntityFrameworkFL\PoniterEntity.edmx">
+    <EntityDeploy Include="Models\EntityFrameworkFL\PointerEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PoniterEntity.Designer.cs</LastGenOutput>
+      <LastGenOutput>PointerEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EntityFrameworkFL\PoniterEntity.Context.tt">
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PoniterEntity.edmx</DependentUpon>
-      <LastGenOutput>PoniterEntity.Context.cs</LastGenOutput>
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+      <LastGenOutput>PointerEntity.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EntityFrameworkFL\PoniterEntity.edmx.diagram">
-      <DependentUpon>PoniterEntity.edmx</DependentUpon>
-      <SubType>Designer</SubType>
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.diagram">
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\EntityFrameworkFL\PoniterEntity.tt">
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PoniterEntity.edmx</DependentUpon>
-      <LastGenOutput>PoniterEntity.cs</LastGenOutput>
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+      <LastGenOutput>PointerEntity.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -313,6 +316,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Role\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

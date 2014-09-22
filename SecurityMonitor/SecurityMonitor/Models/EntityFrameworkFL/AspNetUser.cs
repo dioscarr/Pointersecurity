@@ -19,6 +19,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.Roles = new HashSet<Role>();
         }
     
         public string Id { get; set; }
@@ -37,5 +38,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }
