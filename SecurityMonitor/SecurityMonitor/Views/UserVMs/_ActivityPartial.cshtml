@@ -1,0 +1,95 @@
+﻿@*@model IEnumerable<SecurityMonitor.Models.ActivityLog>*@
+@model PagedList.IPagedList<SecurityMonitor.Models.ActivityLog>
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().FunctionPerformed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Message)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FunctionPerformed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+  
+</table>
+
+<div >
+    page @(Model.PageCount < Model.PageNumber ? 0: Model.PageNumber)
+    of @Model.PageCount
+
+    @if (Model.HasPreviousPage)
+    { 
+        <ul class="pagination">
+       <li> @Html.ActionLink("<<", "Userprofile", new { page = 1 })</li>
+        
+       <li> @Html.ActionLink("< Prev", "Userprofile", new { page = Model.PageNumber - 1 })</li>
+</ul>
+
+    }
+    else
+    {
+        <ul class="pagination">
+            <li><a href="#">First</a></li>
+            <li><a href="#">Prev</a></li>
+        </ul>
+
+    }
+
+    <ul class="pagination">
+        @for (var item = 1; item <= @Model.PageCount; item++ )
+        {
+             <li><a href="Userprofile?page=@item"> @item</a></li>
+        }
+        
+        </ul>
+
+        @if (Model.HasNextPage)
+        {
+            <ul class="pagination">
+                <li> @Html.ActionLink("Next >", "Userprofile", new { page = Model.PageNumber + 1 })</li>
+
+                <li>@Html.ActionLink(">>", "Userprofile", new { page = Model.PageCount })</li>
+            </ul>
+        }
+        else
+        {
+            <ul class="pagination">
+                <li><a href="#">Next</a></li>
+                <li><a href="#">Last</a></li>
+            </ul>
+        }
+</div>

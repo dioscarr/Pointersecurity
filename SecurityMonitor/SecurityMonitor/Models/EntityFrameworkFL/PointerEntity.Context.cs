@@ -43,5 +43,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<UserActivityLog> UserActivityLogs { get; set; }
     }
 }

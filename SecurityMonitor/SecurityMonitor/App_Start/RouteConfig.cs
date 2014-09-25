@@ -23,11 +23,18 @@ namespace SecurityMonitor
                "UserVMs/UpdateRole/{UserID}/{RoleID}",
                new { controller = "UserVMs", action = "UpdateRole", UserID = "", RoleID="" });
 
+            routes.MapRoute("Userprofile",
+             "UserVMs/Userprofile/{sortOrder}",
+             new { controller = "UserVMs", action = "Userprofile",  sortOrder = "" });
+
+
             routes.MapRoute(
               name: "ManageUseslist",
-              url: "{userVM}/{UserList}/{id}",
-              defaults: new { controller = "UserVM", action = "UserList", id = UrlParameter.Optional }
+              url: "{userVMs}/{UserList}/{id}",
+              defaults: new { controller = "UserVMs", action = "UserList", id = UrlParameter.Optional }
           );
+
+            
         }
     }
 }

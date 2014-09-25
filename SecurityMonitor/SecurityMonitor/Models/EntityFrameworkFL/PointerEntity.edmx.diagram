@@ -38,6 +38,8 @@
         <EntityTypeShape EntityType="PointersecurityModel.Role" Width="1.5" PointX="20.25" PointY="14.375" />
         <AssociationConnector Association="PointersecurityModel.FK_Role_AspNetRoles" />
         <AssociationConnector Association="PointersecurityModel.FK_Role_AspNetUsers" />
+        <EntityTypeShape EntityType="PointersecurityModel.UserActivityLog" Width="1.5" PointX="17.25" PointY="18.375" />
+        <AssociationConnector Association="PointersecurityModel.FK_UserActivityLog_AspNetUsers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3,12 +3,56 @@
 @{
     ViewBag.Title = "Pointer Security";
 }
+@{
 
-<h2>Users Management Dashboard</h2>
+}
+<h2>4530 Broadway Apt# 3K</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+<div class="container">
+    <div class="row col-md-12 " style="height:30px; margin-bottom:10px; ">
+        <div class="col-md-12 page-header text-center">
+            <h2>Dioscar's Activities</h2>
+        </div>
+    </div>
+    <div class="row col-md-12 " style="height:60px; margin-bottom:5px; ">
+        <div class="col-md-3 label label-default ">
+            <h3 class="text-left">
+                @Html.ActionLink("Event Performed", "Userprofile", new { sortOrder = ViewBag.FunctionSortParm })
+            </h3>
+        </div>
+        <div class="col-md-3 label label-default ">
+            <h3 class="text-left">
+                @Html.ActionLink("Date Created", "Userprofile", new { sortOrder = ViewBag.DateSortParm })
+            </h3>
+        </div>
+        <div class="col-md-6 label label-default ">
+            <h3 class="text-left">
+                Message
+            </h3>
+        </div>
+    </div>
+    @{ var myUserActivitiesLogVM = ViewBag.myUserActivitiesLogVM; }
+    @foreach (var item in myUserActivitiesLogVM.UserActivites)
+    {
+        <div class="row col-md-12 " style="border-bottom:1px solid white;">
+        </div>
+        <div class="row col-md-12 " style="height:40px; background:#F0F0F0 ;">
+            <div class="col-md-3 text-left"><p>@item.FunctionPerformed </p></div>
+            <div class="col-md-3 text-left"><p>@item.DateCreated</p> </div>
+            <div class="col-md-6 text-left"><p>@item.Message </p></div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+<!--==========================user information section===========================-->
+
+
 <table class="table">
     <tr>
         <th>
@@ -22,8 +66,12 @@
             <p>Roles</p>
         </th>
         <th>
-           
+          
         </th>
+        <th>
+
+        </th>
+
     </tr>
 
 @foreach (var item in Model) {
@@ -58,65 +106,74 @@
         </td>
     </tr>
 }
+   
 
 </table>
-@section scripts
+
+
+
+
+
+<div id="page-content">content</div>
+    <ul id="pagination-demo" class="pagination-sm"></ul>
+    @section scripts
 {
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-  
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+        <script src="~/Scripts/Pagination/jquery.twbsPagination.js"></script>
 
 
-   <script type="text/javascript">
-       $(document).ready(function () {
-           //======Role selector=====
-          
-           $('select').on("change", function () {
-               //grabs the value assigned to  data_dropdown_role attribute
-               var data_attr_dropdown = $(this).attr('data-dropdown-role');
-               //grabs the value from the option.. value attr
-               var option_value_attr = $('option:selected', this).attr('value');
-               var option_Text_attr = $('option:selected', this).text();
-               
-               //=======actionResultCall===========
-               if (option_value_attr != "")
-               {//you are inside 
-                   $.getJSON("/UserVMs/UpdateRole/", { UserID: data_attr_dropdown, RoleID: option_value_attr }, function (data) {
-                       $.each(data, function (i, Model) {
-                           // Model has two properties. value and text. the Model can contain 1 or more rows
-                           if(Model.Text == option_Text_attr)
-                           { 
-                               $('#' + data_attr_dropdown).html(Model.Text);
-                           }
-                       });
-                       //Good place to assign the return data to the Role collumn
-                   });
-
-               }
-           });
-           $('.datattribute-user').on('click', function () {
-               var items_id = $(this).attr('data-user-value');
-               alert(items_id);
-
-           });
-
-           //<=================Call Action that return Json data=======>
-           $('.data-dropdown-role-class').change(function () {
-
-              
-               if ($('.data-dropdown-role-class > option:selected').attr("value") != "undefined") {
-
-                   
-                  
-               }
-           });
-
-       });
+        <script type="text/javascript">
+    $(document).ready(function () {
+        //======Role selector=====
 
 
-  
 
-    </script>
-    
-        }
+        $('select').on("change", function () {
+            //grabs the value assigned to  data_dropdown_role attribute
+            var data_attr_dropdown = $(this).attr('data-dropdown-role');
+            alert(data_attr_dropdown);
+            //grabs the value from the option.. value attr
+            var option_value_attr = $('option:selected', this).attr('value');
+            var option_Text_attr = $('option:selected', this).text();
+
+            //=======actionResultCall===========
+            if (option_value_attr != "") {//you are inside
+                $.getJSON("/UserVMs/UpdateRole/", { UserID: data_attr_dropdown, RoleID: option_value_attr }, function (data) {
+                    $.each(data, function (i, Model) {
+                        // Model has two properties. value and text. the Model can contain 1 or more rows
+                        if (Model.Text == option_Text_attr) {
+                            $('#' + data_attr_dropdown).html(Model.Text);
+                        }
+                    });
+                    //Good place to assign the return data to the Role collumn
+                });
+
+            }
+        });
+        $('.datattribute-user').on('click', function () {
+            var items_id = $(this).attr('data-user-value');
+            alert(items_id);
+
+        });
+
+        //<=================Call Action that return Json data=======>
+        $('.data-dropdown-role-class').change(function () {
+
+
+            if ($('.data-dropdown-role-class > option:selected').attr("value") != "undefined") {
+
+
+
+            }
+        });
+
+    });
+
+
+
+
+        </script>
+    }
