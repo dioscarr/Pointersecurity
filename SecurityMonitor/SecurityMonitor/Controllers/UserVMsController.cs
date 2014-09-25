@@ -171,7 +171,7 @@ namespace SecurityMonitor.Controllers
 
         //==========================Activity partial view ==============
 
-        public ActionResult Userprofile(int ? page) 
+        public ActionResult Userprofile(int ? page, string searchBy, string search ) 
         {
             var currentUserID = User.Identity.GetUserId();
             if (Request.HttpMethod != "GET")
@@ -179,27 +179,41 @@ namespace SecurityMonitor.Controllers
                 page = 1; // after post reset page to 1
 
             }
-            int pageSize = 1;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             //=================user activity===============================
             var myUserActivitiesLogVM = new UserActivityLogVM();
             if (User.Identity.IsAuthenticated != false)
             {
                 string myUserID = User.Identity.GetUserId().ToString();
-                
 
-                myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
-                           .Where(UAL => UAL.UserID == myUserID)
-                           .Select(UAL => new ActivityLog
-                           {
-                               UserID = UAL.UserID,
-                               ID = UAL.ID,
-                               DateCreated = UAL.DateOfEvent,
-                               FunctionPerformed = UAL.Function_Performed,
-                               Message = UAL.Message
-                           }).ToList();
+                if (searchBy == "Function" && String.IsNullOrEmpty(search) == false)
+                {
+                    myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                               .Where(UAL => UAL.UserID == myUserID && UAL.Function_Performed.Contains(search))
+                               .Select(UAL => new ActivityLog
+                               {
+                                   UserID = UAL.UserID,
+                                   ID = UAL.ID,
+                                   DateCreated = UAL.DateOfEvent,
+                                   FunctionPerformed = UAL.Function_Performed,
+                                   Message = UAL.Message
+                               }).ToList();
 
-
+                }
+                else
+                {
+                    myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                              .Where(UAL => UAL.UserID == myUserID)
+                              .Select(UAL => new ActivityLog
+                              {
+                                  UserID = UAL.UserID,
+                                  ID = UAL.ID,
+                                  DateCreated = UAL.DateOfEvent,
+                                  FunctionPerformed = UAL.Function_Performed,
+                                  Message = UAL.Message
+                              }).ToList();
+                }
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM; 
             }
 
