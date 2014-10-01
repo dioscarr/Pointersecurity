@@ -39,6 +39,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileHelpers">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.DataLink">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.DataLink.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.ExcelStorage">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.ExcelStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Excel">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.Office">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcPaging">
       <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
@@ -170,6 +187,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BuildingController.cs" />
+    <Compile Include="Controllers\CsvModelBinder.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserVMsController.cs" />
@@ -177,6 +196,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApartmentVM.cs" />
+    <Compile Include="Models\BuildingInfoVM.cs" />
+    <Compile Include="Models\ClientsVM.cs" />
+    <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\AspNetRole.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -219,6 +244,12 @@
     <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Building.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Client.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -249,6 +280,7 @@
     <Compile Include="Models\EntityFrameworkFL\UserActivityLog.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\TenantVM.cs" />
     <Compile Include="Models\UserActivityLogVM.cs" />
@@ -294,6 +326,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\TimePicket\jquery.datetimepicker.css" />
+    <Content Include="Scripts\TimePicket\jquery.datetimepicker.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -330,6 +364,13 @@
     <Content Include="Views\UserVMs\UserList.cshtml" />
     <Content Include="Views\UserVMs\_ActivityPartial.cshtml" />
     <Content Include="Views\UserVMs\Userprofile.cshtml" />
+    <Content Include="Views\UserVMs\_BuildingInfo.cshtml" />
+    <Content Include="Views\Building\AddApartment.cshtml" />
+    <Content Include="Views\Building\Show.cshtml" />
+    <Content Include="Views\Building\ClientIndex.cshtml" />
+    <Content Include="Views\Building\AddClient.cshtml" />
+    <Content Include="Views\Building\AddBuilding.cshtml" />
+    <Content Include="Views\Building\BuildingIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

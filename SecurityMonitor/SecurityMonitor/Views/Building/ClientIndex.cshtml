@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SecurityMonitor.Models.ClientsVM>
+
+@{
+    ViewBag.Title = "ClientIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ClientIndex</h2>
+
+<p>
+    @Html.ActionLink("Add a new client", "AddClient")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingCount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <button type="button" 
+                    class="btn btn-link" 
+                    onclick="location.href = '@Url.Action("BuildingIndex", "Building", new {ClientID = item.ID })'">
+                    @Html.DisplayFor(modelItem => item.ClientName)
+            </button>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingCount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -34,6 +34,9 @@ namespace SecurityMonitor
               defaults: new { controller = "UserVMs", action = "UserList", id = UrlParameter.Optional }
           );
 
+            routes.MapRoute("AddApartment",
+           "Building/AddApartment/{buildingID}",
+           new { controller = "Building", action = "AddApartment", buildingID = "" });
             
         }
     }

@@ -24,6 +24,11 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public ActionResult UserList(string sortOrder)
         {
+            
+            
+            
+            
+            
             var currentUserID = User.Identity.GetUserId();
 
            
@@ -179,18 +184,30 @@ namespace SecurityMonitor.Controllers
                 page = 1; // after post reset page to 1
 
             }
-            int pageSize = 10;
+            int pageSize = 8;
             int pageNumber = (page ?? 1);
             //=================user activity===============================
             var myUserActivitiesLogVM = new UserActivityLogVM();
             if (User.Identity.IsAuthenticated != false)
             {
                 string myUserID = User.Identity.GetUserId().ToString();
+                if (page == null && searchBy != null && search != null)
+                {
+                    ViewBag.searchBy = searchBy;
+                    ViewBag.search = search;
+                }
+                if (page != null && searchBy != null && search != null)
+                {
+                    ViewBag.searchBy = searchBy;
+                    ViewBag.search = search;
+                }
 
-                if (searchBy == "Function" && String.IsNullOrEmpty(search) == false)
+
+                //=============Search=================
+                if (searchBy == "Function" )
                 {
                     myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
-                               .Where(UAL => UAL.UserID == myUserID && UAL.Function_Performed.Contains(search))
+                               .Where(UAL => UAL.UserID == myUserID && UAL.Function_Performed.Contains(search) || search==null)
                                .Select(UAL => new ActivityLog
                                {
                                    UserID = UAL.UserID,
@@ -200,6 +217,42 @@ namespace SecurityMonitor.Controllers
                                    Message = UAL.Message
                                }).ToList();
 
+                }
+
+                else if (searchBy == "Date")
+                {
+                    DateTime myvar = new DateTime();
+                    if (DateTime.TryParse(search, out myvar))
+                    {
+                        string actualdate = search.Substring(0, 10);
+                        DateTime theTime = Convert.ToDateTime(actualdate);
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                                   .Where(UAL => UAL.UserID == myUserID && UAL.DateOfEvent == theTime)
+                                   .Select(UAL => new ActivityLog
+                                   {
+                                       UserID = UAL.UserID,
+                                       ID = UAL.ID,
+                                       DateCreated = UAL.DateOfEvent,
+                                       FunctionPerformed = UAL.Function_Performed,
+                                       Message = UAL.Message
+                                   }).ToList();
+                    }
+                    else 
+                    {
+                        ViewBag.ItisNotaDay = search;
+
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                             .Where(UAL => UAL.UserID == myUserID)
+                             .Select(UAL => new ActivityLog
+                             {
+                                 UserID = UAL.UserID,
+                                 ID = UAL.ID,
+                                 DateCreated = UAL.DateOfEvent,
+                                 FunctionPerformed = UAL.Function_Performed,
+                                 Message = UAL.Message,
+
+                             }).ToList();
+                    }
                 }
                 else
                 {
@@ -211,29 +264,47 @@ namespace SecurityMonitor.Controllers
                                   ID = UAL.ID,
                                   DateCreated = UAL.DateOfEvent,
                                   FunctionPerformed = UAL.Function_Performed,
-                                  Message = UAL.Message
+                                  Message = UAL.Message,
+
                               }).ToList();
                 }
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM; 
             }
 
+            int  buidingID= 1;
+          var buildinginfo = db.Buildings
+                .Where(c => c.ID == buidingID)
+                .Select(c => new BuildingInfoVM {
+                    ID = c.ID,
+                    BuildingName = c.BuildingName,
+                    BuildingPhone = c.BuildingPhone,
+                    Address =c.Address,
+                    City = c.City,
+                    ZipCode = c.Zipcode,
+                    Manager = c.Manager,
+                    NumberOfApart = (int)c.NumberOfApartment,
+                    States = c.State
+                }).First();
+          //var buildinginfo = new BuildingInfoVM
+          //{
+          //    ID = 1,
+          //    BuildingName = "",
+          //    BuildingPhone = "2122559986",
+          //    Address = "745 Brandon ave",
+          //    City = "Manhattan",
+          //    ZipCode = "10018",
+          //    Manager = "Chris Carter",
+          //    NumberOfApart = 20,
+          //    States = "NY"
+          //};
+            
+            ViewBag.buildingInfo = buildinginfo;
             return PartialView(myUserActivitiesLogVM.UserActivites.ToPagedList(pageNumber, pageSize));
         }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        public PartialViewResult ActivityPartial()
-        {
-
-
-            return PartialView();
-        }
+        //TODO: check op this action. this might not be in use.
+       
+        //==================Building Information================
+      
 
      }   
 }

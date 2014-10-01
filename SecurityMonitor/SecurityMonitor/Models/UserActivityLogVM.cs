@@ -11,6 +11,7 @@ namespace SecurityMonitor.Models
 
         public List<ActivityLog> UserActivites { get; set; }
         public UserVM userVM { get; set; }
+        
     }
 
     public class ActivityLog
@@ -20,5 +21,6 @@ namespace SecurityMonitor.Models
         public string FunctionPerformed { get; set; }
         public DateTime DateCreated { get; set; }
         public string Message { get; set; }
+        public BuildingInfoVM BuildingInfo { get; set; }
     }
 }

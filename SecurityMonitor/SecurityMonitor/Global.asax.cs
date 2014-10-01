@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using SecurityMonitor.Models;
+using SecurityMonitor.Controllers;
 
 
 namespace SecurityMonitor
@@ -20,6 +21,7 @@ namespace SecurityMonitor
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<ApplicationDbContext>(null);
+            ModelBinders.Binders.Add(typeof(EventItem[]), new CsvModelBinder<EventItem>());
         }
     }
 }

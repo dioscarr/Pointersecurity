@@ -15,6 +15,15 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FloorNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="aspnet_Applications">
           <Key>
             <PropertyRef Name="ApplicationId" />
@@ -197,6 +206,29 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="NumberOfApartment" Type="int" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="BuildingPhone" Type="nvarchar" MaxLength="10" />
+          <Property Name="Manager" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BuildingCount" Type="int" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
@@ -368,6 +400,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Apartment_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buildings_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -462,6 +518,7 @@
         </Association>
         <EntityContainer Name="PointersecurityModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Apartment" EntityType="Self.Apartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" Schema="dbo" store:Type="Tables" />
@@ -478,6 +535,8 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -525,6 +584,14 @@
           <AssociationSet Name="FK__aspnet_Us__UserI__5535A963" Association="Self.FK__aspnet_Us__UserI__5535A963">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apartment_Buildings" Association="Self.FK_Apartment_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buildings_Clients" Association="Self.FK_Buildings_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Buildings" EntitySet="Buildings" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -642,6 +709,17 @@
           <AssociationSet Name="FK_UserActivityLog_AspNetUsers" Association="PointersecurityModel.FK_UserActivityLog_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="UserActivityLog" EntitySet="UserActivityLogs" />
+          </AssociationSet>
+          <EntitySet Name="Clients" EntityType="PointersecurityModel.Client" />
+          <EntitySet Name="Apartments" EntityType="PointersecurityModel.Apartment" />
+          <EntitySet Name="Buildings" EntityType="PointersecurityModel.Building" />
+          <AssociationSet Name="FK_Apartment_Buildings" Association="PointersecurityModel.FK_Apartment_Buildings">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Apartment" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buildings_Clients" Association="PointersecurityModel.FK_Buildings_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Building" EntitySet="Buildings" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1071,6 +1149,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingCount" Type="Int32" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Client" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApartmentNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FloorNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Building" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Apartment" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfApartment" Type="Int32" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="BuildingPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Apartments" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Building" ToRole="Apartment" />
+          <NavigationProperty Name="Client" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Building" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Apartment_Buildings">
+          <End Type="PointersecurityModel.Building" Role="Building" Multiplicity="1" />
+          <End Type="PointersecurityModel.Apartment" Role="Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buildings_Clients">
+          <End Type="PointersecurityModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="PointersecurityModel.Building" Role="Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1319,6 +1457,41 @@
                 <ScalarProperty Name="DateOfEvent" ColumnName="DateOfEvent" />
                 <ScalarProperty Name="Function_Performed" ColumnName="Function Performed" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="PointersecurityModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="BuildingCount" ColumnName="BuildingCount" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apartments">
+            <EntityTypeMapping TypeName="PointersecurityModel.Apartment">
+              <MappingFragment StoreEntitySet="Apartment">
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="FloorNumber" ColumnName="FloorNumber" />
+                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="PointersecurityModel.Building">
+              <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="BuildingPhone" ColumnName="BuildingPhone" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="NumberOfApartment" ColumnName="NumberOfApartment" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
