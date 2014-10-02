@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CsvModelBinder.cs" />
+    <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserVMsController.cs" />
@@ -377,6 +378,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\GoogleMaps\" />
     <Folder Include="Views\Roles\" />
     <Folder Include="Views\Role\" />
     <Folder Include="Views\User\" />

@@ -7,35 +7,48 @@
 
 <div class="container">
 
-    <div class="row col-md-12" style="background:#EFEFEF;">
+    <div class="row col-md-12" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
 
-        <div class="col-md-4">
+        <div class="col-md-4" >
             @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
         </div>
 
         <div class="col-md-3 ">
-            <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam></div>
+            <div class="col-md-12">
+                <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam>
+            </div>
+            <div class="col-md-12">
 
+
+                <button type="button"
+                        class="btn btn btn-success"
+                        onclick="location.href = '@Url.Action("AddApartment", "Building", new {BuildingID = ViewBag.buildingInfo.ID})'">
+                    ....Add Apartment(s)....
+                </button>
+                
+            </div>
+            <br />
+        </div>
         <div class="col-md-5" >
-           
-        </div>
-        <div class="row col-md-12">@Html.ActionLink("Add Apartment","AddApartment", "Building", new{BuildingID = ViewBag.buildingInfo.ID},null)</div>
-    </div>
-    <div class="row col-md-12" style="background:#EFEFEF;"><hr/></div>
+            <div id="map" style="height:200px; margin-top:15px; border:1px solid black;"></div></div>
+         </div>
+    
 
-    <div class="row col-md-12">
-        
-        @{var apartmentList = ViewBag.apartmentlist;}
+    <div class="row col-md-12" style="border:1px solid lightgrey;">
 
-        @foreach (var item in apartmentList) { 
-        
-        <div class="col-md-1">
-            <button class="btn btn-info" style="margin:7px;">@item.ApartmentNumber</button>
+        <div style=" margin-top:20px; margin-bottom:20px;" >
+            @{var apartmentList = ViewBag.apartmentlist;}
+
+            @foreach (var item in apartmentList)
+            {
+
+                <div class="col-md-1">
+                    <button class="btn btn-info" style="margin:7px;">@item.ApartmentNumber</button>
+                </div>
+
+
+            }
         </div>
-        
-        
-        }
-        
 
     </div>
 
@@ -59,11 +72,75 @@
         <script src="~/Scripts/Pagination/jquery.twbsPagination.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
+                 Collapse | Copy Code
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
+</script>
+
+
+
         <script type="text/javascript">
             $(document).ready(function (e) {
 
+                //googlemaps 
 
+                //function InitializeMap() {
+                //    google.maps.Geocoder(function () {
+
+                //    })
+                //    //var latlng = new google.maps.LatLng(-34.397, 150.644);
+                //    var myOptions = {
+                //        zoom: 8,
+                //        center: latlng,
+                //        mapTypeId: google.maps.MapTypeId.ROADMAP
+                //    };
+                //    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+                //}
+                //window.onload = InitializeMap;
+    
+                var data_address = $('.googlemapsdata').attr('data-address');
+                var data_city = $('.googlemapsdata-city').attr('data-city');
+                var data_state = $('.googlemapsdata-state').attr('data-state');
+                var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
+                var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
               
+               
+                initialize();
+                codeAddress();
+
+                //========initializes the map======================================
+                var geocoder;
+                var map;
+                function initialize() {
+                    geocoder = new google.maps.Geocoder();
+                    var latlng = new google.maps.LatLng(-34.397, 150.644);
+                    var mapOptions = {
+                        zoom: 16,
+                        center: latlng
+                       // mapTypeId: google.maps.MapTypeId.SATELLITE
+                    }
+                    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                }
+                //============This section search your address
+                function codeAddress() {
+                    var address = BuildingAddress;
+                    geocoder.geocode({ 'address': address }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            map.setCenter(results[0].geometry.location);
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: results[0].geometry.location
+                            });
+                        } else {
+                            alert("Geocode was not successful for the following reason: " + status);
+                        }
+                    });
+                }
+
+
+
+                //google maps ends
+              
+
                 
                 $('#datetimepicker').focusin(function () {
                     $('#radio-btn-date').prop("checked", true).trigger('change');
