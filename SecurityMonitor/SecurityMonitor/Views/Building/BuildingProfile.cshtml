@@ -13,56 +13,33 @@
             @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
         </div>
 
-        <div class="col-md-2 ">
+        <div class="col-md-3 ">
             <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam></div>
 
-        <div class="col-md-6" >
-            <div class="col-md-12" style="margin-top:6px; background:white;">
-                <div class="row col-md-12" >
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1A</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1B</button>
-                    </div>
-                    <div class="col-md-2" >
-                        <button class="btn btn-default" style="margin:7px;">1C</button>
-                    </div>
-                    <div class="col-md-2" >
-                        <button class="btn btn-default" style="margin:7px;">1D</button>
-                    </div>
-                    <div class="col-md-2" >
-                        <button class="btn btn-default" style="margin:7px;">1E</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1F</button>
-                    </div>
-
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1A</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1B</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1C</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1D</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1E</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-default" style="margin:7px;">1F</button>
-                    </div>
-                    
-                </div>
-            </div>
+        <div class="col-md-5" >
+           
         </div>
         <div class="row col-md-12">@Html.ActionLink("Add Apartment","AddApartment", "Building", new{BuildingID = ViewBag.buildingInfo.ID},null)</div>
     </div>
     <div class="row col-md-12" style="background:#EFEFEF;"><hr/></div>
+
+    <div class="row col-md-12">
+        
+        @{var apartmentList = ViewBag.apartmentlist;}
+
+        @foreach (var item in apartmentList) { 
+        
+        <div class="col-md-1">
+            <button class="btn btn-info" style="margin:7px;">@item.ApartmentNumber</button>
+        </div>
+        
+        
+        }
+        
+
+    </div>
+
+   
 
     
     </div>

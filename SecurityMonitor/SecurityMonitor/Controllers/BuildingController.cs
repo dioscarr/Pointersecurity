@@ -61,8 +61,6 @@ namespace SecurityMonitor.Controllers
                 return null;
             }
 
-
-
             return RedirectToAction("ClientIndex");
         }
 
@@ -211,7 +209,21 @@ namespace SecurityMonitor.Controllers
                   }).First();
 
             ViewBag.buildingInfo = buildinginfo;
-            return View();
+
+            //building profile appartmentlist
+            var apartmentlist = db.Apartments
+                .Where(c => c.BuildingID == BuildingID)
+                .Select(c => new ApartmentVM { 
+                 ApartmentNumber = c.ApartmentNumber
+           
+                }).ToList();
+            ViewBag.apartmentlist = apartmentlist;
+
+
+
+            
+
+            return View( );
         }
 
         //=====================Activity Log=======================
@@ -315,6 +327,15 @@ namespace SecurityMonitor.Controllers
         }
 
 
+        //====================apartmenprofile ==========-==========
+
+        [HttpGet]
+        public ActionResult ApparmentProfile(int? ApartmentID) 
+        {
+
+
+            return View();
+        }
        
 
 
