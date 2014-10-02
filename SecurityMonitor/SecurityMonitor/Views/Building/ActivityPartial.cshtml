@@ -1,0 +1,400 @@
+﻿@*@model IEnumerable<SecurityMonitor.Models.ActivityLog>*@
+@model PagedList.IPagedList<SecurityMonitor.Models.ActivityLog>
+
+@{
+    ViewBag.Title = "Userprofile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("ActivityPartial", "Building", FormMethod.Get))
+{
+    <div class="container">
+        
+        <div class="row col-md-12" style="background:lightgrey;">
+
+
+            <div class="col-md-3">
+               
+                <h5>Search By Event</h5>
+            </div>
+            <div class="col-md-3">
+
+               <h5>Search By Date</h5>
+               
+            </div>
+            <div class="col-md-6"></div>
+            </div>
+       
+        <div class="row col-md-12" style="background:lightgrey; height:50px;">
+
+
+            <div class=" col-md-3">
+               
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="radio" id="Function">
+                        </span>
+                        <input type="text"  class="form-control" id="input-search">
+                    </div><!-- /input-group -->
+                
+            </div>
+            <div class=" col-md-3">
+                
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="radio" id="radio-btn-date">
+                        </span>
+                        <input type="text" class="form-control"  id="datetimepicker" >
+                    </div><!-- /input-group -->
+              
+            </div>
+
+            <div class=" col-md-3 ">
+                <input type="submit" value="Search" class="btn btn-success" />
+
+            </div>
+            <div class=" col-md-3">
+                
+                <div class="row">
+
+
+                    
+                   
+                </div><!-- /.row -->
+            </div>
+
+        </div>
+
+        <div class="row col-md-12">
+            <div>
+                page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                of @Model.PageCount
+
+                @if (Model.HasPreviousPage)
+            {
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "ActivityPartial", new { page = 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li> @Html.ActionLink("Prev", "ActivityPartial", new { page = Model.PageNumber - 1, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+
+                else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "ActivityPartial", new { page = 1})</li>
+
+                        <li> @Html.ActionLink("Prev", "ActivityPartial", new { page = Model.PageNumber - 1 })</li>
+                    </ul>
+                }
+
+            }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">First</a></li>
+                        <li><a href="#">Prev</a></li>
+                    </ul>
+
+            }
+                @{
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+
+                    <ul class="pagination pagination-sm">
+                        @for (var item = 1; item <= @Model.PageCount; item++)
+                        {
+                            <li><a href="ActivityPartial?page=@item&SearchBy=@searchBy&Search=@search">@item</a></li>
+                        }
+                    </ul>
+                }
+                else if (ViewBag.searchBy == null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+                    <ul class="pagination pagination-sm">
+                        @for (var item = 1; item <= @Model.PageCount; item++)
+                        {
+                            <li><a href="ActivityPartial?page=@item">@item</a></li>
+                        }
+                    </ul>
+                }
+                }
+
+
+                @if (Model.HasNextPage)
+            {
+                 if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "ActivityPartial", new { page = Model.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li>@Html.ActionLink("Last", "ActivityPartial", new { page = Model.PageCount, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+                 else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "ActivityPartial", new { page = Model.PageNumber + 1 })</li>
+
+                        <li>@Html.ActionLink("Last", "ActivityPartial", new { page = Model.PageCount })</li>
+                    </ul>
+                 }
+                }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">Next</a></li>
+                        <li><a href="#">Last</a></li>
+                    </ul>
+            }
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().FunctionPerformed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().DateCreated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Message)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FunctionPerformed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Message)
+                        </td>
+                        <td>
+                            
+                            
+                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                Details<i class="glyphicon glyphicon-cog"> </i>
+                                <span class="sr-only">See More Details</span>
+                            </a>
+                           
+                        </td>
+                    </tr>
+            }
+
+            </table>
+        </div>
+        <div class="row col-md-12">
+            <div>
+                page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                of @Model.PageCount
+
+                @if (Model.HasPreviousPage)
+            {
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "ActivityPartial", new { page = 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li> @Html.ActionLink("Prev", "ActivityPartial", new { page = Model.PageNumber - 1, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+
+                else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "ActivityPartial", new { page = 1 })</li>
+
+                        <li> @Html.ActionLink("Prev", "ActivityPartial", new { page = Model.PageNumber - 1 })</li>
+                    </ul>
+                }
+
+            }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">First</a></li>
+                        <li><a href="#">Prev</a></li>
+                    </ul>
+
+            }
+                @{
+    if (ViewBag.searchBy != null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+
+        <ul class="pagination pagination-sm">
+            @for (var item = 1; item <= @Model.PageCount; item++)
+            {
+                <li><a href="ActivityPartial?page=@item&SearchBy=@searchBy&Search=@search">@item</a></li>
+            }
+        </ul>
+    }
+    else if (ViewBag.searchBy == null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+        <ul class="pagination pagination-sm">
+            @for (var item = 1; item <= @Model.PageCount; item++)
+            {
+                <li><a href="ActivityPartial?page=@item">@item</a></li>
+            }
+        </ul>
+    }
+                }
+
+
+                @if (Model.HasNextPage)
+            {
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "ActivityPartial", new { page = Model.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li>@Html.ActionLink("Last", "ActivityPartial", new { page = Model.PageCount, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+                else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "ActivityPartial", new { page = Model.PageNumber + 1 })</li>
+
+                        <li>@Html.ActionLink("Last", "ActivityPartial", new { page = Model.PageCount })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">Next</a></li>
+                        <li><a href="#">Last</a></li>
+                    </ul>
+            }
+            </div>
+        </div>
+
+
+
+
+        
+    </div>
+}
+
+@section scripts
+{
+
+    <link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Scripts/Pagination/jquery.twbsPagination.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function (e) {
+
+
+
+
+                $('#datetimepicker').focusin(function () {
+                    $('#radio-btn-date').prop("checked", true).trigger('change');
+                    $('#Function').attr('checked', false);
+
+
+
+                });
+
+                    $('#input-search').focusin(function () {
+
+                        $('#Function').prop("checked", true).trigger("change");
+                        $('#radio-btn-date').attr('checked', false);
+
+
+
+                    });
+
+
+
+
+
+                //==============Datepicker settings=================================
+                $('#datetimepicker').datetimepicker({
+                    timepicker: false,
+                    formatDate: 'y.m.d'
+
+                });
+
+                //=============DateTimePicker plugin settings ends====================
+
+                //=============Radio button functions ================================
+                $('#Function').change(function () {
+                    //alert('yes');
+                    if ($('#Function').is(':Checked'))
+                    {
+                        $('#input-search').attr("name", "search");
+                        $('#Function').attr("name", "searchBy").val('Function');
+                        $('#radio-btn-date').attr('Checked', false);
+
+                        $('#datetimepicker').removeAttr("name");
+                        //alert('yes');
+                    }
+                    else if (!$('#Function').is(':Checked'))
+                    {
+                        $('#input-search').removeAttr("name");
+                        $('#Function').removeAttr("name");
+                        //alert('yes');
+                    }
+                });
+
+                $('#radio-btn-date').change(function () {
+                    //alert('yes');
+                    if ($('#radio-btn-date').is(':Checked')) {
+                        $('#datetimepicker').attr("name", "search");
+                        $('#radio-btn-date').attr("name", "searchBy").val('Date');
+                        $('#Function').attr('Checked', false);
+                        $('#input-search').removeAttr("name");
+                        //alert('yes');
+                    }
+                    else if (!$('#radio-btn-date').is(':Checked')) {
+                        $('#datetimepicker').removeAttr("name");
+                        $('#radio-btn-date').removeAttr("name");
+                        //alert('yes');
+                    }
+                });
+                //===============Radio buttons functions ends==================
+
+            });
+    </script>
+
+}   

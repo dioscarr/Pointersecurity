@@ -176,7 +176,7 @@ namespace SecurityMonitor.Controllers
 
         //==========================Activity partial view ==============
 
-        public ActionResult Userprofile(int ? page, string searchBy, string search ) 
+        public ActionResult Userprofile(int ? page, string searchBy, string search, int? BuildingID ) 
         {
             var currentUserID = User.Identity.GetUserId();
             if (Request.HttpMethod != "GET")
@@ -271,9 +271,16 @@ namespace SecurityMonitor.Controllers
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM; 
             }
 
-            int  buidingID= 1;
+            if (BuildingID !=null)
+            {
+                Session["BuildingID"] = BuildingID;
+            }
+            else
+            {
+                BuildingID = (int)Session["BuildingID"];
+            }
           var buildinginfo = db.Buildings
-                .Where(c => c.ID == buidingID)
+                .Where(c => c.ID == BuildingID)
                 .Select(c => new BuildingInfoVM {
                     ID = c.ID,
                     BuildingName = c.BuildingName,
@@ -285,20 +292,10 @@ namespace SecurityMonitor.Controllers
                     NumberOfApart = (int)c.NumberOfApartment,
                     States = c.State
                 }).First();
-          //var buildinginfo = new BuildingInfoVM
-          //{
-          //    ID = 1,
-          //    BuildingName = "",
-          //    BuildingPhone = "2122559986",
-          //    Address = "745 Brandon ave",
-          //    City = "Manhattan",
-          //    ZipCode = "10018",
-          //    Manager = "Chris Carter",
-          //    NumberOfApart = 20,
-          //    States = "NY"
-          //};
             
             ViewBag.buildingInfo = buildinginfo;
+
+
             return PartialView(myUserActivitiesLogVM.UserActivites.ToPagedList(pageNumber, pageSize));
         }
         //TODO: check op this action. this might not be in use.

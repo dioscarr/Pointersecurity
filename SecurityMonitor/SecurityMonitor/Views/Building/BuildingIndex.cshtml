@@ -45,7 +45,7 @@
             <button 
                      type="button"
                      class="btn btn-link"
-                     onclick="location.href = '@Url.Action("Userprofile", "UserVMs")'">
+                     onclick="location.href = '@Url.Action("BuildingProfile", "Building", new {BuildingID = item.ID})'">
                     @Html.DisplayFor(modelItem => item.BuildingName)
             </button>
         </td>

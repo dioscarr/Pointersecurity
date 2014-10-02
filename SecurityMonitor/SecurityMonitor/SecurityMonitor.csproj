@@ -371,6 +371,9 @@
     <Content Include="Views\Building\AddClient.cshtml" />
     <Content Include="Views\Building\AddBuilding.cshtml" />
     <Content Include="Views\Building\BuildingIndex.cshtml" />
+    <Content Include="Views\Building\ActivityPartial.cshtml" />
+    <Content Include="Views\Building\BuildingProfile.cshtml" />
+    <Content Include="Views\Building\_BuildingInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
