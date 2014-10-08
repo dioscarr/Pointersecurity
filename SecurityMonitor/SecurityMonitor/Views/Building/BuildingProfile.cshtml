@@ -1,215 +1,312 @@
-﻿@using SecurityMonitor.Models;
+﻿@model PagedList.IPagedList<SecurityMonitor.Models.ApartmentVM>
+@using SecurityMonitor.Models;
 
 @{
     ViewBag.Title = "Userprofile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get))
+{
+    <div class="container">
 
-<div class="container">
+        
+            <div class="row col-md-12" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
 
-    <div class="row col-md-12" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
-
-        <div class="col-md-4" >
-            @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
-        </div>
-
-        <div class="col-md-3 ">
-            <div class="col-md-12">
-                <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam>
-            </div>
-            <div class="col-md-12">
-
-
-                <button type="button"
-                        class="btn btn btn-success"
-                        onclick="location.href = '@Url.Action("AddApartment", "Building", new {BuildingID = ViewBag.buildingInfo.ID})'">
-                    ....Add Apartment(s)....
-                </button>
-                
-            </div>
-            <br />
-        </div>
-        <div class="col-md-5" >
-            <div id="map" style="height:200px; margin-top:15px; border:1px solid black;"></div></div>
-         </div>
-    
-
-    <div class="row col-md-12" style="border:1px solid lightgrey;">
-
-        <div style=" margin-top:20px; margin-bottom:20px;" >
-            @{var apartmentList = ViewBag.apartmentlist;}
-
-            @foreach (var item in apartmentList)
-            {
-
-                <div class="col-md-1">
-                    <button class="btn btn-info" style="margin:7px;">@item.ApartmentNumber</button>
+                <div class="col-md-4">
+                    @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
                 </div>
 
+                <div class="col-md-3 ">
+                    <div class="col-md-12">
+                        <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button"
+                                class="btn btn btn-success"
+                                onclick="location.href = '@Url.Action("AddApartment", "Building", new {BuildingID = ViewBag.buildingInfo.ID})'">
+                            ....Add Apartment(s)....
+                        </button>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-md-5">
+                    <div id="map" style="height:200px; margin-top:15px; border:1px solid black;"></div>
+                </div>
+            </div>
+            <div class="row col-md-12" style="background:lightgrey;">
+                <div class="col-md-3">
+                    <h5>Searh By Aparment</h5>
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+            <div class="row col-md-12" style="background:lightgrey; height:50px; ">
+                <div class=" col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="radio" id="ApartmentNumber">
+                        </span>
+                        <input type="text" class="form-control" id="input-search">
+                    </div><!-- /input-group -->
+                </div>
+                <div class=" col-md-3">
+                    <input type="submit" value="Search" class="btn btn-info" />
+                </div>
+                <div class=" col-md-1"><button id="ShowURL" type="button" class="btn btn-default">Get URL</button></div>
+                    <div class=" col-md-2">
+                        <button type="button" class="btn btn-default  pull-left"
+                                onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">
+                            Resquests
+                            <span class="badge badge-warning " style="background:orange;">4</span>
+                        </button>
+                    </div>
+                    <div class=" col-md-2 ">
+                        <button type="button" class="btn btn-default pull-left "
+                                onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">
+                            Contact Book
+                            <span class="badge badge-warning " style="background:Green;">13</span>
+                        </button>
+                    </div>
+                    <div class=" col-md-1">
 
+                        <button type="button" class="btn btn-default  pull-left" onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">Show Log</button>
+                    </div>
+                </div>
+        <!--this section display a link that can be copy-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myURL">
+            <div class="alert alert-success alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                 http://localhost:64083/Building/BuildingProfile?BuildingID=@Session["BuildingID"]
+            </div>
+
+        </div>
+            <div class="row col-md-12">
+                <div>
+                    page @(ViewBag.apartmentlist.PageCount < ViewBag.apartmentlist.PageNumber ? 0 : ViewBag.apartmentlist.PageNumber)
+                    of @ViewBag.apartmentlist.PageCount
+
+                    @if (ViewBag.apartmentlist.HasPreviousPage)
+                {
+                    if (ViewBag.searchBy != null)
+                    {
+                        var searchBy = ViewBag.searchBy;
+                        var search = ViewBag.search;
+
+                        <ul class="pagination pagination-sm">
+                            <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1, SearchBy = @searchBy, Search = @search })</li>
+
+                            <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1, SearchBy = @searchBy, Search = @search })</li>
+                        </ul>
+                    }
+                    else if (ViewBag.searchBy == null)
+                    {
+                        <ul class="pagination pagination-sm">
+                            <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1 })</li>
+
+                            <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1 })</li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                        <ul class="pagination pagination-sm">
+                            <li><a href="#">First</a></li>
+                            <li><a href="#">Prev</a></li>
+                        </ul>
+                }
+                    @{
+    if (ViewBag.searchBy != null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+
+        <ul class="pagination pagination-sm">
+            @for (var item = 1; item <= @ViewBag.apartmentlist.PageCount; item++)
+            {
+                <li><a href="BuildingProfile?page=@item&SearchBy=@searchBy&Search=@search">@item</a></li>
             }
+        </ul>
+    }
+    else if (ViewBag.searchBy == null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+        <ul class="pagination pagination-sm">
+            @for (var item = 1; item <= ViewBag.apartmentlist.PageCount; item++)
+            {
+                <li><a href="BuildingProfile?page=@item">@item</a></li>
+            }
+        </ul>
+    }
+                    }
+                    @if (ViewBag.apartmentlist.HasNextPage)
+                {
+                    if (ViewBag.searchBy != null)
+                    {
+                        var searchBy = ViewBag.searchBy;
+                        var search = ViewBag.search;
+                        <ul class="pagination pagination-sm">
+                            <li> @Html.ActionLink("Next", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
+
+                            <li>@Html.ActionLink("Last", "BuildingProfile", new { page = ViewBag.apartmentlist.PageCount, SearchBy = @searchBy, Search = @search })</li>
+                        </ul>
+                    }
+                    else if (ViewBag.searchBy == null)
+                    {
+                        <ul class="pagination pagination-sm">
+                            <li> @Html.ActionLink("Next", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber + 1 })</li>
+
+                            <li>@Html.ActionLink("Last", "BuildingProfile", new { page = ViewBag.apartmentlist.PageCount })</li>
+                        </ul>
+                    }
+                }
+                else
+                {
+                        <ul class="pagination pagination-sm">
+                            <li><a href="#">Next</a></li>
+                            <li><a href="#">Last</a></li>
+                        </ul>
+                }
+                </div>
+            </div>
+
+            <div class="row col-md-12" style="border:1px solid lightgrey;">
+
+                <div style=" margin-top:20px; margin-bottom:20px;">
+                    @{var apartmentList = ViewBag.apartmentlist;}
+
+                    @foreach (var item in apartmentList)
+                {
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-info" style="margin:7px; " onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID })'">@item.ApartmentNumber </button>
+                        </div>
+                }
+                </div>
+            </div>
         </div>
 
-    </div>
-
-   
-
-    
-    </div>
-
-
-
-   
-
-            @section scripts
+}       @section scripts
 {
-           
-<link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-        <script src="~/Scripts/Pagination/jquery.twbsPagination.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
-                 Collapse | Copy Code
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
-</script>
+    <link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-
-
-        <script type="text/javascript">
-            $(document).ready(function (e) {
-
-                //googlemaps 
-
-                //function InitializeMap() {
-                //    google.maps.Geocoder(function () {
-
-                //    })
-                //    //var latlng = new google.maps.LatLng(-34.397, 150.644);
-                //    var myOptions = {
-                //        zoom: 8,
-                //        center: latlng,
-                //        mapTypeId: google.maps.MapTypeId.ROADMAP
-                //    };
-                //    var map = new google.maps.Map(document.getElementById("map"), myOptions);
-                //}
-                //window.onload = InitializeMap;
-    
-                var data_address = $('.googlemapsdata').attr('data-address');
-                var data_city = $('.googlemapsdata-city').attr('data-city');
-                var data_state = $('.googlemapsdata-state').attr('data-state');
-                var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
-                var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
-              
-               
-                initialize();
-                codeAddress();
-
-                //========initializes the map======================================
-                var geocoder;
-                var map;
-                function initialize() {
-                    geocoder = new google.maps.Geocoder();
-                    var latlng = new google.maps.LatLng(-34.397, 150.644);
-                    var mapOptions = {
-                        zoom: 16,
-                        center: latlng
-                       // mapTypeId: google.maps.MapTypeId.SATELLITE
-                    }
-                    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                }
-                //============This section search your address
-                function codeAddress() {
-                    var address = BuildingAddress;
-                    geocoder.geocode({ 'address': address }, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            map.setCenter(results[0].geometry.location);
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: results[0].geometry.location
-                            });
-                        } else {
-                            alert("Geocode was not successful for the following reason: " + status);
-                        }
-                    });
-                }
+    <script src="~/Scripts/Pagination/jquery.twbsPagination.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
+    Collapse | Copy Code
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
+    </script>
 
 
 
-                //google maps ends
-              
-
-                
-                $('#datetimepicker').focusin(function () {
-                    $('#radio-btn-date').prop("checked", true).trigger('change');
-                    $('#Function').attr('checked', false);
-
-                   
-
-                });
-             
-                    $('#input-search').focusin(function () {
-                      
-                        $('#Function').prop("checked", true).trigger("change");
-                        $('#radio-btn-date').attr('checked', false);
-                        
-
-
-                    });
-               
-              
-                
-
-
-                //==============Datepicker settings=================================
-                $('#datetimepicker').datetimepicker({
-                    timepicker: false,
-                    formatDate: 'y.m.d'
-                    
-                });
-               
-                //=============DateTimePicker plugin settings ends====================
-
-                //=============Radio button functions ================================
-                $('#Function').change(function () {
-                    //alert('yes');
-                    if ($('#Function').is(':Checked'))
-                    {
-                        $('#input-search').attr("name", "search");
-                        $('#Function').attr("name", "searchBy").val('Function');
-                        $('#radio-btn-date').attr('Checked', false);
-
-                        $('#datetimepicker').removeAttr("name");
-                        //alert('yes');
-                    }
-                    else if (!$('#Function').is(':Checked'))
-                    {
-                        $('#input-search').removeAttr("name");
-                        $('#Function').removeAttr("name");
-                        //alert('yes');
-                    }
-                });
-
-                $('#radio-btn-date').change(function () {
-                    //alert('yes');
-                    if ($('#radio-btn-date').is(':Checked')) {
-                        $('#datetimepicker').attr("name", "search");
-                        $('#radio-btn-date').attr("name", "searchBy").val('Date');
-                        $('#Function').attr('Checked', false);
-                        $('#input-search').removeAttr("name");
-                        //alert('yes');
-                    }
-                    else if (!$('#radio-btn-date').is(':Checked')) {
-                        $('#datetimepicker').removeAttr("name");
-                        $('#radio-btn-date').removeAttr("name");
-                        //alert('yes');
-                    }
-                });
-                //===============Radio buttons functions ends==================
-                
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $('#ShowURL').click( function(){
+                $('#myURL').html('<div class="alert alert-success alert-success" role="alert">'+
+                '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+
+                ' http://localhost:64083/Building/BuildingProfile?BuildingID=@Session["BuildingID"]'+
+            '</div>');
             });
-       </script>
-                
-                }        
+
+            //googlemaps
+
+            var data_address = $('.googlemapsdata').attr('data-address');
+            var data_city = $('.googlemapsdata-city').attr('data-city');
+            var data_state = $('.googlemapsdata-state').attr('data-state');
+            var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
+            var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
+
+
+            initialize();
+            codeAddress();
+
+            //========initializes the map======================================
+            var geocoder;
+            var map;
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(-34.397, 150.644);
+                var mapOptions = {
+                    zoom: 16,
+                    center: latlng
+                    // mapTypeId: google.maps.MapTypeId.SATELLITE
+                }
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            }
+            //============This section search your address
+            function codeAddress() {
+                var address = BuildingAddress;
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            }
+            //google maps ends
+            $('#datetimepicker').focusin(function () {
+                $('#radio-btn-date').prop("checked", true).trigger('change');
+                $('#ApartmentNumber').attr('checked', false);
+            });
+            $('#input-search').focusin(function () {
+                $('#ApartmentNumber').prop("checked", true).trigger("change");
+                $('#radio-btn-date').attr('checked', false);
+            });
+            //==============Datepicker settings=================================
+            $('#datetimepicker').datetimepicker({
+                timepicker: false,
+                formatDate: 'y.m.d'
+            });
+
+            //=============DateTimePicker plugin settings ends====================
+
+            //=============Radio button functions ================================
+            $('#ApartmentNumber').change(function () {
+                //alert('yes');
+                if ($('#ApartmentNumber').is(':Checked'))
+                {
+                    $('#input-search').attr("name", "search");
+                    $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');
+                    $('#radio-btn-date').attr('Checked', false);
+
+                    $('#datetimepicker').removeAttr("name");
+                    //alert('yes');
+                }
+                else if (!$('#Function').is(':Checked'))
+                {
+                    $('#input-search').removeAttr("name");
+                    $('#ApartmentNumber').removeAttr("name");
+                    //alert('yes');
+                }
+            });
+
+            $('#radio-btn-date').change(function () {
+                //alert('yes');
+                if ($('#radio-btn-date').is(':Checked')) {
+                    $('#datetimepicker').attr("name", "search");
+                    $('#radio-btn-date').attr("name", "searchBy").val('Date');
+                    $('#ApartmentNumber').attr('Checked', false);
+                    $('#input-search').removeAttr("name");
+                    //alert('yes');
+                }
+                else if (!$('#radio-btn-date').is(':Checked')) {
+                    $('#datetimepicker').removeAttr("name");
+                    $('#radio-btn-date').removeAttr("name");
+                    //alert('yes');
+                }
+            });
+            //===============Radio buttons functions ends==================
+
+        });
+    </script>
+
+}        

@@ -17,6 +17,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public Building()
         {
             this.Apartments = new HashSet<Apartment>();
+            this.UserActivityLogs = new HashSet<UserActivityLog>();
         }
     
         public int ID { get; set; }
@@ -32,5 +33,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     
         public virtual ICollection<Apartment> Apartments { get; set; }
         public virtual Client Client { get; set; }
+        public virtual ICollection<UserActivityLog> UserActivityLogs { get; set; }
     }
 }

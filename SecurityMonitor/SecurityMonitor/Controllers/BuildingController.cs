@@ -8,6 +8,9 @@ using SecurityMonitor.Models.EntityFrameworkFL;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
+using System.Threading.Tasks;
+using System.Net;
+using System.Data.Entity;
 
 
 namespace SecurityMonitor.Controllers
@@ -17,16 +20,16 @@ namespace SecurityMonitor.Controllers
         PointersecurityEntities1 db = new PointersecurityEntities1();
 
 
-        public ActionResult ClientIndex()
+        public async Task<ActionResult> ClientIndex()
         {
-            var clients = db.Clients
+            var clients = await db.Clients
               
                .Select(c => new ClientsVM
                {
                    ID = c.ID,
                    ClientName = c.ClientName,
                    BuildingCount = (int)c.BuildingCount
-               });
+               }).ToListAsync();
             return View(clients);
         }
         
@@ -39,7 +42,7 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddClient(ClientsVM newClient)
+        public async Task<ActionResult> AddClient(ClientsVM newClient)
         {
             try 
             {
@@ -52,7 +55,7 @@ namespace SecurityMonitor.Controllers
                     };
 
                     db.Clients.Add(newclient);
-                    db.SaveChanges();
+                   await db.SaveChangesAsync();
             }
          } 
             catch(ExecutionEngineException e)
@@ -65,10 +68,10 @@ namespace SecurityMonitor.Controllers
         }
 
 
-        public ActionResult BuildingIndex(int ClientID) 
+        public async Task<ActionResult> BuildingIndex(int ClientID) 
         {
             Session["ClientID"] = ClientID;
-            var building = db.Buildings
+            var building = await db.Buildings
                 .Where(c => c.ClientID == ClientID)
                 .Select(c => new BuildingInfoVM
                 {
@@ -82,7 +85,7 @@ namespace SecurityMonitor.Controllers
                     Manager = c.Manager,
                     ClientID = c.ClientID,
                     ID = c.ID
-                }).ToList();
+                }).ToListAsync();
             return View(building);
         }
         // GET: Building
@@ -98,23 +101,29 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddBuilding(BuildingInfoVM apartmentvm)
+        public async Task<ActionResult> AddBuilding(BuildingInfoVM apartmentvm)
         {if (ModelState.IsValid)
             {
-                var apartment = new Building
+                if (User.Identity.IsAuthenticated)
                 {
-                      BuildingName = apartmentvm.BuildingName,
-                      Address = apartmentvm.Address,
-                      BuildingPhone = apartmentvm.BuildingPhone,
-                      NumberOfApartment = apartmentvm.NumberOfApart,
-                      City = apartmentvm.City,
-                      State = apartmentvm.States,
-                      Zipcode = apartmentvm.ZipCode,
-                      Manager = apartmentvm.Manager,
-                      ClientID = (int)Session["ClientID"]
-                }; 
-                db.Buildings.Add(apartment);
-                db.SaveChanges();
+                    var apartment = new Building
+                    {
+                        BuildingName = apartmentvm.BuildingName,
+                        Address = apartmentvm.Address,
+                        BuildingPhone = apartmentvm.BuildingPhone,
+                        NumberOfApartment = apartmentvm.NumberOfApart,
+                        City = apartmentvm.City,
+                        State = apartmentvm.States,
+                        Zipcode = apartmentvm.ZipCode,
+                        Manager = apartmentvm.Manager,
+                        ClientID = (int)Session["ClientID"]
+                    };
+                    db.Buildings.Add(apartment);
+                    await db.SaveChangesAsync();
+                   
+                     
+                }
+            //TODO Exception 
             }
 
 
@@ -138,40 +147,77 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddApartment(ApartmentVM apartmentvm)
+        public async Task<ActionResult> AddApartment(ApartmentVM apartmentvm)
         {
-            if (ModelState.IsValid)            
-            { var apartment = new Apartment
-                {ApartmentNumber = apartmentvm.ApartmentNumber,
-                  BuildingID = Convert.ToInt32(apartmentvm.BuildingID),
-                  FloorNumber = apartmentvm.FloorNumber
-                };
-               db.Apartments.Add(apartment);
-               db.SaveChanges();
-            }
+            if (ModelState.IsValid)
+                if (User.Identity.IsAuthenticated)
+                {
+                    int BuildingID = (int)Session["BuildingID"];
+                    {
+                        var apartment = new Apartment
+                          {
+                              ApartmentNumber = apartmentvm.ApartmentNumber,
+                              BuildingID = Convert.ToInt32(apartmentvm.BuildingID),
+                              FloorNumber = apartmentvm.FloorNumber
+                          };
+                        db.Apartments.Add(apartment);
+                        await db.SaveChangesAsync();
+
+                        //======================insert Add Building Activity================
+                        var UserID = User.Identity.GetUserId();// gets logged user ID
+                        AspNetUser myUser = await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
+                        var newActivity = new UserActivityLog
+                        {
+                            BuildingID = BuildingID,
+                            UserID = User.Identity.GetUserId(),
+                            DateOfEvent = DateTime.Now,
+                            Function_Performed = "Added apartment",
+                            Message = "Apartment # " + apartmentvm.ApartmentNumber + " was added by " + myUser.UserName
+                        };
+                        db.UserActivityLogs.Add(newActivity);
+                        await db.SaveChangesAsync();
+                    }
+                }
            return RedirectToAction("BuildingProfile", "Building");
         }
 
 
         //===================== Apartments CSV Import=======================
-        public ActionResult ProcessCsv(EventItem[] model)
+        public async Task<ActionResult> ProcessCsv(EventItem[] model)
         {
             int BuildingID = (int)Session["BuildingID"];
 
             if (ModelState.IsValid)
-            {
-               foreach(var item in model)
-               { 
-                   var apartment = new Apartment
+                if(User.Identity.IsAuthenticated)
+                {
                     {
-                        ApartmentNumber = item.AparmentNumber,
-                        BuildingID = BuildingID,
-                        FloorNumber = item.Floor
-                    };
-                    db.Apartments.Add(apartment);
-                    db.SaveChanges(); 
-               }
-            }
+                        foreach (var item in model)
+                        {
+                            var apartment = new Apartment
+                             {
+                                 ApartmentNumber = item.AparmentNumber,
+                                 BuildingID = BuildingID,
+                                 FloorNumber = item.Floor
+                             };
+                            db.Apartments.Add(apartment);
+                            await db.SaveChangesAsync();
+
+                            //======================insert Add Building Activity================
+                            var UserID = User.Identity.GetUserId();// gets logged user ID
+                            AspNetUser myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
+                            var newActivity = new UserActivityLog
+                           {
+                               BuildingID = BuildingID,
+                               UserID = User.Identity.GetUserId(),
+                               DateOfEvent = DateTime.Now,
+                               Function_Performed = "Added apartment",
+                               Message = "Apartment # "+ item.AparmentNumber +" was added by " + myUser.UserName
+                           };
+                            db.UserActivityLogs.Add(newActivity);
+                           await db.SaveChangesAsync();
+                        }
+                    }
+                }
             
             return RedirectToAction("BuildingProfile", "Building");
         }
@@ -183,7 +229,7 @@ namespace SecurityMonitor.Controllers
 
         //=============Building Profile =====================
         [HttpGet]
-        public ActionResult BuildingProfile(int? BuildingID)
+        public async Task<ActionResult> BuildingProfile(int? page, string searchBy, string search, int? BuildingID)
         {
             if (BuildingID != null)
             {
@@ -193,7 +239,7 @@ namespace SecurityMonitor.Controllers
             {
                 BuildingID = (int)Session["BuildingID"];
             }
-            var buildinginfo = db.Buildings
+            var buildinginfo = await db.Buildings
                   .Where(c => c.ID == BuildingID)
                   .Select(c => new BuildingInfoVM
                   {
@@ -206,20 +252,56 @@ namespace SecurityMonitor.Controllers
                       Manager = c.Manager,
                       NumberOfApart = (int)c.NumberOfApartment,
                       States = c.State
-                  }).First();
-
+                  }).FirstAsync();
+            Session["Building"] = buildinginfo;
             ViewBag.buildingInfo = buildinginfo;
 
-            //building profile appartmentlist
-            var apartmentlist = db.Apartments
-                .Where(c => c.BuildingID == BuildingID)
-                .Select(c => new ApartmentVM { 
-                 ApartmentNumber = c.ApartmentNumber
-           
-                }).ToList();
-            ViewBag.apartmentlist = apartmentlist;
 
+            //=================building profile appartmentlist==========================================
+            if (page == null && searchBy != null && search != null)
+            {
+                ViewBag.searchBy = searchBy;
+                ViewBag.search = search;
+            }
+            if (page != null && searchBy != null && search != null)
+            {
+                ViewBag.searchBy = searchBy;
+                ViewBag.search = search;
+            }
+            if (Request.HttpMethod != "GET")
+            {
+                page = 1; // after post reset page to 1
 
+            }
+            int pageSize = 96;
+            int pageNumber = (page ?? 1);
+
+            if (searchBy == "ApartmentNumber")
+            {
+                //executes when there is a search
+                var apartmentlist = await db.Apartments
+               .Where(c => c.BuildingID == BuildingID && c.ApartmentNumber.Contains(search))
+               .Select(c => new ApartmentVM
+               {
+                   ApartmentNumber = c.ApartmentNumber
+
+               }).ToListAsync();
+                ViewBag.apartmentlist = apartmentlist.ToPagedList(pageNumber, pageSize);
+            }
+            else
+            {
+                //executes when there is no search
+                var apartmentlist = await db.Apartments
+                    .Where(c => c.BuildingID == BuildingID)
+                    .Select(c => new ApartmentVM
+                    {
+                        ApartmentNumber = c.ApartmentNumber,
+                        ID = c.ID
+
+                    }).ToListAsync();
+                ViewBag.apartmentlist = apartmentlist.ToPagedList(pageNumber, pageSize);
+
+            }
 
             
 
@@ -255,12 +337,12 @@ namespace SecurityMonitor.Controllers
                     ViewBag.search = search;
                 }
 
-
+                int BuildingID = (int)Session["BuildingID"];
                 //=============Search=================
                 if (searchBy == "Function")
                 {
                     myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
-                               .Where(UAL => UAL.UserID == myUserID && UAL.Function_Performed.Contains(search) || search == null)
+                               .Where(UAL => UAL.BuildingID == BuildingID && UAL.Function_Performed.Contains(search))
                                .Select(UAL => new ActivityLog
                                {
                                    UserID = UAL.UserID,
@@ -280,7 +362,7 @@ namespace SecurityMonitor.Controllers
                         string actualdate = search.Substring(0, 10);
                         DateTime theTime = Convert.ToDateTime(actualdate);
                         myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
-                                   .Where(UAL => UAL.UserID == myUserID && UAL.DateOfEvent == theTime)
+                                   .Where(UAL => UAL.BuildingID == BuildingID && UAL.DateOfEvent == theTime)
                                    .Select(UAL => new ActivityLog
                                    {
                                        UserID = UAL.UserID,
@@ -295,7 +377,7 @@ namespace SecurityMonitor.Controllers
                         ViewBag.ItisNotaDay = search;
 
                         myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
-                             .Where(UAL => UAL.UserID == myUserID)
+                             .Where(UAL => UAL.BuildingID == BuildingID)
                              .Select(UAL => new ActivityLog
                              {
                                  UserID = UAL.UserID,
@@ -309,8 +391,9 @@ namespace SecurityMonitor.Controllers
                 }
                 else
                 {
+                   
                     myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
-                              .Where(UAL => UAL.UserID == myUserID)
+                              .Where(UAL => UAL.BuildingID == BuildingID)
                               .Select(UAL => new ActivityLog
                               {
                                   UserID = UAL.UserID,
@@ -321,6 +404,7 @@ namespace SecurityMonitor.Controllers
 
                               }).ToList();
                 }
+               
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM;
             }
             return PartialView(myUserActivitiesLogVM.UserActivites.ToPagedList(pageNumber, pageSize));
@@ -330,14 +414,59 @@ namespace SecurityMonitor.Controllers
         //====================apartmenprofile ==========-==========
 
         [HttpGet]
-        public ActionResult ApparmentProfile(int? ApartmentID) 
+        public async Task<ActionResult> ApartmentProfile(int? ApartmentID) 
+        {
+            var apartmentinfo = new ApartmentVM();
+            var apartmentprofile  = await db.Apartments
+                                            .Where( a=>a.ID == ApartmentID)                                          
+                                            .Select(c=> new ApartmentVM{   ApartmentNumber= c.ApartmentNumber,
+                                                                         FloorNumber = c.FloorNumber,
+                                                                         BuildingID = c.BuildingID, ID = c.ID}).ToListAsync();
+            var tenant = await db.Tenants
+                .Where(t => t.aptID == ApartmentID).ToListAsync();
+
+            ViewBag.tenant = tenant;
+
+            return View(apartmentprofile);
+        }
+
+        //===================Adding Tenant to apartment GET ==============
+        [HttpGet]
+        public ActionResult AddingTenant(int? apartmentID)
+        {
+            if (apartmentID != null)
+            {
+                var newtenant = new TenantVM();
+                newtenant.aptID = (int)apartmentID;
+                return View(newtenant);
+                
+                // return RedirectToAction("ApartmentProfile", new { ApartmentID = apartmentID });
+
+            }
+            return View("page doesn't meet the required elements");
+        }
+
+        //============= Adding Tenant to apartment Post ==============
+        public async Task<ActionResult> AddingTenant(TenantVM newTenant)
         {
 
-
+            if (ModelState.IsValid)
+            {
+                var newtenant = new Tenant
+                {
+                    FirstName = newTenant.FirstName,
+                    LastName = newTenant.LastName,
+                    Phone = newTenant.Phone,
+                    Created = DateTime.Now,
+                    aptID = newTenant.aptID,
+                    Username = newTenant.Username
+                };
+                db.Tenants.Add(newtenant);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID });
+            }
             return View();
         }
-       
-
 
 
     }

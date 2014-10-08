@@ -16,10 +16,12 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     {
         public int ID { get; set; }
         public string UserID { get; set; }
+        public int BuildingID { get; set; }
         public string Function_Performed { get; set; }
         public System.DateTime DateOfEvent { get; set; }
         public string Message { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Building Building { get; set; }
     }
 }

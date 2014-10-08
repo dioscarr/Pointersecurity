@@ -11,8 +11,8 @@ namespace SecurityMonitor.Models
         public string ApartmentNumber  { get; set; }
         public string FloorNumber { get; set; }
         public int BuildingID { get; set; }//Passed by building View Model
-        public List<ApartmentVM> Apartments { get; set; }
-        public List<BuildingInfoVM> Buildings { get; set; }
+        public List<TenantVM> ListOfTenants { get; set; }
+        
 
     
     }

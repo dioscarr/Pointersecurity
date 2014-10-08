@@ -14,11 +14,17 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     
     public partial class Apartment
     {
+        public Apartment()
+        {
+            this.Tenants = new HashSet<Tenant>();
+        }
+    
         public int ID { get; set; }
         public string ApartmentNumber { get; set; }
         public string FloorNumber { get; set; }
         public int BuildingID { get; set; }
     
         public virtual Building Building { get; set; }
+        public virtual ICollection<Tenant> Tenants { get; set; }
     }
 }

@@ -12,18 +12,19 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRole
+    public partial class Tenant
     {
-        public AspNetRole()
-        {
-            this.Roles = new HashSet<Role>();
-            this.AspNetUsers = new HashSet<AspNetUser>();
-        }
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public System.DateTime Created { get; set; }
+        public string isTemPWord { get; set; }
+        public Nullable<int> aptID { get; set; }
+        public string LogintableID { get; set; }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual Apartment Apartment { get; set; }
     }
 }

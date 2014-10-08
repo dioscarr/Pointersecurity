@@ -1,0 +1,96 @@
+﻿@model IEnumerable<SecurityMonitor.Models.ApartmentVM>
+@using SecurityMonitor.Models;
+@{
+    ViewBag.Title = "ApartmentProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<body style="background:darkgrey;">
+
+
+    <div class="container" style="background:darkgrey;">
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:20px;">
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+            <!--Building info section starts-->
+           
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 whitecolor" style="height:200px;  ">
+                <div class="col-md-12" style="height:20px;"></div>
+                 @{ var buildinginfo = (BuildingInfoVM)Session["Building"];}
+                <div class="col-md-3 col-xs-3"><p>Building Name</p></div>
+                <div class="col-md-9  col-xs-9 text-left"><p>@buildinginfo.BuildingName</p></div>
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3 col-xs-6"><p>@Html.DisplayNameFor(model => model.ApartmentNumber)</p></div>
+                    <div class="col-md-9  col-xs-6 text-left"><p> @Html.DisplayFor(modelItem => item.ApartmentNumber)</p></div>
+
+                    <div class="col-md-3 col-xs-6"><p> @Html.DisplayNameFor(model => model.FloorNumber)</p></div>
+                    <div class="col-md-9  col-xs-6 text-left"><p>@Html.DisplayFor(modelItem => item.FloorNumber)</p></div>
+
+                    <div class="col-md-3 col-xs-6"><p>@Html.DisplayNameFor(model => model.BuildingID)</p></div>
+                    <div class="col-md-9  col-xs-6 text-left"><p>@Html.DisplayFor(modelItem => item.BuildingID)</p></div>
+                }
+                <div class="col-md-3 col-xs-6"><p>Address</p></div>
+                <div class="col-md-9  col-xs-6 text-left"><p>@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</p></div>
+
+            </div>
+
+            <!--Building info section ends-->
+            <!--Request section starts-->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 whitecolor" style="height:200px;">
+                <h1>Requests</h1>
+            </div>
+        </div>
+        <!--Add and romove buttons starts-->
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 whitecolor">
+                @foreach (var item in Model)
+                {
+                <button type="button" class="btn btn-default" style="margin:10px;"
+                       
+                        onclick="location.href = '@Url.Action("AddingTenant", "Building", new { ApartmentID = @item.ID })'">Add Tenant</button>
+                        }
+                        </div>
+           
+         </div>
+        <!--Add and romove buttons ends-->
+            <!--Request section ends-->
+
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:20px;">
+
+
+            </div>
+
+            @foreach (var item in ViewBag.tenant)
+            {
+    <!--Tenant section starts-->
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <!--Tenant Info section starts-->
+                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 whitecolor" style="height:200px;">
+                        <h1> @item.FirstName</h1>
+                        <button type="button" class="btn btn-default" style="margin:10px;"
+                                onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = 1 })'">Remove Tenant</button>
+                       
+                    </div>
+                    
+
+                   
+                    <!--Tenant Info section ends-->
+                    <!--Tenant graph section starts-->
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 whitecolor" style="height:200px;">
+                        <h1>Graph</h1>
+                    </div>
+                    <!--Tenant graph section ends-->
+                </div>
+            <!--Tenant section ends-->
+                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:20px;">
+                </div>
+            }
+
+
+        </div>
+
+
+</body>

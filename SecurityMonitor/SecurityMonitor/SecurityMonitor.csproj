@@ -275,6 +275,9 @@
     <Compile Include="Models\EntityFrameworkFL\sysdiagram.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Tenant.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\User.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -297,6 +300,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\EntityFrameworkFL\PointerEntity.edmx">
@@ -375,6 +379,8 @@
     <Content Include="Views\Building\ActivityPartial.cshtml" />
     <Content Include="Views\Building\BuildingProfile.cshtml" />
     <Content Include="Views\Building\_BuildingInfo.cshtml" />
+    <Content Include="Views\Building\ApartmentProfile.cshtml" />
+    <Content Include="Views\Building\AddingTenant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

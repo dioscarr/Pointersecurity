@@ -37,6 +37,10 @@ namespace SecurityMonitor
             routes.MapRoute("AddApartment",
            "Building/AddApartment/{buildingID}",
            new { controller = "Building", action = "AddApartment", buildingID = "" });
+           
+            routes.MapRoute("ApartmentPfrofile",
+       "Building/ApartmentProfile/{ApartmentID}",
+       new { controller = "Building", action = "ApartmentProfile", ApartmentID = "" });
             
         }
     }
