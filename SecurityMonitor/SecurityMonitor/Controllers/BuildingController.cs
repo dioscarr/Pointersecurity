@@ -439,9 +439,6 @@ namespace SecurityMonitor.Controllers
                 var newtenant = new TenantVM();
                 newtenant.aptID = (int)apartmentID;
                 return View(newtenant);
-                
-                // return RedirectToAction("ApartmentProfile", new { ApartmentID = apartmentID });
-
             }
             return View("page doesn't meet the required elements");
         }
@@ -468,6 +465,53 @@ namespace SecurityMonitor.Controllers
             return View();
         }
 
+        //===================DeleteTenant=============
 
+        [HttpGet]
+        public async Task<ActionResult> DeleteTenant(int? TenantID)
+        {
+            if (TenantID != null)
+            {
+                var tenant = await db.Tenants.FindAsync(TenantID);
+
+                if (tenant == null)
+                {
+                    return HttpNotFound();
+                }
+                TenantVM tenantVM = new TenantVM
+                {
+                     FirstName = tenant.FirstName,
+                     LastName = tenant.LastName,
+                     Phone = tenant.Phone,
+                     Username = tenant.Username,
+                     aptID = (int)tenant.aptID,
+                     ID = tenant.ID,
+                     created = tenant.Created
+
+                
+                };
+                ViewBag.aptID = tenant.aptID;
+                ViewBag.tenantID = tenant.ID;
+                return View(tenantVM);
+             
+            }
+            
+            return View();
+        }
+        //======================Delete Tenant POST=======================
+        [HttpPost, ActionName("DeleteTenant")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteTenant(int? removeTenantID, int? ApartmentID)
+        {
+            if (ModelState.IsValid)
+            {
+                var RemovethisTenant = await db.Tenants.FindAsync(removeTenantID);
+                
+                db.Tenants.Remove(RemovethisTenant);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID });
+            }
+            return View();
+        }
     }
 }

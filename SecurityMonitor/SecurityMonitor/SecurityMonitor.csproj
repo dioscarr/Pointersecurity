@@ -189,9 +189,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CsvModelBinder.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TenantsController.cs" />
     <Compile Include="Controllers\UserVMsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,6 +256,12 @@
     <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\GanttLinkId.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\GanttTask.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\PointerEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -295,6 +303,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_broadway.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_meadow.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_skyblue.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -320,7 +332,107 @@
       <DependentUpon>PointerEntity.edmx</DependentUpon>
       <LastGenOutput>PointerEntity.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_quick_info.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_tooltip.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ar.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_be.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ca.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cn.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cs.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_da.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_de.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_el.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_es.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fi.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_he.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_hu.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_id.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_it.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_jp.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nb.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nl.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_no.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pl.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pt.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ro.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ru.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_si.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sk.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sv.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_tr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ua.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\dhtmlxgantt.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_marker.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_quick_info.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_tooltip.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ar.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_be.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ca.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cn.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cs.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_da.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_de.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_el.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_es.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fi.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_he.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_hu.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_id.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_it.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_jp.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nb.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nl.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_no.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pl.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pt.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ro.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ru.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_si.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sk.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sv.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_tr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ua.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ua.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_tr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sv.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sk.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_si.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ru.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ro.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pt.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pl.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_no.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nl.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nb.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_jp.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_it.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_id.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_hu.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_he.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fi.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_es.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_el.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_de.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_da.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cs.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cn.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ca.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_be.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ar.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_tooltip.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_quick_info.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_marker.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\dhtmlxgantt.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -381,9 +493,14 @@
     <Content Include="Views\Building\_BuildingInfo.cshtml" />
     <Content Include="Views\Building\ApartmentProfile.cshtml" />
     <Content Include="Views\Building\AddingTenant.cshtml" />
+    <Content Include="Views\Building\DeleteTenant.cshtml" />
+    <Content Include="Views\Tenants\Delete.cshtml" />
+    <Content Include="Views\Building\Chart1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="external\" />
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\GoogleMaps\" />
     <Folder Include="Views\Roles\" />
     <Folder Include="Views\Role\" />

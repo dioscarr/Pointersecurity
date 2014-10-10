@@ -48,5 +48,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<Tenant> Tenants { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserActivityLog> UserActivityLogs { get; set; }
+        public virtual DbSet<GanttLinkId> GanttLinkIds { get; set; }
+        public virtual DbSet<GanttTask> GanttTasks { get; set; }
     }
 }
