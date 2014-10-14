@@ -58,7 +58,7 @@ namespace SecurityMonitor.Controllers
                    await db.SaveChangesAsync();
             }
          } 
-            catch(ExecutionEngineException e)
+            catch(Exception e)
             {
                 ViewBag.ErrorMessage = e.Message;
                 return null;
@@ -513,5 +513,46 @@ namespace SecurityMonitor.Controllers
             }
             return View();
         }
+
+        //======================TenantRequest======================
+        [HttpGet]
+        public ActionResult TenantRequest(int? tenantID) 
+        {
+
+            if (tenantID != null)
+            {
+                var tenantRequest = new Request();
+
+            
+                tenantRequest.TenantID = (int)tenantID;
+               
+                return View(tenantRequest);
+            }
+
+            return RedirectToAction("Index", "DashBoard");
+        }
+
+        [HttpPost]
+        public ActionResult TenantRequest(Request model)
+        {
+
+            var tenant = db.Tenants.Find(model.TenantID);
+                       
+            if (ModelState.IsValid)
+            {
+                db.Requests.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = tenant.aptID });
+            }
+            return View();
+        }
+
+
+        //======================TenantRequest ends======================
+
+
+
+        
+
     }
 }

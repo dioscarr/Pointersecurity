@@ -6,97 +6,133 @@
 }
 
 
-<body style="background:darkgrey;">
+<body >
     
-    <div class="container" style="background:darkgrey;">
-        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:20px;">
+    <div>
+        <div class="row" style="height:20px;">
+
+
         </div>
-        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
-            <!--Building info section starts-->
-           
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 whitecolor" style="height:200px;  ">
-                <div class="col-md-12" style="height:20px;"></div>
-                 @{ var buildinginfo = (BuildingInfoVM)Session["Building"];}
-                <div class="col-md-3 col-xs-3"><p>Building Name</p></div>
-                <div class="col-md-9  col-xs-9 text-left"><p>@buildinginfo.BuildingName</p></div>
+        <div class="container">
+            <div class="row  BKHead">
+                <!--Building info section starts-->
 
-                @foreach (var item in Model)
-                {
-                    <div class="col-md-3 col-xs-6"><p>@Html.DisplayNameFor(model => model.ApartmentNumber)</p></div>
-                    <div class="col-md-9  col-xs-6 text-left"><p> @Html.DisplayFor(modelItem => item.ApartmentNumber)</p></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="height:200px;  outline:thin solid lightgrey;  ">
+                    <div class="col-md-12" style="height:20px;"></div>
+                    @{ var buildinginfo = (BuildingInfoVM)Session["Building"];}
+                    <div class="col-md-3 col-xs-3"><p>Building Name</p></div>
+                    <div class="col-md-9  col-xs-9 text-left buildinginfotext"><p>@buildinginfo.BuildingName</p></div>
 
-                    <div class="col-md-3 col-xs-6"><p> @Html.DisplayNameFor(model => model.FloorNumber)</p></div>
-                    <div class="col-md-9  col-xs-6 text-left"><p>@Html.DisplayFor(modelItem => item.FloorNumber)</p></div>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-3 col-xs-6 text-left"><p>@Html.DisplayName("Apt#")</p></div>
 
-                    <div class="col-md-3 col-xs-6"><p>@Html.DisplayNameFor(model => model.BuildingID)</p></div>
-                    <div class="col-md-9  col-xs-6 text-left"><p>@Html.DisplayFor(modelItem => item.BuildingID)</p></div>
-                }
-                <div class="col-md-3 col-xs-6"><p>Address</p></div>
-                <div class="col-md-9  col-xs-6 text-left"><p>@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</p></div>
+                        <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p> @Html.DisplayFor(modelItem => item.ApartmentNumber)</p></div>
 
-            </div>
+                        <div class="col-md-3 col-xs-6 text-left"><p> @Html.DisplayNameFor(model => model.FloorNumber)</p></div>
+                        <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p>@Html.DisplayFor(modelItem => item.FloorNumber)</p></div>
 
-            <!--Building info section ends-->
-            <!--Request section starts-->
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 whitecolor" style="height:200px;">
-                <h1>Requests</h1>
-            </div>
-        </div>
-        <!--Add and romove buttons starts-->
-        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 whitecolor">
-                @foreach (var item in Model)
-                {
-                <button type="button" class="btn btn-default" style="margin:10px;"
-                       
-                        onclick="location.href = '@Url.Action("AddingTenant", "Building", new { ApartmentID = @item.ID })'">Add Tenant</button>
-                        }
-                        </div>
-           
-         </div>
-        <!--Add and romove buttons ends-->
-            <!--Request section ends-->
+                        <div class="col-md-3 col-xs-6 text-left"><p>@Html.DisplayNameFor(model => model.BuildingID)</p></div>
+                        <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p>@Html.DisplayFor(modelItem => item.BuildingID)</p></div>
+                    }
+                    <div class="col-md-3 col-xs-6 text-left"><p>Address</p></div>
+                    <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p>@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</p></div>
 
-            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:20px;">
+                </div>
 
-
-            </div>
-
-            @foreach (var item in ViewBag.tenant)
-            {
-    <!--Tenant section starts-->
-                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <!--Tenant Info section starts-->
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
-                        <h1> @item.FirstName</h1>
-                        <button type="button" class="btn btn-default" style="margin:10px;"
-                                onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">Remove Tenant</button>
-                       
-                    </div>
-                    
-
+                <!--Building info section ends-->
+                <!--Request section starts-->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="height:200px; outline:thin solid lightgrey; ">
+                  <div class="col-md-12 col-sm-12 col-xs-12" style="height:50px;">
                    
-                    <!--Tenant Info section ends-->
-                    <!--Tenant graph section starts-->
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
-                      <h3>Resquests Type</h3>
-                        <canvas id="doughNutChartLoc@(item.ID)" class="mygraph" height="200" width="200" data-tenantid="@item.ID"></canvas>
-                      
-                    </div>
-                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
-                        <h3>Current Request</h3>
-                        <canvas id="pieChartLoc@(item.ID)" class="mygraph" height="240" width="400" data-tenantpie="@item.ID"></canvas>
+                  </div>
+                    <button type="button" class="btn btn-info " style="width:130px; height:130px;" ><p class="glyphicon glyphicon-envelope" style="font-size:100px;"></p></button>
+                </div>
+            </div>
+        </div>
 
-                    </div>
-                    <!--Tenant graph section ends-->
-                </div>
-            <!--Tenant section ends-->
-                <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:20px;">
-                </div>
-            }
+        </div>
+    <hr/>
+    <div class="container" style="background:white;">
+        <!--Add and romove buttons starts-->
+        <div class="row  ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                @foreach (var item in Model)
+                {
+                    <button type="button" class="btn btn-default" style="margin:10px;"
+                            onclick="location.href = '@Url.Action("AddingTenant", "Building", new { ApartmentID = @item.ID })'">
+                        Add Tenant
+                    </button>
+                }
+            </div>
+
+        </div>
+
+        <!--Add and romove buttons ends-->
+        <!--Request section ends-->
+
+        <div class="row" style="height:20px;">
 
 
         </div>
+
+        <div class="row">
+            @*<div id="ganttContainer" class="col-md-12 col-sm-12 col-xs-12 whitecolor ganttchart" style="height:350px;  "></div>*@
+
+        </div>
+        <div class="row" style="height:20px;">
+
+            <hr style="color:grey;" />
+        </div>
+
+
+        @foreach (var item in ViewBag.tenant)
+        {
+    <!--Tenant section starts-->
+            <div class="row  ">
+                <!--Tenant Info section starts-->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
+                    <h1> @item.FirstName</h1>
+                    <button type="button" class="btn btn-default" style="margin:10px;"
+                            onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
+                        Remove Tenant
+                    </button>
+                    <button type="button" class="btn btn-default" style="margin:10px;"
+                            onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
+                        New Request
+                    </button>
+
+                </div>
+
+
+
+                <!--Tenant Info section ends-->
+                <!--Tenant graph section starts-->
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
+                    <h3>Resquests Type</h3>
+                    <canvas id="doughNutChartLoc@(item.ID)" class="mygraph" height="200" width="200" data-tenantid="@item.ID"></canvas>
+
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
+                    <h3>Current Request</h3>
+
+
+                </div>
+
+
+                <!--Tenant graph section ends-->
+            </div>
+
+
+            <!--Tenant section ends-->
+            <div class="row " style="height:20px;">
+            </div>
+        }
+
+
+    </div>
+
+
     
 </body>
 
@@ -110,12 +146,13 @@
 
     <script src="~/Scripts/Chart.min.js"></script>
 
+
    <script type="text/javascript">
     $(document).ready(function (e) {
         var canvascount = document.getElementsByTagName("canvas");
         for (var i = 0; i <= canvascount.length - 1; i++) {
             var data_TenantID = canvascount[i].getAttribute("data-tenantid");
-            i++;
+           
             var data = [
                            {
                                value: 50,
@@ -141,31 +178,57 @@
 
           
 
-            var Bardata = {
-                labels: ["Monday", "Tuesday", "Wednesday", "Thrusday", "Friday", "Saturday", "Sunday"],
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        fillColor: "rgba(220,220,220,0.5)",
-                        strokeColor: "rgba(220,220,220,0.8)",
-                        highlightFill: "rgba(220,220,220,0.75)",
-                        highlightStroke: "rgba(220,220,220,1)",
-                        data: [65, 59, 80, 81, 56, 55, 40]
-                    },
-                    {
-                        label: "My Second dataset",
-                        fillColor: "rgba(151,187,205,0.5)",
-                        strokeColor: "rgba(151,187,205,0.8)",
-                        highlightFill: "rgba(151,187,205,0.75)",
-                        highlightStroke: "rgba(151,187,205,1)",
-                        data: [28, 48, 40, 19, 86, 27, 90]
-                    }
+          
+           
+            
+
+
+           
+        };
+
+        //=====================GanttChart==============================
+
+        (function () {
+
+            var tasks = {
+                data: [
+                   { id: 1, text: "Project #1", start_date: "01-04-2013", duration: 18 },
+                   { id: 2, text: "Task #1", start_date: "02-04-2013", duration: 8, parent: 1 },
+                   { id: 3, text: "Task #2", start_date: "11-04-2013", duration: 8, parent: 1 }
                 ]
             };
-            data_TenantID = canvascount[i].getAttribute("data-tenantpie");
-            var myBarChart = new Chart(document.getElementById("pieChartLoc" + data_TenantID).getContext("2d")).Bar(Bardata);
+            // add month scale
+            gantt.config.scale_unit = "week";
+            gantt.config.step = 1;
+            gantt.templates.date_scale = function (date) {
+                var dateToStr = gantt.date.date_to_str("%d %M");
+                var endDate = gantt.date.add(gantt.date.add(date, 1, "week"), -1, "day");
+                return dateToStr(date) + " - " + dateToStr(endDate);
+            };
+            gantt.config.subscales = [
+                { unit: "day", step: 1, date: "%D" }
+            ];
+            gantt.config.scale_height = 50;
+            // configure milestone description
+            gantt.templates.rightside_text = function (start, end, task) {
+                if (task.type == gantt.config.types.milestone) {
+                    return task.text;
+                }
+                return "";
+            };
+            // add section to type selection: task, project or milestone
+            gantt.config.lightbox.sections = [
+                { name: "description", height: 70, map_to: "text", type: "textarea", focus: true },
+                { name: "type", type: "typeselect", map_to: "type" },
+                { name: "time", height: 72, type: "duration", map_to: "auto" }
+            ];
+            gantt.config.xml_date = "%Y-%m-%d %H:%i:%s"; // format of dates in XML
+            gantt.init("ganttContainer"); // initialize gantt
+            gantt.load("/Home/GetGanttData", "json");
+        })();
 
-        };
+        //=====================GanttChart ends==============================
+
 
 
        

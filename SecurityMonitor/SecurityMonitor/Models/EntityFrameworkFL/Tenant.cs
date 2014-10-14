@@ -14,6 +14,11 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     
     public partial class Tenant
     {
+        public Tenant()
+        {
+            this.Requests = new HashSet<Request>();
+        }
+    
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -26,5 +31,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public string LogintableID { get; set; }
     
         public virtual Apartment Apartment { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

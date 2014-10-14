@@ -10,7 +10,7 @@
     <div class="container">
 
         
-            <div class="row col-md-12" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
+            <div class="row" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
 
                 <div class="col-md-4">
                     @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
@@ -33,7 +33,7 @@
                     <div id="map" style="height:200px; margin-top:15px; border:1px solid black;"></div>
                 </div>
             </div>
-            <div class="row col-md-12" style="background:lightgrey;">
+            <div class="row " style="background:lightgrey;">
                 <div class="col-md-3">
                     <h5>Searh By Aparment</h5>
                 </div>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-6"></div>
             </div>
-            <div class="row col-md-12" style="background:lightgrey; height:50px; ">
+            <div class="row " style="background:lightgrey; height:50px; ">
                 <div class=" col-md-3">
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -53,35 +53,37 @@
                 <div class=" col-md-3">
                     <input type="submit" value="Search" class="btn btn-info" />
                 </div>
-                <div class=" col-md-1"><button id="ShowURL" type="button" class="btn btn-default">Get URL</button></div>
-                    <div class=" col-md-2">
+                <div class=" col-md-6">
+                    <div class="pull-right">
+                        <button id="ShowURL" type="button" class="btn btn-default pull-lef">Get URL</button>
+
                         <button type="button" class="btn btn-default  pull-left"
                                 onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">
                             Resquests
                             <span class="badge badge-warning " style="background:orange;">4</span>
                         </button>
-                    </div>
-                    <div class=" col-md-2 ">
+
+
                         <button type="button" class="btn btn-default pull-left "
                                 onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">
                             Contact Book
                             <span class="badge badge-warning " style="background:Green;">13</span>
                         </button>
-                    </div>
-                    <div class=" col-md-1">
 
-                        <button type="button" class="btn btn-default  pull-left" onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">Show Log</button>
+                        <button type="button" class="btn btn-default pull-lef " onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">Show Log</button>
+
                     </div>
+                </div>
                 </div>
         <!--this section display a link that can be copy-->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myURL">
-            <div class="alert alert-success alert-success" role="alert">
+            <div class="alert alert-success alert-success" role="alert" style="display:none;">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                 http://localhost:64083/Building/BuildingProfile?BuildingID=@Session["BuildingID"]
+                http://localhost:64083/Building/BuildingProfile?BuildingID=@Session["BuildingID"]
             </div>
 
         </div>
-            <div class="row col-md-12">
+            <div class="row">
                 <div>
                     page @(ViewBag.apartmentlist.PageCount < ViewBag.apartmentlist.PageNumber ? 0 : ViewBag.apartmentlist.PageNumber)
                     of @ViewBag.apartmentlist.PageCount
@@ -171,7 +173,7 @@
                 </div>
             </div>
 
-            <div class="row col-md-12" style="border:1px solid lightgrey;">
+            <div class="row " style="border:1px solid lightgrey;">
 
                 <div style=" margin-top:20px; margin-bottom:20px;">
                     @{var apartmentList = ViewBag.apartmentlist;}
@@ -179,7 +181,7 @@
                     @foreach (var item in apartmentList)
                 {
                         <div class="col-md-1">
-                            <button type="button" class="btn btn-info" style="margin:7px; " onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID })'">@item.ApartmentNumber </button>
+                            <button type="button" class="btn btn-info" style="margin:7px; " onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID })'">Apt: @item.ApartmentNumber </button>
                         </div>
                 }
                 </div>
@@ -205,7 +207,8 @@
 
     <script type="text/javascript">
         $(document).ready(function (e) {
-            $('#ShowURL').click( function(){
+           
+            $('#ShowURL').click(function () {
                 $('#myURL').html('<div class="alert alert-success alert-success" role="alert">'+
                 '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+
                 ' http://localhost:64083/Building/BuildingProfile?BuildingID=@Session["BuildingID"]'+

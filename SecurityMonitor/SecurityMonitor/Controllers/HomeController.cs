@@ -13,8 +13,13 @@ namespace SecurityMonitor.Controllers
         PointersecurityEntities1 db = new PointersecurityEntities1();
         public ActionResult Index()
         {
+
+
+
             return View();
         }
+
+       
 
 
 

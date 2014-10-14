@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CsvModelBinder.cs" />
+    <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -277,6 +278,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PointerEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Request.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\Role.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -294,6 +298,7 @@
     </Compile>
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RequestVM.cs" />
     <Compile Include="Models\TenantVM.cs" />
     <Compile Include="Models\UserActivityLogVM.cs" />
     <Compile Include="Models\UserVM.cs" />
@@ -332,6 +337,7 @@
       <DependentUpon>PointerEntity.edmx</DependentUpon>
       <LastGenOutput>PointerEntity.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\date.js" />
     <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
     <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js" />
     <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_quick_info.js" />
@@ -496,6 +502,8 @@
     <Content Include="Views\Building\DeleteTenant.cshtml" />
     <Content Include="Views\Tenants\Delete.cshtml" />
     <Content Include="Views\Building\Chart1.cshtml" />
+    <Content Include="Views\Building\TenantRequest.cshtml" />
+    <Content Include="Views\DashBoard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

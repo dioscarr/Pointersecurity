@@ -2,147 +2,161 @@
     ViewBag.Title = "Dasboard";
 }
 <head>
-
-
     <title></title>
-
-
-
 </head>
 
 <div class="container" style="background:lightGrey">
 
-    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" 
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12"
          style="margin-top:50px;">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <button class="btn btn-success" onclick="location.href = '@Url.Action("UserList", "UserVMs")'">Manage Account Users</button>
-</div>
+        </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-       <button class="btn btn-success" onclick="location.href = '@Url.Action("ClientIndex", "Building")'" >Manage Clients</button>
-        </div>       
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("ClientIndex", "Building")'">Manage Clients</button>
+        </div>
     </div>
     <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:20px;"></div>
     <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-
             <h5>Search by Building</h5>
-
-
-           
-
         </div>
-
     </div>
-
-   
-        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
-               
-                        <input type="text" class="col-md-3 form-control" id="input-search">
-               
-               
-                    <input type="submit" value="Search" class="col-md-2 col-lg-offset-1 btn btn-info" />
-              
-            </div>
-
+    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+            <input type="text" class="col-md-3 form-control" id="input-search">
+            <input type="submit" value="Search" class="col-md-2 col-lg-offset-1 btn btn-info" />
         </div>
-    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:20px;"></div>
-
-        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
-
-    <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:100%">
-        <canvas id="doughNutChartLoc" height="300" width="300" style="margin-left:50px; margin-bottom:50px;"></canvas>
     </div>
-
-
-      <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:500px;">
-          <div id="ganttContainer" style="width: 100%; height: 90%;background:white;"></div> 
-      </div>
-
-
+    <div class="row" style="height:150px;"></div>
+    <div class="row text-center whitecolor" style="border:1px solid lightgrey; height:50px;" ><h3>Today's Request</h3></div>
+    <div class="row whitecolor" >
+        <div >
+            <div id="example5.3" style="height:500px;"></div>
+        </div>
     </div>
+</div>
 @section scripts
 {
-
-    
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-  
-<script src="~/Scripts/Chart.min.js"></script>
-
-
-
+    <!--=====================google Chart API starts=======================================-->
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+            'version':'1','packages':['timeline']}]}"></script>
+    <!--=====================google Chart API ends=======================================-->
+<script src="~/Scripts/date.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function (e) {
 
             //=====================GanttChart==============================
-
-            (function () {
-
-                var tasks = {
-                    data: [
-                       { id: 1, text: "Project #1", start_date: "01-04-2013", duration: 18 },
-                       { id: 2, text: "Task #1", start_date: "02-04-2013", duration: 8, parent: 1 },
-                       { id: 3, text: "Task #2", start_date: "11-04-2013", duration: 8, parent: 1 }
-                    ]
-                };
-                // add month scale
-                gantt.config.scale_unit = "week";
-                gantt.config.step = 1;
-                gantt.templates.date_scale = function (date) {
-                    var dateToStr = gantt.date.date_to_str("%d %M");
-                    var endDate = gantt.date.add(gantt.date.add(date, 1, "week"), -1, "day");
-                    return dateToStr(date) + " - " + dateToStr(endDate);
-                };
-                gantt.config.subscales = [
-                    { unit: "day", step: 1, date: "%D" }
-                ];
-                gantt.config.scale_height = 50;
-                // configure milestone description
-                gantt.templates.rightside_text = function (start, end, task) {
-                    if (task.type == gantt.config.types.milestone) {
-                        return task.text;
-                    }
-                    return "";
-                };
-                // add section to type selection: task, project or milestone
-                gantt.config.lightbox.sections = [
-                    { name: "description", height: 70, map_to: "text", type: "textarea", focus: true },
-                    { name: "type", type: "typeselect", map_to: "type" },
-                    { name: "time", height: 72, type: "duration", map_to: "auto" }
-                ];
-                gantt.config.xml_date = "%Y-%m-%d %H:%i:%s"; // format of dates in XML
-                gantt.init("ganttContainer"); // initialize gantt
-                gantt.load("/Home/GetGanttData", "json");
-            }) ();
-
-
-
             //===========================Charts==============================
-            var data = [
-                           {
-                              
-                               value: 50,
-                               color: "lightblue",
-                               label:"dioscar"
+            //=============================Google Chart===================================
+            var url = '@Url.Action("getTodayRequests", "Home")';
+            //============google chart and ajax connection to Action===========
+            $.get(url, function (data) {
+                google.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var container = document.getElementById('example5.3');
+                    var chart = new google.visualization.Timeline(container);
 
-                           },
-                           {
-                               value: 10,
-                               color: "red",
-                               label: "dioscar"
-                           },
-                           {
-                               value: 40,
-                               color: "green",
-                               label: "dioscar"
-                           }
-            ]
-            var myDoughnut = new Chart(document.getElementById("doughNutChartLoc").getContext("2d")).Doughnut(data);
-        });
+
+                    var dataTable = new google.visualization.DataTable();
+                    //=======Adding Column======
+                    dataTable.addColumn({ type: 'string', id: 'Room' });
+                    dataTable.addColumn({ type: 'string', id: 'Name' });
+                    dataTable.addColumn({ type: 'date', id: 'Start' });
+                    dataTable.addColumn({ type: 'date', id: 'End' });
+
+                    // =====year=======
+                    function YearC(value) {
+                        var pattern = /Date\(([^)]+)\)/;
+                        var results = pattern.exec(value);
+                        var dt = new Date(parseFloat(results[1]));
+                        return (dt.getFullYear());
+                    }
+                    // =====Month=======
+                    function MonthC(value) {
+                        var pattern = /Date\(([^)]+)\)/;
+                        var results = pattern.exec(value);
+                        var dt = new Date(parseFloat(results[1]));
+                        return (dt.getMonth());
+                    }
+                    // =====Day=======
+                    function DayC(value) {
+                        var pattern = /Date\(([^)]+)\)/;
+                        var results = pattern.exec(value);
+                        var dt = new Date(parseFloat(results[1]));
+                        return dt.getDate();
+
+                    }
+
+                    // =====Hour=======
+                    function HoursC(value) {
+                        var pattern = /Date\(([^)]+)\)/;
+                        var results = pattern.exec(value);
+                        var dt = new Date(parseFloat(results[1]));
+                        return dt.getHours();
+
+                    }
+                    // =====Minutes=======
+                    function MinutesC(value) {
+                        var pattern = /Date\(([^)]+)\)/;
+                        var results = pattern.exec(value);
+                        var dt = new Date(parseFloat(results[1]));
+                        return dt.getMinutes();
+
+                    }
+
+                    //----------===============Loop=========
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        //===============Conerting Json Date==========
+                        var FromDate = data[i].From;
+                        var ToDate = data[i].To;
+                       
+                        //===============Conerting Json Date ends===========
+                        //==========adding data to chart==========
+                        dataTable.addRows(
+                        [
+                           [
+                               data[i].Type,
+                               data[i].Description,
+                               new Date(parseInt(YearC(FromDate)),
+                                   MonthC(FromDate),
+                                   DayC(FromDate),
+                                   HoursC(FromDate),
+                                   MinutesC(FromDate),
+                                   0),
+                               new Date(YearC(ToDate),
+                                   MonthC(ToDate),
+                                   DayC(ToDate),
+                                   HoursC(ToDate),
+                                   MinutesC(ToDate),
+                                   0)
+                           ]
+                        ]);
+                    }
+                    //---------===============end loop==========
+
+                    //==========chart Options==========
+                    var options = {
+                        timeline: { colorByRowLabel: true },
+                        backgroundColor: '#00000'
+                    };
+
+                    chart.draw(dataTable, options);
+                }
+
+            });
+                            
+                      
+                });
+
+             
+
     </script>
 }

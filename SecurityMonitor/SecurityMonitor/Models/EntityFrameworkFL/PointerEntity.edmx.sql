@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2014 11:10:51
+-- Date Created: 10/12/2014 19:26:34
 -- Generated from EDMX file: C:\Users\dioscar\Source\Repos\Pointersecurity\SecurityMonitor\SecurityMonitor\Models\EntityFrameworkFL\PointerEntity.edmx
 -- --------------------------------------------------
 
@@ -67,6 +67,9 @@ IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId]', 'F') IS N
 GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Request_Tenant]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Request] DROP CONSTRAINT [FK_Request_Tenant];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Role_AspNetRoles]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Role] DROP CONSTRAINT [FK_Role_AspNetRoles];
@@ -147,6 +150,15 @@ IF OBJECT_ID(N'[dbo].[Buildings]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Clients]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Clients];
+GO
+IF OBJECT_ID(N'[dbo].[GanttLinkId]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GanttLinkId];
+GO
+IF OBJECT_ID(N'[dbo].[GanttTask]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GanttTask];
+GO
+IF OBJECT_ID(N'[dbo].[Request]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Request];
 GO
 IF OBJECT_ID(N'[dbo].[Role]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Role];
@@ -427,6 +439,40 @@ CREATE TABLE [dbo].[UserActivityLogs] (
 );
 GO
 
+-- Creating table 'GanttLinkIds'
+CREATE TABLE [dbo].[GanttLinkIds] (
+    [GantLinkID] int IDENTITY(1,1) NOT NULL,
+    [Type] varchar(1)  NOT NULL,
+    [SourceTaskId] int  NOT NULL,
+    [TargerTaskId] int  NOT NULL
+);
+GO
+
+-- Creating table 'GanttTasks'
+CREATE TABLE [dbo].[GanttTasks] (
+    [GantTaskID] int IDENTITY(1,1) NOT NULL,
+    [Text] varchar(255)  NOT NULL,
+    [StartDate] datetime  NOT NULL,
+    [Duration] int  NOT NULL,
+    [Progress] decimal(18,0)  NOT NULL,
+    [SortOrder] int  NOT NULL,
+    [Type] varchar(max)  NOT NULL,
+    [ParentID] int  NULL
+);
+GO
+
+-- Creating table 'Requests'
+CREATE TABLE [dbo].[Requests] (
+    [ID] int  NOT NULL,
+    [RequestType] nvarchar(150)  NOT NULL,
+    [Description] nvarchar(max)  NOT NULL,
+    [FromDate] datetime  NOT NULL,
+    [ToDate] datetime  NOT NULL,
+    [PIN] nvarchar(4)  NULL,
+    [TenantID] int IDENTITY(1,1) NOT NULL
+);
+GO
+
 -- Creating table 'aspnet_UsersInRoles'
 CREATE TABLE [dbo].[aspnet_UsersInRoles] (
     [aspnet_Roles_RoleId] uniqueidentifier  NOT NULL,
@@ -580,6 +626,24 @@ GO
 -- Creating primary key on [ID] in table 'UserActivityLogs'
 ALTER TABLE [dbo].[UserActivityLogs]
 ADD CONSTRAINT [PK_UserActivityLogs]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [GantLinkID] in table 'GanttLinkIds'
+ALTER TABLE [dbo].[GanttLinkIds]
+ADD CONSTRAINT [PK_GanttLinkIds]
+    PRIMARY KEY CLUSTERED ([GantLinkID] ASC);
+GO
+
+-- Creating primary key on [GantTaskID] in table 'GanttTasks'
+ALTER TABLE [dbo].[GanttTasks]
+ADD CONSTRAINT [PK_GanttTasks]
+    PRIMARY KEY CLUSTERED ([GantTaskID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Requests'
+ALTER TABLE [dbo].[Requests]
+ADD CONSTRAINT [PK_Requests]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -897,6 +961,21 @@ GO
 CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUser]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [TenantID] in table 'Requests'
+ALTER TABLE [dbo].[Requests]
+ADD CONSTRAINT [FK_Request_Tenant]
+    FOREIGN KEY ([TenantID])
+    REFERENCES [dbo].[Tenants]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Request_Tenant'
+CREATE INDEX [IX_FK_Request_Tenant]
+ON [dbo].[Requests]
+    ([TenantID]);
 GO
 
 -- --------------------------------------------------
