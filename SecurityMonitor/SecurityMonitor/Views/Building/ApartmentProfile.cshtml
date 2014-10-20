@@ -5,58 +5,89 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{ 
+       var buildinginfo = (BuildingInfoVM)Session["Building"];
+   
+   }
 
+   
 <body >
     
     <div>
         <div class="row" style="height:20px;">
-
+           
 
         </div>
+
         <div class="container">
-            <div class="row  BKHead">
-                <!--Building info section starts-->
 
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="height:200px;  outline:thin solid lightgrey;  ">
-                    <div class="col-md-12" style="height:20px;"></div>
-                    @{ var buildinginfo = (BuildingInfoVM)Session["Building"];}
-                    <div class="col-md-3 col-xs-3"><p>Building Name</p></div>
-                    <div class="col-md-9  col-xs-9 text-left buildinginfotext"><p>@buildinginfo.BuildingName</p></div>
-
+            <!--=================Page Title==================-->
+            <div class=" row  " style="">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxtitle " style="border-bottom:1px solid lightgrey; height:50px;">
+                    <div class=" col-lg-1 col-md-1 col-sm-6 col-xs-6 text-right headingfont ">
+                        Apartment:
+                    </div>
                     @foreach (var item in Model)
                     {
-                        <div class="col-md-3 col-xs-6 text-left"><p>@Html.DisplayName("Apt#")</p></div>
-
-                        <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p> @Html.DisplayFor(modelItem => item.ApartmentNumber)</p></div>
-
-                        <div class="col-md-3 col-xs-6 text-left"><p> @Html.DisplayNameFor(model => model.FloorNumber)</p></div>
-                        <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p>@Html.DisplayFor(modelItem => item.FloorNumber)</p></div>
-
-                        <div class="col-md-3 col-xs-6 text-left"><p>@Html.DisplayNameFor(model => model.BuildingID)</p></div>
-                        <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p>@Html.DisplayFor(modelItem => item.BuildingID)</p></div>
+                        <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 text-left headingfont ">@Html.DisplayFor(modelItem => item.ApartmentNumber)</div>
                     }
-                    <div class="col-md-3 col-xs-6 text-left"><p>Address</p></div>
-                    <div class="col-md-9  col-xs-6 text-left buildinginfotext"><p>@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</p></div>
-
-                </div>
-
-                <!--Building info section ends-->
-                <!--Request section starts-->
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 " style="height:200px; outline:thin solid lightgrey; ">
-                  <div class="col-md-12 col-sm-12 col-xs-12" style="height:50px;">
-                   
-                  </div>
-                    <button type="button" class="btn btn-info " style="width:130px; height:130px;" ><p class="glyphicon glyphicon-envelope" style="font-size:100px;"></p></button>
+                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 headingfont">Address</div>
+                    <div class="col-md-6  col-xs-6 text-left headingfont ">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</div>
                 </div>
             </div>
-        </div>
+            <!--=================Page Title ends==================-->
+            <!--=================Apartment content==================-->
 
-        </div>
-    <hr/>
-    <div class="container" style="background:white;">
-        <!--Add and romove buttons starts-->
-        <div class="row  ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class=" row  " style=" background:white;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " >
+                    <canvas id="Bargraph" width="800" height="300"  ></canvas> 
+                </div>
+            </div>
+
+            <!--=================Apartment content ends==================-->
+
+            <!--==================Circles=============================-->
+            <div class=" row  " style="padding:20px; border-top:1px solid lightgrey;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 CirlceTitle " style=" height:50px; ">
+
+                    <div class="col-lg-3 col-md-3 coll-sm-3 col-xs-3 text-center ">
+                        Today Total
+                    </div>
+
+
+                    <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-md-3 coll-sm-3 col-xs-3 text-center ">
+                        multi days
+                    </div>
+
+                    <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-md-3 coll-sm-3 col-xs-3 text-center ">
+                        pending requests
+                    </div>
+
+                </div>
+                
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                        <div class="col-lg-3 col-md-3 coll-sm-3 col-xs-3  text-center " style="padding-left:60px;">
+                            <div class="circleRequests">50</div>
+                        </div>
+
+                        <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-3 col-md-3 coll-sm-3 col-xs-3  text-center " style="padding-left:60px;">
+                            <div class="circleRequests">12</div>
+                        </div>
+
+                        <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-3 col-md-3 coll-sm-3 col-xs-3  text-center " style="padding-left:60px;">
+                            <div class="circleRequests">37</div>
+                        </div>
+                    </div>
+                <!--=============Building Info=============================-->
+                <div class="col-md-5">
+
+                </div>
+                <!--Building Info Ends-->
+            </div>
+            <!--=======================Circle Ends====================-->
+            <!--=================Tenant==================-->
+            <!--add tenant-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-top:1px solid lightgrey;">
                 @foreach (var item in Model)
                 {
                     <button type="button" class="btn btn-default" style="margin:10px;"
@@ -65,73 +96,61 @@
                     </button>
                 }
             </div>
-
-        </div>
-
-        <!--Add and romove buttons ends-->
-        <!--Request section ends-->
-
-        <div class="row" style="height:20px;">
-
-
-        </div>
-
-        <div class="row">
-            @*<div id="ganttContainer" class="col-md-12 col-sm-12 col-xs-12 whitecolor ganttchart" style="height:350px;  "></div>*@
-
-        </div>
-        <div class="row" style="height:20px;">
-
-            <hr style="color:grey;" />
-        </div>
-
-
-        @foreach (var item in ViewBag.tenant)
-        {
-    <!--Tenant section starts-->
-            <div class="row  ">
-                <!--Tenant Info section starts-->
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
-                    <h1> @item.FirstName</h1>
-                    <button type="button" class="btn btn-default" style="margin:10px;"
-                            onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
-                        Remove Tenant
-                    </button>
-                    <button type="button" class="btn btn-default" style="margin:10px;"
-                            onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
-                        New Request
-                    </button>
-
-                </div>
+            <div class=" row   " style="">
+                @foreach (var item in ViewBag.tenant)
+                {
+                    <!--========================left side===============================-->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  " style="border-bottom:1px solid lightgrey;background:#C1CDCD; padding-bottom:50px;">
+                        <!--========================tenant title===============================-->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:80px;">
+                            <!--========================Request box===============================-->
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right " style="height:60px; padding-top:10px;">
+                                <button type="button" class="btn btn-default" style="margin:10px;"
+                                        onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
+                                    New Request
+                                </button>
+                            </div>
+                        </div>
+                        <!--========================tenant contant box===============================-->
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1  " style=" padding-top:20px; padding-bottom:0px; border-radius:20px; background:white;">
+                            <!--icon-->
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 " style="height:260px;">
+                                <div class=" glyphicon glyphicon-user " style="font-size:40px; padding-top:10px; "></div>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  " style="padding-bottom:10px; ">
+                                <!--tenant Name -->
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:70px;">
+                                    <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7  "><h1> @item.FirstName</h1> </div>
+                                    <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5" style=" padding-top:25px;">
+                                        <button type="button" class="btn btn-default "
+                                                onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
+                                            Remove Tenant
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--tenan content area-->
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-bottom:0px;">
 
 
+                                    <canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>
+                                </div>
 
-                <!--Tenant Info section ends-->
-                <!--Tenant graph section starts-->
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
-                    <h3>Resquests Type</h3>
-                    <canvas id="doughNutChartLoc@(item.ID)" class="mygraph" height="200" width="200" data-tenantid="@item.ID"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                }
 
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 whitecolor" style="height:280px;">
-                    <h3>Current Request</h3>
-
-
-                </div>
-
-
-                <!--Tenant graph section ends-->
             </div>
 
+            <!--=================tenant ends==================-->
 
-            <!--Tenant section ends-->
-            <div class="row " style="height:20px;">
+
+                
+               
             </div>
-        }
 
-
-    </div>
-
+        </div>
+   
 
     
 </body>
@@ -145,93 +164,114 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
     <script src="~/Scripts/Chart.min.js"></script>
-
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="~/Scripts/HighChart/highcharts.js"></script>
+<script src="~/Scripts/HighChart/modules/exporting.js"></script>
    <script type="text/javascript">
     $(document).ready(function (e) {
-        var canvascount = document.getElementsByTagName("canvas");
-        for (var i = 0; i <= canvascount.length - 1; i++) {
-            var data_TenantID = canvascount[i].getAttribute("data-tenantid");
-           
-            var data = [
-                           {
-                               value: 50,
-                               color: "lightblue",
-                               label: "dioscar"
-
-                           },
-                           {
-                               value: 10,
-                               color: "red",
-                               label: "dioscar"
-                           },
-                           {
-                               value: 40,
-                               color: "green",
-                               label: "dioscar"
-                           }
-                           
+       
+        
+       
+        //=====================lINE CHARTChart==============================
+        
+        var data2 = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "#baeac5",
+                    strokeColor: "rgba(220,220,220,0.8)",
+                    highlightFill: "#baeac5",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                }
             ]
-            var myDoughnut = new Chart(document.getElementById("doughNutChartLoc" + data_TenantID).getContext("2d")).Doughnut(data);
-
-
-
-          
-
-          
-           
-            
-
-
-           
         };
 
-        //=====================GanttChart==============================
+        var options = {
 
-        (function () {
+            responsive: true,
+            maintainAspectRatio: true
+        }
+       
+        
+        var myBar = new Chart(document.getElementById("Bargraph").getContext("2d")).Bar(data2, options);
+      
+        //=====================Line Chart ends==============================
 
-            var tasks = {
-                data: [
-                   { id: 1, text: "Project #1", start_date: "01-04-2013", duration: 18 },
-                   { id: 2, text: "Task #1", start_date: "02-04-2013", duration: 8, parent: 1 },
-                   { id: 3, text: "Task #2", start_date: "11-04-2013", duration: 8, parent: 1 }
-                ]
-            };
-            // add month scale
-            gantt.config.scale_unit = "week";
-            gantt.config.step = 1;
-            gantt.templates.date_scale = function (date) {
-                var dateToStr = gantt.date.date_to_str("%d %M");
-                var endDate = gantt.date.add(gantt.date.add(date, 1, "week"), -1, "day");
-                return dateToStr(date) + " - " + dateToStr(endDate);
-            };
-            gantt.config.subscales = [
-                { unit: "day", step: 1, date: "%D" }
-            ];
-            gantt.config.scale_height = 50;
-            // configure milestone description
-            gantt.templates.rightside_text = function (start, end, task) {
-                if (task.type == gantt.config.types.milestone) {
-                    return task.text;
+        //=====================Circle charts for the tenants==============================
+        
+        var canvascount = document.getElementsByTagName("canvas");
+       
+        
+        for (var i = 1; i <= canvascount.length - 1; i++)
+        {   var datachart =[];
+        var data_TenantID = canvascount[i].getAttribute("data-tenantid");
+       
+
+
+       
+        
+           
+     
+        $.ajax({
+            async: false,
+            type: "GET",
+            data:{TenantID: data_TenantID},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/Building/getRequestsType/",
+            success: function(jsonData) {
+               
+                for(var j=0; j<jsonData.length; j++)
+                {
+                 
+                    //Legend Data[].Key shows type name
+                    //Legend: Data[].(type) show the count of the type
+                    datachart.push({value:jsonData[j].AccessControl , color: "lightblue",label:  jsonData[j].key});    
+                   
                 }
-                return "";
-            };
-            // add section to type selection: task, project or milestone
-            gantt.config.lightbox.sections = [
-                { name: "description", height: 70, map_to: "text", type: "textarea", focus: true },
-                { name: "type", type: "typeselect", map_to: "type" },
-                { name: "time", height: 72, type: "duration", map_to: "auto" }
-            ];
-            gantt.config.xml_date = "%Y-%m-%d %H:%i:%s"; // format of dates in XML
-            gantt.init("ganttContainer"); // initialize gantt
-            gantt.load("/Home/GetGanttData", "json");
-        })();
+                drawmychart(datachart);
+             
+               
+            }
+        });
 
-        //=====================GanttChart ends==============================
+
+
+
+        
+      
+      
 
 
 
        
+            debugger; 
+            function drawmychart(data1){
+                var options = { responsive: true }
+                var myDoughnut = new Chart(document.getElementById("doughNutChartLoc" + data_TenantID).getContext("2d")).PolarArea(data1,options);
+            }
+        };
+        //=====================Circle charts for the tenants ends==============================
+      
+        
+    
+
+        
+
+
+       
+      
+
+
+
+
+
+
+
+
+
     });
 </script>
 

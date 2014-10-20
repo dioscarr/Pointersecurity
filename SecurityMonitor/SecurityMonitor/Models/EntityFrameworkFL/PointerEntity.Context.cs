@@ -45,6 +45,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<GanttLinkId> GanttLinkIds { get; set; }
         public virtual DbSet<GanttTask> GanttTasks { get; set; }
+        public virtual DbSet<ReqType> ReqTypes { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }

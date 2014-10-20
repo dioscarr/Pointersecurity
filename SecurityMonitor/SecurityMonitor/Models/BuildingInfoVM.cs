@@ -24,5 +24,10 @@ namespace SecurityMonitor.Models
         public string BuildingPhone { set; get; }
         public int ClientID { get; set; }
         public string Manager { set; get; }
+        public int AptID { set; get; }
+
+        public 
+
+
     }
 }

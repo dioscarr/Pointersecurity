@@ -251,6 +251,13 @@
           <Property Name="Type" Type="varchar(max)" Nullable="false" />
           <Property Name="ParentID" Type="int" />
         </EntityType>
+        <EntityType Name="ReqType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReqType" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Requests">
           <Key>
             <PropertyRef Name="ID" />
@@ -625,6 +632,7 @@
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttTask" EntityType="Self.GanttTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -749,6 +757,7 @@
           <EntitySet Name="Clients" EntityType="PointersecurityModel.Client" />
           <EntitySet Name="GanttLinkIds" EntityType="PointersecurityModel.GanttLinkId" />
           <EntitySet Name="GanttTasks" EntityType="PointersecurityModel.GanttTask" />
+          <EntitySet Name="ReqTypes" EntityType="PointersecurityModel.ReqType" />
           <EntitySet Name="Requests" EntityType="PointersecurityModel.Request" />
           <EntitySet Name="Roles" EntityType="PointersecurityModel.Role" />
           <EntitySet Name="sysdiagrams" EntityType="PointersecurityModel.sysdiagram" />
@@ -1104,6 +1113,13 @@
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ParentID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReqType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReqType1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -1668,6 +1684,14 @@
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="GantTaskID" ColumnName="GantTaskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReqTypes">
+            <EntityTypeMapping TypeName="PointersecurityModel.ReqType">
+              <MappingFragment StoreEntitySet="ReqType">
+                <ScalarProperty Name="ReqType1" ColumnName="ReqType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

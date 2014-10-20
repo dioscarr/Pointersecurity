@@ -231,6 +231,10 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public async Task<ActionResult> BuildingProfile(int? page, string searchBy, string search, int? BuildingID)
         {
+
+
+            Session.Timeout = 20;
+            
             if (BuildingID != null)
             {
                 Session["BuildingID"] = BuildingID;
@@ -416,12 +420,37 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public async Task<ActionResult> ApartmentProfile(int? ApartmentID) 
         {
+
+
+            var buildinginfo = await db.Buildings
+                .Join(db.Apartments,
+                b => b.ID,
+                c => c.BuildingID,
+                (b, c) => new BuildingInfoVM
+                {
+                    ID = c.ID,
+                    BuildingName = b.BuildingName,
+                    BuildingPhone = b.BuildingPhone,
+                    Address = b.Address,
+                    City = b.City,
+                    ZipCode = b.Zipcode,
+                    Manager = b.Manager,
+                    NumberOfApart = (int)b.NumberOfApartment,
+                    States = b.State,
+                    AptID = c.ID
+                })
+                .Where(cb => cb.AptID == ApartmentID)
+                .FirstAsync();
+
+          Session["Building"] = buildinginfo;
+            
             var apartmentinfo = new ApartmentVM();
             var apartmentprofile  = await db.Apartments
                                             .Where( a=>a.ID == ApartmentID)                                          
                                             .Select(c=> new ApartmentVM{   ApartmentNumber= c.ApartmentNumber,
                                                                          FloorNumber = c.FloorNumber,
                                                                          BuildingID = c.BuildingID, ID = c.ID}).ToListAsync();
+            
             var tenant = await db.Tenants
                 .Where(t => t.aptID == ApartmentID).ToListAsync();
 
@@ -525,7 +554,24 @@ namespace SecurityMonitor.Controllers
 
             
                 tenantRequest.TenantID = (int)tenantID;
-               
+
+                List<SelectListItem> reqtype = new List<SelectListItem>();
+                var myitems = db.ReqTypes.ToList();
+
+                foreach (var item in myitems)
+                {
+                    reqtype.Add(new SelectListItem { Text = item.ReqType1, Value = item.ReqType1 });
+
+                }
+             
+
+
+
+                ViewBag.ReqType = reqtype;
+    
+
+
+
                 return View(tenantRequest);
             }
 
@@ -548,8 +594,24 @@ namespace SecurityMonitor.Controllers
         }
 
 
-        //======================TenantRequest ends======================
+        //======================Tenant Request chart======================
+        public JsonResult getRequestsType(int? TenantID)
+        {
 
+            var Tomorrow = DateTime.Today.AddDays(1);
+            var Today = DateTime.Today.Date;
+            //Request From Today
+            var todayRequests = db.Requests
+                 .Where(c => c.TenantID ==(int)TenantID )
+                 .GroupBy(c=> c.RequestType)
+                 .Select(c => new ReqTypeCount { key = c.Key, AccessControl = c.Count() }).ToList();
+
+
+
+            var dayoftheweek = DateTime.Today.AddDays(3).DayOfWeek;
+
+            return new JsonResult { Data = todayRequests, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
 
         
