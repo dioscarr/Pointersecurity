@@ -26,7 +26,7 @@ namespace SecurityMonitor.Models
         public string Manager { set; get; }
         public int AptID { set; get; }
 
-        public 
+        public List<ApartmentVM> AparmentVMs { set; get; }
 
 
     }
