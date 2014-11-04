@@ -8,6 +8,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using SecurityMonitor.Models;
 using SecurityMonitor.Controllers;
+using Microsoft.AspNet.SignalR;
+using Microsoft.Owin;
+
 
 
 namespace SecurityMonitor
@@ -16,12 +19,17 @@ namespace SecurityMonitor
     {
         protected void Application_Start()
         {
+            // Register the default hubs route: ~/signalr/hubs
+           // RouteTable.Routes.MapHubs();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+       
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<ApplicationDbContext>(null);
             ModelBinders.Binders.Add(typeof(EventItem[]), new CsvModelBinder<EventItem>());
+           
         }
     }
 }

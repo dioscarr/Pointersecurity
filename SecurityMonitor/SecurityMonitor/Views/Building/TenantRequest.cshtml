@@ -1,77 +1,97 @@
 ﻿@model SecurityMonitor.Models.EntityFrameworkFL.Request
 
 @{
-    ViewBag.Title = "TenantRequest";
+    ViewBag.Title = "Tenant Request";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>TenantRequest</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Request</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
-                @{IEnumerable<SelectListItem> ReqType = ViewBag.ReqType;}
-        <div class="form-group">
-            @Html.LabelFor(model => model.RequestType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.RequestType,ReqType, new {  @class = "form-control"  })
-                @Html.ValidationMessageFor(model => model.RequestType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "datetimepickerfrom" } })
-                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "datetimepickerto" } })
-                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PIN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PIN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PIN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-    
-    
+<div class="container">
+    <div class="row " style="padding-top:20px;">
         
-     
-    
-    
-    
-}
+            <div class="col-md-3"></div>
+        <!--form begins-->
+        <div class="col-md-6 requestformbox text-center crema" style="">
+            <h2>Tenant Request</h2>
+            @{IEnumerable<SelectListItem> ReqType = ViewBag.ReqType;}
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
+
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="col-md-4 newrequestform newrequestform">
+                    @Html.Label("Rquest Type")
+                </div>
+                <div class="col-md-8 newrequestform ">
+
+                    @Html.DropDownListFor(model => model.RequestType, ReqType, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.RequestType, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                <div class="col-md-4 newrequestform">
+                    @Html.Label("Description")
+                </div>
+                <div class="col-md-7 newrequestform">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = "6", @maxlength = "250", id = "descriptionarea" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1"><div id="wordcount"></div></div>
+
+
+                <div class="col-md-4 newrequestform">
+                    @Html.Label("From")
+                </div>
+                <div class="col-md-8 newrequestform">
+                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "datetimepickerfrom" } })
+                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col-md-4 newrequestform">
+                    @Html.Label("To")
+                </div>
+                <div class="col-md-8 newrequestform">
+                    @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "datetimepickerto" } })
+                    @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col-md-4 newrequestform">
+                    @Html.Label("PIN")
+                </div>
+                <div class="col-md-8 newrequestform">
+                    @Html.EditorFor(model => model.PIN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PIN, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="col-md-4 newrequestform">
+                    <div class="col-md-offset-2 col-md-8 newrequestform">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            }
+            <div class="col-md-3"></div>
+        </div>
+
+       
+    </div>
+</div>
 
 @section scripts
 {
@@ -83,12 +103,32 @@
 
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
-    
+
     <script type="text/javascript">
 
         //=========clearing textbox==========
         //$('#datetimepickerfrom').value('');
         //$('#datetimepickerTo').value('');
+       
+
+        
+        $('#descriptionarea').keyup(function ()
+        {
+            var maxl = $(this).attr("maxlength") -1;
+            var input = $(this).val().length;
+
+            var totalused = maxl +1 - input;
+            if (input != 0)
+            {
+                $('#wordcount').html('<p style="color:red;">-' + input + '</p>' + "<P>of</P>" + '<p style="color:green;">' + totalused+'</p>');
+
+            } else {
+                $('#wordcount').html("");
+            }
+           
+            
+
+        });
 
 
         $(document).ready(function (e) {
@@ -97,9 +137,9 @@
                 timepicker: true,
                 minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
                 formatDate: 'y.m.d',
-                formatTime:'g:i a',
+                formatTime: 'g:i a',
                 step: 5
-                
+
 
             });
 
@@ -111,6 +151,6 @@
                 step: 5
             });
         });
-            //=============DateTimePicker plugin settings ends====================
-            </script>
-        }
+        //=============DateTimePicker plugin settings ends====================
+    </script>
+}

@@ -225,10 +225,31 @@
                
                 for(var j=0; j<jsonData.length; j++)
                 {
+                    //array of colors
+                    var colors = ["#0000FF",
+                                   "#8A2BE2",
+                                   "#6495ED",
+                                   "lightblue", 
+                                   "lightgreen", 
+                                   "orange",
+                                   "yellow",
+                                   "#32CD32",
+                                   "#FF4500", 
+                                   "#FF6347",
+                                   "#008080",
+                                   "#9ACD32",
+                                   "#FFE4B5",
+                                   "#FFE4E1",
+                                   "#0000CD",
+                                   "#9370DB",
+                                   "#B0C4DE",
+                                   "#7FFFD4"
+                    ];                
+                    var rand = Math.floor(Math.random()*colors.length);
                  
                     //Legend Data[].Key shows type name
                     //Legend: Data[].(type) show the count of the type
-                    datachart.push({value:jsonData[j].AccessControl , color: "lightblue",label:  jsonData[j].key});    
+                    datachart.push({value:jsonData[j].AccessControl , color: colors[rand],label:  jsonData[j].key});    
                    
                 }
                 drawmychart(datachart);
@@ -247,10 +268,10 @@
 
 
        
-            debugger; 
+          
             function drawmychart(data1){
                 var options = { responsive: true }
-                var myDoughnut = new Chart(document.getElementById("doughNutChartLoc" + data_TenantID).getContext("2d")).PolarArea(data1,options);
+                var myDoughnut = new Chart(document.getElementById("doughNutChartLoc" + data_TenantID).getContext("2d")).Pie(data1,options);
             }
         };
         //=====================Circle charts for the tenants ends==============================

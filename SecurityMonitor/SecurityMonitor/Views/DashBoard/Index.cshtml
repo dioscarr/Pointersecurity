@@ -7,32 +7,14 @@
 <!--Main Container-->
 <div class="container myRow ">
     <!--=================Page Title==================-->
-
- 
-
-    
-
-
-
-
-
     <!--================Top Section=======================-->
-    <div class="row" style="padding-bottom:70px; padding-top:60px; border-bottom:1px solid lightgrey;">
-        <!--================First Botton================-->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6   ">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="Settings" class=" glyphicon glyphicon-cog AdminMEnu" onclick="location.href = '@Url.Action("manageReqType", "Dashboard")'"></div></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="clients" class=" glyphicon glyphicon-user AdminMEnu"  onclick="location.href = '@Url.Action("ClientIndex", "Building")'"></div></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="Building" class=" glyphicon glyphicon-home AdminMEnu" style=""></div></div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="Others" class="  glyphicon glyphicon-share-alt AdminMEnu" style=""></div></div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="height:49px;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top:10px;">
-                <input type="text" class="col-md-3 form-control  pull-right" id="input-search">
-                <input type="submit" value="Search" class="col-md-2 col-lg-offset-1 btn btn-info  pull-right" />
-            </div>
-        </div>
+    <div class="col-md-12">
+
+
+
+
+
     </div>
-    <!--=================Admin Menu Row ends===================-->
 
     <div class="row " style=" height:50px;">        
        
@@ -82,63 +64,41 @@
 </div>
 @section scripts
 {
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    
-<script src="~/Scripts/Chart.min.js"></script>
-    
-    <!--=====================google Chart API starts=======================================-->
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
 
-    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script src="~/Scripts/Chart.min.js"></script>
+
+<!--=====================google Chart API starts=======================================-->
+
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
             'version':'1','packages':['timeline'], }]}"></script>
-    <!--'callback':'alert("2 sec wait")', 'packages':['corechart']})}, 2000-->
+
 
 
     <!--=====================google Chart API ends=======================================-->
 <script src="~/Scripts/date.js"></script>
 
+
+
+
     <script type="text/javascript">
         $(document).ready(function (e) {
 
-            //======================menu===========================================
-            $('#Others').mouseover(function()
-            {                       
-                //alert('it works');
-                $( this ).addClass("menuover");
-                
-            
-            }).mouseout(function(){
-                $( this ).removeClass("menuover");
-            });
-            
-            $('#Settings').mouseover(function()
-            {                       
-                //alert('it works');
-                $( this ).addClass("menuover");
+            // Start the connection.
 
-            
-            }).mouseout(function(){
-                $( this ).removeClass("menuover");
-            });
-            
-            $('#Building').mouseover(function()
-            {                       
-                //alert('it works');
-                $( this ).addClass("menuover");
+            var notification = $.connection.notificationsHub;
 
-            
-            }).mouseout(function(){
-                $( this ).removeClass("menuover");
-            });
-            $('#clients').mouseover(function()
-            {                       
-                //alert('it works');
-                $( this ).addClass("menuover");
+            notification.client.broadcastNotification = function (name, message) {
+                alert(message);
+            };
 
-            
-            }).mouseout(function(){
-                $( this ).removeClass("menuover");
+            $.connection.hub.start().done(function () {
+               
             });
 
             //============================ pie chart ===============================

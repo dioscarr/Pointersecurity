@@ -411,7 +411,7 @@ namespace SecurityMonitor.Controllers
                
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM;
             }
-            return PartialView(myUserActivitiesLogVM.UserActivites.ToPagedList(pageNumber, pageSize));
+              return PartialView(myUserActivitiesLogVM.UserActivites.ToPagedList(pageNumber, pageSize));
         }
 
 
@@ -473,9 +473,12 @@ namespace SecurityMonitor.Controllers
         }
 
         //============= Adding Tenant to apartment Post ==============
+        [HttpPost]
         public async Task<ActionResult> AddingTenant(TenantVM newTenant)
         {
-
+            try { 
+            
+           
             if (ModelState.IsValid)
             {
                 var newtenant = new Tenant
@@ -490,6 +493,13 @@ namespace SecurityMonitor.Controllers
                 db.Tenants.Add(newtenant);
                 await db.SaveChangesAsync();
                 return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID });
+
+            }
+            }
+                catch(Exception e){
+
+                    ViewBag.Message = e.Message;
+                
             }
             return View();
         }

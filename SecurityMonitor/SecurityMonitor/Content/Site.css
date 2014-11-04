@@ -103,9 +103,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f9f8', end
 }
 
 .shadow2 {
-   -moz-box-shadow:    inset 0 0 7px 0 #000000;
-   -webkit-box-shadow: inset 0 0 7px 0 #000000;
-   box-shadow:         inset 0 0 7px 0 #000000;
+   -moz-box-shadow:    inset 0 0 6px 0 #000000;
+   -webkit-box-shadow: inset 0 0 6px 0 #000000;
+   box-shadow:         inset 0 0 6px 0 #000000;
 }
 
 hrstylefour {
@@ -220,3 +220,89 @@ font-family: Tahoma, Geneva, sans-serif;
 
 
 }
+.shadow3 {
+    border:1px solid lightgrey;
+
+}
+.shadow4 {
+    border:1px solid lightgrey;
+
+-webkit-box-shadow: 0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+-moz-box-shadow:    0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+box-shadow:         0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+}
+
+.myguesslist {
+
+
+position :absolute;
+top:35px;
+left:15px;
+width:195px; 
+background:white;
+
+-webkit-box-shadow: 0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+-moz-box-shadow:    0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+box-shadow:         0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+z-index:1;
+}
+
+.myguesslist ul {
+    /*outline:1px solid lightblue;*/
+width:194px;
+
+}
+    .myguesslist ul li{
+        padding-top:5px;
+        padding-bottom:50px;
+        width:175px;
+        border-bottom:1px solid lightgrey;
+        position:relative;
+        left:-30px;
+    list-style-type:none;
+    /*outline:1px solid lightblue;*/
+    height:50px;
+    background-color:white;
+    }
+
+.pre-scrollable  {
+    padding-top:10px;
+    max-height:550px;
+    
+
+}
+
+
+#TenantSearchResult {
+    padding-top:10px;
+
+      
+}
+
+#myguess>ul>li
+{
+    background-color:white;
+}
+#myguess>ul>li:hover
+{
+    
+   border-bottom:1px solid green;
+   color:black;
+}
+.newrequestform {
+
+padding-bottom:20px;
+}
+
+.requestformbox {
+
+    border:1px solid lightgrey;
+    -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+
+.crema {
+background:rgba(247,249,248,1);
+}
+

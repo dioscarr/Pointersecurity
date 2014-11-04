@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(SecurityMonitor.Startup))]
@@ -8,7 +10,10 @@ namespace SecurityMonitor
     {
         public void Configuration(IAppBuilder app)
         {
+            app.MapSignalR();
             ConfigureAuth(app);
+           
+           
         }
     }
 }
