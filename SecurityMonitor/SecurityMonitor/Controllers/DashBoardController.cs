@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models.EntityFrameworkFL;
 using SecurityMonitor.Models;
+using System.Net.Http;
+using System.Net;
+using SecurityMonitor;
+
 
 namespace SecurityMonitor.Controllers
 {
@@ -206,6 +210,32 @@ namespace SecurityMonitor.Controllers
         }
               return new JsonResult { Data = Search, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        
+        public ActionResult TypeMasterProfile()
+        {
+            List<SelectListItem> n = new List<SelectListItem>();
+           
+
+            ViewBag.listItems = n;
+            
+
+           
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult FromJson(List<JsonVM> name)
+        {
+           
+            
+            
+            // Can process the data any way we want here,
+            // e.g., further server-side validation, save to database, etc
+            return Json(name);
+        }
+
+      
 
     }
 }

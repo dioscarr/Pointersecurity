@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DelegateDecompiler">
+      <HintPath>..\packages\DelegateDecompiler.0.9.1.0\lib\net40-Client\DelegateDecompiler.dll</HintPath>
+    </Reference>
     <Reference Include="FileHelpers">
       <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.dll</HintPath>
     </Reference>
@@ -67,6 +70,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Reflection">
+      <HintPath>..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll</HintPath>
+    </Reference>
     <Reference Include="MvcPaging">
       <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
     </Reference>
@@ -79,6 +85,9 @@
     </Reference>
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PerpetuumSoft.Knockout">
+      <HintPath>..\packages\kMVC.0.6.0\lib\net40\PerpetuumSoft.Knockout.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -204,6 +213,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="FromJsonAttribute.cs" />
     <Compile Include="Hubs\NotificationsHub.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TenantsController.cs" />
@@ -215,6 +225,8 @@
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
+    <Compile Include="Models\JsonVM.cs" />
+    <Compile Include="Models\myController.cs" />
     <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -672,7 +684,6 @@
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\com\highcharts\export\service\MonitorService.class" />
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\log4j.properties" />
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\WEB-INF\classes\com\highcharts\export\controller\ExportController.class" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\HighChart\adapters\standalone-framework.js" />
     <Content Include="Scripts\HighChart\adapters\standalone-framework.src.js" />
@@ -707,8 +718,10 @@
     <Content Include="Scripts\HighChart\themes\grid.js" />
     <Content Include="Scripts\HighChart\themes\sand-signika.js" />
     <Content Include="Scripts\HighChart\themes\skies.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\jquery.signalR2.1.2.min.js" />
@@ -716,7 +729,12 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.1.0.debug.js" />
+    <Content Include="Scripts\knockout-3.1.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\perpetuum.knockout.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\TimePicket\jquery.datetimepicker.css" />
@@ -738,7 +756,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
@@ -775,6 +792,7 @@
     <Content Include="Views\Building\TenantRequest.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\DashBoard\manageReqType.cshtml" />
+    <Content Include="Views\DashBoard\TypeMasterProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

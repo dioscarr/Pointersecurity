@@ -1,0 +1,129 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TypeMasterProfile</h2>
+
+<!--there 2 things going on-->
+<!--1 a loop-->
+<!--2 input that triggers aservablearray to update-->
+<p>Try to type</p>
+<div class="row">
+    <div class="col-md-6">
+        <h6>Enter The Field's Name</h6>
+    </div>
+</div>
+<div class="row outline">
+    <div class="col-md-6 outline">
+        <form data-bind="submit: save">
+            <div data-bind="foreach: users">
+                <!--loop through array Users[]-->
+                @*<div class="col-md-1"><input type="checkbox" data-bind="checked: isDone" /></div>*@
+                <div class="col-md-5">
+                    <input class="form-control" type="text"
+                           data-bind="value: TextBoxLabel,
+                        valueUpdate: 'afterkeydown',
+                        attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
+
+                    <span data-bind="text: TextBoxLabel"></span>
+                    <br />
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control" type="text"
+                           data-bind="value: TextBox,
+                        valueUpdate: 'afterkeydown',
+                        attr: {name: 'Users[' + $index() + '].TextBox' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
+                    @*<span data-bind="text: TextBox"></span>*@
+                    <br />
+                </div>
+                <div class="col-md-1"><button class="btn btn-default" data-bind="click: $parent.removeField">Delete</button></div>
+
+                <!-- Our other UI elements, including the table and ‘add’ button, go here -->
+
+
+
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+       
+    </div>
+    
+
+   
+</div>
+
+ <div class="col-md-12" style="height:10px;"></div>
+
+
+    
+<div class="col-md-12" style="height:50px;"><button type="button" class="col-md-6 btn btn-default" data-bind="click: addUser">Add New Textbox Field</button></div>
+
+
+@section scripts
+
+{
+    
+    
+    
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            function Task(data)
+            {
+                this.title = ko.observable(data.title);
+                this.isDone = ko.observable(data.isDone);
+            }
+
+            function viewModel()
+            {
+                var self = this;
+
+                self.users = ko.observableArray(),//create an array
+                self.addUser = function ()
+                {//create a function named addUsers
+                    this.users.push({// push syntaxt to append array
+                        TextBox: ko.observable(),//add field name to the array
+                        TextBoxLabel: ko.observable()
+                    });
+                }
+                self.save = function (fields) {
+                    debugger;
+                    //alert(ko.toJSON(self.users));
+                    items = ko.observableArray(["one", "two", "three", "four"]);
+                   
+                        $.ajax({  
+                            type: "POST",
+                            url: '/Dashboard/FromJson/',
+                            data: ko.toJSON(self.users),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                alert(ko.toJSON(data));
+                            }
+                        }
+                    });
+               
+                   
+                    //ko.utils.postJson('/Dashboard/FromJson/', { name: fields.users});
+                }
+                self.removeField = function (task)
+                {
+                    self.users.remove(task)
+                };
+
+               };
+          
+            ko.applyBindings(new viewModel()); 
+        });
+
+
+
+    </script>
+    
+    }
