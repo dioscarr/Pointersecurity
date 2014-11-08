@@ -15,9 +15,9 @@
         <h6>Enter The Field's Name</h6>
     </div>
 </div>
-<div class="row outline">
-    <div class="col-md-6 outline">
-        <form data-bind="submit: save">
+<div class="row ">
+    <div class="col-md-6 ">
+        <form data-bind="submit: save" class="col-lg-12">
             <div data-bind="foreach: users">
                 <!--loop through array Users[]-->
                 @*<div class="col-md-1"><input type="checkbox" data-bind="checked: isDone" /></div>*@
@@ -31,42 +31,37 @@
                     <br />
                 </div>
                 <div class="col-md-5">
-                    <input class="form-control" type="text"
+                    <input class="form-control" hidden="hidden" type="text"
                            data-bind="value: TextBox,
                         valueUpdate: 'afterkeydown',
                         attr: {name: 'Users[' + $index() + '].TextBox' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
-                    @*<span data-bind="text: TextBox"></span>*@
+                    <span data-bind="text: TextBox"></span>
                     <br />
                 </div>
                 <div class="col-md-1"><button class="btn btn-default" data-bind="click: $parent.removeField">Delete</button></div>
 
                 <!-- Our other UI elements, including the table and ‘add’ button, go here -->
 
-
-
             </div>
             <button type="submit">Submit</button>
         </form>
        
     </div>
-    
-
-   
+    <!--output master profile preview-->
+    <div class="col-md-6">
+        <div class="colmd-12">
+        </div>
+    </div>
 </div>
 
  <div class="col-md-12" style="height:10px;"></div>
-
-
-    
 <div class="col-md-12" style="height:50px;"><button type="button" class="col-md-6 btn btn-default" data-bind="click: addUser">Add New Textbox Field</button></div>
 
 
 @section scripts
 
 {
-    
-    
-    
+        
 <script src="~/Scripts/knockout-3.1.0.js"></script>
 
     <script type="text/javascript">
@@ -87,8 +82,14 @@
                 self.addUser = function ()
                 {//create a function named addUsers
                     this.users.push({// push syntaxt to append array
-                        TextBox: ko.observable(),//add field name to the array
-                        TextBoxLabel: ko.observable()
+                        TextBox: ko.observable("1"),//add field name to the array
+                        TextBoxLabel: ko.observable(),
+                        RadioButton: ko.observable(),
+                        RadioButtonLabel: ko.observable(),
+                        CheckButton: ko.observable(),
+                        CheckButtonLabel: ko.observable(),
+                        TextArea: ko.observable(),
+                        TextAreaLabel: ko.observable()
                     });
                 }
                 self.save = function (fields) {
@@ -104,18 +105,22 @@
                         dataType: "json",
                         success: function (data) {
                             if (data) {
-                                alert(ko.toJSON(data));
+                                //alert(ko.toJSON(data));
+                                window.location.href = "/Dashboard/PreviewTemplate/";
+                                //alert(ko.toJS(data));
+                                
                             }
                         }
                     });
-               
-                   
                     //ko.utils.postJson('/Dashboard/FromJson/', { name: fields.users});
                 }
                 self.removeField = function (task)
                 {
                     self.users.remove(task)
                 };
+
+                //output preview
+                //masterarray = ko.observablearray();
 
                };
           

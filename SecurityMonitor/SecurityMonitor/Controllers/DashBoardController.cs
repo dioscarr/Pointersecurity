@@ -8,6 +8,7 @@ using SecurityMonitor.Models;
 using System.Net.Http;
 using System.Net;
 using SecurityMonitor;
+using System.Threading.Tasks;
 
 
 namespace SecurityMonitor.Controllers
@@ -225,14 +226,90 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public JsonResult FromJson(List<JsonVM> name)
+        public async Task<JsonResult> FromJson(List<JsonVM> name)
         {
-           
+
+
+            foreach(var item in name)
+            {      
+
+             switch (item.Textbox)
+            {
+                case "1":
+
+
+                   var mppt1 = new MasterProfileField { 
+                      Controller = item.Textbox,
+                        Label = item.TextboxLabel
+                   };
+
+                   db.MasterProfileFields.Add(mppt1);
+                  await db.SaveChangesAsync();
+
+                    break;
+                case "2":
+                     var mppt2 = new MasterProfileField { 
+                      Controller = item.Textbox,
+                        Label = item.TextboxLabel
+                   };
+
+                   db.MasterProfileFields.Add(mppt2);
+                   await db.SaveChangesAsync();
+               
+                    break;
+                case "3":
+                     var mppt3 = new MasterProfileField { 
+                      Controller = item.Textbox,
+                        Label = item.TextboxLabel
+                   };
+
+                   db.MasterProfileFields.Add(mppt3);
+                   await db.SaveChangesAsync();
+                
+                    break;
+                case "4":
+                     var mppt4 = new MasterProfileField { 
+                      Controller = item.Textbox,
+                        Label = item.TextboxLabel
+                   };
+
+                   db.MasterProfileFields.Add(mppt4);
+                   await db.SaveChangesAsync();
+               
+                    break;
+                case "5":
+                     var mppt5 = new MasterProfileField { 
+                      Controller = item.Textbox,
+                        Label = item.TextboxLabel
+                   };
+
+                   db.MasterProfileFields.Add(mppt5);
+                  await db.SaveChangesAsync();
+                
+                    break;
+
+            }
+
+            
+            }
+
+          
+            
             
             
             // Can process the data any way we want here,
             // e.g., further server-side validation, save to database, etc
             return Json(name);
+        }
+
+        [HttpGet]
+        public ActionResult PreviewTemplate()
+        {
+            var MPPT = db.MasterProfileFields
+                .Select(mppt => new MasterProfileVM {  Label= mppt.Label, Controller =mppt.Controller, ID = mppt.ID}).ToList();
+
+
+            return View(MPPT);
         }
 
       

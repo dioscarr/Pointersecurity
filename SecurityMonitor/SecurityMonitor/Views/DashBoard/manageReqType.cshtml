@@ -155,6 +155,10 @@
                         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 whitecolor " style="padding-bottom:20px; padding-top:30px; margin:15px; border:1px solid lightgrey;">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style="padding-bottom:10px; color:black;">
                                 @item.Text
+                                <button class=" btn btn-default"
+                                            onclick="location.href = '@Url.Action("TypeMasterProfile", "Dashboard")'">
+                                            <div class="glyphicon glyphicon-info-sign" style="color:lightblue; "></div>
+                                            </button>
                             </div>
 
                             @using (Html.BeginForm(new { ReqTypeID = Convert.ToInt32(@item.Value) }))
@@ -165,6 +169,7 @@
                                         <input type="submit" value="Remove Category" class="btn btn-default" />
 
                                     </div>
+                                   
                                 </div>
                             }
                         </div>

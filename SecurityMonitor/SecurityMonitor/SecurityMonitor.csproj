@@ -225,7 +225,11 @@
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
+    <Compile Include="Models\EntityFrameworkFL\MasterProfileField.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JsonVM.cs" />
+    <Compile Include="Models\MasterProfileVM.cs" />
     <Compile Include="Models\myController.cs" />
     <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
@@ -793,6 +797,7 @@
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\DashBoard\manageReqType.cshtml" />
     <Content Include="Views\DashBoard\TypeMasterProfile.cshtml" />
+    <Content Include="Views\DashBoard\PreviewTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

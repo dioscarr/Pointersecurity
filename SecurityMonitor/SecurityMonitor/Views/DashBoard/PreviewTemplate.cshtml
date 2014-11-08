@@ -1,0 +1,57 @@
+﻿@model List<SecurityMonitor.Models.MasterProfileVM>
+
+@{
+    ViewBag.Title = "PreviewTemplate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PreviewTemplate</h2>
+
+<div class="row">
+
+    @{
+
+        foreach (var item in Model)
+        {
+            switch (item.Controller)
+            {
+                case "1":
+                    <div class="col-md-12">
+                        @Html.Label(item.Label)
+                        @Html.TextBox(item.Label)
+                    </div>
+                    break;
+                case "2":
+                <div class="col-md-12">
+                    @Html.Label("checkme")
+                    @Html.CheckBox("checkme")
+                </div>
+                    break;
+                case "3":
+                <div class="col-md-12">
+                    @Html.Label("RB")
+                    @Html.RadioButton("RB", true)
+                </div>
+                    break;
+                case "4":
+                <div class="col-md-12">
+                    @Html.Label("TArea")
+                    @Html.TextArea("TArea", new { @rows = "3" })
+                </div>
+                    break;
+                case "5":
+                <div class="col-md-12">
+                    @Html.Label("editor")
+                    @Html.Editor("editor")
+                </div>
+                    break;
+
+            }
+        }
+
+
+    }
+
+
+
+</div>

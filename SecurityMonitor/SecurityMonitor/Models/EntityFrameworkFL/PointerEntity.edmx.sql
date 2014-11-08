@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/04/2014 18:45:16
+-- Date Created: 11/08/2014 09:02:09
 -- Generated from EDMX file: C:\Users\dioscar\Source\Repos\Pointersecurity\SecurityMonitor\SecurityMonitor\Models\EntityFrameworkFL\PointerEntity.edmx
 -- --------------------------------------------------
 
@@ -156,6 +156,9 @@ IF OBJECT_ID(N'[dbo].[GanttLinkId]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[GanttTask]', 'U') IS NOT NULL
     DROP TABLE [dbo].[GanttTask];
+GO
+IF OBJECT_ID(N'[dbo].[MasterProfileFields]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MasterProfileFields];
 GO
 IF OBJECT_ID(N'[dbo].[ReqType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ReqType];
@@ -483,6 +486,14 @@ CREATE TABLE [dbo].[UserActivityLogs] (
 );
 GO
 
+-- Creating table 'MasterProfileFields'
+CREATE TABLE [dbo].[MasterProfileFields] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Label] nvarchar(max)  NOT NULL,
+    [Controller] nvarchar(2)  NOT NULL
+);
+GO
+
 -- Creating table 'aspnet_UsersInRoles'
 CREATE TABLE [dbo].[aspnet_UsersInRoles] (
     [aspnet_Roles_RoleId] uniqueidentifier  NOT NULL,
@@ -660,6 +671,12 @@ GO
 -- Creating primary key on [ID] in table 'UserActivityLogs'
 ALTER TABLE [dbo].[UserActivityLogs]
 ADD CONSTRAINT [PK_UserActivityLogs]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'MasterProfileFields'
+ALTER TABLE [dbo].[MasterProfileFields]
+ADD CONSTRAINT [PK_MasterProfileFields]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
