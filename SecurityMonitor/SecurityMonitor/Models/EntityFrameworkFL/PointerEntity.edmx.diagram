@@ -17,10 +17,10 @@
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_SchemaVersions" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Users" Width="1.5" PointX="15.25" PointY="13.375" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_WebEvent_Events" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="PointersecurityModel.AspNetRole" PointX="0.75" PointY="7.875" Width="1.5" />
+        <EntityTypeShape EntityType="PointersecurityModel.AspNetUserClaim" PointX="0.75" PointY="3.75" Width="1.5" />
         <EntityTypeShape EntityType="PointersecurityModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="9.875" />
-        <EntityTypeShape EntityType="PointersecurityModel.AspNetUser" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="PointersecurityModel.AspNetUser" PointX="0.75" PointY="6.625" Width="1.5" />
         <EntityTypeShape EntityType="PointersecurityModel.Building" Width="1.5" PointX="6" PointY="12.625" />
         <EntityTypeShape EntityType="PointersecurityModel.Client" Width="1.5" PointX="3.75" PointY="13.5" />
         <EntityTypeShape EntityType="PointersecurityModel.GanttLinkId" Width="1.5" PointX="6.75" PointY="0.75" />

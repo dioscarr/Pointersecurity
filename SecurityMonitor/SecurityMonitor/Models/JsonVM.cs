@@ -7,7 +7,12 @@ namespace SecurityMonitor.Models
 {
     public class JsonVM
     {
-        public string Textbox { get; set; }
+        public string Controller { get; set; }
         public string TextboxLabel { set; get; }
+        public List<dropdownoptions> Options { set; get; }
+    }
+    public class dropdownoptions {
+        public string Text { set; get; }
+        public string Value { set; get; }
     }
 }

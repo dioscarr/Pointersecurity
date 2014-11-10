@@ -1,6 +1,5 @@
-﻿
-@{
-    
+﻿@{
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,92 +14,116 @@
         <h6>Enter The Field's Name</h6>
     </div>
 </div>
-<div class="row ">
-    <div class="col-md-6 ">
+
+    <div class="row ">
         <form data-bind="submit: save" class="col-lg-12">
-            <div data-bind="foreach: users">
-                <!--loop through array Users[]-->
-                @*<div class="col-md-1"><input type="checkbox" data-bind="checked: isDone" /></div>*@
-                <div class="col-md-5">
-                    <input class="form-control" type="text"
-                           data-bind="value: TextBoxLabel,
+            <div class="col-md-6 ">
+                <div class="row">
+                    <div class="col-md-12 " style="height:50px;"><button type="submit">Submit</button></div>
+                    <div data-bind="foreach: users">
+                        <!--loop through array Users[]-->
+                        @*<div class="col-md-1"><input type="checkbox" data-bind="checked: isDone" /></div>*@
+                        <div class="col-md-5 ">
+                            @*<input class="form-control" type="text"
+                                   data-bind="value: TextBoxLabel,
+                        valueUpdate: 'afterkeydown',
+                        attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" />*@ 
+                            <select data-bind="options:items, optionsText: 'name', optionsValue: 'value', value:Controller"></select>
+
+                            <span data-bind="text: Controller"></span>
+                            <br />
+                        </div>
+                        <div class="col-md-5 ">
+
+                            <input class="form-control"  type="text"
+                                   data-bind="value: TextBoxLabel,
                         valueUpdate: 'afterkeydown',
                         attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
-
-                    <span data-bind="text: TextBoxLabel"></span>
-                    <br />
+                            <span data-bind="text: TextBoxLabel"></span>
+                            <br />
+                        </div>
+                        <div class="col-md-2 "><button class="btn btn-default" data-bind="click: $parent.removeField">Delete</button></div>
+                      
+                        <!-- Our other UI elements, including the table and ‘add’ button, go here -->
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <input class="form-control" hidden="hidden" type="text"
-                           data-bind="value: TextBox,
-                        valueUpdate: 'afterkeydown',
-                        attr: {name: 'Users[' + $index() + '].TextBox' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
-                    <span data-bind="text: TextBox"></span>
-                    <br />
-                </div>
-                <div class="col-md-1"><button class="btn btn-default" data-bind="click: $parent.removeField">Delete</button></div>
 
-                <!-- Our other UI elements, including the table and ‘add’ button, go here -->
+
+                <!--output master profile preview-->
+                <div class="row">
+                    <div class="col-md-12  " style="height:10px;"></div>
+                    <div class="col-md-12" style="height:50px;">
+                        <button type="button" class="col-md-6 btn btn-default" data-bind="click: addUser">Add New Textbox Field</button>
+                    </div>
+                </div>
 
             </div>
-            <button type="submit">Submit</button>
         </form>
-       
-    </div>
-    <!--output master profile preview-->
-    <div class="col-md-6">
-        <div class="colmd-12">
-        </div>
-    </div>
-</div>
+<!--right side ends **********************************************************************-->
 
- <div class="col-md-12" style="height:10px;"></div>
-<div class="col-md-12" style="height:50px;"><button type="button" class="col-md-6 btn btn-default" data-bind="click: addUser">Add New Textbox Field</button></div>
+    </div>
+
+
 
 
 @section scripts
 
 {
-        
-<script src="~/Scripts/knockout-3.1.0.js"></script>
+
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
 
-            function Task(data)
-            {
+            function Task(data) {
                 this.title = ko.observable(data.title);
                 this.isDone = ko.observable(data.isDone);
             }
 
-            function viewModel()
-            {
+            function viewModel() {
                 var self = this;
 
+                var options =  [
+                               { value: 1, name: 'TextBox' },
+                               { value: 2, name: 'CheckBox' },
+                               { value: 3, name: 'Radio Button' },
+                               { value: 4, name: 'TextArea' },
+                               {value: 5, name: 'DropdownList'}
+                             ]
+
+                items = ko.observableArray(options);
+                
+
+
                 self.users = ko.observableArray(),//create an array
-                self.addUser = function ()
-                {//create a function named addUsers
+
+                //function to add to the arrays++++++++++++++++++++++++++++++++++++
+                self.addUser = function () {//create a function named addUsers
                     this.users.push({// push syntaxt to append array
-                        TextBox: ko.observable("1"),//add field name to the array
-                        TextBoxLabel: ko.observable(),
-                        RadioButton: ko.observable(),
-                        RadioButtonLabel: ko.observable(),
-                        CheckButton: ko.observable(),
-                        CheckButtonLabel: ko.observable(),
-                        TextArea: ko.observable(),
-                        TextAreaLabel: ko.observable()
+                        TextBoxLabel: ko.observable(),//add field name to the array
+                        Controller: ko.observable(),
+                        DropdownOptions: ko.observableArray([{Text:"Fedex",Value:"1"}])
+                      
                     });
                 }
+
+               
+               
+                //function ends to add to the arrays++++++++++++++++++++++++++++++++++++
+
                 self.save = function (fields) {
                     debugger;
-                    //alert(ko.toJSON(self.users));
-                    items = ko.observableArray(["one", "two", "three", "four"]);
                    
-                        $.ajax({  
-                            type: "POST",
-                            url: '/Dashboard/FromJson/',
-                            data: ko.toJSON(self.users),
+                    alert(ko.toJSON(self.users));
+                   
+                  
+                   
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: "POST",
+                        url: '/Dashboard/FromJson/',
+                        data:   ko.toJSON(self.users),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
@@ -108,27 +131,31 @@
                                 //alert(ko.toJSON(data));
                                 window.location.href = "/Dashboard/PreviewTemplate/";
                                 //alert(ko.toJS(data));
-                                
+
                             }
                         }
                     });
                     //ko.utils.postJson('/Dashboard/FromJson/', { name: fields.users});
                 }
-                self.removeField = function (task)
-                {
+
+
+               
+                self.removeField = function (task) {
                     self.users.remove(task)
                 };
 
                 //output preview
                 //masterarray = ko.observablearray();
+                
 
-               };
-          
-            ko.applyBindings(new viewModel()); 
+            };
+
+
+            ko.applyBindings(new viewModel());
         });
 
 
 
     </script>
-    
-    }
+
+}

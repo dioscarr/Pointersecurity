@@ -7,46 +7,75 @@
 
 <h2>PreviewTemplate</h2>
 
-<div class="row">
+
 
     @{
 
         foreach (var item in Model)
         {
+
+
             switch (item.Controller)
             {
                 case "1":
-                    <div class="col-md-12">
-                        @Html.Label(item.Label)
-                        @Html.TextBox(item.Label)
+                    <div class="row">
+                        <div class="col-md-4  " style="padding-bottom:22px;"></div>
+                        <div class="col-md-1 " style="padding-bottom:8px;">
+                            <h6>
+                                @item.Label
+                            </h6>
+                        </div>
+                        <div class="col-md-3 pull-left ">
+                            <h6>
+                                @Html.TextBox(item.Label, null,new { @class = "form-control"})
+                            </h6>
+                        </div>
+                        <div class="col-md-4  " style="padding-bottom:22px;"></div>
                     </div>
                     break;
                 case "2":
-                <div class="col-md-12">
-                    @Html.Label("checkme")
-                    @Html.CheckBox("checkme")
+                <div class="row">
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
+                    <div class="col-md-4  ">
+                        <h6>@Html.CheckBox(item.Label, new { id = item.ID }) @item.Label </h6>
+
+                    </div>
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
                 </div>
                     break;
                 case "3":
-                <div class="col-md-12">
-                    @Html.Label("RB")
-                    @Html.RadioButton("RB", true)
+                <div class="row">
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
+                    <div class="col-md-4  " style="padding-top:-20px;">
+                        <h6>@Html.RadioButton("RB", true) @Html.Label(item.Label)</h6>
+
+                    </div>
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
                 </div>
                     break;
                 case "4":
-                <div class="col-md-12">
-                    @Html.Label("TArea")
-                    @Html.TextArea("TArea", new { @rows = "3" })
+                <div class="row">
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
+                   
+                    <div class="col-md-4">@Html.TextArea("TArea", new { @class="form-control", @rows = "4", PlaceHolder = @item.Label })</div>
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
                 </div>
                     break;
                 case "5":
-                <div class="col-md-12">
-                    @Html.Label("editor")
-                    @Html.Editor("editor")
+                <div class="row">
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
+                    <div class="col-md-4  ">
+                        <h6>
+                            @Html.Label(item.Label)
+                            @Html.Editor("editor")
+                        </h6>
+                    </div>
+                    <div class="col-md-4  " style="padding-bottom:22px;"></div>
                 </div>
                     break;
 
             }
+
         }
 
 
@@ -54,4 +83,3 @@
 
 
 
-</div>

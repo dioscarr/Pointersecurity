@@ -231,15 +231,15 @@ namespace SecurityMonitor.Controllers
 
 
             foreach(var item in name)
-            {      
-
-             switch (item.Textbox)
+            {
+                
+                switch (item.Controller)
             {
                 case "1":
 
 
-                   var mppt1 = new MasterProfileField { 
-                      Controller = item.Textbox,
+                   var mppt1 = new MasterProfileField {
+                       Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
 
@@ -248,8 +248,8 @@ namespace SecurityMonitor.Controllers
 
                     break;
                 case "2":
-                     var mppt2 = new MasterProfileField { 
-                      Controller = item.Textbox,
+                     var mppt2 = new MasterProfileField {
+                         Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
 
@@ -258,8 +258,8 @@ namespace SecurityMonitor.Controllers
                
                     break;
                 case "3":
-                     var mppt3 = new MasterProfileField { 
-                      Controller = item.Textbox,
+                     var mppt3 = new MasterProfileField {
+                         Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
 
@@ -268,8 +268,8 @@ namespace SecurityMonitor.Controllers
                 
                     break;
                 case "4":
-                     var mppt4 = new MasterProfileField { 
-                      Controller = item.Textbox,
+                     var mppt4 = new MasterProfileField {
+                         Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
 
@@ -278,8 +278,8 @@ namespace SecurityMonitor.Controllers
                
                     break;
                 case "5":
-                     var mppt5 = new MasterProfileField { 
-                      Controller = item.Textbox,
+                     var mppt5 = new MasterProfileField {
+                         Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
 
