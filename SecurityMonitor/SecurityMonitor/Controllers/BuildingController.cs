@@ -570,7 +570,7 @@ namespace SecurityMonitor.Controllers
 
                 foreach (var item in myitems)
                 {
-                    reqtype.Add(new SelectListItem { Text = item.ReqType, Value = item.ReqType });
+                    reqtype.Add(new SelectListItem { Text = item.ReqType1, Value = item.ReqType1 });
 
                 }
              
