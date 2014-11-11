@@ -15,6 +15,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     public partial class ReqType
     {
         public int ID { get; set; }
-        public string ReqType1 { get; set; }
+        public string ReqType { get; set; }
     }
 }

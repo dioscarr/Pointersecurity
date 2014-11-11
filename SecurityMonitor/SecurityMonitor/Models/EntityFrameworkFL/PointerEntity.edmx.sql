@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/08/2014 09:02:09
+-- Date Created: 11/11/2014 14:51:08
 -- Generated from EDMX file: C:\Users\dioscar\Source\Repos\Pointersecurity\SecurityMonitor\SecurityMonitor\Models\EntityFrameworkFL\PointerEntity.edmx
 -- --------------------------------------------------
 
@@ -195,8 +195,8 @@ CREATE TABLE [dbo].[C__MigrationHistory] (
 );
 GO
 
--- Creating table 'Apartments'
-CREATE TABLE [dbo].[Apartments] (
+-- Creating table 'Apartment'
+CREATE TABLE [dbo].[Apartment] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [ApartmentNumber] nvarchar(max)  NOT NULL,
     [FloorNumber] nvarchar(50)  NOT NULL,
@@ -390,8 +390,8 @@ CREATE TABLE [dbo].[Clients] (
 );
 GO
 
--- Creating table 'GanttLinkIds'
-CREATE TABLE [dbo].[GanttLinkIds] (
+-- Creating table 'GanttLinkId'
+CREATE TABLE [dbo].[GanttLinkId] (
     [GantLinkID] int IDENTITY(1,1) NOT NULL,
     [Type] varchar(1)  NOT NULL,
     [SourceTaskId] int  NOT NULL,
@@ -399,8 +399,8 @@ CREATE TABLE [dbo].[GanttLinkIds] (
 );
 GO
 
--- Creating table 'GanttTasks'
-CREATE TABLE [dbo].[GanttTasks] (
+-- Creating table 'GanttTask'
+CREATE TABLE [dbo].[GanttTask] (
     [GantTaskID] int IDENTITY(1,1) NOT NULL,
     [Text] varchar(255)  NOT NULL,
     [StartDate] datetime  NOT NULL,
@@ -412,8 +412,16 @@ CREATE TABLE [dbo].[GanttTasks] (
 );
 GO
 
--- Creating table 'ReqTypes'
-CREATE TABLE [dbo].[ReqTypes] (
+-- Creating table 'MasterProfileFields'
+CREATE TABLE [dbo].[MasterProfileFields] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Label] nvarchar(max)  NOT NULL,
+    [Controller] nvarchar(2)  NOT NULL
+);
+GO
+
+-- Creating table 'ReqType'
+CREATE TABLE [dbo].[ReqType] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [ReqType1] varchar(max)  NOT NULL
 );
@@ -431,8 +439,8 @@ CREATE TABLE [dbo].[Requests] (
 );
 GO
 
--- Creating table 'Roles'
-CREATE TABLE [dbo].[Roles] (
+-- Creating table 'Role'
+CREATE TABLE [dbo].[Role] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [UserID] nvarchar(128)  NOT NULL,
     [RoleID] nvarchar(128)  NOT NULL
@@ -449,8 +457,8 @@ CREATE TABLE [dbo].[sysdiagrams] (
 );
 GO
 
--- Creating table 'Tenants'
-CREATE TABLE [dbo].[Tenants] (
+-- Creating table 'Tenant'
+CREATE TABLE [dbo].[Tenant] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [FirstName] nvarchar(max)  NOT NULL,
     [LastName] nvarchar(max)  NOT NULL,
@@ -464,8 +472,8 @@ CREATE TABLE [dbo].[Tenants] (
 );
 GO
 
--- Creating table 'Users'
-CREATE TABLE [dbo].[Users] (
+-- Creating table 'User'
+CREATE TABLE [dbo].[User] (
     [UserID] int IDENTITY(1,1) NOT NULL,
     [Username] nvarchar(max)  NOT NULL,
     [Password] varchar(max)  NOT NULL,
@@ -475,22 +483,14 @@ CREATE TABLE [dbo].[Users] (
 );
 GO
 
--- Creating table 'UserActivityLogs'
-CREATE TABLE [dbo].[UserActivityLogs] (
+-- Creating table 'UserActivityLog'
+CREATE TABLE [dbo].[UserActivityLog] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [UserID] nvarchar(128)  NOT NULL,
     [BuildingID] int  NOT NULL,
     [Function_Performed] nvarchar(max)  NOT NULL,
     [DateOfEvent] datetime  NOT NULL,
     [Message] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'MasterProfileFields'
-CREATE TABLE [dbo].[MasterProfileFields] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [Label] nvarchar(max)  NOT NULL,
-    [Controller] nvarchar(2)  NOT NULL
 );
 GO
 
@@ -518,9 +518,9 @@ ADD CONSTRAINT [PK_C__MigrationHistory]
     PRIMARY KEY CLUSTERED ([MigrationId], [ContextKey] ASC);
 GO
 
--- Creating primary key on [ID] in table 'Apartments'
-ALTER TABLE [dbo].[Apartments]
-ADD CONSTRAINT [PK_Apartments]
+-- Creating primary key on [ID] in table 'Apartment'
+ALTER TABLE [dbo].[Apartment]
+ADD CONSTRAINT [PK_Apartment]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -620,21 +620,27 @@ ADD CONSTRAINT [PK_Clients]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [GantLinkID] in table 'GanttLinkIds'
-ALTER TABLE [dbo].[GanttLinkIds]
-ADD CONSTRAINT [PK_GanttLinkIds]
+-- Creating primary key on [GantLinkID] in table 'GanttLinkId'
+ALTER TABLE [dbo].[GanttLinkId]
+ADD CONSTRAINT [PK_GanttLinkId]
     PRIMARY KEY CLUSTERED ([GantLinkID] ASC);
 GO
 
--- Creating primary key on [GantTaskID] in table 'GanttTasks'
-ALTER TABLE [dbo].[GanttTasks]
-ADD CONSTRAINT [PK_GanttTasks]
+-- Creating primary key on [GantTaskID] in table 'GanttTask'
+ALTER TABLE [dbo].[GanttTask]
+ADD CONSTRAINT [PK_GanttTask]
     PRIMARY KEY CLUSTERED ([GantTaskID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'ReqTypes'
-ALTER TABLE [dbo].[ReqTypes]
-ADD CONSTRAINT [PK_ReqTypes]
+-- Creating primary key on [ID] in table 'MasterProfileFields'
+ALTER TABLE [dbo].[MasterProfileFields]
+ADD CONSTRAINT [PK_MasterProfileFields]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'ReqType'
+ALTER TABLE [dbo].[ReqType]
+ADD CONSTRAINT [PK_ReqType]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -644,9 +650,9 @@ ADD CONSTRAINT [PK_Requests]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'Roles'
-ALTER TABLE [dbo].[Roles]
-ADD CONSTRAINT [PK_Roles]
+-- Creating primary key on [ID] in table 'Role'
+ALTER TABLE [dbo].[Role]
+ADD CONSTRAINT [PK_Role]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -656,27 +662,21 @@ ADD CONSTRAINT [PK_sysdiagrams]
     PRIMARY KEY CLUSTERED ([diagram_id] ASC);
 GO
 
--- Creating primary key on [ID] in table 'Tenants'
-ALTER TABLE [dbo].[Tenants]
-ADD CONSTRAINT [PK_Tenants]
+-- Creating primary key on [ID] in table 'Tenant'
+ALTER TABLE [dbo].[Tenant]
+ADD CONSTRAINT [PK_Tenant]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [UserID] in table 'Users'
-ALTER TABLE [dbo].[Users]
-ADD CONSTRAINT [PK_Users]
+-- Creating primary key on [UserID] in table 'User'
+ALTER TABLE [dbo].[User]
+ADD CONSTRAINT [PK_User]
     PRIMARY KEY CLUSTERED ([UserID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'UserActivityLogs'
-ALTER TABLE [dbo].[UserActivityLogs]
-ADD CONSTRAINT [PK_UserActivityLogs]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
--- Creating primary key on [ID] in table 'MasterProfileFields'
-ALTER TABLE [dbo].[MasterProfileFields]
-ADD CONSTRAINT [PK_MasterProfileFields]
+-- Creating primary key on [ID] in table 'UserActivityLog'
+ALTER TABLE [dbo].[UserActivityLog]
+ADD CONSTRAINT [PK_UserActivityLog]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -696,8 +696,8 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [BuildingID] in table 'Apartments'
-ALTER TABLE [dbo].[Apartments]
+-- Creating foreign key on [BuildingID] in table 'Apartment'
+ALTER TABLE [dbo].[Apartment]
 ADD CONSTRAINT [FK_Apartment_Buildings]
     FOREIGN KEY ([BuildingID])
     REFERENCES [dbo].[Buildings]
@@ -707,22 +707,22 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Apartment_Buildings'
 CREATE INDEX [IX_FK_Apartment_Buildings]
-ON [dbo].[Apartments]
+ON [dbo].[Apartment]
     ([BuildingID]);
 GO
 
--- Creating foreign key on [aptID] in table 'Tenants'
-ALTER TABLE [dbo].[Tenants]
+-- Creating foreign key on [aptID] in table 'Tenant'
+ALTER TABLE [dbo].[Tenant]
 ADD CONSTRAINT [FK_Tenant_Apartment]
     FOREIGN KEY ([aptID])
-    REFERENCES [dbo].[Apartments]
+    REFERENCES [dbo].[Apartment]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Tenant_Apartment'
 CREATE INDEX [IX_FK_Tenant_Apartment]
-ON [dbo].[Tenants]
+ON [dbo].[Tenant]
     ([aptID]);
 GO
 
@@ -843,8 +843,8 @@ ADD CONSTRAINT [FK__aspnet_Pr__UserI__440B1D61]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [RoleID] in table 'Roles'
-ALTER TABLE [dbo].[Roles]
+-- Creating foreign key on [RoleID] in table 'Role'
+ALTER TABLE [dbo].[Role]
 ADD CONSTRAINT [FK_Role_AspNetRoles]
     FOREIGN KEY ([RoleID])
     REFERENCES [dbo].[AspNetRoles]
@@ -854,7 +854,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Role_AspNetRoles'
 CREATE INDEX [IX_FK_Role_AspNetRoles]
-ON [dbo].[Roles]
+ON [dbo].[Role]
     ([RoleID]);
 GO
 
@@ -888,8 +888,8 @@ ON [dbo].[AspNetUserLogins]
     ([UserId]);
 GO
 
--- Creating foreign key on [UserID] in table 'Roles'
-ALTER TABLE [dbo].[Roles]
+-- Creating foreign key on [UserID] in table 'Role'
+ALTER TABLE [dbo].[Role]
 ADD CONSTRAINT [FK_Role_AspNetUsers]
     FOREIGN KEY ([UserID])
     REFERENCES [dbo].[AspNetUsers]
@@ -899,12 +899,12 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Role_AspNetUsers'
 CREATE INDEX [IX_FK_Role_AspNetUsers]
-ON [dbo].[Roles]
+ON [dbo].[Role]
     ([UserID]);
 GO
 
--- Creating foreign key on [UserID] in table 'UserActivityLogs'
-ALTER TABLE [dbo].[UserActivityLogs]
+-- Creating foreign key on [UserID] in table 'UserActivityLog'
+ALTER TABLE [dbo].[UserActivityLog]
 ADD CONSTRAINT [FK_UserActivityLog_AspNetUsers]
     FOREIGN KEY ([UserID])
     REFERENCES [dbo].[AspNetUsers]
@@ -914,7 +914,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserActivityLog_AspNetUsers'
 CREATE INDEX [IX_FK_UserActivityLog_AspNetUsers]
-ON [dbo].[UserActivityLogs]
+ON [dbo].[UserActivityLog]
     ([UserID]);
 GO
 
@@ -933,8 +933,8 @@ ON [dbo].[Buildings]
     ([ClientID]);
 GO
 
--- Creating foreign key on [BuildingID] in table 'UserActivityLogs'
-ALTER TABLE [dbo].[UserActivityLogs]
+-- Creating foreign key on [BuildingID] in table 'UserActivityLog'
+ALTER TABLE [dbo].[UserActivityLog]
 ADD CONSTRAINT [FK_UserActivityLog_Buildings]
     FOREIGN KEY ([BuildingID])
     REFERENCES [dbo].[Buildings]
@@ -944,7 +944,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserActivityLog_Buildings'
 CREATE INDEX [IX_FK_UserActivityLog_Buildings]
-ON [dbo].[UserActivityLogs]
+ON [dbo].[UserActivityLog]
     ([BuildingID]);
 GO
 
@@ -952,7 +952,7 @@ GO
 ALTER TABLE [dbo].[Requests]
 ADD CONSTRAINT [FK_Request_Tenant]
     FOREIGN KEY ([TenantID])
-    REFERENCES [dbo].[Tenants]
+    REFERENCES [dbo].[Tenant]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
@@ -989,7 +989,7 @@ GO
 
 -- Creating foreign key on [AspNetRoles_Id] in table 'AspNetUserRoles'
 ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [FK_AspNetUserRoles_AspNetRole]
+ADD CONSTRAINT [FK_AspNetUserRoles_AspNetRoles]
     FOREIGN KEY ([AspNetRoles_Id])
     REFERENCES [dbo].[AspNetRoles]
         ([Id])
@@ -998,15 +998,15 @@ GO
 
 -- Creating foreign key on [AspNetUsers_Id] in table 'AspNetUserRoles'
 ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUser]
+ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUsers]
     FOREIGN KEY ([AspNetUsers_Id])
     REFERENCES [dbo].[AspNetUsers]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserRoles_AspNetUser'
-CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUser]
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserRoles_AspNetUsers'
+CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
 GO

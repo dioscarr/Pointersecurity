@@ -55,7 +55,7 @@ namespace SecurityMonitor.Controllers
 
             foreach (var item in myitems)
             {
-                reqtypelist.Add(new SelectListItem { Text = item.ReqType1, Value = item.ID.ToString() });
+                reqtypelist.Add(new SelectListItem { Text = item.ReqType, Value = item.ID.ToString() });
 
             }
             ViewBag.reqType = reqtypelist;
@@ -73,7 +73,7 @@ namespace SecurityMonitor.Controllers
                 {
                     var reqtype = new ReqType
                     {
-                        ReqType1 = management.ReqType.ReqType1
+                        ReqType = management.ReqType.ReqType
                     };
                     db.ReqType.Add(reqtype);
                     db.SaveChanges();
