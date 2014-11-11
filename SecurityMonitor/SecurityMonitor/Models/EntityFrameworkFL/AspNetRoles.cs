@@ -12,13 +12,18 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserClaim
+    public partial class AspNetRoles
     {
-        public int Id { get; set; }
-        public string UserId { get; set; }
-        public string ClaimType { get; set; }
-        public string ClaimValue { get; set; }
+        public AspNetRoles()
+        {
+            this.Role = new HashSet<Role>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
+        }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<Role> Role { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

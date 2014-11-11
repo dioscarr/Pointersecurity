@@ -26,7 +26,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<Apartment> Apartments { get; set; }
+        public virtual DbSet<Apartment> Apartment { get; set; }
         public virtual DbSet<aspnet_Applications> aspnet_Applications { get; set; }
         public virtual DbSet<aspnet_Membership> aspnet_Membership { get; set; }
         public virtual DbSet<aspnet_Paths> aspnet_Paths { get; set; }
@@ -37,21 +37,21 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<aspnet_SchemaVersions> aspnet_SchemaVersions { get; set; }
         public virtual DbSet<aspnet_Users> aspnet_Users { get; set; }
         public virtual DbSet<aspnet_WebEvent_Events> aspnet_WebEvent_Events { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Building> Buildings { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<GanttLinkId> GanttLinkIds { get; set; }
-        public virtual DbSet<GanttTask> GanttTasks { get; set; }
-        public virtual DbSet<MasterProfileField> MasterProfileFields { get; set; }
-        public virtual DbSet<ReqType> ReqTypes { get; set; }
-        public virtual DbSet<Request> Requests { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Tenant> Tenants { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserActivityLog> UserActivityLogs { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Buildings> Buildings { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<GanttLinkId> GanttLinkId { get; set; }
+        public virtual DbSet<GanttTask> GanttTask { get; set; }
+        public virtual DbSet<MasterProfileFields> MasterProfileFields { get; set; }
+        public virtual DbSet<ReqType> ReqType { get; set; }
+        public virtual DbSet<Requests> Requests { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Tenant> Tenant { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
     }
 }

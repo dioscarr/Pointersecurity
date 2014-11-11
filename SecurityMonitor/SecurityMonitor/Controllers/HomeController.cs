@@ -46,7 +46,7 @@ namespace SecurityMonitor.Controllers
             {
                 // create tasks array
                 data =  (
-                      from  t in db.GanttTasks.AsEnumerable()
+                      from  t in db.GanttTask.AsEnumerable()
                     select new
                      {
                         id = t.GantTaskID,
@@ -62,7 +62,7 @@ namespace SecurityMonitor.Controllers
                 ).ToArray(),
                 // create links array
                 links = (
-                    from l in db.GanttLinkIds.AsEnumerable()
+                    from l in db.GanttLinkId.AsEnumerable()
                     select new
                     {
                         id = l.GantLinkID,

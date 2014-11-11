@@ -12,10 +12,16 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class MasterProfileField
+    public partial class Requests
     {
         public int ID { get; set; }
-        public string Label { get; set; }
-        public string Controller { get; set; }
+        public string RequestType { get; set; }
+        public string Description { get; set; }
+        public System.DateTime FromDate { get; set; }
+        public System.DateTime ToDate { get; set; }
+        public string PIN { get; set; }
+        public int TenantID { get; set; }
+    
+        public virtual Tenant Tenant { get; set; }
     }
 }

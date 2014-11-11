@@ -12,15 +12,15 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUser
+    public partial class AspNetUsers
     {
-        public AspNetUser()
+        public AspNetUsers()
         {
-            this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
-            this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            this.Roles = new HashSet<Role>();
-            this.UserActivityLogs = new HashSet<UserActivityLog>();
-            this.AspNetRoles = new HashSet<AspNetRole>();
+            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.Role = new HashSet<Role>();
+            this.UserActivityLog = new HashSet<UserActivityLog>();
+            this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
         public string Id { get; set; }
@@ -36,10 +36,10 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
     
-        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<UserActivityLog> UserActivityLogs { get; set; }
-        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual ICollection<Role> Role { get; set; }
+        public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
+        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }
 }

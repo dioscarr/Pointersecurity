@@ -12,12 +12,17 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Clients
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public Clients()
+        {
+            this.Buildings = new HashSet<Buildings>();
+        }
+    
+        public int ID { get; set; }
+        public string ClientName { get; set; }
+        public Nullable<int> BuildingCount { get; set; }
+    
+        public virtual ICollection<Buildings> Buildings { get; set; }
     }
 }

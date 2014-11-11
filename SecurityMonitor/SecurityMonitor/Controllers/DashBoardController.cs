@@ -51,7 +51,7 @@ namespace SecurityMonitor.Controllers
         public void LoadReqType() {
 
             List<SelectListItem> reqtypelist = new List<SelectListItem>();
-            var myitems = db.ReqTypes.ToList();
+            var myitems = db.ReqType.ToList();
 
             foreach (var item in myitems)
             {
@@ -75,7 +75,7 @@ namespace SecurityMonitor.Controllers
                     {
                         ReqType1 = management.ReqType.ReqType1
                     };
-                    db.ReqTypes.Add(reqtype);
+                    db.ReqType.Add(reqtype);
                     db.SaveChanges();
                     LoadReqType();
                     return RedirectToAction("manageReqType");
@@ -83,8 +83,8 @@ namespace SecurityMonitor.Controllers
 
                 else if (ReqTypeID != null)
                 {
-                    var mydeletetype = db.ReqTypes.Find(ReqTypeID);
-                    db.ReqTypes.Remove(mydeletetype);
+                    var mydeletetype = db.ReqType.Find(ReqTypeID);
+                    db.ReqType.Remove(mydeletetype);
                     db.SaveChanges();
                     LoadReqType();
 
@@ -102,12 +102,12 @@ namespace SecurityMonitor.Controllers
                        FN = m[0];
                        LN = m[1];
 
-                       mymanagement.Tenants = db.Tenants.Where(c => c.FirstName.Contains(Search) || c.LastName.Contains(Search) || c.FirstName.Contains(FN) && c.LastName.Contains(LN))
+                       mymanagement.Tenants = db.Tenant.Where(c => c.FirstName.Contains(Search) || c.LastName.Contains(Search) || c.FirstName.Contains(FN) && c.LastName.Contains(LN))
                         .Select(c => new TenantVM { ID = c.ID, FirstName = c.FirstName, LastName = c.LastName, aptID = (int)c.aptID, Phone = c.Phone, created = c.Created }).ToList();
                    }
                    else
                    {
-                       mymanagement.Tenants = db.Tenants.Where(c => c.FirstName.Contains(Search) || c.LastName.Contains(Search))
+                       mymanagement.Tenants = db.Tenant.Where(c => c.FirstName.Contains(Search) || c.LastName.Contains(Search))
                            .Select(c => new TenantVM { ID = c.ID, FirstName = c.FirstName, LastName = c.LastName, aptID = (int)c.aptID, Phone = c.Phone, created = c.Created }).ToList();
                    }
                     
@@ -144,8 +144,8 @@ namespace SecurityMonitor.Controllers
                        FN = m[0];
                        LN = m[1];
 
-                       Search = db.Tenants
-                      .Join(db.Apartments,
+                       Search = db.Tenant
+                      .Join(db.Apartment,
                               c => c.aptID,
                               a => a.ID,
                               (c, a) => new { c,a})
@@ -180,8 +180,8 @@ namespace SecurityMonitor.Controllers
                    else
                    {
 
-                       Search = db.Tenants
-                          .Join(db.Apartments,
+                       Search = db.Tenant
+                          .Join(db.Apartment,
                             c => c.aptID,
                             a => a.ID,
                             (c, a) => new { c, a })
@@ -238,7 +238,7 @@ namespace SecurityMonitor.Controllers
                 case "1":
 
 
-                   var mppt1 = new MasterProfileField {
+                   var mppt1 = new MasterProfileFields {
                        Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
@@ -248,7 +248,7 @@ namespace SecurityMonitor.Controllers
 
                     break;
                 case "2":
-                     var mppt2 = new MasterProfileField {
+                     var mppt2 = new MasterProfileFields {
                          Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
@@ -258,7 +258,7 @@ namespace SecurityMonitor.Controllers
                
                     break;
                 case "3":
-                     var mppt3 = new MasterProfileField {
+                     var mppt3 = new MasterProfileFields {
                          Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
@@ -268,7 +268,7 @@ namespace SecurityMonitor.Controllers
                 
                     break;
                 case "4":
-                     var mppt4 = new MasterProfileField {
+                     var mppt4 = new MasterProfileFields {
                          Controller = item.Controller,
                         Label = item.TextboxLabel
                    };
@@ -278,7 +278,7 @@ namespace SecurityMonitor.Controllers
                
                     break;
                 case "5":
-                     var mppt5 = new MasterProfileField {
+                     var mppt5 = new MasterProfileFields {
                          Controller = item.Controller,
                         Label = item.TextboxLabel
                    };

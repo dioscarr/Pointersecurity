@@ -225,25 +225,37 @@
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
-    <Compile Include="Models\EntityFrameworkFL\MasterProfileField.cs">
+    <Compile Include="Models\EntityFrameworkFL\AspNetRoles.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUserClaims.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUserLogins.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUsers.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Buildings.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Clients.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\MasterProfileFields.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Requests.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\sysdiagrams.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JsonVM.cs" />
     <Compile Include="Models\MasterProfileVM.cs" />
     <Compile Include="Models\myController.cs" />
     <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetRole.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetUser.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetUserClaim.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetUserLogin.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
@@ -276,12 +288,6 @@
     <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Building.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Client.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -309,13 +315,7 @@
     <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Request.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EntityFrameworkFL\Role.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\sysdiagram.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\Tenant.cs">

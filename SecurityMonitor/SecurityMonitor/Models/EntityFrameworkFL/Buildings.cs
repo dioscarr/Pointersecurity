@@ -12,12 +12,12 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class Building
+    public partial class Buildings
     {
-        public Building()
+        public Buildings()
         {
-            this.Apartments = new HashSet<Apartment>();
-            this.UserActivityLogs = new HashSet<UserActivityLog>();
+            this.Apartment = new HashSet<Apartment>();
+            this.UserActivityLog = new HashSet<UserActivityLog>();
         }
     
         public int ID { get; set; }
@@ -31,8 +31,8 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public string BuildingPhone { get; set; }
         public string Manager { get; set; }
     
-        public virtual ICollection<Apartment> Apartments { get; set; }
-        public virtual Client Client { get; set; }
-        public virtual ICollection<UserActivityLog> UserActivityLogs { get; set; }
+        public virtual ICollection<Apartment> Apartment { get; set; }
+        public virtual Clients Clients { get; set; }
+        public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
     }
 }

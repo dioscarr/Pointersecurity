@@ -18,7 +18,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public string UserID { get; set; }
         public string RoleID { get; set; }
     
-        public virtual AspNetRole AspNetRole { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetRoles AspNetRoles { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

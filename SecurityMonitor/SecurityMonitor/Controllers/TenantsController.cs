@@ -18,7 +18,7 @@ namespace SecurityMonitor.Controllers
         // GET: Tenants
         public async Task<ActionResult> Index()
         {
-            var tenants = db.Tenants.Include(t => t.Apartment);
+            var tenants = db.Tenant.Include(t => t.Apartment);
             return View(await tenants.ToListAsync());
         }
 
@@ -29,7 +29,7 @@ namespace SecurityMonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tenant tenant = await db.Tenants.FindAsync(id);
+            Tenant tenant = await db.Tenant.FindAsync(id);
             if (tenant == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace SecurityMonitor.Controllers
         // GET: Tenants/Create
         public ActionResult Create()
         {
-            ViewBag.aptID = new SelectList(db.Apartments, "ID", "ApartmentNumber");
+            ViewBag.aptID = new SelectList(db.Apartment, "ID", "ApartmentNumber");
             return View();
         }
 
@@ -53,12 +53,12 @@ namespace SecurityMonitor.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Tenants.Add(tenant);
+                db.Tenant.Add(tenant);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.aptID = new SelectList(db.Apartments, "ID", "ApartmentNumber", tenant.aptID);
+            ViewBag.aptID = new SelectList(db.Apartment, "ID", "ApartmentNumber", tenant.aptID);
             return View(tenant);
         }
 
@@ -69,12 +69,12 @@ namespace SecurityMonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tenant tenant = await db.Tenants.FindAsync(id);
+            Tenant tenant = await db.Tenant.FindAsync(id);
             if (tenant == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.aptID = new SelectList(db.Apartments, "ID", "ApartmentNumber", tenant.aptID);
+            ViewBag.aptID = new SelectList(db.Apartment, "ID", "ApartmentNumber", tenant.aptID);
             return View(tenant);
         }
 
@@ -91,7 +91,7 @@ namespace SecurityMonitor.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.aptID = new SelectList(db.Apartments, "ID", "ApartmentNumber", tenant.aptID);
+            ViewBag.aptID = new SelectList(db.Apartment, "ID", "ApartmentNumber", tenant.aptID);
             return View(tenant);
         }
 
@@ -102,7 +102,7 @@ namespace SecurityMonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tenant tenant = await db.Tenants.FindAsync(id);
+            Tenant tenant = await db.Tenant.FindAsync(id);
             if (tenant == null)
             {
                 return HttpNotFound();
@@ -115,8 +115,8 @@ namespace SecurityMonitor.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Tenant tenant = await db.Tenants.FindAsync(id);
-            db.Tenants.Remove(tenant);
+            Tenant tenant = await db.Tenant.FindAsync(id);
+            db.Tenant.Remove(tenant);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

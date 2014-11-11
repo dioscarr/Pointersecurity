@@ -12,17 +12,13 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class AspNetUserClaims
     {
-        public Client()
-        {
-            this.Buildings = new HashSet<Building>();
-        }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
     
-        public int ID { get; set; }
-        public string ClientName { get; set; }
-        public Nullable<int> BuildingCount { get; set; }
-    
-        public virtual ICollection<Building> Buildings { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

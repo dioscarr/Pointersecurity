@@ -17,7 +17,7 @@ namespace SecurityMonitor.Controllers
         // GET: Roles
         public ActionResult Index()
         {
-            var roles = db.Roles.Include(r => r.AspNetRole).Include(r => r.AspNetUser);
+            var roles = db.Role.Include(r => r.AspNetRoles).Include(r => r.AspNetUsers);
             return View(roles.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace SecurityMonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = db.Role.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -53,7 +53,7 @@ namespace SecurityMonitor.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Roles.Add(role);
+                db.Role.Add(role);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -70,7 +70,7 @@ namespace SecurityMonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = db.Role.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -105,7 +105,7 @@ namespace SecurityMonitor.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = db.Role.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace SecurityMonitor.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Role role = db.Roles.Find(id);
-            db.Roles.Remove(role);
+            Role role = db.Role.Find(id);
+            db.Role.Remove(role);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

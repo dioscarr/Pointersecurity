@@ -747,7 +747,7 @@
       <Schema Namespace="PointersecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="PointersecurityEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="PointersecurityModel.C__MigrationHistory" />
-          <EntitySet Name="Apartments" EntityType="PointersecurityModel.Apartment" />
+          <EntitySet Name="Apartment" EntityType="PointersecurityModel.Apartment" />
           <EntitySet Name="aspnet_Applications" EntityType="PointersecurityModel.aspnet_Applications" />
           <EntitySet Name="aspnet_Membership" EntityType="PointersecurityModel.aspnet_Membership" />
           <EntitySet Name="aspnet_Paths" EntityType="PointersecurityModel.aspnet_Paths" />
@@ -758,29 +758,29 @@
           <EntitySet Name="aspnet_SchemaVersions" EntityType="PointersecurityModel.aspnet_SchemaVersions" />
           <EntitySet Name="aspnet_Users" EntityType="PointersecurityModel.aspnet_Users" />
           <EntitySet Name="aspnet_WebEvent_Events" EntityType="PointersecurityModel.aspnet_WebEvent_Events" />
-          <EntitySet Name="AspNetRoles" EntityType="PointersecurityModel.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="PointersecurityModel.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="PointersecurityModel.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="PointersecurityModel.AspNetUser" />
-          <EntitySet Name="Buildings" EntityType="PointersecurityModel.Building" />
-          <EntitySet Name="Clients" EntityType="PointersecurityModel.Client" />
-          <EntitySet Name="GanttLinkIds" EntityType="PointersecurityModel.GanttLinkId" />
-          <EntitySet Name="GanttTasks" EntityType="PointersecurityModel.GanttTask" />
-          <EntitySet Name="MasterProfileFields" EntityType="PointersecurityModel.MasterProfileField" />
-          <EntitySet Name="ReqTypes" EntityType="PointersecurityModel.ReqType" />
-          <EntitySet Name="Requests" EntityType="PointersecurityModel.Request" />
-          <EntitySet Name="Roles" EntityType="PointersecurityModel.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="PointersecurityModel.sysdiagram" />
-          <EntitySet Name="Tenants" EntityType="PointersecurityModel.Tenant" />
-          <EntitySet Name="Users" EntityType="PointersecurityModel.User" />
-          <EntitySet Name="UserActivityLogs" EntityType="PointersecurityModel.UserActivityLog" />
+          <EntitySet Name="AspNetRoles" EntityType="PointersecurityModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="PointersecurityModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="PointersecurityModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="PointersecurityModel.AspNetUsers" />
+          <EntitySet Name="Buildings" EntityType="PointersecurityModel.Buildings" />
+          <EntitySet Name="Clients" EntityType="PointersecurityModel.Clients" />
+          <EntitySet Name="GanttLinkId" EntityType="PointersecurityModel.GanttLinkId" />
+          <EntitySet Name="GanttTask" EntityType="PointersecurityModel.GanttTask" />
+          <EntitySet Name="MasterProfileFields" EntityType="PointersecurityModel.MasterProfileFields" />
+          <EntitySet Name="ReqType" EntityType="PointersecurityModel.ReqType" />
+          <EntitySet Name="Requests" EntityType="PointersecurityModel.Requests" />
+          <EntitySet Name="Role" EntityType="PointersecurityModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="PointersecurityModel.sysdiagrams" />
+          <EntitySet Name="Tenant" EntityType="PointersecurityModel.Tenant" />
+          <EntitySet Name="User" EntityType="PointersecurityModel.User" />
+          <EntitySet Name="UserActivityLog" EntityType="PointersecurityModel.UserActivityLog" />
           <AssociationSet Name="FK_Apartment_Buildings" Association="PointersecurityModel.FK_Apartment_Buildings">
-            <End Role="Building" EntitySet="Buildings" />
-            <End Role="Apartment" EntitySet="Apartments" />
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Apartment" EntitySet="Apartment" />
           </AssociationSet>
           <AssociationSet Name="FK_Tenant_Apartment" Association="PointersecurityModel.FK_Tenant_Apartment">
-            <End Role="Apartment" EntitySet="Apartments" />
-            <End Role="Tenant" EntitySet="Tenants" />
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Tenant" EntitySet="Tenant" />
           </AssociationSet>
           <AssociationSet Name="FK__aspnet_Me__Appli__2D27B809" Association="PointersecurityModel.FK__aspnet_Me__Appli__2D27B809">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
@@ -819,44 +819,44 @@
             <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
           </AssociationSet>
           <AssociationSet Name="FK_Role_AspNetRoles" Association="PointersecurityModel.FK_Role_AspNetRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="Role" EntitySet="Roles" />
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Role" EntitySet="Role" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="PointersecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_Role_AspNetUsers" Association="PointersecurityModel.FK_Role_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Role" EntitySet="Roles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Role" EntitySet="Role" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_AspNetUsers" Association="PointersecurityModel.FK_UserActivityLog_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="UserActivityLog" EntitySet="UserActivityLogs" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserActivityLog" EntitySet="UserActivityLog" />
           </AssociationSet>
           <AssociationSet Name="FK_Buildings_Clients" Association="PointersecurityModel.FK_Buildings_Clients">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Buildings" EntitySet="Buildings" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_Buildings" Association="PointersecurityModel.FK_UserActivityLog_Buildings">
-            <End Role="Building" EntitySet="Buildings" />
-            <End Role="UserActivityLog" EntitySet="UserActivityLogs" />
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="UserActivityLog" EntitySet="UserActivityLog" />
           </AssociationSet>
           <AssociationSet Name="FK_Request_Tenant" Association="PointersecurityModel.FK_Request_Tenant">
-            <End Role="Tenant" EntitySet="Tenants" />
-            <End Role="Request" EntitySet="Requests" />
+            <End Role="Tenant" EntitySet="Tenant" />
+            <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
           <AssociationSet Name="aspnet_UsersInRoles" Association="PointersecurityModel.aspnet_UsersInRoles">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="PointersecurityModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -877,8 +877,8 @@
           <Property Name="ApartmentNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FloorNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BuildingID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Building" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Apartment" ToRole="Building" />
-          <NavigationProperty Name="Tenants" Relationship="PointersecurityModel.FK_Tenant_Apartment" FromRole="Apartment" ToRole="Tenant" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Apartment" ToRole="Buildings" />
+          <NavigationProperty Name="Tenant" Relationship="PointersecurityModel.FK_Tenant_Apartment" FromRole="Apartment" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="aspnet_Applications">
           <Key>
@@ -1023,16 +1023,16 @@
           <Property Name="ExceptionType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="AspNetRole">
+        <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Roles" Relationship="PointersecurityModel.FK_Role_AspNetRoles" FromRole="AspNetRole" ToRole="Role" />
-          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+          <NavigationProperty Name="Role" Relationship="PointersecurityModel.FK_Role_AspNetRoles" FromRole="AspNetRoles" ToRole="Role" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserClaim">
+        <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1040,9 +1040,9 @@
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="PointersecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserLogin">
+        <EntityType Name="AspNetUserLogins">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
@@ -1051,9 +1051,9 @@
           <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1069,13 +1069,13 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="PointersecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="Roles" Relationship="PointersecurityModel.FK_Role_AspNetUsers" FromRole="AspNetUser" ToRole="Role" />
-          <NavigationProperty Name="UserActivityLogs" Relationship="PointersecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUser" ToRole="UserActivityLog" />
-          <NavigationProperty Name="AspNetRoles" Relationship="PointersecurityModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="PointersecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Role" Relationship="PointersecurityModel.FK_Role_AspNetUsers" FromRole="AspNetUsers" ToRole="Role" />
+          <NavigationProperty Name="UserActivityLog" Relationship="PointersecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUsers" ToRole="UserActivityLog" />
+          <NavigationProperty Name="AspNetRoles" Relationship="PointersecurityModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="Building">
+        <EntityType Name="Buildings">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1089,18 +1089,18 @@
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="BuildingPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Apartments" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Building" ToRole="Apartment" />
-          <NavigationProperty Name="Client" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Building" ToRole="Client" />
-          <NavigationProperty Name="UserActivityLogs" Relationship="PointersecurityModel.FK_UserActivityLog_Buildings" FromRole="Building" ToRole="UserActivityLog" />
+          <NavigationProperty Name="Apartment" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Buildings" ToRole="Apartment" />
+          <NavigationProperty Name="Clients" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Buildings" ToRole="Clients" />
+          <NavigationProperty Name="UserActivityLog" Relationship="PointersecurityModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
         </EntityType>
-        <EntityType Name="Client">
+        <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BuildingCount" Type="Int32" />
-          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Client" ToRole="Building" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Clients" ToRole="Buildings" />
         </EntityType>
         <EntityType Name="GanttLinkId">
           <Key>
@@ -1124,7 +1124,7 @@
           <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ParentID" Type="Int32" />
         </EntityType>
-        <EntityType Name="MasterProfileField">
+        <EntityType Name="MasterProfileFields">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1139,7 +1139,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReqType1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Request">
+        <EntityType Name="Requests">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1150,7 +1150,7 @@
           <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="TenantID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tenant" Relationship="PointersecurityModel.FK_Request_Tenant" FromRole="Request" ToRole="Tenant" />
+          <NavigationProperty Name="Tenant" Relationship="PointersecurityModel.FK_Request_Tenant" FromRole="Requests" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1159,10 +1159,10 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RoleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRole" Relationship="PointersecurityModel.FK_Role_AspNetRoles" FromRole="Role" ToRole="AspNetRole" />
-          <NavigationProperty Name="AspNetUser" Relationship="PointersecurityModel.FK_Role_AspNetUsers" FromRole="Role" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetRoles" Relationship="PointersecurityModel.FK_Role_AspNetRoles" FromRole="Role" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.FK_Role_AspNetUsers" FromRole="Role" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -1187,7 +1187,7 @@
           <Property Name="aptID" Type="Int32" />
           <Property Name="LogintableID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Apartment" Relationship="PointersecurityModel.FK_Tenant_Apartment" FromRole="Tenant" ToRole="Apartment" />
-          <NavigationProperty Name="Requests" Relationship="PointersecurityModel.FK_Request_Tenant" FromRole="Tenant" ToRole="Request" />
+          <NavigationProperty Name="Requests" Relationship="PointersecurityModel.FK_Request_Tenant" FromRole="Tenant" ToRole="Requests" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1210,14 +1210,14 @@
           <Property Name="Function_Performed" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateOfEvent" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="PointersecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="UserActivityLog" ToRole="AspNetUser" />
-          <NavigationProperty Name="Building" Relationship="PointersecurityModel.FK_UserActivityLog_Buildings" FromRole="UserActivityLog" ToRole="Building" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="UserActivityLog" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_UserActivityLog_Buildings" FromRole="UserActivityLog" ToRole="Buildings" />
         </EntityType>
         <Association Name="FK_Apartment_Buildings">
-          <End Type="PointersecurityModel.Building" Role="Building" Multiplicity="1" />
+          <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
           <End Type="PointersecurityModel.Apartment" Role="Apartment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Building">
+            <Principal Role="Buildings">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Apartment">
@@ -1346,10 +1346,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Role_AspNetRoles">
-          <End Type="PointersecurityModel.AspNetRole" Role="AspNetRole" Multiplicity="1" />
+          <End Type="PointersecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
           <End Type="PointersecurityModel.Role" Role="Role" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetRole">
+            <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Role">
@@ -1358,38 +1358,38 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="PointersecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="PointersecurityModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <End Type="PointersecurityModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaim">
+            <Dependent Role="AspNetUserClaims">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="PointersecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="PointersecurityModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <End Type="PointersecurityModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogin">
+            <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Role_AspNetUsers">
-          <End Type="PointersecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="PointersecurityModel.Role" Role="Role" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Role">
@@ -1398,10 +1398,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserActivityLog_AspNetUsers">
-          <End Type="PointersecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
           <End Type="PointersecurityModel.UserActivityLog" Role="UserActivityLog" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UserActivityLog">
@@ -1410,22 +1410,22 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Buildings_Clients">
-          <End Type="PointersecurityModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="PointersecurityModel.Building" Role="Building" Multiplicity="*" />
+          <End Type="PointersecurityModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Client">
+            <Principal Role="Clients">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Building">
+            <Dependent Role="Buildings">
               <PropertyRef Name="ClientID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserActivityLog_Buildings">
-          <End Type="PointersecurityModel.Building" Role="Building" Multiplicity="1" />
+          <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
           <End Type="PointersecurityModel.UserActivityLog" Role="UserActivityLog" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Building">
+            <Principal Role="Buildings">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="UserActivityLog">
@@ -1435,12 +1435,12 @@
         </Association>
         <Association Name="FK_Request_Tenant">
           <End Type="PointersecurityModel.Tenant" Role="Tenant" Multiplicity="1" />
-          <End Type="PointersecurityModel.Request" Role="Request" Multiplicity="*" />
+          <End Type="PointersecurityModel.Requests" Role="Requests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tenant">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Request">
+            <Dependent Role="Requests">
               <PropertyRef Name="TenantID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1450,8 +1450,8 @@
           <End Type="PointersecurityModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Type="PointersecurityModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="PointersecurityModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Type="PointersecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1469,7 +1469,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Apartments">
+          <EntitySetMapping Name="Apartment">
             <EntityTypeMapping TypeName="PointersecurityModel.Apartment">
               <MappingFragment StoreEntitySet="Apartment">
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -1612,7 +1612,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="PointersecurityModel.AspNetRole">
+            <EntityTypeMapping TypeName="PointersecurityModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1620,7 +1620,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="PointersecurityModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="PointersecurityModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
                 <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
@@ -1630,7 +1630,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="PointersecurityModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="PointersecurityModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -1639,7 +1639,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="PointersecurityModel.AspNetUser">
+            <EntityTypeMapping TypeName="PointersecurityModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
@@ -1657,7 +1657,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="PointersecurityModel.Building">
+            <EntityTypeMapping TypeName="PointersecurityModel.Buildings">
               <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
                 <ScalarProperty Name="BuildingPhone" ColumnName="BuildingPhone" />
@@ -1673,7 +1673,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="PointersecurityModel.Client">
+            <EntityTypeMapping TypeName="PointersecurityModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="BuildingCount" ColumnName="BuildingCount" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
@@ -1681,7 +1681,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GanttLinkIds">
+          <EntitySetMapping Name="GanttLinkId">
             <EntityTypeMapping TypeName="PointersecurityModel.GanttLinkId">
               <MappingFragment StoreEntitySet="GanttLinkId">
                 <ScalarProperty Name="TargerTaskId" ColumnName="TargerTaskId" />
@@ -1691,7 +1691,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GanttTasks">
+          <EntitySetMapping Name="GanttTask">
             <EntityTypeMapping TypeName="PointersecurityModel.GanttTask">
               <MappingFragment StoreEntitySet="GanttTask">
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
@@ -1706,7 +1706,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MasterProfileFields">
-            <EntityTypeMapping TypeName="PointersecurityModel.MasterProfileField">
+            <EntityTypeMapping TypeName="PointersecurityModel.MasterProfileFields">
               <MappingFragment StoreEntitySet="MasterProfileFields">
                 <ScalarProperty Name="Controller" ColumnName="Controller" />
                 <ScalarProperty Name="Label" ColumnName="Label" />
@@ -1714,7 +1714,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReqTypes">
+          <EntitySetMapping Name="ReqType">
             <EntityTypeMapping TypeName="PointersecurityModel.ReqType">
               <MappingFragment StoreEntitySet="ReqType">
                 <ScalarProperty Name="ReqType1" ColumnName="ReqType" />
@@ -1723,7 +1723,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Requests">
-            <EntityTypeMapping TypeName="PointersecurityModel.Request">
+            <EntityTypeMapping TypeName="PointersecurityModel.Requests">
               <MappingFragment StoreEntitySet="Requests">
                 <ScalarProperty Name="TenantID" ColumnName="TenantID" />
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
@@ -1735,7 +1735,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
+          <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="PointersecurityModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
@@ -1745,7 +1745,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PointersecurityModel.sysdiagram">
+            <EntityTypeMapping TypeName="PointersecurityModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="definition" ColumnName="definition" />
                 <ScalarProperty Name="version" ColumnName="version" />
@@ -1755,7 +1755,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tenants">
+          <EntitySetMapping Name="Tenant">
             <EntityTypeMapping TypeName="PointersecurityModel.Tenant">
               <MappingFragment StoreEntitySet="Tenant">
                 <ScalarProperty Name="LogintableID" ColumnName="LogintableID" />
@@ -1771,7 +1771,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
+          <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="PointersecurityModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="isTempPword" ColumnName="isTempPword" />
@@ -1783,7 +1783,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserActivityLogs">
+          <EntitySetMapping Name="UserActivityLog">
             <EntityTypeMapping TypeName="PointersecurityModel.UserActivityLog">
               <MappingFragment StoreEntitySet="UserActivityLog">
                 <ScalarProperty Name="Message" ColumnName="Message" />
@@ -1804,10 +1804,10 @@
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="PointersecurityModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
+            <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
-            <EndProperty Name="AspNetRole">
+            <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
@@ -1824,7 +1824,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

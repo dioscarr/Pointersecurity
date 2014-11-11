@@ -16,7 +16,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     {
         public Apartment()
         {
-            this.Tenants = new HashSet<Tenant>();
+            this.Tenant = new HashSet<Tenant>();
         }
     
         public int ID { get; set; }
@@ -24,7 +24,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public string FloorNumber { get; set; }
         public int BuildingID { get; set; }
     
-        public virtual Building Building { get; set; }
-        public virtual ICollection<Tenant> Tenants { get; set; }
+        public virtual Buildings Buildings { get; set; }
+        public virtual ICollection<Tenant> Tenant { get; set; }
     }
 }

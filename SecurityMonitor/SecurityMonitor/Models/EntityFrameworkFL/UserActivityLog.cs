@@ -21,7 +21,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public System.DateTime DateOfEvent { get; set; }
         public string Message { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Building Building { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Buildings Buildings { get; set; }
     }
 }

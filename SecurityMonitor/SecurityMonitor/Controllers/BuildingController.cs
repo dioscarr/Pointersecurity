@@ -48,7 +48,7 @@ namespace SecurityMonitor.Controllers
             {
                 if(ModelState.IsValid)
                 {
-                    var newclient = new Client
+                    var newclient = new Clients
                     {
                         ClientName = newClient.ClientName,
                         BuildingCount = newClient.BuildingCount
@@ -106,7 +106,7 @@ namespace SecurityMonitor.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    var apartment = new Building
+                    var apartment = new Buildings
                     {
                         BuildingName = apartmentvm.BuildingName,
                         Address = apartmentvm.Address,
@@ -160,12 +160,12 @@ namespace SecurityMonitor.Controllers
                               BuildingID = Convert.ToInt32(apartmentvm.BuildingID),
                               FloorNumber = apartmentvm.FloorNumber
                           };
-                        db.Apartments.Add(apartment);
+                        db.Apartment.Add(apartment);
                         await db.SaveChangesAsync();
 
                         //======================insert Add Building Activity================
                         var UserID = User.Identity.GetUserId();// gets logged user ID
-                        AspNetUser myUser = await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
+                        AspNetUsers myUser = await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
                         var newActivity = new UserActivityLog
                         {
                             BuildingID = BuildingID,
@@ -174,7 +174,7 @@ namespace SecurityMonitor.Controllers
                             Function_Performed = "Added apartment",
                             Message = "Apartment # " + apartmentvm.ApartmentNumber + " was added by " + myUser.UserName
                         };
-                        db.UserActivityLogs.Add(newActivity);
+                        db.UserActivityLog.Add(newActivity);
                         await db.SaveChangesAsync();
                     }
                 }
@@ -199,12 +199,12 @@ namespace SecurityMonitor.Controllers
                                  BuildingID = BuildingID,
                                  FloorNumber = item.Floor
                              };
-                            db.Apartments.Add(apartment);
+                            db.Apartment.Add(apartment);
                             await db.SaveChangesAsync();
 
                             //======================insert Add Building Activity================
                             var UserID = User.Identity.GetUserId();// gets logged user ID
-                            AspNetUser myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
+                            AspNetUsers myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
                             var newActivity = new UserActivityLog
                            {
                                BuildingID = BuildingID,
@@ -213,7 +213,7 @@ namespace SecurityMonitor.Controllers
                                Function_Performed = "Added apartment",
                                Message = "Apartment # "+ item.AparmentNumber +" was added by " + myUser.UserName
                            };
-                            db.UserActivityLogs.Add(newActivity);
+                            db.UserActivityLog.Add(newActivity);
                            await db.SaveChangesAsync();
                         }
                     }
@@ -283,7 +283,7 @@ namespace SecurityMonitor.Controllers
             if (searchBy == "ApartmentNumber")
             {
                 //executes when there is a search
-                var apartmentlist = await db.Apartments
+                var apartmentlist = await db.Apartment
                .Where(c => c.BuildingID == BuildingID && c.ApartmentNumber.Contains(search))
                .Select(c => new ApartmentVM
                {
@@ -295,7 +295,7 @@ namespace SecurityMonitor.Controllers
             else
             {
                 //executes when there is no search
-                var apartmentlist = await db.Apartments
+                var apartmentlist = await db.Apartment
                     .Where(c => c.BuildingID == BuildingID)
                     .Select(c => new ApartmentVM
                     {
@@ -345,7 +345,7 @@ namespace SecurityMonitor.Controllers
                 //=============Search=================
                 if (searchBy == "Function")
                 {
-                    myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                    myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                                .Where(UAL => UAL.BuildingID == BuildingID && UAL.Function_Performed.Contains(search))
                                .Select(UAL => new ActivityLog
                                {
@@ -365,7 +365,7 @@ namespace SecurityMonitor.Controllers
                     {
                         string actualdate = search.Substring(0, 10);
                         DateTime theTime = Convert.ToDateTime(actualdate);
-                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                                    .Where(UAL => UAL.BuildingID == BuildingID && UAL.DateOfEvent == theTime)
                                    .Select(UAL => new ActivityLog
                                    {
@@ -380,7 +380,7 @@ namespace SecurityMonitor.Controllers
                     {
                         ViewBag.ItisNotaDay = search;
 
-                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                              .Where(UAL => UAL.BuildingID == BuildingID)
                              .Select(UAL => new ActivityLog
                              {
@@ -396,7 +396,7 @@ namespace SecurityMonitor.Controllers
                 else
                 {
                    
-                    myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                    myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                               .Where(UAL => UAL.BuildingID == BuildingID)
                               .Select(UAL => new ActivityLog
                               {
@@ -423,7 +423,7 @@ namespace SecurityMonitor.Controllers
 
 
             var buildinginfo = await db.Buildings
-                .Join(db.Apartments,
+                .Join(db.Apartment,
                 b => b.ID,
                 c => c.BuildingID,
                 (b, c) => new BuildingInfoVM
@@ -445,13 +445,13 @@ namespace SecurityMonitor.Controllers
           Session["Building"] = buildinginfo;
             
             var apartmentinfo = new ApartmentVM();
-            var apartmentprofile  = await db.Apartments
+            var apartmentprofile  = await db.Apartment
                                             .Where( a=>a.ID == ApartmentID)                                          
                                             .Select(c=> new ApartmentVM{   ApartmentNumber= c.ApartmentNumber,
                                                                          FloorNumber = c.FloorNumber,
                                                                          BuildingID = c.BuildingID, ID = c.ID}).ToListAsync();
             
-            var tenant = await db.Tenants
+            var tenant = await db.Tenant
                 .Where(t => t.aptID == ApartmentID).ToListAsync();
 
             ViewBag.tenant = tenant;
@@ -490,7 +490,7 @@ namespace SecurityMonitor.Controllers
                     aptID = newTenant.aptID,
                     Username = newTenant.Username
                 };
-                db.Tenants.Add(newtenant);
+                db.Tenant.Add(newtenant);
                 await db.SaveChangesAsync();
                 return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID });
 
@@ -511,7 +511,7 @@ namespace SecurityMonitor.Controllers
         {
             if (TenantID != null)
             {
-                var tenant = await db.Tenants.FindAsync(TenantID);
+                var tenant = await db.Tenant.FindAsync(TenantID);
 
                 if (tenant == null)
                 {
@@ -544,9 +544,9 @@ namespace SecurityMonitor.Controllers
         {
             if (ModelState.IsValid)
             {
-                var RemovethisTenant = await db.Tenants.FindAsync(removeTenantID);
+                var RemovethisTenant = await db.Tenant.FindAsync(removeTenantID);
                 
-                db.Tenants.Remove(RemovethisTenant);
+                db.Tenant.Remove(RemovethisTenant);
                 await db.SaveChangesAsync();
                 return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID });
             }
@@ -560,13 +560,13 @@ namespace SecurityMonitor.Controllers
 
             if (tenantID != null)
             {
-                var tenantRequest = new Request();
+                var tenantRequest = new Requests();
 
             
                 tenantRequest.TenantID = (int)tenantID;
 
                 List<SelectListItem> reqtype = new List<SelectListItem>();
-                var myitems = db.ReqTypes.ToList();
+                var myitems = db.ReqType.ToList();
 
                 foreach (var item in myitems)
                 {
@@ -589,10 +589,10 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public ActionResult TenantRequest(Request model)
+        public ActionResult TenantRequest(Requests model)
         {
 
-            var tenant = db.Tenants.Find(model.TenantID);
+            var tenant = db.Tenant.Find(model.TenantID);
                        
             if (ModelState.IsValid)
             {

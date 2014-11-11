@@ -60,7 +60,7 @@ namespace SecurityMonitor.Controllers
                 string myUserID = User.Identity.GetUserId().ToString();
                 var myUserActivitiesLogVM = new UserActivityLogVM();
 
-                myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                            .Where(UAL => UAL.UserID == myUserID)                         
                            .Select(UAL => new ActivityLog
                            {
@@ -75,7 +75,7 @@ namespace SecurityMonitor.Controllers
                 switch (sortOrder)
                 {
                     case "date_desc":
-                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                             .Where(UAL => UAL.UserID == myUserID)
                             .OrderBy(UAL => UAL.DateOfEvent)
                             .Select(UAL => new ActivityLog
@@ -90,7 +90,7 @@ namespace SecurityMonitor.Controllers
                         ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM;
                         break;
                     case "function_desc":
-                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                             .Where(UAL => UAL.UserID == myUserID)
                             .OrderBy(UAL => UAL.Function_Performed)
                             .Select(UAL => new ActivityLog
@@ -126,17 +126,17 @@ namespace SecurityMonitor.Controllers
                UserID = UserID,
                RoleID = RoleID
            };
-            if (!db.Roles.ToList().Exists(exists => exists.UserID == myRole.UserID
+            if (!db.Role.ToList().Exists(exists => exists.UserID == myRole.UserID
                 && exists.RoleID == myRole.RoleID))
             {
                 if (ModelState.IsValid)
                 {
-                    db.Roles.Add(myRole);
+                    db.Role.Add(myRole);
                     db.SaveChanges();
                 }
 
                 //Join table and select needed fields
-                var AssignedRoleReturn = db.Roles
+                var AssignedRoleReturn = db.Role
                     .Join(db.AspNetRoles,
                     AssignedRoleTable => AssignedRoleTable.RoleID,
                     RoleTable => RoleTable.Id,
@@ -153,7 +153,7 @@ namespace SecurityMonitor.Controllers
             else
             {
                 //Join table and select needed fields
-                var AssignedRoleReturn = db.Roles
+                var AssignedRoleReturn = db.Role
                     .Join(db.AspNetRoles,
                     AssignedRoleTable => AssignedRoleTable.RoleID,
                     RoleTable => RoleTable.Id,
@@ -206,7 +206,7 @@ namespace SecurityMonitor.Controllers
                 //=============Search=================
                 if (searchBy == "Function" )
                 {
-                    myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                    myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                                .Where(UAL => UAL.UserID == myUserID && UAL.Function_Performed.Contains(search) || search==null)
                                .Select(UAL => new ActivityLog
                                {
@@ -226,7 +226,7 @@ namespace SecurityMonitor.Controllers
                     {
                         string actualdate = search.Substring(0, 10);
                         DateTime theTime = Convert.ToDateTime(actualdate);
-                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                                    .Where(UAL => UAL.UserID == myUserID && UAL.DateOfEvent == theTime)
                                    .Select(UAL => new ActivityLog
                                    {
@@ -241,7 +241,7 @@ namespace SecurityMonitor.Controllers
                     {
                         ViewBag.ItisNotaDay = search;
 
-                        myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                        myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                              .Where(UAL => UAL.UserID == myUserID)
                              .Select(UAL => new ActivityLog
                              {
@@ -256,7 +256,7 @@ namespace SecurityMonitor.Controllers
                 }
                 else
                 {
-                    myUserActivitiesLogVM.UserActivites = db.UserActivityLogs
+                    myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                               .Where(UAL => UAL.UserID == myUserID)
                               .Select(UAL => new ActivityLog
                               {
