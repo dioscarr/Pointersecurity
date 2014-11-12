@@ -104,8 +104,10 @@ namespace SecurityMonitor.Controllers
         public async Task<ActionResult> AddBuilding(BuildingInfoVM apartmentvm)
         {if (ModelState.IsValid)
             {
-                if (User.Identity.IsAuthenticated)
-                {
+                //if (User.Identity.IsAuthenticated)
+                //{
+            if(ModelState.IsValid)
+            {
                     var apartment = new Buildings
                     {
                         BuildingName = apartmentvm.BuildingName,
@@ -121,8 +123,8 @@ namespace SecurityMonitor.Controllers
                     db.Buildings.Add(apartment);
                     await db.SaveChangesAsync();
                    
-                     
-                }
+                    }  
+                //}
             //TODO Exception 
             }
 
@@ -150,8 +152,9 @@ namespace SecurityMonitor.Controllers
         public async Task<ActionResult> AddApartment(ApartmentVM apartmentvm)
         {
             if (ModelState.IsValid)
-                if (User.Identity.IsAuthenticated)
-                {
+            { 
+                //if (User.Identity.IsAuthenticated)
+                //{
                     int BuildingID = (int)Session["BuildingID"];
                     {
                         var apartment = new Apartment
@@ -177,7 +180,8 @@ namespace SecurityMonitor.Controllers
                         db.UserActivityLog.Add(newActivity);
                         await db.SaveChangesAsync();
                     }
-                }
+            }
+                //}
            return RedirectToAction("BuildingProfile", "Building");
         }
 
@@ -188,7 +192,8 @@ namespace SecurityMonitor.Controllers
             int BuildingID = (int)Session["BuildingID"];
 
             if (ModelState.IsValid)
-                if(User.Identity.IsAuthenticated)
+
+                //if(User.Identity.IsAuthenticated)
                 {
                     {
                         foreach (var item in model)
@@ -327,8 +332,8 @@ namespace SecurityMonitor.Controllers
             int pageNumber = (page ?? 1);
             //=================user activity===============================
             var myUserActivitiesLogVM = new UserActivityLogVM();
-            if (User.Identity.IsAuthenticated != false)
-            {
+            //if (User.Identity.IsAuthenticated != false)
+            //{
                 string myUserID = User.Identity.GetUserId().ToString();
                 if (page == null && searchBy != null && search != null)
                 {
@@ -410,7 +415,7 @@ namespace SecurityMonitor.Controllers
                 }
                
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM;
-            }
+            //}
               return PartialView(myUserActivitiesLogVM.UserActivites.ToPagedList(pageNumber, pageSize));
         }
 
