@@ -208,18 +208,18 @@ namespace SecurityMonitor.Controllers
                             await db.SaveChangesAsync();
 
                             //======================insert Add Building Activity================
-                            //var UserID = User.Identity.GetUserId();// gets logged user ID
-                           // AspNetUsers myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
-                           // var newActivity = new UserActivityLog
-                           //{
-                           //    BuildingID = BuildingID,
-                           //    UserID = User.Identity.GetUserId(),
-                           //    DateOfEvent = DateTime.Now,
-                           //    FunctionPerformed = "Added apartment",
-                           //    Message = "Apartment # "+ item.AparmentNumber +" was added by " + myUser.UserName
-                           //};
-                           // db.UserActivityLog.Add(newActivity);
-                           //await db.SaveChangesAsync();
+                            var UserID = User.Identity.GetUserId();// gets logged user ID
+                            AspNetUsers myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID);// select from db where logged use match
+                            var newActivity = new UserActivityLog
+                           {
+                               BuildingID = BuildingID,
+                               UserID = "84a4092e-0bcc-4e4f-b007-c87a99eccae3",
+                               DateOfEvent = DateTime.Now,
+                               FunctionPerformed = "Added apartment",
+                               Message = "Apartment # "+ item.AparmentNumber +" was added by " + myUser.UserName
+                           };
+                            db.UserActivityLog.Add(newActivity);
+                           await db.SaveChangesAsync();
                         }
                     }
                 }
