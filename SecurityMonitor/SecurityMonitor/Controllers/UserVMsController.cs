@@ -67,7 +67,7 @@ namespace SecurityMonitor.Controllers
                                UserID = UAL.UserID,
                                ID = UAL.ID,
                                DateCreated = UAL.DateOfEvent,
-                               FunctionPerformed = UAL.Function_Performed,
+                               FunctionPerformed = UAL.FunctionPerformed,
                                Message = UAL.Message
                            }).ToList();
                 ViewBag.myUserActivitiesLogVM = myUserActivitiesLogVM;
@@ -83,7 +83,7 @@ namespace SecurityMonitor.Controllers
                                 UserID = UAL.UserID,
                                 ID = UAL.ID,
                                 DateCreated = UAL.DateOfEvent,
-                                FunctionPerformed = UAL.Function_Performed,
+                                FunctionPerformed = UAL.FunctionPerformed,
                                 Message = UAL.Message
                             }).ToList();
 
@@ -92,13 +92,13 @@ namespace SecurityMonitor.Controllers
                     case "function_desc":
                         myUserActivitiesLogVM.UserActivites = db.UserActivityLog
                             .Where(UAL => UAL.UserID == myUserID)
-                            .OrderBy(UAL => UAL.Function_Performed)
+                            .OrderBy(UAL => UAL.FunctionPerformed)
                             .Select(UAL => new ActivityLog
                             {
                                 UserID = UAL.UserID,
                                 ID = UAL.ID,
                                 DateCreated = UAL.DateOfEvent,
-                                FunctionPerformed = UAL.Function_Performed,
+                                FunctionPerformed = UAL.FunctionPerformed,
                                 Message = UAL.Message
                             }).ToList();
                        // myUserActivitiesLogVM.UserActivites = myUserActivitiesLogVM.UserActivites.OrderBy(a => a.FunctionPerformed).ToList();
@@ -207,13 +207,13 @@ namespace SecurityMonitor.Controllers
                 if (searchBy == "Function" )
                 {
                     myUserActivitiesLogVM.UserActivites = db.UserActivityLog
-                               .Where(UAL => UAL.UserID == myUserID && UAL.Function_Performed.Contains(search) || search==null)
+                               .Where(UAL => UAL.UserID == myUserID && UAL.FunctionPerformed.Contains(search) || search==null)
                                .Select(UAL => new ActivityLog
                                {
                                    UserID = UAL.UserID,
                                    ID = UAL.ID,
                                    DateCreated = UAL.DateOfEvent,
-                                   FunctionPerformed = UAL.Function_Performed,
+                                   FunctionPerformed = UAL.FunctionPerformed,
                                    Message = UAL.Message
                                }).ToList();
 
@@ -233,7 +233,7 @@ namespace SecurityMonitor.Controllers
                                        UserID = UAL.UserID,
                                        ID = UAL.ID,
                                        DateCreated = UAL.DateOfEvent,
-                                       FunctionPerformed = UAL.Function_Performed,
+                                       FunctionPerformed = UAL.FunctionPerformed,
                                        Message = UAL.Message
                                    }).ToList();
                     }
@@ -248,7 +248,7 @@ namespace SecurityMonitor.Controllers
                                  UserID = UAL.UserID,
                                  ID = UAL.ID,
                                  DateCreated = UAL.DateOfEvent,
-                                 FunctionPerformed = UAL.Function_Performed,
+                                 FunctionPerformed = UAL.FunctionPerformed,
                                  Message = UAL.Message,
 
                              }).ToList();
@@ -263,7 +263,7 @@ namespace SecurityMonitor.Controllers
                                   UserID = UAL.UserID,
                                   ID = UAL.ID,
                                   DateCreated = UAL.DateOfEvent,
-                                  FunctionPerformed = UAL.Function_Performed,
+                                  FunctionPerformed = UAL.FunctionPerformed,
                                   Message = UAL.Message,
 
                               }).ToList();

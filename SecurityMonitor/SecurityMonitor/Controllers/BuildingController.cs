@@ -167,15 +167,15 @@ namespace SecurityMonitor.Controllers
                         await db.SaveChangesAsync();
 
                         //======================insert Add Building Activity================
-                        var UserID = User.Identity.GetUserId();// gets logged user ID
-                        AspNetUsers myUser = await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
+                        //var UserID = User.Identity.GetUserId();// gets logged user ID
+                        //AspNetUsers myUser = await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID);select from db where logged use match
                         var newActivity = new UserActivityLog
                         {
                             BuildingID = BuildingID,
-                            UserID = User.Identity.GetUserId(),
+                            UserID = "0575356f-81cc-4dc5-ab44-40c14c44adf9", //User.Identity.GetUserId(),
                             DateOfEvent = DateTime.Now,
-                            Function_Performed = "Added apartment",
-                            Message = "Apartment # " + apartmentvm.ApartmentNumber + " was added by " + myUser.UserName
+                            FunctionPerformed = "Added apartment",
+                            Message = "Apartment # " + apartmentvm.ApartmentNumber + " was added by "// + myUser.UserName
                         };
                         db.UserActivityLog.Add(newActivity);
                         await db.SaveChangesAsync();
@@ -208,15 +208,15 @@ namespace SecurityMonitor.Controllers
                             await db.SaveChangesAsync();
 
                             //======================insert Add Building Activity================
-                            var UserID = User.Identity.GetUserId();// gets logged user ID
-                            AspNetUsers myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
+                            //var UserID = User.Identity.GetUserId();// gets logged user ID
+                           // AspNetUsers myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
                             var newActivity = new UserActivityLog
                            {
                                BuildingID = BuildingID,
-                               UserID = User.Identity.GetUserId(),
+                               UserID = "0575356f-81cc-4dc5-ab44-40c14c44adf9",//User.Identity.GetUserId(),
                                DateOfEvent = DateTime.Now,
-                               Function_Performed = "Added apartment",
-                               Message = "Apartment # "+ item.AparmentNumber +" was added by " + myUser.UserName
+                               FunctionPerformed = "Added apartment",
+                               Message = "Apartment # "+ item.AparmentNumber +" was added by "// + myUser.UserName
                            };
                             db.UserActivityLog.Add(newActivity);
                            await db.SaveChangesAsync();
@@ -322,7 +322,7 @@ namespace SecurityMonitor.Controllers
         public ActionResult ActivityPartial(int? page, string searchBy, string search)
         {
 
-            var currentUserID = User.Identity.GetUserId();
+            //var currentUserID = User.Identity.GetUserId();
             if (Request.HttpMethod != "GET")
             {
                 page = 1; // after post reset page to 1
@@ -334,7 +334,7 @@ namespace SecurityMonitor.Controllers
             var myUserActivitiesLogVM = new UserActivityLogVM();
             //if (User.Identity.IsAuthenticated != false)
             //{
-                string myUserID = User.Identity.GetUserId().ToString();
+                //string myUserID = User.Identity.GetUserId().ToString();
                 if (page == null && searchBy != null && search != null)
                 {
                     ViewBag.searchBy = searchBy;
@@ -351,13 +351,13 @@ namespace SecurityMonitor.Controllers
                 if (searchBy == "Function")
                 {
                     myUserActivitiesLogVM.UserActivites = db.UserActivityLog
-                               .Where(UAL => UAL.BuildingID == BuildingID && UAL.Function_Performed.Contains(search))
+                               .Where(UAL => UAL.BuildingID == BuildingID && UAL.FunctionPerformed.Contains(search))
                                .Select(UAL => new ActivityLog
                                {
                                    UserID = UAL.UserID,
                                    ID = UAL.ID,
                                    DateCreated = UAL.DateOfEvent,
-                                   FunctionPerformed = UAL.Function_Performed,
+                                   FunctionPerformed = UAL.FunctionPerformed,
                                    Message = UAL.Message
                                }).ToList();
 
@@ -377,7 +377,7 @@ namespace SecurityMonitor.Controllers
                                        UserID = UAL.UserID,
                                        ID = UAL.ID,
                                        DateCreated = UAL.DateOfEvent,
-                                       FunctionPerformed = UAL.Function_Performed,
+                                       FunctionPerformed = UAL.FunctionPerformed,
                                        Message = UAL.Message
                                    }).ToList();
                     }
@@ -392,7 +392,7 @@ namespace SecurityMonitor.Controllers
                                  UserID = UAL.UserID,
                                  ID = UAL.ID,
                                  DateCreated = UAL.DateOfEvent,
-                                 FunctionPerformed = UAL.Function_Performed,
+                                 FunctionPerformed = UAL.FunctionPerformed,
                                  Message = UAL.Message,
 
                              }).ToList();
@@ -408,7 +408,7 @@ namespace SecurityMonitor.Controllers
                                   UserID = UAL.UserID,
                                   ID = UAL.ID,
                                   DateCreated = UAL.DateOfEvent,
-                                  FunctionPerformed = UAL.Function_Performed,
+                                  FunctionPerformed = UAL.FunctionPerformed,
                                   Message = UAL.Message,
 
                               }).ToList();
