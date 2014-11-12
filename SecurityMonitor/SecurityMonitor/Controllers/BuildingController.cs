@@ -169,16 +169,16 @@ namespace SecurityMonitor.Controllers
                         //======================insert Add Building Activity================
                         //var UserID = User.Identity.GetUserId();// gets logged user ID
                         //AspNetUsers myUser = await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID);select from db where logged use match
-                        var newActivity = new UserActivityLog
-                        {
-                            BuildingID = BuildingID,
-                            UserID = "0575356f-81cc-4dc5-ab44-40c14c44adf9", //User.Identity.GetUserId(),
-                            DateOfEvent = DateTime.Now,
-                            FunctionPerformed = "Added apartment",
-                            Message = "Apartment # " + apartmentvm.ApartmentNumber + " was added by "// + myUser.UserName
-                        };
-                        db.UserActivityLog.Add(newActivity);
-                        await db.SaveChangesAsync();
+                        //var newActivity = new UserActivityLog
+                        //{
+                        //    BuildingID = BuildingID,
+                        //    UserID = User.Identity.GetUserId(),
+                        //    DateOfEvent = DateTime.Now,
+                        //    FunctionPerformed = "Added apartment",
+                        //    Message = "Apartment # " + apartmentvm.ApartmentNumber + " was added by " + myUser.UserName
+                        //};
+                        //db.UserActivityLog.Add(newActivity);
+                        //await db.SaveChangesAsync();
                     }
             }
                 //}
@@ -210,16 +210,16 @@ namespace SecurityMonitor.Controllers
                             //======================insert Add Building Activity================
                             //var UserID = User.Identity.GetUserId();// gets logged user ID
                            // AspNetUsers myUser =  await db.AspNetUsers.FirstOrDefaultAsync(c => c.Id == UserID); //select from db where logged use match
-                            var newActivity = new UserActivityLog
-                           {
-                               BuildingID = BuildingID,
-                               UserID = "0575356f-81cc-4dc5-ab44-40c14c44adf9",//User.Identity.GetUserId(),
-                               DateOfEvent = DateTime.Now,
-                               FunctionPerformed = "Added apartment",
-                               Message = "Apartment # "+ item.AparmentNumber +" was added by "// + myUser.UserName
-                           };
-                            db.UserActivityLog.Add(newActivity);
-                           await db.SaveChangesAsync();
+                           // var newActivity = new UserActivityLog
+                           //{
+                           //    BuildingID = BuildingID,
+                           //    UserID = User.Identity.GetUserId(),
+                           //    DateOfEvent = DateTime.Now,
+                           //    FunctionPerformed = "Added apartment",
+                           //    Message = "Apartment # "+ item.AparmentNumber +" was added by " + myUser.UserName
+                           //};
+                           // db.UserActivityLog.Add(newActivity);
+                           //await db.SaveChangesAsync();
                         }
                     }
                 }
