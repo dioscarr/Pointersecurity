@@ -36,7 +36,7 @@
                                        data-bind="value: TextBoxLabel,
                             valueUpdate: 'afterkeydown',
                             attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" />*@
-                        <select class="form-control" data-bind="options:items, optionsText: 'name', optionsValue: 'value', value:Controller"></select>
+                        <select class="form-control " data-bind="options:items, optionsText: 'name', optionsValue: 'value', value:Controller"></select>
 
                         @*<span data-bind="text: Controller"></span>*@
                         <br />
@@ -47,7 +47,8 @@
                                data-bind="value: TextBoxLabel,
                         valueUpdate: 'afterkeydown',
                         attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
-                        @*<span data-bind="text: TextBoxLabel"></span>*@
+                        @*<span data-bind="text: TextBoxLabel"></splan>*@
+                        @*@Html.Hidden("dropoption", new { @class = "dropoptions" })*@
                         <br />
                     </div>
                     <div class="col-md-2 "><button class="btn btn-default" data-bind="click: $parent.removeField">Delete</button></div>
@@ -97,10 +98,16 @@
                 this.isDone = ko.observable(data.isDone);
             }
 
+
+
+
             function viewModel() {
                 var self = this;
 
-                var options = [
+
+               
+
+                var optionsVM = [
                                { value: 1, name: 'TextBox' },
                                { value: 2, name: 'CheckBox' },
                                { value: 3, name: 'Radio Button' },
@@ -108,10 +115,10 @@
                                { value: 5, name: 'DropdownList' }
                 ]
 
-                items = ko.observableArray(options);
+                items = ko.observableArray(optionsVM);
 
 
-
+              
                 self.users = ko.observableArray(),//create an array
 
                 //function to add to the arrays++++++++++++++++++++++++++++++++++++
@@ -119,10 +126,13 @@
                     this.users.push({// push syntaxt to append array
                         TextBoxLabel: ko.observable(),//add field name to the array
                         Controller: ko.observable(),
-                        DropdownOptions: ko.observableArray([{ Text: "Fedex", Value: "1" }])
+                        
 
                     });
+                  
                 }
+               
+
 
 
 
@@ -159,6 +169,10 @@
                 self.removeField = function (task) {
                     self.users.remove(task)
                 };
+             
+
+
+                
 
                 //output preview
                 //masterarray = ko.observablearray();
