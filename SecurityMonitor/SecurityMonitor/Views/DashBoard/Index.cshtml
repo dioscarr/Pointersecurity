@@ -8,7 +8,7 @@
 <div class="container myRow ">
     <!--=================Page Title==================-->
     <!--================Top Section=======================-->
-    <div class="col-md-12">
+    <div class="col-md-12 col-sm-12 col-sx-12 ">
 
 
 
@@ -24,11 +24,11 @@
         <!--left donout chart-->
         <div class="col-md-4 " style="height:390px;  ">
             <!--chart title-->
-            <div class="col-md-12 boxtitle text-center " style="padding-bottom:5px; ">
+            <div class="col-md-12 col-sm-12 col-sx-12  boxtitle text-center " style="padding-bottom:5px; ">
                 <h3 style="padding-top:15px;">Something 1</h3>
             </div>
             <!--chart Drawing-->
-            <div class="col-md-12     " style="background:white; height:250px; border:1px solid lightgrey;">
+            <div class="col-md-12 col-sm-12 col-sx-12   " style="background:white; height:250px; border:1px solid lightgrey;">
                 <div class="  smallgraph ">
                     <canvas id="chartleft" class=" " height="200" width="200"></canvas>
                 </div>
@@ -40,12 +40,12 @@
         <!--left donout chart-->
         <div class="col-md-8 " style="height:390px;  ">
             <!--chart title-->
-            <div class="col-md-12 boxtitle text-center " style="padding-bottom:5px; ">
+            <div class="col-md-12 col-sm-12 col-sx-12  boxtitle text-center " style="padding-bottom:5px; ">
                 <h3 style="padding-top:15px;">Something 1</h3>
             </div>
             <!--chart Drawing-->
-            <div class="col-md-12     " style="background:white; height:250px; border:1px solid lightgrey;">
-                <div class=" col-md-12 smallgraph  chartright" >
+            <div class="col-md-12 col-sm-12 col-sx-12   " style="background:white; height:250px; border:1px solid lightgrey;">
+                <div class=" col-md-12 col-sm-12 col-sx-12  smallgraph  chartright">
                     <canvas id="chartright" class="  " width="680" height="220"></canvas>
                 </div>
             </div>
@@ -145,7 +145,13 @@
                         }
                     ]
                 };
-                var myBarChart = new Chart(document.getElementById("chartright").getContext("2d")).Bar(data3);
+
+                var options1 = {
+
+                    responsive: true,
+                    maintainAspectRatio: true
+                };
+                var myBarChart = new Chart(document.getElementById("chartright").getContext("2d")).Bar(data3, options1);
            
            
             //===========================Charts==============================
@@ -252,6 +258,8 @@
                         //==========chart Options==========
                         var options = {
                             timeline: { colorByRowLabel: true },
+                            responsive: true,
+                            maintainAspectRatio: true,
                             backgroundColor: '#00000',
                             dateFormat: 'HH:mm MMMM dd, yyyy'
 
