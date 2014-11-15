@@ -29,8 +29,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                    
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                   
+                    <li>@Html.ActionLink("Clients","ClientIndex", "Building")</li>
+                    <li>@Html.ActionLink("Settings", "manageReqType", "Dashboard")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -42,10 +43,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <!--================First Botton================-->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6   ">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="Settings" class=" glyphicon glyphicon-cog AdminMEnu" onclick="location.href = '@Url.Action("manageReqType", "Dashboard")'"></div></div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="clients" class=" glyphicon glyphicon-user AdminMEnu" onclick="location.href = '@Url.Action("ClientIndex", "Building")'"></div></div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="Building" class=" glyphicon glyphicon-home AdminMEnu" style=""></div></div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-left "><div id="Others" class="  glyphicon glyphicon-share-alt AdminMEnu" style=""></div></div>
+                    <
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="height:49px;">
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " style="padding-top:10px;">

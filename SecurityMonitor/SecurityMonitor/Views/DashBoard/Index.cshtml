@@ -16,11 +16,11 @@
 
     </div>
 
-    <div class="row " style=" height:50px;">        
+    <div class="row " style=" height:10px;">        
        
     </div><!--Page title-->
    
-    <div class="row" >
+    @*<div class="row" >
         <!--left donout chart-->
         <div class="col-md-4 col-sm-4 col-sx-4  " style="height:390px;  ">
             <!--chart title-->
@@ -54,7 +54,7 @@
        
        
 
-    </div>
+    </div>*@
     <div class="row text-center boxtitle" style="border:1px solid lightgrey; height:50px;"><h3>Today's Request</h3></div>
     <div class="row myRow shadow">
         <div class="col-lg-12 col-md-11 col-sm-12 col-xs1-2 ">
@@ -103,55 +103,55 @@
 
             //============================ pie chart ===============================
             
-                var data1 = [
-                               {
-                                   value: 50,
-                                   color: "lightblue",
-                                   label: "dioscar"
+                //var data1 = [
+                //               {
+                //                   value: 50,
+                //                   color: "lightblue",
+                //                   label: "dioscar"
 
-                               },
-                               {
-                                   value: 10,
-                                   color: "red",
-                                   label: "dioscar"
-                               },
-                               {
-                                   value: 40,
-                                   color: "green",
-                                   label: "dioscar"
-                               }
+                //               },
+                //               {
+                //                   value: 10,
+                //                   color: "red",
+                //                   label: "dioscar"
+                //               },
+                //               {
+                //                   value: 40,
+                //                   color: "green",
+                //                   label: "dioscar"
+                //               }
 
-                ]
-                var myDoughnut = new Chart(document.getElementById("chartleft").getContext("2d")).Doughnut(data1);
+                //]
+                //var myDoughnut = new Chart(document.getElementById("chartleft").getContext("2d")).Doughnut(data1);
             
-                var data3 = {
-                    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            fillColor: "rgba(220,220,220,0.5)",
-                            strokeColor: "rgba(220,220,220,0.8)",
-                            highlightFill: "rgba(220,220,220,0.75)",
-                            highlightStroke: "rgba(220,220,220,1)",
-                            data: [65, 59, 80, 81, 56, 55, 40]
-                        },
-                        {
-                            label: "My Second dataset",
-                            fillColor: "rgba(151,187,205,0.5)",
-                            strokeColor: "rgba(151,187,205,0.8)",
-                            highlightFill: "rgba(151,187,205,0.75)",
-                            highlightStroke: "rgba(151,187,205,1)",
-                            data: [28, 48, 40, 19, 86, 27, 90]
-                        }
-                    ]
-                };
+                //var data3 = {
+                //    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                //    datasets: [
+                //        {
+                //            label: "My First dataset",
+                //            fillColor: "rgba(220,220,220,0.5)",
+                //            strokeColor: "rgba(220,220,220,0.8)",
+                //            highlightFill: "rgba(220,220,220,0.75)",
+                //            highlightStroke: "rgba(220,220,220,1)",
+                //            data: [65, 59, 80, 81, 56, 55, 40]
+                //        },
+                //        {
+                //            label: "My Second dataset",
+                //            fillColor: "rgba(151,187,205,0.5)",
+                //            strokeColor: "rgba(151,187,205,0.8)",
+                //            highlightFill: "rgba(151,187,205,0.75)",
+                //            highlightStroke: "rgba(151,187,205,1)",
+                //            data: [28, 48, 40, 19, 86, 27, 90]
+                //        }
+                //    ]
+                //};
 
-                var options1 = {
+                //var options1 = {
 
-                    responsive: true,
-                    maintainAspectRatio: true
-                };
-                var myBarChart = new Chart(document.getElementById("chartright").getContext("2d")).Bar(data3, options1);
+                //    responsive: true,
+                //    maintainAspectRatio: true
+                //};
+                //var myBarChart = new Chart(document.getElementById("chartright").getContext("2d")).Bar(data3, options1);
            
            
             //===========================Charts==============================

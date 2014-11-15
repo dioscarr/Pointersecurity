@@ -7,7 +7,7 @@
 }
 @using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get))
 {
-    <div class="container">
+    <div class="">
 
         
             <div class="row" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
@@ -181,7 +181,7 @@
                     @foreach (var item in apartmentList)
                 {
                         <div class="col-md-1">
-                            <button type="button" class="btn btn-info" style="margin:7px; " onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID })'">Apt: @item.ApartmentNumber </button>
+                            <button type="button" class="btn btn-info" style="margin:7px; " onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID })'">@item.ApartmentNumber </button>
                         </div>
                 }
                 </div>
