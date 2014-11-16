@@ -22,15 +22,52 @@ namespace SecurityMonitor.Controllers
             return View();
         }
         // -===============Timeline for requests=================
-        public JsonResult getTodayRequests()
+        public JsonResult getTodayRequests(string sortby)
         {
 
             var Tomorrow = DateTime.Today.AddDays(1);
             var Today = DateTime.Today.Date;
-            //Request From Today
-            var todayRequests = db.Requests
-                 .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
-                 .Select(c => new { Type = c.RequestType, Description = c.Description, From = c.FromDate, To = c.ToDate }).ToList();
+
+            List<RequestForTodayVM> todayRequests = new List<RequestForTodayVM>();
+
+          
+                if (sortby =="Category")
+                { 
+                //logic for sorting
+                //Request From Today
+                todayRequests = db.Requests
+                    .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
+                  .Join(db.Tenant, c => c.TenantID, t => t.ID,
+                  (c, t) => new RequestForTodayVM { Type = c.RequestType, Description = c.Description, From = c.FromDate, To = c.ToDate })
+                    .ToList();
+                }
+                else if (sortby == "Tenant")
+                {
+                    //logic for sorting
+                    //Request From Today
+                    todayRequests = db.Requests
+                        .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
+                      .Join(db.Tenant, c => c.TenantID, t => t.ID,
+                      (c, t) => new RequestForTodayVM { Type = t.FirstName + " " + t.LastName, Description = c.Description, From = c.FromDate, To = c.ToDate })
+                        .ToList();
+                }
+
+
+                else if (sortby == null)
+                {
+
+                    //Request From Today
+                    todayRequests = db.Requests
+                        .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
+                      .Join(db.Tenant, c => c.TenantID, t => t.ID,
+                      (c, t) => new RequestForTodayVM { Type = c.RequestType, Description = c.Description, From = c.FromDate, To = c.ToDate })
+                        .ToList();
+            
+                }
+          
+          
+            
+           
 
 
             var dayoftheweek = DateTime.Today.AddDays(3).DayOfWeek;

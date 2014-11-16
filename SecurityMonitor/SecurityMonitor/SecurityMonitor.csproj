@@ -332,6 +332,7 @@
     <Compile Include="Models\managementVM.cs" />
     <Compile Include="Models\ReqType.cs" />
     <Compile Include="Models\ReqTypeCount.cs" />
+    <Compile Include="Models\RequestForTodayVM.cs" />
     <Compile Include="Models\RequestVM.cs" />
     <Compile Include="Models\TenantSearch.cs" />
     <Compile Include="Models\TenantVM.cs" />

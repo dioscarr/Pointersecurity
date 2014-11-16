@@ -8,6 +8,7 @@ namespace SecurityMonitor.Models
     public class RequestVM
     {
 
+        
         public int ID { get; set; }
         public string RequestType { get; set; }
         public string Description { get; set; }

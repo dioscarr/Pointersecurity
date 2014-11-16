@@ -55,9 +55,23 @@
        
 
     </div>*@
+
     <div class="row text-center boxtitle" style="border:1px solid lightgrey; height:50px;"><h3>Today's Request</h3></div>
     <div class="row myRow shadow">
-        <div class="col-lg-12 col-md-11 col-sm-12 col-xs1-2 ">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="height:50px;padding-top:10px;">
+            @{
+                List<SelectListItem> options = new List<SelectListItem>();
+                options.Add(new SelectListItem { Text = "Category", Value = "Category" });
+                options.Add(new SelectListItem { Text = "Tenant", Value = "Tenant" });
+                
+            }
+            @Html.DropDownList("mydropdownlist", options, "--Choose a value--", new { id = "mydropdownlist", @class = "form-control" })
+
+        </div>
+        
+
+        
+        <div class="col-lg-12 col-md-11 col-sm-12 col-xs-12 ">
             <div class="" id="RequestChart" style="height:500px; margin:10px;"></div>
         </div>
     </div>
@@ -161,13 +175,24 @@
 
 
 
+            $('#mydropdownlist').change(function () {
+               // alert($(this).val());
 
+                var url = '/Dashboard/getTodayRequests?sortby=' + $(this).val();
+                drawMyChart(url);
+            });
             var url = '/Dashboard/getTodayRequests/';
+
+
+            drawMyChart(url);
+
+            //this function will draw a chart
+            function drawMyChart(url){
 
             setTimeout(function () {
                 // Do something after 5 seconds
 
-                $.get('/Dashboard/getTodayRequests/', function (data) {
+                $.get(url, function (data) {
                     //call function
                     drawChart();
 
@@ -274,7 +299,7 @@
             }, 500);
 
 
-           
+            }
                       
                 });//ends windows.ready
 
