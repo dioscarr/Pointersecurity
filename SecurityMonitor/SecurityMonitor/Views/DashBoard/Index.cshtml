@@ -64,12 +64,12 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="height:50px;padding-top:5px;">
                 @{
                     List<SelectListItem> options = new List<SelectListItem>();
-                    options.Add(new SelectListItem { Text = "Category", Value = "Category" });
-                    options.Add(new SelectListItem { Text = "Tenant", Value = "Tenant" });
+                    options.Add(new SelectListItem { Text = "Category-Current", Value = "Category" });
+                    options.Add(new SelectListItem { Text = "Tenant-Current", Value = "Tenant" });
                     options.Add(new SelectListItem { Text = "Next (7)Days", Value = "next7days" });
 
                 }
-                @Html.DropDownList("mydropdownlist", options, "--Choose a value--", new { id = "mydropdownlist", @class = "form-control" })
+                @Html.DropDownList("mydropdownlist", options,  new { id = "mydropdownlist", @class = "form-control" })
 
             </div>
 
