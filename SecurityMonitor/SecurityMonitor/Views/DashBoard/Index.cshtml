@@ -58,23 +58,27 @@
 
     <div class="row text-center boxtitle" style="border:1px solid lightgrey; height:50px;"><h3>Today's Request</h3></div>
     <div class="row myRow shadow">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="height:50px;padding-top:10px;">
-            @{
-                List<SelectListItem> options = new List<SelectListItem>();
-                options.Add(new SelectListItem { Text = "Category", Value = "Category" });
-                options.Add(new SelectListItem { Text = "Tenant", Value = "Tenant" });
-                
-            }
-            @Html.DropDownList("mydropdownlist", options, "--Choose a value--", new { id = "mydropdownlist", @class = "form-control" })
-
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:50px;padding-top:10px;">
+            <h4> Filter Requests</h4>
         </div>
-        
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="height:50px;padding-top:5px;">
+                @{
+                    List<SelectListItem> options = new List<SelectListItem>();
+                    options.Add(new SelectListItem { Text = "Category", Value = "Category" });
+                    options.Add(new SelectListItem { Text = "Tenant", Value = "Tenant" });
+                    options.Add(new SelectListItem { Text = "Next (7)Days", Value = "next7days" });
 
-        
-        <div class="col-lg-12 col-md-11 col-sm-12 col-xs-12 ">
-            <div class="" id="RequestChart" style="height:500px; margin:10px;"></div>
+                }
+                @Html.DropDownList("mydropdownlist", options, "--Choose a value--", new { id = "mydropdownlist", @class = "form-control" })
+
+            </div>
+
+
+
+            <div class="col-lg-12 col-md-11 col-sm-12 col-xs-12 ">
+                <div class="" id="RequestChart" style="height:500px; margin:10px;"></div>
+            </div>
         </div>
-    </div>
 </div>
 @section scripts
 {

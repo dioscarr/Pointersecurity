@@ -24,7 +24,7 @@ namespace SecurityMonitor.Controllers
         // -===============Timeline for requests=================
         public JsonResult getTodayRequests(string sortby)
         {
-
+            var Next5Days = DateTime.Today.AddDays(7);
             var Tomorrow = DateTime.Today.AddDays(1);
             var Today = DateTime.Today.Date;
 
@@ -47,6 +47,16 @@ namespace SecurityMonitor.Controllers
                     //Request From Today
                     todayRequests = db.Requests
                         .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
+                      .Join(db.Tenant, c => c.TenantID, t => t.ID,
+                      (c, t) => new RequestForTodayVM { Type = t.FirstName + " " + t.LastName, Description = c.Description, From = c.FromDate, To = c.ToDate })
+                        .ToList();
+                }
+                else if (sortby == "next7days")
+                {
+                    //logic for sorting
+                    //Request From Today
+                    todayRequests = db.Requests
+                        .Where(c => c.FromDate >= Today && c.FromDate <= Next5Days || c.FromDate < Today && c.ToDate >= Next5Days)
                       .Join(db.Tenant, c => c.TenantID, t => t.ID,
                       (c, t) => new RequestForTodayVM { Type = t.FirstName + " " + t.LastName, Description = c.Description, From = c.FromDate, To = c.ToDate })
                         .ToList();
