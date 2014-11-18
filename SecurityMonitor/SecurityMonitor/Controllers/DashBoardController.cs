@@ -62,14 +62,22 @@ namespace SecurityMonitor.Controllers
                           Description = "--From-- "+ c.FromDate+ " --TO-- "+ c.ToDate + 
                           "--details--: "+c.Description,
                           From = c.FromDate, 
-                          To = Next7Days })
+                          To = c.ToDate })
                         .ToList();
                     foreach (var item in todayRequests)
                     {
                         if (item.From >= Tomorrow)
-                        {}
-                        else 
-                        {item.From = Tomorrow;}
+                        {
+                            //do nothing
+                        }
+                        else if (item.To <= Next7Days)
+                        { 
+                            //do nothing
+                        }
+                        else
+                        {
+                            item.From = Tomorrow;
+                        }
                     }
                 }
 

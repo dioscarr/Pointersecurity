@@ -293,8 +293,18 @@
                             dateFormat: 'HH:mm MMMM dd, yyyy'
 
                         };
+                        //click event start
+                        google.visualization.events.addListener(chart, 'select', function () {
+                            var selection = chart.getSelection();
+                            if (selection && selection.length > 0) {
+                                alert("Row #" + selection[0].row + ', column #' + selection[0].colorByRowLabel);
+                            }
+                        });
+
+                        //click event ends
                      
                         chart.draw(dataTable, options);
+                        
                     }
 
                 });
