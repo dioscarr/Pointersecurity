@@ -539,6 +539,7 @@
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\xml-hint.js" />
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\jquery-1.11.0.min.js" />
     <Content Include="img\B.png" />
+    <Content Include="img\client.png" />
     <Content Include="img\D.png" />
     <Content Include="img\home.png" />
     <Content Include="img\M.png" />
