@@ -48,7 +48,7 @@ namespace SecurityMonitor.Controllers
                     todayRequests = db.Requests
                         .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
                       .Join(db.Tenant, c => c.TenantID, t => t.ID,
-                      (c, t) => new RequestForTodayVM { Type = t.FirstName + " " + t.LastName, Description = c.Description, From = c.FromDate, To = c.ToDate })
+                      (c, t) => new RequestForTodayVM { Type =c.ID +" "+ t.FirstName + " " + t.LastName, Description = c.Description, From = c.FromDate, To = c.ToDate })
                         .ToList();
                 }
                 else if (sortby == "next7days")
@@ -58,7 +58,7 @@ namespace SecurityMonitor.Controllers
                     todayRequests = db.Requests
                         .Where(c => c.FromDate >= Today && c.FromDate <= Next7Days || c.FromDate < Today && c.ToDate >= Next7Days)
                       .Join(db.Tenant, c => c.TenantID, t => t.ID,
-                      (c, t) => new RequestForTodayVM { Type = t.FirstName + " " + t.LastName,
+                      (c, t) => new RequestForTodayVM { Type = c.ID +" "+ t.FirstName + " " + t.LastName,
                           Description = "--From-- "+ c.FromDate+ " --TO-- "+ c.ToDate + 
                           "--details--: "+c.Description,
                           From = c.FromDate, 
@@ -89,7 +89,7 @@ namespace SecurityMonitor.Controllers
                     todayRequests = db.Requests
                         .Where(c => c.FromDate >= Today && c.FromDate < Tomorrow || c.FromDate < Today && c.ToDate >= Today)
                       .Join(db.Tenant, c => c.TenantID, t => t.ID,
-                      (c, t) => new RequestForTodayVM { Type = c.RequestType, Description = c.Description, From = c.FromDate, To = c.ToDate })
+                      (c, t) => new RequestForTodayVM { Type = c.ID + " " + c.RequestType, Description = c.Description, From = c.FromDate, To = c.ToDate })
                         .ToList();
             
                 }

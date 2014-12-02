@@ -336,3 +336,31 @@ min-width:480px;
 min-width:385px;
 
 }
+
+.tile_height {
+    height:300px;
+
+}
+
+.lightblue {
+background:#69D2E7;
+}
+
+.lightdarkblue {
+background:#019DBC;}
+
+.darkblue {
+
+    background:#126070;
+}
+.sunspotOrange {
+background:#FEBE33;
+}
+.badMoonRisingOrange{
+    background:#F67F20;
+}
+.darkfine {
+background:#474746;
+}
+.lightSilver {
+background:#E7E7E7;}

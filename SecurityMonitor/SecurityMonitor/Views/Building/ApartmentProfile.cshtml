@@ -38,11 +38,11 @@
             <!--=================Page Title ends==================-->
             <!--=================Apartment content==================-->
 
-            <div class=" row  " style=" background:white;">
+            @*<div class=" row  " style=" background:white;">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " >
                     <canvas id="Bargraph" width="800" height="300"  ></canvas> 
                 </div>
-            </div>
+            </div>*@
 
             <!--=================Apartment content ends==================-->
 
@@ -100,16 +100,16 @@
                 @foreach (var item in ViewBag.tenant)
                 {
                     <!--========================left side===============================-->
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  " style="border-bottom:1px solid lightgrey;background:#C1CDCD; padding-bottom:50px;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="border-bottom:1px solid lightgrey;background:#C1CDCD; padding-bottom:50px;">
                         <!--========================tenant title===============================-->
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:80px;">
                             <!--========================Request box===============================-->
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right " style="height:60px; padding-top:10px;">
+                            @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right " style="height:60px; padding-top:10px;">
                                 <button type="button" class="btn btn-default" style="margin:10px;"
                                         onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
                                     New Request
                                 </button>
-                            </div>
+                            </div>*@
                         </div>
                         <!--========================tenant contant box===============================-->
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1  " style=" padding-top:20px; padding-bottom:0px; border-radius:20px; background:white;">
@@ -130,8 +130,6 @@
                                 </div>
                                 <!--tenan content area-->
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-bottom:0px;">
-
-
                                     <canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>
                                 </div>
 
@@ -174,28 +172,28 @@
        
         //=====================lINE CHARTChart==============================
         
-        var data2 = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fillColor: "#baeac5",
-                    strokeColor: "rgba(220,220,220,0.8)",
-                    highlightFill: "#baeac5",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                }
-            ]
-        };
+        //var data2 = {
+        //    labels: ["January", "February", "March", "April", "May", "June", "July"],
+        //    datasets: [
+        //        {
+        //            label: "My First dataset",
+        //            fillColor: "#baeac5",
+        //            strokeColor: "rgba(220,220,220,0.8)",
+        //            highlightFill: "#baeac5",
+        //            highlightStroke: "rgba(220,220,220,1)",
+        //            data: [65, 59, 80, 81, 56, 55, 40]
+        //        }
+        //    ]
+        //};
 
-        var options = {
+        //var options = {
 
-            responsive: true,
-            maintainAspectRatio: true
-        }
+        //    responsive: true,
+        //    maintainAspectRatio: true
+        //}
        
         
-        var myBar = new Chart(document.getElementById("Bargraph").getContext("2d")).Bar(data2, options);
+        //var myBar = new Chart(document.getElementById("Bargraph").getContext("2d")).Bar(data2, options);
       
         //=====================Line Chart ends==============================
 
@@ -204,7 +202,7 @@
         var canvascount = document.getElementsByTagName("canvas");
        
         
-        for (var i = 1; i <= canvascount.length - 1; i++)
+        for (var i = 0; i <= canvascount.length - 1; i++)
         {   var datachart =[];
         var data_TenantID = canvascount[i].getAttribute("data-tenantid");
        

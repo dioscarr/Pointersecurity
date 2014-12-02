@@ -42,7 +42,7 @@
             <!--chart title-->
             <div class="col-md-12 col-sm-12 col-sx-12  boxtitle text-center " style="padding-bottom:5px; ">
                 <h3 style="padding-top:15px;">Something 1</h3>
-            </div>
+            </div> 
             <!--chart Drawing-->
             <div class="col-md-12 col-sm-12 col-sx-12   " style="background:white; height:250px; border:1px solid lightgrey;">
                 <div class=" col-md-12 col-sm-12 col-sx-12  smallgraph  chartright">
@@ -209,6 +209,7 @@
                         //=======create table======
                         var dataTable = new google.visualization.DataTable();
                         //=======Adding Column======
+                        
                         dataTable.addColumn({ type: 'string', id: 'Room' });
                         dataTable.addColumn({ type: 'string', id: 'Name' });
                         dataTable.addColumn({ type: 'date', id: 'Start' });
@@ -265,6 +266,7 @@
                             dataTable.addRows(
                             [
                                [
+                                  
                                    data[i].Type,
                                    data[i].Description,
                                    new Date(parseInt(YearC(FromDate)),
@@ -297,7 +299,11 @@
                         google.visualization.events.addListener(chart, 'select', function () {
                             var selection = chart.getSelection();
                             if (selection && selection.length > 0) {
-                                alert("Row #" + selection[0].row + ', column #' + selection[0].colorByRowLabel);
+                                var mydata = dataTable.getValue(selection[0].row, 0).split(" ");
+                                //alert(mydata[0]);
+                                //window.location.href = URL;
+                                //alert(dataTable.getValue(selection[0].row, 0) + ' clicked');
+                               // alert("Row #" + selection[0].row + ', column #' + selection[0].colorByRowLabel);
                             }
                         });
 
