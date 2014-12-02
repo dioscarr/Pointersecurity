@@ -540,6 +540,7 @@
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\jquery-1.11.0.min.js" />
     <Content Include="img\D.png" />
     <Content Include="img\R.png" />
+    <Content Include="img\S.png" />
     <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
