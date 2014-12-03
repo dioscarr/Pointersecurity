@@ -56,7 +56,7 @@
                 <div class="col-sm-6 col-xs-6 "><h5>Client's Address</h5></div>
                 <div class="col-sm-6 col-xs-6 ">
 
-                    @Html.TextBox("ClientName", null, new { @class = "form-control " })
+                    @Html.TextBox("ClientName", null, new { @class = "form-control ClientName " })
                 </div>
                 <div class="col-sm-6 col-xs-6">@Html.TextBox("ClientAddress", null, new { @class = "form-control " })</div>
 
@@ -77,17 +77,17 @@
             </div>
     <div class="visible-sm visible-xs hidden-lg hidden-md col-sm-12 col-xs-12 lightblue center" style="padding-bottom:20px;
 padding-top:10px; padding-left:30%;">
-        <input type="submit" value="Add new Client" class="form-control" style="width:60%;"/>
+        <input type="submit" value="Add new Client" class="form-control AddClient" style="width:60%;" />
     </div>
         }
    
 
     <!--visible on md lg-->
-    <div class="hidden-xs hidden-sm visible-md visible-lg col-md-2 col-lg-2  tile_height lightblue text-center">
+    <div class="hidden-xs hidden-sm visible-md visible-lg col-md-2 col-lg-2  tile_height lightblue text-center" style="height:100%;">
         @using(Html.BeginForm()){
             <br/>
             <h5>Client's Name</h5>
-             @Html.TextBox("ClientName", null, new {@class="form-control" })
+             @Html.TextBox("ClientName", null, new { @class = "form-control ClientName" })
             <hr/>
             <h5>Client's Address</h5>
              @Html.TextBox("ClientAddress", null, new { @class = "form-control" })
@@ -104,8 +104,8 @@ padding-top:10px; padding-left:30%;">
             <h5>Phone</h5>
              @Html.TextBox("ClientPhone", null, new { @class = "form-control" })
              <hr/>
-            
-        <input class="btn form-control" type="submit" value="Submit"/>
+
+    <input class="btn form-control AddClient" type="submit" value="Submit" />
         }
     </div>
 
@@ -145,3 +145,20 @@ padding-top:10px; padding-left:30%;">
          }
 
 </div>
+
+@section scripts{
+    
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+           
+                $('.ClientName').val('');
+             
+                
+
+        });
+    </script>
+    }
+
