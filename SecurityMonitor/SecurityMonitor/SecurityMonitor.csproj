@@ -543,12 +543,14 @@
     <Content Include="img\client.png" />
     <Content Include="img\D.png" />
     <Content Include="img\Delivery.png" />
+    <Content Include="img\edit.png" />
     <Content Include="img\home.png" />
     <Content Include="img\M.png" />
     <Content Include="img\R.png" />
     <Content Include="img\reports.png" />
     <Content Include="img\S.png" />
     <Content Include="img\Search.png" />
+    <Content Include="img\trash.png" />
     <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

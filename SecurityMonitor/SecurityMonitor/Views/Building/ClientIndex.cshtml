@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<SecurityMonitor.Models.ClientsVM>
-
+@using SecurityMonitor.Models;
 @{
     ViewBag.Title = "ClientIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ClientIndex</h2>
+@*<h2>ClientIndex</h2>
 
 <p>
     @Html.ActionLink("Add a new client", "AddClient")
-</p>
-<table class="table">
+</p>*@
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ClientName)
@@ -19,9 +19,9 @@
             @Html.DisplayNameFor(model => model.BuildingCount)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
+@*@foreach (var item in Model) {
     <tr>
         <td>
             <button type="button" 
@@ -39,13 +39,62 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
-}
+}*@
 
-</table>
+@*</table>*@
 
 <!--main layout for this page-->
 <div class="row">
+    <!--visible on sm xs-->
     <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12  tile_height lightblue "></div>
-    <div class="hidden-xs hidden-sm visible-md visible-lg col-md-2 col-lg-2  tile_height lightblue "></div><div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 tile_height lightdarkblue"></div>
+
+    <!--visible on md lg-->
+    <div class="hidden-xs hidden-sm visible-md visible-lg col-md-2 col-lg-2  tile_height lightblue text-center">
+        @using(Html.BeginForm()){
+            <br/>
+            <h5>Client's Name</h5>
+             @Html.TextBox("ClientName", null, new {@class="form-control" })
+            <hr/>
+            <h5>Client's Address</h5>
+             @Html.TextBox("ClientAddress", null, new { @class = "form-control" })
+             <hr/>
+            <h5>City</h5>
+             @Html.TextBox("ClientCity", null, new { @class = "form-control" })
+             <hr/>
+            <h5>State</h5>
+             @Html.TextBox("ClientState", null, new { @class = "form-control" })
+             <hr/>
+            <h5>Zipcode</h5>
+             @Html.TextBox("ClientZipcode", null, new { @class = "form-control" })
+             <hr/>
+            <h5>Phone</h5>
+             @Html.TextBox("ClientPhone", null, new { @class = "form-control" })
+             <hr/>
+            
+        <input class="btn form-control" type="submit" value="Submit"/>
+        }
+    </div>
+
+    @foreach(var item in Model){
+   
+    <!--always visible main content -->
+  
+      <!--title or information-->
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-center  hollow lightblue " style="padding-bottom:13%;">
+            <h4 style="position:absolute; ">@item.ClientName</h4>
+        </div>
+       <!--edit-->
+       <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:13%;">
+           <img src="~/img/edit.png" style="position:absolute; left:35%; top:20%; height:35%; width:35%;" />
+           <h4 style="position:absolute; left:40%; top:55%;">Edit</h4>
+       </div>
+       <!--trash-->
+       <div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:13%;">
+           <img src="~/img/trash.png" style=" position:absolute; left:35%; top:20%; height:35%; width:35%;" />
+           <h4 style="position:absolute; left:40%; top:55%;">Trash</h4>
+       </div>
+
+   
+         }
 
 </div>

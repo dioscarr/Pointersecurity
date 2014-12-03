@@ -32,7 +32,37 @@ namespace SecurityMonitor.Controllers
                }).ToListAsync();
             return View(clients);
         }
-        
+
+
+
+
+        [HttpPost]
+          public async Task<ActionResult> ClientIndex(string ClientName)
+        {
+
+            //if (ModelState.IsValid)
+            //{
+            //    var Client = new Clients 
+            //    { 
+                  //TO DO: update Clients table with matching fields from ClientsVM...
+            //    };
+            //    db.Clients.Add(Client);
+            //    await db.SaveChangesAsync();
+            //}
+
+
+            var clients = await db.Clients
+
+              .Select(c => new ClientsVM
+              {
+                  ID = c.ID,
+                  ClientName = c.ClientName,
+                  BuildingCount = (int)c.BuildingCount
+              }).ToListAsync();
+            return View(clients);
+            
+        }
+  
         [HttpGet]
         public ActionResult AddClient()
         {

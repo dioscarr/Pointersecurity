@@ -9,6 +9,11 @@ namespace SecurityMonitor.Models
     {
         public int ID { get; set; }
         public string ClientName { get; set; }
+        public string Address { set; get; }
+        public string city { set; get; }
+        public string State { set; get; }
+        public string zipcode { set; get; }
+        public string Phone { set; get; }
         public int BuildingCount { get; set; }
         public List<ClientsVM> ListOfClients { get; set; }
     }
