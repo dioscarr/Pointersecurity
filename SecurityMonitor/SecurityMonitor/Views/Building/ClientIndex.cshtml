@@ -50,7 +50,7 @@
 
         @using (Html.BeginForm())
         {
-            <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12    lightblue " style="min-height:250px;">
+            <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12   myswipe lightblue " style="min-height:250px;">
 
                 <div class="col-sm-6 col-xs-6 "><h5>Client's Name</h5></div>
                 <div class="col-sm-6 col-xs-6 "><h5>Client's Address</h5></div>
@@ -155,7 +155,25 @@ padding-top:10px; padding-left:30%;">
 
            
                 $('.ClientName').val('');
-             
+
+            //swipe
+                $('.myswipe').on({
+                    'swipe': function (ev) {
+                        alert('1')
+                    },
+                    'swipeleft': function (ev) {
+                        alert('2')
+                    },
+                    'swiperight': function (ev) {
+                        alert('Swiping right')
+                    },
+                    'swipeup': function (ev) {
+                        alert('Swiping up')
+                    },
+                    'swipedown': function (ev) {
+                        alert('Swiping down')
+                    }
+                })
                 
 
         });
