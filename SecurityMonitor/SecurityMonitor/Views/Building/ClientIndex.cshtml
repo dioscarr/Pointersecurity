@@ -46,36 +46,41 @@
 <!--main layout for this page-->
 <div class="row">
     <!--visible on sm xs-->
-    <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12   outline lightblue ">
+    
 
         @using (Html.BeginForm())
         {
-            
-              <h5 class="col-sm-6 col-xs-6 outline">Client's Name</h5>
-              <h5 class="col-sm-6 col-xs-6">Client's Address</h5>
-            <div class="col-sm-6 col-xs-6 ">
-                 <input type="text" class=" form-control  pull-right" name="ClientName" >
+            <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12    lightblue " style="min-height:250px;">
+
+                <div class="col-sm-6 col-xs-6 "><h5>Client's Name</h5></div>
+                <div class="col-sm-6 col-xs-6 "><h5>Client's Address</h5></div>
+                <div class="col-sm-6 col-xs-6 ">
+
+                    @Html.TextBox("ClientName", null, new { @class = "form-control " })
+                </div>
+                <div class="col-sm-6 col-xs-6">@Html.TextBox("ClientAddress", null, new { @class = "form-control " })</div>
+
+                <h5 class="col-sm-6 col-xs-6">City</h5>
+                <h5 class="col-sm-6 col-xs-6">State</h5>
+                <div class="col-sm-6 col-xs-6">  @Html.TextBox("ClientCity", null, new { @class = "form-control " })</div>
+                <div class="col-sm-6 col-xs-6"> @Html.TextBox("ClientState", null, new { @class = "form-control " })</div>
+
+
+                <h5 class="col-sm-6 col-xs-6">Zipcode</h5>
+                <h5 class="col-sm-6 col-xs-6">Phone</h5>
+                <div class="col-sm-6 col-xs-6"> @Html.TextBox("ClientZipcode", null, new { @class = "form-control " })</div>
+                <div class="col-sm-6 col-xs-6"> @Html.TextBox("ClientPhone", null, new { @class = "form-control " })</div>
+
+
+               
+
             </div>
-              <div class="col-sm-6 col-xs-6">@Html.TextBox("ClientAddress", null, new { @class = "form-control " })</div>
-           
-              <h5 class="col-sm-6 col-xs-6">City</h5>
-              <h5 class="col-sm-6 col-xs-6">State</h5>
-              <div class="col-sm-6 col-xs-6">  @Html.TextBox("ClientCity", null, new { @class = "form-control " })</div>
-              <div class="col-sm-6 col-xs-6"> @Html.TextBox("ClientState", null, new { @class = "form-control " })</div>
-           
-           
-              <h5 class="col-sm-6 col-xs-6">Zipcode</h5>
-              <h5 class="col-sm-6 col-xs-6">Phone</h5>
-              <div class="col-sm-6 col-xs-6"> @Html.TextBox("ClientZipcode", null, new { @class = "form-control " })</div>
-              <div class="col-sm-6 col-xs-6"> @Html.TextBox("ClientPhone", null, new { @class = "form-control " })</div>
-            
-            
-              <div class="col-sm-12 col-xs-12 text-center  " style="padding-bottom:30px;" >            
-                 <input class="btn btn-default col-sm-12 col-xs-12 outline" 
-                   style="position:relative; top:20px;" type="submit" value="Submit" />
-              </div>
-        }
+    <div class="visible-sm visible-xs hidden-lg hidden-md col-sm-12 col-xs-12 lightblue center" style="padding-bottom:20px;
+padding-top:10px; padding-left:30%;">
+        <input type="submit" value="Add new Client" class="form-control" style="width:60%;"/>
     </div>
+        }
+   
 
     <!--visible on md lg-->
     <div class="hidden-xs hidden-sm visible-md visible-lg col-md-2 col-lg-2  tile_height lightblue text-center">
