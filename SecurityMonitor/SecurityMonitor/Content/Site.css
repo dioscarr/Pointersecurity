@@ -415,6 +415,7 @@ background:#E7E7E7;}
 }
 .hollow:hover, .hollow:focus, .hollow:active {
   background: none;
+  color:#019DBC;
 }
 .maxheight {
    
@@ -438,9 +439,9 @@ figcaption {
   opacity: 0;
   bottom: 0; 
   left: -90%;
-  -webkit-transition: all 0.6s ease;
-  -moz-transition:    all 0.6s ease;
-  -o-transition:      all 0.6s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -o-transition:      all 0.2s ease;
 }
 
 figure:hover figcaption {
