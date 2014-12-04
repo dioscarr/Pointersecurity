@@ -112,7 +112,8 @@ padding-top:10px; padding-left:30%;">
     @foreach(var item in Model){
    
     <!--always visible main content -->
-    <figure class=" col-lg-6 col-md-6 col-sm-8 col-xs-8  hollow lightblue " style="padding-bottom:0px;">
+    <figure class=" col-lg-6 col-md-6 col-sm-8 col-xs-8  hollow lightblue " style="padding-bottom:0px;"
+            onclick="location.href = '@Url.Action("BuildingIndex", "Building", new {ClientID = item.ID })'">
         <!--title or information-->
         <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
             <h4 style="position:absolute; top:30px; left:10%; ">@item.ClientName</h4>
