@@ -814,6 +814,8 @@
     <Content Include="Views\DashBoard\manageReqType.cshtml" />
     <Content Include="Views\DashBoard\TypeMasterProfile.cshtml" />
     <Content Include="Views\DashBoard\PreviewTemplate.cshtml" />
+    <Content Include="Views\Building\deleteClient.cshtml" />
+    <Content Include="Views\Building\EditClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

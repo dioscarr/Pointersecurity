@@ -101,8 +101,55 @@ namespace SecurityMonitor.Controllers
 
             return RedirectToAction("ClientIndex");
         }
+        //client Edit
+        [HttpGet]
+        public ActionResult EditClient(int id)
+        {
+            var client = db.Clients.Find(id);
+            return View(client);
+        }
+
+           //client Edit Post
+        [HttpPost]
+        public ActionResult EditClient(Clients model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var client = new Clients
+                {
+                     ClientName = model.ClientName,
+                     BuildingCount = model.BuildingCount
+                };
+                db.Clients.Add(client);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ClientIndex");
+        }
+
+        //Client Delete
+        [HttpGet]
+        public async Task<ActionResult> deleteClient(int? id)
+        {
+            var client =await db.Clients.FindAsync(id);
+
+            return View(client);
+        }
+        //Client Delete
+        [HttpPost]
+        public async Task<ActionResult> deleteClient(Clients model) {
+
+            if (ModelState.IsValid)
+            {
+                var client = await db.Clients.FindAsync(model.ID);
+                db.Clients.Remove(client);
+                await db.SaveChangesAsync();
+            }
 
 
+              
+            return RedirectToAction("ClientIndex");
+        }
         public async Task<ActionResult> BuildingIndex(int ClientID) 
         {
             Session["ClientID"] = ClientID;

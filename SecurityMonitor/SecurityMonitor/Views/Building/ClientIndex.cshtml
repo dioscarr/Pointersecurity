@@ -130,29 +130,35 @@ padding-top:10px; padding-left:30%;">
         </figcaption>
     </figure>
             <!--edit-->
-       <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;">
-           <!--img edit-->
-           <img src="~/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"
-                 style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />
-           
-           <img src="~/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"
-                style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />
-           
-           <!--text edit-->
-           <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>
-           <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>
-       </div>
-       <!--trash-->
-       <div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;">
-          <!--img trash-->
-            <img src="~/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />
-           <img src="~/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />
-         <!--text Trash-->
-           <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Trash</h4>
-           <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;">Trash</h4>
-       </div>
+    <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;" 
+         onclick="location.href = '@Url.Action("EditClient", "Building", new {id = item.ID })'">
+        <!--img edit-->
+        <img src="~/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"
+             style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />
 
-   
+        <img src="~/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"
+             style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />
+
+        <!--text edit-->
+        <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>
+        <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>
+    </div>
+       <!--trash-->
+    <div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;"
+          onclick="location.href = '@Url.Action("deleteClient", "Building", new {id = item.ID })'">
+        <!--img trash-->
+        <img src="~/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />
+        <img src="~/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />
+        <!--text Trash-->
+        <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">
+            Trash
+        </h4>
+        <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;">
+            Trash
+        </h4>
+    </div>
+
+
     }
 
 </div>
