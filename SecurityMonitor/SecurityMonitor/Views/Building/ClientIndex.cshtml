@@ -50,7 +50,7 @@
 
         @using (Html.BeginForm())
         {
-            <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12   myswipe lightblue " style="min-height:250px;">
+            <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12    lightblue " style="min-height:250px;">
 
                 <div class="col-sm-6 col-xs-6 "><h5>Client's Name</h5></div>
                 <div class="col-sm-6 col-xs-6 "><h5>Client's Address</h5></div>
@@ -112,13 +112,23 @@ padding-top:10px; padding-left:30%;">
     @foreach(var item in Model){
    
     <!--always visible main content -->
-  
-      <!--title or information-->
-        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 text-center  hollow lightblue " style="padding-bottom:100px;">
+    <figure class=" col-lg-6 col-md-6 col-sm-8 col-xs-8  hollow lightblue " style="padding-bottom:0px;">
+        <!--title or information-->
+        <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
             <h4 style="position:absolute; top:30%; left:10%; ">@item.ClientName</h4>
-            
+            <!--*****************************-->
+            <!--*****************************-->
         </div>
-       <!--edit-->
+        <figcaption class="col-md-8 col-md-offset-5 col-sm-8 col-sm-offset-5 " style="padding-right:20px;">
+
+            Client Name: @item.ClientName
+            <br />
+            More info here...
+
+
+        </figcaption>
+    </figure>
+            <!--edit-->
        <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;">
            <!--img edit-->
            <img src="~/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"
@@ -142,7 +152,7 @@ padding-top:10px; padding-left:30%;">
        </div>
 
    
-         }
+    }
 
 </div>
 
@@ -157,23 +167,10 @@ padding-top:10px; padding-left:30%;">
                 $('.ClientName').val('');
 
             //swipe
-                $('.myswipe').on({
-                    'swipe': function (ev) {
-                        alert('1')
-                    },
-                    'swipeleft': function (ev) {
-                        alert('2')
-                    },
-                    'swiperight': function (ev) {
-                        alert('Swiping right')
-                    },
-                    'swipeup': function (ev) {
-                        alert('Swiping up')
-                    },
-                    'swipedown': function (ev) {
-                        alert('Swiping down')
-                    }
-                })
+                $('#myswipe').on("swipeleft", function () {
+                    alert('it works');
+                }
+                );
                 
 
         });
