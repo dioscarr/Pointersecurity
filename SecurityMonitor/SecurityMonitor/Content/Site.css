@@ -452,3 +452,11 @@ figure:hover figcaption {
 
 .cap-right figcaption { bottom: 0; right: -30%; }
 .cap-right:hover figcaption { right: 0; }
+
+.delete_question_client {
+    height:150px;
+}
+
+.delete_client_content {
+ height:300px
+}
