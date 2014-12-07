@@ -195,7 +195,7 @@ padding-top:10px; padding-left:30%;">
         function loadProducts() {
             if (skip > -1 && !_inCallback) {
                 _inCallback = true;
-                skip++;
+                skip+=10;
                 $('div#loading').html('<p><img src="/img/ajax-loader.gif"></p>');
                 $.get("/Building/LoadingClients/?skip=" + skip, function (data) {
                    
