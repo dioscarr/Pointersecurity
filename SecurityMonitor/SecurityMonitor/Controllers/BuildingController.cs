@@ -29,7 +29,7 @@ namespace SecurityMonitor.Controllers
                    ID = c.ID,
                    ClientName = c.ClientName,
                    BuildingCount = (int)c.BuildingCount
-               }).Take(1).ToListAsync();
+               }).Take(2).ToListAsync();
             return View(clients);
         }
 
@@ -76,7 +76,7 @@ namespace SecurityMonitor.Controllers
                   ID = c.ID,
                   ClientName = c.ClientName,
                   BuildingCount = (int)c.BuildingCount
-              }).ToListAsync();
+              }).Take(2).ToListAsync();
             return View(clients);
             
         }
