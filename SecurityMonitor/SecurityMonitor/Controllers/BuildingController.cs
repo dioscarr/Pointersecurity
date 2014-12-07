@@ -33,13 +33,13 @@ namespace SecurityMonitor.Controllers
             return View(clients);
         }
 
-        public ActionResult LoadingClients(int skip)
+        public async Task<ActionResult> LoadingClients(int skip)
         {
             if (Request.IsAjaxRequest())
             {
 
-                var clientsList=db.Clients.OrderByDescending(c=>c.ClientName).Skip(skip).Take(10).Select(c=> new{ClientName=c.ClientName, id = c.ID}).ToList();
-               return new JsonResult { Data = clientsList, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                var clientsList=await db.Clients.OrderByDescending(c=>c.ClientName).Skip(skip).Take(10).Select(c=> new{ClientName=c.ClientName, id = c.ID}).ToListAsync();
+               return  new JsonResult { Data = clientsList, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                
              
             }
