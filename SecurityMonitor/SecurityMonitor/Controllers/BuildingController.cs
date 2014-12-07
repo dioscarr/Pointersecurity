@@ -29,8 +29,21 @@ namespace SecurityMonitor.Controllers
                    ID = c.ID,
                    ClientName = c.ClientName,
                    BuildingCount = (int)c.BuildingCount
-               }).ToListAsync();
+               }).Take(1).ToListAsync();
             return View(clients);
+        }
+
+        public ActionResult LoadingClients(int skip)
+        {
+            if (Request.IsAjaxRequest())
+            {
+
+                var clientsList=db.Clients.OrderByDescending(c=>c.ClientName).Skip(skip).Take(2).Select(c=> new{ClientName=c.ClientName, id = c.ID}).ToList();
+               return new JsonResult { Data = clientsList, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+               
+             
+            }
+            return RedirectToAction("clientsIndex");
         }
 
 

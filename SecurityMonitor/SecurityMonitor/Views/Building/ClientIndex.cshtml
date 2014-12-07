@@ -163,24 +163,103 @@ padding-top:10px; padding-left:30%;">
 
 </div>
 
+<div class="row">
+
+    <div id="clientList" class="col-md-12 col-lg-12">
+       
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="loading"></div>
+</div>
+
 @section scripts{
     
 <script src="~/Scripts/jquery-2.1.1.js"></script>
     
     <script type="text/javascript">
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-           
-                $('.ClientName').val('');
+        
+        
+        
+                    var skip = 0;
+        var _inCallback = false;
 
-            //swipe
-                $('#myswipe').on("swipeleft", function () {
-                    alert('it works');
-                }
-                );
-                
+        function loadProducts() {
+            if (skip > -1 && !_inCallback) {
+                _inCallback = true;
+                skip++;
+                $('div#loading').html('<p><img src="/img/ajax-loader.gif"></p>');
+                $.get("/Building/LoadingClients/?skip=" + skip, function (data) {
+                   
+                    var records_count = data.length;
+                    if (data != '') {
+                        // alert(data[0].ClientName);
+                        for (var i = 0; i <records_count; i++)
+                        {
 
+                            var id = data[i].id;
+
+                           
+
+                            var main_content = ' <figure class=" col-lg-6 col-md-6 col-sm-8 col-xs-8  hollow lightblue findme " style="padding-bottom:0px;"' +
+                                                 
+                                                      //url goes here
+                                                       ' <!--title or information-->' +
+                                                       ' <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">' +
+                                                       '  <h4 style="position:absolute; top:30px; left:10%; ">' + data[i].ClientName + '</h4>' +
+                                                       '</div>' +
+                                                       '<figcaption class="col-md-8 col-md-offset-5 col-sm-6 col-sm-offset-7    " style="padding-right:20px;">' +
+                                                       ' Client Name: ' + data[i].ClientName +
+                                                       '<br />' +
+                                                       ' More info here...' +
+                                                       '</figcaption>' +
+                                                       '</figure>';
+                            var $main_content = $(main_content).click(function () {
+                                window.location.href = "/building/buildingIndex/?ClientID=" + id;
+                            });
+
+                            $("#clientList").append($main_content);
+                                              
+                        }
+                        
+                    }
+                    else {
+                        alert('this is an else')
+                        skip = -1;
+                    }
+                    
+                    _inCallback = false;
+                    $('div#loading').empty();
+                });
+            }
+        }
+
+        var dcList = true;
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+                loadProducts();
+            }
         });
+
+
+
+
+
+
+
+
+        $('.ClientName').val('');
+
+        //swipe
+        $('#myswipe').on("swipeleft", function () {
+            alert('it works');
+        }
+        );
+
+
+    });
     </script>
     }
 
