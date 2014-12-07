@@ -209,7 +209,7 @@ padding-top:10px; padding-left:30%;">
 
                            
 
-                            var main_content = ' <figure class=" col-lg-6 col-md-6 col-sm-8 col-xs-8  hollow lightblue findme " style="padding-bottom:0px;"' +
+                            var main_content = ' <figure class=" col-lg-8 col-md-8 col-sm-8 col-xs-8  hollow lightblue findme " style="padding-bottom:0px;"' +
                                                  
                                                       //url goes here
                                                        ' <!--title or information-->' +
@@ -222,11 +222,50 @@ padding-top:10px; padding-left:30%;">
                                                        ' More info here...' +
                                                        '</figcaption>' +
                                                        '</figure>';
-                            var $main_content = $(main_content).click(function () {
-                                window.location.href = "/building/buildingIndex/?ClientID=" + id;
+
+                            var Edit_Content = ' <!--edit-->'+
+                                                '<div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;" >'+
+                                                '<!--img edit-->'+
+                                                '<img src="/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"'+
+                                                 'style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />'+
+                                                '<img src="/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"'+
+                                                'style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />'+
+                                                '<!--text edit-->'+
+                                                '<h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>'+
+                                                '<h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>'+
+                                                '</div>';
+
+                            var Delete_Content = '<!--trash-->' +
+                                                    '<div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;">' +
+                                                    '<!--img trash-->' +
+                                                    '<img src="/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />' +
+                                                    '<img src="/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />' +
+                                                    '<!--text Trash-->' +
+                                                    '<h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Trash' +
+                                                    '</h4>' +
+                                                    '<h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;"> Trash' +
+                                                    '</h4>' +
+                                                    '</div>';
+
+                            var $Delete_Content = $(Delete_Content).click(function () {
+                                window.location.href = "/building/deleteClient/?id=" + id;
+                               
                             });
 
+                            var $Edit_Content = $(Edit_Content).click(function () {
+                                window.location.href = "/building/buildingIndex/?ClientID=" + id;
+                            });
+                            var $main_content = $(main_content).click(function () {
+                                window.location.href = "/building/EditClient/?id=" + id;
+                            });
+
+
+
                             $("#clientList").append($main_content);
+
+                            $("#clientList").append($Edit_Content);
+
+                            $("#clientList").append($Delete_Content);
                                               
                         }
                         

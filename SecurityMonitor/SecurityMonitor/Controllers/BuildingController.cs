@@ -29,7 +29,7 @@ namespace SecurityMonitor.Controllers
                    ID = c.ID,
                    ClientName = c.ClientName,
                    BuildingCount = (int)c.BuildingCount
-               }).Take(2).ToListAsync();
+               }).Take(10).ToListAsync();
             return View(clients);
         }
 
@@ -38,7 +38,7 @@ namespace SecurityMonitor.Controllers
             if (Request.IsAjaxRequest())
             {
 
-                var clientsList=db.Clients.OrderByDescending(c=>c.ClientName).Skip(skip).Take(2).Select(c=> new{ClientName=c.ClientName, id = c.ID}).ToList();
+                var clientsList=db.Clients.OrderByDescending(c=>c.ClientName).Skip(skip).Take(10).Select(c=> new{ClientName=c.ClientName, id = c.ID}).ToList();
                return new JsonResult { Data = clientsList, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                
              
