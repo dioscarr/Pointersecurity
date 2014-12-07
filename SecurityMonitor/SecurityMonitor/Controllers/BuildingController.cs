@@ -76,7 +76,7 @@ namespace SecurityMonitor.Controllers
                   ID = c.ID,
                   ClientName = c.ClientName,
                   BuildingCount = (int)c.BuildingCount
-              }).Take(2).ToListAsync();
+              }).Take(10).ToListAsync();
             return View(clients);
             
         }
