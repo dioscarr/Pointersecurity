@@ -512,5 +512,15 @@ height:20px;
     color:white;
 }
 
+.pre-scrollable {
+height:800px;
+
+}
+
+.scrollable {
+    height: 1030px; /* or any value */
+    overflow-y: auto;
+}
+
 
 

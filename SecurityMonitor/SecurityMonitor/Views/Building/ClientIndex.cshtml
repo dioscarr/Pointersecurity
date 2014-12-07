@@ -108,67 +108,75 @@ padding-top:10px; padding-left:30%;">
     <input class="btn form-control AddClient" type="submit" value="Submit" />
         }
     </div>
+    <div id="clientList" class="scrollable">
+        @foreach (var item in Model)
+        {
 
-    @foreach(var item in Model){
-   
     <!--always visible main content -->
-    <figure class=" col-lg-6 col-md-6 col-sm-8 col-xs-8  hollow lightblue " style="padding-bottom:0px;"
-            onclick="location.href = '@Url.Action("BuildingIndex", "Building", new {ClientID = item.ID })'">
-        <!--title or information-->
-        <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
-            <h4 style="position:absolute; top:30px; left:10%; ">@item.ClientName</h4>
-            <!--*****************************-->
-            <!--*****************************-->
-        </div>
-        <figcaption class="col-md-8 col-md-offset-5 col-sm-6 col-sm-offset-7    " style="padding-right:20px;">
 
-            Client Name: @item.ClientName
-            <br />
-            More info here...
+            <figure class=" col-lg-8 col-md-8 col-sm-8 col-xs-8  hollow lightblue " style="padding-bottom:0px;"
+                    onclick="location.href = '@Url.Action("BuildingIndex", "Building", new {ClientID = item.ID })'">
+                <!--title or information-->
+                <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
+                    <h4 style="position:absolute; top:30px; left:10%; ">@item.ClientName</h4>
+                    <!--*****************************-->
+                    <!--*****************************-->
+                </div>
+                <figcaption class="col-md-8 col-md-offset-5 col-sm-6 col-sm-offset-7    " style="padding-right:20px;">
+
+                    Client Name: @item.ClientName
+                    <br />
+                    More info here...
 
 
-        </figcaption>
-    </figure>
-            <!--edit-->
-    <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;" 
-         onclick="location.href = '@Url.Action("EditClient", "Building", new {id = item.ID })'">
-        <!--img edit-->
-        <img src="~/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"
-             style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />
+                </figcaption>
+            </figure>
+        <!--edit-->
+            <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;"
+                 onclick="location.href = '@Url.Action("EditClient", "Building", new {id = item.ID })'">
+                <!--img edit-->
+                <img src="~/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"
+                     style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />
 
-        <img src="~/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"
-             style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />
+                <img src="~/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"
+                     style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />
 
-        <!--text edit-->
-        <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>
-        <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>
+                <!--text edit-->
+                <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>
+                <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>
+            </div>
+        <!--trash-->
+            <div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;"
+                 onclick="location.href = '@Url.Action("deleteClient", "Building", new {id = item.ID })'">
+                <!--img trash-->
+                <img src="~/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />
+                <img src="~/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />
+                <!--text Trash-->
+                <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">
+                    Trash
+                </h4>
+                <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;">
+                    Trash
+                </h4>
+            </div>
+
+
+
+        }
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="height:100px;" id="loadmore"><h2>Load More...</h2></div>
     </div>
-       <!--trash-->
-    <div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;"
-          onclick="location.href = '@Url.Action("deleteClient", "Building", new {id = item.ID })'">
-        <!--img trash-->
-        <img src="~/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />
-        <img src="~/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />
-        <!--text Trash-->
-        <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">
-            Trash
-        </h4>
-        <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;">
-            Trash
-        </h4>
-    </div>
 
-
-    }
-
+    
 </div>
+
+
 
 <div class="row">
 
-    <div id="clientList" class="col-md-12 col-lg-12">
+    @*<div id="clientList" class="col-md-12 col-lg-12 pre-scrollable">
        
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="loading"></div>
+    </div>*@
+   
 </div>
 
 @section scripts{
@@ -244,7 +252,9 @@ padding-top:10px; padding-left:30%;">
         });
 
 
-
+        $('#loadmore').click(function () {
+            loadProducts();
+        });
 
 
 
