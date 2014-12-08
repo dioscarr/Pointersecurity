@@ -7,33 +7,20 @@
 }
 @using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get))
 {
+    
+     
+          <div id="map" class="row lightblue" style="height:330px;  "></div>
+               
     <div class="">
 
         
-            <div class="row" style="background:#EFEFEF; margin-top:30px; border:1px solid lightgrey;">
-
-                <div class="col-md-4">
+            <div class="row lightblue" style="border:1px solid lightgrey;">
+                <!--hidden-->
+                <div class="col-md-4 hidden" >
                     @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
                 </div>
-
-                <div class="col-md-3 ">
-                    <div class="col-md-12">
-                        <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="button"
-                                class="btn btn btn-success"
-                                onclick="location.href = '@Url.Action("AddApartment", "Building", new {BuildingID = ViewBag.buildingInfo.ID})'">
-                            ....Add Apartment(s)....
-                        </button>
-                    </div>
-                    <br />
-                </div>
-                <div class="col-md-5">
-                    <div id="map" style="height:200px; margin-top:15px; border:1px solid black;"></div>
-                </div>
             </div>
-            <div class="row " style="background:lightgrey;">
+            <div class="row lightblue" >
                 <div class="col-md-3">
                     <h5>Searh By Aparment</h5>
                 </div>
@@ -41,7 +28,7 @@
                 </div>
                 <div class="col-md-6"></div>
             </div>
-            <div class="row " style="background:lightgrey; height:50px; ">
+            <div class="row lightblue" style=" height:50px; ">
                 <div class=" col-md-3">
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -55,6 +42,11 @@
                 </div>
                 <div class=" col-md-6">
                     <div class="pull-right">
+                        <button type="button"
+                                class="btn btn btn-success"
+                                onclick="location.href = '@Url.Action("AddApartment", "Building", new {BuildingID = ViewBag.buildingInfo.ID})'">
+                            Add APT
+                        </button>
                         <button id="ShowURL" type="button" class="btn btn-default pull-lef">Get URL</button>
 
                         <button type="button" class="btn btn-default  pull-left"
@@ -83,7 +75,7 @@
             </div>
 
         </div>
-            <div class="row">
+            <div class="row lightblue">
                 <div>
                     page @(ViewBag.apartmentlist.PageCount < ViewBag.apartmentlist.PageNumber ? 0 : ViewBag.apartmentlist.PageNumber)
                     of @ViewBag.apartmentlist.PageCount
@@ -173,15 +165,16 @@
                 </div>
             </div>
 
-            <div class="row " style="border:1px solid lightgrey;">
+            <div class="row lightblue " style="border:1px solid lightgrey;">
 
                 <div style=" margin-top:20px; margin-bottom:20px;">
                     @{var apartmentList = ViewBag.apartmentlist;}
 
                     @foreach (var item in apartmentList)
                 {
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-info" style="margin:7px; " onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID })'">@item.ApartmentNumber </button>
+                        <div class="col-md-4 lightdarkblue hollow2 text-center" style="padding-top:20px; padding-bottom:20px; border:1px inset #32b6d9;"
+                             onclick="location.href = '/building/ApartmentProfile/?ApartmentID=@item.ID'">
+                           <h1>@item.ApartmentNumber</h1>
                         </div>
                 }
                 </div>
