@@ -5,46 +5,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EditClient</h2>
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Clients</h4>
-        <hr />
+    
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClientName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
+          
+           <div class="row lightblue" style="padding-top:50px; padding-bottom:500px;">
+               <div class="text-center" style="padding-bottom:30px;">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BuildingCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BuildingCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BuildingCount, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                   <h1>Review and Edit</h1>
+               </div>
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style=" padding-left:200px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
+               </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style=" padding-left:100px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.BuildingCount, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.BuildingCount, "", new { @class = "text-danger" })
+               </div>
+
+               <button type="submit" class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 lightdarkblue delete_question_client text-center hollow1 " style="padding-top:20px;">
+                   <h1>Save</h1>
+               </button>
+               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 lightdarkblue delete_question_client text-center hollow1 " style="padding-top:50px;"
+                    onclick="location.href = '@Url.Action("ClientIndex", "Building")'">
+                   <h1>Cancel</h1>
+               </div>
+           </div>
+        
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

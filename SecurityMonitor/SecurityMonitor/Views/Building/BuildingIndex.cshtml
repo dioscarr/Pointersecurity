@@ -82,6 +82,7 @@
                     @Html.ActionLink("Trash", "Delete", new { id = item.ID })
                 </td>
             </tr>
+            @Html.HiddenFor(c=> item.ClientID)
         }
 
     </table>

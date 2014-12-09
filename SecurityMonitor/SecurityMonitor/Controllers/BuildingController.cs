@@ -213,7 +213,7 @@ namespace SecurityMonitor.Controllers
                         State = apartmentvm.States,
                         Zipcode = apartmentvm.ZipCode,
                         Manager = apartmentvm.Manager,
-                        ClientID = (int)Session["ClientID"]
+                        ClientID = apartmentvm.ClientID
                     };
                     db.Buildings.Add(apartment);
                     await db.SaveChangesAsync();
@@ -225,7 +225,7 @@ namespace SecurityMonitor.Controllers
 
 
 
-        return RedirectToAction("BuildingIndex", new { ClientID = Session["ClientID"] });
+        return RedirectToAction("BuildingIndex", new { ClientID = apartmentvm.ClientID });
         }
 
         
@@ -329,7 +329,7 @@ namespace SecurityMonitor.Controllers
 
         //=============Building Profile =====================
         [HttpGet]
-        public async Task<ActionResult> BuildingProfile(int? page, string searchBy, string search, int? BuildingID)
+        public async Task<ActionResult> BuildingProfile(int? page, string search, int? BuildingID)
         {
 
 
@@ -362,14 +362,14 @@ namespace SecurityMonitor.Controllers
 
 
             //=================building profile appartmentlist==========================================
-            if (page == null && searchBy != null && search != null)
+            if (page == null  && search != null)
             {
-                ViewBag.searchBy = searchBy;
+               
                 ViewBag.search = search;
             }
-            if (page != null && searchBy != null && search != null)
+            if (page != null && search != null)
             {
-                ViewBag.searchBy = searchBy;
+               
                 ViewBag.search = search;
             }
             if (Request.HttpMethod != "GET")
@@ -380,13 +380,14 @@ namespace SecurityMonitor.Controllers
             int pageSize = 96;
             int pageNumber = (page ?? 1);
 
-            if (searchBy == "ApartmentNumber")
+            if (search !=null)
             {
                 //executes when there is a search
                 var apartmentlist = await db.Apartment
                .Where(c => c.BuildingID == BuildingID && c.ApartmentNumber.Contains(search))
                .Select(c => new ApartmentVM
                {
+                   ID = c.ID,
                    ApartmentNumber = c.ApartmentNumber
 
                }).ToListAsync();

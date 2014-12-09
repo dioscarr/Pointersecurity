@@ -14,33 +14,26 @@
     <div class="">
 
         
-            <div class="row lightblue" style="border:1px solid lightgrey;">
-                <!--hidden-->
-                <div class="col-md-4 hidden" >
-                    @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
-                </div>
+        <div class="row lightblue hidden">
+            <!--hidden-->
+            <div class="col-md-4 ">
+                @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
             </div>
-            <div class="row lightblue" >
-                <div class="col-md-3">
-                    <h5>Searh By Aparment</h5>
+        </div>
+           
+            <div class="row lightblue" style=" padding-top:50px; padding-bottom:50px;">
+                <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    
+                       
+                        
+                        <input type="text" class="form-control" id="input-search" name="Search" placeholder="Filter Apartments">
+                    
                 </div>
-                <div class="col-md-3">
+                <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
+                    <input type="submit" value="Search" class="btn btn-info col-sm-6 col-xs-6" />
                 </div>
-                <div class="col-md-6"></div>
-            </div>
-            <div class="row lightblue" style=" height:50px; ">
-                <div class=" col-md-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <input type="radio" id="ApartmentNumber">
-                        </span>
-                        <input type="text" class="form-control" id="input-search">
-                    </div><!-- /input-group -->
-                </div>
-                <div class=" col-md-3">
-                    <input type="submit" value="Search" class="btn btn-info" />
-                </div>
-                <div class=" col-md-6">
+                <!--right side buttoms visible only on lg md-->
+                <div class=" hidden-sm hidden-xs col-md-6 col-sm-12 col-xs-12  ">
                     <div class="pull-right">
                         <button type="button"
                                 class="btn btn btn-success"
@@ -75,22 +68,21 @@
             </div>
 
         </div>
-            <div class="row lightblue">
+            <dliv class="row lightblue text-center">
                 <div>
-                    page @(ViewBag.apartmentlist.PageCount < ViewBag.apartmentlist.PageNumber ? 0 : ViewBag.apartmentlist.PageNumber)
-                    of @ViewBag.apartmentlist.PageCount
+                    
 
                     @if (ViewBag.apartmentlist.HasPreviousPage)
                 {
                     if (ViewBag.searchBy != null)
                     {
-                        var searchBy = ViewBag.searchBy;
+                        
                         var search = ViewBag.search;
 
                         <ul class="pagination pagination-sm">
-                            <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1, SearchBy = @searchBy, Search = @search })</li>
+                            <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1, Search = @search })</li>
 
-                            <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1, SearchBy = @searchBy, Search = @search })</li>
+                            <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1, Search = @search })</li>
                         </ul>
                     }
                     else if (ViewBag.searchBy == null)
@@ -112,13 +104,13 @@
                     @{
     if (ViewBag.searchBy != null)
     {
-        var searchBy = ViewBag.searchBy;
+     
         var search = ViewBag.search;
 
         <ul class="pagination pagination-sm">
             @for (var item = 1; item <= @ViewBag.apartmentlist.PageCount; item++)
             {
-                <li><a href="BuildingProfile?page=@item&SearchBy=@searchBy&Search=@search">@item</a></li>
+                <li><a href="BuildingProfile?page=@item&Search=@search">@item</a></li>
             }
         </ul>
     }
@@ -163,7 +155,7 @@
                         </ul>
                 }
                 </div>
-            </div>
+            </dliv>
 
             <div class="row lightblue " style="border:1px solid lightgrey;">
 
@@ -252,21 +244,15 @@
                 });
             }
             //google maps ends
-            $('#datetimepicker').focusin(function () {
-                $('#radio-btn-date').prop("checked", true).trigger('change');
-                $('#ApartmentNumber').attr('checked', false);
-            });
+            
             $('#input-search').focusin(function () {
+                alert('yes');
                 $('#ApartmentNumber').prop("checked", true).trigger("change");
-                $('#radio-btn-date').attr('checked', false);
-            });
-            //==============Datepicker settings=================================
-            $('#datetimepicker').datetimepicker({
-                timepicker: false,
-                formatDate: 'y.m.d'
+               
             });
 
-            //=============DateTimePicker plugin settings ends====================
+            $('#input-search').focusin(function () { alert('yes'); });
+          
 
             //=============Radio button functions ================================
             $('#ApartmentNumber').change(function () {
@@ -274,36 +260,14 @@
                 if ($('#ApartmentNumber').is(':Checked'))
                 {
                     $('#input-search').attr("name", "search");
-                    $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');
-                    $('#radio-btn-date').attr('Checked', false);
-
-                    $('#datetimepicker').removeAttr("name");
+                    $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');                  
                     //alert('yes');
                 }
-                else if (!$('#Function').is(':Checked'))
-                {
-                    $('#input-search').removeAttr("name");
-                    $('#ApartmentNumber').removeAttr("name");
-                    //alert('yes');
-                }
+                
             });
 
-            $('#radio-btn-date').change(function () {
-                //alert('yes');
-                if ($('#radio-btn-date').is(':Checked')) {
-                    $('#datetimepicker').attr("name", "search");
-                    $('#radio-btn-date').attr("name", "searchBy").val('Date');
-                    $('#ApartmentNumber').attr('Checked', false);
-                    $('#input-search').removeAttr("name");
-                    //alert('yes');
-                }
-                else if (!$('#radio-btn-date').is(':Checked')) {
-                    $('#datetimepicker').removeAttr("name");
-                    $('#radio-btn-date').removeAttr("name");
-                    //alert('yes');
-                }
-            });
-            //===============Radio buttons functions ends==================
+           
+         
 
         });
     </script>
