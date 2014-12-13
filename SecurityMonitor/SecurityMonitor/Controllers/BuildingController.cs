@@ -76,7 +76,7 @@ namespace SecurityMonitor.Controllers
                       //TO DO: update Clients table with matching fields from ClientsVM...
                     };
                     db.Clients.Add(Client);
-                   db.SaveChangesAsync();
+                   db.SaveChanges();
                 }
             }
 
