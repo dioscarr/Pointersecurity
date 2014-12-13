@@ -30,6 +30,14 @@ namespace SecurityMonitor.Controllers
                    ClientName = c.ClientName,
                    BuildingCount = (int)c.BuildingCount
                }).Take(10).ToList();
+
+            foreach (var item in clients)
+            {
+                if (item.BuildingCount == null)
+                {
+                    item.BuildingCount = 0;
+                }
+            };
             return View(clients);
         }
 
