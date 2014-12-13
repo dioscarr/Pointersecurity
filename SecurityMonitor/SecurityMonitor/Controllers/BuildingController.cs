@@ -20,16 +20,16 @@ namespace SecurityMonitor.Controllers
         PointersecurityEntities1 db = new PointersecurityEntities1();
 
 
-        public async Task<ActionResult> ClientIndex()
+        public ActionResult ClientIndex()
         {
-            var clients = await db.Clients
+            var clients =  db.Clients
               
                .Select(c => new ClientsVM
                {
                    ID = c.ID,
                    ClientName = c.ClientName,
                    BuildingCount = (int)c.BuildingCount
-               }).Take(10).ToListAsync();
+               }).Take(10).ToList();
             return View(clients);
         }
 
@@ -50,7 +50,7 @@ namespace SecurityMonitor.Controllers
 
 
         [HttpPost]
-          public async Task<ActionResult> ClientIndex(string ClientName)
+          public ActionResult ClientIndex(string ClientName)
         {
 
             if (ModelState.IsValid)
@@ -64,19 +64,19 @@ namespace SecurityMonitor.Controllers
                       //TO DO: update Clients table with matching fields from ClientsVM...
                     };
                     db.Clients.Add(Client);
-                    await db.SaveChangesAsync();
+                   db.SaveChangesAsync();
                 }
             }
 
 
-            var clients = await db.Clients
+            var clients = db.Clients
 
               .Select(c => new ClientsVM
               {
                   ID = c.ID,
                   ClientName = c.ClientName,
                   BuildingCount = (int)c.BuildingCount
-              }).Take(10).ToListAsync();
+              }).Take(10).ToList();
             return View(clients);
             
         }
@@ -90,7 +90,7 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddClient(ClientsVM newClient)
+        public ActionResult AddClient(ClientsVM newClient)
         {
             try 
             {
@@ -103,7 +103,7 @@ namespace SecurityMonitor.Controllers
                     };
 
                     db.Clients.Add(newclient);
-                   await db.SaveChangesAsync();
+                   db.SaveChanges();
             }
          } 
             catch(Exception e)
@@ -144,13 +144,14 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public async Task<ActionResult> deleteClient(int? id)
         {
-            var client =await db.Clients.FindAsync(id);
+            var client = await db.Clients.FindAsync(id);
 
             return View(client);
         }
         //Client Delete
         [HttpPost]
-        public async Task<ActionResult> deleteClient(Clients model) {
+        public async Task<ActionResult> deleteClient(Clients model)
+        {
 
             if (ModelState.IsValid)
             {
@@ -334,16 +335,10 @@ namespace SecurityMonitor.Controllers
 
 
             Session.Timeout = 20;
-            
-            if (BuildingID != null)
-            {
-                Session["BuildingID"] = BuildingID;
-            }
-            else
-            {
-                BuildingID = (int)Session["BuildingID"];
-            }
-            var buildinginfo = await db.Buildings
+
+            ViewBag.BuildingID = BuildingID;
+
+                        var buildinginfo = await db.Buildings
                   .Where(c => c.ID == BuildingID)
                   .Select(c => new BuildingInfoVM
                   {
@@ -411,6 +406,14 @@ namespace SecurityMonitor.Controllers
             
 
             return View( );
+        }
+
+        public ActionResult LoadBuildingReq(int BuildingID)
+        {
+            var TotalReq = db.Requests.Where(b => b.Tenant.Apartment.BuildingID == BuildingID).Count();
+
+            return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+              
         }
 
         //=====================Activity Log=======================
