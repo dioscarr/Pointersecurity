@@ -176,8 +176,10 @@ namespace SecurityMonitor.Controllers
               
             return RedirectToAction("ClientIndex");
         }
+    [HttpGet]
         public async Task<ActionResult> BuildingIndex(int ClientID) 
         {
+            ViewBag.ClientID = ClientID;
             Session["ClientID"] = ClientID;
             var building = await db.Buildings
                 .Where(c => c.ClientID == ClientID)
@@ -198,10 +200,18 @@ namespace SecurityMonitor.Controllers
         }
         // GET: Building
         [HttpGet]
-        public ActionResult AddBuilding()
+        public ActionResult AddBuilding(int? ClientID)
         {
            
-            var building = new BuildingInfoVM ();
+            var building = new BuildingInfoVM();
+            if (ClientID != null)
+            {
+                ViewBag.ClientID = ClientID;
+                building.ClientID = (int)ClientID;
+            
+            }
+           
+          
 
 
 
