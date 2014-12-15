@@ -251,6 +251,48 @@ namespace SecurityMonitor.Controllers
         return RedirectToAction("BuildingIndex", new { ClientID = apartmentvm.ClientID });
         }
 
+        //Delete building ##########################################################################################################
+        //TO DO: no views define yet
+        public ActionResult BuildingDelete(int id)
+        {
+          
+            var building = db.Buildings.Find(id);
+            return View(building);
+        
+        }
+        [HttpPost]
+        public async Task<ActionResult> BuildingDelete(int BuildingID)
+        {
+            if (ModelState.IsValid)
+            {
+                var building = db.Buildings.Find(BuildingID);
+                db.Buildings.Remove(building);
+                await db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("BuildingIdex");
+        }
+
+        public ActionResult BuildingEdit(int id)
+        {
+            var building = db.Buildings.Find(id);
+
+            return View(building);
+        
+        }
+        [HttpPost]
+        public async Task<ActionResult> BuildingEdit(Buildings model, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Buildings.Add(model);
+                await db.SaveChangesAsync();
+            
+            }
+
+            return RedirectToAction("buildingIndex");
+        
+        }
         
         // GET: Building
     [HttpGet]

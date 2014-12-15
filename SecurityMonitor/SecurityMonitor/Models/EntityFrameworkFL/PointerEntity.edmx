@@ -768,7 +768,6 @@
           <EntitySet Name="GanttTask" EntityType="PointersecurityModel.GanttTask" />
           <EntitySet Name="MasterProfileFields" EntityType="PointersecurityModel.MasterProfileFields" />
           <EntitySet Name="ReqType" EntityType="PointersecurityModel.ReqType" />
-          <EntitySet Name="Requests" EntityType="PointersecurityModel.Requests" />
           <EntitySet Name="Role" EntityType="PointersecurityModel.Role" />
           <EntitySet Name="sysdiagrams" EntityType="PointersecurityModel.sysdiagrams" />
           <EntitySet Name="Tenant" EntityType="PointersecurityModel.Tenant" />
@@ -846,10 +845,6 @@
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="UserActivityLog" EntitySet="UserActivityLog" />
           </AssociationSet>
-          <AssociationSet Name="FK_Request_Tenant" Association="PointersecurityModel.FK_Request_Tenant">
-            <End Role="Tenant" EntitySet="Tenant" />
-            <End Role="Requests" EntitySet="Requests" />
-          </AssociationSet>
           <AssociationSet Name="aspnet_UsersInRoles" Association="PointersecurityModel.aspnet_UsersInRoles">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
@@ -857,6 +852,11 @@
           <AssociationSet Name="AspNetUserRoles" Association="PointersecurityModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Requests" EntityType="PointersecurityModel.Requests" />
+          <AssociationSet Name="FK_Request_Tenant" Association="PointersecurityModel.FK_Request_Tenant">
+            <End Role="Tenant" EntitySet="Tenant" />
+            <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1139,19 +1139,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReqType1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Requests">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RequestType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="TenantID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tenant" Relationship="PointersecurityModel.FK_Request_Tenant" FromRole="Requests" ToRole="Tenant" />
-        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
@@ -1433,6 +1420,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="aspnet_UsersInRoles">
+          <End Type="PointersecurityModel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
+          <End Type="PointersecurityModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="PointersecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="TenantID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tenant" Relationship="PointersecurityModel.FK_Request_Tenant" FromRole="Requests" ToRole="Tenant" />
+        </EntityType>
         <Association Name="FK_Request_Tenant">
           <End Type="PointersecurityModel.Tenant" Role="Tenant" Multiplicity="1" />
           <End Type="PointersecurityModel.Requests" Role="Requests" Multiplicity="*" />
@@ -1444,14 +1452,6 @@
               <PropertyRef Name="TenantID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="aspnet_UsersInRoles">
-          <End Type="PointersecurityModel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
-          <End Type="PointersecurityModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="PointersecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1722,19 +1722,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Requests">
-            <EntityTypeMapping TypeName="PointersecurityModel.Requests">
-              <MappingFragment StoreEntitySet="Requests">
-                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
-                <ScalarProperty Name="PIN" ColumnName="PIN" />
-                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
-                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RequestType" ColumnName="RequestType" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="PointersecurityModel.Role">
               <MappingFragment StoreEntitySet="Role">
@@ -1811,6 +1798,19 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="PointersecurityModel.Requests">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
