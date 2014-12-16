@@ -228,6 +228,13 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="BuildingCount" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="GanttLinkId">
           <Key>
@@ -1101,6 +1108,13 @@
           <Property Name="ClientName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BuildingCount" Type="Int32" />
           <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Clients" ToRole="Buildings" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GanttLinkId">
           <Key>
@@ -1675,6 +1689,13 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="PointersecurityModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="BuildingCount" ColumnName="BuildingCount" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

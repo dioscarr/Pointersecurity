@@ -22,6 +22,13 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public int ID { get; set; }
         public string ClientName { get; set; }
         public Nullable<int> BuildingCount { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Fax { get; set; }
+        public string Email { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
     
         public virtual ICollection<Buildings> Buildings { get; set; }
     }

@@ -17,28 +17,75 @@ namespace SecurityMonitor.Controllers
 {
     public class BuildingController : Controller
     {
+        //DB context
         PointersecurityEntities1 db = new PointersecurityEntities1();
-
+        
+        
+        
+        
+        
+        //client index
 
         public ActionResult ClientIndex()
         {
             var clients =  db.Clients
-              
                .Select(c => new ClientsVM
                {
                    ID = c.ID,
                    ClientName = c.ClientName,
-                   BuildingCount = (int)c.BuildingCount
+                   BuildingCount = (int)c.BuildingCount,
+                   Address = c.Address,
+                    Phone =c.Phone,
+                     city=c.City,
+                      State = c.State,
+                      zipcode = c.ZipCode,
+                       Fax = c.Fax,
+                       Email = c.Email
+                    
+                  
                }).Take(10).ToList();
 
             foreach (var item in clients)
             {
-                if (item.BuildingCount == null)
+                if (item.BuildingCount <=0)
                 {
                     item.BuildingCount = 0;
                 }
             };
             return View(clients);
+        }
+
+        [HttpPost]
+        public ActionResult ClientIndex(string ClientName)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (ClientName != "")
+                {
+                    var Client = new Clients
+                    {
+                        ClientName = ClientName,
+                        BuildingCount = 10,
+
+                        //TO DO: update Clients table with matching fields from ClientsVM...
+                    };
+                    db.Clients.Add(Client);
+                    db.SaveChanges();
+                }
+            }
+
+
+            var clients = db.Clients
+
+              .Select(c => new ClientsVM
+              {
+                  ID = c.ID,
+                  ClientName = c.ClientName,
+                  BuildingCount = (int)c.BuildingCount
+              }).Take(10).ToList();
+            return View(clients);
+
         }
 
         public async Task<ActionResult> LoadingClients(int? skip)
@@ -61,37 +108,7 @@ namespace SecurityMonitor.Controllers
 
 
 
-        [HttpPost]
-          public ActionResult ClientIndex(string ClientName)
-        {
-
-            if (ModelState.IsValid)
-            {
-                if (ClientName !="")
-                { 
-                    var Client = new Clients 
-                    { 
-                         ClientName = ClientName,
-                         BuildingCount = 10
-                      //TO DO: update Clients table with matching fields from ClientsVM...
-                    };
-                    db.Clients.Add(Client);
-                   db.SaveChanges();
-                }
-            }
-
-
-            var clients = db.Clients
-
-              .Select(c => new ClientsVM
-              {
-                  ID = c.ID,
-                  ClientName = c.ClientName,
-                  BuildingCount = (int)c.BuildingCount
-              }).Take(10).ToList();
-            return View(clients);
-            
-        }
+        
   
         [HttpGet]
         public ActionResult AddClient()
@@ -208,6 +225,7 @@ namespace SecurityMonitor.Controllers
             {
                 ViewBag.ClientID = ClientID;
                 building.ClientID = (int)ClientID;
+
             
             }
            
@@ -253,6 +271,7 @@ namespace SecurityMonitor.Controllers
 
         //Delete building ##########################################################################################################
         //TO DO: no views define yet
+        [HttpGet]
         public ActionResult BuildingDelete(int id)
         {
           
@@ -261,7 +280,7 @@ namespace SecurityMonitor.Controllers
         
         }
         [HttpPost]
-        public async Task<ActionResult> BuildingDelete(int BuildingID)
+        public async Task<ActionResult> BuildingDelete(Buildings model, int BuildingID)
         {
             if (ModelState.IsValid)
             {
