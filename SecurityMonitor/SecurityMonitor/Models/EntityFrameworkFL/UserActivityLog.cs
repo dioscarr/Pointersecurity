@@ -16,7 +16,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     {
         public int ID { get; set; }
         public string UserID { get; set; }
-        public int BuildingID { get; set; }
+        public Nullable<int> BuildingID { get; set; }
         public string FunctionPerformed { get; set; }
         public System.DateTime DateOfEvent { get; set; }
         public string Message { get; set; }

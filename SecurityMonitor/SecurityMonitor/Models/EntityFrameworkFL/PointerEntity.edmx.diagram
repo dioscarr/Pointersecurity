@@ -8,29 +8,30 @@
         <EntityTypeShape EntityType="PointersecurityModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.Apartment" Width="1.5" PointX="8.25" PointY="20.25" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Applications" Width="1.5" PointX="10.75" PointY="7.875" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Membership" Width="1.5" PointX="13" PointY="6.5" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Membership" Width="1.5" PointX="17.5" PointY="5.875" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Paths" Width="1.5" PointX="13" PointY="15.75" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="15.25" PointY="19.125" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="17.5" PointY="12.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Profile" Width="1.5" PointX="17.5" PointY="9.375" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Roles" Width="1.5" PointX="13" PointY="12.625" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="17.5" PointY="12.25" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Profile" Width="1.5" PointX="17.5" PointY="2.375" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Roles" Width="1.5" PointX="13" PointY="6.375" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_SchemaVersions" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Users" Width="1.5" PointX="15.25" PointY="9.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Users" Width="1.5" PointX="15.25" PointY="6.75" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_WebEvent_Events" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="7.125" />
-        <EntityTypeShape EntityType="PointersecurityModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="PointersecurityModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="PointersecurityModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="7.125" />
         <EntityTypeShape EntityType="PointersecurityModel.AspNetUsers" Width="1.5" PointX="3" PointY="7.25" />
         <EntityTypeShape EntityType="PointersecurityModel.Buildings" Width="1.5" PointX="6" PointY="12.625" />
-        <EntityTypeShape EntityType="PointersecurityModel.Clients" Width="1.5" PointX="3.75" PointY="13.5" />
+        <EntityTypeShape EntityType="PointersecurityModel.Clients" Width="1.5" PointX="3.75" PointY="12.75" />
         <EntityTypeShape EntityType="PointersecurityModel.GanttLinkId" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.GanttTask" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="PointersecurityModel.MasterProfileFields" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.ReqType" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.Requests" Width="1.5" PointX="12.75" PointY="20.125" />
         <EntityTypeShape EntityType="PointersecurityModel.Role" Width="1.5" PointX="8.25" PointY="7.625" />
         <EntityTypeShape EntityType="PointersecurityModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.Tenant" Width="1.5" PointX="10.5" PointY="19.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.User" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.User" Width="1.5" PointX="10.75" PointY="11.75" />
         <EntityTypeShape EntityType="PointersecurityModel.UserActivityLog" Width="1.5" PointX="8.25" PointY="11.125" />
         <AssociationConnector Association="PointersecurityModel.FK_Apartment_Buildings" />
         <AssociationConnector Association="PointersecurityModel.FK_Tenant_Apartment" />
@@ -50,10 +51,10 @@
         <AssociationConnector Association="PointersecurityModel.FK_UserActivityLog_AspNetUsers" />
         <AssociationConnector Association="PointersecurityModel.FK_Buildings_Clients" />
         <AssociationConnector Association="PointersecurityModel.FK_UserActivityLog_Buildings" />
+        <AssociationConnector Association="PointersecurityModel.FK_Request_Tenant" />
         <AssociationConnector Association="PointersecurityModel.aspnet_UsersInRoles" />
         <AssociationConnector Association="PointersecurityModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="PointersecurityModel.Requests" Width="1.5" PointX="12.75" PointY="20.125" />
-        <AssociationConnector Association="PointersecurityModel.FK_Request_Tenant" />
+        <EntityTypeShape EntityType="PointersecurityModel.States" Width="1.5" PointX="4.75" PointY="18.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

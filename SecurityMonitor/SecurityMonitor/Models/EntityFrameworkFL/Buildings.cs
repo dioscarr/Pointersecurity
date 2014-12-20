@@ -27,7 +27,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public string State { get; set; }
         public string Zipcode { get; set; }
         public Nullable<int> NumberOfApartment { get; set; }
-        public int ClientID { get; set; }
+        public Nullable<int> ClientID { get; set; }
         public string BuildingPhone { get; set; }
         public string Manager { get; set; }
     

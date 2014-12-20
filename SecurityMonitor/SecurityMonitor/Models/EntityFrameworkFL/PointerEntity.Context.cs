@@ -47,11 +47,12 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<GanttTask> GanttTask { get; set; }
         public virtual DbSet<MasterProfileFields> MasterProfileFields { get; set; }
         public virtual DbSet<ReqType> ReqType { get; set; }
+        public virtual DbSet<Requests> Requests { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tenant> Tenant { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
-        public virtual DbSet<Requests> Requests { get; set; }
+        public virtual DbSet<States> States { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/11/2014 14:51:08
+-- Date Created: 12/19/2014 19:42:59
 -- Generated from EDMX file: C:\Users\dioscar\Source\Repos\Pointersecurity\SecurityMonitor\SecurityMonitor\Models\EntityFrameworkFL\PointerEntity.edmx
 -- --------------------------------------------------
 
@@ -169,6 +169,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Role]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Role];
 GO
+IF OBJECT_ID(N'[dbo].[States]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[States];
+GO
 IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[sysdiagrams];
 GO
@@ -200,7 +203,7 @@ CREATE TABLE [dbo].[Apartment] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [ApartmentNumber] nvarchar(max)  NOT NULL,
     [FloorNumber] nvarchar(50)  NOT NULL,
-    [BuildingID] int  NOT NULL
+    [BuildingID] int  NULL
 );
 GO
 
@@ -376,7 +379,7 @@ CREATE TABLE [dbo].[Buildings] (
     [State] nvarchar(2)  NOT NULL,
     [Zipcode] nvarchar(5)  NOT NULL,
     [NumberOfApartment] int  NULL,
-    [ClientID] int  NOT NULL,
+    [ClientID] int  NULL,
     [BuildingPhone] nvarchar(10)  NULL,
     [Manager] nvarchar(max)  NULL
 );
@@ -386,7 +389,14 @@ GO
 CREATE TABLE [dbo].[Clients] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [ClientName] nvarchar(max)  NOT NULL,
-    [BuildingCount] int  NULL
+    [BuildingCount] int  NULL,
+    [Address] nvarchar(max)  NULL,
+    [Phone] nvarchar(10)  NULL,
+    [Fax] nvarchar(10)  NULL,
+    [Email] nvarchar(max)  NULL,
+    [City] nvarchar(max)  NULL,
+    [State] nvarchar(2)  NULL,
+    [ZipCode] nvarchar(5)  NULL
 );
 GO
 
@@ -435,7 +445,7 @@ CREATE TABLE [dbo].[Requests] (
     [FromDate] datetime  NOT NULL,
     [ToDate] datetime  NOT NULL,
     [PIN] nvarchar(4)  NULL,
-    [TenantID] int  NOT NULL
+    [TenantID] int  NULL
 );
 GO
 
@@ -486,11 +496,18 @@ GO
 -- Creating table 'UserActivityLog'
 CREATE TABLE [dbo].[UserActivityLog] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [UserID] nvarchar(128)  NOT NULL,
-    [BuildingID] int  NOT NULL,
-    [Function_Performed] nvarchar(max)  NOT NULL,
+    [UserID] nvarchar(128)  NULL,
+    [BuildingID] int  NULL,
+    [FunctionPerformed] nvarchar(max)  NOT NULL,
     [DateOfEvent] datetime  NOT NULL,
     [Message] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'States'
+CREATE TABLE [dbo].[States] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [State] varchar(2)  NOT NULL
 );
 GO
 
@@ -677,6 +694,12 @@ GO
 -- Creating primary key on [ID] in table 'UserActivityLog'
 ALTER TABLE [dbo].[UserActivityLog]
 ADD CONSTRAINT [PK_UserActivityLog]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'States'
+ALTER TABLE [dbo].[States]
+ADD CONSTRAINT [PK_States]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 

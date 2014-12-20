@@ -25,10 +25,15 @@ namespace SecurityMonitor.Controllers
         
         
         //client index
-
+    [HttpGet]
         public ActionResult ClientIndex()
         {
-            var clients =  db.Clients
+            //this is for the add client partial view
+            ViewBag.ClientModel = new ClientsVM();
+            
+        
+        var ObjClients = new ClientsVM();
+        ObjClients.ListOfClients = db.Clients
                .Select(c => new ClientsVM
                {
                    ID = c.ID,
@@ -45,14 +50,16 @@ namespace SecurityMonitor.Controllers
                   
                }).Take(10).ToList();
 
-            foreach (var item in clients)
+        ObjClients.States = db.States.Select(c=> new State{ ID = c.ID, myState = c.State}).ToList();
+
+        foreach (var item in ObjClients.ListOfClients)
             {
                 if (item.BuildingCount <=0)
                 {
                     item.BuildingCount = 0;
                 }
             };
-            return View(clients);
+        return View(ObjClients);
         }
 
         [HttpPost]
@@ -106,31 +113,41 @@ namespace SecurityMonitor.Controllers
         }
 
 
+        //[HttpGet]
+        //public ActionResult AddClient()
+        //{
 
 
-        
-  
-        [HttpGet]
-        public ActionResult AddClient()
-        {
-
-           
-            return View(); 
-        }
+        //    return View();
+        //}
 
         [HttpPost]
-        public ActionResult AddClient(ClientsVM newClient)
+        public ActionResult AddClient(string ClientName, string Address, string City, 
+            string State, string zipcode, string Fax, string Phone, string email, 
+            int? buildingcount, int? ContactID)
         {
             try 
             {
                 if(ModelState.IsValid)
                 {
+
+                    if (buildingcount == null)
+                    {
+                        buildingcount = 0;
+                    }
                     var newclient = new Clients
                     {
-                        ClientName = newClient.ClientName,
-                        BuildingCount = newClient.BuildingCount
+                          ClientName = ClientName,
+                          BuildingCount = (int)buildingcount,
+                          Address = Address,
+                          City = City,
+                          State = State,
+                          ZipCode = zipcode,
+                          Fax = Fax,
+                          Phone = Phone,
+                          Email =email
                     };
-
+                    
                     db.Clients.Add(newclient);
                    db.SaveChanges();
             }
@@ -160,10 +177,14 @@ namespace SecurityMonitor.Controllers
             {
                 var client = new Clients
                 {
+                     ID =model.ID,
                      ClientName = model.ClientName,
                      BuildingCount = model.BuildingCount
                 };
-                db.Clients.Add(client);
+                db.Clients.Attach(client);
+                var Entry = db.Entry(client);
+                Entry.Property(c => c.ClientName).IsModified = true;
+
                 db.SaveChanges();
             }
             return RedirectToAction("ClientIndex");
@@ -173,7 +194,7 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public async Task<ActionResult> deleteClient(int? id)
         {
-            var client = await db.Clients.FindAsync(id);
+            var client = await db.Clients.FirstOrDefaultAsync(c=>c.ID==id);
 
             return View(client);
         }
@@ -210,7 +231,7 @@ namespace SecurityMonitor.Controllers
                     States = c.State,
                     ZipCode = c.Zipcode,
                     Manager = c.Manager,
-                    ClientID = c.ClientID,
+                    ClientID = (int)c.ClientID,
                     ID = c.ID
                 }).ToListAsync();
             return View(building);
@@ -272,24 +293,68 @@ namespace SecurityMonitor.Controllers
         //Delete building ##########################################################################################################
         //TO DO: no views define yet
         [HttpGet]
-        public ActionResult BuildingDelete(int id)
+        public ActionResult ErrorpageMessage(string errorMessage, int ClientID)
         {
-          
+
+            var objerrormessage = new ErrorMessageVM();
+
+            objerrormessage.ErrorMessagestring = errorMessage;
+            objerrormessage.ClientID = ClientID;
+
+            return View(objerrormessage);
+        
+        
+        }
+        [HttpGet]
+        public ActionResult BuildingDelete(int id, int? ClientID)
+        {
+          //check if building has apartments asigned or null
+           var Apartments =db.Apartment.Where(c => c.BuildingID == id).Select(c=> new {}).ToList();
+           if (Apartments.Count !=0)
+            {
+
+                return RedirectToAction("ErrorpageMessage", new { errorMessage = "Cannot be delete since it has apartments.", ClientID = ClientID });
+            
+            }
+
+
             var building = db.Buildings.Find(id);
+            building.ClientID=ClientID;
             return View(building);
         
         }
         [HttpPost]
-        public async Task<ActionResult> BuildingDelete(Buildings model, int BuildingID)
+        public async Task<ActionResult> BuildingDelete(Buildings model, int BuildingID, int? ClientID)
         {
             if (ModelState.IsValid)
             {
-                var building = db.Buildings.Find(BuildingID);
-                db.Buildings.Remove(building);
+                var mynewbuilding = new Buildings
+                {
+                     BuildingName = model.BuildingName,
+                      Address = model.Address,
+                       City =model.City,
+                     State = model.City,
+                     Zipcode = model.Zipcode,
+                     ClientID = ClientID,
+                     BuildingPhone = model.BuildingPhone,
+                     NumberOfApartment = model.NumberOfApartment,
+                     ID = model.ID
+
+
+                };
+
+
+                var Entry = db.Entry(mynewbuilding);
+                if (Entry.State == EntityState.Detached) 
+                { 
+                    db.Buildings.Attach(mynewbuilding);
+                }
+               
+                db.Buildings.Remove(mynewbuilding);
                 await db.SaveChangesAsync();
             }
 
-            return RedirectToAction("BuildingIdex");
+            return RedirectToAction("BuildingIndex", new { ClientID = ClientID });
         }
 
         public ActionResult BuildingEdit(int id)
@@ -636,7 +701,7 @@ namespace SecurityMonitor.Controllers
                                             .Where( a=>a.ID == ApartmentID)                                          
                                             .Select(c=> new ApartmentVM{   ApartmentNumber= c.ApartmentNumber,
                                                                          FloorNumber = c.FloorNumber,
-                                                                         BuildingID = c.BuildingID, ID = c.ID}).ToListAsync();
+                                                                         BuildingID = (int)c.BuildingID, ID = c.ID}).ToListAsync();
             
             var tenant = await db.Tenant
                 .Where(t => t.aptID == ApartmentID).ToListAsync();

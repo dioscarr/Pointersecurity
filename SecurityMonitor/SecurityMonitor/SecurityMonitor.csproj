@@ -225,6 +225,9 @@
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
+    <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\AspNetRoles.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -235,27 +238,6 @@
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\AspNetUsers.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Buildings.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Clients.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\MasterProfileFields.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Requests.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\sysdiagrams.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JsonVM.cs" />
-    <Compile Include="Models\MasterProfileVM.cs" />
-    <Compile Include="Models\myController.cs" />
-    <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
@@ -288,6 +270,12 @@
     <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Buildings.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Clients.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -297,6 +285,37 @@
     <Compile Include="Models\EntityFrameworkFL\GanttTask.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\MasterProfileFields.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Requests.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Role.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\States.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\sysdiagrams.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Tenant.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\User.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\UserActivityLog.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ErrorMessageVM.cs" />
+    <Compile Include="Models\JsonVM.cs" />
+    <Compile Include="Models\MasterProfileVM.cs" />
+    <Compile Include="Models\myController.cs" />
     <Compile Include="Models\EntityFrameworkFL\PointerEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -311,21 +330,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PointerEntity.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Role.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Tenant.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\User.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\UserActivityLog.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -800,7 +804,6 @@
     <Content Include="Views\Building\AddApartment.cshtml" />
     <Content Include="Views\Building\Show.cshtml" />
     <Content Include="Views\Building\ClientIndex.cshtml" />
-    <Content Include="Views\Building\AddClient.cshtml" />
     <Content Include="Views\Building\AddBuilding.cshtml" />
     <Content Include="Views\Building\BuildingIndex.cshtml" />
     <Content Include="Views\Building\ActivityPartial.cshtml" />
@@ -818,6 +821,9 @@
     <Content Include="Views\DashBoard\PreviewTemplate.cshtml" />
     <Content Include="Views\Building\deleteClient.cshtml" />
     <Content Include="Views\Building\EditClient.cshtml" />
+    <Content Include="Views\Building\_AddClient.cshtml" />
+    <Content Include="Views\Building\BuildingDelete.cshtml" />
+    <Content Include="Views\Building\ErrorpageMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

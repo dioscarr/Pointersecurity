@@ -22,7 +22,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public int ID { get; set; }
         public string ApartmentNumber { get; set; }
         public string FloorNumber { get; set; }
-        public int BuildingID { get; set; }
+        public Nullable<int> BuildingID { get; set; }
     
         public virtual Buildings Buildings { get; set; }
         public virtual ICollection<Tenant> Tenant { get; set; }

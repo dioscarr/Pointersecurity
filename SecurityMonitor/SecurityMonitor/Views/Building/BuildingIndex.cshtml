@@ -70,8 +70,8 @@
                 </td>
                
                 <td class="col-md-2">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Trash", "Delete", new { id = item.ID })
+                    @Html.ActionLink("Edit", "building", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "BuildingDelete", new { id = item.ID, ClientID = item.ClientID})
                 </td>
             </tr>
             @Html.HiddenFor(c=> item.ClientID)
