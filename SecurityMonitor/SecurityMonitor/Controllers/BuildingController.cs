@@ -191,15 +191,23 @@ namespace SecurityMonitor.Controllers
 
             if (ModelState.IsValid)
             {
-                var client = new Clients
-                {
-                     ID =model.ID,
-                     ClientName = model.ClientName,
-                     BuildingCount = model.BuildingCount
-                };
-                db.Clients.Attach(client);
-                var Entry = db.Entry(client);
+                //var client = new Clients
+                //{
+                //     ID =model.ID,
+                //     ClientName = model.ClientName,
+                //     BuildingCount = model.BuildingCount
+                //};
+                model.BuildingCount = 0;
+                db.Clients.Attach(model);
+                var Entry = db.Entry(model);
                 Entry.Property(c => c.ClientName).IsModified = true;
+                Entry.Property(c => c.Address).IsModified = true;
+                Entry.Property(c => c.City).IsModified = true;
+                Entry.Property(c => c.State).IsModified = true;
+                Entry.Property(c => c.Phone).IsModified = true;
+                Entry.Property(c => c.Fax).IsModified = true;
+                Entry.Property(c => c.Email ).IsModified = true;
+                Entry.Property(c => c.BuildingCount).IsModified = true;
 
                 db.SaveChanges();
             }

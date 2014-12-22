@@ -1,6 +1,7 @@
 ﻿@model PagedList.IPagedList<SecurityMonitor.Models.ApartmentVM>
 @using SecurityMonitor.Models;
 
+
 @{
     ViewBag.Title = "Userprofile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,14 +10,14 @@
 
 @using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get, new { BuildingID = @ViewBag.BuildingID }))
 {
-
+    var building = (BuildingInfoVM)ViewBag.buildingInfo;
     <div class="row">
         <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center" style="padding-top:50px; background:white;">
-        <p style="font-size:27px;">4530 Broadway</p>
-            <p style="font-size:20px;">New York, N.Y.</p>
-            <p style="font-size:20px;"> Zip-Code:10040</p>
-            <p style="font-size:20px;"> Contact manager: Jose Ramos </p>
-            <p style="font-size:20px;"> Tel: 347 300-9878</p></div>
+        <p style="font-size:27px;">@building.Address</p>
+            <p style="font-size:20px;">@building.City  @building.States</p>
+            <p style="font-size:20px;">@building.ZipCode</p>
+            <p style="font-size:20px;"> Contact manager: @building.Manager </p>
+            <p style="font-size:20px;"> Tel: @building.BuildingPhone</p></div>
         <div id="map" class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 lightblue" style="height:330px;  "></div>
     </div>
 

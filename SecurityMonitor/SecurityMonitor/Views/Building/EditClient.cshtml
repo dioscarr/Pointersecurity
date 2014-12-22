@@ -25,14 +25,47 @@
                    <h1>Review and Edit</h1>
                </div>
                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style=" padding-left:200px; padding-top:50px; padding-bottom:50px;">
-                   @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.EditorFor(model => model.ClientName, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Name" } })
                    @Html.ValidationMessageFor(model => model.ClientName, "", new { @class = "text-danger" })
                </div>
 
 
                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style=" padding-left:100px; padding-top:50px; padding-bottom:50px;">
-                   @Html.EditorFor(model => model.BuildingCount, new { htmlAttributes = new { @class = "form-control" } })
-                   @Html.ValidationMessageFor(model => model.BuildingCount, "", new { @class = "text-danger" })
+                   @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Address" } })
+                   @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+               </div>
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style=" padding-left:200px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @Placeholder = "City" } })
+                   @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+               </div>
+
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style=" padding-left:100px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @Placeholder = "State" } })
+                   @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+               </div>
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style=" padding-left:200px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Zipcode" } })
+                   @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+               </div>
+
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style=" padding-left:100px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Phone" } })
+                   @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+               </div>
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style=" padding-left:200px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Fax" } })
+                   @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+               </div>
+
+
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style=" padding-left:100px; padding-top:50px; padding-bottom:50px;">
+                   @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @Placeholder="Email" } })
+                   @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                </div>
 
                <button type="submit" class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 lightdarkblue delete_question_client text-center hollow1 " style="padding-top:20px;">
