@@ -37,7 +37,7 @@
         </div>
         <div class="col-sm-6 col-xs-6">
             @{IEnumerable<State> States = Model.States;}
-            @Html.DropDownList("State", new SelectList(States, "value", "myState"), new { @class = "form-control" })
+            @Html.DropDownList("State", new SelectList(States, "value", "myState"),"Choose State" ,new { @class = "form-control" })
         </div>
         <h5 class="col-sm-6 col-xs-6">Zipcode</h5>
         <h5 class="col-sm-6 col-xs-6">Phone</h5>
@@ -81,7 +81,7 @@ padding-top:10px; padding-left:30%;">
         <hr />
         <h5>State</h5>
         IEnumerable<State> States = Model.States;
-        @Html.DropDownList("State", new SelectList(States, "value", "myState"), new { @class = "form-control" })
+        @Html.DropDownList("State", new SelectList(States, "value", "myState"), "Choose State", new { @class = "form-control" })
         <hr />
         <h5>Zipcode</h5>
         @Html.TextBox("zipcode", null, new { @class = "form-control", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'", @placeholder = "Required" })
