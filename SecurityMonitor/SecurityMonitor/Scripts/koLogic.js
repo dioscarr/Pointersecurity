@@ -1,9 +1,7 @@
 ﻿$(function(){
 
 
-
-    alert("alert");
-
+  
 
 
 

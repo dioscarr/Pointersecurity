@@ -27,6 +27,7 @@ namespace SecurityMonitor.Models
     public class State
     {
         public int ID { set; get; }
+        public string value { set; get; }
         public string myState { set; get; }
     }
 }

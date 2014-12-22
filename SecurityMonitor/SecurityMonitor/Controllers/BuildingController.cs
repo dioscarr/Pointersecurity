@@ -12,6 +12,12 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Data.Entity;
 
+//TO DO: 
+
+//12-19-2014
+//this needs to be handle on while adding buildin. 
+// cound should increase when adding building and decrease when deleting building
+
 
 namespace SecurityMonitor.Controllers
 {
@@ -50,7 +56,7 @@ namespace SecurityMonitor.Controllers
                   
                }).Take(10).ToList();
 
-        ObjClients.States = db.States.Select(c=> new State{ ID = c.ID, myState = c.State}).ToList();
+        ObjClients.States = db.States.Select(c => new State { value = c.State, myState = c.State }).ToList();
 
         foreach (var item in ObjClients.ListOfClients)
             {
@@ -122,35 +128,45 @@ namespace SecurityMonitor.Controllers
         //}
 
         [HttpPost]
-        public ActionResult AddClient(string ClientName, string Address, string City, 
-            string State, string zipcode, string Fax, string Phone, string email, 
-            int? buildingcount, int? ContactID)
+        public ActionResult AddClient(ClientsVM model, int? buildingcount, int? ContactID)
         {
+
+
+
+
             try 
             {
-                if(ModelState.IsValid)
+
+                if (ModelState.IsValid)
                 {
 
                     if (buildingcount == null)
                     {
+                        //TO DO: this needs to be handle on while adding buildin. 
+                        // cound should increase when adding building and decrease when deleting building
                         buildingcount = 0;
                     }
                     var newclient = new Clients
                     {
-                          ClientName = ClientName,
-                          BuildingCount = (int)buildingcount,
-                          Address = Address,
-                          City = City,
-                          State = State,
-                          ZipCode = zipcode,
-                          Fax = Fax,
-                          Phone = Phone,
-                          Email =email
+                        ClientName = model.ClientName,
+                        BuildingCount = (int)buildingcount,
+                        Address = model.Address,
+                        City = model.city,
+                        State = model.State,
+                        ZipCode = model.zipcode,
+                        Fax = model.Fax,
+                        Phone = model.Phone,
+                        Email = model.Email
                     };
-                    
+
                     db.Clients.Add(newclient);
-                   db.SaveChanges();
-            }
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return RedirectToAction("clientIndex");
+                    
+                }
          } 
             catch(Exception e)
             {
@@ -369,12 +385,20 @@ namespace SecurityMonitor.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Buildings.Add(model);
+                db.Buildings.Attach(model);
+                var Entry = db.Entry(model);
+                Entry.Property(c => c.BuildingName).IsModified = true;
+                Entry.Property(c => c.Address).IsModified = true;
+                Entry.Property(c => c.City).IsModified = true;
+                Entry.Property(c => c.State).IsModified = true;
+                Entry.Property(c => c.Manager).IsModified = true;
+                Entry.Property(c => c.Zipcode).IsModified = true;
+                Entry.Property(c => c.BuildingPhone).IsModified = true;
                 await db.SaveChangesAsync();
             
             }
 
-            return RedirectToAction("buildingIndex");
+            return RedirectToAction("buildingIndex", new {ClientID = model.ClientID });
         
         }
         

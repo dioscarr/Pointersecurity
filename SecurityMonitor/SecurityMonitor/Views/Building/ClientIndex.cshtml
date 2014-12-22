@@ -69,9 +69,9 @@
                 </div>
                 <figcaption class="col-md-8 col-md-offset-5 col-sm-6 col-sm-offset-7    " style="padding-right:20px;">
 
-                    Client Name: @item.ClientName
+                    Phone: @item.Phone
                     <br />
-                    More info here...
+                    Email: @item.Email
 
 
                 </figcaption>
@@ -116,19 +116,55 @@
     
 </div>
 
-
-
-
-
 @section scripts{
     
 <script src="~/Scripts/jquery-2.1.1.js"></script>
     
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/koLogic.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
+       
+        //#################################ko validation
+        function ViewModel() {
+            Name = ko.observable("");
+            Address = ko.observable("");
+            City = ko.observable("");
+            //State = ko.observable("");
+            Phone = ko.observable("");
+            Fax = ko.observable("");
+            Zipcode = ko.observable("");
+            Email = ko.observable("");
 
-        
-        
+            this.chrName = ko.computed(function () { if (Name().length > 0){ return 'chars: ' + Name().length; } });
+            this.chrAddress = ko.computed(function () { if (Address().length >0) { return 'chars:' + Address().length; }});
+            this.chrCity = ko.computed(function () { if (City().length > 0) { return 'chars:' + City().length; }});
+            this.chrPhone = ko.computed(function () { if (Phone().length > 0) { return 'remaining chars:' + (10 - Phone().length); } });
+            this.chrFax = ko.computed(function () { if (Fax().length > 0) { return 'remaining chars:' + (10 - Fax().length); } });
+            this.chrZipcode = ko.computed(function () { if (Zipcode().length >0) { return 'remaining chars:' + (5 - Zipcode().length); }});
+            this.chrEmail = ko.computed(function () { if (Email().length > 0) { return 'chars;' + Email().length; }});
+
+
+
+            this.btnStat = ko.computed( function () {
+                //debugger;
+                if (Name().length > 0 && Address().length > 0 && City().length > 0 && Phone().length > 0 && Fax().length > 0 && Zipcode().length > 0 && Email().length > 0) {
+                    $('#submitlgmd').prop("disabled", false);
+                    $('#submitlgmd_B').prop("disabled", false);
+                   
+                    return Name().length;
+                }
+                else
+                {
+                    $('#submitlgmd').prop("disabled", true);
+                    $('#submitlgmd_B').prop("disabled", true);
+                }
+            },this);
+        };
+
+        ko.applyBindings(new ViewModel());
+
+        //######################################KO validation finish
         
                     var skip = 0;
         var _inCallback = false;

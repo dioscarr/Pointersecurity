@@ -454,12 +454,12 @@ figcaption {
   padding: 30px 20px; 
 
   
-  opacity: 0;
+  opacity: 1;
   bottom: 0; 
-  left: -90%;
-  -webkit-transition: all 0.2s ease;
+  left: 0;
+  /*-webkit-transition: all 0.2s ease;
   -moz-transition:    all 0.2s ease;
-  -o-transition:      all 0.2s ease;
+  -o-transition:      all 0.2s ease;*/
 }
 
 figure:hover figcaption {
@@ -556,4 +556,9 @@ height:800px;
 p {
 
 font-family:Baskerville;
+}
+
+.ClientEditrows {
+    padding-top:20px;
+    padding-bottom:20px;
 }

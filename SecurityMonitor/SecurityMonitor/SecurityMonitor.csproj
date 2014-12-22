@@ -824,6 +824,7 @@
     <Content Include="Views\Building\_AddClient.cshtml" />
     <Content Include="Views\Building\BuildingDelete.cshtml" />
     <Content Include="Views\Building\ErrorpageMessage.cshtml" />
+    <Content Include="Views\Building\BuildingEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
