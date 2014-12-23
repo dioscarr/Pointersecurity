@@ -417,6 +417,7 @@ namespace SecurityMonitor.Controllers
 
 
             var apartment = new ApartmentVM();
+
             apartment.BuildingID = buildingID;
 
           

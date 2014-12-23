@@ -25,7 +25,7 @@ namespace SecurityMonitor.Models
         public int ClientID { get; set; }
         public string Manager { set; get; }
         public int AptID { set; get; }
-
+        public List<State> StatesList { set; get; }
         public List<ApartmentVM> AparmentVMs { set; get; }
 
 

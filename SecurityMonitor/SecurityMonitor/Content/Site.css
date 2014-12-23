@@ -440,7 +440,7 @@ background:#E7E7E7;}
 }
 
 
- /* figures */
+ /*/* figures */
 figure { 
   display: block; 
   position: relative; 
@@ -449,8 +449,8 @@ figure {
 
 figcaption { 
   position: absolute; 
-  background: rgba(0,0,0,0.75); 
-  color: white; 
+  background: rgba(0,0,0,0.0); 
+  color:#2d6793; 
   padding: 30px 20px; 
 
   
@@ -460,7 +460,7 @@ figcaption {
   /*-webkit-transition: all 0.2s ease;
   -moz-transition:    all 0.2s ease;
   -o-transition:      all 0.2s ease;*/
-}
+/*}
 
 figure:hover figcaption {
   opacity: 1;
@@ -469,7 +469,7 @@ figure:hover figcaption {
 }
 
 .cap-right figcaption { bottom: 0; right: -30%; }
-.cap-right:hover figcaption { right: 0; }
+.cap-right:hover figcaption { right: 0; }*/*/
 
 .delete_question_client {
     height:150px;

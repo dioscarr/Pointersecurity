@@ -19,14 +19,16 @@
         <div class="col-lg-6 col-md-6 col-lg-offset-4 col-md-offset-4">
            
             <div class="ClientEditrows">
-                @Html.EditorFor(model => model.BuildingName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @data_bind="value:Name, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.BuildingName, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Name", @data_bind="value:Name, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.BuildingName, "", new { @class = "text-danger" })
                 <div id="idName" class="" style="position:relative; left:290px; top:-25px;"></div>
 
             </div>
          
             <div class="ClientEditrows">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address", @data_bind = "value:Address, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Address", @data_bind = "value:Address, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 <div id="idAddress" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -35,14 +37,16 @@
 
             <div class="ClientEditrows">
 
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", @data_bind = "value:City, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "City", @data_bind = "value:City, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 <div id="idCity" class="" style="position:relative; left:290px; top:-25px;"></div>
             </div>
 
             <div class="ClientEditrows">
 
-                @Html.EditorFor(model => model.States, new { htmlAttributes = new { @class = "form-control", @placeholder = "State", @data_bind = "value:State, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.States, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "State", @data_bind = "value:State, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.States, "", new { @class = "text-danger" })
                 <div id="idState" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -51,7 +55,8 @@
 
             <div class="ClientEditrows">
 
-                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip-Code", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Zip-Code", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                 <div id="idZipcode" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -59,7 +64,8 @@
 
             <div class="ClientEditrows">
 
-                @Html.EditorFor(model => model.NumberOfApart, new { htmlAttributes = new { @class = "form-control", @placeholder = "# of Apt."} })
+                @Html.EditorFor(model => model.NumberOfApart, new { htmlAttributes = new { @class = "form-control", 
+               @placeholder = "# of Apt."} })
                 @Html.ValidationMessageFor(model => model.NumberOfApart, " ", new { @class = "text-danger" })
                
              </div>
@@ -67,7 +73,8 @@
             <div class="ClientEditrows">
 
 
-                @Html.EditorFor(model => model.BuildingPhone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone", @data_bind = "value:Phone, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.BuildingPhone, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Phone", @data_bind = "value:Phone, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.BuildingPhone, "", new { @class = "text-danger" })
                 <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -76,11 +83,12 @@
 
             <div class="ClientEditrows">
 
-                @Html.EditorFor(model => model.Manager, new { htmlAttributes = new { @class = "form-control", @placeholder = "Manager", @data_bind = "value:Manager, valueUpdate:'afterkeydown'" } })
+                @Html.EditorFor(model => model.Manager, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Manager", @data_bind = "value:Manager, valueUpdate:'afterkeydown'" } })
                 @Html.ValidationMessageFor(model => model.Manager, "", new { @class = "text-danger"})
                 <div id="idmanager" class="" style="position:relative; left:290px; top:-25px;" ></div>
                 </div>
-                <input type="submit" value="Create" class="btn btn-default form-control" />
+            <input id="submitlgmd" type="submit" value="Create" class="btn btn-default form-control" />
             </div>
     </div>
     @Html.HiddenFor(model => model.ClientID)
@@ -245,15 +253,22 @@
                        $('#idEmail').addClass('glyphicon glyphicon-asterisk');
                    }
                });
-
+               //  
                this.btnStat = ko.computed(function () {
                    //debugger;
-                   if (Manager().length > 0 && Address().length > 0 && City().length > 0 && Phone().length > 0 && Fax().length > 0 && Zipcode().length > 0 && Email().length > 0) {
+                   if (State().length > 0 &&
+                       Name().length0 &&
+                       Manager().length > 0 &&
+                       Address().length > 0 &&
+                       City().length > 0 &&
+                       Phone().length > 0 &&
+                       Zipcode().length > 0)
+                   {
                        $('#submitlgmd').prop("disabled", false);
                        $('#submitlgmd_B').prop("disabled", false);
-                       return Manager().length;
                    }
-                   else {
+                   else
+                   {
                        $('#submitlgmd').prop("disabled", true);
                        $('#submitlgmd_B').prop("disabled", true);
                    }
