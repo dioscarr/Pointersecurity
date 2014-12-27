@@ -1,4 +1,5 @@
 ﻿@model SecurityMonitor.Models.BuildingInfoVM
+           @using SecurityMonitor.Models;
 
 @{
     ViewBag.Title = "AddBuilding";
@@ -44,9 +45,9 @@
             </div>
 
             <div class="ClientEditrows">
-
-                @Html.EditorFor(model => model.States, new { htmlAttributes = new { @class = "form-control",
-               @placeholder = "State", @data_bind = "value:State, valueUpdate:'afterkeydown'" } })
+                @{IEnumerable<State> Statelist = Model.StatesList;}
+                @Html.DropDownListFor(model => model.States, new SelectList(Statelist, "myState", "value"),"Choose State", new{@class = "form-control",
+               @placeholder = "State", @maxlength = "2", @data_bind = "value:State, valueUpdate:'afterkeydown'"  })
                 @Html.ValidationMessageFor(model => model.States, "", new { @class = "text-danger" })
                 <div id="idState" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -56,7 +57,7 @@
             <div class="ClientEditrows">
 
                 @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control",
-               @placeholder = "Zip-Code", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'" } })
+               @placeholder = "Zip-Code", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'", @maxlength = "5" } })
                 @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                 <div id="idZipcode" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -64,17 +65,24 @@
 
             <div class="ClientEditrows">
 
-                @Html.EditorFor(model => model.NumberOfApart, new { htmlAttributes = new { @class = "form-control", 
-               @placeholder = "# of Apt."} })
-                @Html.ValidationMessageFor(model => model.NumberOfApart, " ", new { @class = "text-danger" })
-               
+                @Html.EditorFor(model => model.NumberOfApart, new { htmlAttributes = new { 
+               @class = "form-control", @maxlength = "3", @placeholder = "# of Apt.",
+               @data_bind = "numeric:AptNum, value:AptNum, valueUpdate:'afterkeydown'"
+           },
+           })
+                
+                <div id="idAptNum" class="" style="position:relative; left:290px; top:-25px;"></div>
              </div>
 
             <div class="ClientEditrows">
 
 
                 @Html.EditorFor(model => model.BuildingPhone, new { htmlAttributes = new { @class = "form-control",
-               @placeholder = "Phone", @data_bind = "value:Phone, valueUpdate:'afterkeydown'" } })
+                                                                                           @placeholder = "Phone",
+                                                                                           @maxlength = "10",
+                                                                                           @data_bind = "value:Phone, valueUpdate:'afterkeydown'"
+           }
+           })
                 @Html.ValidationMessageFor(model => model.BuildingPhone, "", new { @class = "text-danger" })
                 <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
 
@@ -113,16 +121,27 @@
                Manager = ko.observable("");
                Address = ko.observable("");
                City = ko.observable("");
-               //AptNum = ko.observable("");
+               AptNum = ko.observable();
                State = ko.observable("");
                 //State = ko.observable("");
-               Phone = ko.observable("");
+               Phone = ko.observable("")           
                Fax = ko.observable("");
                Zipcode = ko.observable("");
                Email = ko.observable("");
+               this.chrAptNum = ko.computed(function () {if (AptNum() >= 0 )
+                   {
+                   $('#idAptNum').css("color", "green");
+                   $('#idAptNum').removeClass('glyphicon glyphicon-asterisk');
+                   $('#idAptNum').addClass('glyphicon glyphicon-ok');
+                  
+               } else {
+                   $('#idAptNum').removeClass('glyphicon glyphicon-ok');
+                   $('#idAptNum').css("color", "red");
+                   $('#idAptNum').addClass('glyphicon glyphicon-asterisk');
+               }});
                this.chrName = ko.computed(function ()
                { 
-                if (Name().length > 0) {
+                if (Name().length > 0  ) {
                     $('#idName').css("color", "green");
                     $('#idName').removeClass('glyphicon glyphicon-asterisk');
                     $('#idName').addClass('glyphicon glyphicon-ok');
@@ -257,7 +276,7 @@
                this.btnStat = ko.computed(function () {
                    //debugger;
                    if (State().length > 0 &&
-                       Name().length0 &&
+                       Name().length >0 &&
                        Manager().length > 0 &&
                        Address().length > 0 &&
                        City().length > 0 &&
@@ -277,7 +296,37 @@
 
            ko.applyBindings(new ViewModel());
 
+          
+          
+
        });
+
+       //only numeric handler
+       ko.bindingHandlers.numeric = {
+           init: function (element, valueAccessor) {
+               $(element).on("keydown", function (event) {
+                   // Allow: backspace, delete, tab, escape, and enter
+                   if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+                       // Allow: Ctrl+A
+                       (event.keyCode == 65 && event.ctrlKey === true) ||
+                       // Allow: . ,
+                       (event.keyCode == 188 || event.keyCode == 190 || event.keyCode == 110) ||
+                       // Allow: home, end, left, right
+                       (event.keyCode >= 35 && event.keyCode <= 39)) {
+                       // let it happen, don't do anything
+                       return;
+                   }
+                   else {
+                       // Ensure that it is a number and stop the keypress
+                       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                           event.preventDefault();
+                       }
+                   }
+               });
+           }
+       };
+
+
 
     </script>
     

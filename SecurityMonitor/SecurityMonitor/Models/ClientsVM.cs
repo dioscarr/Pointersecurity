@@ -19,6 +19,7 @@ namespace SecurityMonitor.Models
         public string Fax { set; get; }
         public string Email { set; get; }
         public int BuildingCount { get; set; }
+        public ClientsVM Client { set; get; }
         public List<ClientsVM> ListOfClients { get; set; }
         public List<State> States { set; get; }
  

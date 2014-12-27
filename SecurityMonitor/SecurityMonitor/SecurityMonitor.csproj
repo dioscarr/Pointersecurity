@@ -556,6 +556,7 @@
     <Content Include="img\S.png" />
     <Content Include="img\Search.png" />
     <Content Include="img\trash.png" />
+    <Content Include="img\whiteinterior.jpg" />
     <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -825,6 +826,7 @@
     <Content Include="Views\Building\BuildingDelete.cshtml" />
     <Content Include="Views\Building\ErrorpageMessage.cshtml" />
     <Content Include="Views\Building\BuildingEdit.cshtml" />
+    <Content Include="Views\Building\deleteApartment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

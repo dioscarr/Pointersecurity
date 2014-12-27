@@ -10,156 +10,122 @@
    
    }
 
-   
-<body >
-    
-    <div>
-        <div class="row" style="height:20px;">
-           
 
-        </div>
+  
 
-        <div class="">
+<div class="row " style="height:500px; background-image:url(/img/whiteinterior.jpg); background-size:cover; background-position-y:center;">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4    " style="padding-top:20px; padding-bottom:20px;">
+        <h1>@buildinginfo.BuildingName</h1>
+        <br /><span class="" style="color:white; font-size:20px;">@buildinginfo.Address</span>
+        <br /><span class="" style="color:white;">@buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</span>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  " style="height:178px;">
+
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-top:50px;">
+        <button type="button" class="btn btn-default"
+                onclick="location.href = '@Url.Action("deleteApartment", "Building", new { ApartmentID = @buildinginfo.ID })'">
+            Delete this Apartment
+        </button>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  whity ">
+        @foreach (var item in Model)
+        {
+            <h1 style="font-size:245px; color:white; ">@Html.DisplayFor(modelItem => item.ApartmentNumber)</h1>
+        }
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row">
 
             <!--=================Page Title==================-->
-            <div class=" row  " style="">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boxtitle " style="border-bottom:1px solid lightgrey; height:50px;">
-                    <div class=" col-lg-1 col-md-1 col-sm-6 col-xs-6 text-right headingfont ">
-                        Apartment:
-                    </div>
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 text-left headingfont ">@Html.DisplayFor(modelItem => item.ApartmentNumber)</div>
-                    }
-                    <div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 headingfont">Address</div>
-                    <div class="col-md-6  col-xs-6 text-left headingfont ">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode</div>
-                </div>
-            </div>
-            <!--=================Page Title ends==================-->
-            <!--=================Apartment content==================-->
-
-            @*<div class=" row  " style=" background:white;">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " >
-                    <canvas id="Bargraph" width="800" height="300"  ></canvas> 
-                </div>
-            </div>*@
-
-            <!--=================Apartment content ends==================-->
-
-            <!--==================Circles=============================-->
-            <div class=" row  " style="padding:20px; border-top:1px solid lightgrey;">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 CirlceTitle " style=" height:50px; ">
-
-                    <div class="col-lg-3 col-md-3 coll-sm-3 col-xs-3 text-center ">
-                        Today Total
-                    </div>
-
-
-                    <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-md-3 coll-sm-3 col-xs-3 text-center ">
-                        multi days
-                    </div>
-
-                    <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-md-3 coll-sm-3 col-xs-3 text-center ">
-                        pending requests
-                    </div>
-
-                </div>
-                
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                        <div class="col-lg-3 col-md-3 coll-sm-3 col-xs-3  text-center " style="padding-left:60px;">
-                            <div class="circleRequests">50</div>
-                        </div>
-
-                        <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-3 col-md-3 coll-sm-3 col-xs-3  text-center " style="padding-left:60px;">
-                            <div class="circleRequests">12</div>
-                        </div>
-
-                        <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-lg-3 col-md-3 coll-sm-3 col-xs-3  text-center " style="padding-left:60px;">
-                            <div class="circleRequests">37</div>
-                        </div>
-                    </div>
-                <!--=============Building Info=============================-->
-                <div class="col-md-5">
-
-                </div>
-                <!--Building Info Ends-->
-            </div>
-            <!--=======================Circle Ends====================-->
+            
+        
             <!--=================Tenant==================-->
             <!--add tenant-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-top:1px solid lightgrey;">
                 @foreach (var item in Model)
                 {
                     <button type="button" class="btn btn-default" style="margin:10px;"
-                            onclick="location.href = '@Url.Action("AddingTenant", "Building", new { ApartmentID = @item.ID })'">
-                        Add Tenant
+                            onclick="location.href = '@Url.Action("AddingTenant", "Building", new { apartmentID = @item.ID   })'">
+                        Add Tenant to this apartment
                     </button>
                 }
             </div>
-            <div class=" row   " style="">
+            </div>
+            
                 @foreach (var item in ViewBag.tenant)
                 {
-                    <!--========================left side===============================-->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="border-bottom:1px solid lightgrey;background:#C1CDCD; padding-bottom:50px;">
-                        <!--========================tenant title===============================-->
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:80px;">
+                    <div class=" row  outline  " style="">
+                  
                             <!--========================Request box===============================-->
-                            @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right " style="height:60px; padding-top:10px;">
+                         
                                 <button type="button" class="btn btn-default" style="margin:10px;"
                                         onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
                                     New Request
                                 </button>
-                            </div>*@
-                        </div>
+                       
                         <!--========================tenant contant box===============================-->
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1  " style=" padding-top:20px; padding-bottom:0px; border-radius:20px; background:white;">
+                       
                             <!--icon-->
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 " style="height:260px;">
+                           
                                 <div class=" glyphicon glyphicon-user " style="font-size:40px; padding-top:10px; "></div>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  " style="padding-bottom:10px; ">
+                         
                                 <!--tenant Name -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:70px;">
-                                    <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7  "><h1> @item.FirstName</h1> </div>
-                                    <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5" style=" padding-top:25px;">
+                          
+                                   <h1> @item.FirstName</h1>
+                                  
                                         <button type="button" class="btn btn-default "
                                                 onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
                                             Remove Tenant
                                         </button>
-                                    </div>
-                                </div>
+                                 
                                 <!--tenan content area-->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-bottom:0px;">
-                                    <canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>
-                                </div>
+                               
+                                    @*<canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>*@
+                               
 
-                            </div>
-                        </div>
-                    </div>
+                            
+                       
+                 
+                      </div>
                 }
 
-            </div>
+          
 
             <!--=================tenant ends==================-->
 
 
                 
                
-            </div>
+      
 
-        </div>
+        
    
 
     
-</body>
+
 
 @section scripts
 {
 
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+  
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
 
     <script src="~/Scripts/Chart.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>

@@ -266,17 +266,12 @@ namespace SecurityMonitor.Controllers
         {
            
             var building = new BuildingInfoVM();
+            building.StatesList =db.States.Select(c=> new State{myState =c.State, value=c.State }).ToList();
             if (ClientID != null)
             {
                 ViewBag.ClientID = ClientID;
                 building.ClientID = (int)ClientID;
-
-            
             }
-           
-          
-
-
 
             return View(building);
         }
@@ -426,18 +421,19 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddApartment(ApartmentVM apartmentvm)
+        public async Task<ActionResult> AddApartment(ApartmentVM apartmentvm, int buildingID)
         {
+            
+            
             if (ModelState.IsValid)
             { 
                 //if (User.Identity.IsAuthenticated)
                 //{
-                    int BuildingID = (int)Session["BuildingID"];
-                    {
+                 
                         var apartment = new Apartment
                           {
                               ApartmentNumber = apartmentvm.ApartmentNumber,
-                              BuildingID = Convert.ToInt32(apartmentvm.BuildingID),
+                              BuildingID =buildingID,
                               FloorNumber = apartmentvm.FloorNumber
                           };
                         db.Apartment.Add(apartment);
@@ -456,10 +452,10 @@ namespace SecurityMonitor.Controllers
                         //};
                         //db.UserActivityLog.Add(newActivity);
                         //await db.SaveChangesAsync();
-                    }
+                   
             }
                 //}
-           return RedirectToAction("BuildingProfile", "Building");
+            return RedirectToAction("BuildingProfile", "Building", new { BuildingID = buildingID});
         }
 
 
@@ -503,6 +499,26 @@ namespace SecurityMonitor.Controllers
             
             return RedirectToAction("BuildingProfile", "Building");
         }
+        [HttpGet]
+        public ActionResult deleteApartment(int apartmentID) 
+        {
+            var b = db.Apartment.Find(apartmentID);
+           
+            return View(b);
+        }
+        [HttpPost]
+        public ActionResult deleteApartment(Apartment model, int id)
+        {
+
+            if (ModelState.IsValid) {
+                var b = db.Apartment.Find(id);
+                db.Apartment.Remove(b);
+                db.SaveChanges();
+            }
+            return RedirectToAction("BuildingProfile", new { BuildingID = model.BuildingID });
+        
+        }
+
 
         public ViewResult Show()
         {
