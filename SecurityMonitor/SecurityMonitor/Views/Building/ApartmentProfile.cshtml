@@ -6,25 +6,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
-       var buildinginfo = (BuildingInfoVM)Session["Building"];
-   
-   }
+@{
+    var buildinginfo = (BuildingInfoVM)Session["Building"];
 
+}
 
-  
-
+<!--========================Top section====================-->
 <div class="row " style="height:500px; background-image:url(/img/whiteinterior.jpg); background-size:cover; background-position-y:center;">
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4    " style="padding-top:20px; padding-bottom:20px;">
-        <h1>@buildinginfo.BuildingName</h1>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px;" 
+    onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = @buildinginfo.BuildingID })'">
+        <span style="color:white;">Return To Building</span>
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4    " style="padding-top:0px; padding-bottom:0px;">
+        <h1 > @buildinginfo.BuildingName</h1>
         <br /><span class="" style="color:white; font-size:20px;">@buildinginfo.Address</span>
         <br /><span class="" style="color:white;">@buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span>
     </div>
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  " style="height:178px;">
-       
+
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-top:50px;">
-        <button type="button" class="btn btn-default" 
+        <button type="button" class="btn btn-default "
                 onclick="location.href = '@Url.Action("deleteApartment", "Building", new { ApartmentID = @buildinginfo.ID })'">
             Delete this Apartment
         </button>
@@ -32,7 +35,7 @@
         @foreach (var item in Model)
         {
 
-            <button type="button" class="btn btn-default pull-right " 
+            <button type="button" class="btn btn-default pull-right"
                     onclick="location.href = '@Url.Action("AddingTenant", "Building", new { apartmentID = @item.ID   })'">
                 Add Tenant to this apartment
             </button>
@@ -42,103 +45,81 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  whity ">
         @foreach (var item in Model)
         {
-            <h1 style="font-size:245px; color:white; ">@Html.DisplayFor(modelItem => item.ApartmentNumber)</h1>
+            <h1 style="font-size:170px; color:white; ">@Html.DisplayFor(modelItem => item.ApartmentNumber)</h1>
         }
     </div>
-
-
 </div>
 
+<div class="row " style="padding-bottom:40px;">
+    <!--=================Tenant==================-->
+    <!--add tenant-->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-top:1px solid lightgrey;">
+
+    </div>
+</div>
+
+@foreach (Tenant item in ViewBag.tenant)
+{
+    <div class=" row  hollow3  " style="border-bottom:1px solid lightgrey; ">
+        <!--tenant information-->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height:200px;">
+
+            <div class=" glyphicon glyphicon-user " style="font-size:40px; padding-top:10px; "></div>
+            <button type="button" class="btn btn-link "
+                    onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
+                Edit
+            </button>
+            <br />
+            <h4>@item.FirstName @item.LastName</h4><br />
+            <div class="" style="position:relative; top:-15px;">
+                Phone: @item.Phone <br />
+                Created on @item.Created
+                <br />
 
 
-
-
-
-
-
-
-
-
-        <div class="row " style="padding-bottom:40px;"> 
-
-           
-            
-        
-            <!--=================Tenant==================-->
-            <!--add tenant-->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border-top:1px solid lightgrey;">
-               
+                <button type="button" class="btn btn-link " style="margin-left:-10px;"
+                        onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
+                    Remove this Tenant
+                </button>
             </div>
-            </div>
-            
-                @foreach (Tenant item in ViewBag.tenant)
-                {
-                    <div class=" row  hollow3  " style="border-bottom:1px solid lightgrey; ">
-                        <!--tenant information-->
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height:200px;">
-
-                            <div class=" glyphicon glyphicon-user " style="font-size:40px; padding-top:10px; "></div>
-                            <button type="button" class="btn btn-link "
-                                    onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
-                                Edit
-                            </button>
-                            <br/>
-                            <h4>@item.FirstName @item.LastName</h4><br />
-                            <div class="" style="position:relative; top:-15px;">
-                                Phone: @item.Phone <br />
-                                Created on @item.Created
-                                <br />
-
-
-                                <button type="button" class="btn btn-link " style="margin-left:-10px;"
-                                        onclick="location.href = '@Url.Action("DeleteTenant", "Building", new { TenantID = @item.ID })'">
-                                    Remove this Tenant
-                                </button>
-                            </div>
-                        </div>
-                        <!--advance options-->
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height:160px;">
+        </div>
+        <!--advance options-->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height:160px;">
 
 
 
-                            <button type="button" class="btn btn-link" style="margin:9px;"
-                                    onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
-                                New Access Request
-                            </button>
-                            <br/>
-                            <button type="button" class="btn btn-link" style="margin:9px;"
-                                    onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
-                                Deliveries
-                            </button>
-                            <br />
-                            <button type="button" class="btn btn-link" style="margin:9px;"
-                                    onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
-                               Message Center
-                            </button>
-                            <br />
-                            <button type="button" class="btn btn-link" style="margin:9px;"
-                                    onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
-                                History
-                            </button>
+            <button type="button" class="btn btn-link" style="margin:9px;"
+                    onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
+                New Access Request
+            </button>
+            <br />
+            <button type="button" class="btn btn-link" style="margin:9px;"
+                    onclick="location.href = '@Url.Action("TenantDeliveryIndex", "Building", new { TenantID = @item.ID })'">
+                Deliveries
+            </button>
+            <br />
+            <button type="button" class="btn btn-link" style="margin:9px;"
+                    onclick="location.href = '@Url.Action("TenantMessegeCenterIndex", "Building", new { TenantID = @item.ID })'">
+                Message Center
+            </button>
+            <br />
+            <button type="button" class="btn btn-link" style="margin:9px;"
+                    onclick="location.href = '@Url.Action("RequestHistoryIndex", "Building", new { TenantID = @item.ID })'">
+                History
+            </button>
 
 
-                        </div>
+        </div>
 
-                        <!--========================Request box===============================-->
-                        @*<canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>*@
-                    </div>
-                }
-
-          
-
-            <!--=================tenant ends==================-->
+        <!--========================Request box===============================-->
+        @*<canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>*@
+    </div>
+}
 
 
-                
-               
-      
 
-        
+<!--=================tenant ends==================-->
+
    
 
     

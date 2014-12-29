@@ -1,0 +1,133 @@
+﻿@model SecurityMonitor.Models.EntityFrameworkFL.Requests
+
+@{
+    ViewBag.Title = "BuildingRequestHistoryEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        @using (Html.BeginForm(new { RequestID = Model.ID, BuildingID = Model.Tenant.Apartment.BuildingID}))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RequestType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{IEnumerable<SelectListItem> reqtype = ViewBag.RequestTypeEdit;}
+
+                        @Html.DropDownListFor(model => model.RequestType, reqtype, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RequestType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", id = "datetimepickerfrom" } })
+                        @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", id = "datetimepickerto" } })
+                        @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PIN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PIN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PIN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+@section scripts
+{
+
+   
+   
+    <script src="~/Scripts/bootstrap.js"></script>
+  
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
+    <script type="text/javascript">          
+        //=========clearing textbox==========
+        //$('#datetimepickerfrom').value('');
+        //$('#datetimepickerTo').value('');
+
+
+
+        //$('#descriptionarea').keyup(function () {
+        //    var maxl = $(this).attr("maxlength") - 1;
+        //    var input = $(this).val().length;
+
+        //    var totalused = maxl + 1 - input;
+        //    if (input != 0) {
+        //        $('#wordcount').html('<p style="color:red;">-' + input + '</p>' + "<P>of</P>" + '<p style="color:green;">' + totalused + '</p>');
+
+        //    } else {
+        //        $('#wordcount').html("");
+        //    }
+
+
+
+        //});
+
+
+        $(document).ready(function (e) {
+            //==============Datepicker settings=================================
+            $('#datetimepickerfrom').datetimepicker({
+                timepicker: true,
+                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
+                formatDate: 'y.m.d',
+                formatTime: 'g:i a',
+                step: 5
+
+
+            });
+
+            $('#datetimepickerto').datetimepicker({
+                timepicker: true,
+                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
+                formatDate: 'y.m.d',
+                formatTime: 'g:i a',
+                step: 5
+            });
+        });
+        //=============DateTimePicker plugin settings ends====================
+    </script>
+    }

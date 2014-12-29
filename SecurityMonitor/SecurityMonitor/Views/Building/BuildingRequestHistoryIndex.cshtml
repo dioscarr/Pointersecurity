@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SecurityMonitor.Models.EntityFrameworkFL.Requests>
+
+@{
+    ViewBag.Title = "BuildingRequestHistoryIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PIN)
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PIN)
+        </td>
+        <td>
+            <a href="@Url.Action("ApartmentProfile", "Building", new { ApartmentID = item.Tenant.Apartment.ID, BuildingID = item.Tenant.Apartment.BuildingID })">@Html.DisplayFor(modelItem => item.Tenant.FirstName) @Html.DisplayFor(modelItem => item.Tenant.LastName)</a>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "BuildingRequestHistoryEdit", new { RequestID = item.ID }) |
+          |
+            @Html.ActionLink("Delete", "BuildingRequestHistoryDelete", new { RequestID = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

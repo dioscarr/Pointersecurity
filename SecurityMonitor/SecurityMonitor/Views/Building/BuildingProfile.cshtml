@@ -54,7 +54,7 @@
                         <button id="ShowURL" type="button" class="btn btn-default pull-lef">Get URL</button>
 
                         <button type="button" class="btn btn-default  pull-left"
-                                onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">
+                                onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
                             Resquests
                             <span id="Requestscount"class="badge badge-warning " style="background:orange;">0</span>
                         </button>
@@ -176,8 +176,8 @@
                     @foreach (var item in apartmentList)
                     {
                         <div class="col-md-4 lightdarkblue hollow2 text-center" style="padding-top:20px; padding-bottom:20px; border:1px inset #32b6d9;"
-                             onclick="location.href = '/building/ApartmentProfile/?ApartmentID=@item.ID'">
-                           <h1>@item.ApartmentNumber</h1>
+                           onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID, BuildingID =  ViewBag.BuildingID })'">
+                            <h1>@item.ApartmentNumber</h1>
                         </div>
                     }
                 </div>

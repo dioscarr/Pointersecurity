@@ -827,6 +827,14 @@
     <Content Include="Views\Building\ErrorpageMessage.cshtml" />
     <Content Include="Views\Building\BuildingEdit.cshtml" />
     <Content Include="Views\Building\deleteApartment.cshtml" />
+    <Content Include="Views\Building\RequestHistoryIndex.cshtml" />
+    <Content Include="Views\Building\RequestdeleteHistory.cshtml" />
+    <Content Include="Views\Building\TenantDeliveryIndex.cshtml" />
+    <Content Include="Views\Building\TenantMessegeCenterIndex.cshtml" />
+    <Content Include="Views\Building\BuildingRequestHistoryIndex.cshtml" />
+    <Content Include="Views\Building\BuildingRequestHistoryDelete.cshtml" />
+    <Content Include="Views\Building\BuildingRequestHistoryEdit.cshtml" />
+    <Content Include="Views\Building\TenantEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

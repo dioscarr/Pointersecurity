@@ -605,6 +605,55 @@ namespace SecurityMonitor.Controllers
             return View( );
         }
 
+        //=================BuildingRequestsHistory==========================
+        [HttpGet]
+        public ActionResult BuildingRequestHistoryIndex(int BuildingID) 
+        {
+            var BR = db.Requests.Where(r => r.Tenant.Apartment.BuildingID ==BuildingID).ToList();
+            return View(BR); //done
+        }
+        [HttpGet]
+        public ActionResult BuildingRequestHistoryEdit(int RequestID) 
+        {
+            Requests request = db.Requests.Find(RequestID);
+            var reqType = db.ReqType.Select(c => new SelectListItem { Text= c.ReqType1, Value= c.ReqType1 }).ToList();
+            //dropdownlist
+            ViewBag.RequestTypeEdit = reqType;
+            return View(request); 
+        }
+        [HttpPost]
+        public ActionResult BuildingRequestHistoryEdit(int RequestID, int BuildingID)
+        {
+            Requests request = db.Requests.Find(RequestID);
+            db.Requests.Attach(request);
+            var Entry = db.Entry(request);
+            Entry.Property(c => c.Description).IsModified = true;
+            Entry.Property(c => c.PIN).IsModified = true;
+            Entry.Property(c => c.RequestType).IsModified = true;
+            Entry.Property(c => c.ToDate).IsModified = true;
+            Entry.Property(c => c.FromDate).IsModified = true;
+            db.SaveChanges();
+            return RedirectToAction("BuildingRequestHistoryIndex", new { BuildingID = BuildingID });
+        }
+        [HttpGet]
+        public ActionResult BuildingRequestHistoryDelete(int RequestID)
+        {
+            Requests request = db.Requests.Find(RequestID);
+            return View(request);
+        }
+        [HttpPost]
+        public ActionResult BuildingRequestHistoryDelete(int RequestID, int BuildingID)
+        {
+            if (ModelState.IsValid)
+            {
+                Requests req = db.Requests.Find(RequestID);
+                db.Requests.Remove(req);
+                db.SaveChanges();
+            
+            }
+            return RedirectToAction("BuildingRequestHistoryIndex", new {BuildingID = BuildingID }); 
+        }
+
         public ActionResult LoadBuildingReq(int BuildingID)
         {
             var TotalReq = db.Requests.Where(b => b.Tenant.Apartment.BuildingID == BuildingID).Count();
@@ -719,7 +768,7 @@ namespace SecurityMonitor.Controllers
         //====================apartmenprofile ==========-==========
 
         [HttpGet]
-        public async Task<ActionResult> ApartmentProfile(int? ApartmentID) 
+        public async Task<ActionResult> ApartmentProfile(int? ApartmentID, int BuildingID) 
         {
 
 
@@ -730,6 +779,7 @@ namespace SecurityMonitor.Controllers
                 (b, c) => new BuildingInfoVM
                 {
                     ID = c.ID,
+                    BuildingID = b.ID,
                     BuildingName = b.BuildingName,
                     BuildingPhone = b.BuildingPhone,
                     Address = b.Address,
@@ -804,9 +854,27 @@ namespace SecurityMonitor.Controllers
             }
             return View();
         }
-
+        //Tenant Edit
+        [HttpGet]
+        public ActionResult TenantEdit(int TenantID)
+        {
+            var tn = db.Tenant.Find(TenantID);
+            return View(tn);        
+        }
+        [HttpPost]
+        public ActionResult TenantEdit(Tenant model)
+        {           
+            db.Tenant.Attach(model);
+            var Entry = db.Entry(model);
+            Entry.Property(c => c.FirstName).IsModified = true;
+            Entry.Property(c => c.LastName).IsModified = true;
+            Entry.Property(c => c.Phone).IsModified = true;
+            Entry.Property(c => c.Username).IsModified = true;
+            
+            db.SaveChanges();         
+            return RedirectToAction("ApartmentProfile", new { ApartmrntID = model.Apartment.ID, BuildingID = model.Apartment.BuildingID });
+        }
         //===================DeleteTenant=============
-
         [HttpGet]
         public async Task<ActionResult> DeleteTenant(int? TenantID)
         {
@@ -841,6 +909,7 @@ namespace SecurityMonitor.Controllers
         //======================Delete Tenant POST=======================
         [HttpPost, ActionName("DeleteTenant")]
         [ValidateAntiForgeryToken]
+       
         public async Task<ActionResult> DeleteTenant(int? removeTenantID, int? ApartmentID)
         {
             if (ModelState.IsValid)
@@ -925,7 +994,48 @@ namespace SecurityMonitor.Controllers
         }
 
 
+       //History -- requests
+        public ActionResult RequestHistoryIndex(int TenantID)
+        {
+            var requests = db.Requests.Where(r=>r.TenantID==TenantID).ToList();
+
+            return View(requests);
+        }
+
+        //deleteRequestHistoryIndex
+        [HttpGet]
+        public ActionResult RequestdeleteHistory(int RequestID)
+        {
+            Requests Request = db.Requests.Find(RequestID);
+            return View(Request);        
+        }
         
+        [HttpPost]
+        public ActionResult RequestdeleteHistory(int RequestID, int ApartmentID)
+        {
+             
+            if (ModelState.IsValid)
+            {
+               Requests Request = db.Requests.Find(RequestID);
+               db.Requests.Remove(Request);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID });
+        
+        }
+
+        //Tenant Delivary
+        public ActionResult TenantDeliveryIndex(int TenantID)
+        {
+            return View();
+        
+        }
+
+        //Tenant Messege Center
+        public ActionResult TenantMessegeCenterIndex(int TenantID)
+        {  
+            return View();
+        }
 
     }
 }

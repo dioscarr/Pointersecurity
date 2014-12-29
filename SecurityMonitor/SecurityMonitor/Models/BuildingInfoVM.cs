@@ -10,6 +10,7 @@ namespace SecurityMonitor.Models
     public class BuildingInfoVM
     {
         public int ID { set; get;}
+        public int BuildingID { set; get; }
         [DisplayName("Building")] 
         public string BuildingName { set; get; }
          [DisplayName("Address")] 
