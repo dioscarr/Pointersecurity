@@ -654,6 +654,20 @@ namespace SecurityMonitor.Controllers
             return RedirectToAction("BuildingRequestHistoryIndex", new {BuildingID = BuildingID }); 
         }
 
+        //Contact Book
+        [HttpGet]
+        public ActionResult ContactBook(int BuildingID)
+        {
+            List<Tenant> tn = db.Tenant.Where(t => t.Apartment.Buildings.ID == BuildingID).ToList();
+            return View(tn);
+        }
+        //ContactBookCount
+        public ActionResult ContactBookCount(int BuildingID)
+        {
+            var TotalReq = db.Tenant.Where(t => t.Apartment.Buildings.ID == BuildingID).Count();
+            return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }      
+
         public ActionResult LoadBuildingReq(int BuildingID)
         {
             var TotalReq = db.Requests.Where(b => b.Tenant.Apartment.BuildingID == BuildingID).Count();
@@ -843,7 +857,7 @@ namespace SecurityMonitor.Controllers
                 };
                 db.Tenant.Add(newtenant);
                 await db.SaveChangesAsync();
-                return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID });
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID, BuildingID= newtenant.Apartment.BuildingID });
 
             }
             }
@@ -858,12 +872,14 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public ActionResult TenantEdit(int TenantID)
         {
-            var tn = db.Tenant.Find(TenantID);
+            Tenant tn = db.Tenant.Find(TenantID);
             return View(tn);        
         }
         [HttpPost]
-        public ActionResult TenantEdit(Tenant model)
-        {           
+        public ActionResult TenantEdit(Tenant model,int ApartmentID, int BuildingID)
+        {   //this i use forthe link since model didn't pass Nav properties
+           
+ 
             db.Tenant.Attach(model);
             var Entry = db.Entry(model);
             Entry.Property(c => c.FirstName).IsModified = true;
@@ -871,56 +887,31 @@ namespace SecurityMonitor.Controllers
             Entry.Property(c => c.Phone).IsModified = true;
             Entry.Property(c => c.Username).IsModified = true;
             
-            db.SaveChanges();         
-            return RedirectToAction("ApartmentProfile", new { ApartmrntID = model.Apartment.ID, BuildingID = model.Apartment.BuildingID });
+            db.SaveChanges();
+           
+            return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID =BuildingID});
         }
         //===================DeleteTenant=============
         [HttpGet]
-        public async Task<ActionResult> DeleteTenant(int? TenantID)
+        public ActionResult TenantDelete(int TenantID)
         {
-            if (TenantID != null)
-            {
-                var tenant = await db.Tenant.FindAsync(TenantID);
-
-                if (tenant == null)
-                {
-                    return HttpNotFound();
-                }
-                TenantVM tenantVM = new TenantVM
-                {
-                     FirstName = tenant.FirstName,
-                     LastName = tenant.LastName,
-                     Phone = tenant.Phone,
-                     Username = tenant.Username,
-                     aptID = (int)tenant.aptID,
-                     ID = tenant.ID,
-                     created = tenant.Created
-
-                
-                };
-                ViewBag.aptID = tenant.aptID;
-                ViewBag.tenantID = tenant.ID;
-                return View(tenantVM);
-             
-            }
-            
-            return View();
+            Tenant tn = db.Tenant.Find(TenantID);
+            return View(tn);
         }
         //======================Delete Tenant POST=======================
-        [HttpPost, ActionName("DeleteTenant")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-       
-        public async Task<ActionResult> DeleteTenant(int? removeTenantID, int? ApartmentID)
+
+        public ActionResult TenantDelete(int TenantID, int ApartmentID, int BuildingID)
         {
-            if (ModelState.IsValid)
-            {
-                var RemovethisTenant = await db.Tenant.FindAsync(removeTenantID);
+          
+                var tn =  db.Tenant.Find(TenantID);
                 
-                db.Tenant.Remove(RemovethisTenant);
-                await db.SaveChangesAsync();
-                return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID });
-            }
-            return View();
+                db.Tenant.Remove(tn);
+               db.SaveChanges();
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID = BuildingID });
+            
+           
         }
 
         //======================TenantRequest======================

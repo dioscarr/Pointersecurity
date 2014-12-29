@@ -61,9 +61,9 @@
 
 
                         <button type="button" class="btn btn-default pull-left "
-                                onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">
+                                onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
                             Contact Book
-                            <span class="badge badge-warning " style="background:Green;">0</span>
+                            <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
                         </button>
 
                         <button type="button" class="btn btn-default pull-lef " onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">Show Log</button>
@@ -340,7 +340,37 @@
             }
         });
 
+        //loading request
+        var buildingID = "@ViewBag.buildingInfo.ID";
+        $.ajax({
 
+            type: "GET",
+            data: { buildingID: buildingID },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/Building/LoadBuildingReq/",
+            success: function (jsonData) {
+                // alert(jsonData);
+                $('#Requestscount').html(jsonData);
+
+            }
+        });
+
+        $.ajax({
+
+            type: "GET",
+            data: { buildingID: buildingID },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/Building/ContactBookCount/",
+            success: function (jsonData) {
+                // alert(jsonData);
+                $('#RequestCountContactBook').html(jsonData);
+
+            }
+        });
+
+        
     });
     </script>
 

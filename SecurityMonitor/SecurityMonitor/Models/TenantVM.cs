@@ -23,6 +23,7 @@ namespace SecurityMonitor.Models
         public string Password { get; set; }
         public DateTime created { get; set; }
         public string isTempPWord { get; set; }
+        public int BuildingID { get; set; }
         public int aptID { get; set; }
     }
 }
