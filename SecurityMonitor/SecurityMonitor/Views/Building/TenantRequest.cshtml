@@ -20,7 +20,7 @@
             </div>
 
             @{IEnumerable<SelectListItem> ReqType = ViewBag.ReqType;}
-            @using (Html.BeginForm(new { BuildingID = (int)@ViewBag.RequestBuildingID }))
+            @using (Html.BeginForm(new { BuildingID = (int)@ViewBag.RequestBuildingID, TenantID = (int)@ViewBag.TenantID }))
             {
                 @Html.AntiForgeryToken()
 
