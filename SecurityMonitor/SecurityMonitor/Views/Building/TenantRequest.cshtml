@@ -20,11 +20,11 @@
             </div>
 
             @{IEnumerable<SelectListItem> ReqType = ViewBag.ReqType;}
-            @using (Html.BeginForm())
+            @using (Html.BeginForm(new { BuildingID = (int)@ViewBag.RequestBuildingID }))
             {
                 @Html.AntiForgeryToken()
 
-
+                
 
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })

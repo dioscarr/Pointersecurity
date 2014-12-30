@@ -917,12 +917,13 @@ namespace SecurityMonitor.Controllers
 
         //======================TenantRequest======================
         [HttpGet]
-        public ActionResult TenantRequest(int? tenantID) 
+        public ActionResult TenantRequest(int? tenantID, int BuildingID ) 
         {
 
             if (tenantID != null)
             {
                 var tenantRequest = new Requests();
+                
 
             
                 tenantRequest.TenantID = (int)tenantID;
@@ -937,8 +938,8 @@ namespace SecurityMonitor.Controllers
                 }
              
 
-
-
+                //this is because buildingID is needed.
+                ViewBag.RequestBuildingID = BuildingID;
                 ViewBag.ReqType = reqtype;
     
 
@@ -951,7 +952,7 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public ActionResult TenantRequest(Requests model)
+        public ActionResult TenantRequest(Requests model, int BuildingID)
         {
 
             var tenant = db.Tenant.Find(model.TenantID);
@@ -960,7 +961,7 @@ namespace SecurityMonitor.Controllers
             {
                 db.Requests.Add(model);
                 db.SaveChanges();
-                return RedirectToAction("ApartmentProfile", new { ApartmentID = tenant.aptID });
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = tenant.aptID, BuildingID = BuildingID });
             }
             return View();
         }
