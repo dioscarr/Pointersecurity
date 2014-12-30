@@ -995,14 +995,15 @@ namespace SecurityMonitor.Controllers
         [HttpPost]
         public ActionResult RequestdeleteHistory(int RequestID, int ApartmentID)
         {
-             
+             Requests ObjRequest = db.Requests.Find(RequestID);
+             var ObjTenantID = ObjRequest.Tenant.ID;
             if (ModelState.IsValid)
             {
                Requests Request = db.Requests.Find(RequestID);
                db.Requests.Remove(Request);
                 db.SaveChanges();
             }
-            return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID });
+            return RedirectToAction("RequestHistoryIndex", new { TenantID = ObjTenantID });
         
         }
 

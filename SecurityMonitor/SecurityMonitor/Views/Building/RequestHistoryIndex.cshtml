@@ -6,57 +6,37 @@
 }
 
 
+    @foreach (var item in Model)
+    {
+        <div class="row hollow4 RequestHIndexRow">
+            <div class="col-md-2 RequestHIndex">
+                <h4 class="underlineclass">Request Type:</h4> @Html.DisplayFor(modelItem => item.RequestType)
+            </div>
+            <div class="col-md-2 RequestHIndex">
+                <h4 class="underlineclass">Start Time:</h4> @Html.DisplayFor(modelItem => item.FromDate)
+            </div>
+            <div class="col-md-2 RequestHIndex">
+                <h4 class="underlineclass">End Time:</h4> @Html.DisplayFor(modelItem => item.ToDate)
+            </div>
+            <div class="col-md-2 RequestHIndex">
+                <h4 class="underlineclass">Secret PIN:</h4> @Html.DisplayFor(modelItem => item.PIN)
+            </div>
+            <div class="col-md-4 RequestHIndex">
+                <h4 class="underlineclass">Name:</h4> @Html.DisplayFor(modelItem => item.Tenant.FirstName) @Html.DisplayFor(modelItem => item.Tenant.LastName)
+
+            </div>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RequestType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FromDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ToDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PIN)
-        </th>
-        <th>
-            @Html.DisplayName("Name")
-        </th>
-        <th></th>
-    </tr>
+            <div class="col-md-10 RequestHIndex">
+                <h4 class="underlineclass">Description:</h4> @Html.DisplayFor(modelItem => item.Description)
+            </div>
+            <div class="col-md-2 pull-right RequestHIndex">
+                <h4 class="underlineclass">Settings:</h4>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                @Html.ActionLink("Delete", "RequestdeleteHistory", new { RequestID = item.ID })
+            </div>
+        </div>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RequestType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FromDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ToDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PIN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tenant.FirstName) @Html.DisplayFor(modelItem=> item.Tenant.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "RequestdeleteHistory", new { RequestID = item.ID })
-        </td>
-    </tr>
-}
 
-</table>
