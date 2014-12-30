@@ -826,12 +826,13 @@ namespace SecurityMonitor.Controllers
 
         //===================Adding Tenant to apartment GET ==============
         [HttpGet]
-        public ActionResult AddingTenant(int? apartmentID)
+        public ActionResult AddingTenant(int? apartmentID, int BuildingID)
         {
             if (apartmentID != null)
             {
                 var newtenant = new TenantVM();
                 newtenant.aptID = (int)apartmentID;
+                newtenant.BuildingID = BuildingID;
                 return View(newtenant);
             }
             return View("page doesn't meet the required elements");
@@ -857,7 +858,7 @@ namespace SecurityMonitor.Controllers
                 };
                 db.Tenant.Add(newtenant);
                 await db.SaveChangesAsync();
-                return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID, BuildingID= newtenant.Apartment.BuildingID });
+                return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID, BuildingID= newTenant.BuildingID });
 
             }
             }
