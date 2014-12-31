@@ -25,14 +25,16 @@ namespace SecurityMonitor.Controllers
     {
         //DB context
         PointersecurityEntities1 db = new PointersecurityEntities1();
-        
-        
+
         
         //shared_layout
         public ActionResult shared_layoutAllOpenRequests()
         {
-            var TotalReq = db.Requests.Where(r => r.FromDate >= DateTime.Today && r.ToDate>=DateTime.Today).Count();
-            TotalReq = TotalReq;
+            var Tomorrow = DateTime.Today.AddDays(1);
+        
+            var TotalReq = db.Requests.Where(c=>c.FromDate < Tomorrow && c.ToDate >= DateTime.Today).Count();
+
+            
             return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }      
         
