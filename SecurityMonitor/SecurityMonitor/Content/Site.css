@@ -606,20 +606,24 @@ font-family:Baskerville;
 
 .RequestHIndex 
 {
-    padding-top:10px;
-    padding-bottom:10px;
+
+   
     
 }
 
 .underlineclass {
     border-bottom:1px solid lightgrey;
-    padding-bottom:5px;
-    padding-top:5px;
-    background-color:#F0EFFF;
+    padding-bottom:0px;
+    padding-top:0px;
+    
 
 }
 .RequestHIndexRow {
 border-bottom:1px solid lightgrey;
 padding-bottom:20px;
 padding-top:20px;
+}
+
+.RequestHIndexColor {
+color:#019DBC;
 }

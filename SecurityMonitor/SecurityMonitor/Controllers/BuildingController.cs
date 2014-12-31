@@ -36,7 +36,21 @@ namespace SecurityMonitor.Controllers
 
             
             return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        //shared_layout
+        public ActionResult shared_layoutnext7Requests()
+        {
+            var Next7 = DateTime.Today.AddDays(7);
+            var Tomorrow = DateTime.Today.AddDays(1);
+            var Today = DateTime.Today;
+
+            var TotalReq = db.Requests.Where(c => c.FromDate >= Today && c.FromDate <= Next7 || c.FromDate < Today && c.ToDate >= Next7).Count();
+
+
+            return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }      
+        
         
         //client index
     [HttpGet]
