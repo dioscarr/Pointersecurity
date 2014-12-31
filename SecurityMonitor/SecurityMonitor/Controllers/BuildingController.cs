@@ -28,7 +28,13 @@ namespace SecurityMonitor.Controllers
         
         
         
-        
+        //shared_layout
+        public ActionResult shared_layoutAllOpenRequests()
+        {
+            var TotalReq = db.Requests.Where(r => r.FromDate >= DateTime.Today && r.ToDate>=DateTime.Today).Count();
+            TotalReq = TotalReq;
+            return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }      
         
         //client index
     [HttpGet]

@@ -42,10 +42,10 @@
         <div class="row" style="padding-bottom:10px; padding-top:0px; border-bottom:1px solid lightgrey;">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <!--================First Botton================-->
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6   ">
-                    <
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="height:50px;">
+                    <h5 style="color:white;">Open Request(s) <span id="openrequestid" class="badge " style="color:White; background:green;"></span></h5>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="height:49px;">
+                <div class="col-lg-6 col-md-6 col-sm-6 coll-xs-6 " style="height:49px;">
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " style="padding-top:10px;">
                         <input type="text" class=" form-control  pull-right" id="input-search">
                         <!--search result-->
@@ -163,6 +163,22 @@
 
         });
 
+
+        //loading request
+       
+        $.ajax({
+
+            type: "GET",
+            //data: { buildingID: buildingID },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/Building/shared_layoutAllOpenRequests/",
+            success: function (jsonData) {
+                // alert(jsonData);
+                $('#openrequestid').html(jsonData);
+
+            }
+        });
 
     });
 
