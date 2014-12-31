@@ -581,7 +581,7 @@ height:800px;
 .hollow4:hover, .hollow1:focus, .hollow4:active {
   background: rgba(0,0,0,0.05);
   color:Black;
-  font-weight:700;
+  
 }
 
 .resizemapclass{
