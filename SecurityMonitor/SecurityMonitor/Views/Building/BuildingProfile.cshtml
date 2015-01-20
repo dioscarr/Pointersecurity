@@ -66,7 +66,8 @@
                             <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
                         </button>
 
-                        <button type="button" class="btn btn-default pull-lef " onclick="location.href = '@Url.Action("ActivityPartial", "Building")'">Show Log</button>
+                        <button type="button" class="btn btn-default pull-lef " 
+                        onclick="location.href = '@Url.Action("BuildingApartmentDeleteAll", "Building", new{BuildingID =  @ViewBag.buildingInfo.ID })'">Remove Apts</button>
 
                     </div>
                 </div>

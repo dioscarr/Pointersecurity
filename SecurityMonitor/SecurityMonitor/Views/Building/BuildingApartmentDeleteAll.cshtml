@@ -1,0 +1,28 @@
+﻿@model SecurityMonitor.Models.ApartmentdeleteAll
+@using SecurityMonitor.Models.EntityFrameworkFL;
+
+@{
+    ViewBag.Title = "BuildingApartmentDeleteAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BuildingApartmentDeleteAll</h2>
+
+<div>
+    <h4>ApartmentdeleteAll</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -521,10 +521,64 @@ namespace SecurityMonitor.Controllers
             
             return RedirectToAction("BuildingProfile", "Building");
         }
+        //remove all apartment from the building========================================
+        [HttpGet]
+        public async Task<ActionResult> BuildingApartmentDeleteAll(int BuildingID)
+        {
+            var t = await db.Tenant.Where(c => c.Apartment.Buildings.ID == BuildingID).ToListAsync();
+            var r = await db.Requests.Where(c => c.Tenant.Apartment.Buildings.ID == BuildingID).ToListAsync();
+            ApartmentdeleteAll APtDelAll = new ApartmentdeleteAll() {BuildingID = BuildingID};
+            APtDelAll.TenantList = t;
+            APtDelAll.RequestList = r;
+            return View(APtDelAll);
+        }
+        [HttpPost]
+        public async Task<ActionResult> BuildingApartmentDeleteAll(int BuildingID, string x)
+        {
+            var AllApartments = await db.Apartment.Where(a => a.BuildingID == BuildingID).ToListAsync();
+            db.Apartment.RemoveRange(AllApartments);
+            await db.SaveChangesAsync();
+            return RedirectToAction("BuildingProfile", new { BuildingID = BuildingID });
+        }
+        //============================================================
+        [HttpGet]
+        public ActionResult BuildingTenantDeleteAll(int BuildingID) 
+        {
+            ViewBag.BuildingID = BuildingID;
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> BuildingTenantDeleteAll(int BuildingID, string x)
+        {
+            List<Tenant> tenantList =await  db.Tenant.Where(c => c.Apartment.Buildings.ID == BuildingID).ToListAsync();
+            db.Tenant.RemoveRange(tenantList);
+            await db.SaveChangesAsync();
+            return RedirectToAction("ApartmentDeleteAll", new {BuildingID =BuildingID} );
+        }
+
+        [HttpGet]
+        public ActionResult BuildingAllRequestDelete(int BuildingID)
+        {
+            ViewBag.BuildingID = BuildingID;
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> BuildingAllRequestDelete(int BuildingID, string x)
+        {
+            var RequesList = await db.Requests.Where(r => r.Tenant.Apartment.Buildings.ID == BuildingID).ToListAsync();
+            db.Requests.RemoveRange(RequesList);
+            await db.SaveChangesAsync();
+            return RedirectToAction("ApartmentDeleteAll", new {BuildingID =BuildingID} );
+        }
+
+        //delete apartment
         [HttpGet]
         public ActionResult deleteApartment(int apartmentID) 
         {
             var b = db.Apartment.Find(apartmentID);
+           
+            
            
             return View(b);
         }

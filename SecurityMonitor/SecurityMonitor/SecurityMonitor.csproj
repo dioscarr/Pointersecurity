@@ -222,6 +222,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApartmentdeleteAll.cs" />
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
@@ -836,6 +837,7 @@
     <Content Include="Views\Building\TenantEdit.cshtml" />
     <Content Include="Views\Building\TenantDelete.cshtml" />
     <Content Include="Views\Building\ContactBook.cshtml" />
+    <Content Include="Views\Building\BuildingApartmentDeleteAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
