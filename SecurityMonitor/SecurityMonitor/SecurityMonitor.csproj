@@ -550,8 +550,11 @@
     <Content Include="img\building.png" />
     <Content Include="img\client.png" />
     <Content Include="img\D.png" />
+    <Content Include="img\DeleteButton.jpg" />
     <Content Include="img\Delivery.png" />
     <Content Include="img\edit.png" />
+    <Content Include="img\errors.jpg" />
+    <Content Include="img\errors1.jpg" />
     <Content Include="img\home.png" />
     <Content Include="img\M.png" />
     <Content Include="img\R.png" />

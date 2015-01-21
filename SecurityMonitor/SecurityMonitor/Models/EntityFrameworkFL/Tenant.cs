@@ -10,7 +10,9 @@
 namespace SecurityMonitor.Models.EntityFrameworkFL
 {
     using System;
-    using System.Collections.Generic;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
     
     public partial class Tenant
     {
@@ -20,7 +22,9 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         }
     
         public int ID { get; set; }
+        [DisplayName ("First Name")]
         public string FirstName { get; set; }
+          [DisplayName("Last Name")]
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Username { get; set; }

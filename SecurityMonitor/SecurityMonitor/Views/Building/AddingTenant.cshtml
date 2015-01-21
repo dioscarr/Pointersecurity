@@ -15,9 +15,15 @@
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                
+
+
                 <!--Title-->
                 <div class=" text-left col-md-12" style="padding-left:100px;">
                     <h1>Moving in!</h1>
+                </div>
+                <div class=" text-right col-md-12" style="padding-left:100px;">
+                    @Html.ActionLink("Not Yet!", "ApartmentProfile", new { ApartmentID = @Model.aptID, BuildingID = @Model.BuildingID })
                 </div>
                 <!--FirstName input box-->
                 <div class="ClientEditrows">
