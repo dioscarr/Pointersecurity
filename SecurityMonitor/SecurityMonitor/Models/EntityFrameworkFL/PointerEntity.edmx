@@ -258,6 +258,13 @@
           <Property Name="Type" Type="varchar(max)" Nullable="false" />
           <Property Name="ParentID" Type="int" />
         </EntityType>
+        <EntityType Name="ListOfModule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="MasterProfileFields">
           <Key>
             <PropertyRef Name="ID" />
@@ -265,6 +272,15 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Controller" Type="nvarchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ListOfModuleID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ReqType">
           <Key>
@@ -559,6 +575,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Module_Buildings1">
+          <End Role="ListOfModule" Type="Self.ListOfModule" Multiplicity="1" />
+          <End Role="Module" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListOfModule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="ListOfModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Request_Tenant">
           <End Role="Tenant" Type="Self.Tenant" Multiplicity="0..1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
@@ -654,7 +682,9 @@
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttTask" EntityType="Self.GanttTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListOfModule" EntityType="Self.ListOfModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterProfileFields" EntityType="Self.MasterProfileFields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -730,6 +760,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Module_Buildings1" Association="Self.FK_Module_Buildings1">
+            <End Role="ListOfModule" EntitySet="ListOfModule" />
+            <End Role="Module" EntitySet="Module" />
           </AssociationSet>
           <AssociationSet Name="FK_Request_Tenant" Association="Self.FK_Request_Tenant">
             <End Role="Tenant" EntitySet="Tenant" />
@@ -874,6 +908,16 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="States" EntityType="PointersecurityModel.States" />
+          <EntitySet Name="Module" EntityType="PointersecurityModel.Module" />
+          <AssociationSet Name="FK_Module_Buildings1" Association="PointersecurityModel.FK_Module_Buildings1">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+          <EntitySet Name="ListOfModule" EntityType="PointersecurityModel.ListOfModule" />
+          <AssociationSet Name="FK_Module_Buildings11" Association="PointersecurityModel.FK_Module_Buildings11">
+            <End Role="ListOfModule" EntitySet="ListOfModule" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -1108,6 +1152,7 @@
           <NavigationProperty Name="Apartment" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Buildings" ToRole="Apartment" />
           <NavigationProperty Name="Clients" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Buildings" ToRole="Clients" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointersecurityModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
+          <NavigationProperty Name="Module" Relationship="PointersecurityModel.FK_Module_Buildings1" FromRole="Buildings" ToRole="Module" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -1483,6 +1528,49 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Module_Buildings1" FromRole="Module" ToRole="Buildings" />
+          <Property Name="ListOfModuleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ListOfModule" Relationship="PointersecurityModel.FK_Module_Buildings11" FromRole="Module" ToRole="ListOfModule" />
+        </EntityType>
+        <Association Name="FK_Module_Buildings1">
+          <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointersecurityModel.Module" Role="Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ListOfModule">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Module" Relationship="PointersecurityModel.FK_Module_Buildings11" FromRole="ListOfModule" ToRole="Module" />
+        </EntityType>
+        <Association Name="FK_Module_Buildings11">
+          <End Type="PointersecurityModel.ListOfModule" Role="ListOfModule" Multiplicity="1" />
+          <End Type="PointersecurityModel.Module" Role="Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListOfModule">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="ListOfModuleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1852,6 +1940,24 @@
             <EntityTypeMapping TypeName="PointersecurityModel.States">
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Module">
+            <EntityTypeMapping TypeName="PointersecurityModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="ListOfModuleID" ColumnName="ListOfModuleID" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListOfModule">
+            <EntityTypeMapping TypeName="PointersecurityModel.ListOfModule">
+              <MappingFragment StoreEntitySet="ListOfModule">
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

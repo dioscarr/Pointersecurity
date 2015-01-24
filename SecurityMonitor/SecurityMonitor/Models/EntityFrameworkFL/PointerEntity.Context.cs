@@ -54,5 +54,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
         public virtual DbSet<States> States { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
+        public virtual DbSet<ListOfModule> ListOfModule { get; set; }
     }
 }

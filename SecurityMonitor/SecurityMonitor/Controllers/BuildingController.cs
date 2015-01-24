@@ -611,6 +611,10 @@ namespace SecurityMonitor.Controllers
 
             ViewBag.BuildingID = BuildingID;
 
+            //Module
+            ViewBag.Module = db.Module.Where(m => m.BuildingID == BuildingID).ToList();
+            ViewBag.ModuleCount = db.Module.Where(model => model.BuildingID == BuildingID).Count();
+
                         var buildinginfo = await db.Buildings
                   .Where(c => c.ID == BuildingID)
                   .Select(c => new BuildingInfoVM

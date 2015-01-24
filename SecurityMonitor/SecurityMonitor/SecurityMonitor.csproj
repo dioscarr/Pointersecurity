@@ -213,6 +213,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="FromJsonAttribute.cs" />
     <Compile Include="Hubs\NotificationsHub.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -286,7 +287,13 @@
     <Compile Include="Models\EntityFrameworkFL\GanttTask.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFrameworkFL\ListOfModule.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFrameworkFL\MasterProfileFields.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Module.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
@@ -561,6 +568,7 @@
     <Content Include="img\reports.png" />
     <Content Include="img\S.png" />
     <Content Include="img\Search.png" />
+    <Content Include="img\solution.jpg" />
     <Content Include="img\trash.png" />
     <Content Include="img\whiteinterior.jpg" />
     <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
@@ -843,6 +851,8 @@
     <Content Include="Views\Building\TenantDelete.cshtml" />
     <Content Include="Views\Building\ContactBook.cshtml" />
     <Content Include="Views\Building\BuildingApartmentDeleteAll.cshtml" />
+    <Content Include="Views\Module\_ModuleView.cshtml" />
+    <Content Include="Views\Module\ModuleAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

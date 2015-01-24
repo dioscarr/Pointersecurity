@@ -627,3 +627,15 @@ padding-top:20px;
 .RequestHIndexColor {
 color:#019DBC;
 }
+
+.servicesrow {
+    background:#282D33;
+}
+.servicescells {
+    height:60px;
+    padding-top:20px;
+    border:1px  groove lightgrey;
+    color:white;
+    font-weight:500;
+    background-color:#2d687a;
+}

@@ -11,8 +11,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Buildings
     {
@@ -20,37 +18,23 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         {
             this.Apartment = new HashSet<Apartment>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
+            this.Module = new HashSet<Module>();
         }
     
         public int ID { get; set; }
-        [Required]
-        [DisplayName("Name")]
         public string BuildingName { get; set; }
-        [Required]
-         [DisplayName("Address")]
         public string Address { get; set; }
-        [Required]
-         [DisplayName("City")]
         public string City { get; set; }
-        [Required]
-         [DisplayName("State")]
         public string State { get; set; }
-        [Required]
-         [DisplayName("Zipcode")]
         public string Zipcode { get; set; }
-        [Required]
-         [DisplayName("Apts")]
         public Nullable<int> NumberOfApartment { get; set; }
         public Nullable<int> ClientID { get; set; }
-        [Required]
-         [DisplayName("Phone")]
         public string BuildingPhone { get; set; }
-        [Required]
-         [DisplayName("Manager")]
         public string Manager { get; set; }
     
         public virtual ICollection<Apartment> Apartment { get; set; }
         public virtual Clients Clients { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
+        public virtual ICollection<Module> Module { get; set; }
     }
 }

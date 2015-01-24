@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<SecurityMonitor.Models.ApartmentVM>
 @using SecurityMonitor.Models;
+@using SecurityMonitor.Models.EntityFrameworkFL;
 
 
 @{
@@ -17,7 +18,20 @@
             <p style="font-size:20px;">@building.City  @building.States</p>
             <p style="font-size:20px;">@building.ZipCode</p>
             <p style="font-size:20px;"> Contact manager: @building.Manager </p>
-            <p style="font-size:20px;"> Tel: @building.BuildingPhone</p></div>
+            <p style="font-size:20px;"> Tel: @building.BuildingPhone</p>
+        
+            <!--Add Module section-->
+            <div class=" hollow3"
+                 style="height:100px;
+                        width:100px;
+                        border:1px solid grey;
+                        position:absolute;
+                        top:0px;
+                        left:0px;"
+                 onclick="location.href = '@Url.Action("ModuleAdd", "Module", new { BuildingID = ViewBag.buildingInfo.ID })'">
+                <div style="padding-top:20px;"><p>Add</p><p> Module</p></div>
+            </div>
+        </div>
         <div id="map" class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 lightblue" style="height:330px;  "></div>
     </div>
 
@@ -67,11 +81,20 @@
                         </button>
 
                         <button type="button" class="btn btn-default pull-lef " 
-                        onclick="location.href = '@Url.Action("BuildingApartmentDeleteAll", "Building", new{BuildingID =  @ViewBag.buildingInfo.ID })'">Remove Apts</button>
+                        onclick="location.href = '@Url.Action("BuildingApartmentDeleteAll", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">Remove Apts</button>
 
                     </div>
                 </div>
                 </div>
+        <!--Module Section starts-->
+       @{if (ViewBag.ModuleCount > 0)
+         {
+         
+            <div class="row servicesrow">
+                @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
+            </div>
+         }
+}
         <!--this section display a link that can be copy-->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myURL">
             <div class="alert alert-success alert-success" role="alert" style="display:none;">
