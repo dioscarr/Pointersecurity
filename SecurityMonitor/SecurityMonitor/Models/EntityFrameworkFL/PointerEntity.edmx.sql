@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/19/2014 19:42:59
+-- Date Created: 01/23/2015 21:25:59
 -- Generated from EDMX file: C:\Users\dioscar\Source\Repos\Pointersecurity\SecurityMonitor\SecurityMonitor\Models\EntityFrameworkFL\PointerEntity.edmx
 -- --------------------------------------------------
 
@@ -67,6 +67,9 @@ IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId]', 'F') IS N
 GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Module_Buildings1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Module] DROP CONSTRAINT [FK_Module_Buildings1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Request_Tenant]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Requests] DROP CONSTRAINT [FK_Request_Tenant];
@@ -157,8 +160,14 @@ GO
 IF OBJECT_ID(N'[dbo].[GanttTask]', 'U') IS NOT NULL
     DROP TABLE [dbo].[GanttTask];
 GO
+IF OBJECT_ID(N'[dbo].[ListOfModule]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ListOfModule];
+GO
 IF OBJECT_ID(N'[dbo].[MasterProfileFields]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MasterProfileFields];
+GO
+IF OBJECT_ID(N'[dbo].[Module]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Module];
 GO
 IF OBJECT_ID(N'[dbo].[ReqType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ReqType];
@@ -511,6 +520,22 @@ CREATE TABLE [dbo].[States] (
 );
 GO
 
+-- Creating table 'Module'
+CREATE TABLE [dbo].[Module] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [BuildingID] int  NOT NULL,
+    [ServiceName] nvarchar(max)  NOT NULL,
+    [ListOfModuleID] int  NOT NULL
+);
+GO
+
+-- Creating table 'ListOfModule'
+CREATE TABLE [dbo].[ListOfModule] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [ModuleName] nvarchar(max)  NOT NULL
+);
+GO
+
 -- Creating table 'aspnet_UsersInRoles'
 CREATE TABLE [dbo].[aspnet_UsersInRoles] (
     [aspnet_Roles_RoleId] uniqueidentifier  NOT NULL,
@@ -700,6 +725,18 @@ GO
 -- Creating primary key on [ID] in table 'States'
 ALTER TABLE [dbo].[States]
 ADD CONSTRAINT [PK_States]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [PK_Module]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'ListOfModule'
+ALTER TABLE [dbo].[ListOfModule]
+ADD CONSTRAINT [PK_ListOfModule]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -1032,6 +1069,36 @@ GO
 CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [BuildingID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [FK_Module_Buildings1]
+    FOREIGN KEY ([BuildingID])
+    REFERENCES [dbo].[Buildings]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Module_Buildings1'
+CREATE INDEX [IX_FK_Module_Buildings1]
+ON [dbo].[Module]
+    ([BuildingID]);
+GO
+
+-- Creating foreign key on [ListOfModuleID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [FK_Module_Buildings11]
+    FOREIGN KEY ([ListOfModuleID])
+    REFERENCES [dbo].[ListOfModule]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Module_Buildings11'
+CREATE INDEX [IX_FK_Module_Buildings11]
+ON [dbo].[Module]
+    ([ListOfModuleID]);
 GO
 
 -- --------------------------------------------------

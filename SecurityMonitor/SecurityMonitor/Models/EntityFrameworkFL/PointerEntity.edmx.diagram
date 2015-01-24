@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1d89c2000dd341b792232a9f35ba826c" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="1d89c2000dd341b792232a9f35ba826c" Name="Diagram1" ZoomLevel="107">
         <EntityTypeShape EntityType="PointersecurityModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.Apartment" Width="1.5" PointX="8.25" PointY="20.25" />
+        <EntityTypeShape EntityType="PointersecurityModel.Apartment" Width="1.5" PointX="8.125" PointY="18.125" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Applications" Width="1.5" PointX="10.75" PointY="7.875" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Membership" Width="1.5" PointX="17.5" PointY="5.875" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Paths" Width="1.5" PointX="13" PointY="15.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="15.25" PointY="19.125" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_Paths" Width="1.5" PointX="13.375" PointY="13" />
+        <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="15.625" PointY="14.5" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="17.5" PointY="12.25" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Profile" Width="1.5" PointX="17.5" PointY="2.375" />
         <EntityTypeShape EntityType="PointersecurityModel.aspnet_Roles" Width="1.5" PointX="13" PointY="6.375" />
@@ -26,11 +26,11 @@
         <EntityTypeShape EntityType="PointersecurityModel.GanttLinkId" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointersecurityModel.GanttTask" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="PointersecurityModel.MasterProfileFields" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.ReqType" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.Requests" Width="1.5" PointX="12.75" PointY="20.125" />
+        <EntityTypeShape EntityType="PointersecurityModel.ReqType" Width="1.5" PointX="3.25" PointY="16.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.Requests" Width="1.5" PointX="13" PointY="17.5" />
         <EntityTypeShape EntityType="PointersecurityModel.Role" Width="1.5" PointX="8.25" PointY="7.625" />
         <EntityTypeShape EntityType="PointersecurityModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointersecurityModel.Tenant" Width="1.5" PointX="10.5" PointY="19.75" />
+        <EntityTypeShape EntityType="PointersecurityModel.Tenant" Width="1.5" PointX="10.625" PointY="17.875" />
         <EntityTypeShape EntityType="PointersecurityModel.User" Width="1.5" PointX="10.75" PointY="11.75" />
         <EntityTypeShape EntityType="PointersecurityModel.UserActivityLog" Width="1.5" PointX="8.25" PointY="11.125" />
         <AssociationConnector Association="PointersecurityModel.FK_Apartment_Buildings" />
@@ -54,7 +54,7 @@
         <AssociationConnector Association="PointersecurityModel.FK_Request_Tenant" />
         <AssociationConnector Association="PointersecurityModel.aspnet_UsersInRoles" />
         <AssociationConnector Association="PointersecurityModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="PointersecurityModel.States" Width="1.5" PointX="4.75" PointY="18.875" />
+        <EntityTypeShape EntityType="PointersecurityModel.States" Width="1.5" PointX="5.125" PointY="16.75" />
         <EntityTypeShape EntityType="PointersecurityModel.Module" Width="1.5" PointX="10" PointY="14.625" />
         <AssociationConnector Association="PointersecurityModel.FK_Module_Buildings1" />
         <EntityTypeShape EntityType="PointersecurityModel.ListOfModule" Width="1.5" PointX="7.875" PointY="16" />
