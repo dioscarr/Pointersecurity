@@ -17,11 +17,17 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public ListOfModule()
         {
             this.Module = new HashSet<Module>();
+            this.PendingModules = new HashSet<PendingModules>();
+            this.Module1 = new HashSet<Module>();
+            this.Module2 = new HashSet<Module>();
         }
     
         public int ID { get; set; }
         public string ModuleName { get; set; }
     
         public virtual ICollection<Module> Module { get; set; }
+        public virtual ICollection<PendingModules> PendingModules { get; set; }
+        public virtual ICollection<Module> Module1 { get; set; }
+        public virtual ICollection<Module> Module2 { get; set; }
     }
 }

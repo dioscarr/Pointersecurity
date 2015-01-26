@@ -213,6 +213,8 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="FromJsonAttribute.cs" />
     <Compile Include="Hubs\NotificationsHub.cs" />
@@ -294,6 +296,14 @@
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\Module.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\PendingModules.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
@@ -589,7 +599,7 @@
     <Content Include="Models\EntityFrameworkFL\PointerEntity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PointerEntity.edmx</DependentUpon>
-      <LastGenOutput>PointerEntity.cs</LastGenOutput>
+      <LastGenOutput>PointerEntity1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
@@ -853,6 +863,10 @@
     <Content Include="Views\Building\BuildingApartmentDeleteAll.cshtml" />
     <Content Include="Views\Module\_ModuleView.cshtml" />
     <Content Include="Views\Module\ModuleAdd.cshtml" />
+    <Content Include="Views\Manager\BuildingProfile.cshtml" />
+    <Content Include="Views\Shared\_ManagerLayout.cshtml" />
+    <Content Include="Views\Management\PendingModules.cshtml" />
+    <Content Include="Views\Manager\ApartmentProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

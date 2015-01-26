@@ -26,14 +26,14 @@ namespace SecurityMonitor.Controllers
         public ActionResult ModuleAdd(int BuildingID)
         {
             
-            Module ObjModule = new Module();
+            PendingModules ObjModule = new PendingModules();
             ObjModule.BuildingID = BuildingID;
             ViewBag.ListOfModules = db.ListOfModule.Select(c => new SelectListItem { Text = c.ModuleName, Value= c.ID.ToString()}).ToList();
             return View(ObjModule);
         }
         
        [HttpPost]
-       public ActionResult ModuleAdd(Module model, int BuildingID)
+       public ActionResult ModuleAdd(PendingModules model, int BuildingID)
        {
            if (!ModelState.IsValid)
            {
@@ -49,7 +49,7 @@ namespace SecurityMonitor.Controllers
                //return RedirectToAction("ModuleAdd",new {BuildingID=BuildingID});
            }
           
-           db.Module.Add(model);
+           db.PendingModules.Add(model);
            db.SaveChanges();
            return RedirectToAction("buildingProfile", "building", new { BuildingID = BuildingID });
        }

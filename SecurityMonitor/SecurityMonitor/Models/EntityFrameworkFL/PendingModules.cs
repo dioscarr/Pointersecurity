@@ -12,15 +12,14 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     using System;
     using System.Collections.Generic;
     
-    public partial class Module
+    public partial class PendingModules
     {
         public int ID { get; set; }
         public int BuildingID { get; set; }
         public string ServiceName { get; set; }
         public int ListOfModuleID { get; set; }
     
+        public virtual Buildings Buildings { get; set; }
         public virtual ListOfModule ListOfModule { get; set; }
-        public virtual ListOfModule ListOfModule1 { get; set; }
-        public virtual ListOfModule ListOfModule2 { get; set; }
     }
 }
