@@ -16,7 +16,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     public partial class PointersecurityEntities1 : DbContext
     {
         public PointersecurityEntities1()
-            : base("name=PointersecurityEntities1")
+            : base("name=PointersecurityEntities2")
         {
         }
     
