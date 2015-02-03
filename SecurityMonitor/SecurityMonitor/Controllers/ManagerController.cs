@@ -14,6 +14,7 @@ using System.Data.Entity;
 
 namespace SecurityMonitor.Controllers
 {
+    [Authorize]
     public class ManagerController : Controller
     {
 
@@ -21,7 +22,15 @@ namespace SecurityMonitor.Controllers
         PointersecurityEntities1 db = new PointersecurityEntities1();
         //Building Profile ==================================================================================
         
+
+
         [HttpGet]
+        
+        public ActionResult Index()
+        {
+         return View();
+        }
+         [HttpGet]
         public async Task<ActionResult> BuildingProfile(int? page, string search, int? BuildingID)
         {
             Session.Timeout = 20;

@@ -17,7 +17,7 @@ namespace SecurityMonitor.Models
         }
     }
 
-    public class PointersecurityEntities2 : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
     //     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     //{
@@ -30,16 +30,16 @@ namespace SecurityMonitor.Models
         //{
         //    return new ApplicationDbContext();
         //}
+        //throwIfV1Schema: false
 
-
-        public PointersecurityEntities2()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext()
+            : base("DefaultConnection")
         {
         }
 
-        public static PointersecurityEntities2 Create()
+        public static ApplicationDbContext Create()
         {
-            return new PointersecurityEntities2();
+            return new ApplicationDbContext();
         }
 
         public System.Data.Entity.DbSet<SecurityMonitor.Models.UserVM> UserVMs { get; set; }

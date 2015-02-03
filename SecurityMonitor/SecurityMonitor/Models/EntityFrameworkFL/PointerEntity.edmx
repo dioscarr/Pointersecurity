@@ -265,6 +265,23 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ModuleName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagerBuilding">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="MasterProfileFields">
           <Key>
             <PropertyRef Name="ID" />
@@ -596,6 +613,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Manager_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Module_Buildings1">
           <End Role="ListOfModule" Type="Self.ListOfModule" Multiplicity="1" />
           <End Role="Module" Type="Self.Module" Multiplicity="*" />
@@ -740,6 +769,8 @@
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttTask" EntityType="Self.GanttTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListOfModule" EntityType="Self.ListOfModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagerBuilding" EntityType="Self.ManagerBuilding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterProfileFields" EntityType="Self.MasterProfileFields" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingModules" EntityType="Self.PendingModules" Schema="dbo" store:Type="Tables" />
@@ -823,6 +854,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Manager_AspNetUsers" Association="Self.FK_Manager_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
           <AssociationSet Name="FK_Module_Buildings1" Association="Self.FK_Module_Buildings1">
             <End Role="ListOfModule" EntitySet="ListOfModule" />
             <End Role="Module" EntitySet="Module" />
@@ -890,6 +925,8 @@
           <EntitySet Name="GanttLinkId" EntityType="PointersecurityModel.GanttLinkId" />
           <EntitySet Name="GanttTask" EntityType="PointersecurityModel.GanttTask" />
           <EntitySet Name="ListOfModule" EntityType="PointersecurityModel.ListOfModule" />
+          <EntitySet Name="Manager" EntityType="PointersecurityModel.Manager" />
+          <EntitySet Name="ManagerBuilding" EntityType="PointersecurityModel.ManagerBuilding" />
           <EntitySet Name="MasterProfileFields" EntityType="PointersecurityModel.MasterProfileFields" />
           <EntitySet Name="Module" EntityType="PointersecurityModel.Module" />
           <EntitySet Name="PendingModules" EntityType="PointersecurityModel.PendingModules" />
@@ -956,6 +993,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_AspNetUsers" Association="PointersecurityModel.FK_Manager_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Manager" EntitySet="Manager" />
           </AssociationSet>
           <AssociationSet Name="FK_Role_AspNetUsers" Association="PointersecurityModel.FK_Role_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1218,6 +1259,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="PointersecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="PointersecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Manager" Relationship="PointersecurityModel.FK_Manager_AspNetUsers" FromRole="AspNetUsers" ToRole="Manager" />
           <NavigationProperty Name="Role" Relationship="PointersecurityModel.FK_Role_AspNetUsers" FromRole="AspNetUsers" ToRole="Role" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointersecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUsers" ToRole="UserActivityLog" />
           <NavigationProperty Name="AspNetRoles" Relationship="PointersecurityModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
@@ -1289,6 +1331,24 @@
           <NavigationProperty Name="PendingModules" Relationship="PointersecurityModel.FK_Module_Listofmodule" FromRole="ListOfModule" ToRole="PendingModules" />
           <NavigationProperty Name="Module1" Relationship="PointersecurityModel.FK_PendingModuleRequests_Buildings1" FromRole="ListOfModule" ToRole="Module" />
           <NavigationProperty Name="Module2" Relationship="PointersecurityModel.FK_PendingModuleRequests1_Buildings1" FromRole="ListOfModule" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.FK_Manager_AspNetUsers" FromRole="Manager" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="ManagerBuilding">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MasterProfileFields">
           <Key>
@@ -1578,6 +1638,18 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_AspNetUsers">
+          <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="PointersecurityModel.Manager" Role="Manager" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1972,6 +2044,25 @@
             <EntityTypeMapping TypeName="PointersecurityModel.ListOfModule">
               <MappingFragment StoreEntitySet="ListOfModule">
                 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manager">
+            <EntityTypeMapping TypeName="PointersecurityModel.Manager">
+              <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagerBuilding">
+            <EntityTypeMapping TypeName="PointersecurityModel.ManagerBuilding">
+              <MappingFragment StoreEntitySet="ManagerBuilding">
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -5,66 +5,220 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="row" style="padding-top:50px; padding-bottom:300px;  background-image:url(/img/errors1.jpg);  background-size:cover; background-position-y:center; background-position-x:left;">
+    <div class="col-md-offset-3">
+
+        @using (Html.BeginForm(new { ApartmentID = Model.Apartment.ID, BuildingID = Model.Apartment.BuildingID }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <!--Title-->
+                <div class=" text-left col-md-12" style="padding-left:50px; padding-bottom:50px;">
+                    <h1>Check for errors!</h1>
+                    
+                </div>
+               
+                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.Created)
 
 
-@using (Html.BeginForm(new { ApartmentID = Model.Apartment.ID, BuildingID = Model.Apartment.BuildingID}))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-        @Html.HiddenFor(model => model.Created)
-       
-       
+                <!--FirstName input box-->
+                <div class="form-group ">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6 ">
+                        @Html.EditorFor(model => model.FirstName, new
+           {
+               htmlAttributes = new
+               {
+                   id = "idFirstNameBox",
+                   @class = "form-control",
+                   @placeholder = "First Name",
+                   @data_bind = "value:FName, valueUpdate:'afterkeydown'"
+               }
+           })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        <div id="idFirstName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                    </div>
+                </div>
+                <!--LastName InputBox-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LastName, new
+           {
+               htmlAttributes = new
+               {
+                   id = "idLastNameBox",
+                   @class = "form-control",
+                   @placeholder = "Last Name",
+                   @data_bind = "value:LName, valueUpdate:'afterkeydown'"
+               }
+           })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        <div id="idLastName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                    </div>
+                </div>
+                <!--Phone Number-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Phone, new
+           {
+               htmlAttributes = new
+               {
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                   id = "idPhoneBox",
+                   @class = "form-control",
+                   @placeholder = "Phone",
+                   @data_bind = "value:Phone, valueUpdate:'afterkeydown'",
+                   @maxlength = "10"
+               }
+           })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
+                    </div>
+                </div>
+                <!--UserName Box-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Username, new
+           {
+               htmlAttributes = new
+               {
+                   id = "idUsernameBox",
+                   @class = "form-control",
+                   @placeholder = "Username",
+                   @data_bind = "value:Username, valueUpdate:'afterkeydown'",
+                   @maxlength = "20"
+               }
+           })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        <div id="idUsername" class="" style="position:relative; left:290px; top:-25px;"></div>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" id="submitlgmd" value="Save" class="btn btn-default  " style="width:100%; " />
+                        <div class="col-md-offset-6" style="padding-top:20px;">
+                            @Html.ActionLink("Looks good! take me back", "ApartmentProfile", new { ApartmentID = @Model.Apartment.ID, BuildingID = @Model.Apartment.BuildingID })
+                        </div>       
+                    </div>
+                </div>
+
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            function ViewModel() {
+                FName = ko.observable("");
+                LName = ko.observable("");
+                Phone = ko.observable("");
+                Username = ko.observable("");
+
+                //Checks if Fname has chr
+                this.ComputeFName = ko.computed(function () {
+                    if (FName().length > 0) {
+                        $('#idFirstName').css("color", "green");
+                        $('#idFirstName').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idFirstName').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + FName().length;
+                    } else {
+                        $('#idFirstName').removeClass('glyphicon glyphicon-ok');
+                        $('#idFirstName').css("color", "red");
+                        $('#idFirstName').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+
+                //Checks if Lname has chr
+                this.ComputeLName = ko.computed(function () {
+                    if (LName().length > 0) {
+                        $('#idLastName').css("color", "green");
+                        $('#idLastName').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idLastName').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + LName().length;
+                    } else {
+                        $('#idLastName').removeClass('glyphicon glyphicon-ok');
+                        $('#idLastName').css("color", "red");
+                        $('#idLastName').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+
+                //Checks if  has Phone digits
+                this.ComputePhone = ko.computed(function () {
+                    if (Phone().length > 0) {
+                        $('#idPhone').css("color", "green");
+                        $('#idPhone').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idPhone').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + Phone().length;
+                    }
+                    else {
+                        $('#idPhone').removeClass('glyphicon glyphicon-ok');
+                        $('#idPhone').css("color", "red");
+                        $('#idPhone').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+
+                //Checks if Username has chr
+                this.Computeusername = ko.computed(function () {
+                    if (Username().length > 0) {
+                        $('#idUsername').css("color", "green");
+                        $('#idUsername').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idUsername').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + Username().length;
+                    } else {
+                        $('#idUsername').removeClass('glyphicon glyphicon-ok');
+                        $('#idUsername').css("color", "red");
+                        $('#idUsername').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+
+
+                this.btnStat = ko.computed(function () {
+                    //debugger;
+                    if (
+                        FName().length > 0 &&
+                        LName().length > 0 &&
+                        Phone().length > 0 &&
+                        Username().length > 0
+                        ) {
+                        $('#submitlgmd').prop("disabled", false);
+                        //$('#submitlgmd_B').prop("disabled", false);
+                    }
+                    else {
+                        $('#submitlgmd').prop("disabled", true);
+                        //$('#submitlgmd_B').prop("disabled", true);
+                    }
+                }, this);
+
+                this.setFname = ko.computed(function () { return FName($('#idFirstNameBox').val()); });
+                this.setLname = ko.computed(function () { return LName($('#idLastNameBox').val()); });
+                this.setPhone = ko.computed(function () { return Phone($('#idPhoneBox').val()); });
+                this.setUsername = ko.computed(function () { return Username($('#idUsernameBox').val()); });
+            };
+
+            ko.applyBindings(new ViewModel());
+
+
+
+
+        });
+    </script>
+
 }

@@ -38,6 +38,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual Manager Manager { get; set; }
         public virtual ICollection<Role> Role { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }

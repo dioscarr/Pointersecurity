@@ -643,3 +643,43 @@ color:#019DBC;
 .lightgreenManager {
 background:#baeac5;
 }
+
+.scrollable {
+ overflow-x: hidden;
+ scrollbar-arrow-color:none;
+ scrollbar-base-color:rgba(50, 50, 50, 0.75);
+ scrollbar-track-color:rgba(50, 50, 50, 0.75);
+ scrollbar-face-color:rgba(50, 50, 50, 0.75);
+
+}
+
+.settingstyle {
+    padding-top:13px;
+    background:rgb(247,249,248);
+    color:black;
+    border-bottom: 1px solid white;
+    height:100px;
+}
+#ApplayID {
+
+display:none;
+}
+
+.contentconfirm {
+    color:black;
+    padding-top:5px;
+    font-size:14px;
+}
+
+#idconfirmcontent
+{
+padding-bottom:20px;
+}
+.circlesteps {
+
+background:#282D33;
+border-radius:100%;
+padding: 15px 20px;
+font-size:18px;
+color:white;
+}

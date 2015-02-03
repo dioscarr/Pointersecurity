@@ -18,17 +18,22 @@ namespace SecurityMonitor.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-
+        
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
-            UserManager = userManager;
-        }
 
-        public ApplicationUserManager UserManager {
+            UserManager = userManager;
+           
+            RoleManager = roleManager;
+
+          
+        }
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -38,6 +43,11 @@ namespace SecurityMonitor.Controllers
                 _userManager = value;
             }
         }
+
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager { get; private set;}
+
+       
 
         //
         // GET: /Account/Login
@@ -60,7 +70,19 @@ namespace SecurityMonitor.Controllers
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
+
+
                     await SignInAsync(user, model.RememberMe);
+
+                  
+                    ApplicationDbContext context = new ApplicationDbContext();
+                   
+                     var UserManager1 = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                     var UserID = UserManager.FindByEmail(model.Email).Id;
+                     if (UserManager1.IsInRole(UserID, "Admin"))
+                     {
+                         return RedirectToAction("Index", "Home");
+                     }
                     return RedirectToLocal(returnUrl);
                 }
                 else

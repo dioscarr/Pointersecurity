@@ -16,7 +16,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     public partial class PointersecurityEntities1 : DbContext
     {
         public PointersecurityEntities1()
-            : base("name=PointersecurityEntities2")
+            : base("name=PointersecurityEntities1")
         {
         }
     
@@ -46,6 +46,8 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public virtual DbSet<GanttLinkId> GanttLinkId { get; set; }
         public virtual DbSet<GanttTask> GanttTask { get; set; }
         public virtual DbSet<ListOfModule> ListOfModule { get; set; }
+        public virtual DbSet<Manager> Manager { get; set; }
+        public virtual DbSet<ManagerBuilding> ManagerBuilding { get; set; }
         public virtual DbSet<MasterProfileFields> MasterProfileFields { get; set; }
         public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<PendingModules> PendingModules { get; set; }

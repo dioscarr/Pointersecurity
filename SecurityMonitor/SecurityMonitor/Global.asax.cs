@@ -28,7 +28,7 @@ namespace SecurityMonitor
             RouteConfig.RegisterRoutes(RouteTable.Routes);
        
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<PointersecurityEntities2>(null);
+            Database.SetInitializer<ApplicationDbContext>(null);
             ModelBinders.Binders.Add(typeof(EventItem[]), new CsvModelBinder<EventItem>());
            
         }
