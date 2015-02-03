@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Show</h2>
+
+@using (Html.BeginForm("ProcessCsv", "Building", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h2>Import Using CSV</h2>
+    <div class="control-group">
+        <div class="controls">
+            <input id="model" type="file" accept="csv" name="model" data-val="true" data-val-required="File is required" />
+        </div>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Import" />
+}

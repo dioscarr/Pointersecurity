@@ -19,8 +19,21 @@ namespace SecurityMonitor.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+    //     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    //{
+        //public ApplicationDbContext()
+        //    : base("DefaultConnection", throwIfV1Schema: false)
+        //{
+        //}
+
+        //public static ApplicationDbContext Create()
+        //{
+        //    return new ApplicationDbContext();
+        //}
+        //throwIfV1Schema: false
+
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection")
         {
         }
 
@@ -28,5 +41,9 @@ namespace SecurityMonitor.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SecurityMonitor.Models.UserVM> UserVMs { get; set; }
+
+        public System.Data.Entity.DbSet<SecurityMonitor.Models.ClientsVM> ClientsVMs { get; set; }
     }
 }

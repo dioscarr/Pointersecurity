@@ -1,0 +1,333 @@
+﻿@model SecurityMonitor.Models.BuildingInfoVM
+           @using SecurityMonitor.Models;
+
+@{
+    ViewBag.Title = "AddBuilding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+  
+      
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="row lightblue" >
+        <div class="col-lg-6 col-md-6 col-lg-offset-4 col-md-offset-4">
+           
+            <div class="ClientEditrows">
+                @Html.EditorFor(model => model.BuildingName, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Name", @data_bind="value:Name, valueUpdate:'afterkeydown'" } })
+                @Html.ValidationMessageFor(model => model.BuildingName, "", new { @class = "text-danger" })
+                <div id="idName" class="" style="position:relative; left:290px; top:-25px;"></div>
+
+            </div>
+         
+            <div class="ClientEditrows">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Address", @data_bind = "value:Address, valueUpdate:'afterkeydown'" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                <div id="idAddress" class="" style="position:relative; left:290px; top:-25px;"></div>
+
+
+            </div>
+
+            <div class="ClientEditrows">
+
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "City", @data_bind = "value:City, valueUpdate:'afterkeydown'" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                <div id="idCity" class="" style="position:relative; left:290px; top:-25px;"></div>
+            </div>
+
+            <div class="ClientEditrows">
+                @{IEnumerable<State> Statelist = Model.StatesList;}
+                @Html.DropDownListFor(model => model.States, new SelectList(Statelist, "myState", "value"),"Choose State", new{@class = "form-control",
+               @placeholder = "State", @maxlength = "2", @data_bind = "value:State, valueUpdate:'afterkeydown'"  })
+                @Html.ValidationMessageFor(model => model.States, "", new { @class = "text-danger" })
+                <div id="idState" class="" style="position:relative; left:290px; top:-25px;"></div>
+
+
+            </div>
+
+            <div class="ClientEditrows">
+
+                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Zip-Code", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'", @maxlength = "5" } })
+                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                <div id="idZipcode" class="" style="position:relative; left:290px; top:-25px;"></div>
+
+            </div>
+
+            <div class="ClientEditrows">
+
+                @Html.EditorFor(model => model.NumberOfApart, new { htmlAttributes = new { 
+               @class = "form-control", @maxlength = "3", @placeholder = "# of Apt.",
+               @data_bind = "numeric:AptNum, value:AptNum, valueUpdate:'afterkeydown'"
+           },
+           })
+                
+                <div id="idAptNum" class="" style="position:relative; left:290px; top:-25px;"></div>
+             </div>
+
+            <div class="ClientEditrows">
+
+
+                @Html.EditorFor(model => model.BuildingPhone, new { htmlAttributes = new { @class = "form-control",
+                                                                                           @placeholder = "Phone",
+                                                                                           @maxlength = "10",
+                                                                                           @data_bind = "value:Phone, valueUpdate:'afterkeydown'"
+           }
+           })
+                @Html.ValidationMessageFor(model => model.BuildingPhone, "", new { @class = "text-danger" })
+                <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
+
+
+            </div>
+
+            <div class="ClientEditrows">
+
+                @Html.EditorFor(model => model.Manager, new { htmlAttributes = new { @class = "form-control",
+               @placeholder = "Manager", @data_bind = "value:Manager, valueUpdate:'afterkeydown'" } })
+                @Html.ValidationMessageFor(model => model.Manager, "", new { @class = "text-danger"})
+                <div id="idmanager" class="" style="position:relative; left:290px; top:-25px;" ></div>
+                </div>
+            <input id="submitlgmd" type="submit" value="Create" class="btn btn-default form-control" />
+            </div>
+    </div>
+    @Html.HiddenFor(model => model.ClientID)
+
+}
+
+<div>
+    @Html.ActionLink("Back to building list", "ClientIndex")
+</div>
+
+
+@section scripts{
+    
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+    
+   <script type="text/javascript">
+
+       $(document).ready(function () {
+           function ViewModel() {
+               Name = ko.observable("");
+               Manager = ko.observable("");
+               Address = ko.observable("");
+               City = ko.observable("");
+               AptNum = ko.observable();
+               State = ko.observable("");
+                //State = ko.observable("");
+               Phone = ko.observable("")           
+               Fax = ko.observable("");
+               Zipcode = ko.observable("");
+               Email = ko.observable("");
+               this.chrAptNum = ko.computed(function () {if (AptNum() >= 0 )
+                   {
+                   $('#idAptNum').css("color", "green");
+                   $('#idAptNum').removeClass('glyphicon glyphicon-asterisk');
+                   $('#idAptNum').addClass('glyphicon glyphicon-ok');
+                  
+               } else {
+                   $('#idAptNum').removeClass('glyphicon glyphicon-ok');
+                   $('#idAptNum').css("color", "red");
+                   $('#idAptNum').addClass('glyphicon glyphicon-asterisk');
+               }});
+               this.chrName = ko.computed(function ()
+               { 
+                if (Name().length > 0  ) {
+                    $('#idName').css("color", "green");
+                    $('#idName').removeClass('glyphicon glyphicon-asterisk');
+                    $('#idName').addClass('glyphicon glyphicon-ok');
+                    return 'chars: ' + Name().length;
+                } else {
+                    $('#idName').removeClass('glyphicon glyphicon-ok');
+                    $('#idName').css("color", "red");
+                    $('#idName').addClass('glyphicon glyphicon-asterisk');
+                } 
+               });
+
+               this.chrManager = ko.computed(function ()
+               {
+                if (Manager().length > 0)
+                    {$('#idmanager').css("color", "green");
+                    $('#idmanager').removeClass('glyphicon glyphicon-asterisk');
+                    $('#idmanager').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + Manager().length;
+                } else {
+                    $('#idmanager').removeClass('glyphicon glyphicon-ok');
+                    $('#idmanager').css("color", "red");
+                    $('#idmanager').addClass('glyphicon glyphicon-asterisk');
+                    }
+               });
+
+
+               this.chrAddress = ko.computed(function ()
+               {
+                   if (Address().length > 0)
+                   {
+                       $('#idAddress').css("color", "green");
+                       $('#idAddress').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idAddress').addClass('glyphicon glyphicon-ok');
+                       return 'chars: ' + Address().length;
+                   } else
+                   {
+                       $('#idAddress').removeClass('glyphicon glyphicon-ok');
+                       $('#idAddress').css("color", "red");
+                       $('#idAddress').addClass('glyphicon glyphicon-asterisk');
+                   }
+               });
+              //City
+               this.chrCity = ko.computed(function ()
+               {
+                   if (City().length > 0)
+                   {
+                       $('#idCity').css("color", "green");
+                       $('#idCity').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idCity').addClass('glyphicon glyphicon-ok');
+                           return 'chars: ' + Address().length;
+                       }
+                       else {
+                       $('#idCity').removeClass('glyphicon glyphicon-ok');
+                       $('#idCity').css("color", "red");
+                       $('#idCity').addClass('glyphicon glyphicon-asterisk');
+                       }
+               });
+
+               this.chrState = ko.computed(function ()
+               {
+                   if (State().length > 0)
+                   {
+                       $('#idState').css("color", "green");
+                       $('#idState').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idState').addClass('glyphicon glyphicon-ok');
+                       return 'chars: ' + State().length;
+                   }
+                   else {
+                       $('#idState').removeClass('glyphicon glyphicon-ok');
+                       $('#idState').css("color", "red");
+                       $('#idState').addClass('glyphicon glyphicon-asterisk');
+                   }
+               });
+              
+               
+
+               this.chrPhone = ko.computed(function () {
+                   if (Phone().length > 0) {
+                       $('#idPhone').css("color", "green");
+                       $('#idPhone').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idPhone').addClass('glyphicon glyphicon-ok');
+                       return 'chars: ' + Phone().length;
+                   }
+                   else {
+                       $('#idPhone').removeClass('glyphicon glyphicon-ok');
+                       $('#idPhone').css("color", "red");
+                       $('#idPhone').addClass('glyphicon glyphicon-asterisk');
+                   }
+               });
+
+               this.chrFax = ko.computed(function () {
+                   if (Fax().length > 0) {
+                       $('#idFax').css("color", "green");
+                       $('#idFax').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idFax').addClass('glyphicon glyphicon-ok');
+                       return 'chars: ' + Fax().length;
+                   }
+                   else {
+                       $('#idFax').removeClass('glyphicon glyphicon-ok');
+                       $('#idFax').css("color", "red");
+                       $('#idFax').addClass('glyphicon glyphicon-asterisk');
+                   }
+               });
+
+               this.chrZipcode = ko.computed(function () {
+                   if (Zipcode().length > 0) {
+                       $('#idZipcode').css("color", "green");
+                       $('#idZipcode').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idZipcode').addClass('glyphicon glyphicon-ok');
+                       return 'chars: ' + Zipcode().length;
+                   }
+                   else {
+                       $('#idZipcode').removeClass('glyphicon glyphicon-ok');
+                       $('#idZipcode').css("color", "red");
+                       $('#idZipcode').addClass('glyphicon glyphicon-asterisk');
+                   }
+               });
+               this.chrEmail = ko.computed(function () {
+                   if (Email().length > 0) {
+                       $('#idEmail').css("color", "green");
+                       $('#idEmail').removeClass('glyphicon glyphicon-asterisk');
+                       $('#idEmail').addClass('glyphicon glyphicon-ok');
+                       return 'chars: ' + Email().length;
+                   }
+                   else {
+                       $('#idEmail').removeClass('glyphicon glyphicon-ok');
+                       $('#idEmail').css("color", "red");
+                       $('#idEmail').addClass('glyphicon glyphicon-asterisk');
+                   }
+               });
+               //  
+               this.btnStat = ko.computed(function () {
+                   //debugger;
+                   if (State().length > 0 &&
+                       Name().length >0 &&
+                       Manager().length > 0 &&
+                       Address().length > 0 &&
+                       City().length > 0 &&
+                       Phone().length > 0 &&
+                       Zipcode().length > 0)
+                   {
+                       $('#submitlgmd').prop("disabled", false);
+                       $('#submitlgmd_B').prop("disabled", false);
+                   }
+                   else
+                   {
+                       $('#submitlgmd').prop("disabled", true);
+                       $('#submitlgmd_B').prop("disabled", true);
+                   }
+               }, this);
+           };
+
+           ko.applyBindings(new ViewModel());
+
+          
+          
+
+       });
+
+       //only numeric handler
+       ko.bindingHandlers.numeric = {
+           init: function (element, valueAccessor) {
+               $(element).on("keydown", function (event) {
+                   // Allow: backspace, delete, tab, escape, and enter
+                   if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+                       // Allow: Ctrl+A
+                       (event.keyCode == 65 && event.ctrlKey === true) ||
+                       // Allow: . ,
+                       (event.keyCode == 188 || event.keyCode == 190 || event.keyCode == 110) ||
+                       // Allow: home, end, left, right
+                       (event.keyCode >= 35 && event.keyCode <= 39)) {
+                       // let it happen, don't do anything
+                       return;
+                   }
+                   else {
+                       // Ensure that it is a number and stop the keypress
+                       if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                           event.preventDefault();
+                       }
+                   }
+               });
+           }
+       };
+
+
+
+    </script>
+    
+    }

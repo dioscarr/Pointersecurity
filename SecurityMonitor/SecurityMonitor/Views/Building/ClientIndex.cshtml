@@ -1,0 +1,286 @@
+﻿@model SecurityMonitor.Models.ClientsVM
+@using SecurityMonitor.Models;
+@{
+    ViewBag.Title = "ClientIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>ClientIndex</h2>
+
+<p>
+    @Html.ActionLink("Add a new client", "AddClient")
+</p>*@
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingCount)
+        </th>
+        <th></th>
+    </tr>*@
+
+@*@foreach (var item in Model) {
+    <tr>
+        <td>
+            <button type="button" 
+                    class="btn btn-link" 
+                    onclick="location.href = '@Url.Action("BuildingIndex", "Building", new {ClientID = item.ID })'">
+                    @Html.DisplayFor(modelItem => item.ClientName)
+            </button>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingCount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}*@
+
+@*</table>*@
+
+
+
+
+
+
+<!--main layout for this page-->
+<div class="row">
+   <!--(ClientsVM)ViewBag.ClientModel-->
+   @{Html.RenderPartial("_AddClient", Model);}
+    
+    <div id="clientList" class="col-lg-10 col-md-10 col-sm-12 col-xs-12 scrollable">
+        @foreach (var item in Model.ListOfClients)
+        {
+            
+    <!--always visible main content -->
+
+    <figure class=" col-lg-8 col-md-8 col-sm-8 col-xs-8  hollow lightblue " style="padding-bottom:19px;"
+            onclick="location.href = '@Url.Action("BuildingIndex", "Building", new {ClientID = item.ID })'">
+        <!--title or information-->
+        <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
+        </div>
+        <figcaption class="col-md-12 col-sm-12   " >
+            <div >Name: @item.ClientName</div>
+            @*<div class="col-md-6 col-sm-6 col-xs-6">Phone: @item.Phone</div>
+            <div class="col-md-6 col-sm-6 col-xs-6">Email: @item.Email</div>
+            <div class="col-md-6 col-sm-6 col-xs-6">Address: @item.Address</div>*@
+        </figcaption>
+    </figure>
+        <!--edit-->
+            <div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;"
+                 onclick="location.href = '@Url.Action("EditClient", "Building", new {id = item.ID })'">
+                <!--img edit-->
+                <img src="~/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"
+                     style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />
+
+                <img src="~/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"
+                     style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />
+
+                <!--text edit-->
+                <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>
+                <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>
+            </div>
+        <!--trash-->
+            <div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;"
+                 onclick="location.href = '@Url.Action("deleteClient", "Building", new {id = item.ID })'">
+                <!--img trash-->
+                <img src="~/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />
+                <img src="~/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />
+                <!--text Trash-->
+                <h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">
+                    Trash
+                </h4>
+                <h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;">
+                    Trash
+                </h4>
+            </div>
+
+
+
+        }
+
+
+    </div>
+  
+
+    
+</div>
+
+@section scripts{
+    
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+    
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/koLogic.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+       
+        //#################################ko validation
+        function ViewModel() {
+            Name = ko.observable("");
+            Address = ko.observable("");
+            City = ko.observable("");
+            //State = ko.observable("");
+            Phone = ko.observable("");
+            Fax = ko.observable("");
+            Zipcode = ko.observable("");
+            Email = ko.observable("");
+
+            this.chrName = ko.computed(function () { if (Name().length > 0){ return 'chars: ' + Name().length; } });
+            this.chrAddress = ko.computed(function () { if (Address().length >0) { return 'chars:' + Address().length; }});
+            this.chrCity = ko.computed(function () { if (City().length > 0) { return 'chars:' + City().length; }});
+            this.chrPhone = ko.computed(function () { if (Phone().length > 0) { return 'remaining chars:' + (10 - Phone().length); } });
+            this.chrFax = ko.computed(function () { if (Fax().length > 0) { return 'remaining chars:' + (10 - Fax().length); } });
+            this.chrZipcode = ko.computed(function () { if (Zipcode().length >0) { return 'remaining chars:' + (5 - Zipcode().length); }});
+            this.chrEmail = ko.computed(function () { if (Email().length > 0) { return 'chars;' + Email().length; }});
+
+
+
+            this.btnStat = ko.computed( function () {
+                //debugger;
+                if (Name().length > 0 && Address().length > 0 && City().length > 0 && Phone().length > 0 && Fax().length > 0 && Zipcode().length > 0 && Email().length > 0) {
+                    $('#submitlgmd').prop("disabled", false);
+                    $('#submitlgmd_B').prop("disabled", false);
+                   
+                    return Name().length;
+                }
+                else
+                {
+                    $('#submitlgmd').prop("disabled", true);
+                    $('#submitlgmd_B').prop("disabled", true);
+                }
+            },this);
+        };
+
+        ko.applyBindings(new ViewModel());
+
+        //######################################KO validation finish
+        
+                    var skip = 0;
+        var _inCallback = false;
+
+        function loadProducts() {
+            if (skip > -1 && !_inCallback) {
+                _inCallback = true;
+                skip+=10;
+                $('div#loading').html('<p><img src="/img/ajax-loader.gif" height></p>');
+                $.get("/Building/LoadingClients/?skip=" + skip, function (data) {
+                   
+                    var records_count = data.length;
+                    if (data != '') {
+                        // alert(data[0].ClientName);
+                        for (var i = 0; i <records_count; i++)
+                        {
+
+                            var id = data[i].id;
+
+                           
+
+                            var main_content = ' <figure class=" col-lg-8 col-md-8 col-sm-8 col-xs-8  hollow lightblue findme " style="padding-bottom:0px;"' +
+                                                 
+                                                      //url goes here
+                                                       ' <!--title or information-->' +
+                                                       ' <div id="myswipe" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">' +
+                                                       '  <h4 style="position:absolute; top:30px; left:10%; ">' + data[i].ClientName + '</h4>' +
+                                                       '</div>' +
+                                                       '<figcaption class="col-md-8 col-md-offset-5 col-sm-6 col-sm-offset-7    " style="padding-right:20px;">' +
+                                                       ' Client Name: ' + data[i].ClientName +
+                                                       '<br />' +
+                                                       ' More info here...' +
+                                                       '</figcaption>' +
+                                                       '</figure>';
+
+                            var Edit_Content = ' <!--edit-->'+
+                                                '<div class="col-md-2 col-sm-2 col-xs-2 text-center  hollow lightdarkblue " style="padding-bottom:100px;" >'+
+                                                '<!--img edit-->'+
+                                                '<img src="/img/edit.png" class="visible-lg visible-md hidden-sm hidden-xs"'+
+                                                 'style="position:absolute; left:42%; top:10%; height:25%; width:15%;" />'+
+                                                '<img src="/img/edit.png" class="visible-sm visible-xs hidden-lg hidden-md"'+
+                                                'style="position:absolute; left:42%; top:10%; height:25%; width:25%;" />'+
+                                                '<!--text edit-->'+
+                                                '<h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Edit</h4>'+
+                                                '<h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:30%; top:38%;">Edit</h4>'+
+                                                '</div>';
+
+                            var Delete_Content = '<!--trash-->' +
+                                                    '<div class="col-md-2 col-sm-2 col-xs-2 text-center pull-right hollow darkblue " style=" padding-bottom:100px;">' +
+                                                    '<!--img trash-->' +
+                                                    '<img src="/img/trash.png" class="visible-lg visible-md hidden-sm hidden-xs" style=" position:absolute; left:42%; top:10%; height:25%; width:15%;" />' +
+                                                    '<img src="/img/trash.png" class="visible-sm visible-xs hidden-lg hidden-md" style=" position:absolute; left:42%; top:10%; height:25%; width:25%;" />' +
+                                                    '<!--text Trash-->' +
+                                                    '<h4 class="visible-lg visible-md hidden-sm hidden-xs" style="position:absolute; left:40%; top:38%;">Trash' +
+                                                    '</h4>' +
+                                                    '<h4 class="visible-sm visible-xs hidden-lg hidden-md" style="position:absolute; left:25%; top:38%;"> Trash' +
+                                                    '</h4>' +
+                                                    '</div>';
+
+                            var $Delete_Content = $(Delete_Content).click(function () {
+                                window.location.href = "/building/deleteClient/?id=" + id;
+                               
+                            });
+
+                            var $Edit_Content = $(Edit_Content).click(function () {
+                                window.location.href = "/building/EditClient/?id=" + id;
+                            });
+                            var $main_content = $(main_content).click(function () {
+                                window.location.href = "/building/buildingIndex/?ClientID=" + id;
+                            });
+
+
+
+                            $("#clientList").append($main_content);
+
+                            $("#clientList").append($Edit_Content);
+
+                            $("#clientList").append($Delete_Content);
+                                              
+                        }
+                        
+                    }
+                    else {
+                        //alert('this is an else');
+                        skip = -1;
+                    }
+                    
+                    _inCallback = false;
+                    $('div#loading').empty();
+                });
+            }
+        }
+
+        var dcList = true;
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+                loadProducts();
+            }
+        });
+
+
+        $('#loadmore').click(function () {
+            loadProducts();
+        });
+
+
+
+
+
+        $('.ClientName').val('');
+
+        //swipe
+        $('#myswipe').on("swipeleft", function () {
+            alert('it works');
+        }
+        );
+
+
+    });
+    </script>
+    }
+

@@ -1,0 +1,308 @@
+﻿@*@model IEnumerable<SecurityMonitor.Models.ActivityLog>*@
+@model PagedList.IPagedList<SecurityMonitor.Models.ActivityLog>
+
+
+
+
+@using (Html.BeginForm("userprofile", "UserVMs", FormMethod.Get))
+{
+    <div class="container">
+        
+        <div class="row col-md-12" style="background:lightgrey;">
+
+
+            <div class="col-md-3">
+               
+                <h5>Search By Event</h5>
+            </div>
+            <div class="col-md-3">
+
+               <h5>Search By Date</h5>
+               
+            </div>
+            <div class="col-md-6"></div>
+            </div>
+       
+        <div class="row col-md-12" style="background:lightgrey; height:50px;">
+
+
+            <div class=" col-md-3">
+               
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="radio" id="Function">
+                        </span>
+                        <input type="text"  class="form-control" id="input-search">
+                    </div><!-- /input-group -->
+                
+            </div>
+            <div class=" col-md-3">
+                
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input type="radio" id="radio-btn-date">
+                        </span>
+                        <input type="text" class="form-control"  id="datetimepicker" >
+                    </div><!-- /input-group -->
+              
+            </div>
+
+            <div class=" col-md-3 ">
+                <input type="submit" value="Search" class="btn btn-success" />
+
+            </div>
+            <div class=" col-md-3">
+                
+                <div class="row">
+
+
+                    
+                   
+                </div><!-- /.row -->
+            </div>
+
+        </div>
+
+        <div class="row col-md-12">
+            <div>
+                page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                of @Model.PageCount
+
+                @if (Model.HasPreviousPage)
+            {
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "Userprofile", new { page = 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li> @Html.ActionLink("Prev", "Userprofile", new { page = Model.PageNumber - 1, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+
+                else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "Userprofile", new { page = 1})</li>
+
+                        <li> @Html.ActionLink("Prev", "Userprofile", new { page = Model.PageNumber - 1})</li>
+                    </ul>
+                }
+
+            }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">First</a></li>
+                        <li><a href="#">Prev</a></li>
+                    </ul>
+
+            }
+                @{
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+
+                    <ul class="pagination pagination-sm">
+                        @for (var item = 1; item <= @Model.PageCount; item++)
+                        {
+                            <li><a href="userprofile?page=@item&SearchBy=@searchBy&Search=@search">@item</a></li>
+                        }
+                    </ul>
+                }
+                else if (ViewBag.searchBy == null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+                    <ul class="pagination pagination-sm">
+                        @for (var item = 1; item <= @Model.PageCount; item++)
+                        {
+                            <li><a href="userprofile?page=@item">@item</a></li>
+                        }
+                    </ul>
+                }
+                }
+
+
+                @if (Model.HasNextPage)
+            {
+                 if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "Userprofile", new { page = Model.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li>@Html.ActionLink("Last", "Userprofile", new { page = Model.PageCount, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+                 else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "Userprofile", new { page = Model.PageNumber + 1 })</li>
+
+                        <li>@Html.ActionLink("Last", "Userprofile", new { page = Model.PageCount})</li>
+                    </ul>
+                 }
+                }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">Next</a></li>
+                        <li><a href="#">Last</a></li>
+                    </ul>
+            }
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().FunctionPerformed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().DateCreated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Message)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FunctionPerformed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Message)
+                        </td>
+                        <td>
+                            
+                            
+                            <a href="@Url.Action("Details", new { id = item.ID })">
+                                Details<i class="glyphicon glyphicon-cog"> </i>
+                                <span class="sr-only">See More Details</span>
+                            </a>
+                           
+                        </td>
+                    </tr>
+            }
+
+            </table>
+        </div>
+        <div class="row col-md-12">
+            <div>
+                page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                of @Model.PageCount
+
+                @if (Model.HasPreviousPage)
+            {
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "Userprofile", new { page = 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li> @Html.ActionLink("Prev", "Userprofile", new { page = Model.PageNumber - 1, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+
+                else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("First", "Userprofile", new { page = 1 })</li>
+
+                        <li> @Html.ActionLink("Prev", "Userprofile", new { page = Model.PageNumber - 1 })</li>
+                    </ul>
+                }
+
+            }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">First</a></li>
+                        <li><a href="#">Prev</a></li>
+                    </ul>
+
+            }
+                @{
+    if (ViewBag.searchBy != null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+
+        <ul class="pagination pagination-sm">
+            @for (var item = 1; item <= @Model.PageCount; item++)
+            {
+                <li><a href="userprofile?page=@item&SearchBy=@searchBy&Search=@search">@item</a></li>
+            }
+        </ul>
+    }
+    else if (ViewBag.searchBy == null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+        <ul class="pagination pagination-sm">
+            @for (var item = 1; item <= @Model.PageCount; item++)
+            {
+                <li><a href="userprofile?page=@item">@item</a></li>
+            }
+        </ul>
+    }
+                }
+
+
+                @if (Model.HasNextPage)
+            {
+                if (ViewBag.searchBy != null)
+                {
+                    var searchBy = ViewBag.searchBy;
+                    var search = ViewBag.search;
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "Userprofile", new { page = Model.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
+
+                        <li>@Html.ActionLink("Last", "Userprofile", new { page = Model.PageCount, SearchBy = @searchBy, Search = @search })</li>
+                    </ul>
+                }
+                else if (ViewBag.searchBy == null)
+                {
+
+                    <ul class="pagination pagination-sm">
+                        <li> @Html.ActionLink("Next", "Userprofile", new { page = Model.PageNumber + 1 })</li>
+
+                        <li>@Html.ActionLink("Last", "Userprofile", new { page = Model.PageCount })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">Next</a></li>
+                        <li><a href="#">Last</a></li>
+                    </ul>
+            }
+            </div>
+        </div>
+
+
+
+
+        
+    </div>
+}
+

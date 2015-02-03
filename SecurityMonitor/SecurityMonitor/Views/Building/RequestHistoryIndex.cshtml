@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SecurityMonitor.Models.EntityFrameworkFL.Requests>
+
+@{
+    ViewBag.Title = "RequestHistoryIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@foreach (var item in Model)
+{
+    <div class="row hollow4 RequestHIndexRow">
+        <div class="col-md-2 RequestHIndex">
+            <h4 class="underlineclass RequestHIndexColor">Name:</h4> <a href="@Url.Action("ApartmentProfile", "Building", new { ApartmentID = item.Tenant.Apartment.ID, BuildingID = item.Tenant.Apartment.BuildingID })">@Html.DisplayFor(modelItem => item.Tenant.FirstName) @Html.DisplayFor(modelItem => item.Tenant.LastName)</a>             
+            <h4 class="underlineclass RequestHIndexColor">Secret PIN:</h4> @Html.DisplayFor(modelItem => item.PIN)        
+            <h4 class="underlineclass RequestHIndexColor">Settings:</h4>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @Html.ActionLink("Delete", "RequestdeleteHistory", new { RequestID = item.ID })
+        </div>
+
+
+        <div class="col-md-8 text-center RequestHIndex">
+            <h4 class="" style=" padding-bottom:10px; color:#0094ff; border-bottom:1px solid #0094ff;">Description:</h4> @Html.DisplayFor(modelItem => item.Description)
+        </div>
+        <div class="col-md-2 RequestHIndex">
+            <h4 class="underlineclass RequestHIndexColor">Request Type:</h4> @Html.DisplayFor(modelItem => item.RequestType)
+            <h4 class="underlineclass RequestHIndexColor">Start Time:</h4> @Html.DisplayFor(modelItem => item.FromDate)
+            <h4 class="underlineclass RequestHIndexColor">End Time:</h4> @Html.DisplayFor(modelItem => item.ToDate)
+        </div>
+        </div>
+}
+
+

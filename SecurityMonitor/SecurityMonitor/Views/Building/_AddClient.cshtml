@@ -1,0 +1,111 @@
+﻿@model SecurityMonitor.Models.ClientsVM
+@using SecurityMonitor.Models;
+
+<!--
+    ClientName
+    Address
+    City
+    State
+    zipcode
+    Fax
+    Phone
+    email
+    int? buildingcount
+    int? ContactID
+-->
+<!--visible on sm xs-->
+@using (Html.BeginForm("AddClient", "Building", FormMethod.Post))
+{
+    <div class="hidden-md hidden-lg visible-sm visible-xs col-sm-12 col-xs-12    lightblue " style="min-height:300px;">
+
+        <div class="col-sm-6 col-xs-6 "><h5>Client's Name</h5></div>
+        <div class="col-sm-6 col-xs-6 "><h5>Client's Address</h5></div>
+        <div class="col-sm-6 col-xs-6 ">
+
+        @Html.TextBoxFor(model => model.ClientName, null, new { @class = "form-control ClientName ", @data_bind = "value:Name, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrName"></div>
+
+        </div>
+        <div class="col-sm-6 col-xs-6">@Html.TextBoxFor(model => model.Address, null, new { @class = "form-control ClientName ", @data_bind = "value:Address, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrAddress"></div>
+        </div>
+
+        <h5 class="col-sm-6 col-xs-6">City</h5>
+        <h5 class="col-sm-6 col-xs-6">State</h5>
+        <div class="col-sm-6 col-xs-6">  @Html.TextBoxFor(model => model.city, null, new { @class = "form-control ClientName ", @data_bind = "value:City, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrCity"></div>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+            @{IEnumerable<State> States = Model.States;}
+            @Html.DropDownList("State", new SelectList(States, "value", "myState"),"Choose State" ,new { @class = "form-control" })
+        </div>
+        <h5 class="col-sm-6 col-xs-6">Zipcode</h5>
+        <h5 class="col-sm-6 col-xs-6">Phone</h5>
+        <div class="col-sm-6 col-xs-6"> @Html.TextBoxFor(model => model.zipcode, null, new { @class = "form-control ClientName ", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrZipcode"></div>
+        </div>
+        <div class="col-sm-6 col-xs-6"> @Html.TextBoxFor(model => model.Phone, null, new { @class = "form-control ClientName ", @data_bind = "value:Phone, valueUpdate:'afterkeydown'", @maxlength = "10", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrPhone"></div>
+        </div>
+
+        <h5 class="col-sm-6 col-xs-6">Fax</h5>
+        <h5 class="col-sm-6 col-xs-6">Email</h5>
+        <div class="col-sm-6 col-xs-6"> @Html.TextBoxFor(model => model.Fax, null, new { @class = "form-control ClientName ", @data_bind = "value:Fax, valueUpdate:'afterkeydown'", @maxlength = "10", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrFax"></div></div>
+        <div class="col-sm-6 col-xs-6"> @Html.TextBoxFor(model => model.Email, null, new { @class = "form-control ClientName ", @data_bind = "value:Email, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+            <div style="color:red;" data-bind="text:chrEmail"></div></div>
+        
+    </div>
+    <div class="visible-sm visible-xs hidden-lg hidden-md col-sm-12 col-xs-12 lightblue center" style="padding-bottom:20px;
+padding-top:10px; padding-left:30%;">
+        <input id="submitlgmd_B" type="submit" value="Add new Client" class="form-control AddClient" style="width:60%;" />
+    </div>
+}
+
+<!--visible on md lg-->
+<div class="hidden-xs hidden-sm visible-md visible-lg col-md-2 col-lg-2  tile_height lightblue text-center" style="min-height:100%;">
+    @using (Html.BeginForm("AddClient", "Building", FormMethod.Post))
+    {
+        <br />
+        <h5>Client's Name</h5>
+        @Html.TextBox("ClientName", null, new { @class = "form-control ClientName", @data_bind="value:Name, valueUpdate:'afterkeydown'",@placeholder="Required" })
+    <div  style="color:red;"data-bind="text:chrName"></div>
+        <hr />
+        <h5>Client's Address</h5>
+        @Html.TextBox("Address", null, new { @class = "form-control", @data_bind = "value:Address, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+    <div style="color:red;" data-bind="text:chrAddress"></div>
+        <hr />
+        <h5>City</h5>
+        @Html.TextBox("city", null, new { @class = "form-control", @data_bind = "value:City, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+    <div style="color:red;" data-bind="text:chrCity"></div>
+        <hr />
+        <h5>State</h5>
+        IEnumerable<State> States = Model.States;
+        @Html.DropDownList("State", new SelectList(States, "value", "myState"), "Choose State", new { @class = "form-control" })
+        <hr />
+        <h5>Zipcode</h5>
+        @Html.TextBox("zipcode", null, new { @class = "form-control", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+    <div style="color:red;" data-bind="text:chrZipcode"></div>
+        <hr />
+        <h5>Phone</h5>
+        @Html.TextBox("Phone", null, new { @class = "form-control", @data_bind = "value:Phone, valueUpdate:'afterkeydown'", @maxlength = "10", @placeholder = "Required" })
+    <div style="color:red;" data-bind="text:chrPhone"></div>
+        <hr />
+        <h5>Fax</h5>
+        @Html.TextBoxFor(model => model.Fax, null, new { @class = "form-control ClientName ", @data_bind = "value:Fax, valueUpdate:'afterkeydown'", @maxlength = "10", @placeholder = "Required" })
+    <div style="color:red;" data-bind="text:chrFax"></div>
+        <hr />
+        <h5>Email</h5>
+        @Html.TextBoxFor(model => model.Email, null, new { @class = "form-control ClientName ", @data_bind = "value:Email, valueUpdate:'afterkeydown'", @placeholder = "Required" })
+    <div style="color:red;" data-bind="text:chrEmail"></div>
+        <hr />
+        <input class="btn form-control AddClient" type="submit" value="Submit" id="submitlgmd" />
+    }
+</div>
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

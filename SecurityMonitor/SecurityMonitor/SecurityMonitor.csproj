@@ -39,10 +39,69 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DelegateDecompiler">
+      <HintPath>..\packages\DelegateDecompiler.0.9.1.0\lib\net40-Client\DelegateDecompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.DataLink">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.DataLink.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.ExcelStorage">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\FileHelpers.ExcelStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Excel">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.Office">
+      <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Reflection">
+      <HintPath>..\packages\Mono.Reflection.1.0.0.0\lib\Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcPaging">
+      <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PerpetuumSoft.Knockout">
+      <HintPath>..\packages\kMVC.0.6.0\lib\net40\PerpetuumSoft.Knockout.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -103,23 +162,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -159,37 +209,605 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BuildingController.cs" />
+    <Compile Include="Controllers\CsvModelBinder.cs" />
+    <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\GoogleMapsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="FromJsonAttribute.cs" />
+    <Compile Include="Hubs\NotificationsHub.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TenantsController.cs" />
+    <Compile Include="Controllers\UserVMsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApartmentdeleteAll.cs" />
+    <Compile Include="Models\ApartmentVM.cs" />
+    <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\BuildingInfoVM.cs" />
+    <Compile Include="Models\ClientsVM.cs" />
+    <Compile Include="Models\DisplayClientBuilding.cs" />
+    <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetRoles.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUserClaims.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUserLogins.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\AspNetUsers.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Membership.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Paths.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationAllUsers.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationPerUser.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Profile.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Roles.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_SchemaVersions.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_Users.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Buildings.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Clients.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\GanttLinkId.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\GanttTask.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\ListOfModule.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Manager.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\ManagerBuilding.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\MasterProfileFields.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Module.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\PendingModules.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Requests.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Role.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\States.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\sysdiagrams.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\Tenant.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\User.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\UserActivityLog.cs">
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ErrorMessageVM.cs" />
+    <Compile Include="Models\JsonVM.cs" />
+    <Compile Include="Models\ManagerVM.cs" />
+    <Compile Include="Models\MasterProfileVM.cs" />
+    <Compile Include="Models\myController.cs" />
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFrameworkFL\PointerEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\managementVM.cs" />
+    <Compile Include="Models\RegisterManagerVM.cs" />
+    <Compile Include="Models\ReqType.cs" />
+    <Compile Include="Models\ReqTypeCount.cs" />
+    <Compile Include="Models\RequestForTodayVM.cs" />
+    <Compile Include="Models\RequestVM.cs" />
+    <Compile Include="Models\TenantSearch.cs" />
+    <Compile Include="Models\TenantVM.cs" />
+    <Compile Include="Models\UserActivityLogVM.cs" />
+    <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_broadway.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_meadow.css" />
+    <Content Include="Content\dhtmlxgantt\dhtmlxgantt_skyblue.css" />
+    <Content Include="Content\hover.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Highcharts-4.0.4\examples\3d-column-interactive\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\3d-column-null-values\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\3d-column-stacking-grouping\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\3d-pie-donut\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\3d-pie\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\3d-scatter-draggable\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\area-basic\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\area-inverted\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\area-missing\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\area-negative\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\area-stacked-percent\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\area-stacked\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\arearange-line\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\arearange\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\areaspline\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\bar-basic\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\bar-negative-stack\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\bar-stacked\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\box-plot\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\bubble-3d\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\bubble\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-basic\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-drilldown\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-negative\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-parsed\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-placement\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-rotated-labels\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-stacked-and-grouped\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-stacked-percent\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\column-stacked\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\columnrange\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\combo-dual-axes\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\combo-meteogram\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\combo-multi-axes\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\combo-regression\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\combo\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\dynamic-click-to-add\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\dynamic-master-detail\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\dynamic-update\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\error-bar\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\funnel\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\gauge-clock\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\gauge-dual\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\gauge-solid\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\gauge-speedometer\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\gauge-vu-meter\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\heatmap-canvas\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\heatmap\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\line-ajax\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\line-basic\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\line-labels\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\line-log-axis\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\line-time-series\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-basic\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-donut\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-drilldown\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-gradient\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-legend\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-monochrome\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pie-semi-circle\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\polar-spider\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\polar-wind-rose\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\polar\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\pyramid\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\renderer\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\scatter\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\sparkline\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\spline-inverted\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\spline-irregular-time\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\spline-plot-bands\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\spline-symbols\index.htm" />
+    <Content Include="Highcharts-4.0.4\examples\waterfall\index.htm" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\pom.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\converter\SVGConverter.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\converter\SVGConverterException.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\pool\AbstractPool.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\pool\BlockingQueuePool.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\pool\ObjectFactory.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\pool\ObjectPool.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\pool\PoolException.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\pool\ServerObjectFactory.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\server\Server.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\server\ServerState.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\server\TimeOut.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\util\MimeType.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\java\com\highcharts\export\util\TempDir.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\data.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\drilldown.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\funnel.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\heatmap.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\highcharts-3d.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\highcharts-convert.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\highcharts-more.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\highcharts.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\jquery.1.9.1.min.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\map.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\no-data-to-display.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\phantomjs\solid-gauge.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\spring-convert.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\data.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\drilldown.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\funnel.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\heatmap.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\highcharts-3d.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\highcharts-convert.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\highcharts-more.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\highcharts.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\highstock.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\jquery.1.9.1.min.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\map.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\no-data-to-display.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\phantomjs\solid-gauge.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\spring-convert.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\highcharts-export-convert.jar" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\pom.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\java\com\highcharts\export\controller\ExportController.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\java\com\highcharts\export\controller\ZeroRequestParameterException.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\java\com\highcharts\export\filter\CorsFilter.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\java\com\highcharts\export\interceptor\RequestInterceptor.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\java\com\highcharts\export\service\MonitorService.java" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\META-INF\context.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\css\demo.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\Highcharts-icon-160px.png" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\codemirror.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\codemirror.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\mode\javascript\index.html" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\mode\javascript\javascript.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\mode\javascript\typescript.html" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\mode\xml\index.html" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\mode\xml\xml.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\closetag.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\dialog.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\dialog.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\foldcode.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\formatting.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\javascript-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\loadmode.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\match-highlighter.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\multiplex.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\overlay.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\pig-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\runmode-standalone.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\runmode.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\search.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\searchcursor.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\simple-hint.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\simple-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\codemirror\util\xml-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\resources\lib\jquery-1.11.0.min.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\jspf\callback.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\jspf\config.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\jspf\lexl.svg" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\spring\export-servlet.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\spring\spring-context.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\web.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\META-INF\context.xml" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\css\demo.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\Highcharts-icon-160px.png" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\codemirror.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\codemirror.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\mode\javascript\index.html" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\mode\javascript\javascript.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\mode\javascript\typescript.html" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\mode\xml\index.html" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\mode\xml\xml.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\closetag.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\dialog.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\dialog.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\foldcode.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\formatting.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\javascript-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\loadmode.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\match-highlighter.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\multiplex.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\overlay.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\pig-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\runmode-standalone.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\runmode.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\search.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\searchcursor.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\simple-hint.css" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\simple-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\codemirror\util\xml-hint.js" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\resources\lib\jquery-1.11.0.min.js" />
+    <Content Include="img\AddingTenant.jpg" />
+    <Content Include="img\AddingTenant1.png" />
+    <Content Include="img\ajax-loader.gif" />
+    <Content Include="img\B.png" />
+    <Content Include="img\building.png" />
+    <Content Include="img\client.png" />
+    <Content Include="img\D.png" />
+    <Content Include="img\DeleteButton.jpg" />
+    <Content Include="img\Delivery.png" />
+    <Content Include="img\edit.png" />
+    <Content Include="img\errors.jpg" />
+    <Content Include="img\errors1.jpg" />
+    <Content Include="img\home.png" />
+    <Content Include="img\M.png" />
+    <Content Include="img\R.png" />
+    <Content Include="img\reports.png" />
+    <Content Include="img\S.png" />
+    <Content Include="img\Search.png" />
+    <Content Include="img\solution.jpg" />
+    <Content Include="img\trash.png" />
+    <Content Include="img\whiteinterior.jpg" />
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <EntityDeploy Include="Models\EntityFrameworkFL\PointerEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PointerEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+      <LastGenOutput>PointerEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.diagram">
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\EntityFrameworkFL\PointerEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PointerEntity.edmx</DependentUpon>
+      <LastGenOutput>PointerEntity1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\date.js" />
+    <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_quick_info.js" />
+    <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_tooltip.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ar.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_be.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ca.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cn.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_cs.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_da.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_de.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_el.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_es.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fi.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_fr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_he.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_hu.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_id.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_it.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_jp.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nb.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_nl.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_no.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pl.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_pt.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ro.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ru.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_si.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sk.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_sv.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_tr.js" />
+    <Content Include="Scripts\dhtmlxgantt\locale\locale_ua.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\dhtmlxgantt.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_marker.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_quick_info.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_tooltip.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ar.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_be.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ca.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cn.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cs.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_da.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_de.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_el.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_es.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fi.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_he.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_hu.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_id.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_it.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_jp.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nb.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nl.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_no.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pl.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pt.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ro.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ru.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_si.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sk.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sv.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_tr.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ua.js" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ua.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_tr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sv.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_sk.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_si.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ru.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ro.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pt.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_pl.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_no.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nl.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_nb.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_jp.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_it.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_id.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_hu.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_he.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fr.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_fi.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_es.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_el.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_de.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_da.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cs.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_cn.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ca.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_be.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale_ar.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\locale\locale.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_tooltip.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_quick_info.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\ext\dhtmlxgantt_marker.js.map" />
+    <Content Include="Scripts\dhtmlxgantt\sources\dhtmlxgantt.js.map" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\app-convert.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\src\main\resources\log4j.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\app-convert.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\converter\SVGConverter.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\converter\SVGConverterException.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\AbstractPool%241.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\AbstractPool.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\BlockingQueuePool.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\ObjectFactory.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\ObjectPool.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\PoolException.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\ServerObjectFactory%24PortStatus.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\pool\ServerObjectFactory.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\server\Server%241.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\server\Server.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\server\ServerState.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\server\TimeOut.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\util\MimeType.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\com\highcharts\export\util\TempDir.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\classes\log4j.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\maven-archiver\pom.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\resources\log4j.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\pages\demo.jsp" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\pages\error.jsp" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\src\main\webapp\WEB-INF\spring\app-convert.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\com\highcharts\export\controller\ExportController.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\com\highcharts\export\controller\ZeroRequestParameterException.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\com\highcharts\export\filter\CorsFilter.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\com\highcharts\export\interceptor\RequestInterceptor.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\com\highcharts\export\service\MonitorService.class" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\log4j.properties" />
+    <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\WEB-INF\classes\com\highcharts\export\controller\ExportController.class" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\HighChart\adapters\standalone-framework.js" />
+    <Content Include="Scripts\HighChart\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\HighChart\highcharts-3d.js" />
+    <Content Include="Scripts\HighChart\highcharts-3d.src.js" />
+    <Content Include="Scripts\HighChart\highcharts-all.js" />
+    <Content Include="Scripts\HighChart\highcharts-more.js" />
+    <Content Include="Scripts\HighChart\highcharts-more.src.js" />
+    <Content Include="Scripts\HighChart\highcharts.js" />
+    <Content Include="Scripts\HighChart\highcharts.src.js" />
+    <Content Include="Scripts\HighChart\modules\canvas-tools.js" />
+    <Content Include="Scripts\HighChart\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\HighChart\modules\data.js" />
+    <Content Include="Scripts\HighChart\modules\data.src.js" />
+    <Content Include="Scripts\HighChart\modules\drilldown.js" />
+    <Content Include="Scripts\HighChart\modules\drilldown.src.js" />
+    <Content Include="Scripts\HighChart\modules\exporting.js" />
+    <Content Include="Scripts\HighChart\modules\exporting.src.js" />
+    <Content Include="Scripts\HighChart\modules\funnel.js" />
+    <Content Include="Scripts\HighChart\modules\funnel.src.js" />
+    <Content Include="Scripts\HighChart\modules\heatmap.js" />
+    <Content Include="Scripts\HighChart\modules\heatmap.src.js" />
+    <Content Include="Scripts\HighChart\modules\no-data-to-display.js" />
+    <Content Include="Scripts\HighChart\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\HighChart\modules\solid-gauge.js" />
+    <Content Include="Scripts\HighChart\modules\solid-gauge.src.js" />
+    <Content Include="Scripts\HighChart\themes\dark-blue.js" />
+    <Content Include="Scripts\HighChart\themes\dark-green.js" />
+    <Content Include="Scripts\HighChart\themes\dark-unica.js" />
+    <Content Include="Scripts\HighChart\themes\gray.js" />
+    <Content Include="Scripts\HighChart\themes\grid-light.js" />
+    <Content Include="Scripts\HighChart\themes\grid.js" />
+    <Content Include="Scripts\HighChart\themes\sand-signika.js" />
+    <Content Include="Scripts\HighChart\themes\skies.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR2.1.2.min.js" />
+    <Content Include="Scripts\jquery.touchSwipe.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.1.0.debug.js" />
+    <Content Include="Scripts\knockout-3.1.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\koLogic.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\perpetuum.knockout.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\TimePicket\jquery.datetimepicker.css" />
+    <Content Include="Scripts\TimePicket\jquery.datetimepicker.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -203,7 +821,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
@@ -219,9 +836,72 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\UserVMs\UserList.cshtml" />
+    <Content Include="Views\UserVMs\_ActivityPartial.cshtml" />
+    <Content Include="Views\UserVMs\Userprofile.cshtml" />
+    <Content Include="Views\UserVMs\_BuildingInfo.cshtml" />
+    <Content Include="Views\Building\AddApartment.cshtml" />
+    <Content Include="Views\Building\Show.cshtml" />
+    <Content Include="Views\Building\ClientIndex.cshtml" />
+    <Content Include="Views\Building\AddBuilding.cshtml" />
+    <Content Include="Views\Building\BuildingIndex.cshtml" />
+    <Content Include="Views\Building\ActivityPartial.cshtml" />
+    <Content Include="Views\Building\BuildingProfile.cshtml" />
+    <Content Include="Views\Building\_BuildingInfo.cshtml" />
+    <Content Include="Views\Building\ApartmentProfile.cshtml" />
+    <Content Include="Views\Building\AddingTenant.cshtml" />
+    <Content Include="Views\Tenants\Delete.cshtml" />
+    <Content Include="Views\Building\Chart1.cshtml" />
+    <Content Include="Views\Building\TenantRequest.cshtml" />
+    <Content Include="Views\DashBoard\Index.cshtml" />
+    <Content Include="Views\DashBoard\manageReqType.cshtml" />
+    <Content Include="Views\DashBoard\TypeMasterProfile.cshtml" />
+    <Content Include="Views\DashBoard\PreviewTemplate.cshtml" />
+    <Content Include="Views\Building\deleteClient.cshtml" />
+    <Content Include="Views\Building\EditClient.cshtml" />
+    <Content Include="Views\Building\_AddClient.cshtml" />
+    <Content Include="Views\Building\BuildingDelete.cshtml" />
+    <Content Include="Views\Building\ErrorpageMessage.cshtml" />
+    <Content Include="Views\Building\BuildingEdit.cshtml" />
+    <Content Include="Views\Building\deleteApartment.cshtml" />
+    <Content Include="Views\Building\RequestHistoryIndex.cshtml" />
+    <Content Include="Views\Building\RequestdeleteHistory.cshtml" />
+    <Content Include="Views\Building\TenantDeliveryIndex.cshtml" />
+    <Content Include="Views\Building\TenantMessegeCenterIndex.cshtml" />
+    <Content Include="Views\Building\BuildingRequestHistoryIndex.cshtml" />
+    <Content Include="Views\Building\BuildingRequestHistoryDelete.cshtml" />
+    <Content Include="Views\Building\BuildingRequestHistoryEdit.cshtml" />
+    <Content Include="Views\Building\TenantEdit.cshtml" />
+    <Content Include="Views\Building\TenantDelete.cshtml" />
+    <Content Include="Views\Building\ContactBook.cshtml" />
+    <Content Include="Views\Building\BuildingApartmentDeleteAll.cshtml" />
+    <Content Include="Views\Module\_ModuleView.cshtml" />
+    <Content Include="Views\Module\ModuleAdd.cshtml" />
+    <Content Include="Views\Manager\BuildingProfile.cshtml" />
+    <Content Include="Views\Shared\_ManagerLayout.cshtml" />
+    <Content Include="Views\Management\PendingModules.cshtml" />
+    <Content Include="Views\Manager\ApartmentProfile.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Management\Addrole.cshtml" />
+    <Content Include="Views\Management\RoleIndex.cshtml" />
+    <Content Include="Views\Management\Index.cshtml" />
+    <Content Include="Views\Management\DeleteRole.cshtml" />
+    <Content Include="Views\Management\ManageUserRoles.cshtml" />
+    <Content Include="Views\Management\AddManager.cshtml" />
+    <Content Include="Views\Management\SelectBuilding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Start\App_Data\" />
+    <Folder Include="external\" />
+    <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\generated-sources\annotations\" />
+    <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\surefire\" />
+    <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\generated-sources\annotations\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\GoogleMaps\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Role\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -229,6 +909,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

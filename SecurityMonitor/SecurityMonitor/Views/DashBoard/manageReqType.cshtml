@@ -1,0 +1,270 @@
+﻿@model SecurityMonitor.Models.managementVM
+@using SecurityMonitor.Models
+
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<body >
+
+    <div class=" whitecolor" >
+
+        @*<div class="col-md-12 " style="padding-bottom:100px; padding-top:40px; border-bottom:1px solid lightgrey;">
+
+
+
+                <div class="col-md-3 ">UserName:<input class="form-control" type="text" id="messageAuthor" /></div>
+                <div class="col-md-3 "> Message:<input class="form-control"  type="text" id="message" /></div>
+                <div class="col-md-6 pull-left " style="padding-top:20px;"> <input class="btn btn-default" type="button" id="sendmessage" value="Send" /> </div>
+
+
+
+            </div>*@
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-top:20px;">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12    " style="padding-bottom:20px;">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="col-md-12 ">
+
+                        <div class="col-md-12" style="padding-bottom:60px; ">
+                            <div class="col-md-12">
+                                <h6>Search by First or Last Name:</h6>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBox("Search", null, new { @class = "form-control", ID = "MYsEARCH" })
+                                <div id="myguess" class="myguesslist ">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" value="Search" class="btn btn-default" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+
+                <!--====================ReqType Management===============================-->
+                <div id="TenantSearchResult" class="col-md-12  pre-scrollable" style="max-height:550px; border:1px solid lightgrey; ">
+                    @{
+
+
+                        if (Model.Tenants != null)
+                        {
+
+                            foreach (var item in Model.Tenants)
+                            {
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 whitecolor shadow3    " style="  padding-bottom:70px; padding-top:20px; border-bottom:1px solid lightgrey;">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  " style="padding-bottom:0px; color:black; font-size:medium;">
+                                        @item.FirstName @item.LastName
+                                    </div>
+                                    <!--tenant info button-->
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right " style="padding-bottom:20px; color:black; position:relative; top:10px;">
+                                        <button class=" btn btn-default"
+                                                onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new {ApartmentID = @item.aptID})'">
+                                            <div class="glyphicon glyphicon-info-sign" style="color:lightblue; "></div>
+                                        </button>
+                                    </div>
+                                    <!--tenant new request button-->
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right  " style="padding-bottom:20px; color:black; position:relative; top:10px;">
+                                        <button class="btn btn-default"
+                                                onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID })'">
+                                            <div class="glyphicon glyphicon-edit glyphicon glyphicon-" style="color:lightgreen;"></div>
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5  " style="padding-top:0px; color:grey; font-style:italic; font-size:small;">
+                                        Phone#: @item.Phone
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7  " style="padding-top:0px; color:grey; font-style:italic; font-size:small;">
+                                        Created on: @item.created
+                                    </div>
+
+
+
+                                </div>
+
+                                <div style="padding-bottom:15px;">
+
+
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-bottom:60px; padding-top:30px;">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style="padding-bottom:10px; color:black;">
+                                    No Search Result...
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
+                                </div>
+                            </div>
+                        }
+
+
+
+                    }
+                </div>
+
+                <!--====================ReqType Management ends===============================-->
+            </div>
+
+            <!--===========================================Search begins===================================-->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  myRow " style="padding-bottom:10px; border:1px solid lightgrey;">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="col-md-12 ">
+
+                        <div class="col-md-12" style="padding-bottom:60px;">
+                            <div class="col-md-12">
+                                <h6>Enter Request Type</h6>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ReqType.ReqType1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ReqType.ReqType1, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!--====================ReqType Management===============================-->
+                @{
+
+                    IEnumerable<SelectListItem> ReqType = ViewBag.reqType;
+                    foreach (var item in @ReqType)
+                    {
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 whitecolor " style="padding-bottom:20px; padding-top:30px; margin:15px; border:1px solid lightgrey;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " style="padding-bottom:10px; color:black;">
+                                @item.Text
+                                <button class=" btn btn-default"
+                                            onclick="location.href = '@Url.Action("TypeMasterProfile", "Dashboard")'">
+                                            <div class="glyphicon glyphicon-info-sign" style="color:lightblue; "></div>
+                                            </button>
+                            </div>
+
+                            @using (Html.BeginForm(new { ReqTypeID = Convert.ToInt32(@item.Value) }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Remove Category" class="btn btn-default" />
+
+                                    </div>
+                                   
+                                </div>
+                            }
+                        </div>
+
+                    }
+
+
+                }
+
+                <!--====================ReqType Management ends===============================-->
+            </div>
+        </div>
+    </div>
+</body>
+
+@section scripts
+{
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+
+<script src="~/signalr/hubs"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+           
+            //$('#MYsEARCH').on("focusout", function () {
+            //    $('#myguess').fadeOut("slow").html('');
+
+            //});
+
+            $('#myguess a').click(function(){ alert('yes');});
+            function MyFunction()
+            {
+                
+                $('#MYsEARCH').val($(this).getAttribute("data-tenantname"));
+                alert($(this).getAttribute("data-tenantname"));
+                $('#myguess').html('');
+
+            };
+
+
+
+            $('#MYsEARCH').keyup(function()
+            {
+
+                if( $('#MYsEARCH').val()=="")
+                {$('#myguess').html('');
+                }
+                else{
+                    $.ajax({
+                        url: "/Dashboard/getKeyupSearch",
+                        data: {mysearch :  $('#MYsEARCH').val()},
+                        context: document.body
+                    }).done(function(tenant) {
+
+                        $('#myguess').show("slow").html('<ul></ul>');
+                            for(var i=0; i< tenant.length; i++)
+                            {
+                                var aptURL = '/Building/ApartmentProfile?ApartmentID=' + tenant[i].ApartmentID;
+                                var RequestURL = '/Building/TenantRequest?TenantID=' + tenant[i].TenantID;
+                                $('#myguess ul').append('<li class="clickme" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '"><a href=""  onClick="myfunction()" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '">' + tenant[i].FirstName + " " + tenant[i].LastName +'</a>'+
+                                    ' ' + '<a href="' + aptURL + '"><div class="glyphicon glyphicon-info-sign" style="color:lightblue;"></div></a>' +
+                                    ' ' + '<a href="' + RequestURL + '"><div class="glyphicon glyphicon-edit glyphicon glyphicon" style="color:lightgreen;"></div></a>' +
+                                    ' <div id="addressresult" Style="font-size:9px; color:grey;">Apt: ' + tenant[i].Apt + " -Address: " + tenant[i].Address + " " + tenant[i].city + " " + tenant[i].zipcode + '</div> </li>');
+                            }
+
+
+                    });
+                }
+
+
+
+            });
+
+            
+            
+
+
+            //var notification = $.connection.notificationsHub;
+
+            //notification.client.broadcastNotification = function (name, message) {
+            //    alert(message);
+            //};
+
+
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    // Call the Send method on the hub.
+                    notification.server.sendNotification($('#messageAuthor').val(), $('#message').val());
+                    //Notifications.server.sendNotification($('#messageAuthor').val(), $('#message').val());
+                });
+            });
+
+        });
+    </script>
+}

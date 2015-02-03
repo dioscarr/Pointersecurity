@@ -1,0 +1,168 @@
+﻿@using SecurityMonitor.Models;
+
+@{
+    ViewBag.Title = "Userprofile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row col-md-12" style="background:#EFEFEF;">
+
+        <div class="col-md-4">
+            @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
+        </div>
+
+        <div class="col-md-2 ">
+            <spam class="glyphicon glyphicon-home " style="font-size: 150px; margin-top:10px; "></spam></div>
+
+        <div class="col-md-6" >
+            <div class="col-md-12" style="margin-top:6px; background:white;">
+                <div class="row col-md-12" >
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1A</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1B</button>
+                    </div>
+                    <div class="col-md-2" >
+                        <button class="btn btn-default" style="margin:7px;">1C</button>
+                    </div>
+                    <div class="col-md-2" >
+                        <button class="btn btn-default" style="margin:7px;">1D</button>
+                    </div>
+                    <div class="col-md-2" >
+                        <button class="btn btn-default" style="margin:7px;">1E</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1F</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1A</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1B</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1C</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1D</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1E</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" style="margin:7px;">1F</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12">@Html.ActionLink("Add Apartment","AddApartment", "Building", new{BuildingID = ViewBag.buildingInfo.ID},null)</div>
+    </div>
+    <div class="row col-md-12" style="background:#EFEFEF;"><hr/></div>
+
+    
+    </div>
+
+
+
+    @Html.Partial("_ActivityPartial")
+
+
+
+
+
+
+   
+
+            @section scripts
+{
+           
+<link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+        <script src="~/Scripts/Pagination/jquery.twbsPagination.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function (e) {
+
+
+              
+                
+                $('#datetimepicker').focusin(function () {
+                    $('#radio-btn-date').prop("checked", true).trigger('change');
+                    $('#Function').attr('checked', false);
+
+                   
+
+                });
+             
+                    $('#input-search').focusin(function () {
+                      
+                        $('#Function').prop("checked", true).trigger("change");
+                        $('#radio-btn-date').attr('checked', false);
+                        
+
+
+                    });
+               
+              
+                
+
+
+                //==============Datepicker settings=================================
+                $('#datetimepicker').datetimepicker({
+                    timepicker: false,
+                    formatDate: 'y.m.d'
+                    
+                });
+               
+                //=============DateTimePicker plugin settings ends====================
+
+                //=============Radio button functions ================================
+                $('#Function').change(function () {
+                    //alert('yes');
+                    if ($('#Function').is(':Checked'))
+                    {
+                        $('#input-search').attr("name", "search");
+                        $('#Function').attr("name", "searchBy").val('Function');
+                        $('#radio-btn-date').attr('Checked', false);
+
+                        $('#datetimepicker').removeAttr("name");
+                        //alert('yes');
+                    }
+                    else if (!$('#Function').is(':Checked'))
+                    {
+                        $('#input-search').removeAttr("name");
+                        $('#Function').removeAttr("name");
+                        //alert('yes');
+                    }
+                });
+
+                $('#radio-btn-date').change(function () {
+                    //alert('yes');
+                    if ($('#radio-btn-date').is(':Checked')) {
+                        $('#datetimepicker').attr("name", "search");
+                        $('#radio-btn-date').attr("name", "searchBy").val('Date');
+                        $('#Function').attr('Checked', false);
+                        $('#input-search').removeAttr("name");
+                        //alert('yes');
+                    }
+                    else if (!$('#radio-btn-date').is(':Checked')) {
+                        $('#datetimepicker').removeAttr("name");
+                        $('#radio-btn-date').removeAttr("name");
+                        //alert('yes');
+                    }
+                });
+                //===============Radio buttons functions ends==================
+                
+            });
+       </script>
+                
+                }        

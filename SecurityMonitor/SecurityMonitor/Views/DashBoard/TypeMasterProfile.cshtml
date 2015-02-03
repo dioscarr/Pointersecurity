@@ -1,0 +1,191 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!--there 2 things going on-->
+<!--1 a loop-->
+<!--2 input that triggers aservablearray to update-->
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 ">
+        <div class="row">
+            <div class="col-md-12 ">
+                <h5>Use the bellow form to create a new template by adding fields of your choice.</h5>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+    <form data-bind="submit: save" class="col-lg-12">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6 crema requestformbox " style="padding-top:20px;">
+            <div class="row">
+
+                <div data-bind="foreach: users">
+                    <!--loop through array Users[]-->
+                    @*<div class="col-md-1"><input type="checkbox" data-bind="checked: isDone" /></div>*@
+                    <div class="col-md-5 ">
+                        @*<input class="form-control" type="text"
+                                       data-bind="value: TextBoxLabel,
+                            valueUpdate: 'afterkeydown',
+                            attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" />*@
+                        <select class="form-control " data-bind="options:items, optionsText: 'name', optionsValue: 'value', value:Controller"></select>
+
+                        @*<span data-bind="text: Controller"></span>*@
+                        <br />
+                    </div>
+                    <div class="col-md-5 ">
+
+                        <input class="form-control has-success" type="text"
+                               data-bind="value: TextBoxLabel,
+                        valueUpdate: 'afterkeydown',
+                        attr: {name: 'Users[' + $index() + '].TextBoxLabel' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
+                        @*<span data-bind="text: TextBoxLabel"></splan>*@
+                        @*@Html.Hidden("dropoption", new { @class = "dropoptions" })*@
+                        <br />
+                    </div>
+                    <div class="col-md-2 "><button class="btn btn-default" data-bind="click: $parent.removeField">Delete</button></div>
+
+                    <!-- Our other UI elements, including the table and ‘add’ button, go here -->
+                </div>
+            </div>
+
+
+            <!--output master profile preview-->
+            <div class="row">
+                <div class="col-md-12  " style="height:10px;"></div>
+                <div class="col-md-3 "></div>
+                <div class="col-md-6 " style="height:50px; ">
+                    <button type="button" class="col-md-12 btn btn-default " data-bind="click: addUser">Add New Field</button>
+
+                </div>
+                <div class="col-md-3 " style="height:50px; "></div>
+                <div class="col-md-3 " style="height:50px; "></div>
+                <div class="col-md-6 " style="height:50px;">
+                    <button type="submit" class="col-md-12 btn btn-info ">Submit</button>
+                </div>
+                <div class="col-md-3 " style="height:50px; "></div>
+            </div>
+
+        </div>
+    </form>
+    <!--right side ends **********************************************************************-->
+
+</div>
+
+
+
+
+@section scripts
+
+{
+
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            function Task(data) {
+                this.title = ko.observable(data.title);
+                this.isDone = ko.observable(data.isDone);
+            }
+
+
+
+
+            function viewModel() {
+                var self = this;
+
+
+               
+
+                var optionsVM = [
+                               { value: 1, name: 'TextBox' },
+                               { value: 2, name: 'CheckBox' },
+                               { value: 3, name: 'Radio Button' },
+                               { value: 4, name: 'TextArea' },
+                               { value: 5, name: 'DropdownList' }
+                ]
+
+                items = ko.observableArray(optionsVM);
+
+
+              
+                self.users = ko.observableArray(),//create an array
+
+                //function to add to the arrays++++++++++++++++++++++++++++++++++++
+                self.addUser = function () {//create a function named addUsers
+                    this.users.push({// push syntaxt to append array
+                        TextBoxLabel: ko.observable(),//add field name to the array
+                        Controller: ko.observable(),
+                        
+
+                    });
+                  
+                }
+               
+
+
+
+
+                //function ends to add to the arrays++++++++++++++++++++++++++++++++++++
+
+                self.save = function (fields) {
+                    debugger;
+
+                    alert(ko.toJSON(self.users));
+
+
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: "POST",
+                        url: '/Dashboard/FromJson/',
+                        data: ko.toJSON(self.users),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                //alert(ko.toJSON(data));
+                                window.location.href = "/Dashboard/PreviewTemplate/";
+                                //alert(ko.toJS(data));
+
+                            }
+                        }
+                    });
+                    //ko.utils.postJson('/Dashboard/FromJson/', { name: fields.users});
+                }
+
+
+
+                self.removeField = function (task) {
+                    self.users.remove(task)
+                };
+             
+
+
+                
+
+                //output preview
+                //masterarray = ko.observablearray();
+
+
+            };
+
+
+            ko.applyBindings(new viewModel());
+        });
+
+
+
+    </script>
+
+}
