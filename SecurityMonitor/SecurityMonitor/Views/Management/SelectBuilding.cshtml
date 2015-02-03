@@ -1,0 +1,170 @@
+﻿@model SecurityMonitor.Models.DisplayClientBuilding
+
+@{
+    ViewBag.Title = "SelectBuilding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row" style="padding-top:20px">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+        <h4>Please select a company</h4>
+        <br/>
+       <span style="font-size:25px;">Step </span> <span class=" circlesteps" > 1</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+        <h4>Please select a building</h4>
+        <br />
+        <span style="font-size:25px;">Step </span> <span class=" circlesteps"> 2</span>
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+        <h4>Confirm and apply</h4>
+        <br />
+        <span style="font-size:25px;">Step </span> <span class=" circlesteps"> 3</span>
+
+    </div>
+</div>
+
+<div class="row" style="padding-bottom:40px; border-bottom:1px solid lightgrey; ">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 scrollable "
+         style=" position:relative; 
+                 top:20px;
+                  padding-right:50px; 
+                  height:300px;
+                  border:3px solid white;">
+
+        @foreach (var item in Model.clients)
+        {
+            using (Html.BeginForm("SelectBuilding", "Management", new { ClientID = @item.ID, ManagerID = @Model.ManagerID }, FormMethod.Post, null))
+            {
+                @Html.HiddenFor(c => c.ManagerID, @Model.ManagerID)
+                <button class="row  hollow3 text-center settingstyle">
+                    <p style="font-size:20px;">
+                       @item.ClientName
+                      
+                    </p>
+                </button>
+            }
+        }
+    </div>
+    <div id="myidBuilding " class="col-lg-4 col-md-4 col-sm-4 col-xs-4 scrollable "
+         style=" position:relative;
+                     top:20px;
+                     padding-right:50px;
+                     height:300px;
+                     
+                      border:3px solid white;">
+
+        @if (Model.buildings != null)
+        {
+            foreach (var item in Model.buildings)
+            {
+                <button class="row  hollow3 text-center settingstyle clickmyid"
+                        data-myid="@item.ID"
+                        data-clientname="@item.Clients.ClientName"
+                        data-buildingName="@item.BuildingName"
+                        data-address="@item.Address"
+                        data-state="@item.State"
+                        data-zipcode="@item.Zipcode"
+                        data-phone="@item.BuildingPhone"
+                        data-myclientid="@item.Clients.ID">
+                    <p style="font-size:20px;">
+                    Name: @item.BuildingName
+                    </p>
+                </button>
+            }
+        }
+    </div>
+    @using (Html.BeginForm("ManagerBuilding", "Management", FormMethod.Post))
+    {
+        <div id="myapplayid" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 scrollable text-center"
+             style=" position:relative;
+                     top:20px;
+                     padding-right:50px;
+                     height:300px;
+                     background:rgb(247,249,248);
+                     border:1px  groove #fefefe;">
+           <div id="idconfirmcontent" class="row" >
+               
+           </div>
+
+
+
+            @Html.HiddenFor(model => model.ClientID, Model.ClientID)
+            @Html.HiddenFor(c => c.BuildingID)
+            @Html.HiddenFor(c => c.ManagerID, Model.ManagerID)
+            
+            <button id="ApplayID" class="row  hollow3 text-center settingstyle "
+                    >
+                
+                <p style="font-size:30px;">
+                    Apply
+                </p>
+            </button>
+        </div>
+    }
+</div>
+<div class="row" style="padding-top:20px; padding-bottom:20px;">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
+        <h4>New building added for the current manager</h4>
+        
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+        <h4>Advance settings</h4>
+    </div>
+   
+</div>
+@if (Model.ManagerBuildings != null)
+{
+    <div class="row  " style="padding-bottom:50px; border-top:1px solid lightgray;">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 scrollable settingstyle "
+              style="height:200px;   
+                     border:3px solid white;">
+            @foreach (var item in Model.BuildingsOnDeck)
+            {
+
+                <div class=" row settingstyle hollow3" style="border:1px solid lightgrey;">
+                    @item.BuildingName | @item.Address | @item.City
+                </div>
+
+            }
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 scrollable settingstyle " style="height:200px;   border:3px solid white;">
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.clickmyid').on("click", function () {
+                var buildingID = (this).getAttribute("data-myid");
+                var clientname = (this).getAttribute("data-clientname");
+                var buildingName = (this).getAttribute("data-buildingName");
+                var address = (this).getAttribute("data-address");
+                var state  = (this).getAttribute("data-state");
+                var zipcode = (this).getAttribute("data-zipcode");
+                var phone = (this).getAttribute("data-phone");
+                $('#ApplayID').show();//.html(buildingID);
+                $('input[name=BuildingID]').val(buildingID);
+                //alert(buildingName);
+
+                $('#idconfirmcontent').html("<span class='contentconfirm'><br/>Please review the following information <br/>before assigning this building!</span><br/><br/>" +
+                                            "<span class='contentconfirm'>Client Name:" + clientname + "</span><br/>" +
+                                            "<span class='contentconfirm'>Building Name:" + buildingName + "</span><br/>" +
+                                            "<span class='contentconfirm'>Address:" + address + "</span><br/>" +
+                                            "<span class='contentconfirm'>State:" + state + "</span>" +
+                                            "<span class='contentconfirm'>Zipcode:" + zipcode + "</span><br/>" +
+                                            "<span class='contentconfirm'>Phone:" + phone + "</span>");
+
+            });
+        });
+
+</script>
+
+}
