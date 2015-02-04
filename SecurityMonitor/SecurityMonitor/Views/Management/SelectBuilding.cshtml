@@ -36,6 +36,7 @@
         {
             using (Html.BeginForm("SelectBuilding", "Management", new { ClientID = @item.ID, ManagerID = @Model.ManagerID }, FormMethod.Post, null))
             {
+               
                 @Html.HiddenFor(c => c.ManagerID, @Model.ManagerID)
                 <button class="row  hollow3 text-center settingstyle">
                     <p style="font-size:20px;">
@@ -66,7 +67,11 @@
                         data-state="@item.State"
                         data-zipcode="@item.Zipcode"
                         data-phone="@item.BuildingPhone"
-                        data-myclientid="@item.Clients.ID">
+                        data-myclientid="@item.Clients.ID"
+                        data-ManagerFName="@Model.Manager.FirstName"
+                        data-ManagerLName="@Model.Manager.LastName"
+                        data-ManagerPhone="@Model.Manager.Phone">
+                    
                     <p style="font-size:20px;">
                     Name: @item.BuildingName
                     </p>
@@ -121,16 +126,25 @@
                      border:3px solid white;">
             @foreach (var item in Model.BuildingsOnDeck)
             {
+                using (@Html.BeginForm("ManagerBuildingDelete", "Management"))
+                {
+                    @Html.HiddenFor(c => c.Manager.FirstName, @Model.Manager.FirstName)
+                    @Html.HiddenFor(c => c.Manager.LastName, @Model.Manager.LastName)
+                    @Html.HiddenFor(c => c.Manager.Phone, @Model.Manager.Phone)
+                    @Html.Hidden("BuildingID", @item.ID)
+                    @Html.HiddenFor(c => c.ManagerID, Model.ManagerID)
+                    <div class="  row settingstyle hollow3" style="border:1px solid lightgrey;">
+                        @item.BuildingName | @item.Address | @item.City | <button class="btn btn-link">Remove from manager</button>
+                    </div>
 
-                <div class=" row settingstyle hollow3" style="border:1px solid lightgrey;">
-                    @item.BuildingName | @item.Address | @item.City
-                </div>
-
+                }
             }
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 scrollable settingstyle " style="height:200px;   border:3px solid white;">
         </div>
     </div>
+    
+    
 }
 
 @section Scripts {
@@ -150,17 +164,37 @@
                 var state  = (this).getAttribute("data-state");
                 var zipcode = (this).getAttribute("data-zipcode");
                 var phone = (this).getAttribute("data-phone");
+                var ManagerPhone = (this).GetAtt
+
+                var ManagerFName = (this).getAttribute("data-ManagerFName");
+                var ManagerLName = (this).getAttribute("data-ManagerLName");
+                var ManagerPhone = (this).getAttribute("data-ManagerPhone");
+                
                 $('#ApplayID').show();//.html(buildingID);
                 $('input[name=BuildingID]').val(buildingID);
                 //alert(buildingName);
 
-                $('#idconfirmcontent').html("<span class='contentconfirm'><br/>Please review the following information <br/>before assigning this building!</span><br/><br/>" +
-                                            "<span class='contentconfirm'>Client Name:" + clientname + "</span><br/>" +
+                $('#idconfirmcontent').html("<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>" +
+                                             "<span class='contentconfirm pull'>" +
+                                            "<br/>Please review the following information" +
+                                            "<br/>before assigning this building!</span>" +
+                                            "<br/>" +
+                                            "<br/>" +
+                                            "</div>" +
+                                            "<div class='pull-left col-lg-6 col-md-6'>" +
+                                           
+                                            "<span class='contentconfirm '>Client Name:" + clientname + "</span><br/>" +
                                             "<span class='contentconfirm'>Building Name:" + buildingName + "</span><br/>" +
                                             "<span class='contentconfirm'>Address:" + address + "</span><br/>" +
                                             "<span class='contentconfirm'>State:" + state + "</span>" +
                                             "<span class='contentconfirm'>Zipcode:" + zipcode + "</span><br/>" +
-                                            "<span class='contentconfirm'>Phone:" + phone + "</span>");
+                                            "<span class='contentconfirm'>Phone:" + phone + "</span>"+
+                                            "</div>"+
+                                            "<div class='col-lg-6 col-md-6 col-sm-6 col-xs-6'>" +
+                                            "<span class='contentconfirm '>Client Name:" + ManagerFName + "</span><br/>" +
+                                            "<span class='contentconfirm'>Building Name:" + ManagerLName + "</span><br/>" +
+                                            "<span class='contentconfirm'>Address:" + ManagerPhone + "</span><br/>" +
+                                            "</div>");
 
             });
         });

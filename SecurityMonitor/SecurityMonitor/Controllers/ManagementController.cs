@@ -223,8 +223,17 @@ namespace SecurityMonitor.Controllers
            EmailConfirmed = false,
            PasswordHash = hasher.HashPassword(model.Password)
           };
+           string[] FullName = model.FullName.Split(new string[] {" "}, StringSplitOptions.None);
+           Manager mgr = new Manager() {  
+                                       ID = AppUser.Id,  
+                                       FirstName=FullName[0].ToString(), 
+                                       LastName = FullName[1].ToString(),  
+                                       Phone = model.Phone};
+           db.Manager.Add(mgr);
            context.Users.Add(AppUser);
+          
            await context.SaveChangesAsync();
+           await db.SaveChangesAsync();
 
            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
            if(!RoleManager.RoleExists("Manager"))
@@ -242,7 +251,7 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
        public ActionResult SelectBuilding(DisplayClientBuilding model)
        {
-           model.Manager = db.AspNetUsers.Find(model.ManagerID);
+           model.Manager = db.Manager.Find(model.ManagerID);
          
             model.clients = db.Clients.ToList();
             //get all entries that belong to the current Manager on the managerbuilding table
@@ -263,8 +272,9 @@ namespace SecurityMonitor.Controllers
         [HttpPost]
         public ActionResult SelectBuilding(DisplayClientBuilding model, int ClientID)
         {
+            
             model.ClientID = ClientID;
-           
+            model.Manager = db.Manager.Find(model.ManagerID);
             model.clients= db.Clients.ToList();
             
             if (model.clients == null){ return View(model); }
@@ -290,7 +300,7 @@ namespace SecurityMonitor.Controllers
             //1. set ManagerBuilding Obj and save it in db
             //2. load clients, Buildings, assigned buildings to the current manager
             //3.
-            
+            model.Manager = db.Manager.Find(model.ManagerID);
             ManagerBuilding ObjMB = new ManagerBuilding
             {
                 BuildingID =BuildingID,
@@ -324,6 +334,19 @@ namespace SecurityMonitor.Controllers
             }
             
             return View("SelectBuilding",model);
+        }
+        [HttpPost]
+        public ActionResult ManagerBuildingDelete(DisplayClientBuilding model)
+        {
+
+            ManagerBuilding MB = db.ManagerBuilding
+                                    .Where(c => c.BuildingID == model.BuildingID && c.UserID == model.ManagerID)
+                                    .FirstOrDefault();
+            db.ManagerBuilding.Remove(MB);
+            db.SaveChanges();
+            
+            return View("SelectBuilding", model);
+
         }
 
        public RoleManager<IdentityRole> RoleManager { get; set; }

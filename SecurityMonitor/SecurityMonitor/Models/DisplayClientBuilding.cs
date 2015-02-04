@@ -12,7 +12,8 @@ namespace SecurityMonitor.Models
         public int BuildingID { set; get; }
         public string ManagerID { set; get; }        
         public int ClientID { set; get; }
-        public AspNetUsers Manager { set; get; }
+        public int selectedbuilding { set; get; }
+        public Manager Manager { set; get; }
         public List<Clients> clients { set; get; }
         public List<Buildings> buildings { set; get; }
         public List<ManagerBuilding> ManagerBuildings { set; get; }
