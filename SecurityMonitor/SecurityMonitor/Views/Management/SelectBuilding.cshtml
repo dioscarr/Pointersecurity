@@ -4,23 +4,24 @@
     ViewBag.Title = "SelectBuilding";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        @Html.ActionLink("Management", "Index") -> @Html.ActionLink("Managers", "AssignBtoM")
+    </div>
+</div>
 <div class="row" style="padding-top:20px">
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
         <h4>Please select a company</h4>
-        <br/>
-       <span style="font-size:25px;">Step </span> <span class=" circlesteps" > 1</span>
+       
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
         <h4>Please select a building</h4>
-        <br />
-        <span style="font-size:25px;">Step </span> <span class=" circlesteps"> 2</span>
-
+        
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
         <h4>Confirm and apply</h4>
-        <br />
-        <span style="font-size:25px;">Step </span> <span class=" circlesteps"> 3</span>
-
+       
     </div>
 </div>
 
@@ -36,48 +37,46 @@
         {
             using (Html.BeginForm("SelectBuilding", "Management", new { ClientID = @item.ID, ManagerID = @Model.ManagerID }, FormMethod.Post, null))
             {
-               
                 @Html.HiddenFor(c => c.ManagerID, @Model.ManagerID)
                 <button class="row  hollow3 text-center settingstyle">
                     <p style="font-size:20px;">
                        @item.ClientName
-                      
                     </p>
                 </button>
             }
         }
     </div>
     <div id="myidBuilding " class="col-lg-4 col-md-4 col-sm-4 col-xs-4 scrollable "
-         style=" position:relative;
+         style="position:relative;
                      top:20px;
                      padding-right:50px;
                      height:300px;
-                     
-                      border:3px solid white;">
+                     background:rgb(247,249,248);
+                     border:1px solid lightgrey;">
 
-        @if (Model.buildings != null)
-        {
-            foreach (var item in Model.buildings)
-            {
-                <button class="row  hollow3 text-center settingstyle clickmyid"
-                        data-myid="@item.ID"
-                        data-clientname="@item.Clients.ClientName"
-                        data-buildingName="@item.BuildingName"
-                        data-address="@item.Address"
-                        data-state="@item.State"
-                        data-zipcode="@item.Zipcode"
-                        data-phone="@item.BuildingPhone"
-                        data-myclientid="@item.Clients.ID"
-                        data-ManagerFName="@Model.Manager.FirstName"
-                        data-ManagerLName="@Model.Manager.LastName"
-                        data-ManagerPhone="@Model.Manager.Phone">
-                    
-                    <p style="font-size:20px;">
-                    Name: @item.BuildingName
-                    </p>
-                </button>
-            }
-        }
+                    @if (Model.buildings != null)
+                    {
+                        foreach (var item in Model.buildings)
+                        {
+                            <button class="row  hollow3 text-center settingstyle clickmyid"
+                                    data-myid="@item.ID"
+                                    data-clientname="@item.Clients.ClientName"
+                                    data-buildingname="@item.BuildingName"
+                                    data-address="@item.Address"
+                                    data-state="@item.State"
+                                    data-zipcode="@item.Zipcode"
+                                    data-phone="@item.BuildingPhone"
+                                    data-myclientid="@item.Clients.ID"
+                                    data-managerfname="@Model.Manager.FirstName"
+                                    data-managerlname="@Model.Manager.LastName"
+                                    data-managerphone="@Model.Manager.Phone">
+
+                                <p style="font-size:20px;">
+                                    Name: @item.BuildingName
+                                </p>
+                            </button>
+                        }
+                    }
     </div>
     @using (Html.BeginForm("ManagerBuilding", "Management", FormMethod.Post))
     {
@@ -87,20 +86,13 @@
                      padding-right:50px;
                      height:300px;
                      background:rgb(247,249,248);
-                     border:1px  groove #fefefe;">
+                     border:1px  solid lightgrey;">
            <div id="idconfirmcontent" class="row" >
-               
            </div>
-
-
-
             @Html.HiddenFor(model => model.ClientID, Model.ClientID)
             @Html.HiddenFor(c => c.BuildingID)
             @Html.HiddenFor(c => c.ManagerID, Model.ManagerID)
-            
-            <button id="ApplayID" class="row  hollow3 text-center settingstyle "
-                    >
-                
+            <button id="ApplayID" class="row  hollow3 text-center settingstyle " >
                 <p style="font-size:30px;">
                     Apply
                 </p>
@@ -131,9 +123,9 @@
                     @Html.HiddenFor(c => c.Manager.FirstName, @Model.Manager.FirstName)
                     @Html.HiddenFor(c => c.Manager.LastName, @Model.Manager.LastName)
                     @Html.HiddenFor(c => c.Manager.Phone, @Model.Manager.Phone)
-                    @Html.Hidden("BuildingID", @item.ID)
+                    @Html.Hidden("BuildingID2", @item.ID)
                     @Html.HiddenFor(c => c.ManagerID, Model.ManagerID)
-                    <div class="  row settingstyle hollow3" style="border:1px solid lightgrey;">
+                    <div class=" clickitagain row settingstyle hollow3" style="border:1px solid lightgrey;" data-myid2="@item.ID">
                         @item.BuildingName | @item.Address | @item.City | <button class="btn btn-link">Remove from manager</button>
                     </div>
 
@@ -156,6 +148,11 @@
 
         $(document).ready(function () {
 
+            $('.clickitagain').on("click", function () {
+                var buildingID2 = (this).getAttribute("data-myid2");
+                //alert(buildingID2);
+                $('input[name=BuildingID2]').val(buildingID);
+            });
             $('.clickmyid').on("click", function () {
                 var buildingID = (this).getAttribute("data-myid");
                 var clientname = (this).getAttribute("data-clientname");
@@ -183,7 +180,7 @@
                                             "</div>" +
                                             "<div class='pull-left col-lg-6 col-md-6'>" +
                                            
-                                            "<span class='contentconfirm '>Client Name:" + clientname + "</span><br/>" +
+                                            
                                             "<span class='contentconfirm'>Building Name:" + buildingName + "</span><br/>" +
                                             "<span class='contentconfirm'>Address:" + address + "</span><br/>" +
                                             "<span class='contentconfirm'>State:" + state + "</span>" +

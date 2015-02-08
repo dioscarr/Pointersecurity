@@ -233,6 +233,7 @@
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
     <Compile Include="Models\DisplayClientBuilding.cs" />
+    <Compile Include="Models\DisplayManagerRoleDelete.cs" />
     <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
       <DependentUpon>PointerEntity.tt</DependentUpon>
     </Compile>
@@ -889,6 +890,7 @@
     <Content Include="Views\Management\ManageUserRoles.cshtml" />
     <Content Include="Views\Management\AddManager.cshtml" />
     <Content Include="Views\Management\SelectBuilding.cshtml" />
+    <Content Include="Views\Management\AssignBtoM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

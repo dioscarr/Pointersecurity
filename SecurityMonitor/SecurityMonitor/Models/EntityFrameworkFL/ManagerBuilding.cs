@@ -15,7 +15,11 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     public partial class ManagerBuilding
     {
         public int ID { get; set; }
-        public string UserID { get; set; }
         public int BuildingID { get; set; }
+        public string UserID { get; set; }
+        public string ManagerID { get; set; }
+    
+        public virtual Buildings Buildings { get; set; }
+        public virtual Manager Manager { get; set; }
     }
 }

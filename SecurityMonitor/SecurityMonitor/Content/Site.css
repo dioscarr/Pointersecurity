@@ -683,3 +683,41 @@ padding: 15px 20px;
 font-size:18px;
 color:white;
 }
+.manageindexcsssettings {
+padding-top:50px;
+padding-bottom:50px;
+display:inline;
+color:white;
+}
+.linksetting {
+    color:white;
+}
+
+.centermypform {
+position:relative; left:70px;
+
+}
+.RoleIndex {
+    padding-top:20px;
+padding-bottom:20px;
+background:rgb(247,249,248);
+}
+
+.roldedelete {
+padding-top:40px;
+padding-bottom:40px;
+border-top:1px solid lightgrey;
+border-bottom:1px solid lightgrey;
+}
+
+.roldedeleteheading {
+
+    padding-top:40px;
+padding-bottom:20px;
+}
+
+.managerlistsettings {
+    position:relative; left:300px;
+    padding-top:50px;
+    padding-bottom:50px;
+}

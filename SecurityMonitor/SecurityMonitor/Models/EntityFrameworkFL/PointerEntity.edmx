@@ -220,6 +220,7 @@
           <Property Name="ClientID" Type="int" />
           <Property Name="BuildingPhone" Type="nvarchar" MaxLength="10" />
           <Property Name="Manager" Type="nvarchar(max)" />
+          <Property Name="ManagersID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -273,14 +274,16 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientID" Type="int" />
         </EntityType>
         <EntityType Name="ManagerBuilding">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ManagerID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="MasterProfileFields">
           <Key>
@@ -545,6 +548,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Buildings_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ManagersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Buildings_PendingModules">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
           <End Role="PendingModules" Type="Self.PendingModules" Multiplicity="*" />
@@ -622,6 +637,42 @@
             </Principal>
             <Dependent Role="Manager">
               <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerBuilding_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="ManagerBuilding" Type="Self.ManagerBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ManagerBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManagerBuilding_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+          <End Role="ManagerBuilding" Type="Self.ManagerBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ManagerBuilding">
+              <PropertyRef Name="ManagerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -834,6 +885,10 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Buildings" EntitySet="Buildings" />
           </AssociationSet>
+          <AssociationSet Name="FK_Buildings_Manager" Association="Self.FK_Buildings_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Buildings_PendingModules" Association="Self.FK_Buildings_PendingModules">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="PendingModules" EntitySet="PendingModules" />
@@ -857,6 +912,18 @@
           <AssociationSet Name="FK_Manager_AspNetUsers" Association="Self.FK_Manager_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Clients" Association="Self.FK_Manager_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerBuilding_Buildings" Association="Self.FK_ManagerBuilding_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManagerBuilding_Manager" Association="Self.FK_ManagerBuilding_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
           </AssociationSet>
           <AssociationSet Name="FK_Module_Buildings1" Association="Self.FK_Module_Buildings1">
             <End Role="ListOfModule" EntitySet="ListOfModule" />
@@ -1014,6 +1081,10 @@
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="PendingModules" EntitySet="PendingModules" />
           </AssociationSet>
+          <AssociationSet Name="FK_ManagerBuilding_Buildings" Association="PointersecurityModel.FK_ManagerBuilding_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_Buildings" Association="PointersecurityModel.FK_UserActivityLog_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="UserActivityLog" EntitySet="UserActivityLog" />
@@ -1034,6 +1105,10 @@
             <End Role="ListOfModule" EntitySet="ListOfModule" />
             <End Role="Module" EntitySet="Module" />
           </AssociationSet>
+          <AssociationSet Name="FK_ManagerBuilding_Manager" Association="PointersecurityModel.FK_ManagerBuilding_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+          </AssociationSet>
           <AssociationSet Name="FK_Request_Tenant" Association="PointersecurityModel.FK_Request_Tenant">
             <End Role="Tenant" EntitySet="Tenant" />
             <End Role="Requests" EntitySet="Requests" />
@@ -1045,6 +1120,14 @@
           <AssociationSet Name="AspNetUserRoles" Association="PointersecurityModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buildings_Manager" Association="PointersecurityModel.FK_Buildings_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Clients" Association="PointersecurityModel.FK_Manager_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Manager" EntitySet="Manager" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1281,7 +1364,10 @@
           <NavigationProperty Name="Apartment" Relationship="PointersecurityModel.FK_Apartment_Buildings" FromRole="Buildings" ToRole="Apartment" />
           <NavigationProperty Name="Clients" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Buildings" ToRole="Clients" />
           <NavigationProperty Name="PendingModules" Relationship="PointersecurityModel.FK_Buildings_PendingModules" FromRole="Buildings" ToRole="PendingModules" />
+          <NavigationProperty Name="ManagerBuilding" Relationship="PointersecurityModel.FK_ManagerBuilding_Buildings" FromRole="Buildings" ToRole="ManagerBuilding" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointersecurityModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
+          <Property Name="ManagersID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Manager1" Relationship="PointersecurityModel.FK_Buildings_Manager" FromRole="Buildings" ToRole="Manager" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -1298,6 +1384,7 @@
           <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Buildings_Clients" FromRole="Clients" ToRole="Buildings" />
+          <NavigationProperty Name="Manager" Relationship="PointersecurityModel.FK_Manager_Clients" FromRole="Clients" ToRole="Manager" />
         </EntityType>
         <EntityType Name="GanttLinkId">
           <Key>
@@ -1341,14 +1428,21 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="PointersecurityModel.FK_Manager_AspNetUsers" FromRole="Manager" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ManagerBuilding" Relationship="PointersecurityModel.FK_ManagerBuilding_Manager" FromRole="Manager" ToRole="ManagerBuilding" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_Buildings_Manager" FromRole="Manager" ToRole="Buildings" />
+          <Property Name="ClientID" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="PointersecurityModel.FK_Manager_Clients" FromRole="Manager" ToRole="Clients" />
         </EntityType>
         <EntityType Name="ManagerBuilding">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="PointersecurityModel.FK_ManagerBuilding_Buildings" FromRole="ManagerBuilding" ToRole="Buildings" />
+          <NavigationProperty Name="Manager" Relationship="PointersecurityModel.FK_ManagerBuilding_Manager" FromRole="ManagerBuilding" ToRole="Manager" />
         </EntityType>
         <EntityType Name="MasterProfileFields">
           <Key>
@@ -1701,6 +1795,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ManagerBuilding_Buildings">
+          <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointersecurityModel.ManagerBuilding" Role="ManagerBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ManagerBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserActivityLog_Buildings">
           <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="0..1" />
           <End Type="PointersecurityModel.UserActivityLog" Role="UserActivityLog" Multiplicity="*" />
@@ -1761,6 +1867,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ManagerBuilding_Manager">
+          <End Type="PointersecurityModel.Manager" Role="Manager" Multiplicity="0..1" />
+          <End Type="PointersecurityModel.ManagerBuilding" Role="ManagerBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ManagerBuilding">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Request_Tenant">
           <End Type="PointersecurityModel.Tenant" Role="Tenant" Multiplicity="0..1" />
           <End Type="PointersecurityModel.Requests" Role="Requests" Multiplicity="*" />
@@ -1780,6 +1898,30 @@
         <Association Name="AspNetUserRoles">
           <End Type="PointersecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="PointersecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Buildings_Manager">
+          <End Type="PointersecurityModel.Manager" Role="Manager" Multiplicity="0..1" />
+          <End Type="PointersecurityModel.Buildings" Role="Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ManagersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Clients">
+          <End Type="PointersecurityModel.Clients" Role="Clients" Multiplicity="0..1" />
+          <End Type="PointersecurityModel.Manager" Role="Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1987,6 +2129,7 @@
           <EntitySetMapping Name="Buildings">
             <EntityTypeMapping TypeName="PointersecurityModel.Buildings">
               <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="ManagersID" ColumnName="ManagersID" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
                 <ScalarProperty Name="BuildingPhone" ColumnName="BuildingPhone" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
@@ -2051,6 +2194,7 @@
           <EntitySetMapping Name="Manager">
             <EntityTypeMapping TypeName="PointersecurityModel.Manager">
               <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -2061,8 +2205,9 @@
           <EntitySetMapping Name="ManagerBuilding">
             <EntityTypeMapping TypeName="PointersecurityModel.ManagerBuilding">
               <MappingFragment StoreEntitySet="ManagerBuilding">
-                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

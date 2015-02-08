@@ -92,9 +92,49 @@ namespace SecurityMonitor.Controllers
            return View();
        }
        [HttpGet]
-       public ActionResult DeleteRole(string RoleName)
+       public ActionResult DeleteRole(string RoleName, string RoleID)
        {
-           var ObjRole = db.AspNetRoles.Where(c => c.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+           ApplicationDbContext context = new ApplicationDbContext();
+           DisplayManagerRoleDelete ObjRole = new DisplayManagerRoleDelete();
+           ObjRole.MyRoles =  db.AspNetRoles.Where(c => c.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+          
+           var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+           var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+          // ObjRole.buildingmanager = db.ManagerBuilding.Where(c => c.UserID == c.Manager.ID).ToList();           
+           
+           List<Manager> list1 = new List<Manager>();
+           List<Buildings> ListBuilding = new List<Buildings>();
+
+          // find list all manager
+           var objAllManager =  db.Manager.ToList();
+          // loop through all manager
+           foreach(var item in objAllManager)
+           {//list of role that belong to the current user
+               var ListofRoleName = userManager.GetRoles(item.AspNetUsers.Id).ToList();
+              //loop through all names 
+               foreach (var individualRoleName in ListofRoleName)
+               {//check if the current role  matches the role passed
+                   if (individualRoleName == RoleName)
+                   { //if match then load manager 
+                       Manager ObjManager = new Manager();
+                       ObjManager = db.Manager.Find(item.AspNetUsers.Id);
+                      //add manager to myManager List<>
+                      // ObjRole.MyManagers.Add(ObjManager);
+                       var objmb = db.ManagerBuilding.Where(c => c.UserID == item.AspNetUsers.Id).ToList();
+                        foreach(var item2 in objmb)
+                        {
+                            ListBuilding.Add(item2.Buildings);
+                        }
+
+                      list1.Add(ObjManager);
+                   }
+               }
+           }
+
+           ViewBag.Managers = list1;
+           ViewBag.Buildings = ListBuilding;
+
+
 
            return View(ObjRole);
        }
@@ -192,10 +232,14 @@ namespace SecurityMonitor.Controllers
            return View("ManageUserRoles");
        }
 
+       
        [HttpGet]
        public ActionResult AddManager()
        {
           var ObjManager = new ManagerVM();
+          ViewBag.clientList = db.Clients
+              .Select(c => new SelectListItem { Text = c.ClientName,
+                                                Value = c.ID.ToString() }).ToList();
           return View(ObjManager); 
        }
 
@@ -250,7 +294,7 @@ namespace SecurityMonitor.Controllers
       
         [HttpGet]
        public ActionResult SelectBuilding(DisplayClientBuilding model)
-       {
+        {
            model.Manager = db.Manager.Find(model.ManagerID);
          
             model.clients = db.Clients.ToList();
@@ -267,7 +311,7 @@ namespace SecurityMonitor.Controllers
                 model.BuildingsOnDeck.Add(Addit);
             } 
             return View(model);
-        }
+            }
 
         [HttpPost]
         public ActionResult SelectBuilding(DisplayClientBuilding model, int ClientID)
@@ -304,7 +348,8 @@ namespace SecurityMonitor.Controllers
             ManagerBuilding ObjMB = new ManagerBuilding
             {
                 BuildingID =BuildingID,
-                UserID = model.ManagerID
+                UserID = model.ManagerID,
+                 ManagerID = model.ManagerID
             };
             if (db.ManagerBuilding.Where(c => c.UserID == model.ManagerID && c.BuildingID == BuildingID).FirstOrDefault() == null)
             {
@@ -336,20 +381,33 @@ namespace SecurityMonitor.Controllers
             return View("SelectBuilding",model);
         }
         [HttpPost]
-        public ActionResult ManagerBuildingDelete(DisplayClientBuilding model)
+        public ActionResult ManagerBuildingDelete(DisplayClientBuilding model, int BuildingID2)
         {
 
             ManagerBuilding MB = db.ManagerBuilding
-                                    .Where(c => c.BuildingID == model.BuildingID && c.UserID == model.ManagerID)
+                                    .Where(c => c.BuildingID == BuildingID2 && c.UserID == model.ManagerID)
                                     .FirstOrDefault();
+           if(MB!=null)
+           {
             db.ManagerBuilding.Remove(MB);
             db.SaveChanges();
-            
-            return View("SelectBuilding", model);
+            }
+            return RedirectToAction("SelectBuilding", model);
 
         }
+        //Assign building to manager
+        public ActionResult AssignBtoM()
+        {
+            //TODO: View and manage roles manager table needs to add and remove managers
+
+            var Managers = db.Manager.ToList();
+            return View(Managers);
+        }
+
+        
 
        public RoleManager<IdentityRole> RoleManager { get; set; }
+        
        
     }
 }

@@ -18,6 +18,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         {
             this.Apartment = new HashSet<Apartment>();
             this.PendingModules = new HashSet<PendingModules>();
+            this.ManagerBuilding = new HashSet<ManagerBuilding>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
         }
     
@@ -31,10 +32,13 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public Nullable<int> ClientID { get; set; }
         public string BuildingPhone { get; set; }
         public string Manager { get; set; }
+        public string ManagersID { get; set; }
     
         public virtual ICollection<Apartment> Apartment { get; set; }
         public virtual Clients Clients { get; set; }
         public virtual ICollection<PendingModules> PendingModules { get; set; }
+        public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
+        public virtual Manager Manager1 { get; set; }
     }
 }

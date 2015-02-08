@@ -45,5 +45,6 @@ namespace SecurityMonitor.Models
         public System.Data.Entity.DbSet<SecurityMonitor.Models.UserVM> UserVMs { get; set; }
 
         public System.Data.Entity.DbSet<SecurityMonitor.Models.ClientsVM> ClientsVMs { get; set; }
+        public System.Data.Entity.DbSet<IdentityUserClaim> Claims { get; set; }
     }
 }

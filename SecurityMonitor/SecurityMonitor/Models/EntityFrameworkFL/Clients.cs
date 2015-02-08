@@ -17,6 +17,7 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public Clients()
         {
             this.Buildings = new HashSet<Buildings>();
+            this.Manager = new HashSet<Manager>();
         }
     
         public int ID { get; set; }
@@ -31,5 +32,6 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
         public string ZipCode { get; set; }
     
         public virtual ICollection<Buildings> Buildings { get; set; }
+        public virtual ICollection<Manager> Manager { get; set; }
     }
 }

@@ -5,31 +5,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-
-    <p>
-        @Html.ActionLink("Create New Role", "Addrole") | @Html.ActionLink("Manage User and Roles", "ManageUserRoles")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "DeleteRole", new {RoleName=item.Name })
-                </td>
-               
-            </tr>
-        }
-
-    </table>
+<div class="row" >
+    <div class="text-center col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-lg-4 col-md-4 col-sm-4 col-xs-4  "
+         style="padding-top:50px; padding-bottom:30px;">
+        <p>
+            @Html.ActionLink("Create New Role", "Addrole") | @Html.ActionLink("Manage User and Roles", "ManageUserRoles")
+        </p>
+    </div>
 </div>
+<div class="row">
+    <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center  ">
+        <p style="font-size:larger;">Available Roles</p>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row" style="padding-bottom:30px;">
+        <div class=" text-center col-md-offset-4 col-sm-offset-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 RoleIndex hollow3">
+            @Html.DisplayFor(modelItem => item.Name) |
+            @Html.ActionLink("Delete", "DeleteRole", new { RoleName = item.Name, RoleID = @item.Id })
+        </div>
+    </div>
+}
+
+<div class="row" style="padding-bottom:30px;"></div>
+
+

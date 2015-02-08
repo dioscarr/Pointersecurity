@@ -14,11 +14,21 @@ namespace SecurityMonitor.Models.EntityFrameworkFL
     
     public partial class Manager
     {
+        public Manager()
+        {
+            this.ManagerBuilding = new HashSet<ManagerBuilding>();
+            this.Buildings = new HashSet<Buildings>();
+        }
+    
         public string ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+        public Nullable<int> ClientID { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
+        public virtual ICollection<Buildings> Buildings { get; set; }
+        public virtual Clients Clients { get; set; }
     }
 }
