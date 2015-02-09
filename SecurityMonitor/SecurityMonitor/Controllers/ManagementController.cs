@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SecurityMonitor.Controllers
 {
-    [Authorize(Roles="Admin")]
+    //[Authorize(Roles="Admin")]
     public class ManagementController : Controller
     {
         PointersecurityEntities1 db = new PointersecurityEntities1();
@@ -155,12 +155,13 @@ namespace SecurityMonitor.Controllers
            // prepopulat roles for the view dropdown
            var list = dbContextRole.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
            ViewBag.Roles = list;
+           ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            return View();
        }
 
        [HttpPost]
        [ValidateAntiForgeryToken]
-       public ActionResult RoleAddToUser(string UserName, string RoleName)
+       public ActionResult RoleAddToUser(string UserName, string RoleName, string FirstName, string LastName, string Phone)
        {
           
             ApplicationDbContext context = new ApplicationDbContext();
@@ -173,11 +174,39 @@ namespace SecurityMonitor.Controllers
             var roleresult = UserManager.AddToRole(currentUserID, RoleName);
            
             ViewBag.ResultMessage = "Role created successfully !";
+
+            var ObjisitManager = db.Manager.Find(currentUserID);
+            Manager ObjManager = new Manager();
+            if (ObjisitManager != null)
+            {//update
+                // ObjManager.ID = ObjisitManager.ID;
+                //ObjManager.FirstName = ObjisitManager.FirstName;
+                //ObjManager.LastName = ObjisitManager.LastName;
+                //ObjManager.Phone = ObjisitManager.Phone;
+                //db.Manager.Attach(ObjManager);
+                //var Entry = db.Entry(ObjManager);
+                //Entry.Property(c => c.FirstName).IsModified = true;
+                //Entry.Property(c => c.LastName).IsModified = true;
+                //Entry.Property(c => c.Phone).IsModified = true;
+            }
+            else 
+            {//insert
+                ObjManager.ID = currentUserID;
+                ObjManager.FirstName = FirstName;
+                ObjManager.LastName = LastName;
+                ObjManager.Phone = Phone;
+                db.Manager.Add(ObjManager);
+                db.SaveChanges();
+            }
+
+
+
            
+
            // prepopulat roles for the view dropdown
            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
            ViewBag.Roles = list;
-
+           ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            return View("ManageUserRoles");
        }
 
@@ -199,6 +228,7 @@ namespace SecurityMonitor.Controllers
                var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
           
                ViewBag.Roles = list;
+               ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            }
            return View("ManageUserRoles");
        }
@@ -218,15 +248,18 @@ namespace SecurityMonitor.Controllers
                UserManager.RemoveFromRole(currentUserID, RoleName);
                
                ViewBag.ResultMessage = "Role removed from this user successfully !";
+     
            }
            else
            {
                ViewBag.ResultMessage = "This user doesn't belong to selected role.";
+             
            }
            ViewBag.RolesForThisUser = Roles.GetRolesForUser(UserName);
            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
           
            ViewBag.Roles = list;
+           ViewBag.clientlist = db.Clients.Select(c => new SelectListItem {Text = c.ClientName, Value=c.ID.ToString() }).ToList();
 
 
            return View("ManageUserRoles");
@@ -272,8 +305,9 @@ namespace SecurityMonitor.Controllers
                                        ID = AppUser.Id,  
                                        FirstName=FullName[0].ToString(), 
                                        LastName = FullName[1].ToString(),  
-                                       Phone = model.Phone};
-           db.Manager.Add(mgr);
+                                       Phone = model.Phone,
+                                        ClientID = model.clientID};
+           db.Manager.Add(mgr); 
            context.Users.Add(AppUser);
           
            await context.SaveChangesAsync();
@@ -287,7 +321,7 @@ namespace SecurityMonitor.Controllers
            var Result = UserManager.AddToRole(AppUser.Id, "Manager");
 
            DisplayClientBuilding ObjDCB = new DisplayClientBuilding(){
-            ManagerID = AppUser.Id};
+            ManagerID = AppUser.Id, ClientID = model.clientID};
 
            return RedirectToAction("SelectBuilding", ObjDCB);
        }
@@ -297,7 +331,7 @@ namespace SecurityMonitor.Controllers
         {
            model.Manager = db.Manager.Find(model.ManagerID);
          
-            model.clients = db.Clients.ToList();
+            model.clients = db.Clients.Where(c=>c.ID == model.ClientID).ToList();
             //get all entries that belong to the current Manager on the managerbuilding table
            
             model.ManagerBuildings = db.ManagerBuilding.Where(c => c.UserID == model.ManagerID).ToList();
@@ -319,7 +353,7 @@ namespace SecurityMonitor.Controllers
             
             model.ClientID = ClientID;
             model.Manager = db.Manager.Find(model.ManagerID);
-            model.clients= db.Clients.ToList();
+            model.clients= db.Clients.Where(c=>c.ID == model.ClientID).ToList();
             
             if (model.clients == null){ return View(model); }
             
@@ -357,7 +391,7 @@ namespace SecurityMonitor.Controllers
                 db.SaveChanges();
             }
             //get All clients
-            model.clients = db.Clients.ToList();
+            model.clients = db.Clients.Where(c => c.ID == model.ClientID).ToList();
             //get all entries that belong to the current Manager on the managerbuilding table
             model.ManagerBuildings = db.ManagerBuilding.Where(c => c.UserID == model.ManagerID).ToList();
             //selected client's building

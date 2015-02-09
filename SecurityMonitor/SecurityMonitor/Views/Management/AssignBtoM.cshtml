@@ -11,16 +11,22 @@
             <p style="font-size:30px;">Managers</p>
         </div>
     </div>
+<div class="row " style="border-bottom:1px solid lightgrey;">
+    <div class="col-md-2 managerlistsettings ">Name </div>
+    <div class="col-md-2 managerlistsettings">Phone </div>
+    <div class="col-md-3 managerlistsettings">UserName</div>
+</div>
     @foreach (var item in Model)
     {
         DisplayClientBuilding mymodel = new DisplayClientBuilding()
         {
-            ManagerID = @item.ID
+            ManagerID = @item.ID,
+           ClientID= @item.Clients.ID
         };
         <div class="row  hollow3" onclick="location.href = '@Url.Action("SelectBuilding", "management", mymodel)'">
             <div class="col-md-2 managerlistsettings ">@item.FirstName @item.LastName </div>
             <div class="col-md-2 managerlistsettings">@item.Phone </div>
-            <div class="col-md-3 managerlistsettings">@item.FirstName @item.AspNetUsers.UserName</div>
+            <div class="col-md-3 managerlistsettings"> @item.AspNetUsers.UserName</div>
         </div>
 
     }

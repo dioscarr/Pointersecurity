@@ -38,6 +38,7 @@
             using (Html.BeginForm("SelectBuilding", "Management", new { ClientID = @item.ID, ManagerID = @Model.ManagerID }, FormMethod.Post, null))
             {
                 @Html.HiddenFor(c => c.ManagerID, @Model.ManagerID)
+            @Html.HiddenFor(c=>c.ClientID)
                 <button class="row  hollow3 text-center settingstyle">
                     <p style="font-size:20px;">
                        @item.ClientName
@@ -92,6 +93,8 @@
             @Html.HiddenFor(model => model.ClientID, Model.ClientID)
             @Html.HiddenFor(c => c.BuildingID)
             @Html.HiddenFor(c => c.ManagerID, Model.ManagerID)
+            @Html.HiddenFor(c=>c.ClientID)
+
             <button id="ApplayID" class="row  hollow3 text-center settingstyle " >
                 <p style="font-size:30px;">
                     Apply
@@ -125,6 +128,7 @@
                     @Html.HiddenFor(c => c.Manager.Phone, @Model.Manager.Phone)
                     @Html.Hidden("BuildingID2", @item.ID)
                     @Html.HiddenFor(c => c.ManagerID, Model.ManagerID)
+                @Html.HiddenFor(c=>c.ClientID)
                     <div class=" clickitagain row settingstyle hollow3" style="border:1px solid lightgrey;" data-myid2="@item.ID">
                         @item.BuildingName | @item.Address | @item.City | <button class="btn btn-link">Remove from manager</button>
                     </div>

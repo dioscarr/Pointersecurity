@@ -1,66 +1,99 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ManageUserRoles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Manage User Roles</h2>
-@Html.ActionLink("Create New Role", "Addrole") | @Html.ActionLink("Manage User Role", "ManageUserRoles")
-<hr />
-
-<h2>Role Add to User</h2>
-
-@using (Html.BeginForm("RoleAddToUser", "Management"))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <p>
-        Username : @Html.TextBox("UserName")
-        Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
-
-    </p>
-
-    <input type="submit" value="Save" />
-}
-<hr />
-<h3>Get Roles for a User</h3>
-@using (Html.BeginForm("GetRoles", "Management"))
-{
-    @Html.AntiForgeryToken()
-    <p>
-        Username : @Html.TextBox("UserName")
-        <input type="submit" value="Get Roles for this User" />
-    </p>
-}
-
-@if (ViewBag.RolesForThisUser != null)
-{
-    <div style="background-color:yellow;">
-        <h3>Roles for this user </h3>
-        <ol>
-            @foreach (string s in ViewBag.RolesForThisUser)
-            {
-                <li>@s</li>
-            }
-        </ol>
+<div class="row" style="border-bottom:1px solid lightgrey;">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="position:relative; left:450px; padding-bottom:40px;">
+        <h2>Manage User Roles</h2>
+        @Html.ActionLink("Create New Role", "Addrole") | @Html.ActionLink("Manage User Role", "ManageUserRoles")
+        
     </div>
-}
+</div>
+<div class="row" style="border-bottom:1px solid lightgrey; padding-top:100px; padding-bottom:100px;">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="position:relative; left:100px">
+        <h2>Role Add to User</h2>
 
-<hr />
-<h3>Delete A User from a Role</h3>
+        @using (Html.BeginForm("RoleAddToUser", "Management"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-@using (Html.BeginForm("DeleteRoleForUser", "Management"))
+            <p>
+                Username : @Html.TextBox("UserName", null, new { @class = "form-control" })
+                Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...", new {id="myRoles", @class = "form-control" })
+                <div id="myclients" style="display:none;">
+                    Role Name: @Html.DropDownList("Clients", (IEnumerable<SelectListItem>)ViewBag.clientlist, "Select a client", new { @class = "form-control" })
+                    
+                </div>
+            </p>
+
+    <input type="submit" class="btn btn-default" style="width:400px;" value="Save" />
+        }
+        
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left:100px;">
+        <h3>Get Roles for a User</h3>
+        @using (Html.BeginForm("GetRoles", "Management"))
+        {
+            @Html.AntiForgeryToken()
+            <p>
+                Username : @Html.TextBox("UserName", null, new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" style="width:400px;" value="Get Roles for this User" />
+            </p>
+        }
+
+        @if (ViewBag.RolesForThisUser != null)
+        {
+            <div style="background-color:yellow;">
+                <h3>Roles for this user </h3>
+                <ol>
+                    @foreach (string s in ViewBag.RolesForThisUser)
+                    {
+                        <li>@s</li>
+                    }
+                </ol>
+            </div>
+        }
+
+       
+    </div>
+    </div>
+<div class="row">
+    
+</div>
+<div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="position:relative; left:450px; padding-top:40px; padding-bottom:50px;">
+        <h3>Delete A User from a Role</h3>
+
+        @using (Html.BeginForm("DeleteRoleForUser", "Management"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <p>
+                Username : @Html.TextBox("UserName",null,new { @class = "form-control" })
+                Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...", new {@class="form-control" })
+
+            </p>
+
+    <input type="submit" value="Delete this user from Role" class="btn btn-default" style="width:400px;" />
+        }
+    </div>
+    </div>
+
+@section scripts
 {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <p>
-        Username : @Html.TextBox("UserName")
-        Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
-
-    </p>
-
-    <input type="submit" value="Delete this user from Role" />
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+           // alert('yes');
+            $('#myRoles').change(function () {
+                if ($(this).val() == "Manager") {
+                    $('#myclients').show();
+                }
+                else { $('#myclients').css("display","none")}
+            });
+        });
+    </script>
 }

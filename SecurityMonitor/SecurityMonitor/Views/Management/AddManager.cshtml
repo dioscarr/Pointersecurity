@@ -65,6 +65,15 @@
                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
             </div>
         </div>
+        @{List<SelectListItem> objclientlist = (List<SelectListItem>)ViewBag.clientList;}
+       
+         <div class="form-group centermypform">
+            @Html.Label("Client", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               
+              @Html.DropDownListFor(c => c.clientID, objclientlist,"Select a client", new { @class = "form-control" })
+            </div>
+        </div>
 
         <div class="form-group centermypform">
             <div class="col-md-offset-2 col-md-10">
