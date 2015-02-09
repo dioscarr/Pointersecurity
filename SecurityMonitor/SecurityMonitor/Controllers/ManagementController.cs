@@ -21,7 +21,7 @@ namespace SecurityMonitor.Controllers
         {
 
             return View();
-        }
+        } 
 
 
 
