@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/23/2015 21:25:59
+-- Date Created: 02/09/2015 14:06:12
 -- Generated from EDMX file: C:\Users\dioscar\Source\Repos\Pointersecurity\SecurityMonitor\SecurityMonitor\Models\EntityFrameworkFL\PointerEntity.edmx
 -- --------------------------------------------------
 
@@ -56,6 +56,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Buildings_Clients]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Buildings] DROP CONSTRAINT [FK_Buildings_Clients];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Buildings_Manager]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Buildings] DROP CONSTRAINT [FK_Buildings_Manager];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Buildings_PendingModules]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PendingModules] DROP CONSTRAINT [FK_Buildings_PendingModules];
+GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId];
 GO
@@ -68,8 +74,29 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Manager_AspNetUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Manager] DROP CONSTRAINT [FK_Manager_AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Manager_Clients]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Manager] DROP CONSTRAINT [FK_Manager_Clients];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ManagerBuilding_Buildings]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ManagerBuilding] DROP CONSTRAINT [FK_ManagerBuilding_Buildings];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ManagerBuilding_Manager]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ManagerBuilding] DROP CONSTRAINT [FK_ManagerBuilding_Manager];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Module_Buildings1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Module] DROP CONSTRAINT [FK_Module_Buildings1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Module_Listofmodule]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PendingModules] DROP CONSTRAINT [FK_Module_Listofmodule];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PendingModuleRequests_Buildings1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Module] DROP CONSTRAINT [FK_PendingModuleRequests_Buildings1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PendingModuleRequests1_Buildings1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Module] DROP CONSTRAINT [FK_PendingModuleRequests1_Buildings1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Request_Tenant]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Requests] DROP CONSTRAINT [FK_Request_Tenant];
@@ -163,11 +190,20 @@ GO
 IF OBJECT_ID(N'[dbo].[ListOfModule]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ListOfModule];
 GO
+IF OBJECT_ID(N'[dbo].[Manager]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Manager];
+GO
+IF OBJECT_ID(N'[dbo].[ManagerBuilding]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ManagerBuilding];
+GO
 IF OBJECT_ID(N'[dbo].[MasterProfileFields]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MasterProfileFields];
 GO
 IF OBJECT_ID(N'[dbo].[Module]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Module];
+GO
+IF OBJECT_ID(N'[dbo].[PendingModules]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PendingModules];
 GO
 IF OBJECT_ID(N'[dbo].[ReqType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ReqType];
@@ -390,7 +426,8 @@ CREATE TABLE [dbo].[Buildings] (
     [NumberOfApartment] int  NULL,
     [ClientID] int  NULL,
     [BuildingPhone] nvarchar(10)  NULL,
-    [Manager] nvarchar(max)  NULL
+    [Manager] nvarchar(max)  NULL,
+    [ManagersID] nvarchar(128)  NULL
 );
 GO
 
@@ -431,11 +468,55 @@ CREATE TABLE [dbo].[GanttTask] (
 );
 GO
 
+-- Creating table 'ListOfModule'
+CREATE TABLE [dbo].[ListOfModule] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [ModuleName] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Manager'
+CREATE TABLE [dbo].[Manager] (
+    [ID] nvarchar(128)  NOT NULL,
+    [FirstName] nvarchar(100)  NOT NULL,
+    [LastName] nvarchar(100)  NOT NULL,
+    [Phone] nvarchar(10)  NOT NULL,
+    [ClientID] int  NULL
+);
+GO
+
+-- Creating table 'ManagerBuilding'
+CREATE TABLE [dbo].[ManagerBuilding] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [BuildingID] int  NOT NULL,
+    [UserID] nvarchar(128)  NOT NULL,
+    [ManagerID] nvarchar(128)  NULL
+);
+GO
+
 -- Creating table 'MasterProfileFields'
 CREATE TABLE [dbo].[MasterProfileFields] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Label] nvarchar(max)  NOT NULL,
     [Controller] nvarchar(2)  NOT NULL
+);
+GO
+
+-- Creating table 'Module'
+CREATE TABLE [dbo].[Module] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [BuildingID] int  NOT NULL,
+    [ServiceName] nvarchar(max)  NOT NULL,
+    [ListOfModuleID] int  NOT NULL
+);
+GO
+
+-- Creating table 'PendingModules'
+CREATE TABLE [dbo].[PendingModules] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [BuildingID] int  NOT NULL,
+    [ServiceName] nvarchar(max)  NOT NULL,
+    [ListOfModuleID] int  NOT NULL
 );
 GO
 
@@ -463,6 +544,13 @@ CREATE TABLE [dbo].[Role] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [UserID] nvarchar(128)  NOT NULL,
     [RoleID] nvarchar(128)  NOT NULL
+);
+GO
+
+-- Creating table 'States'
+CREATE TABLE [dbo].[States] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [State] varchar(2)  NOT NULL
 );
 GO
 
@@ -510,29 +598,6 @@ CREATE TABLE [dbo].[UserActivityLog] (
     [FunctionPerformed] nvarchar(max)  NOT NULL,
     [DateOfEvent] datetime  NOT NULL,
     [Message] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'States'
-CREATE TABLE [dbo].[States] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [State] varchar(2)  NOT NULL
-);
-GO
-
--- Creating table 'Module'
-CREATE TABLE [dbo].[Module] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [BuildingID] int  NOT NULL,
-    [ServiceName] nvarchar(max)  NOT NULL,
-    [ListOfModuleID] int  NOT NULL
-);
-GO
-
--- Creating table 'ListOfModule'
-CREATE TABLE [dbo].[ListOfModule] (
-    [ID] int IDENTITY(1,1) NOT NULL,
-    [ModuleName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -674,9 +739,39 @@ ADD CONSTRAINT [PK_GanttTask]
     PRIMARY KEY CLUSTERED ([GantTaskID] ASC);
 GO
 
+-- Creating primary key on [ID] in table 'ListOfModule'
+ALTER TABLE [dbo].[ListOfModule]
+ADD CONSTRAINT [PK_ListOfModule]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Manager'
+ALTER TABLE [dbo].[Manager]
+ADD CONSTRAINT [PK_Manager]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'ManagerBuilding'
+ALTER TABLE [dbo].[ManagerBuilding]
+ADD CONSTRAINT [PK_ManagerBuilding]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
 -- Creating primary key on [ID] in table 'MasterProfileFields'
 ALTER TABLE [dbo].[MasterProfileFields]
 ADD CONSTRAINT [PK_MasterProfileFields]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [PK_Module]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'PendingModules'
+ALTER TABLE [dbo].[PendingModules]
+ADD CONSTRAINT [PK_PendingModules]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -695,6 +790,12 @@ GO
 -- Creating primary key on [ID] in table 'Role'
 ALTER TABLE [dbo].[Role]
 ADD CONSTRAINT [PK_Role]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'States'
+ALTER TABLE [dbo].[States]
+ADD CONSTRAINT [PK_States]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -719,24 +820,6 @@ GO
 -- Creating primary key on [ID] in table 'UserActivityLog'
 ALTER TABLE [dbo].[UserActivityLog]
 ADD CONSTRAINT [PK_UserActivityLog]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
--- Creating primary key on [ID] in table 'States'
-ALTER TABLE [dbo].[States]
-ADD CONSTRAINT [PK_States]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
--- Creating primary key on [ID] in table 'Module'
-ALTER TABLE [dbo].[Module]
-ADD CONSTRAINT [PK_Module]
-    PRIMARY KEY CLUSTERED ([ID] ASC);
-GO
-
--- Creating primary key on [ID] in table 'ListOfModule'
-ALTER TABLE [dbo].[ListOfModule]
-ADD CONSTRAINT [PK_ListOfModule]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -948,6 +1031,15 @@ ON [dbo].[AspNetUserLogins]
     ([UserId]);
 GO
 
+-- Creating foreign key on [ID] in table 'Manager'
+ALTER TABLE [dbo].[Manager]
+ADD CONSTRAINT [FK_Manager_AspNetUsers]
+    FOREIGN KEY ([ID])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
 -- Creating foreign key on [UserID] in table 'Role'
 ALTER TABLE [dbo].[Role]
 ADD CONSTRAINT [FK_Role_AspNetUsers]
@@ -993,6 +1085,36 @@ ON [dbo].[Buildings]
     ([ClientID]);
 GO
 
+-- Creating foreign key on [BuildingID] in table 'PendingModules'
+ALTER TABLE [dbo].[PendingModules]
+ADD CONSTRAINT [FK_Buildings_PendingModules]
+    FOREIGN KEY ([BuildingID])
+    REFERENCES [dbo].[Buildings]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Buildings_PendingModules'
+CREATE INDEX [IX_FK_Buildings_PendingModules]
+ON [dbo].[PendingModules]
+    ([BuildingID]);
+GO
+
+-- Creating foreign key on [BuildingID] in table 'ManagerBuilding'
+ALTER TABLE [dbo].[ManagerBuilding]
+ADD CONSTRAINT [FK_ManagerBuilding_Buildings]
+    FOREIGN KEY ([BuildingID])
+    REFERENCES [dbo].[Buildings]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ManagerBuilding_Buildings'
+CREATE INDEX [IX_FK_ManagerBuilding_Buildings]
+ON [dbo].[ManagerBuilding]
+    ([BuildingID]);
+GO
+
 -- Creating foreign key on [BuildingID] in table 'UserActivityLog'
 ALTER TABLE [dbo].[UserActivityLog]
 ADD CONSTRAINT [FK_UserActivityLog_Buildings]
@@ -1006,6 +1128,81 @@ GO
 CREATE INDEX [IX_FK_UserActivityLog_Buildings]
 ON [dbo].[UserActivityLog]
     ([BuildingID]);
+GO
+
+-- Creating foreign key on [ListOfModuleID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [FK_Module_Buildings1]
+    FOREIGN KEY ([ListOfModuleID])
+    REFERENCES [dbo].[ListOfModule]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Module_Buildings1'
+CREATE INDEX [IX_FK_Module_Buildings1]
+ON [dbo].[Module]
+    ([ListOfModuleID]);
+GO
+
+-- Creating foreign key on [ListOfModuleID] in table 'PendingModules'
+ALTER TABLE [dbo].[PendingModules]
+ADD CONSTRAINT [FK_Module_Listofmodule]
+    FOREIGN KEY ([ListOfModuleID])
+    REFERENCES [dbo].[ListOfModule]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Module_Listofmodule'
+CREATE INDEX [IX_FK_Module_Listofmodule]
+ON [dbo].[PendingModules]
+    ([ListOfModuleID]);
+GO
+
+-- Creating foreign key on [ListOfModuleID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [FK_PendingModuleRequests_Buildings1]
+    FOREIGN KEY ([ListOfModuleID])
+    REFERENCES [dbo].[ListOfModule]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PendingModuleRequests_Buildings1'
+CREATE INDEX [IX_FK_PendingModuleRequests_Buildings1]
+ON [dbo].[Module]
+    ([ListOfModuleID]);
+GO
+
+-- Creating foreign key on [ListOfModuleID] in table 'Module'
+ALTER TABLE [dbo].[Module]
+ADD CONSTRAINT [FK_PendingModuleRequests1_Buildings1]
+    FOREIGN KEY ([ListOfModuleID])
+    REFERENCES [dbo].[ListOfModule]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PendingModuleRequests1_Buildings1'
+CREATE INDEX [IX_FK_PendingModuleRequests1_Buildings1]
+ON [dbo].[Module]
+    ([ListOfModuleID]);
+GO
+
+-- Creating foreign key on [ManagerID] in table 'ManagerBuilding'
+ALTER TABLE [dbo].[ManagerBuilding]
+ADD CONSTRAINT [FK_ManagerBuilding_Manager]
+    FOREIGN KEY ([ManagerID])
+    REFERENCES [dbo].[Manager]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ManagerBuilding_Manager'
+CREATE INDEX [IX_FK_ManagerBuilding_Manager]
+ON [dbo].[ManagerBuilding]
+    ([ManagerID]);
 GO
 
 -- Creating foreign key on [TenantID] in table 'Requests'
@@ -1071,34 +1268,34 @@ ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
 GO
 
--- Creating foreign key on [BuildingID] in table 'Module'
-ALTER TABLE [dbo].[Module]
-ADD CONSTRAINT [FK_Module_Buildings1]
-    FOREIGN KEY ([BuildingID])
-    REFERENCES [dbo].[Buildings]
+-- Creating foreign key on [ManagersID] in table 'Buildings'
+ALTER TABLE [dbo].[Buildings]
+ADD CONSTRAINT [FK_Buildings_Manager]
+    FOREIGN KEY ([ManagersID])
+    REFERENCES [dbo].[Manager]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_Module_Buildings1'
-CREATE INDEX [IX_FK_Module_Buildings1]
-ON [dbo].[Module]
-    ([BuildingID]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_Buildings_Manager'
+CREATE INDEX [IX_FK_Buildings_Manager]
+ON [dbo].[Buildings]
+    ([ManagersID]);
 GO
 
--- Creating foreign key on [ListOfModuleID] in table 'Module'
-ALTER TABLE [dbo].[Module]
-ADD CONSTRAINT [FK_Module_Buildings11]
-    FOREIGN KEY ([ListOfModuleID])
-    REFERENCES [dbo].[ListOfModule]
+-- Creating foreign key on [ClientID] in table 'Manager'
+ALTER TABLE [dbo].[Manager]
+ADD CONSTRAINT [FK_Manager_Clients]
+    FOREIGN KEY ([ClientID])
+    REFERENCES [dbo].[Clients]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_Module_Buildings11'
-CREATE INDEX [IX_FK_Module_Buildings11]
-ON [dbo].[Module]
-    ([ListOfModuleID]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_Manager_Clients'
+CREATE INDEX [IX_FK_Manager_Clients]
+ON [dbo].[Manager]
+    ([ClientID]);
 GO
 
 -- --------------------------------------------------
