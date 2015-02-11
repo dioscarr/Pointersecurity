@@ -18,19 +18,19 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
             <p>
-                Username : @Html.TextBox("UserName", null, new { @class = "form-control" })
+                Username :@Html.TextBox("UserName",null , new { @class = "form-control" })
                 Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...", new {id="myRoles", @class = "form-control" })
                 <div id="myclients" style="display:none;">
-                    Role Name: @Html.DropDownList("Clients", (IEnumerable<SelectListItem>)ViewBag.clientlist, "Select a client", new { @class = "form-control" })
-                    
+                    Role Client Name: @Html.DropDownList("Clients", (IEnumerable<SelectListItem>)ViewBag.clientlist, "Select a client", new { @class = "form-control" })
+                    First Name: @Html.TextBox("FirstName",null, new { @class = "form-control" })
+                    Last Name:@Html.TextBox("LastName", null, new { @class = "form-control" })
+                    Last Name:@Html.TextBox("Phone", null, new { @class = "form-control" })
+
                 </div>
             </p>
-
     <input type="submit" class="btn btn-default" style="width:400px;" value="Save" />
         }
-        
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left:100px;">
         <h3>Get Roles for a User</h3>
@@ -42,7 +42,6 @@
                 <input type="submit" class="btn btn-default" style="width:400px;" value="Get Roles for this User" />
             </p>
         }
-
         @if (ViewBag.RolesForThisUser != null)
         {
             <div style="background-color:yellow;">
@@ -55,8 +54,6 @@
                 </ol>
             </div>
         }
-
-       
     </div>
     </div>
 <div class="row">

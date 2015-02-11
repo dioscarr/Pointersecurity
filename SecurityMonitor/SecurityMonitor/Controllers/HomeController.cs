@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using SecurityMonitor.Models.EntityFrameworkFL;
+using SecurityMonitor.Models.Azure;
 
 namespace SecurityMonitor.Controllers
 {

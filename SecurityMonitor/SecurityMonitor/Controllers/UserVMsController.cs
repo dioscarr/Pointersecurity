@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using SecurityMonitor.Models.EntityFrameworkFL;
+using SecurityMonitor.Models.Azure;
 using SecurityMonitor.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;

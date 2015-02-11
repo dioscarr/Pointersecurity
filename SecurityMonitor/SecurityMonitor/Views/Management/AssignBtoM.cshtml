@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SecurityMonitor.Models.EntityFrameworkFL.Manager>
+﻿@model IEnumerable<SecurityMonitor.Models.Azure.Manager>
 @using SecurityMonitor.Models;
 
     <div class="row">
@@ -16,18 +16,23 @@
     <div class="col-md-2 managerlistsettings">Phone </div>
     <div class="col-md-3 managerlistsettings">UserName</div>
 </div>
-    @foreach (var item in Model)
-    {
-        DisplayClientBuilding mymodel = new DisplayClientBuilding()
-        {
-            ManagerID = @item.ID,
-           ClientID= @item.Clients.ID
-        };
-        <div class="row  hollow3" onclick="location.href = '@Url.Action("SelectBuilding", "management", mymodel)'">
-            <div class="col-md-2 managerlistsettings ">@item.FirstName @item.LastName </div>
-            <div class="col-md-2 managerlistsettings">@item.Phone </div>
-            <div class="col-md-3 managerlistsettings"> @item.AspNetUsers.UserName</div>
-        </div>
-
-    }
+   @if (Model != null)
+   {
+       foreach (var item in Model)
+       {
+           if (item.Clients != null)
+           {
+               DisplayClientBuilding mymodel = new DisplayClientBuilding()
+               {
+                   ManagerID = @item.ID,
+                   ClientID = @item.Clients.ID
+               };
+            <div class="row  hollow3" onclick="location.href = '@Url.Action("SelectBuilding", "management", mymodel)'">
+                <div class="col-md-2 managerlistsettings ">@item.FirstName @item.LastName </div>
+                <div class="col-md-2 managerlistsettings">@item.Phone </div>
+                <div class="col-md-3 managerlistsettings"> @item.AspNetUsers.UserName</div>
+            </div>
+           }
+       }
+   }
 

@@ -230,142 +230,106 @@
     <Compile Include="Models\ApartmentdeleteAll.cs" />
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\Azure\Apartment.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\AspNetRoles.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\AspNetUserClaims.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\AspNetUserLogins.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\AspNetUsers.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Buildings.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Clients.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\C__MigrationHistory.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\dbEFAzure.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbEFAzure.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\dbEFAzure.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\dbEFAzure.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbEFAzure.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\GanttLinkId.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\GanttTask.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\ListOfModule.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Manager.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\ManagerBuilding.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\MasterProfileFields.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Module.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\PendingModules.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\ReqType.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Requests.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Role.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\States.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\sysdiagrams.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\Tenant.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\User.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Azure\UserActivityLog.cs">
+      <DependentUpon>dbEFAzure.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
     <Compile Include="Models\DisplayClientBuilding.cs" />
     <Compile Include="Models\DisplayManagerRoleDelete.cs" />
-    <Compile Include="Models\EntityFrameworkFL\Apartment.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetRoles.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetUserClaims.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetUserLogins.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\AspNetUsers.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_Applications.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_Membership.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_Paths.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationAllUsers.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_PersonalizationPerUser.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_Profile.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_Roles.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_SchemaVersions.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_Users.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\aspnet_WebEvent_Events.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Buildings.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Clients.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\C__MigrationHistory.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\GanttLinkId.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\GanttTask.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\ListOfModule.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Manager.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\ManagerBuilding.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\MasterProfileFields.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Module.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PendingModules.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PointerEntity1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\ReqType.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Requests.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Role.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\States.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\sysdiagrams.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\Tenant.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\User.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\UserActivityLog.cs">
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ErrorMessageVM.cs" />
     <Compile Include="Models\JsonVM.cs" />
     <Compile Include="Models\ManagerVM.cs" />
     <Compile Include="Models\MasterProfileVM.cs" />
     <Compile Include="Models\myController.cs" />
-    <Compile Include="Models\EntityFrameworkFL\PointerEntity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PointerEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PointerEntity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PointerEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFrameworkFL\PointerEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PointerEntity.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\managementVM.cs" />
     <Compile Include="Models\RegisterManagerVM.cs" />
-    <Compile Include="Models\ReqType.cs" />
     <Compile Include="Models\ReqTypeCount.cs" />
     <Compile Include="Models\RequestForTodayVM.cs" />
     <Compile Include="Models\RequestVM.cs" />
@@ -594,26 +558,8 @@
     <Content Include="img\solution.jpg" />
     <Content Include="img\trash.png" />
     <Content Include="img\whiteinterior.jpg" />
-    <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EntityFrameworkFL\PointerEntity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PointerEntity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EntityFrameworkFL\PointerEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointerEntity.edmx</DependentUpon>
-      <LastGenOutput>PointerEntity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EntityFrameworkFL\PointerEntity.edmx.diagram">
-      <DependentUpon>PointerEntity.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\EntityFrameworkFL\PointerEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointerEntity.edmx</DependentUpon>
-      <LastGenOutput>PointerEntity1.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
     <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js" />
@@ -780,6 +726,23 @@
     <Content Include="Scripts\HighChart\themes\grid.js" />
     <Content Include="Scripts\HighChart\themes\sand-signika.js" />
     <Content Include="Scripts\HighChart\themes\skies.js" />
+    <EntityDeploy Include="Models\Azure\dbEFAzure.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbEFAzure.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Azure\dbEFAzure.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbEFAzure.edmx</DependentUpon>
+      <LastGenOutput>dbEFAzure.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Azure\dbEFAzure.edmx.diagram">
+      <DependentUpon>dbEFAzure.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Azure\dbEFAzure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbEFAzure.edmx</DependentUpon>
+      <LastGenOutput>dbEFAzure.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

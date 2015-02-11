@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SecurityMonitor.Models.EntityFrameworkFL;
+using SecurityMonitor.Models.Azure;
 using SecurityMonitor.Models;
 using System.Net.Http;
 using System.Net;

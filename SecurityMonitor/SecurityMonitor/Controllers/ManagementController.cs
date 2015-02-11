@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SecurityMonitor.Models.EntityFrameworkFL;
+using SecurityMonitor.Models.Azure;
 using SecurityMonitor.Models;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -169,8 +169,18 @@ namespace SecurityMonitor.Controllers
 
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            var currentUserID = db.AspNetUsers.FirstOrDefault(c => c.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).Id;
+            var CurrentUser = db.AspNetUsers.FirstOrDefault(c => c.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
 
+            
+            if (CurrentUser == null)
+            {
+                 ViewBag.Roles  = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                
+                ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
+                ViewBag.ResultMessage = "There is no user with this Username !";
+                return View("ManageUserRoles");
+            }
+            var currentUserID = CurrentUser.Id;
             var roleresult = UserManager.AddToRole(currentUserID, RoleName);
            
             ViewBag.ResultMessage = "Role created successfully !";
@@ -204,8 +214,7 @@ namespace SecurityMonitor.Controllers
            
 
            // prepopulat roles for the view dropdown
-           var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-           ViewBag.Roles = list;
+          ViewBag.Roles  = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
            ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            return View("ManageUserRoles");
        }
@@ -220,14 +229,21 @@ namespace SecurityMonitor.Controllers
                ApplicationDbContext context = new ApplicationDbContext();
                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-               var currentUserID = db.AspNetUsers
-                   .FirstOrDefault(c => c.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).Id;
+               var CurrentUser = db.AspNetUsers.FirstOrDefault(c => c.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
 
-              
+               if (CurrentUser == null)
+               {
+                   // prepopulat roles for the view dropdown
+                   ViewBag.Roles = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                   ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
+      
+                   ViewBag.ResultMessage = "There is no user with this Username !";
+                   return View("ManageUserRoles");
+               }
+               var currentUserID = CurrentUser.Id;
                ViewBag.RolesForThisUser = UserManager.GetRoles(currentUserID);
-               var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-          
-               ViewBag.Roles = list;
+               // prepopulat roles for the view dropdown
+               ViewBag.Roles = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
                ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            }
            return View("ManageUserRoles");
@@ -240,9 +256,19 @@ namespace SecurityMonitor.Controllers
        {
            ApplicationDbContext context = new ApplicationDbContext();
            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-           var currentUserID = db.AspNetUsers
-                   .FirstOrDefault(c => c.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).Id;
+           var CurrentUser = db.AspNetUsers.FirstOrDefault(c => c.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase));
 
+
+           if (CurrentUser == null)
+           {
+               // prepopulat roles for the view dropdown
+               ViewBag.Roles = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+               ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
+      
+               ViewBag.ResultMessage = "There is no user with this Username !";
+               return View("ManageUserRoles");
+           }
+           var currentUserID = CurrentUser.Id;
            if (UserManager.IsInRole(currentUserID, RoleName))
            {
                UserManager.RemoveFromRole(currentUserID, RoleName);
@@ -256,12 +282,10 @@ namespace SecurityMonitor.Controllers
              
            }
            ViewBag.RolesForThisUser = Roles.GetRolesForUser(UserName);
-           var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-          
-           ViewBag.Roles = list;
-           ViewBag.clientlist = db.Clients.Select(c => new SelectListItem {Text = c.ClientName, Value=c.ID.ToString() }).ToList();
-
-
+           // prepopulat roles for the view dropdown
+           ViewBag.Roles = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+           ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
+      
            return View("ManageUserRoles");
        }
 

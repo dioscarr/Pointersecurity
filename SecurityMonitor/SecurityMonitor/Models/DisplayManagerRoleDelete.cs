@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using SecurityMonitor.Models.EntityFrameworkFL;
+using SecurityMonitor.Models.Azure;
 
 namespace SecurityMonitor.Models
 {

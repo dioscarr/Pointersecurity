@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using SecurityMonitor.Models.EntityFrameworkFL;
+using SecurityMonitor.Models.Azure;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
 using System.Threading.Tasks;
 using System.Net;
 using System.Data.Entity;
+
 
 //TO DO: 
 
