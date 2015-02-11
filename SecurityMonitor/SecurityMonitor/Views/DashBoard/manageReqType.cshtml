@@ -14,12 +14,9 @@
 
         @*<div class="col-md-12 " style="padding-bottom:100px; padding-top:40px; border-bottom:1px solid lightgrey;">
 
-
-
                 <div class="col-md-3 ">UserName:<input class="form-control" type="text" id="messageAuthor" /></div>
                 <div class="col-md-3 "> Message:<input class="form-control"  type="text" id="message" /></div>
                 <div class="col-md-6 pull-left " style="padding-top:20px;"> <input class="btn btn-default" type="button" id="sendmessage" value="Send" /> </div>
-
 
 
             </div>*@
@@ -28,9 +25,6 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-
-
-
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="col-md-12 ">
@@ -49,15 +43,11 @@
                                 <input type="submit" value="Search" class="btn btn-default" />
                             </div>
                         </div>
-
                     </div>
-
                 }
-
                 <!--====================ReqType Management===============================-->
                 <div id="TenantSearchResult" class="col-md-12  pre-scrollable" style="max-height:550px; border:1px solid lightgrey; ">
                     @{
-
 
                         if (Model.Tenants != null)
                         {
@@ -89,8 +79,6 @@
                                         Created on: @item.created
                                     </div>
 
-
-
                                 </div>
 
                                 <div style="padding-bottom:15px;">
@@ -110,8 +98,6 @@
                                 </div>
                             </div>
                         }
-
-
 
                     }
                 </div>

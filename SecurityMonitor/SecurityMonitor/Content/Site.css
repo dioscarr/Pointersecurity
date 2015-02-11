@@ -721,3 +721,11 @@ padding-bottom:20px;
     padding-top:50px;
     padding-bottom:50px;
 }
+
+.myborder{
+    border:1px groove rgb(247,249,248);
+color:white;
+}
+.tablebk{background:#2d6793;}
+
+.tablebk1{background:rgba(249,254,255,1);}
