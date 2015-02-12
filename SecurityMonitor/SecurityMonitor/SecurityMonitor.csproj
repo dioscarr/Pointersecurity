@@ -230,93 +230,6 @@
     <Compile Include="Models\ApartmentdeleteAll.cs" />
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
-    <Compile Include="Models\Azure\Apartment.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\AspNetRoles.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\AspNetUserClaims.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\AspNetUserLogins.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\AspNetUsers.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Buildings.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Clients.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\C__MigrationHistory.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\dbEFAzure.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbEFAzure.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\dbEFAzure.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\dbEFAzure.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbEFAzure.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\GanttLinkId.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\GanttTask.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\ListOfModule.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Manager.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\ManagerBuilding.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\MasterProfileFields.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Module.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\PendingModules.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\ReqType.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Requests.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Role.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\States.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\sysdiagrams.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\Tenant.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\User.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Azure\UserActivityLog.cs">
-      <DependentUpon>dbEFAzure.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
     <Compile Include="Models\DisplayClientBuilding.cs" />
@@ -726,23 +639,6 @@
     <Content Include="Scripts\HighChart\themes\grid.js" />
     <Content Include="Scripts\HighChart\themes\sand-signika.js" />
     <Content Include="Scripts\HighChart\themes\skies.js" />
-    <EntityDeploy Include="Models\Azure\dbEFAzure.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbEFAzure.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Azure\dbEFAzure.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbEFAzure.edmx</DependentUpon>
-      <LastGenOutput>dbEFAzure.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Azure\dbEFAzure.edmx.diagram">
-      <DependentUpon>dbEFAzure.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Azure\dbEFAzure.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbEFAzure.edmx</DependentUpon>
-      <LastGenOutput>dbEFAzure.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -862,6 +758,7 @@
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\generated-sources\annotations\" />
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\surefire\" />
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\generated-sources\annotations\" />
+    <Folder Include="Models\Azure\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\GoogleMaps\" />
     <Folder Include="Views\Roles\" />
@@ -877,6 +774,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PointerSecurityDataLayer\PointerSecurityDataLayer.csproj">
+      <Project>{97878883-7211-43d7-881f-0d930e4a02af}</Project>
+      <Name>PointerSecurityDataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

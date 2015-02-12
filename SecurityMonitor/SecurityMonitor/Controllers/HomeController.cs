@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using SecurityMonitor.Models.Azure;
+using PointerSecurityDataLayer;
 
 namespace SecurityMonitor.Controllers
 {
     public class HomeController : Controller
     {
-        PointersecurityEntities1 db = new PointersecurityEntities1();
+        pointersecurityEntities db = new pointersecurityEntities();
         public ActionResult Index()
         {
 
