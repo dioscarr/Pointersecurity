@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0bf1bd56960446cab6e3156b0345ef3f" Name="Diagram1">
+        <EntityTypeShape EntityType="AzureModel.Apartment" Width="1.5" PointX="12.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.AspNetUsers" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Buildings" Width="1.5" PointX="10.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Clients" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.GanttLinkId" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.GanttTask" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.ListOfModule" Width="1.5" PointX="10.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Manager" Width="1.5" PointX="8.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.ManagerBuilding" Width="1.5" PointX="12.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.MasterProfileFields" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Module" Width="1.5" PointX="12.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.PendingModules" Width="1.5" PointX="12.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.ReqType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Requests" Width="1.5" PointX="17.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Role" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.States" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.sysdiagrams" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.Tenant" Width="1.5" PointX="15" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.User" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AzureModel.UserActivityLog" Width="1.5" PointX="15.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="AzureModel.FK_Apartment_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Tenant_Apartment" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Role_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Manager_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Role_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_UserActivityLog_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Buildings_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Buildings_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Buildings_PendingModules" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_ManagerBuilding_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_UserActivityLog_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Manager_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Module_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Module_Listofmodule" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_PendingModuleRequests_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_PendingModuleRequests1_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_ManagerBuilding_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.FK_Request_Tenant" ManuallyRouted="false" />
+        <AssociationConnector Association="AzureModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 
 namespace SecurityMonitor.Controllers
 {
