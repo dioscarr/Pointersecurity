@@ -729,3 +729,11 @@ color:white;
 .tablebk{background:#2d6793;}
 
 .tablebk1{background:rgba(249,254,255,1);}
+
+
+.right-border {
+border-right:1px groove lightgrey;
+}
+.page-heightcustom {
+    height:700px;
+}

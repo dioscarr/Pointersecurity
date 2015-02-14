@@ -4,26 +4,37 @@
     ViewBag.Title = "BuildingIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row " style="border:none; background:white; ">
-    <h4 class=" pull-right" style="padding-top:0px; padding-bottom:20px;color:#808080; ">
-        @Html.ActionLink("Add New Location", "AddBuilding", new { ClientID = (int)ViewBag.ClientID })
-    </h4>
+<div class="row " style="border:none; background:white; height:50px; ">
+    
 </div>
-<div class="row ">
-    <div class=" col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-6 col-sm-6 myborder" style="padding-top:5px; padding-bottom:5px; background:lightgrey;">
-        Properties
+<div class="row  ">
+    <div class=" col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-6 col-sm-6 " style="padding-top:5px; padding-bottom:5px; background:white; color:black;">
+        <div class="row shadow5 lightblue">
+            <div class=" col-lg-3 col-md-3 col-sm-3 pull-left right-border lightblue" style="height:30px;">Properties</div>
+            <div class=" col-lg-6 col-md-6 col-sm-6  pull-left right-border" style="height:30px;">Address</div>
+            <div class=" col-lg-3 col-md-3 col-sm-3 pull-right">
+                <p class=" pull-right" style="padding-top:0px; padding-bottom:0px;color:#808080; ">
+                    @Html.ActionLink("Add New Location", "AddBuilding", new { ClientID = (int)ViewBag.ClientID })
+                </p>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row " >
+<div class="row page-heightcustom "  >
 
-    <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-6 col-sm-6   scrollable "
-         style="height:300px;">
+    <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-6 col-md-6 col-sm-6   scrollable shadow shadow5"
+         style="height:200px;">
         @foreach (var item in Model)
         {
-            <div class="row" style="padding-top:5px;">
-                <div class=" col-lg-9 col-md-9 col-sm-9 hollow3 myborder tablebk" style="padding-top:5px; padding-bottom:5px;"
+            <div class="row shadow" style="padding-top:5px;">
+                <div class=" col-lg-3 col-md-3 col-sm-3 hollow3 myborder tablebk" style="padding-top:5px; padding-bottom:5px;"
                      onclick="location.href = '@Url.Action("BuildingProfile", "Building", new {BuildingID = item.ID})'">
                     @Html.DisplayFor(modelItem => item.BuildingName)
+
+                </div>
+                <div class=" col-lg-6 col-md-6 col-sm-6 hollow3 myborder tablebk" style="padding-top:5px; padding-bottom:5px;"
+                     onclick="location.href = '@Url.Action("BuildingProfile", "Building", new {BuildingID = item.ID})'">
+
                     @Html.DisplayFor(modelItem => item.Address)
                     @Html.DisplayFor(modelItem => item.City)
                     @Html.DisplayFor(modelItem => item.States)
