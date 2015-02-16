@@ -1,0 +1,61 @@
+﻿@model SecurityMonitor.Models.ManagerVM
+@using SecurityMonitor.Models;
+@{
+    ViewBag.Title = "ManagementBuilding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="addmanager">
+    <div class="row" style="padding:50px 0;">
+        @{ ManagerVM ObjManager = (ManagerVM)@ViewBag.Manager;}
+        @using (Html.BeginForm("addmanager", "Management", FormMethod.Post, new { ManagerID = @ViewBag.Manager }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+
+           <button type="submit" class="btn btn-default">Add Manager</button>
+        }
+    </div>
+</section>
+
+
+
+<section id=" editManager">
+    <div class="row">
+        @using (Html.BeginForm("editManager", "Management", FormMethod.Post, new { ManagerID = @ViewBag.ManagerID }))
+        {
+            <button type="submit" class="btn btn-default">Edit Manager</button>
+        }
+    </div>
+</section>
+
+
+
+<section id="removeManager">
+    <div class="row">
+        @using (Html.BeginForm("removeManager", "Management", FormMethod.Post, new { ManagerID = @ViewBag.ManagerID }))
+        {
+            <button type="submit" class="btn btn-default">Remove Manager</button>
+        }
+    </div>
+</section>
+
+

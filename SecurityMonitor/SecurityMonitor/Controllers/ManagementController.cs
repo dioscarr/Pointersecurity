@@ -462,6 +462,39 @@ namespace SecurityMonitor.Controllers
             return View(Managers);
         }
 
+        public ActionResult ManagementBuilding(int BuildingID)
+        {
+            //---------------------------------------------------------------------------------------------
+            ViewBag.Manager = db.ManagerBuilding
+                .Where(c => c.BuildingID == BuildingID)
+                .Select(c => new ManagerVM { FullName = c.Manager.FirstName +" " +c.Manager.LastName,
+                                             Username  = c.Manager.AspNetUsers.Email,
+                                             Phone = c.Manager.Phone }).FirstOrDefault();
+               
+            //manager ends-----------------------------------------------------------------------------------------  
+ 
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddManager(Manager model)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditManager(Manager model)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RemoveManager(int ManagerID)
+        {
+            return View();
+        }
+
+
         
 
        public RoleManager<IdentityRole> RoleManager { get; set; }

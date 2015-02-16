@@ -751,6 +751,7 @@
     <Content Include="Views\Management\AddManager.cshtml" />
     <Content Include="Views\Management\SelectBuilding.cshtml" />
     <Content Include="Views\Management\AssignBtoM.cshtml" />
+    <Content Include="Views\Management\ManagementBuilding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
