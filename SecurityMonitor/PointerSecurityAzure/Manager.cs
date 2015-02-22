@@ -18,6 +18,7 @@ namespace PointerSecurityAzure
         {
             this.Buildings = new HashSet<Buildings>();
             this.ManagerBuilding = new HashSet<ManagerBuilding>();
+            this.ActiveManager = new HashSet<ActiveManager>();
         }
     
         public string ID { get; set; }
@@ -30,5 +31,6 @@ namespace PointerSecurityAzure
         public virtual ICollection<Buildings> Buildings { get; set; }
         public virtual Clients Clients { get; set; }
         public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
+        public virtual ICollection<ActiveManager> ActiveManager { get; set; }
     }
 }

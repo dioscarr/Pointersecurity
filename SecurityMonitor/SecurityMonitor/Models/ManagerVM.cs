@@ -8,7 +8,7 @@ namespace SecurityMonitor.Models
 {
     public class ManagerVM
     {
-        
+        public string ID { get; set; }
         [Required]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
@@ -45,6 +45,7 @@ namespace SecurityMonitor.Models
         public String Phone { set; get; }
 
         public int clientID { get; set; }
+        public int BuildingID { get; set; }
 
 
 

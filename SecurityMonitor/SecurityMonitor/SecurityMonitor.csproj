@@ -227,6 +227,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiveManagerVM.cs" />
     <Compile Include="Models\ApartmentdeleteAll.cs" />
     <Compile Include="Models\ApartmentVM.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Models\DisplayManagerRoleDelete.cs" />
     <Compile Include="Models\ErrorMessageVM.cs" />
     <Compile Include="Models\JsonVM.cs" />
+    <Compile Include="Models\ManagementBuilding.cs" />
     <Compile Include="Models\ManagerVM.cs" />
     <Compile Include="Models\MasterProfileVM.cs" />
     <Compile Include="Models\myController.cs" />

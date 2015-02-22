@@ -1,4 +1,4 @@
-﻿@model SecurityMonitor.Models.ManagerVM
+﻿@model SecurityMonitor.Models.ManagementBuilding
 @using SecurityMonitor.Models;
 @{
     ViewBag.Title = "ManagementBuilding";
@@ -6,56 +6,100 @@
 }
 
 <section id="addmanager">
-    <div class="row" style="padding:50px 0;">
-        @{ ManagerVM ObjManager = (ManagerVM)@ViewBag.Manager;}
-        @using (Html.BeginForm("addmanager", "Management", FormMethod.Post, new { ManagerID = @ViewBag.Manager }))
+    <div class="row" style="padding:50px 0; background:white; padding-bottom:100px; ">
+
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px;"
+                 onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = })'">
+                <span style="color:white;">Return To Building</span>
+
+            </div>*@
+        @using (Html.BeginForm("AddManagerTobuilding", "Management"))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+            <section>
+                <div class="col-md-offset-1 col-md-4 form-group " style="border:1px solid lightgrey; height:400px; background:#f5f3f3;">                  
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+                        <p style="font-size:20px; padding-top:20px;">Add a Building Manager</p>
+                    </div>
+                         @Html.TextBox("FullName", null, new { placeholder = "Full Name", @class = "form-control col-md-12 col-sm-12 col-xs-12 input-sm  ", @style = " max-width: 100%; margin-bottom: 10px; margin-top:30px; " })
+                         @Html.TextBox("Email", null, new { placeholder = "Email", @class = " form-control col-md-12 col-sm-12 col-xs-12 input-sm", @style = " max-width: 100%; margin-bottom: 10px;" })
+                         @Html.TextBox("Phone", null, new { placeholder = "Phone", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = " max-width: 50%;margin-bottom: 10px;" })
+                         @Html.TextBox("UserName", null, new { placeholder = "UserName", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
+                         @Html.Password("Password", null, new { placeholder = "Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
+                         @Html.Password("ConfirmPassword", null, new { placeholder = "Confirm Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
+                         @Html.Hidden("ClientID", Model.ClientID)
+                         @Html.Hidden("BuildingID", Model.buildingID)
 
-                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        <div><button type="submit" class="btn btn-default col-lg-12 col-md-12 col-sm-12 col-xs-12">Add Manager</button></div>
 
+                </div>
 
-           <button type="submit" class="btn btn-default">Add Manager</button>
+                
+                <div class="col-md-offset-2 col-md-4 form-group  scrollable" style="padding:50px 0; 
+                                                                                    background:#f5f3f3;
+                                                                                    height:400px;
+                                                                                    border:1px solid lightgrey;">
+                    @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
+                    
+                    <div class="col-md-12 text-center">
+                    @if (ObjActiveManager != null)
+                    {
+                        <p>@ObjActiveManager.myManager.FirstName @ObjActiveManager.myManager.LastName @Html.ActionLink("Deactivate", "DeactivateManager",
+                        new { ManagerID = @ObjActiveManager.ManagerID, BuildingID=@ObjActiveManager.BuildingID})</p>
+                    }
+                    else
+                    {
+                        <p>Currently, there is no Active Manager</p>
+
+                    }
+                    </div>
+                   
+
+                    @if (Model.managerVM.Count > 0)
+                    {
+
+                        foreach (var item in Model.managerVM)
+                        {
+                            <div class="col-md-12 text-center hollow3 rowsettings_manager" style=" margin-top:10px; padding:10px 0;">
+                                Name: @item.FullName
+                                |  @Html.ActionLink("Activate", "ActivateManager", new {managerid =@item.ID, buildingid=@Model.buildingID })
+                                |  @Html.ActionLink("Edit", "EditManager") |
+                                |  @Html.ActionLink("Remove", "RemoveManager",
+                                                                            new
+                                                                            {
+                                                                                BuildingID = @Model.buildingID,
+                                                                                ClientID = @Model.ClientID,
+                                                                                ManagerID = @item.ID
+                                                                            })
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-md-12 text-center">There is no manager assigned to the building.</div>
+
+                    }
+                </div>
+            </section>
         }
     </div>
 </section>
 
 
 
-<section id=" editManager">
-    <div class="row">
-        @using (Html.BeginForm("editManager", "Management", FormMethod.Post, new { ManagerID = @ViewBag.ManagerID }))
-        {
-            <button type="submit" class="btn btn-default">Edit Manager</button>
-        }
-    </div>
-</section>
 
 
 
-<section id="removeManager">
-    <div class="row">
-        @using (Html.BeginForm("removeManager", "Management", FormMethod.Post, new { ManagerID = @ViewBag.ManagerID }))
-        {
-            <button type="submit" class="btn btn-default">Remove Manager</button>
-        }
-    </div>
-</section>
+
+
+
+
+
+
+
+
+
 
 

@@ -607,7 +607,14 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public async Task<ActionResult> BuildingProfile(int? page, string search, int? BuildingID)
         {
-
+            ViewBag.Manager = db.ManagerBuilding
+               .Where(c => c.BuildingID == BuildingID)
+               .Select(c => new ManagerVM
+               {
+                   FullName = c.Manager.FirstName + " " + c.Manager.LastName,
+                   Username = c.Manager.AspNetUsers.Email,
+                   Phone = c.Manager.Phone
+               }).FirstOrDefault();
 
             Session.Timeout = 20;
 

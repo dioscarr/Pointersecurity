@@ -20,6 +20,7 @@ namespace PointerSecurityAzure
             this.PendingModules = new HashSet<PendingModules>();
             this.ManagerBuilding = new HashSet<ManagerBuilding>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
+            this.ActiveManager = new HashSet<ActiveManager>();
         }
     
         public int ID { get; set; }
@@ -40,5 +41,6 @@ namespace PointerSecurityAzure
         public virtual ICollection<PendingModules> PendingModules { get; set; }
         public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
+        public virtual ICollection<ActiveManager> ActiveManager { get; set; }
     }
 }

@@ -763,3 +763,18 @@ background:white;
 .outline {
   outline:1px solid red;
 }
+
+.appendedInputButton {
+     display: block;
+  width: 100%;
+  min-height: 28px;        
+   
+}
+input-settings {
+    margin-bottom: 10px;
+}
+
+.rowsettings_manager{
+
+    background:#cbd1ed;
+}

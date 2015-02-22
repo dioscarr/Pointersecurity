@@ -9,6 +9,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using System.Data.Entity.Validation;
 
 
 namespace SecurityMonitor.Controllers
@@ -461,39 +462,189 @@ namespace SecurityMonitor.Controllers
             var Managers = db.Manager.ToList();
             return View(Managers);
         }
-
+        [HttpGet]
         public ActionResult ManagementBuilding(int BuildingID)
         {
+            var ObjMB = new ManagementBuilding();
             //---------------------------------------------------------------------------------------------
-            ViewBag.Manager = db.ManagerBuilding
+            ObjMB.managerVM = db.ManagerBuilding
                 .Where(c => c.BuildingID == BuildingID)
                 .Select(c => new ManagerVM { FullName = c.Manager.FirstName +" " +c.Manager.LastName,
                                              Username  = c.Manager.AspNetUsers.Email,
-                                             Phone = c.Manager.Phone }).FirstOrDefault();
-               
+                                             Phone = c.Manager.Phone,
+                                             ID = c.ManagerID
+                }).ToList();
             //manager ends-----------------------------------------------------------------------------------------  
- 
+            //ClientID
+            var clientID =db.Buildings
+                .Where(c => c.ID == BuildingID)
+                .FirstOrDefault()
+                .Clients.ID;           
+            foreach (var item in ObjMB.managerVM)
+            {
+                item.clientID = clientID;
+               
+            }
+            ObjMB.ClientID = clientID;
+            ObjMB.buildingID = BuildingID;
+           
+           //loading Activemanager
+           var Activemanager = db.ActiveManager.Where(c => c.BuildingID == BuildingID)
+                                                    .Select(c => new ActiveManagerVM {
+                                                                                        Id  = c.Id, 
+                                                                                        BuildingID =c.BuildingID,
+                                                                                    ManagerID =c.ManagerID}).FirstOrDefault();
+            if(Activemanager!=null)
+            {
+                Activemanager.myManager = db.Manager.Find(Activemanager.ManagerID);
+            }
 
-            return View();
+            ViewBag.Activemanager = Activemanager;
+
+            return View(ObjMB);
         }
         [HttpPost]
-        public ActionResult AddManager(Manager model)
+        public async Task<ActionResult> AddManagerTobuilding(ManagementBuilding model, ManagerVM  model2)
         {
-            return View();
+            try
+            {
+            if (!ModelState.IsValid)
+            {
+                return View("ManagementBuilding", model);
+            }
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            PasswordHasher hasher = new PasswordHasher();
+            var a = UserManager.FindByEmail(model2.Email);
+            if (a != null)
+            {
+                return View("ManagementBuilding", model);
+            }
+            ApplicationUser AppUser = new ApplicationUser()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = model2.Email,
+                UserName = model2.Username,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                PhoneNumber = model2.Phone,
+                LockoutEnabled = false,
+                LockoutEndDateUtc= DateTime.Now.AddDays(365),
+                AccessFailedCount = 0,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                EmailConfirmed = false,
+                PasswordHash = hasher.HashPassword(model2.Password)
+            };
+            string[] FullName = model2.FullName.Split(new string[] { " " }, StringSplitOptions.None);
+            Manager mgr = new Manager()
+            {
+                ID = AppUser.Id,
+                FirstName = FullName[0].ToString(),
+                LastName = FullName[1].ToString(),
+                Phone = model2.Phone,
+                ClientID = model2.clientID
+            };
+            db.Manager.Add(mgr);
+            context.Users.Add(AppUser);
+
+            await context.SaveChangesAsync();
+            await db.SaveChangesAsync();
+
+            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (!RoleManager.RoleExists("Manager"))
+            {var roleresult = RoleManager.Create(new IdentityRole("Manager"));}
+            var Result = UserManager.AddToRole(AppUser.Id, "Manager");
+
+            ManagerBuilding ObjManagerBuilding = new ManagerBuilding()
+            {
+                 BuildingID = model2.BuildingID,
+                  ManagerID = mgr.ID ,
+                   UserID =mgr.ID
+            };
+
+            db.ManagerBuilding.Add(ObjManagerBuilding);
+            await db.SaveChangesAsync();
+         
+
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            return RedirectToAction("ManagementBuilding", new { BuildingID=model2.BuildingID});
+        }
+        
+        [HttpGet]
+        public ActionResult RemoveManager(int BuildingID, int ClientID, string ManagerID)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            Manager Obj = db.Manager.Find(ManagerID);
+            AspNetUsers user = db.AspNetUsers.Find(ManagerID);
+            ManagerBuilding managerb = db.ManagerBuilding.Where(c => c.ManagerID == ManagerID).FirstOrDefault();
+           
+            
+            UserManager.RemoveFromRole(ManagerID, "Manager");//from role Manager
+            context.SaveChanges();
+
+            db.ManagerBuilding.Remove(managerb);// mapping row building and user
+            db.SaveChanges(); 
+               
+                 db.Manager.Remove(Obj); //manager
+                 db.SaveChanges();
+
+                 db.AspNetUsers.Remove(user);//remove user
+                db.SaveChanges();
+
+                return RedirectToAction("ManagementBuilding", new { BuildingID = BuildingID });
+        }
+        public ActionResult ActivateManager(string managerid, int buildingid)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ManagementBuilding", new { BuildingID = buildingid });
+            }
+
+
+            var deleteanyentry = db.ActiveManager.Where(c => c.BuildingID == buildingid).ToList();
+            
+
+            ActiveManager ObjActiveManager = new ActiveManager(){
+               BuildingID = buildingid,
+               ManagerID = managerid
+            };
+
+            if(db.ActiveManager.RemoveRange(deleteanyentry)!=null)
+            {
+                db.ActiveManager.RemoveRange(deleteanyentry);
+            }
+            db.ActiveManager.Add(ObjActiveManager);
+            db.SaveChanges();
+
+
+            return RedirectToAction("ManagementBuilding", new { BuildingID = buildingid });
         }
 
-        [HttpPost]
-        public ActionResult EditManager(Manager model)
+        public ActionResult DeactivateManager(string ManagerID, int BuildingID)
         {
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult RemoveManager(int ManagerID)
-        {
-            return View();
+            ActiveManager Obj = db.ActiveManager.Where(c=>c.ManagerID==ManagerID).FirstOrDefault();
+            db.ActiveManager.Remove(Obj);
+            db.SaveChanges();
+            return RedirectToAction("ManagementBuilding", new { BuildingID = BuildingID });
         }
-
 
         
 
