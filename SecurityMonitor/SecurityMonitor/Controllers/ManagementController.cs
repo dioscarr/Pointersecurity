@@ -646,6 +646,12 @@ namespace SecurityMonitor.Controllers
             return RedirectToAction("ManagementBuilding", new { BuildingID = BuildingID });
         }
 
+        public ActionResult ManageUsersProfile(int BuildingID)
+        {
+
+            return View();
+        }
+
         
 
        public RoleManager<IdentityRole> RoleManager { get; set; }

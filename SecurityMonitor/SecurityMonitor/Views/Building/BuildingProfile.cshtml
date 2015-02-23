@@ -61,11 +61,19 @@
 
                 <div class="row  border-white SettingBPUsers text-center" style="background:#282D33; color:white;">
                     <!--active Manager ToDO: use current add manager page.  -->
+                    @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
+                     @if (ObjActiveManager != null)
+                     {
+
+                        <p style="display:inline;">Manager: @ObjActiveManager.myManager.FirstName @ObjActiveManager.myManager.LastName</p>
+
+                     }
+                     else
+                     {
+
+                     }
                     
-                    @{ManagerVM ObjManagerVM = (ManagerVM)@ViewBag.Manager;}
-                    Active Manager: @{if(ObjManagerVM != null)
-                                        { @ObjManagerVM.FullName}}
-                    | @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null)|
+                    <p style="display:inline;">| @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null)|</p>
 
                 </div>
                 <div class="row" style="border-bottom:1px solid lightgrey;">
@@ -88,9 +96,8 @@
                 </div>
                 <!--Manage building Users-->
                 <div class="row darkdarkblue  border-white SettingBPUsers text-center"  style=" height:40px;  background:#282D33; color:white; ">
-                   | @Html.ActionLink("Add","BuildingUserAdd","Building") |  
-                    @Html.ActionLink("Edit", "BuildingUserEdit", "Building") | 
-                    @Html.ActionLink("Remove", "BuildingUserRemove", "Building") | 
+                   | @Html.ActionLink("Manage Users","ManageUsersProfile","Management") |  
+                   
                 </div>
 
 

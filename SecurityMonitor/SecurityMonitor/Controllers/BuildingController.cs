@@ -607,6 +607,7 @@ namespace SecurityMonitor.Controllers
         [HttpGet]
         public async Task<ActionResult> BuildingProfile(int? page, string search, int? BuildingID)
         {
+
             ViewBag.Manager = db.ManagerBuilding
                .Where(c => c.BuildingID == BuildingID)
                .Select(c => new ManagerVM
@@ -688,6 +689,23 @@ namespace SecurityMonitor.Controllers
                 ViewBag.apartmentlist = apartmentlist.ToPagedList(pageNumber, pageSize);
 
             }
+
+            //loading Activemanager
+            var Activemanager = db.ActiveManager.Where(c => c.BuildingID == BuildingID)
+                                                     .Select(c => new ActiveManagerVM
+                                                     {
+                                                         Id = c.Id,
+                                                         BuildingID = c.BuildingID,
+                                                         ManagerID = c.ManagerID
+                                                     }).FirstOrDefault();
+            if (Activemanager != null)
+            {
+                Activemanager.myManager = db.Manager.Find(Activemanager.ManagerID);
+            }
+
+            ViewBag.Activemanager = Activemanager;
+
+           
 
             
 

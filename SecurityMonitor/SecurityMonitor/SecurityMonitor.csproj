@@ -239,6 +239,7 @@
     <Compile Include="Models\JsonVM.cs" />
     <Compile Include="Models\ManagementBuilding.cs" />
     <Compile Include="Models\ManagerVM.cs" />
+    <Compile Include="Models\ManageUsersProfileVM.cs" />
     <Compile Include="Models\MasterProfileVM.cs" />
     <Compile Include="Models\myController.cs" />
     <Compile Include="Models\EventItem.cs" />
