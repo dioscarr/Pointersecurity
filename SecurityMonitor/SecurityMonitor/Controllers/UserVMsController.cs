@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using SecurityMonitor.Models.Azure;
+using PointerSecurityAzure;
 using SecurityMonitor.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
@@ -18,7 +18,7 @@ namespace SecurityMonitor.Controllers
 {
     public class UserVMsController : Controller
     {
-        private PointersecurityEntities1 db = new PointersecurityEntities1();
+        private pointersecurityEntities db = new pointersecurityEntities();
         
         //============================ GET: UserVMs============================
         [HttpGet]

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using SecurityMonitor.Models.Azure;
+using PointerSecurityAzure;
+
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
@@ -25,7 +26,7 @@ namespace SecurityMonitor.Controllers
     public class BuildingController : Controller
     {
         //DB context
-        PointersecurityEntities1 db = new PointersecurityEntities1();
+        pointersecurityEntities db = new pointersecurityEntities();
 
         
         //shared_layout
@@ -607,6 +608,14 @@ namespace SecurityMonitor.Controllers
         public async Task<ActionResult> BuildingProfile(int? page, string search, int? BuildingID)
         {
 
+            ViewBag.Manager = db.ManagerBuilding
+               .Where(c => c.BuildingID == BuildingID)
+               .Select(c => new ManagerVM
+               {
+                   FullName = c.Manager.FirstName + " " + c.Manager.LastName,
+                   Username = c.Manager.AspNetUsers.Email,
+                   Phone = c.Manager.Phone
+               }).FirstOrDefault();
 
             Session.Timeout = 20;
 
@@ -680,6 +689,23 @@ namespace SecurityMonitor.Controllers
                 ViewBag.apartmentlist = apartmentlist.ToPagedList(pageNumber, pageSize);
 
             }
+
+            //loading Activemanager
+            var Activemanager = db.ActiveManager.Where(c => c.BuildingID == BuildingID)
+                                                     .Select(c => new ActiveManagerVM
+                                                     {
+                                                         Id = c.Id,
+                                                         BuildingID = c.BuildingID,
+                                                         ManagerID = c.ManagerID
+                                                     }).FirstOrDefault();
+            if (Activemanager != null)
+            {
+                Activemanager.myManager = db.Manager.Find(Activemanager.ManagerID);
+            }
+
+            ViewBag.Activemanager = Activemanager;
+
+           
 
             
 

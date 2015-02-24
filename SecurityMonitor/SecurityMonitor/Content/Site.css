@@ -729,3 +729,52 @@ color:white;
 .tablebk{background:#2d6793;}
 
 .tablebk1{background:rgba(249,254,255,1);}
+
+
+.right-border {
+border-right:1px groove lightgrey;
+}
+.border {
+border:1px groove lightgrey;
+}
+.page-heightcustom {
+    height:700px;
+}
+
+.background-white {
+background:white;
+}
+
+.darkdarkblue{
+   background:#2d6793;
+   color:white;
+}
+
+.border-white{
+    border:1px solid white;
+}
+
+.SettingBPUsers{
+    height:40px;
+     padding:10px 0;
+
+}
+
+.outline {
+  outline:1px solid red;
+}
+
+.appendedInputButton {
+     display: block;
+  width: 100%;
+  min-height: 28px;        
+   
+}
+input-settings {
+    margin-bottom: 10px;
+}
+
+.rowsettings_manager{
+
+    background:#cbd1ed;
+}

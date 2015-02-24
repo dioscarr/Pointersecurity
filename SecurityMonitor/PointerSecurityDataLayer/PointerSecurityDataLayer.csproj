@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97878883-7211-43D7-881F-0D930E4A02AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PointerSecurityDataLayer</RootNamespace>
+    <AssemblyName>PointerSecurityDataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Apartment.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Buildings.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clients.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GanttLinkId.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GanttTask.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListOfModule.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manager.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManagerBuilding.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterProfileFields.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PendingModules.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointerSucurity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerSucurity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointerSucurity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointerSucurity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PointerSucurity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReqType.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requests.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="States.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tenant.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserActivityLog.cs">
+      <DependentUpon>PointerSucurity.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="PointerSucurity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PointerSucurity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="PointerSucurity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PointerSucurity.edmx</DependentUpon>
+      <LastGenOutput>PointerSucurity.Context.cs</LastGenOutput>
+    </None>
+    <None Include="PointerSucurity.edmx.diagram">
+      <DependentUpon>PointerSucurity.edmx</DependentUpon>
+    </None>
+    <None Include="PointerSucurity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PointerSucurity.edmx</DependentUpon>
+      <LastGenOutput>PointerSucurity.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PointerSecurityAzure\PointerSecurityAzure.csproj">
+      <Project>{a2044151-dd90-438d-8f1f-bad23d41fd0e}</Project>
+      <Name>PointerSecurityAzure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,6 +1,6 @@
 ﻿@model PagedList.IPagedList<SecurityMonitor.Models.ApartmentVM>
 @using SecurityMonitor.Models;
-@using SecurityMonitor.Models.Azure;
+@using PointerSecurityAzure;
 
 
 @{
@@ -8,88 +8,185 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get, new { BuildingID = @ViewBag.BuildingID }))
 {
+    <!--top left square -->
     var building = (BuildingInfoVM)ViewBag.buildingInfo;
-    <div class="row">
-        <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center" style="padding-top:50px; background:white;">
-        <p style="font-size:27px;">@building.Address</p>
-            <p style="font-size:20px;">@building.City  @building.States</p>
-            <p style="font-size:20px;">@building.ZipCode</p>
-            <p style="font-size:20px;"> Contact manager: @building.Manager </p>
-            <p style="font-size:20px;"> Tel: @building.BuildingPhone</p>
-        
-            <!--Add Module section-->
-            <div class="row servicescells hollow3"
-                 style="height:100px; border:none; "
-                 onclick="location.href = '@Url.Action("ModuleAdd", "Module", new { BuildingID = ViewBag.buildingInfo.ID })'">
-                <div style="padding-top:20px; font-weight:500;">Add new services to this building</div>
+    <section>
+        <div class="row" style="height:330px;">
+            <!--Info setion-->
+            <section>
+                <div class="col-md-4 col-lg-4 col-xs-12 col-sm-12 text-center"
+                     style="background:white;">
+                    <div class="row border-white"
+                         style="background:#282D33;
+                                color:white;
+                                height:40px; ">
+                        Building Information
+                    </div>
+                    <section>
+                        <div class="row border text-center" style="height:150px;">
+                            <p style="font-size:18px;">@building.BuildingName</p>
+                            <p style="font-size:18px;">
+                                @building.Address
+                                @building.City
+                                @building.States
+                                @building.ZipCode
+                            </p>
+                           
+                            <p style="font-size:18px;"> Tel: @building.BuildingPhone</p>
+                            <p> | @Html.ActionLink("Edit Information", "BuildingUserAdd", "Building") |  </p>
+                        </div>
+                    </section>
+                    <!--Add Module section-->
+                    <section>
+                        <div class="row servicescells hollow3"
+                             style="height:100px; border:none; "
+                             onclick="location.href = '@Url.Action("ModuleAdd", "Module", new { BuildingID = ViewBag.buildingInfo.ID })'">
+                            <div style="padding-top:20px; font-weight:500;">Add new services to this building</div>
+                        </div>
+                    </section>
+                    <div class="row  text-center"
+                         style="background:white;">
+                        <div class=" border-white"
+                             style="background:#282D33;
+                                color:white;
+                                height:40px; ">
+                            Building Information
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 lightblue background-white" style="height:330px; ">
+
+                <div class="row  border-white SettingBPUsers text-center" style="background:#282D33; color:white;">
+                    <!--active Manager ToDO: use current add manager page.  -->
+                    @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
+                     @if (ObjActiveManager != null)
+                     {
+
+                        <p style="display:inline;">Manager: @ObjActiveManager.myManager.FirstName @ObjActiveManager.myManager.LastName</p>
+
+                     }
+                     else
+                     {
+
+                     }
+                    
+                    <p style="display:inline;">| @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null)|</p>
+
+                </div>
+                <div class="row" style="border-bottom:1px solid lightgrey;">
+                    <div class="col-md-6 ">Active Users</div>
+                    <div class="col-md-6">View Permission</div>
+                </div>
+                <div class="row scrollable " style="height:229px;">
+
+                    @for (int i = 0; i < 15; i++)
+                    {
+                        <div class="row SettingBPUsers ">
+                            <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px;"> @building.Manager </p></div>
+                            <div class="col-md-6" style="padding-left:30px;">
+                                @Html.CheckBox("permission", false, new { @class = "checkbox mycheckbosex", @style = "display:inline;" })
+                                Show permission
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <!--Manage building Users-->
+                <div class="row darkdarkblue  border-white SettingBPUsers text-center"  style=" height:40px;  background:#282D33; color:white; ">
+                   | @Html.ActionLink("Manage Users","ManageUsersProfile","Management") |  
+                   
+                </div>
+
+
+            </div>
+            <div id="map" class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 lightblue" style="height:330px;">
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12    permissiontable " style="display:none;">
+                <div class="row background-white text-center border-white"
+                     style="z-index:1;
+                         height:40px;
+                         background:#282D33;
+                         color:white; ">
+                    Active permission
+                </div>
+                <div class="row background-white " style="height:250px;">
+
+
+                </div>
+                <div class="row darkdarkblue  border-white SettingBPUsers " style=" height:40px;  background:#282D33; color:white; ">
+
+                </div>
+
             </div>
         </div>
-        <div id="map" class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 lightblue" style="height:330px;  "></div>
-    </div>
+    </section>
 
 
     <div class="">
         @Html.Hidden("BuildingID", "@ViewBag.BuildingID")
-        
+
         <div class="row lightblue hidden">
             <!--hidden-->
             <div class="col-md-4 ">
                 @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
             </div>
         </div>
-           
-            <div class="row lightblue" style=" padding-top:50px; padding-bottom:50px;">
-                <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                    
-                       
-                        
-                        <input type="text" class="form-control" id="input-search" name="Search" placeholder="Filter Apartments">
-                    
-                </div>
-                <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
-                    <input type="submit" value="Search" class="btn btn-info col-sm-6 col-xs-6" />
-                </div>
-                <!--right side buttoms visible only on lg md-->
-                <div class=" hidden-sm hidden-xs col-md-6 col-sm-12 col-xs-12  ">
-                    <div class="pull-right">
-                        <button type="button"
-                                class="btn btn btn-success"
-                                onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'">
-                            Add APT
-                        </button>
-                        <button id="ShowURL" type="button" class="btn btn-default pull-lef">Get URL</button>
 
-                        <button type="button" class="btn btn-default  pull-left"
-                                onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
-                            Resquests
-                            <span id="Requestscount"class="badge badge-warning " style="background:orange;">0</span>
-                        </button>
+        <div class="row lightblue" style=" padding-top:50px; padding-bottom:50px;">
+            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6">
 
 
-                        <button type="button" class="btn btn-default pull-left "
-                                onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
-                            Contact Book
-                            <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
-                        </button>
 
-                        <button type="button" class="btn btn-default pull-lef " 
-                        onclick="location.href = '@Url.Action("BuildingApartmentDeleteAll", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">Remove Apts</button>
+                <input type="text" class="form-control" id="input-search" name="Search" placeholder="Filter Apartments">
 
-                    </div>
-                </div>
-                </div>
-        <!--Module Section starts-->
-       @{if (ViewBag.ModuleCount > 0)
-         {
-         
-            <div class="row servicesrow">
-                @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
             </div>
-         }
-}
+            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
+                <input type="submit" value="Search" class="btn btn-info col-sm-6 col-xs-6" />
+            </div>
+            <!--right side buttoms visible only on lg md-->
+            <div class=" hidden-sm hidden-xs col-md-6 col-sm-12 col-xs-12  ">
+                <div class="pull-right">
+                    <button type="button"
+                            class="btn btn btn-success"
+                            onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'">
+                        Add APT
+                    </button>
+                    <button id="ShowURL" type="button" class="btn btn-default pull-lef">Get URL</button>
+
+                    <button type="button" class="btn btn-default  pull-left"
+                            onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
+                        Resquests
+                        <span id="Requestscount" class="badge badge-warning " style="background:orange;">0</span>
+                    </button>
+
+
+                    <button type="button" class="btn btn-default pull-left "
+                            onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
+                        Contact Book
+                        <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
+                    </button>
+
+                    <button type="button" class="btn btn-default pull-lef "
+                            onclick="location.href = '@Url.Action("BuildingApartmentDeleteAll", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
+                        Remove Apts
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <!--Module Section starts-->
+        @{if (ViewBag.ModuleCount > 0)
+        {
+
+        <div class="row servicesrow">
+            @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
+        </div>
+        }
+        }
         <!--this section display a link that can be copy-->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="myURL">
             <div class="alert alert-success alert-success" role="alert" style="display:none;">
@@ -98,299 +195,319 @@
             </div>
 
         </div>
-            <dliv class="row lightblue text-center">
-                <div>
-                    
+        <dliv class="row lightblue text-center">
+            <div>
 
-                    @if (ViewBag.apartmentlist.HasPreviousPage)
-                    {
-                        if (ViewBag.searchBy != null)
-                        {
 
-                            var search = ViewBag.search;
-
-                        <ul class="pagination pagination-sm">
-                            <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1, Search = @search })</li>
-
-                            <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1, Search = @search })</li>
-                        </ul>
-                        }
-                        else if (ViewBag.searchBy == null)
-                        {
-                        <ul class="pagination pagination-sm">
-                            <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1 })</li>
-
-                            <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1 })</li>
-                        </ul>
-                        }
-                    }
-                    else
-                    {
-                        <ul class="pagination pagination-sm">
-                            <li><a href="#">First</a></li>
-                            <li><a href="#">Prev</a></li>
-                        </ul>
-                    }
-                    @{
+                @if (ViewBag.apartmentlist.HasPreviousPage)
+                {
                     if (ViewBag.searchBy != null)
                     {
 
                         var search = ViewBag.search;
 
-        <ul class="pagination pagination-sm">
-            @for (var item = 1; item <= @ViewBag.apartmentlist.PageCount; item++)
-            {
-                <li><a href="BuildingProfile?page=@item&Search=@search&BuildingID=@ViewBag.BuildingID">@item</a></li>
-            }
-        </ul>
+                <ul class="pagination pagination-sm">
+                    <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1, Search = @search })</li>
+
+                    <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1, Search = @search })</li>
+                </ul>
                     }
                     else if (ViewBag.searchBy == null)
                     {
+                <ul class="pagination pagination-sm">
+                    <li> @Html.ActionLink("First", "BuildingProfile", new { page = 1 })</li>
+
+                    <li> @Html.ActionLink("Prev", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber - 1 })</li>
+                </ul>
+                    }
+                }
+                else
+                {
+                <ul class="pagination pagination-sm">
+                    <li><a href="#">First</a></li>
+                    <li><a href="#">Prev</a></li>
+                </ul>
+                }
+                @{
+    if (ViewBag.searchBy != null)
+    {
+
+        var search = ViewBag.search;
+
+                <ul class="pagination pagination-sm">
+                    @for (var item = 1; item <= @ViewBag.apartmentlist.PageCount; item++)
+            {
+            <li><a href="BuildingProfile?page=@item&Search=@search&BuildingID=@ViewBag.BuildingID">@item</a></li>
+            }
+                </ul>
+    }
+    else if (ViewBag.searchBy == null)
+    {
+        var searchBy = ViewBag.searchBy;
+        var search = ViewBag.search;
+                <ul class="pagination pagination-sm">
+                    @for (var item = 1; item <= ViewBag.apartmentlist.PageCount; item++)
+            {
+            <li><a href="BuildingProfile?page=@item&BuildingID=@ViewBag.BuildingID">@item</a></li>
+            }
+                </ul>
+    }
+                }
+                @if (ViewBag.apartmentlist.HasNextPage)
+                {
+                    if (ViewBag.searchBy != null)
+                    {
                         var searchBy = ViewBag.searchBy;
                         var search = ViewBag.search;
-        <ul class="pagination pagination-sm">
-            @for (var item = 1; item <= ViewBag.apartmentlist.PageCount; item++)
-            {
-                <li><a href="BuildingProfile?page=@item&BuildingID=@ViewBag.BuildingID">@item</a></li>
-            }
-        </ul>
-                    }
-                    }
-                    @if (ViewBag.apartmentlist.HasNextPage)
-                    {
-                        if (ViewBag.searchBy != null)
-                        {
-                            var searchBy = ViewBag.searchBy;
-                            var search = ViewBag.search;
-                        <ul class="pagination pagination-sm">
-                            <li> @Html.ActionLink("Next", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
+                <ul class="pagination pagination-sm">
+                    <li> @Html.ActionLink("Next", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber + 1, SearchBy = @searchBy, Search = @search })</li>
 
-                            <li>@Html.ActionLink("Last", "BuildingProfile", new { page = ViewBag.apartmentlist.PageCount, SearchBy = @searchBy, Search = @search })</li>
-                        </ul>
-                        }
-                        else if (ViewBag.searchBy == null)
-                        {
-                        <ul class="pagination pagination-sm">
-                            <li> @Html.ActionLink("Next", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber + 1 })</li>
-
-                            <li>@Html.ActionLink("Last", "BuildingProfile", new { page = ViewBag.apartmentlist.PageCount })</li>
-                        </ul>
-                        }
+                    <li>@Html.ActionLink("Last", "BuildingProfile", new { page = ViewBag.apartmentlist.PageCount, SearchBy = @searchBy, Search = @search })</li>
+                </ul>
                     }
-                    else
+                    else if (ViewBag.searchBy == null)
                     {
-                        <ul class="pagination pagination-sm">
-                            <li><a href="#">Next</a></li>
-                            <li><a href="#">Last</a></li>
-                        </ul>
+                <ul class="pagination pagination-sm">
+                    <li> @Html.ActionLink("Next", "BuildingProfile", new { page = ViewBag.apartmentlist.PageNumber + 1 })</li>
+
+                    <li>@Html.ActionLink("Last", "BuildingProfile", new { page = ViewBag.apartmentlist.PageCount })</li>
+                </ul>
                     }
+                }
+                else
+                {
+                <ul class="pagination pagination-sm">
+                    <li><a href="#">Next</a></li>
+                    <li><a href="#">Last</a></li>
+                </ul>
+                }
+            </div>
+        </dliv>
+
+        <div class="row lightblue " style="border:1px solid lightgrey;">
+
+            <div style=" margin-top:20px; margin-bottom:20px;">
+                @{var apartmentList = ViewBag.apartmentlist;}
+
+                @foreach (var item in apartmentList)
+                {
+                <div class="col-md-4 lightdarkblue hollow2 text-center" style="padding-top:20px; padding-bottom:20px; border:1px inset #32b6d9;"
+                     onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID, BuildingID =  ViewBag.BuildingID })'">
+                    <h1>@item.ApartmentNumber</h1>
                 </div>
-            </dliv>
-
-            <div class="row lightblue " style="border:1px solid lightgrey;">
-
-                <div style=" margin-top:20px; margin-bottom:20px;">
-                    @{var apartmentList = ViewBag.apartmentlist;}
-
-                    @foreach (var item in apartmentList)
-                    {
-                        <div class="col-md-4 lightdarkblue hollow2 text-center" style="padding-top:20px; padding-bottom:20px; border:1px inset #32b6d9;"
-                           onclick="location.href = '@Url.Action("ApartmentProfile", "Building", new { ApartmentID = @item.ID, BuildingID =  ViewBag.BuildingID })'">
-                            <h1>@item.ApartmentNumber</h1>
-                        </div>
-                    }
-                </div>
+                }
             </div>
         </div>
+    </div>
+}
 
-}      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--Form ends-->
-
- @section scripts
+@section scripts
 {
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
     <link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
-  
+
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-    
+
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
-    Collapse | Copy Code
+
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
     </script>
 
-<script src="~/Scripts/knockout-3.1.0.js"></script>
-<script src="~/Scripts/koLogic.js"></script>
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/koLogic.js"></script>
     <script type="text/javascript">
 
-        
-    $(document).ready(function (e) {
 
-        
-     
+        $(document).ready(function (e) {
 
-        //var Viewmodel;
+            $('.mycheckbosex').change(function () {
+                if ($(this).is(':checked') == true) {
+                    $('.permissiontable').fadeIn(500);
+                    $('#map').hide();
+                }
+                else {
 
-        //$(function () {
+                    $('.permissiontable').hide();
+                    $('#map').show(1000);
+                }
+            });
 
-        //    Viewmodel = {
-        //        mapsresize: ko.observable(false),
-        //        name: ko.observable("dioscar")
-        //    };
+            //var Viewmodel;
 
+            //$(function () {
 
-            
-        //    ko.applyBindings(Viewmodel);
-        //});
-
-
-
-        //$('#btn_make_map_large').click(function () {
-
-        //    $('#map').toggle(function () {
-        //        Viewmodel.mapsresize(true);
-
-        //    }, function () {
-               
-        //        Viewmodel.mapsresize(false);
-        //        $('#map').addClass("riginalwidth");
-        //    });
+            //    Viewmodel = {
+            //        mapsresize: ko.observable(false),
+            //        name: ko.observable("dioscar")
+            //    };
 
 
+            //    ko.applyBindings(Viewmodel);
+            //});
 
-        //});
+            //$('#btn_make_map_large').click(function () {
+
+            //    $('#map').toggle(function () {
+            //        Viewmodel.mapsresize(true);
+
+            //    }, function () {
+
+            //        Viewmodel.mapsresize(false);
+            //        $('#map').addClass("riginalwidth");
+            //    });
+
+            //});
 
 
-
-
-        @*if ($('#input-search').va() != "Filter Apartments") {
+            @*if ($('#input-search').va() != "Filter Apartments") {
 
                 var search = "@ViewBag.search";
                 $('#input-search').prop("Placeholder", search);
             };*@
 
+            $('#ShowURL').click(function () {
+                $('#myURL').html('<div class="alert alert-success alert-success" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                ' http://localhost:64083/Building/BuildingProfile?BuildingID=&BuildingID=@ViewBag.BuildingID' +
+            '</div>');
+            });
+
+            //googlemaps
+
+            var data_address = $('.googlemapsdata').attr('data-address');
+            var data_city = $('.googlemapsdata-city').attr('data-city');
+            var data_state = $('.googlemapsdata-state').attr('data-state');
+            var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
+            var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
 
 
-        $('#ShowURL').click(function () {
-            $('#myURL').html('<div class="alert alert-success alert-success" role="alert">' +
-            '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
-            ' http://localhost:64083/Building/BuildingProfile?BuildingID=&BuildingID=@ViewBag.BuildingID' +
-        '</div>');
-        });
+            initialize();
+            codeAddress();
 
-        //googlemaps
-
-        var data_address = $('.googlemapsdata').attr('data-address');
-        var data_city = $('.googlemapsdata-city').attr('data-city');
-        var data_state = $('.googlemapsdata-state').attr('data-state');
-        var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
-        var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
-
-
-        initialize();
-        codeAddress();
-
-        //========initializes the map======================================
-        var geocoder;
-        var map;
-        function initialize() {
-            geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(-34.397, 150.644);
-            var mapOptions = {
-                zoom: 16,
-                center: latlng
-                // mapTypeId: google.maps.MapTypeId.SATELLITE
+            //========initializes the map======================================
+            var geocoder;
+            var map;
+            function initialize() {
+                geocoder = new google.maps.Geocoder();
+                var latlng = new google.maps.LatLng(-34.397, 150.644);
+                var mapOptions = {
+                    zoom: 16,
+                    center: latlng
+                    // mapTypeId: google.maps.MapTypeId.SATELLITE
+                }
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
             }
-            map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        }
-        //============This section search your address
-        function codeAddress() {
-            var address = BuildingAddress;
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    alert("Geocode was not successful for the following reason: " + status);
+            //============This section search your address
+            function codeAddress() {
+                var address = BuildingAddress;
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            }
+            //google maps ends
+
+            $('#input-search').focusin(function () {
+                alert('yes');
+                $('#ApartmentNumber').prop("checked", true).trigger("change");
+
+            });
+
+            $('#input-search').focusin(function () { alert('yes'); });
+
+
+            //=============Radio button functions ================================
+            $('#ApartmentNumber').change(function () {
+                //alert('yes');
+                if ($('#ApartmentNumber').is(':Checked')) {
+                    $('#input-search').attr("name", "search");
+                    $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');
+                    //alert('yes');
+                }
+
+            });
+
+
+            //loading request
+            var buildingID = "@ViewBag.buildingInfo.ID";
+            $.ajax({
+
+                type: "GET",
+                data: { buildingID: buildingID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "/Building/LoadBuildingReq/",
+                success: function (jsonData) {
+                    // alert(jsonData);
+                    $('#Requestscount').html(jsonData);
+
                 }
             });
-        }
-        //google maps ends
 
-        $('#input-search').focusin(function () {
-            alert('yes');
-            $('#ApartmentNumber').prop("checked", true).trigger("change");
+            //loading request
+            var buildingID = "@ViewBag.buildingInfo.ID";
+            $.ajax({
+
+                type: "GET",
+                data: { buildingID: buildingID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "/Building/LoadBuildingReq/",
+                success: function (jsonData) {
+                    // alert(jsonData);
+                    $('#Requestscount').html(jsonData);
+
+                }
+            });
+
+            $.ajax({
+
+                type: "GET",
+                data: { buildingID: buildingID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "/Building/ContactBookCount/",
+                success: function (jsonData) {
+                    // alert(jsonData);
+                    $('#RequestCountContactBook').html(jsonData);
+
+                }
+            });
+
 
         });
-
-        $('#input-search').focusin(function () { alert('yes'); });
-
-
-        //=============Radio button functions ================================
-        $('#ApartmentNumber').change(function () {
-            //alert('yes');
-            if ($('#ApartmentNumber').is(':Checked')) {
-                $('#input-search').attr("name", "search");
-                $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');
-                //alert('yes');
-            }
-
-        });
-
-
-        //loading request
-        var buildingID = "@ViewBag.buildingInfo.ID";
-        $.ajax({
-
-            type: "GET",
-            data: { buildingID: buildingID },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/Building/LoadBuildingReq/",
-            success: function (jsonData) {
-                // alert(jsonData);
-                $('#Requestscount').html(jsonData);
-
-            }
-        });
-
-        //loading request
-        var buildingID = "@ViewBag.buildingInfo.ID";
-        $.ajax({
-
-            type: "GET",
-            data: { buildingID: buildingID },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/Building/LoadBuildingReq/",
-            success: function (jsonData) {
-                // alert(jsonData);
-                $('#Requestscount').html(jsonData);
-
-            }
-        });
-
-        $.ajax({
-
-            type: "GET",
-            data: { buildingID: buildingID },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/Building/ContactBookCount/",
-            success: function (jsonData) {
-                // alert(jsonData);
-                $('#RequestCountContactBook').html(jsonData);
-
-            }
-        });
-
-        
-    });
     </script>
-
 }        

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SecurityMonitor.Models.Azure;
+using PointerSecurityAzure;
 
 namespace SecurityMonitor.Controllers
 {
     
     public class ModuleController : Controller
     {
-        PointersecurityEntities1 db = new PointersecurityEntities1();
+        pointersecurityEntities db = new pointersecurityEntities();
 
         // GET: Module
         public PartialViewResult ModuleView(int BuildingID)
