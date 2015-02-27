@@ -21,7 +21,7 @@
                     <div class="row border-white"
                          style="background:#282D33;
                                 color:white;
-                                height:40px; ">
+                                padding:9px 0; ">
                         Building Information
                     </div>
                     <section>
@@ -51,8 +51,8 @@
                         <div class=" border-white"
                              style="background:#282D33;
                                 color:white;
-                                height:40px; ">
-                            Building Information
+                                padding:9px 0; ">
+                            
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 </div>
                 <!--Manage building Users-->
                 <div class="row darkdarkblue  border-white SettingBPUsers text-center"  style=" height:40px;  background:#282D33; color:white; ">
-                   | @Html.ActionLink("Manage Users","ManageUsersProfile","Management") |  
+                   | @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID },null) |  
                    
                 </div>
 
@@ -108,7 +108,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12    permissiontable " style="display:none;">
                 <div class="row background-white text-center border-white"
                      style="z-index:1;
-                         height:40px;
+                         padding:9px 0;
                          background:#282D33;
                          color:white; ">
                     Active permission

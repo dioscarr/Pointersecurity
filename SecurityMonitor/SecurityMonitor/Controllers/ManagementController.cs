@@ -648,6 +648,15 @@ namespace SecurityMonitor.Controllers
 
         public ActionResult ManageUsersProfile(int BuildingID)
         {
+            //todo: create users, assign level of privilage
+            ManageUsersProfileVM mupvm = new ManageUsersProfileVM();
+           var result= mupvm.InsertRole("Repair1");
+
+           return View(mupvm);
+        }
+
+        public ActionResult AddUser(int BuildingID, ManagerVM model_User, Permission model_permissions)
+        {
 
             return View();
         }

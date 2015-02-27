@@ -102,6 +102,9 @@
     <Compile Include="PendingModules.cs">
       <DependentUpon>pointersecurityAzuredb.tt</DependentUpon>
     </Compile>
+    <Compile Include="PermissionMapRole.cs">
+      <DependentUpon>pointersecurityAzuredb.tt</DependentUpon>
+    </Compile>
     <Compile Include="pointersecurityAzuredb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

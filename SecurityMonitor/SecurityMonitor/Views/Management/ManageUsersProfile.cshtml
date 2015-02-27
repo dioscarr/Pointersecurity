@@ -1,0 +1,161 @@
+﻿@model SecurityMonitor.Models.ManageUsersProfileVM
+@{
+    ViewBag.Title = "ManageUsersProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="padding:0px 0; background:white; padding-bottom:100px; ">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px; margin-bottom:50px;"
+         onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = @Model.BuildingID })'">
+        <span style="color:white;">Return To Building</span>
+
+    </div>
+
+    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px;"
+             onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = })'">
+            <span style="color:white;">Return To Building</span>
+
+        </div>*@
+    <div class="col-md-offset-1 col-md-4 form-group " style="border:1px solid lightgrey; height:400px; background:#f5f3f3;">
+
+        @using (Html.BeginForm("AddUser", "Management"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <section>
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
+                    <p style="font-size:20px; padding-top:20px;">Manage User(s)</p>
+                </div>
+                @Html.TextBox("FullName", null, new { placeholder = "Full Name", @class = "form-control col-md-12 col-sm-12 col-xs-12 input-sm  ", @style = " max-width: 100%; margin-bottom: 10px; margin-top:30px; " })
+                @Html.TextBox("Email", null, new { placeholder = "Email", @class = " form-control col-md-12 col-sm-12 col-xs-12 input-sm", @style = " max-width: 100%; margin-bottom: 10px;" })
+                @Html.TextBox("Phone", null, new { placeholder = "Phone", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = " max-width: 50%;margin-bottom: 10px;" })
+                @Html.TextBox("UserName", null, new { placeholder = "UserName", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
+                @Html.Password("Password", null, new { placeholder = "Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
+                @Html.Password("ConfirmPassword", null, new { placeholder = "Confirm Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
+
+                @Html.Hidden("BuildingID", Model.BuildingID)
+
+                <div><button type="submit" class="btn btn-default col-lg-12 col-md-12 col-sm-12 col-xs-12">Add Manager</button></div>
+
+
+            </section>
+        }
+    </div>
+    <div class="col-md-6" >
+        <div class="row ">
+            <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
+
+                <div class="col-md-12 text-center permission " style="padding-top:25px; ">
+                    Modules Permissions
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Repair:
+                    @Html.CheckBoxFor(c => c.permission.permission.Repair, new { data_bind = " checked: myValue, click: myAction" })
+                    <div id="repairid" data-bind="text: myValue"></div>
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Acess Control:
+                    @Html.CheckBoxFor(c => c.permission.permission.Accesscontrol)
+
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    News:
+                    @Html.CheckBoxFor(c => c.permission.permission.News)
+
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Events:
+                    @Html.CheckBoxFor(c => c.permission.permission.Events)
+
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Legal Docs:
+                    @Html.CheckBoxFor(c => c.permission.permission.LegalDocs)
+
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Delivery:
+                    @Html.CheckBoxFor(c => c.permission.permission.Delivery)
+
+                </div>
+            </div>
+            <!--bUILDING pERMISSION-->
+            <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
+
+                <div class="col-md-12 text-center permission " style="padding-top:25px; ">
+                    Building Permission
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Contact Book:
+                    @Html.CheckBoxFor(c => c.permission.permission.Contactbook)
+
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Apartments:
+                    @Html.CheckBoxFor(c => c.permission.permission.Apartment)
+
+                </div>
+                <div class="col-md-12 text-center permission hollow3">
+                    Basic Building Features:
+                    @Html.CheckBoxFor(c => c.permission.permission.BasicFeatures)
+
+                </div>
+                
+            </div>
+            
+
+        </div>
+
+    </div>
+    
+</div>
+
+
+
+
+
+
+@section scripts
+{
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+           ///jquery
+
+           
+       });
+
+
+
+       var viewModel = {
+          
+           myValue: ko.observable(false),
+           
+          
+           myAction: function () {
+               var self = this;
+              
+              //do 
+              
+           },
+          
+       };
+
+       ko.applyBindings(viewModel);
+
+
+    </script>
+    
+    
+    
+    
+    }
+
+
+
+
+

@@ -236,6 +236,7 @@
     <Compile Include="Models\DisplayClientBuilding.cs" />
     <Compile Include="Models\DisplayManagerRoleDelete.cs" />
     <Compile Include="Models\ErrorMessageVM.cs" />
+    <Compile Include="Models\HandleRole.cs" />
     <Compile Include="Models\JsonVM.cs" />
     <Compile Include="Models\ManagementBuilding.cs" />
     <Compile Include="Models\ManagerVM.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\managementVM.cs" />
+    <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\RegisterManagerVM.cs" />
     <Compile Include="Models\ReqTypeCount.cs" />
     <Compile Include="Models\RequestForTodayVM.cs" />
@@ -755,6 +757,7 @@
     <Content Include="Views\Management\SelectBuilding.cshtml" />
     <Content Include="Views\Management\AssignBtoM.cshtml" />
     <Content Include="Views\Management\ManagementBuilding.cshtml" />
+    <Content Include="Views\Management\ManageUsersProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

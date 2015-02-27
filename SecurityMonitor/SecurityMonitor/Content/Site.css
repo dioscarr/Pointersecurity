@@ -778,3 +778,8 @@ input-settings {
 
     background:#cbd1ed;
 }
+.permission {
+    border:1px solid rgb(241, 241, 241);
+    padding:16px 0;
+
+}

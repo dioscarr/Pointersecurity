@@ -54,6 +54,9 @@
         <EntityTypeShape EntityType="PointerSecurityModel.ActiveManager" Width="1.5" PointX="15.25" PointY="14.625" />
         <AssociationConnector Association="PointerSecurityModel.FK_ActiveManager_To_Manager" />
         <AssociationConnector Association="PointerSecurityModel.FK_ActiveManager_ToBuilding" />
+        <EntityTypeShape EntityType="PointerSecurityModel.PermissionMapRole" Width="1.5" PointX="9.125" PointY="18.125" />
+        <AssociationConnector Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" />
+        <AssociationConnector Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

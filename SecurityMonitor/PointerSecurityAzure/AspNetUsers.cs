@@ -21,6 +21,7 @@ namespace PointerSecurityAzure
             this.Role = new HashSet<Role>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.PermissionMapRole = new HashSet<PermissionMapRole>();
         }
     
         public string Id { get; set; }
@@ -42,5 +43,6 @@ namespace PointerSecurityAzure
         public virtual ICollection<Role> Role { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<PermissionMapRole> PermissionMapRole { get; set; }
     }
 }
