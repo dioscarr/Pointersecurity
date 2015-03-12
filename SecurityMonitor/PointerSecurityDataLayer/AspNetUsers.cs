@@ -18,7 +18,10 @@ namespace PointerSecurityDataLayer
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.BuildingUserMapping = new HashSet<BuildingUserMapping>();
+            this.PermissionMapRole = new HashSet<PermissionMapRole>();
             this.Role = new HashSet<Role>();
+            this.Shipment = new HashSet<Shipment>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
             this.AspNetRoles = new HashSet<AspNetRoles>();
         }
@@ -38,9 +41,13 @@ namespace PointerSecurityDataLayer
     
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual ICollection<BuildingUserMapping> BuildingUserMapping { get; set; }
         public virtual Manager Manager { get; set; }
+        public virtual ICollection<PermissionMapRole> PermissionMapRole { get; set; }
         public virtual ICollection<Role> Role { get; set; }
+        public virtual ICollection<Shipment> Shipment { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual Tenant Tenant { get; set; }
     }
 }

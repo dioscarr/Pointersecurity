@@ -52,5 +52,6 @@ namespace PointerSecurityAzure
         public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
         public virtual DbSet<ActiveManager> ActiveManager { get; set; }
         public virtual DbSet<PermissionMapRole> PermissionMapRole { get; set; }
+        public virtual DbSet<BuildingUser> BuildingUser { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace PointerSecurityAzure
             this.ManagerBuilding = new HashSet<ManagerBuilding>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
             this.ActiveManager = new HashSet<ActiveManager>();
+            this.BuildingUser = new HashSet<BuildingUser>();
         }
     
         public int ID { get; set; }
@@ -42,5 +43,6 @@ namespace PointerSecurityAzure
         public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
         public virtual ICollection<ActiveManager> ActiveManager { get; set; }
+        public virtual ICollection<BuildingUser> BuildingUser { get; set; }
     }
 }

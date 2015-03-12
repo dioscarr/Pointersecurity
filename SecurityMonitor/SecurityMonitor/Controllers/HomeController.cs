@@ -4,24 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 
 namespace SecurityMonitor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        pointersecurityEntities db = new pointersecurityEntities();
+        PointerSecurityEntities db = new PointerSecurityEntities();
         public ActionResult Index()
         {
-
-
-
             return View();
         }
-
-       
-
-
 
         public ActionResult About()
         {
@@ -74,5 +68,7 @@ namespace SecurityMonitor.Controllers
             };
             return new  JsonResult { Data = jsonData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+       
     }
 }

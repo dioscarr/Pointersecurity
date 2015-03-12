@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
@@ -14,18 +14,17 @@ using System.Data.Entity;
 
 namespace SecurityMonitor.Controllers
 {
-    [Authorize]
+   [Authorize(Roles = "Manager")]
     public class ManagerController : Controller
     {
 
          //DB context
-        pointersecurityEntities db = new pointersecurityEntities();
+        PointerSecurityEntities db = new PointerSecurityEntities();
         //Building Profile ==================================================================================
         
 
 
-        [HttpGet]
-        
+        [HttpGet]        
         public ActionResult Index()
         {
          return View();
@@ -140,7 +139,7 @@ namespace SecurityMonitor.Controllers
             List<Tenant> tn = db.Tenant.Where(t => t.Apartment.Buildings.ID == BuildingID).ToList();
             return View(tn);
         }
-        //ContactBookCount
+       //ContactBookCount
        
         public ActionResult ContactBookCount(int BuildingID)
         {
@@ -155,9 +154,7 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = TotalReq, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
               
         }
-
         //====================apartmenprofile ==========-==========
-
         [HttpGet]
         public async Task<ActionResult> ApartmentProfile(int? ApartmentID, int BuildingID)
         {

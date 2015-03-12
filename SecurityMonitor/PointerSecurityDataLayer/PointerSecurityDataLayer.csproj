@@ -48,116 +48,135 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveManager.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Apartment.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetRoles.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserClaims.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserLogins.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUsers.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Buildings.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingUser.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingUserMapping.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Clients.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="GanttLinkId.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="GanttTask.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="ListOfModule.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="ManagerBuilding.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="MasterProfileFields.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Module.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Package.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="PendingModules.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointerSucurity.Context.cs">
+    <Compile Include="PermissionMapRole.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PointerSecurity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointerSucurity.Context.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointerSucurity.cs">
+    <Compile Include="PointerSecurity.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
-    <Compile Include="PointerSucurity.Designer.cs">
+    <Compile Include="PointerSecurity.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PointerSucurity.edmx</DependentUpon>
+      <DependentUpon>PointerSecurity.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReqType.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Requests.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shipment.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SignalRMessageTable.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="States.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Tenant.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="UserActivityLog.cs">
-      <DependentUpon>PointerSucurity.tt</DependentUpon>
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="PointerSucurity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PointerSucurity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="PointerSucurity.Context.tt">
+    <EntityDeploy Include="PointerSecurity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PointerSecurity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PointerSecurity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointerSucurity.edmx</DependentUpon>
-      <LastGenOutput>PointerSucurity.Context.cs</LastGenOutput>
+      <DependentUpon>PointerSecurity.edmx</DependentUpon>
+      <LastGenOutput>PointerSecurity.Context.cs</LastGenOutput>
     </None>
-    <None Include="PointerSucurity.edmx.diagram">
-      <DependentUpon>PointerSucurity.edmx</DependentUpon>
+    <None Include="PointerSecurity.edmx.diagram">
+      <DependentUpon>PointerSecurity.edmx</DependentUpon>
     </None>
-    <None Include="PointerSucurity.tt">
+    <None Include="PointerSecurity.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PointerSucurity.edmx</DependentUpon>
-      <LastGenOutput>PointerSucurity.cs</LastGenOutput>
+      <DependentUpon>PointerSecurity.edmx</DependentUpon>
+      <LastGenOutput>PointerSecurity.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

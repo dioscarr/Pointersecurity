@@ -20,7 +20,7 @@ namespace PointerSecurityDataLayer
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }
         public string PIN { get; set; }
-        public Nullable<int> TenantID { get; set; }
+        public string TenantID { get; set; }
     
         public virtual Tenant Tenant { get; set; }
     }

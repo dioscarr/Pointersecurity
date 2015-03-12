@@ -1,4 +1,4 @@
-﻿@model PointerSecurityAzure.Requests
+﻿@model PointerSecurityDataLayer.Requests
 
 @{
     ViewBag.Title = "Tenant Request";
@@ -20,7 +20,7 @@
             </div>
 
             @{IEnumerable<SelectListItem> ReqType = ViewBag.ReqType;}
-            @using (Html.BeginForm(new { BuildingID = (int)@ViewBag.RequestBuildingID, TenantID = (int)@ViewBag.TenantID }))
+            @using (Html.BeginForm(new { BuildingID = (int)@ViewBag.RequestBuildingID, TenantID = (string)@ViewBag.TenantID }))
             {
                 @Html.AntiForgeryToken()
 

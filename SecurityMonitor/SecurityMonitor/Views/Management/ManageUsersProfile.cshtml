@@ -1,26 +1,30 @@
 ﻿@model SecurityMonitor.Models.ManageUsersProfileVM
+       @using SecurityMonitor.Models;
+@using PointerSecurityDataLayer
 @{
     ViewBag.Title = "ManageUsersProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px; margin-bottom:50px;"
+     onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = @Model.BuildingID })'">
+    <span style="color:white;">Return To Building</span>
 
-<div class="row" style="padding:0px 0; background:white; padding-bottom:100px; ">
+</div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px; margin-bottom:50px;"
-         onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = @Model.BuildingID })'">
-        <span style="color:white;">Return To Building</span>
 
-    </div>
 
-    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px;"
-             onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = })'">
-            <span style="color:white;">Return To Building</span>
+<div class="row " style="padding:0px 0; background:white; padding-bottom:100px; height:400px; ">
 
-        </div>*@
+    
+   
+@using (Html.BeginForm("AddUser", "Management"))
+{
+
+    List<string> myRoles = new List<string> { "Repair2", "Repair3", "Repair4" };
+
     <div class="col-md-offset-1 col-md-4 form-group " style="border:1px solid lightgrey; height:400px; background:#f5f3f3;">
-
-        @using (Html.BeginForm("AddUser", "Management"))
-        {
+        @Html.HiddenFor(model => model.RoleNames, myRoles)
+       
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -36,24 +40,29 @@
                 @Html.Password("ConfirmPassword", null, new { placeholder = "Confirm Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
 
                 @Html.Hidden("BuildingID", Model.BuildingID)
+           
 
-                <div><button type="submit" class="btn btn-default col-lg-12 col-md-12 col-sm-12 col-xs-12">Add Manager</button></div>
+                <div>
+                    <button type="submit" class="btn btn-default col-lg-12 col-md-12 col-sm-12 col-xs-12">Add Manager</button>
+                    <button id='upClick' type="button" class="btn btn-link">Edit Users Permission(s)</button>
+
+                </div>
 
 
             </section>
-        }
+        
     </div>
-    <div class="col-md-6" >
+    <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
         <div class="row ">
-            <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
+            <div class="col-md-6" style="background: #f5f3f3; border-right:1px solid lightgrey; ">
 
                 <div class="col-md-12 text-center permission " style="padding-top:25px; ">
                     Modules Permissions
                 </div>
                 <div class="col-md-12 text-center permission hollow3">
                     Repair:
-                    @Html.CheckBoxFor(c => c.permission.permission.Repair, new { data_bind = " checked: myValue, click: myAction" })
-                    <div id="repairid" data-bind="text: myValue"></div>
+                    @Html.CheckBoxFor(c => c.permission.permission.Repair, new { })
+
                 </div>
                 <div class="col-md-12 text-center permission hollow3">
                     Acess Control:
@@ -82,7 +91,7 @@
                 </div>
             </div>
             <!--bUILDING pERMISSION-->
-            <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
+            <div class="col-md-6" style="background: #f5f3f3;  ">
 
                 <div class="col-md-12 text-center permission " style="padding-top:25px; ">
                     Building Permission
@@ -102,16 +111,163 @@
                     @Html.CheckBoxFor(c => c.permission.permission.BasicFeatures)
 
                 </div>
-                
+
             </div>
-            
+
 
         </div>
 
     </div>
+
+}
+
+   
+
+   
     
 </div>
 
+<div class="row EditpermissionSection" style="display:none;">
+    <div class="col-md-offset-1 col-md-10">
+        <p style="padding-top:30px;">To Edit user permission please follow these steps.</p>
+        <ul>
+            <li>Select the " Change Current permision Radio Button"</li>
+            <li>Check or Uncheck the permission to either added or remove it</li>
+            <li>when all changes are completed click "Save All Changes" button</li>
+        </ul>
+    </div>
+</div>
+<div class="row EditpermissionSection" style="height:600px; margin-top:5px; display:none;">
+
+
+    <div class="col-md-offset-1 col-md-4" style=" margin-top:20px;  border:1px solid lightgrey;">
+        <div class="row SettingBPUsers   " style=" background:#f5f3f3; padding:25px 0;">
+            <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px; ">User Name</p></div>
+            <div class="col-md-6" style="padding-left:30px;">
+                Change Properties
+            </div>
+        </div>
+        @{ List<BuildingUser> ObjBU = (List<BuildingUser>)ViewBag.BuildingUsers;
+       
+
+            <div class="row scrollable" style="background:white; height:350px; border-top:1px solid lightgrey; border-bottom:1px solid lightgrey; padding-bottom:30px;">
+                @if (ObjBU.Count >= 0)
+                {
+                    foreach (var item in ObjBU)
+                    {
+                        <div class="col-md-12 SettingBPUsers  hollow3 shadow3" style="  background:#f5f3f3; border:1px solid lightgrey;  margin-top:5px; margin-bottom:5px;">
+                            <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px;">@item.FirstName @item.LastName </p></div>
+                            <div class="col-md-6" style="padding-left:30px;">
+                                @Html.RadioButton("permission", false, new { data_chkID = @item.UserID, @class = "checkbox mycheckbosex", @style = "display:inline;" })
+                                Edit 
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p> no User assign yet!</p>
+
+                }
+            </div>
+    <div class="row" style=" border:1px solid lightgrey; height:90px;  border-top:none; background: #f5f3f3;">
+
+    </div>
+            <div class="row">
+                <button type="button" class=" col-md-12 btn btn-success" style="height:50px;" id="EditClearAllid">
+                    Clear All
+                </button>
+
+            </div>
+}
+    </div>
+    @{using (@Html.BeginForm("EditBUPermissions", "Management"))
+    {
+        <div class="col-md-6" style=" margin-top:20px; height:500px;">
+            <div class="row " style="background: #f5f3f3;border:1px solid lightgrey; ">
+                <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
+
+                    <div class="col-md-12 text-center permission " style="padding-top:25px;  ">
+                        Modules Permissions
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Repair:
+                        @Html.CheckBoxFor(c => c.permission.permission.Repair, new { id = "EditRepairid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Acess Control:
+                        @Html.CheckBoxFor(c => c.permission.permission.Accesscontrol, new { id = "EditACid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        News:
+                        @Html.CheckBoxFor(c => c.permission.permission.News, new { id = "EditNewsid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Events:
+                        @Html.CheckBoxFor(c => c.permission.permission.Events, new { id = "EditEventsid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Legal Docs:
+                        @Html.CheckBoxFor(c => c.permission.permission.LegalDocs, new { id = "EditLDid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Delivery:
+                        @Html.CheckBoxFor(c => c.permission.permission.Delivery, new { id = "EditDeliveryid", @class = "chk" })
+
+                    </div>
+                </div>
+                <!--bUILDING pERMISSION-->
+                <div class="col-md-6" style="background:#f5f3f3;border:1px solid lightgrey; padding-bottom:210px; ">
+
+                    <div class="col-md-12 text-center permission " style="padding-top:25px; ">
+                        Building Permission
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Contact Book:
+                        @Html.CheckBoxFor(c => c.permission.permission.Contactbook, new { id = "EditCBid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Apartments:
+                        @Html.CheckBoxFor(c => c.permission.permission.Apartment, new { id = "EditApartmentid", @class = "chk" })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3 shadow3" style="padding-top:25px; margin:5px 0; border:1px solid lightgrey; ">
+                        Basic Building Features:
+                        @Html.CheckBoxFor(c => c.permission.permission.BasicFeatures, new { id = "EditBasicid", @class = "chk" })
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12 ">
+                    @Html.Hidden("BuildingID", Model.BuildingID)
+                    @Html.Hidden("UserID")
+                    <button type="submit" class="btn btn-success row" style=" height:50px; border-top-left-radius:0px; border-top-right-radius:0px;">Save All Changes</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    }}
+</div>
+@*<div class="row" id="myURL">
+    <div class="alert alert-success alert-success" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+    </div>
+
+</div>*@
 
 
 
@@ -119,34 +275,120 @@
 
 @section scripts
 {
+<script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/knockout-3.1.0.js"></script>
 <script src="~/Scripts/jquery-2.1.1.min.js"></script>
 
    <script type="text/javascript">
        $(document).ready(function () {
-           ///jquery
 
-           
+           $("#upClick").on("click", function () {
+               $('.EditpermissionSection').show();
+               $('html, body').animate({ scrollTop: "1000px" });
+
+           });   
+           //edit permissions
+           $('.mycheckbosex').change(function () {
+
+               if ($(this).is(':checked') == true) {   
+                   
+
+                   var data_chkID = $(this).attr('data-chkID');
+                   //set UserID on hidden 
+                   $('#UserID').val(data_chkID);
+                   //function
+                   resetcheckboxes();
+
+                   $.ajax({
+                       type: "GET",
+                       data: { BuildingIDUserID: data_chkID },
+                       contentType: "application/json; charset=utf-8",
+                       dataType: "json",
+                       url: "/Management/Loadingbuildinguserpermissions/",
+                       success: function (jsonData) {                      
+                           var i = 0;
+                           for (var item in jsonData) {
+                              
+                               switch (jsonData[i])
+                               {
+                                   case "Repair":
+                                       $('#EditRepairid').prop("checked",true);
+                                
+                                       break;
+                                   case "Delivery":
+                                       $('#EditDeliveryid').prop("checked", true);
+                                    
+                                       break;
+                                   case "News":
+                                       $('#EditNewsid').prop("checked", true);
+                                   
+                                       break;
+                                   case "AccessControl":
+                                       $('#EditACid').prop("checked", true);
+                                    
+                                       break;
+                                   case "Apartment":
+                                       $('#EditApartmentid').prop("checked", true);
+                                     
+                                       break;
+                                   case "Contactbook":
+                                       $('#EditCBid').prop("checked", true);
+                                   
+                                       break;
+                                   case "Events":
+                                       $('#EditEventsid').prop("checked", true);
+                                    
+                                       break;
+                                   case "LegalDocs":
+                                       $('#EditLDid').prop("checked", true);
+                                    
+                                       break;
+                               }
+                               i++;
+                           }
+                       }
+                   });
+
+               }
+               else {
+                   resetcheckboxes();
+                   //$('.permissiontable').hide();
+                   //$('#map').show(1000);
+               }
+           });
+
+           //Clear All 
+           $('#EditClearAllid').on("click", function()
+           {
+               $('.mycheckbosex').prop("checked", false);
+               resetcheckboxes();
+           });
+
+           //$('.chk').change(function () {
+           //    $('#myURL').html('<div class="alert alert-success alert-success" role="alert">' +
+           //    '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+           //    'this is a test message' +
+           //'</div>');
+
+
+           //    $('#myURL').fadeOut(2000);
+           //});
+
        });
 
-
-
-       var viewModel = {
-          
-           myValue: ko.observable(false),
-           
-          
-           myAction: function () {
-               var self = this;
-              
-              //do 
-              
-           },
-          
-       };
-
-       ko.applyBindings(viewModel);
-
+      
+       //reset checkboxes
+       function resetcheckboxes() {
+           $('#EditRepairid').prop("checked", false);
+           $('#EditDeliveryid').prop("checked", false);
+           $('#EditNewsid').prop("checked", false);
+           $('#EditACid').prop("checked", false);
+           $('#EditApartmentid').prop("checked", false);
+           $('#EditCBid').prop("checked", false);
+           $('#EditEventsid').prop("checked", false);
+           $('#EditLDid').prop("checked", false);
+       }
+      
 
     </script>
     

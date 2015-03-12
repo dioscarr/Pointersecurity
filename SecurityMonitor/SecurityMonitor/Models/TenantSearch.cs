@@ -16,6 +16,6 @@ namespace SecurityMonitor.Models
         public string zipcode { set; get; }        
         public int BuildingID { set; get; }
         public int ApartmentID { set; get; }
-        public int TenantID { set; get; }
+        public string TenantID { set; get; }
     }
 }

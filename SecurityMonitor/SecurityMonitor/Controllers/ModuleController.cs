@@ -3,14 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityAzure;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using PointerSecurityDataLayer;
+using SecurityMonitor.Models;
 
 namespace SecurityMonitor.Controllers
 {
-    
+    //[Authorize(Roles = "Admin")]
     public class ModuleController : Controller
     {
-        pointersecurityEntities db = new pointersecurityEntities();
+        PointerSecurityEntities db = new PointerSecurityEntities();
+
+
+
+        //select available modeule
+        public ActionResult SelectModuleIndex(string UserID)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            DisplayManagerRoleDelete ObjRole = new DisplayManagerRoleDelete();
+            ModuleSelectVM ObjS = new ModuleSelectVM();
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+           ObjS.AllRoles = userManager.GetRoles(UserID);
+
+           return View(ObjS);
+        }
 
         // GET: Module
         public PartialViewResult ModuleView(int BuildingID)
@@ -53,5 +71,20 @@ namespace SecurityMonitor.Controllers
            db.SaveChanges();
            return RedirectToAction("buildingProfile", "building", new { BuildingID = BuildingID });
        }
+
+        [HttpGet]
+        [Authorize(Roles="Repair")]
+       public ActionResult RepairIndex()
+       {
+           return View();
+       }
+
+        public ActionResult DeliveryDisplay()
+        {
+
+           var UserID = User.Identity.GetUserId();
+
+            return View();
+        }
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using SecurityMonitor.Models;
+using SecurityMonitor.Workes;
 
 namespace SecurityMonitor.Controllers
 {
@@ -79,11 +80,22 @@ namespace SecurityMonitor.Controllers
                    
                      var UserManager1 = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                      var UserID = UserManager.FindByEmail(model.Email).Id;
+
+
                      if (UserManager1.IsInRole(UserID, "Admin"))
                      {
                          return RedirectToAction("Index", "Home");
                      }
-                    return RedirectToLocal(returnUrl);
+                     else
+                     {
+                         var allRoles = UserManager1.GetRoles(UserID);
+
+                         var defineroute = FindRoute.FindDefaultRoute(allRoles);
+
+                         return RedirectToAction(defineroute[0], defineroute[1], new { UserID = UserID });
+                     
+                     }
+                   // return RedirectToLocal(returnUrl);
                 }
                 else
                 {
@@ -459,7 +471,7 @@ namespace SecurityMonitor.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Login");
         }
 
         //

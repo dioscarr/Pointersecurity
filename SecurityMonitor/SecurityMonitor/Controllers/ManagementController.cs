@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 using SecurityMonitor.Models;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,28 +14,22 @@ using System.Data.Entity.Validation;
 
 namespace SecurityMonitor.Controllers
 {
-    //[Authorize(Roles="Admin")]
+    [Authorize(Roles="Admin")]
     public class ManagementController : Controller
     {
-        pointersecurityEntities db = new pointersecurityEntities();
-        public ActionResult Index()
+       PointerSecurityEntities db = new PointerSecurityEntities();
+       public ActionResult Index()
         {
 
             return View();
         } 
-
-
-
        [HttpGet]
-        public ActionResult PendingModules()
+       public ActionResult PendingModules()
         {
             List<PendingModules> ObjPendingMoodule = db.PendingModules.ToList();
 
             return View(ObjPendingMoodule);
         }
-
-      
-
        [HttpPost]
        public ActionResult approve(int BuildingID, int ListOfModuleID, string ServiceName, int PendingID)
        {
@@ -54,7 +48,6 @@ namespace SecurityMonitor.Controllers
            db.SaveChanges();
            return RedirectToAction("PendingModules"); 
        }
-
        [HttpPost]
        public ActionResult denied(int pendingID)
        {
@@ -63,7 +56,6 @@ namespace SecurityMonitor.Controllers
            db.SaveChanges();
            return RedirectToAction("PendingModules");
        }
-
         //================Role Management===================================================
        [HttpGet]
        public ActionResult RoleIndex()
@@ -148,7 +140,6 @@ namespace SecurityMonitor.Controllers
            db.SaveChanges();
            return RedirectToAction("RoleIndex");
        }
-
        [HttpGet]
        public ActionResult ManageUserRoles()
        {
@@ -159,14 +150,13 @@ namespace SecurityMonitor.Controllers
            ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            return View();
        }
-
        [HttpPost]
        [ValidateAntiForgeryToken]
        public ActionResult RoleAddToUser(string UserName, string RoleName, string FirstName, string LastName, string Phone)
        {
           
             ApplicationDbContext context = new ApplicationDbContext();
-            pointersecurityEntities db = new pointersecurityEntities();
+            PointerSecurityEntities db = new PointerSecurityEntities();
 
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
@@ -219,7 +209,6 @@ namespace SecurityMonitor.Controllers
            ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
            return View("ManageUserRoles");
        }
-
        [Authorize(Roles = "Admin")]
        [HttpPost]
        [ValidateAntiForgeryToken]
@@ -249,7 +238,6 @@ namespace SecurityMonitor.Controllers
            }
            return View("ManageUserRoles");
        }
-
        [HttpPost]
        [Authorize(Roles = "Admin")]
        [ValidateAntiForgeryToken]
@@ -288,9 +276,7 @@ namespace SecurityMonitor.Controllers
            ViewBag.clientlist = db.Clients.Select(c => new SelectListItem { Text = c.ClientName, Value = c.ID.ToString() }).ToList();
       
            return View("ManageUserRoles");
-       }
-
-       
+       }       
        [HttpGet]
        public ActionResult AddManager()
        {
@@ -300,7 +286,6 @@ namespace SecurityMonitor.Controllers
                                                 Value = c.ID.ToString() }).ToList();
           return View(ObjManager); 
        }
-
        [HttpPost]
        [AllowAnonymous]
        [ValidateAntiForgeryToken]
@@ -349,9 +334,8 @@ namespace SecurityMonitor.Controllers
             ManagerID = AppUser.Id, ClientID = model.clientID};
 
            return RedirectToAction("SelectBuilding", ObjDCB);
-       }
-      
-        [HttpGet]
+       }      
+       [HttpGet]
        public ActionResult SelectBuilding(DisplayClientBuilding model)
         {
            model.Manager = db.Manager.Find(model.ManagerID);
@@ -371,9 +355,8 @@ namespace SecurityMonitor.Controllers
             } 
             return View(model);
             }
-
-        [HttpPost]
-        public ActionResult SelectBuilding(DisplayClientBuilding model, int ClientID)
+       [HttpPost]
+       public ActionResult SelectBuilding(DisplayClientBuilding model, int ClientID)
         {
             
             model.ClientID = ClientID;
@@ -398,7 +381,7 @@ namespace SecurityMonitor.Controllers
             
             return View(model);
         }
-        public ActionResult ManagerBuilding(DisplayClientBuilding model, int BuildingID)
+       public ActionResult ManagerBuilding(DisplayClientBuilding model, int BuildingID)
         {
             //1. set ManagerBuilding Obj and save it in db
             //2. load clients, Buildings, assigned buildings to the current manager
@@ -439,8 +422,8 @@ namespace SecurityMonitor.Controllers
             
             return View("SelectBuilding",model);
         }
-        [HttpPost]
-        public ActionResult ManagerBuildingDelete(DisplayClientBuilding model, int BuildingID2)
+       [HttpPost]
+       public ActionResult ManagerBuildingDelete(DisplayClientBuilding model, int BuildingID2)
         {
 
             ManagerBuilding MB = db.ManagerBuilding
@@ -454,16 +437,16 @@ namespace SecurityMonitor.Controllers
             return RedirectToAction("SelectBuilding", model);
 
         }
-        //Assign building to manager
-        public ActionResult AssignBtoM()
+       //Assign building to manager
+       public ActionResult AssignBtoM()
         {
             //TODO: View and manage roles manager table needs to add and remove managers
 
             var Managers = db.Manager.ToList();
             return View(Managers);
         }
-        [HttpGet]
-        public ActionResult ManagementBuilding(int BuildingID)
+       [HttpGet]
+       public ActionResult ManagementBuilding(int BuildingID)
         {
             var ObjMB = new ManagementBuilding();
             //---------------------------------------------------------------------------------------------
@@ -503,8 +486,8 @@ namespace SecurityMonitor.Controllers
 
             return View(ObjMB);
         }
-        [HttpPost]
-        public async Task<ActionResult> AddManagerTobuilding(ManagementBuilding model, ManagerVM  model2)
+       [HttpPost]
+       public async Task<ActionResult> AddManagerTobuilding(ManagementBuilding model, ManagerVM  model2)
         {
             try
             {
@@ -583,10 +566,9 @@ namespace SecurityMonitor.Controllers
                 throw;
             }
             return RedirectToAction("ManagementBuilding", new { BuildingID=model2.BuildingID});
-        }
-        
-        [HttpGet]
-        public ActionResult RemoveManager(int BuildingID, int ClientID, string ManagerID)
+        }        
+       [HttpGet]
+       public ActionResult RemoveManager(int BuildingID, int ClientID, string ManagerID)
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -610,7 +592,7 @@ namespace SecurityMonitor.Controllers
 
                 return RedirectToAction("ManagementBuilding", new { BuildingID = BuildingID });
         }
-        public ActionResult ActivateManager(string managerid, int buildingid)
+       public ActionResult ActivateManager(string managerid, int buildingid)
         {
             if (!ModelState.IsValid)
             {
@@ -636,8 +618,7 @@ namespace SecurityMonitor.Controllers
 
             return RedirectToAction("ManagementBuilding", new { BuildingID = buildingid });
         }
-
-        public ActionResult DeactivateManager(string ManagerID, int BuildingID)
+       public ActionResult DeactivateManager(string ManagerID, int BuildingID)
         {
 
             ActiveManager Obj = db.ActiveManager.Where(c=>c.ManagerID==ManagerID).FirstOrDefault();
@@ -645,25 +626,53 @@ namespace SecurityMonitor.Controllers
             db.SaveChanges();
             return RedirectToAction("ManagementBuilding", new { BuildingID = BuildingID });
         }
-
-        public ActionResult ManageUsersProfile(int BuildingID)
+       public ActionResult ManageUsersProfile(int BuildingID)
         {
             //todo: create users, assign level of privilage
             ManageUsersProfileVM mupvm = new ManageUsersProfileVM();
-           var result= mupvm.InsertRole("Repair1");
+            mupvm.BuildingID = BuildingID;
+            ViewBag.BuildingUsers = mupvm.LoadBuildingUsers(BuildingID);
 
            return View(mupvm);
         }
-
-        public ActionResult AddUser(int BuildingID, ManagerVM model_User, Permission model_permissions)
+        [HttpPost]
+       public ActionResult AddUser(int BuildingID, ManagerVM model_User, Permission model_permissions, ManageUsersProfileVM model4)
         {
-
-            return View();
+            ManageUsersProfileVM Obj = new ManageUsersProfileVM();            
+            Obj.managerVM = model_User;
+            var UserID = Obj.InsertUser(Obj);           
+            var RoleNames = Obj.ConvertToRoleNames(model4);
+            Obj.AddBuildingUser(model_User, UserID);
+            foreach (var item in RoleNames)
+            {
+                Obj.InserUserPermission(item, UserID);
+            }
+            return RedirectToAction("ManageUsersProfile", new {BuildingID = BuildingID });
         }
+        [HttpPost]
+        public async Task<ActionResult> EditBUPermissions(int BuildingID, ManageUsersProfileVM model, string UserID)
+        {
+            
+            ManageUsersProfileVM ObjBU = new ManageUsersProfileVM();
 
-        
-
-       public RoleManager<IdentityRole> RoleManager { get; set; }
+            var RoleNames = ObjBU.ConvertToRoleNames(model);
+            await ObjBU.EditbuildingUserPermission(RoleNames, UserID);
+            return RedirectToAction("ManageUsersProfile", new { BuildingID = BuildingID });
+        }
+        public ActionResult Loadingbuildinguserpermissions(string BuildingIDUserID)
+        {
+            ManageUsersProfileVM Objbu = new ManageUsersProfileVM();
+           var BuildingUserpermissions = Objbu.LoadBuildingUserPermission(BuildingIDUserID);
+           return new JsonResult { Data = BuildingUserpermissions, JsonRequestBehavior = JsonRequestBehavior.AllowGet };   
+           
+        }
+        //public ActionResult EditBuildingUserPermission(int BuildingID)
+        //{
+        //    ManageUsersProfileVM Objbu = new ManageUsersProfileVM();
+        //    Objbu.LoadBuildingUsers(BuildingID);
+        //}
+      
+        public RoleManager<IdentityRole> RoleManager { get; set; }
         
        
     }

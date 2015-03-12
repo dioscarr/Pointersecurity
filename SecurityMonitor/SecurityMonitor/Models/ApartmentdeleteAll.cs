@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 
 namespace SecurityMonitor.Models
 {

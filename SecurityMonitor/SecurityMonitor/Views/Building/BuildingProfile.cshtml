@@ -1,6 +1,6 @@
 ﻿@model PagedList.IPagedList<SecurityMonitor.Models.ApartmentVM>
 @using SecurityMonitor.Models;
-@using PointerSecurityAzure;
+@using PointerSecurityDataLayer
 
 
 @{
@@ -40,7 +40,7 @@
                     </section>
                     <!--Add Module section-->
                     <section>
-                        <div class="row servicescells hollow3"
+                        <div class="row servicescells hollow3 "
                              style="height:100px; border:none; "
                              onclick="location.href = '@Url.Action("ModuleAdd", "Module", new { BuildingID = ViewBag.buildingInfo.ID })'">
                             <div style="padding-top:20px; font-weight:500;">Add new services to this building</div>
@@ -51,7 +51,7 @@
                         <div class=" border-white"
                              style="background:#282D33;
                                 color:white;
-                                padding:9px 0; ">
+                               height:40px; ">
                             
                         </div>
                     </div>
@@ -73,30 +73,44 @@
 
                      }
                     
-                    <p style="display:inline;">| @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null)|</p>
+                    <p style="display:inline;"> @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null) </p>
 
                 </div>
-                <div class="row" style="border-bottom:1px solid lightgrey;">
+                <div class="row lightblue" style="border-bottom:1px solid lightgrey; ">
                     <div class="col-md-6 ">Active Users</div>
                     <div class="col-md-6">View Permission</div>
                 </div>
                 <div class="row scrollable " style="height:229px;">
+                    @{ List<BuildingUser> ObjBU = (List<BuildingUser>)ViewBag.BuildingUsers;
 
-                    @for (int i = 0; i < 15; i++)
-                    {
-                        <div class="row SettingBPUsers ">
-                            <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px;"> @building.Manager </p></div>
-                            <div class="col-md-6" style="padding-left:30px;">
-                                @Html.CheckBox("permission", false, new { @class = "checkbox mycheckbosex", @style = "display:inline;" })
-                                Show permission
+                     if (ObjBU.Count >= 0)
+                     {
+                         foreach (var item in ObjBU)
+                         {
+                            <div class="row SettingBPUsers ">
+                                <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px;">@item.FirstName @item.LastName </p></div>
+                                <div class="col-md-6" style="padding-left:30px;">
+                                    @Html.RadioButton("permission", false, new { data_chkID = @item.UserID, @class = "checkbox mycheckbosex", @style = "display:inline;" })
+                                    Show permission
+                                </div>
                             </div>
-                        </div>
+
+                         }
+                     }
+                     else 
+                     { 
+                         <p> no User assign yet!</p>
+                     
+                     }
+
+
                     }
+                    
 
                 </div>
                 <!--Manage building Users-->
                 <div class="row darkdarkblue  border-white SettingBPUsers text-center"  style=" height:40px;  background:#282D33; color:white; ">
-                   | @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID },null) |  
+                    @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID },null)  
                    
                 </div>
 
@@ -111,14 +125,14 @@
                          padding:9px 0;
                          background:#282D33;
                          color:white; ">
-                    Active permission
+                    Active permission(s)
                 </div>
-                <div class="row background-white " style="height:250px;">
-
+                <div id="permissionlist" class="row background-white scrollable " style="height:250px;">
+                   
 
                 </div>
-                <div class="row darkdarkblue  border-white SettingBPUsers " style=" height:40px;  background:#282D33; color:white; ">
-
+                <div class="row darkdarkblue  border-white SettingBPUsers  text-center" style=" height:40px;  background:#282D33; color:white; ">
+                    <button type="button" class="btn btn-link" style="position:relative; bottom:10px;"><span id="showgooglemap" style=" display:inline;">Show Building Location</span><span class="glyphicon glyphicon-map-marker" style="display:inline;"></span></button>
                 </div>
 
             </div>
@@ -345,11 +359,43 @@
 
 
         $(document).ready(function (e) {
+            //show google map
+            $('#showgooglemap').on("click", function () {
+                $('.permissiontable').hide();
+                $('#map').show(1000);
+                $('.mycheckbosex').prop("checked", false);
+            });
 
+            //Building User Section
             $('.mycheckbosex').change(function () {
                 if ($(this).is(':checked') == true) {
+                    $('.permissiontable').hide();
                     $('.permissiontable').fadeIn(500);
                     $('#map').hide();
+                    
+                    var data_chkID = $(this).attr('data-chkID');
+                    // alert(data_chkID);
+
+                    $.ajax({
+
+                        type: "GET",
+                        data: { BuildingIDUserID: data_chkID },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url: "/Management/Loadingbuildinguserpermissions/",
+                        success: function (jsonData) {
+                            // alert(jsonData[0]);
+                            $('#permissionlist').html("");
+                            var i = 0;
+                            for (var item in jsonData)
+                            { 
+                                //alert(i);
+                                $('#permissionlist').append(" <div class='col-md-12 hollow3 permissionrowsettings'>" + jsonData[i] + "</div>");
+                                i++;
+                            }
+                        }
+                    });
+
                 }
                 else {
 

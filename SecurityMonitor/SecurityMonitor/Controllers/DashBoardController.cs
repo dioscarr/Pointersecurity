@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 using SecurityMonitor.Models;
 using System.Net.Http;
 using System.Net;
@@ -13,9 +13,10 @@ using System.Threading.Tasks;
 
 namespace SecurityMonitor.Controllers
 {
+       [Authorize(Roles = "Admin")]
     public class DashBoardController : Controller
     {
-        pointersecurityEntities db = new pointersecurityEntities();
+        PointerSecurityEntities db = new PointerSecurityEntities();
         // GET: DashBoard
         public ActionResult Index()
         {
@@ -228,6 +229,7 @@ namespace SecurityMonitor.Controllers
                                                             zipcode = b.Zipcode,
                                                             ApartmentID = ca.a.ID,
                                                             TenantID = ca.c.ID,
+                                                            
                                                             BuildingID = b.ID
                                                           })
                       .Where(c => c.FirstName.Contains(mysearch) ||

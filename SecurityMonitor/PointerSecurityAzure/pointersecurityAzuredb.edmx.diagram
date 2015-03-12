@@ -57,6 +57,8 @@
         <EntityTypeShape EntityType="PointerSecurityModel.PermissionMapRole" Width="1.5" PointX="9.125" PointY="18.125" />
         <AssociationConnector Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" />
         <AssociationConnector Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" />
+        <EntityTypeShape EntityType="PointerSecurityModel.BuildingUser" Width="1.5" PointX="12.25" PointY="6.75" />
+        <AssociationConnector Association="PointerSecurityModel.FK_BuildingUSer" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

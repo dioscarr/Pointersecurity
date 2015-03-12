@@ -16,6 +16,7 @@ namespace PointerSecurityDataLayer
     {
         public Apartment()
         {
+            this.Shipment = new HashSet<Shipment>();
             this.Tenant = new HashSet<Tenant>();
         }
     
@@ -25,6 +26,7 @@ namespace PointerSecurityDataLayer
         public Nullable<int> BuildingID { get; set; }
     
         public virtual Buildings Buildings { get; set; }
+        public virtual ICollection<Shipment> Shipment { get; set; }
         public virtual ICollection<Tenant> Tenant { get; set; }
     }
 }

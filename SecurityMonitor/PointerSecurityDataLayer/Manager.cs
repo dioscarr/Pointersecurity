@@ -16,6 +16,7 @@ namespace PointerSecurityDataLayer
     {
         public Manager()
         {
+            this.ActiveManager = new HashSet<ActiveManager>();
             this.Buildings = new HashSet<Buildings>();
             this.ManagerBuilding = new HashSet<ManagerBuilding>();
         }
@@ -26,6 +27,7 @@ namespace PointerSecurityDataLayer
         public string Phone { get; set; }
         public Nullable<int> ClientID { get; set; }
     
+        public virtual ICollection<ActiveManager> ActiveManager { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<Buildings> Buildings { get; set; }
         public virtual Clients Clients { get; set; }

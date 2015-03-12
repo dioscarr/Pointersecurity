@@ -72,6 +72,9 @@
     <Compile Include="Buildings.cs">
       <DependentUpon>pointersecurityAzuredb.tt</DependentUpon>
     </Compile>
+    <Compile Include="BuildingUser.cs">
+      <DependentUpon>pointersecurityAzuredb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Clients.cs">
       <DependentUpon>pointersecurityAzuredb.tt</DependentUpon>
     </Compile>

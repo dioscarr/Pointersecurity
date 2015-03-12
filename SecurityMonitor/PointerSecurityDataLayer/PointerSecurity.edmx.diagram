@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c91feb07420841d491c9de4011c3e86e" Name="Diagram1" ZoomLevel="111">
+        <EntityTypeShape EntityType="PointerSecurityModel.ActiveManager" Width="1.5" PointX="10.5" PointY="25" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Apartment" Width="1.5" PointX="15.75" PointY="32.25" />
+        <EntityTypeShape EntityType="PointerSecurityModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="19.5" />
+        <EntityTypeShape EntityType="PointerSecurityModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="30.125" />
+        <EntityTypeShape EntityType="PointerSecurityModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="32.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.AspNetUsers" Width="1.5" PointX="3" PointY="23.5" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Buildings" Width="1.5" PointX="13.5" PointY="23.625" />
+        <EntityTypeShape EntityType="PointerSecurityModel.BuildingUser" Width="1.5" PointX="15.75" PointY="35.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.BuildingUserMapping" Width="1.5" PointX="5.25" PointY="26" />
+        <EntityTypeShape EntityType="PointerSecurityModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Clients" Width="1.5" PointX="6" PointY="15.375" />
+        <EntityTypeShape EntityType="PointerSecurityModel.GanttLinkId" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.GanttTask" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.ListOfModule" Width="1.5" PointX="13.5" PointY="19.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Manager" Width="1.5" PointX="8.25" PointY="24.5" />
+        <EntityTypeShape EntityType="PointerSecurityModel.ManagerBuilding" Width="1.5" PointX="15.75" PointY="24.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.MasterProfileFields" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Module" Width="1.5" PointX="15.75" PointY="17.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Package" Width="1.5" PointX="20.25" PointY="29" />
+        <EntityTypeShape EntityType="PointerSecurityModel.PendingModules" Width="1.5" PointX="15.75" PointY="21.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.PermissionMapRole" Width="1.5" PointX="5.25" PointY="20" />
+        <EntityTypeShape EntityType="PointerSecurityModel.ReqType" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Requests" Width="1.5" PointX="20.25" PointY="35.875" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Role" Width="1.5" PointX="5.25" PointY="23" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Shipment" Width="1.5" PointX="18" PointY="28.625" />
+        <EntityTypeShape EntityType="PointerSecurityModel.SignalRMessageTable" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.States" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.User" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PointerSecurityModel.UserActivityLog" Width="1.5" PointX="18.75" PointY="24.75" />
+        <AssociationConnector Association="PointerSecurityModel.FK_ActiveManager_To_Manager" />
+        <AssociationConnector Association="PointerSecurityModel.FK_ActiveManager_ToBuilding" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Apartment_Buildings" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Shipment_Apartment" />
+        <AssociationConnector Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Role_AspNetRoles" />
+        <AssociationConnector Association="PointerSecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PointerSecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PointerSecurityModel.FK_BuildingUserMapping_AspNetUsers1" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Manager_AspNetUsers" />
+        <AssociationConnector Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Role_AspNetUsers" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Shipment_AspNETUser" />
+        <AssociationConnector Association="PointerSecurityModel.FK_UserActivityLog_AspNetUsers" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Buildings_Clients" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Buildings_Manager" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Buildings_PendingModules" />
+        <AssociationConnector Association="PointerSecurityModel.FK_BuildingUSer" />
+        <AssociationConnector Association="PointerSecurityModel.FK_BuildingUserMapping_Buildings1" />
+        <AssociationConnector Association="PointerSecurityModel.FK_ManagerBuilding_Buildings" />
+        <AssociationConnector Association="PointerSecurityModel.FK_UserActivityLog_Buildings" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Manager_Clients" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Module_Buildings1" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Module_Listofmodule" />
+        <AssociationConnector Association="PointerSecurityModel.FK_PendingModuleRequests_Buildings1" />
+        <AssociationConnector Association="PointerSecurityModel.FK_PendingModuleRequests1_Buildings1" />
+        <AssociationConnector Association="PointerSecurityModel.FK_ManagerBuilding_Manager" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Shipment_Package1" />
+        <AssociationConnector Association="PointerSecurityModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Tenant" Width="1.5" PointX="18.25" PointY="32.375" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Tenant_Apartment" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Tenant_AspNetUsers" />
+        <AssociationConnector Association="PointerSecurityModel.FK_Request_Tenant" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

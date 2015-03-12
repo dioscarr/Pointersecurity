@@ -7,13 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 
 namespace SecurityMonitor.Controllers
 {
     public class RolesController : Controller
     {
-        private pointersecurityEntities db = new pointersecurityEntities();
+        private PointerSecurityEntities db = new PointerSecurityEntities();
 
         // GET: Roles
         public ActionResult Index()

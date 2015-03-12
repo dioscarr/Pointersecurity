@@ -8,8 +8,8 @@ namespace SecurityMonitor.Models
 {
     public class TenantVM
     {
-        [Key]
-        public int ID { get; set; }
+        
+        public string ID { get; set; }
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

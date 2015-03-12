@@ -19,7 +19,7 @@ namespace PointerSecurityDataLayer
             this.Requests = new HashSet<Requests>();
         }
     
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
@@ -31,6 +31,7 @@ namespace PointerSecurityDataLayer
         public string LogintableID { get; set; }
     
         public virtual Apartment Apartment { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<Requests> Requests { get; set; }
     }
 }

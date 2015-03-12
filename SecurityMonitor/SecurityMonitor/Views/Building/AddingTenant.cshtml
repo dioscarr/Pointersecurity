@@ -86,6 +86,20 @@
                     <div id="idUsername" class="" style="position:relative; left:290px; top:-25px;"></div>
                 </div>
 
+                <div class="ClientEditrows">
+                    @Html.EditorFor(model => model.Password, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control",
+               @placeholder = "Password",
+               @data_bind = "value:Password, valueUpdate:'afterkeydown'",
+               @maxlength = "20"
+           }
+       })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <div id="idPassword" class="" style="position:relative; left:290px; top:-25px;"></div>
+                </div>
                 <div class="col-md-12"><p> @ViewBag.Message</p></div>
 
 
@@ -118,6 +132,7 @@
                 LName = ko.observable("");
                 Phone = ko.observable("");
                 Username = ko.observable("");
+                Password = ko.observable("");
 
                 //Checks if Fname has chr
                 this.ComputeFName = ko.computed(function () {
@@ -176,6 +191,20 @@
                     }
                 });
 
+                //Checks if password has chr
+                this.Computepassword = ko.computed(function () {
+                    if (Password().length > 0) {
+                        $('#idPassword').css("color", "green");
+                        $('#idPassword').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idPassword').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + Username().length;
+                    } else {
+                        $('#idPassword').removeClass('glyphicon glyphicon-ok');
+                        $('#idPassword').css("color", "red");
+                        $('#idPassword').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+
 
                 this.btnStat = ko.computed(function () {
                     //debugger;
@@ -183,6 +212,7 @@
                         FName().length > 0 &&
                         LName().length > 0 &&
                         Phone().length > 0 &&
+                        Password().length > 0 &&
                         Username().length > 0
                         ) {
                         $('#submitlgmd').prop("disabled", false);

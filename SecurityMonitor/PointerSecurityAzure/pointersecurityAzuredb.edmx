@@ -109,6 +109,19 @@
           <Property Name="Manager" Type="nvarchar(max)" />
           <Property Name="ManagersID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="BuildingUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="225" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="225" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -393,6 +406,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BuildingUSer">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="BuildingUser" Type="Self.BuildingUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuildingUser">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -623,6 +648,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuildingUser" EntityType="Self.BuildingUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" Schema="dbo" store:Type="Tables" />
@@ -673,6 +699,10 @@
           <AssociationSet Name="FK_Buildings_PendingModules" Association="Self.FK_Buildings_PendingModules">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="PendingModules" EntitySet="PendingModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildingUSer" Association="Self.FK_BuildingUSer">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="BuildingUser" EntitySet="BuildingUser" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -859,6 +889,7 @@
           <NavigationProperty Name="ManagerBuilding" Relationship="Self.FK_ManagerBuilding_Buildings" FromRole="Buildings" ToRole="ManagerBuilding" />
           <NavigationProperty Name="UserActivityLog" Relationship="Self.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
           <NavigationProperty Name="ActiveManager" Relationship="PointerSecurityModel.FK_ActiveManager_ToBuilding" FromRole="Buildings" ToRole="ActiveManager" />
+          <NavigationProperty Name="BuildingUser" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="Buildings" ToRole="BuildingUser" />
         </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -1441,6 +1472,11 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
           </AssociationSet>
+          <EntitySet Name="BuildingUser" EntityType="PointerSecurityModel.BuildingUser" />
+          <AssociationSet Name="FK_BuildingUSer" Association="PointerSecurityModel.FK_BuildingUSer">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="BuildingUser" EntitySet="BuildingUser" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActiveManager">
           <Key>
@@ -1507,6 +1543,32 @@
             </Principal>
             <Dependent Role="PermissionMapRole">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BuildingUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="BuildingUser" ToRole="Buildings" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_BuildingUSer">
+          <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointerSecurityModel.BuildingUser" Role="BuildingUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuildingUser">
+              <PropertyRef Name="BuildingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1828,6 +1890,20 @@
               <MappingFragment StoreEntitySet="PermissionMapRole">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuildingUser">
+            <EntityTypeMapping TypeName="PointerSecurityModel.BuildingUser">
+              <MappingFragment StoreEntitySet="BuildingUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

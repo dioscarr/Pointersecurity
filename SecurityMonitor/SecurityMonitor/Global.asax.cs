@@ -21,7 +21,7 @@ namespace SecurityMonitor
         {
       ModelBinders.Binders.DefaultBinder = new PerpetuumSoft.Knockout.KnockoutModelBinder();
             // Register the default hubs route: ~/signalr/hubs
-           // RouteTable.Routes.MapHubs();
+            //RouteTable.Routes.MapHubs();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
                 

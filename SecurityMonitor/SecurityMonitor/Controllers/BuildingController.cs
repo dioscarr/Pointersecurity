@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using PointerSecurityAzure;
+using PointerSecurityDataLayer;
 
 using Microsoft.AspNet.Identity;
 using PagedList;
@@ -12,6 +12,7 @@ using PagedList.Mvc;
 using System.Threading.Tasks;
 using System.Net;
 using System.Data.Entity;
+using SecurityMonitor.Workes;
 
 
 //TO DO: 
@@ -20,13 +21,14 @@ using System.Data.Entity;
 //this needs to be handle on while adding buildin. 
 // cound should increase when adding building and decrease when deleting building
 
-
 namespace SecurityMonitor.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class BuildingController : Controller
     {
         //DB context
-        pointersecurityEntities db = new pointersecurityEntities();
+        PointerSecurityEntities db = new PointerSecurityEntities();
 
         
         //shared_layout
@@ -605,9 +607,13 @@ namespace SecurityMonitor.Controllers
 
         //=============Building Profile =====================
         [HttpGet]
-        public async Task<ActionResult> BuildingProfile(int? page, string search, int? BuildingID)
+        public async Task<ActionResult> BuildingProfile(int? page, string search, int BuildingID)
         {
 
+            ManageUsersProfileVM ObjBU = new ManageUsersProfileVM();
+            List<BuildingUser> ListBU = ObjBU.LoadBuildingUsers(BuildingID);
+            ViewBag.BuildingUsers = ListBU;
+           
             ViewBag.Manager = db.ManagerBuilding
                .Where(c => c.BuildingID == BuildingID)
                .Select(c => new ManagerVM
@@ -954,8 +960,13 @@ namespace SecurityMonitor.Controllers
            
             if (ModelState.IsValid)
             {
+
+                var UserID = RegisterUsers.InsertUser(newTenant.Username, newTenant.Phone, newTenant.Password);
+                var result = RegisterUsers.InserToRole("Tenant", UserID);
+
                 var newtenant = new Tenant
                 {
+                    ID = UserID,
                     FirstName = newTenant.FirstName,
                     LastName = newTenant.LastName,
                     Phone = newTenant.Phone,
@@ -1024,13 +1035,13 @@ namespace SecurityMonitor.Controllers
 
         //======================TenantRequest======================
         [HttpGet]
-        public ActionResult TenantRequest(int? tenantID, int BuildingID ) 
+        public ActionResult TenantRequest(string tenantID, int BuildingID ) 
         {
 
             if (tenantID != null)
             {
                 var tenantRequest = new Requests();
-                tenantRequest.TenantID = (int)tenantID;
+                tenantRequest.TenantID = tenantID;
                 List<SelectListItem> reqtype = new List<SelectListItem>();
                 var myitems = db.ReqType.ToList();
                 foreach (var item in myitems)
@@ -1049,7 +1060,7 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public ActionResult TenantRequest(Requests model, int BuildingID, int TenantID)
+        public ActionResult TenantRequest(Requests model, int BuildingID, string TenantID)
         {
             var tenantApt = db.Tenant.FirstOrDefault(c=>c.ID == TenantID);
                        
@@ -1064,14 +1075,14 @@ namespace SecurityMonitor.Controllers
 
 
         //======================Tenant Request chart======================
-        public JsonResult getRequestsType(int? TenantID)
+        public JsonResult getRequestsType(string TenantID)
         {
 
             var Tomorrow = DateTime.Today.AddDays(1);
             var Today = DateTime.Today.Date;
             //Request From Today
             var todayRequests = db.Requests
-                 .Where(c => c.TenantID ==(int)TenantID )
+                 .Where(c => c.TenantID ==TenantID )
                  .GroupBy(c=> c.RequestType)
                  .Select(c => new ReqTypeCount { key = c.Key, AccessControl = c.Count() }).ToList();
 
@@ -1084,7 +1095,7 @@ namespace SecurityMonitor.Controllers
 
 
        //History -- requests
-        public ActionResult RequestHistoryIndex(int TenantID)
+        public ActionResult RequestHistoryIndex(string TenantID)
         {
             var requests = db.Requests.Where(r=>r.TenantID==TenantID).ToList();
 
