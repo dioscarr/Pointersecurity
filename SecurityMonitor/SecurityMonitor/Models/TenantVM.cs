@@ -26,5 +26,6 @@ namespace SecurityMonitor.Models
         public string isTempPWord { get; set; }
         public int BuildingID { get; set; }
         public int aptID { get; set; }
+        public bool EmailNotification { get; set; }
     }
 }

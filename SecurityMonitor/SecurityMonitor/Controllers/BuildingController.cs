@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Data.Entity;
 using SecurityMonitor.Workes;
+using System.Net.Mail;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 
 //TO DO: 
@@ -964,7 +966,7 @@ namespace SecurityMonitor.Controllers
                 var UserID = RegisterUsers.InsertUser(newTenant.Username, newTenant.Phone, newTenant.Password);
                 var result = RegisterUsers.InserToRole("Tenant", UserID);
 
-                var newtenant = new Tenant
+                var tenantdb = new Tenant
                 {
                     ID = UserID,
                     FirstName = newTenant.FirstName,
@@ -974,8 +976,19 @@ namespace SecurityMonitor.Controllers
                     aptID = newTenant.aptID,
                     Username = newTenant.Username
                 };
-                db.Tenant.Add(newtenant);
+                db.Tenant.Add(tenantdb);
+                
                 await db.SaveChangesAsync();
+               
+                if(newTenant.EmailNotification==true)
+                { 
+                    Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+                    MailMessage msg = new MailMessage("pointerwebapp@gmail.com", tenantdb.Username);
+                    msg.Subject = "Pointer Security New Account Notification";
+                    msg.Body = "A new account has been created for you on PointerSecurity website. please click the following link to access your account.";
+                    gmail.Send(msg);
+                }
+             
                 return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID, BuildingID= newTenant.BuildingID });
 
             }
@@ -989,7 +1002,7 @@ namespace SecurityMonitor.Controllers
         }
         //Tenant Edit
         [HttpGet]
-        public ActionResult TenantEdit(int TenantID)
+        public ActionResult TenantEdit(string TenantID)
         {
             Tenant tn = db.Tenant.Find(TenantID);
             return View(tn);        
@@ -1012,7 +1025,7 @@ namespace SecurityMonitor.Controllers
         }
         //===================DeleteTenant=============
         [HttpGet]
-        public ActionResult TenantDelete(int TenantID)
+        public ActionResult TenantDelete(string TenantID)
         {
             Tenant tn = db.Tenant.Find(TenantID);
             return View(tn);
@@ -1020,15 +1033,39 @@ namespace SecurityMonitor.Controllers
         //======================Delete Tenant POST=======================
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public ActionResult TenantDelete(int TenantID, int ApartmentID, int BuildingID)
+        public ActionResult TenantDelete(string TenantID, int ApartmentID, int BuildingID)
         {
-          
-                var tn =  db.Tenant.Find(TenantID);
-                
+            try 
+
+            {
+                ApplicationDbContext context = new ApplicationDbContext();
+                ApplicationUser AppUser = new ApplicationUser();
+                var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                // remove tenant from role
+                userManager.RemoveFromRole(TenantID, "Tenant");
+                //find tenant on the tenant table 
+                 AspNetUsers aspnetuser = db.AspNetUsers.Find(TenantID);
+                db.AspNetUsers.Remove(aspnetuser);
+                var tn = db.Tenant.Find(TenantID);
+                //remove tenant from the tenant table
                 db.Tenant.Remove(tn);
-               db.SaveChanges();
-                return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID = BuildingID });
+                //save changes 
+                db.SaveChanges();
+                //load tenant applicationuser 
+                AppUser = userManager.FindById(TenantID);
+                //delete tenant applicationuser
+                var result = userManager.Delete(AppUser);
+               
+               
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = e.Message;
+
+            }
+               
+            return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID = BuildingID });
             
            
         }

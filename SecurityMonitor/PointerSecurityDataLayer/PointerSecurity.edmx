@@ -300,11 +300,9 @@
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="isTemPWord" Type="nvarchar(max)" />
           <Property Name="aptID" Type="int" />
-          <Property Name="LogintableID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1773,11 +1771,9 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="isTemPWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="aptID" Type="Int32" />
-          <Property Name="LogintableID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Tenant_Apartment" FromRole="Tenant" ToRole="Apartment" />
           <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="Tenant" ToRole="AspNetUsers" />
           <NavigationProperty Name="Requests" Relationship="PointerSecurityModel.FK_Request_Tenant" FromRole="Tenant" ToRole="Requests" />
@@ -2162,11 +2158,9 @@
           <EntitySetMapping Name="Tenant">
             <EntityTypeMapping TypeName="PointerSecurityModel.Tenant">
               <MappingFragment StoreEntitySet="Tenant">
-                <ScalarProperty Name="LogintableID" ColumnName="LogintableID" />
                 <ScalarProperty Name="aptID" ColumnName="aptID" />
                 <ScalarProperty Name="isTemPWord" ColumnName="isTemPWord" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

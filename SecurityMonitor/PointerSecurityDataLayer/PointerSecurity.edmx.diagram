@@ -64,7 +64,7 @@
         <AssociationConnector Association="PointerSecurityModel.FK_ManagerBuilding_Manager" />
         <AssociationConnector Association="PointerSecurityModel.FK_Shipment_Package1" />
         <AssociationConnector Association="PointerSecurityModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="PointerSecurityModel.Tenant" Width="1.5" PointX="18.25" PointY="32.375" />
+        <EntityTypeShape EntityType="PointerSecurityModel.Tenant" Width="1.5" PointX="21" PointY="24.5" />
         <AssociationConnector Association="PointerSecurityModel.FK_Tenant_Apartment" />
         <AssociationConnector Association="PointerSecurityModel.FK_Tenant_AspNetUsers" />
         <AssociationConnector Association="PointerSecurityModel.FK_Request_Tenant" />
