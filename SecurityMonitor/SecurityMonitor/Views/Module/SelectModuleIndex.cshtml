@@ -8,20 +8,53 @@
 
 
 <div class="row " style="padding:50px 0">
-
     <div class="col-md-offset-2 col-md-8">
-        
         <div class="col-md-offset-1 col-md-10">
             <div class="row  text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">Modules</div>
             @foreach (var item in @Model.AllRoles)
-            { 
-                <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;" >@item @Html.ActionLink("Delivery display","DeliveryDisplay")</div>
-                        
+            {
+
+                switch (item)
+                {
+                    case "Delivery":
+                        <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                            @item @Html.ActionLink(@item, "Delivery")
+                        </div>
+                        break;
+                    case "News":
+                    <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                        @item @Html.ActionLink(@item, "Delivery")
+                    </div>
+                        break;
+                    case "Events":
+                    <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                        @item @Html.ActionLink(@item, "Delivery")
+                    </div>
+                        break;
+                    case "Repair":
+                    <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                        @item @Html.ActionLink(@item, "Delivery")
+                    </div>
+                        break;
+                    case "LegalDocs":
+                    <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                        @item @Html.ActionLink(@item, "Delivery")
+                    </div>
+                        break;
+                    case "AccessControl":
+                    <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                        @item @Html.ActionLink(@item, "Delivery")
+                    </div>
+                        break;
+                    case "BasicFeatures":
+                    <div class="row hollow3 text-center" style="padding:20px 0; border-bottom:1px solid #ebebeb;">
+                        @item @Html.ActionLink(@item, "Delivery")
+                    </div>
+                        break;
+
+                }
             }
-
         </div>
-
-
     </div>
 </div>
 

@@ -19,16 +19,26 @@ namespace PointerSecurityDataLayer
             this.Package = new HashSet<Package>();
         }
     
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+        public bool isNewUser { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zipcode { get; set; }
+        public string ApartmentNumber { get; set; }
+        public System.DateTime Created { get; set; }
+        public int BuildingID { get; set; }
         public int aptID { get; set; }
         public string BuildingUserID { get; set; }
-        public string PackageID { get; set; }
+        public string TenantID { get; set; }
+        public bool Notified { get; set; }
     
         public virtual Apartment Apartment { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Buildings Buildings { get; set; }
         public virtual ICollection<Package> Package { get; set; }
     }
 }

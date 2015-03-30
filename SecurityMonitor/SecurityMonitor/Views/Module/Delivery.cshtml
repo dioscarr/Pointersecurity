@@ -1,0 +1,507 @@
+﻿@model SecurityMonitor.Models.DeliveryVM
+
+@{
+    ViewBag.Title = "Delivery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog " >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="click:mydefault"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Please fill out the form for none building users</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" style="background:white; height:50px;margin:5px 0; padding-top:5px;">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group ">
+                                <span class="input-group-addon" id="basic-addon1">First Name</span>
+                                <input type="text" class="form-control" placeholder="(require)" data-bind="value:FirstName, valueUpdate:'afterkeydown'">
+
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group ">
+                            <span class="input-group-addon" id="basic-addon1">Last Nam</span>
+                            <input type="text" class="form-control" placeholder="(require)" aria-describedby="basic-addon1" data-bind="value:LastName, valueUpdate:'afterkeydown'">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="background:white; height:50px;margin:5px 0; padding-top:5px;">
+                    <div class="col-md-6">
+                        <div class="input-group ">
+                            <span class="input-group-addon" id="basic-addon1" >Phone</span>
+                            <input type="text" class="form-control" placeholder="(Optional) " aria-describedby="basic-addon1" data-bind="value:Phone, valueUpdate:'afterkeydown'">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group ">
+                            <span class="input-group-addon" id="basic-addon1">Apartment#</span>
+                            @Html.DropDownList("selectapartment", @Model.ApatList, "Select one", new {  @class="form-control", placeholder="(require) ", @data_bind="value:ApartmentNumber, valueUpdate:'afterkeydown'"})
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+                          
+
+                   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-bind="click:mydefault " data-dismiss="modal">Close</button>
+
+                <button class="btn btn-info " type="button" data-bind="click:OtherUserFormToObservable" data-dismiss="modal">Create Recipient</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row" style="margin-top:50px;">
+    <div class="col-md-12 text-left">
+        <p class="form-group">
+            @Html.CheckBox("group1", false, new { id = "chkaptid", @style = "display:inline;", @data_bind = "checked:aptlisVisible, visible:searchboxOptionvisible" })
+            @Html.Label("Search within apartment", new { @style = "display:inline;", @data_bind = "visible:searchboxOptionvisible" })
+            @Html.CheckBox("group1", false, new { id = "chkaformid", @style = "display:inline;", @data_toggle="modal", @data_target="#myModal", @data_bind = "checked:otheruservisible" })
+            @Html.Label("Can't Find person in directory", new { @style = "display:inline;" })
+        </p>
+    </div>
+   
+
+</div>
+
+@{List<SelectListItem> items = new List<SelectListItem>();
+items.Add(new SelectListItem { Text = "1", Value = "1" });
+}
+@using (Html.BeginForm())
+{
+
+
+    //headings
+    <div class="row" style="background:lightgrey; padding:10px 0; margin-bottom:10px;" data-bind="visible:searchboxOptionvisible">
+    <div class="col-md-3" id="aptdropid" data-bind="visible:aptlisVisible">
+        <span class="displayinline">Filter by apartment</span>
+        @Html.DropDownList("Apartment", @Model.ApatList,"no selection", new { @class = " form-control", @data_bind = "value:Apartment" })
+    </div>
+    <div class="col-md-5">
+        <span class="displayinline">Name</span>
+        @Html.TextBox("Name", null, new { @class = " form-control displayinline ", data_bind = "value:search, valueUpdate: 'afterkeydown' " })
+    </div>
+
+
+    <div class="col-md-4"></div>
+</div>
+}
+
+
+
+<div class="hidden" data-BuildingID = "@Model.buildinguser.BuildingID" id="mybuildingID"></div>
+
+<div class="row" style="height:400px;">
+    <div class="col-md-12">
+        <div class="row" style="height:400px;">
+            
+            <div class="col-md-3 " style="background:lightgrey;height:400px;" data-bind="visible:searchOptionvisible">
+
+                <div class="col-md-12  scrollable" data-bind="foreach: {data: TOA, as: 'item'}" style="background:white; height:350px;margin:20px 0;">
+                    <div class="hollow3  mykey1" style="margin:10px 0 5px 0; background:white; padding-top:10px; border-bottom:1px solid lightgrey;"
+                       
+                          data-bind="click:getalldata">
+                        <span data-bind="text:item.FirstName"></span>
+                        <span data-bind="text:item.LastName"></span>
+                        <span data-bind="text:item.Phone"></span>
+                        <span data-bind="text:item.Apt"></span>
+                        <span data-bind="text:item.Address"></span>
+                        <span data-bind="text:item.city"></span>
+                        <span data-bind="text:item.zipcode"></span>
+                    </div>
+
+                </div>
+            </div>
+           
+            <div class="col-md-3 " style="background:lightgrey;height:400px;" data-bind="visible:ActiveUserForShipment">
+                <div class="col-md-12  scrollable" style="background:white; height:350px;margin:20px 0; padding-top:5px;">
+                    <div style="margin:10px 0 5px 0; background:white; padding-top:5px; border-bottom:1px solid lightgrey;">
+                       
+                            <span data-bind="text:FirstName"></span>
+
+                            <span data-bind="text:LastName"></span>
+                        
+                        <br />
+                         <strong>Phone: </strong> <span data-bind="text:Phone"></span>
+                        
+                       <strong>Aparment#: </strong> <span data-bind="text:ApartmentNumber"></span>
+                        
+                            <strong>Address: </strong><br /> <span data-bind="text:Address"></span>
+                        
+                        
+                            <span data-bind="text:City"></span>
+                            <span data-bind="text:State"></span>
+                            <span data-bind="text:Zipcode"></span>
+                        
+                        <br/>
+                        <strong>Package Count: </strong><span data-bind="text:PackageCount"></span>
+                    </div>
+               
+
+            </div>
+                </div>
+           
+            <div class="col-md-9 " style=" border:1px solid lightgrey;" data-bind="visible:Packagevisible">
+                <form data-bind="submit: save" class="col-lg-12">
+                    <div class="col-md-12 "></div>
+                    <div class="row  requestformbox " style="padding-top:20px;">
+                        <div class="row scrollable " style="height:400px;"  data-bind="foreach: users">
+                            <div class="col-md-12">
+                                <div class="col-md-2 "><p>Service</p></div>
+                                <div class="col-md-4 "><p>Tracking Number</p></div>
+                                <div class="col-md-2 "><p>Type</p></div>
+                                <div class="col-md-2 "><p>Service</p></div>
+                                <div class="col-md-2 "><p></p></div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row"  style=" border-bottom:1px solid lightgrey;" >
+                                    <!--loop through array Users[]-->
+                                    <div class="col-md-2 ">
+                                      
+                                        @Html.DropDownList("dropdowncarrierservices",@Model.carrierService,"Select", new{@class="form-control ",  @data_bind="value:Service"})
+                                        
+                                        <br />
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        <input class="form-control has-success" type="text"
+                                               data-bind="value: Trackingnumber, valueUpdate: 'afterkeydown', attr: {name: 'users[  $index()  ].Trackingnumber' }" /> <!--the $index() reprsent the current indenx of the loop. this is 0 base-->
+                                        <br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.DropDownList("Apartment", @Model.PackageType, "Select", new { @class = " form-control", @data_bind = "value:PackageType" })
+                                    </div>
+                                    <div class="col-md-2">
+                                        @Html.DropDownList("Apartment", @Model.shippingService, "Select", new { @class = " form-control", @data_bind = "value:shippingService" })
+                                    </div>
+                                    <div class="col-md-2 " style="height:60px;">
+                                        <button class="btn btn-default" data-bind="click:removeField">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--output master profile preview-->
+                       
+
+                    </div>
+                    <div class="row" style="border-top:1px solid lightgrey;">
+                        <div class="col-md-12  " style="height:10px;"></div>
+                        <div class="col-md-3 "></div>
+                        <div class="col-md-6 " style="height:50px; ">
+                            <button type="button" class="col-md-12 btn btn-default " data-bind="click: addUser">Add new Package</button>
+
+                        </div>
+                        <div class="col-md-3 " style="height:50px; "></div>
+                        <div class="col-md-3 " style="height:50px; "></div>
+                        <div class="col-md-6 " style="height:50px;">
+                            <button type="submit" class="col-md-12 btn btn-info ">Submit</button>
+                        </div>
+                        <div class="col-md-3 " style="height:50px; "></div>
+                    </div>
+                </form>
+            </div>
+            </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 " style="height:50px; border:1px solid lightgrey; padding-top:15px;">
+        <span>Logged User:</span>
+        <span>@Model.buildinguser.FirstName @Model.buildinguser.LastName</span>
+        <span class="someSpace">Email: </span>
+        <span >@Model.buildinguser.UserName</span>
+        <span class="someSpace">Phone</span>
+        <span>@Model.buildinguser.Phone</span>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+
+
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+           
+            function Task(data) {
+                this.title = ko.observable(data.title);
+                this.isDone = ko.observable(data.isDone);
+            }
+            var viewModel = function() {
+                var self = this;
+                this.clickme = function (item, event) {
+                    alert('yes');
+                }
+                self.Apartment = ko.observable();
+                self.FirstName = ko.observable("");
+                self.LastName = ko.observable("");
+                self.Phone = ko.observable("");
+                self.ApartmentNumber = ko.observable("");
+                self.Userkey = ko.observable("");
+                self.CurrentBuildingID = ko.observable(); //TODO
+                self.ApartmentID = ko.observable(); //TODO
+                self.ActiveUserForShipment = ko.observable(false);
+                self.PackageCount = ko.observable(0);
+                self.isNewUser = ko.observable(false);
+
+                //Address 
+                self.Address = ko.observable("");
+                self.City = ko.observable("");
+                self.State = ko.observable("");
+                self.Zipcode = ko.observable("");
+
+                self.users = ko.observableArray();//create an array
+                
+                self.aptlisVisible = ko.observable(false);//set visibility for apartment list
+                self.otheruservisible = ko.observable(false);//set visibility for other user form
+                self.searchOptionvisible = ko.observable(true);//set visibility for all search components
+                self.searchboxOptionvisible = ko.observable(true);//set visibility for SearchOptions 
+                self.Packagevisible = ko.observable(true);
+               
+                var optionsVM = [{ value: 1, name: 'UPS' },
+                                 { value: 1, name: 'FeDex' },
+                                 { value: 1, name: 'USPS' },
+                                 { value: 1, name: 'DHL' },
+                                 { value: 1, name: 'TNT' },
+                                 { value: 1, name: 'Other couriers' }]
+                items = ko.observableArray(optionsVM);
+
+
+
+                self.mydefault = function (value) {
+
+                    self.FirstName("");
+                    self.LastName("");
+                    self.Phone("");
+                    self.ApartmentNumber("");
+                    self.ActiveUserForShipment(false);
+                    self.searchOptionvisible(true);
+                    self.otheruservisible(false);
+                    self.aptlisVisible(false);
+                    self.searchboxOptionvisible(true);
+                    self.isNewUser(false);
+                };
+                //self.searchDiv = ko.observable(true);//set visibility for 
+                self.otheruservisible.subscribe(function (value) {
+                   
+                    if (value == true)
+                    {
+                        self.FirstName("");
+                        self.LastName("");
+                        self.Phone("");
+                        self.ApartmentNumber("");
+                        self.ActiveUserForShipment(false);
+                        self.searchOptionvisible(false);
+                        self.otheruservisible(true);
+                        self.aptlisVisible(false);
+                        self.searchboxOptionvisible(false);
+                        self.isNewUser(true);
+                    }
+                    else {
+                        self.searchOptionvisible(true);
+                        self.otheruservisible(false);
+                        self.aptlisVisible(false);
+                        self.searchboxOptionvisible(true);
+                        self.isNewUser(false)
+                    }
+
+                    self.setvisibilityForActiveUser = function ()
+                    {
+                        self.ActiveUserForShipment(true);
+                        self.otheruservisible(false);
+
+                    };
+                });
+                self.hideUserSearchOptions = ko.computed(function () {
+                });
+                self.TOA = ko.observableArray();
+                // search for tenant on the current building 
+                self.search = ko.observable("");
+                self.search.subscribe(function (value) {
+                    self.searchOptionvisible(true);
+                    self.ActiveUserForShipment(false);
+                   
+                    var aptNumber = self.Apartment();
+                   
+                    var buildingID = $('#mybuildingID').attr("data-BuildingID");
+                    if (value != "") {
+                        $.ajax({url: "/Building/getKeyupSearch",
+                            data: { mysearch: value, BuildingID: buildingID, aptNumber: aptNumber },
+                                context: document.body }).done(function (tenant) {self.TOA(tenant);});
+                    }else { self.TOA(""); }
+                    
+                });
+                //function to add to the arrays++++++++++++++++++++++++++++++++++++
+                self.addUser = function () {//create a function named addUsers
+                    
+                    //push from userform
+                    self.users.push({
+                        Service: ko.observable(),//add field name to the array
+                        Trackingnumber: ko.observable(),
+                        PackageType: ko.observable(),
+                        shippingService: ko.observable()
+
+                    });
+                    self.PackageCount(self.PackageCount() + 1);                 
+
+                };
+                var Shipment = {
+                    FirstName: self.FirstName,
+                    LastName: self.LastName,
+                    Phone: self.Phone,
+                    ApartmentNumber: self.ApartmentNumber,                   
+                    Package: self.PackageCount,
+                    UserID: self.Userkey,
+                    BuildingID: self.CurrentBuildingID,
+                    ApartmentID: self.ApartmentID,
+                    Address: self.Address,
+                    City: self.City,
+                    State: self.State,
+                    Zipcode: self.Zipcode,
+                    UserID: self.Userkey,
+                    isNewUser:self.isNewUser,
+                    Packages: self.users                    
+                };
+                //function ends to add to the arrays++++++++++++++++++++++++++++++++++++
+
+                self.save = function (fields) {
+                    debugger;
+                    alert(ko.toJSON(Shipment));
+                    //  alert(ko.toJSON(Shipment));
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: "POST",
+                        url: '/Module/AddShipemnt/',
+                        data: ko.toJSON(Shipment),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                                //window.location.href = "/Dashboard/PreviewTemplate/";
+                            }
+                        }
+                    });
+                };
+                self.removeField = function (task) 
+                {
+                    self.users.remove(task);
+                    self.PackageCount(self.PackageCount() - 1)
+            };
+                self.getalldata = function (item, event)
+                {
+                    self.isNewUser(false);
+                    self.searchOptionvisible(false);
+                    self.otheruservisible(false);
+                    self.ActiveUserForShipment(true);                 
+                    //from db person info
+                    self.FirstName(item.FirstName);
+                    self.LastName(item.LastName);
+                    self.Phone(item.Phone);
+                    self.ApartmentNumber(item.Apt);
+                    //from db keys vals
+                    self.CurrentBuildingID(item.BuildingID);
+                    self.ApartmentID(item.ApartmentID);
+                    self.Userkey(item.Userkey);
+
+                  
+                    //from db Address
+                    self.Address(item.Address);
+                    self.City(item.city);
+                    self.State(item.State);
+                    self.Zipcode(item.zipcode);
+
+                    //setting up packages field
+                    if (self.users().length < 1)
+                    {
+                        self.addUser();
+                        //alert(self.users().length);
+                    }
+                    
+                  
+                };
+                self.OtherUserFormToObservable = function () {
+                    self.otheruservisible(false);
+                    self.ActiveUserForShipment(true);
+                    self.searchOptionvisible(false);
+                    //setting up packages field
+                    if (self.users().length < 1) {
+                        self.addUser();
+                        //alert(self.users().length);
+                    }
+                };
+
+                //output preview
+                //masterarray = ko.observablearray();
+            };
+            ko.applyBindings(viewModel);
+
+
+        });
+
+
+
+    </script>
+}
+

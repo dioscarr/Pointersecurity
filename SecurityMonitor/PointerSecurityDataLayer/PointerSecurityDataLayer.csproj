@@ -105,6 +105,12 @@
     <Compile Include="Package.cs">
       <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
+    <Compile Include="PackageDeliveryStatus.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PackageType.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
     <Compile Include="PendingModules.cs">
       <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
@@ -137,6 +143,12 @@
       <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="Shipment.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShippingCarrier.cs">
+      <DependentUpon>PointerSecurity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShippingService.cs">
       <DependentUpon>PointerSecurity.tt</DependentUpon>
     </Compile>
     <Compile Include="SignalRMessageTable.cs">

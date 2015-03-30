@@ -22,6 +22,7 @@ namespace PointerSecurityDataLayer
             this.BuildingUser = new HashSet<BuildingUser>();
             this.BuildingUserMapping = new HashSet<BuildingUserMapping>();
             this.ManagerBuilding = new HashSet<ManagerBuilding>();
+            this.Shipment = new HashSet<Shipment>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
         }
     
@@ -45,6 +46,7 @@ namespace PointerSecurityDataLayer
         public virtual ICollection<BuildingUser> BuildingUser { get; set; }
         public virtual ICollection<BuildingUserMapping> BuildingUserMapping { get; set; }
         public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
+        public virtual ICollection<Shipment> Shipment { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
     }
 }

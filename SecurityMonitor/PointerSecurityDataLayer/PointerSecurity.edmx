@@ -205,10 +205,28 @@
             <PropertyRef Name="TrackingNumber" />
           </Key>
           <Property Name="TrackingNumber" Type="nvarchar" MaxLength="225" Nullable="false" />
-          <Property Name="Service" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShippingServiceID" Type="int" Nullable="false" />
+          <Property Name="ShippingCarrierID" Type="int" Nullable="false" />
+          <Property Name="PakageTypeID" Type="int" Nullable="false" />
           <Property Name="ArrivalTime" Type="datetime" Nullable="false" />
           <Property Name="DeliverTime" Type="datetime" />
-          <Property Name="ShipmentID" Type="int" Nullable="false" />
+          <Property Name="ShipmentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PackageDeliveryStatusID" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PackageDeliveryStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="PendingModules">
           <Key>
@@ -258,13 +276,36 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="isNewUser" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
           <Property Name="aptID" Type="int" Nullable="false" />
           <Property Name="BuildingUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="PackageID" Type="nvarchar" MaxLength="225" Nullable="false" />
+          <Property Name="TenantID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Notified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingCarrier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Services" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Service" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="SignalRMessageTable">
           <Key>
@@ -558,6 +599,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Package_PackageDeliveryStatus">
+          <End Role="PackageDeliveryStatus" Type="Self.PackageDeliveryStatus" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageDeliveryStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PackageDeliveryStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_PackageType">
+          <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PakageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Shipment">
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_ShippingCarrier">
+          <End Role="ShippingCarrier" Type="Self.ShippingCarrier" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingCarrier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingCarrierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_ShippingService">
+          <End Role="ShippingService" Type="Self.ShippingService" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PendingModuleRequests_Buildings1">
           <End Role="ListOfModule" Type="Self.ListOfModule" Multiplicity="1" />
           <End Role="Module" Type="Self.Module" Multiplicity="*" />
@@ -666,15 +767,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shipment_Package1">
-          <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
-          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+        <Association Name="FK_Shipment_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Shipment">
+            <Principal Role="Buildings">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Package">
-              <PropertyRef Name="ShipmentID" />
+            <Dependent Role="Shipment">
+              <PropertyRef Name="BuildingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -747,12 +848,16 @@
           <EntitySet Name="MasterProfileFields" EntityType="Self.MasterProfileFields" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageDeliveryStatus" EntityType="Self.PackageDeliveryStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageType" EntityType="Self.PackageType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingModules" EntityType="Self.PendingModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermissionMapRole" EntityType="Self.PermissionMapRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingCarrier" EntityType="Self.ShippingCarrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingService" EntityType="Self.ShippingService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SignalRMessageTable" EntityType="Self.SignalRMessageTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -835,6 +940,26 @@
             <End Role="ListOfModule" EntitySet="ListOfModule" />
             <End Role="PendingModules" EntitySet="PendingModules" />
           </AssociationSet>
+          <AssociationSet Name="FK_Package_PackageDeliveryStatus" Association="Self.FK_Package_PackageDeliveryStatus">
+            <End Role="PackageDeliveryStatus" EntitySet="PackageDeliveryStatus" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_PackageType" Association="Self.FK_Package_PackageType">
+            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Shipment" Association="Self.FK_Package_Shipment">
+            <End Role="Shipment" EntitySet="Shipment" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingCarrier" Association="Self.FK_Package_ShippingCarrier">
+            <End Role="ShippingCarrier" EntitySet="ShippingCarrier" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingService" Association="Self.FK_Package_ShippingService">
+            <End Role="ShippingService" EntitySet="ShippingService" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
           <AssociationSet Name="FK_PendingModuleRequests_Buildings1" Association="Self.FK_PendingModuleRequests_Buildings1">
             <End Role="ListOfModule" EntitySet="ListOfModule" />
             <End Role="Module" EntitySet="Module" />
@@ -871,9 +996,9 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Package1" Association="Self.FK_Shipment_Package1">
+          <AssociationSet Name="FK_Shipment_Buildings" Association="Self.FK_Shipment_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Shipment" EntitySet="Shipment" />
-            <End Role="Package" EntitySet="Package" />
           </AssociationSet>
           <AssociationSet Name="FK_Tenant_Apartment" Association="Self.FK_Tenant_Apartment">
             <End Role="Apartment" EntitySet="Apartment" />
@@ -915,16 +1040,19 @@
           <EntitySet Name="ManagerBuilding" EntityType="PointerSecurityModel.ManagerBuilding" />
           <EntitySet Name="MasterProfileFields" EntityType="PointerSecurityModel.MasterProfileFields" />
           <EntitySet Name="Module" EntityType="PointerSecurityModel.Module" />
-          <EntitySet Name="Package" EntityType="PointerSecurityModel.Package" />
+          <EntitySet Name="PackageDeliveryStatus" EntityType="PointerSecurityModel.PackageDeliveryStatus" />
           <EntitySet Name="PendingModules" EntityType="PointerSecurityModel.PendingModules" />
           <EntitySet Name="PermissionMapRole" EntityType="PointerSecurityModel.PermissionMapRole" />
           <EntitySet Name="ReqType" EntityType="PointerSecurityModel.ReqType" />
           <EntitySet Name="Requests" EntityType="PointerSecurityModel.Requests" />
           <EntitySet Name="Role" EntityType="PointerSecurityModel.Role" />
           <EntitySet Name="Shipment" EntityType="PointerSecurityModel.Shipment" />
+          <EntitySet Name="ShippingCarrier" EntityType="PointerSecurityModel.ShippingCarrier" />
+          <EntitySet Name="ShippingService" EntityType="PointerSecurityModel.ShippingService" />
           <EntitySet Name="SignalRMessageTable" EntityType="PointerSecurityModel.SignalRMessageTable" />
           <EntitySet Name="States" EntityType="PointerSecurityModel.States" />
           <EntitySet Name="sysdiagrams" EntityType="PointerSecurityModel.sysdiagrams" />
+          <EntitySet Name="Tenant" EntityType="PointerSecurityModel.Tenant" />
           <EntitySet Name="User" EntityType="PointerSecurityModel.User" />
           <EntitySet Name="UserActivityLog" EntityType="PointerSecurityModel.UserActivityLog" />
           <AssociationSet Name="FK_ActiveManager_To_Manager" Association="PointerSecurityModel.FK_ActiveManager_To_Manager">
@@ -942,6 +1070,10 @@
           <AssociationSet Name="FK_Shipment_Apartment" Association="PointerSecurityModel.FK_Shipment_Apartment">
             <End Role="Apartment" EntitySet="Apartment" />
             <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tenant_Apartment" Association="PointerSecurityModel.FK_Tenant_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Tenant" EntitySet="Tenant" />
           </AssociationSet>
           <AssociationSet Name="FK_PermissionMapRole_ASPNETRole" Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -979,6 +1111,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tenant_AspNetUsers" Association="PointerSecurityModel.FK_Tenant_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Tenant" EntitySet="Tenant" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_AspNetUsers" Association="PointerSecurityModel.FK_UserActivityLog_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserActivityLog" EntitySet="UserActivityLog" />
@@ -1006,6 +1142,10 @@
           <AssociationSet Name="FK_ManagerBuilding_Buildings" Association="PointerSecurityModel.FK_ManagerBuilding_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_Buildings" Association="PointerSecurityModel.FK_Shipment_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_Buildings" Association="PointerSecurityModel.FK_UserActivityLog_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
@@ -1035,28 +1175,37 @@
             <End Role="Manager" EntitySet="Manager" />
             <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
           </AssociationSet>
-          <AssociationSet Name="FK_Shipment_Package1" Association="PointerSecurityModel.FK_Shipment_Package1">
-            <End Role="Shipment" EntitySet="Shipment" />
-            <End Role="Package" EntitySet="Package" />
+          <AssociationSet Name="FK_Request_Tenant" Association="PointerSecurityModel.FK_Request_Tenant">
+            <End Role="Tenant" EntitySet="Tenant" />
+            <End Role="Requests" EntitySet="Requests" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="PointerSecurityModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Tenant" EntityType="PointerSecurityModel.Tenant" />
-          <AssociationSet Name="FK_Tenant_Apartment" Association="PointerSecurityModel.FK_Tenant_Apartment">
-            <End Role="Apartment" EntitySet="Apartment" />
-            <End Role="Tenant" EntitySet="Tenant" />
+          <EntitySet Name="Package" EntityType="PointerSecurityModel.Package" />
+          <EntitySet Name="PackageType" EntityType="PointerSecurityModel.PackageType" />
+          <AssociationSet Name="FK_Package_PackageDeliveryStatus" Association="PointerSecurityModel.FK_Package_PackageDeliveryStatus">
+            <End Role="PackageDeliveryStatus" EntitySet="PackageDeliveryStatus" />
+            <End Role="Package" EntitySet="Package" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tenant_AspNetUsers" Association="PointerSecurityModel.FK_Tenant_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Tenant" EntitySet="Tenant" />
+          <AssociationSet Name="FK_Package_PackageType" Association="PointerSecurityModel.FK_Package_PackageType">
+            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Package" EntitySet="Package" />
           </AssociationSet>
-          <AssociationSet Name="FK_Request_Tenant" Association="PointerSecurityModel.FK_Request_Tenant">
-            <End Role="Tenant" EntitySet="Tenant" />
-            <End Role="Requests" EntitySet="Requests" />
+          <AssociationSet Name="FK_Package_Shipment" Association="PointerSecurityModel.FK_Package_Shipment">
+            <End Role="Shipment" EntitySet="Shipment" />
+            <End Role="Package" EntitySet="Package" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_Package_ShippingCarrier" Association="PointerSecurityModel.FK_Package_ShippingCarrier">
+            <End Role="ShippingCarrier" EntitySet="ShippingCarrier" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingService" Association="PointerSecurityModel.FK_Package_ShippingService">
+            <End Role="ShippingService" EntitySet="ShippingService" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="ActiveManager">
           <Key>
             <PropertyRef Name="Id" />
@@ -1133,9 +1282,9 @@
           <NavigationProperty Name="PermissionMapRole" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" FromRole="AspNetUsers" ToRole="PermissionMapRole" />
           <NavigationProperty Name="Role" Relationship="PointerSecurityModel.FK_Role_AspNetUsers" FromRole="AspNetUsers" ToRole="Role" />
           <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Shipment_AspNETUser" FromRole="AspNetUsers" ToRole="Shipment" />
+          <NavigationProperty Name="Tenant" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="AspNetUsers" ToRole="Tenant" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointerSecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUsers" ToRole="UserActivityLog" />
           <NavigationProperty Name="AspNetRoles" Relationship="PointerSecurityModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Tenant" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="AspNetUsers" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="Buildings">
           <Key>
@@ -1160,6 +1309,7 @@
           <NavigationProperty Name="BuildingUser" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="Buildings" ToRole="BuildingUser" />
           <NavigationProperty Name="BuildingUserMapping" Relationship="PointerSecurityModel.FK_BuildingUserMapping_Buildings1" FromRole="Buildings" ToRole="BuildingUserMapping" />
           <NavigationProperty Name="ManagerBuilding" Relationship="PointerSecurityModel.FK_ManagerBuilding_Buildings" FromRole="Buildings" ToRole="ManagerBuilding" />
+          <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Shipment_Buildings" FromRole="Buildings" ToRole="Shipment" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointerSecurityModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
         </EntityType>
         <EntityType Name="BuildingUser">
@@ -1292,16 +1442,13 @@
           <NavigationProperty Name="ListOfModule1" Relationship="PointerSecurityModel.FK_PendingModuleRequests_Buildings1" FromRole="Module" ToRole="ListOfModule" />
           <NavigationProperty Name="ListOfModule2" Relationship="PointerSecurityModel.FK_PendingModuleRequests1_Buildings1" FromRole="Module" ToRole="ListOfModule" />
         </EntityType>
-        <EntityType Name="Package">
+        <EntityType Name="PackageDeliveryStatus">
           <Key>
-            <PropertyRef Name="TrackingNumber" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="TrackingNumber" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
-          <Property Name="Service" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeliverTime" Type="DateTime" Precision="3" />
-          <Property Name="ShipmentID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Shipment_Package1" FromRole="Package" ToRole="Shipment" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_PackageDeliveryStatus" FromRole="PackageDeliveryStatus" ToRole="Package" />
         </EntityType>
         <EntityType Name="PendingModules">
           <Key>
@@ -1358,16 +1505,42 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="isNewUser" Type="Boolean" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ApartmentNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
           <Property Name="aptID" Type="Int32" Nullable="false" />
           <Property Name="BuildingUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PackageID" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="TenantID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Notified" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Shipment_Apartment" FromRole="Shipment" ToRole="Apartment" />
           <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Shipment_AspNETUser" FromRole="Shipment" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Shipment_Package1" FromRole="Shipment" ToRole="Package" />
+          <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_Shipment_Buildings" FromRole="Shipment" ToRole="Buildings" />
+          <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_Shipment" FromRole="Shipment" ToRole="Package" />
+          </EntityType>
+        <EntityType Name="ShippingCarrier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Services" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_ShippingCarrier" FromRole="ShippingCarrier" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="ShippingService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Service" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_ShippingService" FromRole="ShippingService" ToRole="Package" />
         </EntityType>
         <EntityType Name="SignalRMessageTable">
           <Key>
@@ -1393,6 +1566,22 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tenant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isTemPWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="aptID" Type="Int32" />
+          <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Tenant_Apartment" FromRole="Tenant" ToRole="Apartment" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="Tenant" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Requests" Relationship="PointerSecurityModel.FK_Request_Tenant" FromRole="Tenant" ToRole="Requests" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1462,6 +1651,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Shipment">
+              <PropertyRef Name="aptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tenant_Apartment">
+          <End Type="PointerSecurityModel.Apartment" Role="Apartment" Multiplicity="0..1" />
+          <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tenant">
               <PropertyRef Name="aptID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1578,6 +1779,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tenant_AspNetUsers">
+          <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tenant">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserActivityLog_AspNetUsers">
           <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
           <End Type="PointerSecurityModel.UserActivityLog" Role="UserActivityLog" Multiplicity="*" />
@@ -1658,6 +1871,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ManagerBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_Buildings">
+          <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Shipment" Role="Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipment">
               <PropertyRef Name="BuildingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1746,7 +1971,74 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shipment_Package1">
+        <Association Name="FK_Request_Tenant">
+          <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Requests" Role="Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tenant">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="TenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="PointerSecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="TrackingNumber" />
+          </Key>
+          <Property Name="TrackingNumber" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingServiceID" Type="Int32" Nullable="false" />
+          <Property Name="ShippingCarrierID" Type="Int32" Nullable="false" />
+          <Property Name="PakageTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeliverTime" Type="DateTime" Precision="3" />
+          <Property Name="ShipmentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PackageDeliveryStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PackageDeliveryStatus" Relationship="PointerSecurityModel.FK_Package_PackageDeliveryStatus" FromRole="Package" ToRole="PackageDeliveryStatus" />
+          <NavigationProperty Name="PackageType" Relationship="PointerSecurityModel.FK_Package_PackageType" FromRole="Package" ToRole="PackageType" />
+          <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Package_Shipment" FromRole="Package" ToRole="Shipment" />
+          <NavigationProperty Name="ShippingCarrier" Relationship="PointerSecurityModel.FK_Package_ShippingCarrier" FromRole="Package" ToRole="ShippingCarrier" />
+          <NavigationProperty Name="ShippingService" Relationship="PointerSecurityModel.FK_Package_ShippingService" FromRole="Package" ToRole="ShippingService" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_PackageType" FromRole="PackageType" ToRole="Package" />
+        </EntityType>
+        <Association Name="FK_Package_PackageDeliveryStatus">
+          <End Type="PointerSecurityModel.PackageDeliveryStatus" Role="PackageDeliveryStatus" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageDeliveryStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PackageDeliveryStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_PackageType">
+          <End Type="PointerSecurityModel.PackageType" Role="PackageType" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PakageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Shipment">
           <End Type="PointerSecurityModel.Shipment" Role="Shipment" Multiplicity="1" />
           <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1758,59 +2050,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="PointerSecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Tenant">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="isTemPWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="aptID" Type="Int32" />
-          <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Tenant_Apartment" FromRole="Tenant" ToRole="Apartment" />
-          <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="Tenant" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Requests" Relationship="PointerSecurityModel.FK_Request_Tenant" FromRole="Tenant" ToRole="Requests" />
-        </EntityType>
-        <Association Name="FK_Tenant_Apartment">
-          <End Type="PointerSecurityModel.Apartment" Role="Apartment" Multiplicity="0..1" />
-          <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="*" />
+        <Association Name="FK_Package_ShippingCarrier">
+          <End Type="PointerSecurityModel.ShippingCarrier" Role="ShippingCarrier" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Apartment">
+            <Principal Role="ShippingCarrier">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Tenant">
-              <PropertyRef Name="aptID" />
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingCarrierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tenant_AspNetUsers">
-          <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+        <Association Name="FK_Package_ShippingService">
+          <End Type="PointerSecurityModel.ShippingService" Role="ShippingService" Multiplicity="1" />
+          <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tenant">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Request_Tenant">
-          <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="1" />
-          <End Type="PointerSecurityModel.Requests" Role="Requests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tenant">
+            <Principal Role="ShippingService">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Requests">
-              <PropertyRef Name="TenantID" />
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingServiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2022,14 +2282,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Package">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Package">
-              <MappingFragment StoreEntitySet="Package">
-                <ScalarProperty Name="ShipmentID" ColumnName="ShipmentID" />
-                <ScalarProperty Name="DeliverTime" ColumnName="DeliverTime" />
-                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
-                <ScalarProperty Name="Service" ColumnName="Service" />
-                <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+          <EntitySetMapping Name="PackageDeliveryStatus">
+            <EntityTypeMapping TypeName="PointerSecurityModel.PackageDeliveryStatus">
+              <MappingFragment StoreEntitySet="PackageDeliveryStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2085,12 +2342,37 @@
           <EntitySetMapping Name="Shipment">
             <EntityTypeMapping TypeName="PointerSecurityModel.Shipment">
               <MappingFragment StoreEntitySet="Shipment">
-                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="Notified" ColumnName="Notified" />
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
                 <ScalarProperty Name="BuildingUserID" ColumnName="BuildingUserID" />
                 <ScalarProperty Name="aptID" ColumnName="aptID" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="isNewUser" ColumnName="isNewUser" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingCarrier">
+            <EntityTypeMapping TypeName="PointerSecurityModel.ShippingCarrier">
+              <MappingFragment StoreEntitySet="ShippingCarrier">
+                <ScalarProperty Name="Services" ColumnName="Services" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingService">
+            <EntityTypeMapping TypeName="PointerSecurityModel.ShippingService">
+              <MappingFragment StoreEntitySet="ShippingService">
+                <ScalarProperty Name="Service" ColumnName="Service" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2120,6 +2402,20 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tenant">
+            <EntityTypeMapping TypeName="PointerSecurityModel.Tenant">
+              <MappingFragment StoreEntitySet="Tenant">
+                <ScalarProperty Name="aptID" ColumnName="aptID" />
+                <ScalarProperty Name="isTemPWord" ColumnName="isTemPWord" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2155,16 +2451,25 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Tenant">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Tenant">
-              <MappingFragment StoreEntitySet="Tenant">
-                <ScalarProperty Name="aptID" ColumnName="aptID" />
-                <ScalarProperty Name="isTemPWord" ColumnName="isTemPWord" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <EntitySetMapping Name="Package">
+            <EntityTypeMapping TypeName="PointerSecurityModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PackageDeliveryStatusID" ColumnName="PackageDeliveryStatusID" />
+                <ScalarProperty Name="ShipmentID" ColumnName="ShipmentID" />
+                <ScalarProperty Name="DeliverTime" ColumnName="DeliverTime" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="PakageTypeID" ColumnName="PakageTypeID" />
+                <ScalarProperty Name="ShippingCarrierID" ColumnName="ShippingCarrierID" />
+                <ScalarProperty Name="ShippingServiceID" ColumnName="ShippingServiceID" />
+                <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageType">
+            <EntityTypeMapping TypeName="PointerSecurityModel.PackageType">
+              <MappingFragment StoreEntitySet="PackageType">
+                <ScalarProperty Name="PackageType1" ColumnName="PackageType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

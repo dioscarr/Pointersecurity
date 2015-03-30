@@ -97,16 +97,8 @@
                 this.title = ko.observable(data.title);
                 this.isDone = ko.observable(data.isDone);
             }
-
-
-
-
             function viewModel() {
                 var self = this;
-
-
-               
-
                 var optionsVM = [
                                { value: 1, name: 'TextBox' },
                                { value: 2, name: 'CheckBox' },
@@ -114,10 +106,7 @@
                                { value: 4, name: 'TextArea' },
                                { value: 5, name: 'DropdownList' }
                 ]
-
                 items = ko.observableArray(optionsVM);
-
-
               
                 self.users = ko.observableArray(),//create an array
 
@@ -126,25 +115,14 @@
                     this.users.push({// push syntaxt to append array
                         TextBoxLabel: ko.observable(),//add field name to the array
                         Controller: ko.observable(),
-                        
-
                     });
-                  
                 }
-               
-
-
-
-
                 //function ends to add to the arrays++++++++++++++++++++++++++++++++++++
 
                 self.save = function (fields) {
                     debugger;
 
                     alert(ko.toJSON(self.users));
-
-
-
                     $.ajaxSettings.traditional = true;
                     $.ajax({
                         type: "POST",
@@ -157,30 +135,17 @@
                                 //alert(ko.toJSON(data));
                                 window.location.href = "/Dashboard/PreviewTemplate/";
                                 //alert(ko.toJS(data));
-
                             }
                         }
                     });
                     //ko.utils.postJson('/Dashboard/FromJson/', { name: fields.users});
                 }
-
-
-
                 self.removeField = function (task) {
                     self.users.remove(task)
                 };
-             
-
-
-                
-
                 //output preview
                 //masterarray = ko.observablearray();
-
-
             };
-
-
             ko.applyBindings(new viewModel());
         });
 

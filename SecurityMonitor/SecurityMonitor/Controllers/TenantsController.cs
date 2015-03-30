@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PointerSecurityDataLayer;
+using SecurityMonitor.Models;
 
 namespace SecurityMonitor.Controllers
 {
@@ -119,6 +120,21 @@ namespace SecurityMonitor.Controllers
             db.Tenant.Remove(tenant);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult TenantProfile()
+        {
+            return View();
+        }
+
+
+
+        public ActionResult TenantIndex(string TenantID)
+        {   //TODO: Tenant Dashboard
+            TenantIndexVM TIvm = new TenantIndexVM();
+
+            return View(TIvm);
         }
 
         protected override void Dispose(bool disposing)

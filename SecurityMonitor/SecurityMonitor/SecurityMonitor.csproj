@@ -100,11 +100,15 @@
     <Reference Include="PerpetuumSoft.Knockout">
       <HintPath>..\packages\kMVC.0.6.0\lib\net40\PerpetuumSoft.Knockout.dll</HintPath>
     </Reference>
+    <Reference Include="SeeSharpShip">
+      <HintPath>..\packages\SeeSharpShip.0.1.7.0\lib\net40\SeeSharpShip.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -237,9 +241,11 @@
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\BuildingUserMappingVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
+    <Compile Include="Models\DeliveryVM.cs" />
     <Compile Include="Models\DisplayClientBuilding.cs" />
     <Compile Include="Models\DisplayManagerRoleDelete.cs" />
     <Compile Include="Models\ErrorMessageVM.cs" />
+    <Compile Include="Models\FindRouteOptions.cs" />
     <Compile Include="Models\HandleRole.cs" />
     <Compile Include="Models\JsonVM.cs" />
     <Compile Include="Models\ManagementBuilding.cs" />
@@ -251,12 +257,16 @@
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\managementVM.cs" />
+    <Compile Include="Models\Otherusers.cs" />
+    <Compile Include="Models\PackageSearchVM.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\RegisterManagerVM.cs" />
     <Compile Include="Models\RepairModelVM.cs" />
     <Compile Include="Models\ReqTypeCount.cs" />
     <Compile Include="Models\RequestForTodayVM.cs" />
     <Compile Include="Models\RequestVM.cs" />
+    <Compile Include="Models\ShipmentVM.cs" />
+    <Compile Include="Models\TenantIndexVM.cs" />
     <Compile Include="Models\TenantSearch.cs" />
     <Compile Include="Models\TenantVM.cs" />
     <Compile Include="Models\UserActivityLogVM.cs" />
@@ -266,9 +276,12 @@
     <Compile Include="Workes\DeliveryWorker.cs" />
     <Compile Include="Workes\FindRoute.cs" />
     <Compile Include="Workes\Gmail.cs" />
+    <Compile Include="Workes\PasswordGenerator.cs" />
     <Compile Include="Workes\RegisterUsers.cs" />
+    <Compile Include="Workes\TenantWorker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dhtmlxgantt\dhtmlxgantt.css" />
@@ -655,10 +668,12 @@
     <Content Include="Scripts\HighChart\themes\sand-signika.js" />
     <Content Include="Scripts\HighChart\themes\skies.js" />
     <Content Include="App.Config" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\jquery.signalR2.1.2.min.js" />
@@ -771,6 +786,7 @@
     <Content Include="Views\Module\RepairIndex.cshtml" />
     <Content Include="Views\Module\SelectModuleIndex.cshtml" />
     <Content Include="Views\Module\DeliveryDisplay.cshtml" />
+    <Content Include="Views\Module\Delivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

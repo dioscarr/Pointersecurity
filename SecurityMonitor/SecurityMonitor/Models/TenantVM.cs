@@ -7,8 +7,7 @@ using System.Web;
 namespace SecurityMonitor.Models
 {
     public class TenantVM
-    {
-        
+    {        
         public string ID { get; set; }
         public int UserID { get; set; }
         public string FirstName { get; set; }
@@ -27,5 +26,6 @@ namespace SecurityMonitor.Models
         public int BuildingID { get; set; }
         public int aptID { get; set; }
         public bool EmailNotification { get; set; }
+        public bool GenerateAutomaticPassword { get; set; }
     }
 }

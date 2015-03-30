@@ -15,11 +15,19 @@ namespace PointerSecurityDataLayer
     public partial class Package
     {
         public string TrackingNumber { get; set; }
-        public string Service { get; set; }
+        public int ShippingServiceID { get; set; }
+        public int ShippingCarrierID { get; set; }
+        public int PakageTypeID { get; set; }
         public System.DateTime ArrivalTime { get; set; }
         public Nullable<System.DateTime> DeliverTime { get; set; }
-        public int ShipmentID { get; set; }
+        public string ShipmentID { get; set; }
+        public int PackageDeliveryStatusID { get; set; }
+        public string Note { get; set; }
     
+        public virtual PackageDeliveryStatus PackageDeliveryStatus { get; set; }
+        public virtual PackageType PackageType { get; set; }
         public virtual Shipment Shipment { get; set; }
+        public virtual ShippingCarrier ShippingCarrier { get; set; }
+        public virtual ShippingService ShippingService { get; set; }
     }
 }

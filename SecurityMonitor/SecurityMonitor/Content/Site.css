@@ -282,10 +282,8 @@ padding-bottom:20px;
 
 .requestformbox {
 
-    border:1px solid lightgrey;
-    -webkit-border-radius: 10px;
--moz-border-radius: 10px;
-border-radius: 10px;
+   
+   
 }
 
 .crema {
@@ -388,6 +386,19 @@ background:#E7E7E7;}
 }
 
 /* Hollow */
+.homebox {
+  display: inline-block;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: background;
+  transition-property: background;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+
+  /* Hack to improve aliasing on mobile/tablet devices */
+}
+
+/* Hollow */
 .hollow {
   display: inline-block;
   -webkit-transition-duration: 0.3s;
@@ -396,7 +407,7 @@ background:#E7E7E7;}
   transition-property: background;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  box-shadow: inset 0 0 0 4px #e1e1e1, 0 0 1px rgba(0, 0, 0, 0);
+
   /* Hack to improve aliasing on mobile/tablet devices */
 }
 .hollow:hover, .hollow:focus, .hollow:active {
@@ -780,3 +791,55 @@ color:white;
 
 
 
+.myguesslistDelivery {
+
+
+position :absolute;
+top:0px;
+left:0px;
+width:293px; 
+background:white;
+
+-webkit-box-shadow: 0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+-moz-box-shadow:    0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+box-shadow:         0px 3px 10px 1px rgba(48, 50, 50, 0.47);
+z-index:1;
+}
+
+.myguesslistDelivery ul {
+    /*outline:1px solid lightblue;*/
+width:194px;
+
+}
+    .myguesslistDelivery ul li{
+        padding-top:5px;
+        padding-bottom:50px;
+        width:175px;
+        border-bottom:1px solid lightgrey;
+        position:relative;
+        left:-30px;
+    list-style-type:none;
+    /*outline:1px solid lightblue;*/
+    height:50px;
+    background-color:white;
+    }
+
+.displayinline {
+display:inline;
+}
+
+
+.someSpace {
+margin:0 0 0 15px;
+}
+.somespaceup {
+margin-top:2px;
+
+}
+
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 28px;        // Make inputs at least the height of their button counterpart
+  .box-sizing(border-box); // Makes inputs behave like true block-level elements
+}

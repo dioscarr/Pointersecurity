@@ -15,6 +15,8 @@ using System.Data.Entity;
 using SecurityMonitor.Workes;
 using System.Net.Mail;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.IO;
+using System.Text;
 
 
 //TO DO: 
@@ -941,20 +943,17 @@ namespace SecurityMonitor.Controllers
 
         //===================Adding Tenant to apartment GET ==============
         [HttpGet]
-        public ActionResult AddingTenant(int? apartmentID, int BuildingID)
+        public ActionResult AddingTenant(int apartmentID, int BuildingID)
         {
-            if (apartmentID != null)
-            {
                 var newtenant = new TenantVM();
                 newtenant.aptID = (int)apartmentID;
                 newtenant.BuildingID = BuildingID;
                 return View(newtenant);
-            }
-            return View("page doesn't meet the required elements");
         }
 
         //============= Adding Tenant to apartment Post ==============
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddingTenant(TenantVM newTenant)
         {
             try { 
@@ -963,9 +962,14 @@ namespace SecurityMonitor.Controllers
             if (ModelState.IsValid)
             {
 
-                var UserID = RegisterUsers.InsertUser(newTenant.Username, newTenant.Phone, newTenant.Password);
-                var result = RegisterUsers.InserToRole("Tenant", UserID);
+                string password ="";
+                if (newTenant.GenerateAutomaticPassword == false){ password = newTenant.Password;}
+                else{ password = PasswordGenerator.GeneratePassword("8").ToString();}
 
+              
+                var UserID = RegisterUsers.InsertUser(newTenant.Username, newTenant.Phone, password);
+                var result = RegisterUsers.InserToRole("Tenant", UserID);
+                
                 var tenantdb = new Tenant
                 {
                     ID = UserID,
@@ -978,14 +982,27 @@ namespace SecurityMonitor.Controllers
                 };
                 db.Tenant.Add(tenantdb);
                 
-                await db.SaveChangesAsync();
-               
+                await db.SaveChangesAsync();         
+                
                 if(newTenant.EmailNotification==true)
-                { 
+                {
+                    var aptNumber = db.Apartment.Find(newTenant.aptID).ApartmentNumber;
+
+                    
+                    string string1 = "Hi " + newTenant.FirstName +" "+ newTenant.LastName + ", An Account has been created for you by PointerWebApp.com ";
+                    string string2 = "The login information for apartment: "+ aptNumber+" is below";
+                    string string3 = "Username: "+newTenant.Username;
+                    string string4 = "Temporary password: " + password;
+                    string string5 = "Click the on this http://localhost:64083/Account/Manage link and follow the instructions to initiate your account ";
+                    string string6 = "Company Description";
+                    string string7 = "Find more information...";
+
+                    string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+
                     Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
                     MailMessage msg = new MailMessage("pointerwebapp@gmail.com", tenantdb.Username);
                     msg.Subject = "Pointer Security New Account Notification";
-                    msg.Body = "A new account has been created for you on PointerSecurity website. please click the following link to access your account.";
+                    msg.Body = x;
                     gmail.Send(msg);
                 }
              
@@ -1000,6 +1017,8 @@ namespace SecurityMonitor.Controllers
             }
             return View();
         }
+
+
         //Tenant Edit
         [HttpGet]
         public ActionResult TenantEdit(string TenantID)
@@ -1162,6 +1181,108 @@ namespace SecurityMonitor.Controllers
         
         }
 
+        [HttpGet]
+    [AllowAnonymous]
+        public JsonResult getKeyupSearch(string mysearch, int BuildingID, string aptNumber)
+      {
+
+            var Search = new List<TenantSearch>();
+
+            if (mysearch != null || mysearch != "")
+            {
+                string FN = string.Empty;
+                string LN = string.Empty;
+                string[] m = mysearch.Split(null);//if the splitting char is null it is assume that the delimiter is a whie space
+                var mymanagement = new managementVM();
+                if (m.Length > 1)
+                {
+                    FN = m[0];
+                    LN = m[1];
+
+                    Search = db.Tenant
+                   .Join(db.Apartment,
+                           c => c.aptID,
+                           a => a.ID,
+                           (c, a) => new { c, a })
+                           .Join(db.Buildings,
+                           ca => ca.a.BuildingID,
+                           b => b.ID,
+                           (ca, b) => new TenantSearch
+                           {
+                               FirstName = ca.c.FirstName,
+                               LastName = ca.c.LastName,
+                               Apt = ca.a.ApartmentNumber,
+                               Address = b.Address,
+                               city = b.City,
+                               State = b.State,
+                               zipcode = b.Zipcode,
+                               ApartmentID = ca.a.ID,
+                               TenantID = ca.c.ID,
+                               Userkey = ca.c.AspNetUsers.Id,
+                               Phone = ca.c.Phone,
+                               BuildingID = b.ID
+                           })
+                   .Where(c => c.FirstName.Contains(mysearch) ||
+                               c.LastName.Contains(mysearch) ||
+                               c.FirstName.Contains(FN) &&
+                               c.LastName.Contains(LN)
+                          ).Where(c => c.BuildingID == BuildingID)
+                    .OrderByDescending(c => c.FirstName)
+                   .Take(10)
+                   .ToList();
+                       if (aptNumber != "")
+                    {
+                        Search = Search.Where(c => c.Apt == aptNumber).ToList();
+                   
+                    }
+
+                    return new JsonResult { Data = Search, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+                }
+                else
+                {
+
+                    Search = db.Tenant
+                       .Join(db.Apartment,
+                         c => c.aptID,
+                         a => a.ID,
+                         (c, a) => new { c, a })
+                         .Join(db.Buildings,
+                         ca => ca.a.BuildingID,
+                         b => b.ID,
+                         (ca, b) => new TenantSearch
+                         {
+                             FirstName = ca.c.FirstName,
+                             LastName = ca.c.LastName,
+                             Apt = ca.a.ApartmentNumber,
+                             Address = b.Address,
+                             city = b.City,
+                             State = b.State,
+                             zipcode = b.Zipcode,
+                             ApartmentID = ca.a.ID,
+                             TenantID = ca.c.ID,
+                             Userkey = ca.c.AspNetUsers.Id,
+                              Phone = ca.c.Phone,
+                             BuildingID = b.ID
+                         })
+                   .Where(c => c.FirstName.Contains(mysearch) || c.LastName.Contains(mysearch))
+                   .Where(c => c.BuildingID == BuildingID)
+                   .OrderByDescending(c => c.FirstName)
+                   .Take(10)
+                   .ToList();
+                    if (aptNumber != "")
+                    {
+                        Search = Search.Where(c => c.Apt == aptNumber).ToList();
+
+                    }
+
+                    return new JsonResult { Data = Search, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+
+            }
+            return new JsonResult { Data = Search, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         //Tenant Delivary
         public ActionResult TenantDeliveryIndex(int TenantID)
         {
@@ -1174,6 +1295,7 @@ namespace SecurityMonitor.Controllers
         {  
             return View();
         }
+
 
     }
 }

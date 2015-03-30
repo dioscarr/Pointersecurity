@@ -46,8 +46,8 @@ namespace PointerSecurityDataLayer
         public virtual ICollection<PermissionMapRole> PermissionMapRole { get; set; }
         public virtual ICollection<Role> Role { get; set; }
         public virtual ICollection<Shipment> Shipment { get; set; }
+        public virtual Tenant Tenant { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
-        public virtual Tenant Tenant { get; set; }
     }
 }

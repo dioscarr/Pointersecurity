@@ -19,6 +19,14 @@ namespace SecurityMonitor.Workes
                     myroute.Add("SelectModuleIndex");
                     myroute.Add("Module");
                     return myroute;
+                case "Tenant":
+                    myroute.Add("ApartmentProfile");
+                    myroute.Add("Tenant");
+                    return myroute;
+                case "Delivery":
+                    myroute.Add("SelectModuleIndex");
+                    myroute.Add("Module");
+                    return myroute;
 
             }
             }
