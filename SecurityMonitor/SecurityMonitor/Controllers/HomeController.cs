@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 
 namespace SecurityMonitor.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
         public ActionResult Index()
         {
             return View();

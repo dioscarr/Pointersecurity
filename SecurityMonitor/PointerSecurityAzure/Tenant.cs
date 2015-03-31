@@ -19,18 +19,17 @@ namespace PointerSecurityAzure
             this.Requests = new HashSet<Requests>();
         }
     
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
         public System.DateTime Created { get; set; }
         public string isTemPWord { get; set; }
         public Nullable<int> aptID { get; set; }
-        public string LogintableID { get; set; }
     
         public virtual Apartment Apartment { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual ICollection<Requests> Requests { get; set; }
     }
 }

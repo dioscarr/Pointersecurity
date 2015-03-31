@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 using SecurityMonitor.Models;
 
 namespace SecurityMonitor.Controllers
 {
     public class TenantsController : Controller
     {
-        private PointerSecurityEntities db = new PointerSecurityEntities();
+        private NewPointerdbEntities db = new NewPointerdbEntities();
 
         // GET: Tenants
         public async Task<ActionResult> Index()

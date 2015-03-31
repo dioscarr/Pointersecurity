@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 using SecurityMonitor.Models;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -17,7 +17,7 @@ namespace SecurityMonitor.Controllers
     [Authorize(Roles="Admin")]
     public class ManagementController : Controller
     {
-       PointerSecurityEntities db = new PointerSecurityEntities();
+       NewPointerdbEntities db = new NewPointerdbEntities();
        public ActionResult Index()
         {
 
@@ -156,7 +156,7 @@ namespace SecurityMonitor.Controllers
        {
           
             ApplicationDbContext context = new ApplicationDbContext();
-            PointerSecurityEntities db = new PointerSecurityEntities();
+            NewPointerdbEntities db = new NewPointerdbEntities();
 
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 

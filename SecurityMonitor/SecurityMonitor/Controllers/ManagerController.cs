@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
@@ -19,7 +19,7 @@ namespace SecurityMonitor.Controllers
     {
 
          //DB context
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
         //Building Profile ==================================================================================
         
 

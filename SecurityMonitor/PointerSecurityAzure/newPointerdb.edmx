@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PointerSecurityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="NewPointerdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActiveManager">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,6 +21,117 @@
           <Property Name="ApartmentNumber" Type="nvarchar(max)" Nullable="false" />
           <Property Name="FloorNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="BuildingID" Type="int" />
+        </EntityType>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredApplicationName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="MobilePIN" Type="nvarchar" MaxLength="16" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="LoweredEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="aspnet_Paths">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredPath" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationAllUsers">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PageSettings" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationPerUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PathId" Type="uniqueidentifier" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="PageSettings" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyValuesString" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PropertyValuesBinary" Type="varbinary(max)" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredRoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Name="Feature" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CompatibleSchemaVersion" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="LoweredUserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_UsersInRoles">
+          <Key>
+            <PropertyRef Name="aspnet_Roles_RoleId" />
+            <PropertyRef Name="aspnet_Users_UserId" />
+          </Key>
+          <Property Name="aspnet_Roles_RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="aspnet_Users_UserId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="aspnet_WebEvent_Events">
           <Key>
@@ -122,6 +233,14 @@
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="BuildingUserMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -212,6 +331,34 @@
           <Property Name="ServiceName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ListOfModuleID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="TrackingNumber" />
+          </Key>
+          <Property Name="TrackingNumber" Type="nvarchar" MaxLength="225" Nullable="false" />
+          <Property Name="ShippingServiceID" Type="int" Nullable="false" />
+          <Property Name="ShippingCarrierID" Type="int" Nullable="false" />
+          <Property Name="PakageTypeID" Type="int" Nullable="false" />
+          <Property Name="ArrivalTime" Type="datetime" Nullable="false" />
+          <Property Name="DeliverTime" Type="datetime" />
+          <Property Name="ShipmentID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PackageDeliveryStatusID" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PackageDeliveryStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="PendingModules">
           <Key>
             <PropertyRef Name="ID" />
@@ -246,7 +393,7 @@
           <Property Name="FromDate" Type="datetime" Nullable="false" />
           <Property Name="ToDate" Type="datetime" Nullable="false" />
           <Property Name="PIN" Type="nvarchar" MaxLength="4" />
-          <Property Name="TenantID" Type="int" />
+          <Property Name="TenantID" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -255,6 +402,49 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RoleID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="isNewUser" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="aptID" Type="int" Nullable="false" />
+          <Property Name="BuildingUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="TenantID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Notified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingCarrier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Services" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippingService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Service" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SignalRMessageTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="States">
           <Key>
@@ -277,16 +467,14 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="isTemPWord" Type="nvarchar(max)" />
           <Property Name="aptID" Type="int" />
-          <Property Name="LogintableID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -310,6 +498,114 @@
           <Property Name="DateOfEvent" Type="datetime" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <Association Name="FK__aspnet_Me__Appli__2D27B809">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__UserI__2E1BDC42">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pa__Appli__66603565">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Paths">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__6E01572D">
+          <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
+          <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationAllUsers">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__73BA3083">
+          <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__UserI__74AE54BC">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pr__UserI__440B1D61">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Ro__Appli__4F7CD00D">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__1920BF5C">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ActiveManager_To_Manager">
           <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
           <End Role="ActiveManager" Type="Self.ActiveManager" Multiplicity="*" />
@@ -343,6 +639,30 @@
             </Principal>
             <Dependent Role="Apartment">
               <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aspnet_UsersInRoles_aspnet_Roles">
+          <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="1" />
+          <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="aspnet_UsersInRoles">
+              <PropertyRef Name="aspnet_Roles_RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aspnet_UsersInRoles_aspnet_Users">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_UsersInRoles">
+              <PropertyRef Name="aspnet_Users_UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -418,6 +738,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BuildingUserMapping_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="BuildingUserMapping" Type="Self.BuildingUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuildingUserMapping">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildingUserMapping_Buildings1">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="BuildingUserMapping" Type="Self.BuildingUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuildingUserMapping">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -518,6 +862,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Package_PackageDeliveryStatus">
+          <End Role="PackageDeliveryStatus" Type="Self.PackageDeliveryStatus" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageDeliveryStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PackageDeliveryStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_PackageType">
+          <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PakageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Shipment">
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_ShippingCarrier">
+          <End Role="ShippingCarrier" Type="Self.ShippingCarrier" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingCarrier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingCarrierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_ShippingService">
+          <End Role="ShippingService" Type="Self.ShippingService" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PendingModuleRequests_Buildings1">
           <End Role="ListOfModule" Type="Self.ListOfModule" Multiplicity="1" />
           <End Role="Module" Type="Self.Module" Multiplicity="*" />
@@ -567,7 +971,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Request_Tenant">
-          <End Role="Tenant" Type="Self.Tenant" Multiplicity="0..1" />
+          <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tenant">
@@ -602,6 +1006,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Shipment_Apartment">
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="aptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_AspNETUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="BuildingUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tenant_Apartment">
           <End Role="Apartment" Type="Self.Apartment" Multiplicity="0..1" />
           <End Role="Tenant" Type="Self.Tenant" Multiplicity="*" />
@@ -611,6 +1051,18 @@
             </Principal>
             <Dependent Role="Tenant">
               <PropertyRef Name="aptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tenant_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Tenant" Type="Self.Tenant" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tenant">
+              <PropertyRef Name="ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -638,9 +1090,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PointerSecurityModelStoreContainer">
+        <EntityContainer Name="NewPointerdbModelStoreContainer">
           <EntitySet Name="ActiveManager" EntityType="Self.ActiveManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Apartment" EntityType="Self.Apartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Self.aspnet_PersonalizationAllUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Self.aspnet_PersonalizationPerUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Profile" EntityType="Self.aspnet_Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Roles" EntityType="Self.aspnet_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aspnet_UsersInRoles" EntityType="Self.aspnet_UsersInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -649,6 +1111,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BuildingUser" EntityType="Self.BuildingUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuildingUserMapping" EntityType="Self.BuildingUserMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" Schema="dbo" store:Type="Tables" />
@@ -658,16 +1121,59 @@
           <EntitySet Name="ManagerBuilding" EntityType="Self.ManagerBuilding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MasterProfileFields" EntityType="Self.MasterProfileFields" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageDeliveryStatus" EntityType="Self.PackageDeliveryStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageType" EntityType="Self.PackageType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingModules" EntityType="Self.PendingModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermissionMapRole" EntityType="Self.PermissionMapRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipment" EntityType="Self.Shipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingCarrier" EntityType="Self.ShippingCarrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingService" EntityType="Self.ShippingService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SignalRMessageTable" EntityType="Self.SignalRMessageTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tenant" EntityType="Self.Tenant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserActivityLog" EntityType="Self.UserActivityLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__aspnet_Me__Appli__2D27B809" Association="Self.FK__aspnet_Me__Appli__2D27B809">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__UserI__2E1BDC42" Association="Self.FK__aspnet_Me__UserI__2E1BDC42">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pa__Appli__66603565" Association="Self.FK__aspnet_Pa__Appli__66603565">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__6E01572D" Association="Self.FK__aspnet_Pe__PathI__6E01572D">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__73BA3083" Association="Self.FK__aspnet_Pe__PathI__73BA3083">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__UserI__74AE54BC" Association="Self.FK__aspnet_Pe__UserI__74AE54BC">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pr__UserI__440B1D61" Association="Self.FK__aspnet_Pr__UserI__440B1D61">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Ro__Appli__4F7CD00D" Association="Self.FK__aspnet_Ro__Appli__4F7CD00D">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__1920BF5C" Association="Self.FK__aspnet_Us__Appli__1920BF5C">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_ActiveManager_To_Manager" Association="Self.FK_ActiveManager_To_Manager">
             <End Role="Manager" EntitySet="Manager" />
             <End Role="ActiveManager" EntitySet="ActiveManager" />
@@ -679,6 +1185,14 @@
           <AssociationSet Name="FK_Apartment_Buildings" Association="Self.FK_Apartment_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aspnet_UsersInRoles_aspnet_Roles" Association="Self.FK_aspnet_UsersInRoles_aspnet_Roles">
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aspnet_UsersInRoles_aspnet_Users" Association="Self.FK_aspnet_UsersInRoles_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Self.FK_AspNetUserRoles_AspNetRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -703,6 +1217,14 @@
           <AssociationSet Name="FK_BuildingUSer" Association="Self.FK_BuildingUSer">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="BuildingUser" EntitySet="BuildingUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildingUserMapping_AspNetUsers1" Association="Self.FK_BuildingUserMapping_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildingUserMapping_Buildings1" Association="Self.FK_BuildingUserMapping_Buildings1">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -736,6 +1258,26 @@
             <End Role="ListOfModule" EntitySet="ListOfModule" />
             <End Role="PendingModules" EntitySet="PendingModules" />
           </AssociationSet>
+          <AssociationSet Name="FK_Package_PackageDeliveryStatus" Association="Self.FK_Package_PackageDeliveryStatus">
+            <End Role="PackageDeliveryStatus" EntitySet="PackageDeliveryStatus" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_PackageType" Association="Self.FK_Package_PackageType">
+            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Shipment" Association="Self.FK_Package_Shipment">
+            <End Role="Shipment" EntitySet="Shipment" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingCarrier" Association="Self.FK_Package_ShippingCarrier">
+            <End Role="ShippingCarrier" EntitySet="ShippingCarrier" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingService" Association="Self.FK_Package_ShippingService">
+            <End Role="ShippingService" EntitySet="ShippingService" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
           <AssociationSet Name="FK_PendingModuleRequests_Buildings1" Association="Self.FK_PendingModuleRequests_Buildings1">
             <End Role="ListOfModule" EntitySet="ListOfModule" />
             <End Role="Module" EntitySet="Module" />
@@ -764,8 +1306,24 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Role" EntitySet="Role" />
           </AssociationSet>
+          <AssociationSet Name="FK_Shipment_Apartment" Association="Self.FK_Shipment_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_AspNETUser" Association="Self.FK_Shipment_AspNETUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_Buildings" Association="Self.FK_Shipment_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tenant_Apartment" Association="Self.FK_Tenant_Apartment">
             <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Tenant" EntitySet="Tenant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tenant_AspNetUsers" Association="Self.FK_Tenant_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Tenant" EntitySet="Tenant" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_AspNetUsers" Association="Self.FK_UserActivityLog_AspNetUsers">
@@ -777,10 +1335,21 @@
             <End Role="UserActivityLog" EntitySet="UserActivityLog" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PointerSecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NewPointerdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ActiveManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Manager" Relationship="Self.FK_ActiveManager_To_Manager" FromRole="ActiveManager" ToRole="Manager" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_ActiveManager_ToBuilding" FromRole="ActiveManager" ToRole="Buildings" />
+        </EntityType>
         <EntityType Name="Apartment">
           <Key>
             <PropertyRef Name="ID" />
@@ -790,7 +1359,131 @@
           <Property Name="FloorNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BuildingID" Type="Int32" />
           <NavigationProperty Name="Buildings" Relationship="Self.FK_Apartment_Buildings" FromRole="Apartment" ToRole="Buildings" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK_Shipment_Apartment" FromRole="Apartment" ToRole="Shipment" />
           <NavigationProperty Name="Tenant" Relationship="Self.FK_Tenant_Apartment" FromRole="Apartment" ToRole="Tenant" />
+        </EntityType>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoweredApplicationName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="Self.FK__aspnet_Me__Appli__2D27B809" FromRole="aspnet_Applications" ToRole="aspnet_Membership" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="Self.FK__aspnet_Pa__Appli__66603565" FromRole="aspnet_Applications" ToRole="aspnet_Paths" />
+          <NavigationProperty Name="aspnet_Roles" Relationship="Self.FK__aspnet_Ro__Appli__4F7CD00D" FromRole="aspnet_Applications" ToRole="aspnet_Roles" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Us__Appli__1920BF5C" FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobilePIN" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="LoweredEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Me__Appli__2D27B809" FromRole="aspnet_Membership" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Me__UserI__2E1BDC42" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Paths">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="PathId" Type="Guid" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoweredPath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Pa__Appli__66603565" FromRole="aspnet_Paths" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_PersonalizationAllUsers" Relationship="Self.FK__aspnet_Pe__PathI__6E01572D" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationAllUsers" />
+          <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Self.FK__aspnet_Pe__PathI__73BA3083" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationPerUser" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationAllUsers">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="PathId" Type="Guid" Nullable="false" />
+          <Property Name="PageSettings" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="Self.FK__aspnet_Pe__PathI__6E01572D" FromRole="aspnet_PersonalizationAllUsers" ToRole="aspnet_Paths" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationPerUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PathId" Type="Guid" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="PageSettings" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="Self.FK__aspnet_Pe__PathI__73BA3083" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Paths" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Pe__UserI__74AE54BC" FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyNames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyValuesString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyValuesBinary" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Self.FK__aspnet_Pr__UserI__440B1D61" FromRole="aspnet_Profile" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoweredRoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Ro__Appli__4F7CD00D" FromRole="aspnet_Roles" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Users" Relationship="Self.aspnet_UsersInRoles" FromRole="aspnet_Roles" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Name="Feature" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompatibleSchemaVersion" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsCurrentVersion" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoweredUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileAlias" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="Self.FK__aspnet_Us__Appli__1920BF5C" FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="Self.FK__aspnet_Me__UserI__2E1BDC42" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
+          <NavigationProperty Name="aspnet_PersonalizationPerUser" Relationship="Self.FK__aspnet_Pe__UserI__74AE54BC" FromRole="aspnet_Users" ToRole="aspnet_PersonalizationPerUser" />
+          <NavigationProperty Name="aspnet_Profile" Relationship="Self.FK__aspnet_Pr__UserI__440B1D61" FromRole="aspnet_Users" ToRole="aspnet_Profile" />
+          <NavigationProperty Name="aspnet_Roles" Relationship="Self.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
         </EntityType>
         <EntityType Name="aspnet_WebEvent_Events">
           <Key>
@@ -818,9 +1511,9 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PermissionMapRole" Relationship="Self.FK_PermissionMapRole_ASPNETRole" FromRole="AspNetRoles" ToRole="PermissionMapRole" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Role_AspNetRoles" FromRole="AspNetRoles" ToRole="Role" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-          <NavigationProperty Name="PermissionMapRole" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" FromRole="AspNetRoles" ToRole="PermissionMapRole" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -861,11 +1554,14 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="BuildingUserMapping" Relationship="Self.FK_BuildingUserMapping_AspNetUsers1" FromRole="AspNetUsers" ToRole="BuildingUserMapping" />
           <NavigationProperty Name="Manager" Relationship="Self.FK_Manager_AspNetUsers" FromRole="AspNetUsers" ToRole="Manager" />
+          <NavigationProperty Name="PermissionMapRole" Relationship="Self.FK_PermissionMapRole_ASPNETUSERS" FromRole="AspNetUsers" ToRole="PermissionMapRole" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Role_AspNetUsers" FromRole="AspNetUsers" ToRole="Role" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK_Shipment_AspNETUser" FromRole="AspNetUsers" ToRole="Shipment" />
+          <NavigationProperty Name="Tenant" Relationship="Self.FK_Tenant_AspNetUsers" FromRole="AspNetUsers" ToRole="Tenant" />
           <NavigationProperty Name="UserActivityLog" Relationship="Self.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUsers" ToRole="UserActivityLog" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="PermissionMapRole" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" FromRole="AspNetUsers" ToRole="PermissionMapRole" />
         </EntityType>
         <EntityType Name="Buildings">
           <Key>
@@ -882,14 +1578,40 @@
           <Property Name="BuildingPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ManagersID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActiveManager" Relationship="Self.FK_ActiveManager_ToBuilding" FromRole="Buildings" ToRole="ActiveManager" />
           <NavigationProperty Name="Apartment" Relationship="Self.FK_Apartment_Buildings" FromRole="Buildings" ToRole="Apartment" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Buildings_Clients" FromRole="Buildings" ToRole="Clients" />
           <NavigationProperty Name="Manager1" Relationship="Self.FK_Buildings_Manager" FromRole="Buildings" ToRole="Manager" />
           <NavigationProperty Name="PendingModules" Relationship="Self.FK_Buildings_PendingModules" FromRole="Buildings" ToRole="PendingModules" />
+          <NavigationProperty Name="BuildingUser" Relationship="Self.FK_BuildingUSer" FromRole="Buildings" ToRole="BuildingUser" />
+          <NavigationProperty Name="BuildingUserMapping" Relationship="Self.FK_BuildingUserMapping_Buildings1" FromRole="Buildings" ToRole="BuildingUserMapping" />
           <NavigationProperty Name="ManagerBuilding" Relationship="Self.FK_ManagerBuilding_Buildings" FromRole="Buildings" ToRole="ManagerBuilding" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK_Shipment_Buildings" FromRole="Buildings" ToRole="Shipment" />
           <NavigationProperty Name="UserActivityLog" Relationship="Self.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
-          <NavigationProperty Name="ActiveManager" Relationship="PointerSecurityModel.FK_ActiveManager_ToBuilding" FromRole="Buildings" ToRole="ActiveManager" />
-          <NavigationProperty Name="BuildingUser" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="Buildings" ToRole="BuildingUser" />
+        </EntityType>
+        <EntityType Name="BuildingUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="225" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="225" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_BuildingUSer" FromRole="BuildingUser" ToRole="Buildings" />
+        </EntityType>
+        <EntityType Name="BuildingUserMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_BuildingUserMapping_AspNetUsers1" FromRole="BuildingUserMapping" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_BuildingUserMapping_Buildings1" FromRole="BuildingUserMapping" ToRole="Buildings" />
         </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -960,11 +1682,11 @@
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClientID" Type="Int32" />
+          <NavigationProperty Name="ActiveManager" Relationship="Self.FK_ActiveManager_To_Manager" FromRole="Manager" ToRole="ActiveManager" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Manager_AspNetUsers" FromRole="Manager" ToRole="AspNetUsers" />
           <NavigationProperty Name="Buildings" Relationship="Self.FK_Buildings_Manager" FromRole="Manager" ToRole="Buildings" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Manager_Clients" FromRole="Manager" ToRole="Clients" />
           <NavigationProperty Name="ManagerBuilding" Relationship="Self.FK_ManagerBuilding_Manager" FromRole="Manager" ToRole="ManagerBuilding" />
-          <NavigationProperty Name="ActiveManager" Relationship="PointerSecurityModel.FK_ActiveManager_To_Manager" FromRole="Manager" ToRole="ActiveManager" />
         </EntityType>
         <EntityType Name="ManagerBuilding">
           <Key>
@@ -997,6 +1719,41 @@
           <NavigationProperty Name="ListOfModule1" Relationship="Self.FK_PendingModuleRequests_Buildings1" FromRole="Module" ToRole="ListOfModule" />
           <NavigationProperty Name="ListOfModule2" Relationship="Self.FK_PendingModuleRequests1_Buildings1" FromRole="Module" ToRole="ListOfModule" />
         </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="TrackingNumber" />
+          </Key>
+          <Property Name="TrackingNumber" Type="String" MaxLength="225" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShippingServiceID" Type="Int32" Nullable="false" />
+          <Property Name="ShippingCarrierID" Type="Int32" Nullable="false" />
+          <Property Name="PakageTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeliverTime" Type="DateTime" Precision="3" />
+          <Property Name="ShipmentID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PackageDeliveryStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PackageDeliveryStatus" Relationship="Self.FK_Package_PackageDeliveryStatus" FromRole="Package" ToRole="PackageDeliveryStatus" />
+          <NavigationProperty Name="PackageType" Relationship="Self.FK_Package_PackageType" FromRole="Package" ToRole="PackageType" />
+          <NavigationProperty Name="Shipment" Relationship="Self.FK_Package_Shipment" FromRole="Package" ToRole="Shipment" />
+          <NavigationProperty Name="ShippingCarrier" Relationship="Self.FK_Package_ShippingCarrier" FromRole="Package" ToRole="ShippingCarrier" />
+          <NavigationProperty Name="ShippingService" Relationship="Self.FK_Package_ShippingService" FromRole="Package" ToRole="ShippingService" />
+        </EntityType>
+        <EntityType Name="PackageDeliveryStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_Package_PackageDeliveryStatus" FromRole="PackageDeliveryStatus" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_Package_PackageType" FromRole="PackageType" ToRole="Package" />
+        </EntityType>
         <EntityType Name="PendingModules">
           <Key>
             <PropertyRef Name="ID" />
@@ -1007,6 +1764,16 @@
           <Property Name="ListOfModuleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Buildings" Relationship="Self.FK_Buildings_PendingModules" FromRole="PendingModules" ToRole="Buildings" />
           <NavigationProperty Name="ListOfModule" Relationship="Self.FK_Module_Listofmodule" FromRole="PendingModules" ToRole="ListOfModule" />
+        </EntityType>
+        <EntityType Name="PermissionMapRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_PermissionMapRole_ASPNETRole" FromRole="PermissionMapRole" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_PermissionMapRole_ASPNETUSERS" FromRole="PermissionMapRole" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="ReqType">
           <Key>
@@ -1025,7 +1792,7 @@
           <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="TenantID" Type="Int32" />
+          <Property Name="TenantID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Tenant" Relationship="Self.FK_Request_Tenant" FromRole="Requests" ToRole="Tenant" />
         </EntityType>
         <EntityType Name="Role">
@@ -1037,6 +1804,55 @@
           <Property Name="RoleID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_Role_AspNetRoles" FromRole="Role" ToRole="AspNetRoles" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Role_AspNetUsers" FromRole="Role" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isNewUser" Type="Boolean" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="aptID" Type="Int32" Nullable="false" />
+          <Property Name="BuildingUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Notified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_Shipment_Apartment" FromRole="Shipment" ToRole="Apartment" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Shipment_AspNETUser" FromRole="Shipment" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK_Shipment_Buildings" FromRole="Shipment" ToRole="Buildings" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_Package_Shipment" FromRole="Shipment" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="ShippingCarrier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Services" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_Package_ShippingCarrier" FromRole="ShippingCarrier" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="ShippingService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_Package_ShippingService" FromRole="ShippingService" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="SignalRMessageTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="States">
           <Key>
@@ -1059,17 +1875,16 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="isTemPWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="aptID" Type="Int32" />
-          <Property Name="LogintableID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Apartment" Relationship="Self.FK_Tenant_Apartment" FromRole="Tenant" ToRole="Apartment" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Tenant_AspNetUsers" FromRole="Tenant" ToRole="AspNetUsers" />
           <NavigationProperty Name="Requests" Relationship="Self.FK_Request_Tenant" FromRole="Tenant" ToRole="Requests" />
         </EntityType>
         <EntityType Name="User">
@@ -1096,6 +1911,30 @@
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_UserActivityLog_AspNetUsers" FromRole="UserActivityLog" ToRole="AspNetUsers" />
           <NavigationProperty Name="Buildings" Relationship="Self.FK_UserActivityLog_Buildings" FromRole="UserActivityLog" ToRole="Buildings" />
         </EntityType>
+        <Association Name="FK_ActiveManager_To_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+          <End Role="ActiveManager" Type="Self.ActiveManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActiveManager">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveManager_ToBuilding">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="ActiveManager" Type="Self.ActiveManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActiveManager">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Apartment_Buildings">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="0..1" />
           <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
@@ -1108,6 +1947,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Shipment_Apartment">
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="aptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tenant_Apartment">
           <End Role="Apartment" Type="Self.Apartment" Multiplicity="0..1" />
           <End Role="Tenant" Type="Self.Tenant" Multiplicity="*" />
@@ -1117,6 +1968,126 @@
             </Principal>
             <Dependent Role="Tenant">
               <PropertyRef Name="aptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__Appli__2D27B809">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pa__Appli__66603565">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Paths">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Ro__Appli__4F7CD00D">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__1920BF5C">
+          <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__UserI__2E1BDC42">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__6E01572D">
+          <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
+          <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationAllUsers">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__73BA3083">
+          <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__UserI__74AE54BC">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pr__UserI__440B1D61">
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionMapRole_ASPNETRole">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="PermissionMapRole" Type="Self.PermissionMapRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionMapRole">
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1160,6 +2131,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BuildingUserMapping_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="BuildingUserMapping" Type="Self.BuildingUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BuildingUserMapping">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Manager_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
@@ -1172,6 +2155,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PermissionMapRole_ASPNETUSERS">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="PermissionMapRole" Type="Self.PermissionMapRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PermissionMapRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Role_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Role" Type="Self.Role" Multiplicity="*" />
@@ -1181,6 +2176,30 @@
             </Principal>
             <Dependent Role="Role">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_AspNETUser">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="BuildingUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tenant_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Tenant" Type="Self.Tenant" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tenant">
+              <PropertyRef Name="ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1232,6 +2251,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BuildingUSer">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="BuildingUser" Type="Self.BuildingUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuildingUser">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BuildingUserMapping_Buildings1">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="BuildingUserMapping" Type="Self.BuildingUserMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BuildingUserMapping">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ManagerBuilding_Buildings">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
           <End Role="ManagerBuilding" Type="Self.ManagerBuilding" Multiplicity="*" />
@@ -1240,6 +2283,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="ManagerBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Shipment">
               <PropertyRef Name="BuildingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1328,8 +2383,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Package_PackageDeliveryStatus">
+          <End Role="PackageDeliveryStatus" Type="Self.PackageDeliveryStatus" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageDeliveryStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PackageDeliveryStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_PackageType">
+          <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PakageTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Shipment">
+          <End Role="Shipment" Type="Self.Shipment" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipment">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShipmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_ShippingCarrier">
+          <End Role="ShippingCarrier" Type="Self.ShippingCarrier" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingCarrier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingCarrierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_ShippingService">
+          <End Role="ShippingService" Type="Self.ShippingService" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingService">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ShippingServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Request_Tenant">
-          <End Role="Tenant" Type="Self.Tenant" Multiplicity="0..1" />
+          <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tenant">
@@ -1340,18 +2455,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="aspnet_UsersInRoles">
+          <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
+          <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="pointersecurityEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NewPointerdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActiveManager" EntityType="Self.ActiveManager" />
           <EntitySet Name="Apartment" EntityType="Self.Apartment" />
+          <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" />
+          <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" />
+          <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Self.aspnet_PersonalizationAllUsers" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Self.aspnet_PersonalizationPerUser" />
+          <EntitySet Name="aspnet_Profile" EntityType="Self.aspnet_Profile" />
+          <EntitySet Name="aspnet_Roles" EntityType="Self.aspnet_Roles" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" />
+          <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" />
           <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="Buildings" EntityType="Self.Buildings" />
+          <EntitySet Name="BuildingUser" EntityType="Self.BuildingUser" />
+          <EntitySet Name="BuildingUserMapping" EntityType="Self.BuildingUserMapping" />
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" />
@@ -1361,22 +2492,82 @@
           <EntitySet Name="ManagerBuilding" EntityType="Self.ManagerBuilding" />
           <EntitySet Name="MasterProfileFields" EntityType="Self.MasterProfileFields" />
           <EntitySet Name="Module" EntityType="Self.Module" />
+          <EntitySet Name="Package" EntityType="Self.Package" />
+          <EntitySet Name="PackageDeliveryStatus" EntityType="Self.PackageDeliveryStatus" />
+          <EntitySet Name="PackageType" EntityType="Self.PackageType" />
           <EntitySet Name="PendingModules" EntityType="Self.PendingModules" />
+          <EntitySet Name="PermissionMapRole" EntityType="Self.PermissionMapRole" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" />
           <EntitySet Name="Requests" EntityType="Self.Requests" />
           <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Shipment" EntityType="Self.Shipment" />
+          <EntitySet Name="ShippingCarrier" EntityType="Self.ShippingCarrier" />
+          <EntitySet Name="ShippingService" EntityType="Self.ShippingService" />
+          <EntitySet Name="SignalRMessageTable" EntityType="Self.SignalRMessageTable" />
           <EntitySet Name="States" EntityType="Self.States" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tenant" EntityType="Self.Tenant" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="UserActivityLog" EntityType="Self.UserActivityLog" />
+          <AssociationSet Name="FK_ActiveManager_To_Manager" Association="Self.FK_ActiveManager_To_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="ActiveManager" EntitySet="ActiveManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveManager_ToBuilding" Association="Self.FK_ActiveManager_ToBuilding">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="ActiveManager" EntitySet="ActiveManager" />
+          </AssociationSet>
           <AssociationSet Name="FK_Apartment_Buildings" Association="Self.FK_Apartment_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Apartment" EntitySet="Apartment" />
           </AssociationSet>
+          <AssociationSet Name="FK_Shipment_Apartment" Association="Self.FK_Shipment_Apartment">
+            <End Role="Apartment" EntitySet="Apartment" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tenant_Apartment" Association="Self.FK_Tenant_Apartment">
             <End Role="Apartment" EntitySet="Apartment" />
             <End Role="Tenant" EntitySet="Tenant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__Appli__2D27B809" Association="Self.FK__aspnet_Me__Appli__2D27B809">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pa__Appli__66603565" Association="Self.FK__aspnet_Pa__Appli__66603565">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Ro__Appli__4F7CD00D" Association="Self.FK__aspnet_Ro__Appli__4F7CD00D">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__1920BF5C" Association="Self.FK__aspnet_Us__Appli__1920BF5C">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__UserI__2E1BDC42" Association="Self.FK__aspnet_Me__UserI__2E1BDC42">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__6E01572D" Association="Self.FK__aspnet_Pe__PathI__6E01572D">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__73BA3083" Association="Self.FK__aspnet_Pe__PathI__73BA3083">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__UserI__74AE54BC" Association="Self.FK__aspnet_Pe__UserI__74AE54BC">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pr__UserI__440B1D61" Association="Self.FK__aspnet_Pr__UserI__440B1D61">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionMapRole_ASPNETRole" Association="Self.FK_PermissionMapRole_ASPNETRole">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
           </AssociationSet>
           <AssociationSet Name="FK_Role_AspNetRoles" Association="Self.FK_Role_AspNetRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1390,13 +2581,29 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_BuildingUserMapping_AspNetUsers1" Association="Self.FK_BuildingUserMapping_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
+          </AssociationSet>
           <AssociationSet Name="FK_Manager_AspNetUsers" Association="Self.FK_Manager_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Manager" EntitySet="Manager" />
           </AssociationSet>
+          <AssociationSet Name="FK_PermissionMapRole_ASPNETUSERS" Association="Self.FK_PermissionMapRole_ASPNETUSERS">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
+          </AssociationSet>
           <AssociationSet Name="FK_Role_AspNetUsers" Association="Self.FK_Role_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_AspNETUser" Association="Self.FK_Shipment_AspNETUser">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Shipment" EntitySet="Shipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tenant_AspNetUsers" Association="Self.FK_Tenant_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Tenant" EntitySet="Tenant" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_AspNetUsers" Association="Self.FK_UserActivityLog_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1414,9 +2621,21 @@
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="PendingModules" EntitySet="PendingModules" />
           </AssociationSet>
+          <AssociationSet Name="FK_BuildingUSer" Association="Self.FK_BuildingUSer">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="BuildingUser" EntitySet="BuildingUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BuildingUserMapping_Buildings1" Association="Self.FK_BuildingUserMapping_Buildings1">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
+          </AssociationSet>
           <AssociationSet Name="FK_ManagerBuilding_Buildings" Association="Self.FK_ManagerBuilding_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_Buildings" Association="Self.FK_Shipment_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
           <AssociationSet Name="FK_UserActivityLog_Buildings" Association="Self.FK_UserActivityLog_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
@@ -1446,140 +2665,56 @@
             <End Role="Manager" EntitySet="Manager" />
             <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
           </AssociationSet>
+          <AssociationSet Name="FK_Package_PackageDeliveryStatus" Association="Self.FK_Package_PackageDeliveryStatus">
+            <End Role="PackageDeliveryStatus" EntitySet="PackageDeliveryStatus" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_PackageType" Association="Self.FK_Package_PackageType">
+            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Shipment" Association="Self.FK_Package_Shipment">
+            <End Role="Shipment" EntitySet="Shipment" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingCarrier" Association="Self.FK_Package_ShippingCarrier">
+            <End Role="ShippingCarrier" EntitySet="ShippingCarrier" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_ShippingService" Association="Self.FK_Package_ShippingService">
+            <End Role="ShippingService" EntitySet="ShippingService" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
           <AssociationSet Name="FK_Request_Tenant" Association="Self.FK_Request_Tenant">
             <End Role="Tenant" EntitySet="Tenant" />
             <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="aspnet_UsersInRoles" Association="Self.aspnet_UsersInRoles">
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="ActiveManager" EntityType="PointerSecurityModel.ActiveManager" />
-          <AssociationSet Name="FK_ActiveManager_To_Manager" Association="PointerSecurityModel.FK_ActiveManager_To_Manager">
-            <End Role="Manager" EntitySet="Manager" />
-            <End Role="ActiveManager" EntitySet="ActiveManager" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActiveManager_ToBuilding" Association="PointerSecurityModel.FK_ActiveManager_ToBuilding">
-            <End Role="Buildings" EntitySet="Buildings" />
-            <End Role="ActiveManager" EntitySet="ActiveManager" />
-          </AssociationSet>
-          <EntitySet Name="PermissionMapRole" EntityType="PointerSecurityModel.PermissionMapRole" />
-          <AssociationSet Name="FK_PermissionMapRole_ASPNETRole" Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PermissionMapRole_ASPNETUSERS" Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
-          </AssociationSet>
-          <EntitySet Name="BuildingUser" EntityType="PointerSecurityModel.BuildingUser" />
-          <AssociationSet Name="FK_BuildingUSer" Association="PointerSecurityModel.FK_BuildingUSer">
-            <End Role="Buildings" EntitySet="Buildings" />
-            <End Role="BuildingUser" EntitySet="BuildingUser" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="ActiveManager">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ManagerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="BuildingID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Manager" Relationship="PointerSecurityModel.FK_ActiveManager_To_Manager" FromRole="ActiveManager" ToRole="Manager" />
-          <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_ActiveManager_ToBuilding" FromRole="ActiveManager" ToRole="Buildings" />
-        </EntityType>
-        <Association Name="FK_ActiveManager_To_Manager">
-          <End Type="PointerSecurityModel.Manager" Role="Manager" Multiplicity="1" />
-          <End Type="PointerSecurityModel.ActiveManager" Role="ActiveManager" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Manager">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ActiveManager">
-              <PropertyRef Name="ManagerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ActiveManager_ToBuilding">
-          <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
-          <End Type="PointerSecurityModel.ActiveManager" Role="ActiveManager" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Buildings">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ActiveManager">
-              <PropertyRef Name="BuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PermissionMapRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RoleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRoles" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" FromRole="PermissionMapRole" ToRole="AspNetRoles" />
-          <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" FromRole="PermissionMapRole" ToRole="AspNetUsers" />
-        </EntityType>
-        <Association Name="FK_PermissionMapRole_ASPNETRole">
-          <End Type="PointerSecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
-          <End Type="PointerSecurityModel.PermissionMapRole" Role="PermissionMapRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PermissionMapRole">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PermissionMapRole_ASPNETUSERS">
-          <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="PointerSecurityModel.PermissionMapRole" Role="PermissionMapRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PermissionMapRole">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="BuildingUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BuildingID" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="BuildingUser" ToRole="Buildings" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_BuildingUSer">
-          <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
-          <End Type="PointerSecurityModel.BuildingUser" Role="BuildingUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Buildings">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="BuildingUser">
-              <PropertyRef Name="BuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PointerSecurityModelStoreContainer" CdmEntityContainer="pointersecurityEntities">
+        <EntityContainerMapping StorageEntityContainer="NewPointerdbModelStoreContainer" CdmEntityContainer="NewPointerdbEntities">
+          <EntitySetMapping Name="ActiveManager">
+            <EntityTypeMapping TypeName="NewPointerdbModel.ActiveManager">
+              <MappingFragment StoreEntitySet="ActiveManager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Apartment">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Apartment">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Apartment">
               <MappingFragment StoreEntitySet="Apartment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
@@ -1588,8 +2723,119 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Applications">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Applications">
+              <MappingFragment StoreEntitySet="aspnet_Applications">
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Membership">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Membership">
+              <MappingFragment StoreEntitySet="aspnet_Membership">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Paths">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Paths">
+              <MappingFragment StoreEntitySet="aspnet_Paths">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="LoweredPath" ColumnName="LoweredPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_PersonalizationAllUsers">
+              <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+                <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_PersonalizationPerUser">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_PersonalizationPerUser">
+              <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Profile">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Profile">
+              <MappingFragment StoreEntitySet="aspnet_Profile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
+                <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Roles">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Roles">
+              <MappingFragment StoreEntitySet="aspnet_Roles">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_SchemaVersions">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_SchemaVersions">
+              <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+                <ScalarProperty Name="Feature" ColumnName="Feature" />
+                <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+                <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Users">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Users">
+              <MappingFragment StoreEntitySet="aspnet_Users">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+                <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="aspnet_WebEvent_Events">
-            <EntityTypeMapping TypeName="PointerSecurityModel.aspnet_WebEvent_Events">
+            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_WebEvent_Events">
               <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
@@ -1610,7 +2856,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="PointerSecurityModel.AspNetRoles">
+            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1618,7 +2864,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="PointerSecurityModel.AspNetUserClaims">
+            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1628,7 +2874,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="PointerSecurityModel.AspNetUserLogins">
+            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -1637,7 +2883,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="PointerSecurityModel.AspNetUsers">
+            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1655,7 +2901,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Buildings">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Buildings">
               <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
@@ -1671,8 +2917,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BuildingUser">
+            <EntityTypeMapping TypeName="NewPointerdbModel.BuildingUser">
+              <MappingFragment StoreEntitySet="BuildingUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BuildingUserMapping">
+            <EntityTypeMapping TypeName="NewPointerdbModel.BuildingUserMapping">
+              <MappingFragment StoreEntitySet="BuildingUserMapping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="PointerSecurityModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="NewPointerdbModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="C__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -1682,7 +2951,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Clients">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
@@ -1698,7 +2967,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GanttLinkId">
-            <EntityTypeMapping TypeName="PointerSecurityModel.GanttLinkId">
+            <EntityTypeMapping TypeName="NewPointerdbModel.GanttLinkId">
               <MappingFragment StoreEntitySet="GanttLinkId">
                 <ScalarProperty Name="GantLinkID" ColumnName="GantLinkID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -1708,7 +2977,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GanttTask">
-            <EntityTypeMapping TypeName="PointerSecurityModel.GanttTask">
+            <EntityTypeMapping TypeName="NewPointerdbModel.GanttTask">
               <MappingFragment StoreEntitySet="GanttTask">
                 <ScalarProperty Name="GantTaskID" ColumnName="GantTaskID" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
@@ -1722,7 +2991,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ListOfModule">
-            <EntityTypeMapping TypeName="PointerSecurityModel.ListOfModule">
+            <EntityTypeMapping TypeName="NewPointerdbModel.ListOfModule">
               <MappingFragment StoreEntitySet="ListOfModule">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
@@ -1730,7 +2999,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manager">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Manager">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Manager">
               <MappingFragment StoreEntitySet="Manager">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1741,7 +3010,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ManagerBuilding">
-            <EntityTypeMapping TypeName="PointerSecurityModel.ManagerBuilding">
+            <EntityTypeMapping TypeName="NewPointerdbModel.ManagerBuilding">
               <MappingFragment StoreEntitySet="ManagerBuilding">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -1751,7 +3020,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MasterProfileFields">
-            <EntityTypeMapping TypeName="PointerSecurityModel.MasterProfileFields">
+            <EntityTypeMapping TypeName="NewPointerdbModel.MasterProfileFields">
               <MappingFragment StoreEntitySet="MasterProfileFields">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Label" ColumnName="Label" />
@@ -1760,7 +3029,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Module">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Module">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Module">
               <MappingFragment StoreEntitySet="Module">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -1769,8 +3038,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Package">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+                <ScalarProperty Name="ShippingServiceID" ColumnName="ShippingServiceID" />
+                <ScalarProperty Name="ShippingCarrierID" ColumnName="ShippingCarrierID" />
+                <ScalarProperty Name="PakageTypeID" ColumnName="PakageTypeID" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="DeliverTime" ColumnName="DeliverTime" />
+                <ScalarProperty Name="ShipmentID" ColumnName="ShipmentID" />
+                <ScalarProperty Name="PackageDeliveryStatusID" ColumnName="PackageDeliveryStatusID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageDeliveryStatus">
+            <EntityTypeMapping TypeName="NewPointerdbModel.PackageDeliveryStatus">
+              <MappingFragment StoreEntitySet="PackageDeliveryStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageType">
+            <EntityTypeMapping TypeName="NewPointerdbModel.PackageType">
+              <MappingFragment StoreEntitySet="PackageType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PackageType1" ColumnName="PackageType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PendingModules">
-            <EntityTypeMapping TypeName="PointerSecurityModel.PendingModules">
+            <EntityTypeMapping TypeName="NewPointerdbModel.PendingModules">
               <MappingFragment StoreEntitySet="PendingModules">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -1779,8 +3079,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PermissionMapRole">
+            <EntityTypeMapping TypeName="NewPointerdbModel.PermissionMapRole">
+              <MappingFragment StoreEntitySet="PermissionMapRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ReqType">
-            <EntityTypeMapping TypeName="PointerSecurityModel.ReqType">
+            <EntityTypeMapping TypeName="NewPointerdbModel.ReqType">
               <MappingFragment StoreEntitySet="ReqType">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ReqType1" ColumnName="ReqType1" />
@@ -1788,7 +3097,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Requests">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Requests">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Requests">
               <MappingFragment StoreEntitySet="Requests">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RequestType" ColumnName="RequestType" />
@@ -1801,7 +3110,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Role">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -1809,8 +3118,55 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Shipment">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Shipment">
+              <MappingFragment StoreEntitySet="Shipment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="isNewUser" ColumnName="isNewUser" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="aptID" ColumnName="aptID" />
+                <ScalarProperty Name="BuildingUserID" ColumnName="BuildingUserID" />
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+                <ScalarProperty Name="Notified" ColumnName="Notified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingCarrier">
+            <EntityTypeMapping TypeName="NewPointerdbModel.ShippingCarrier">
+              <MappingFragment StoreEntitySet="ShippingCarrier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Services" ColumnName="Services" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingService">
+            <EntityTypeMapping TypeName="NewPointerdbModel.ShippingService">
+              <MappingFragment StoreEntitySet="ShippingService">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SignalRMessageTable">
+            <EntityTypeMapping TypeName="NewPointerdbModel.SignalRMessageTable">
+              <MappingFragment StoreEntitySet="SignalRMessageTable">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="PointerSecurityModel.States">
+            <EntityTypeMapping TypeName="NewPointerdbModel.States">
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="State" ColumnName="State" />
@@ -1818,7 +3174,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PointerSecurityModel.sysdiagrams">
+            <EntityTypeMapping TypeName="NewPointerdbModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1829,23 +3185,21 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tenant">
-            <EntityTypeMapping TypeName="PointerSecurityModel.Tenant">
+            <EntityTypeMapping TypeName="NewPointerdbModel.Tenant">
               <MappingFragment StoreEntitySet="Tenant">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="isTemPWord" ColumnName="isTemPWord" />
                 <ScalarProperty Name="aptID" ColumnName="aptID" />
-                <ScalarProperty Name="LogintableID" ColumnName="LogintableID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="PointerSecurityModel.User">
+            <EntityTypeMapping TypeName="NewPointerdbModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -1857,7 +3211,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserActivityLog">
-            <EntityTypeMapping TypeName="PointerSecurityModel.UserActivityLog">
+            <EntityTypeMapping TypeName="NewPointerdbModel.UserActivityLog">
               <MappingFragment StoreEntitySet="UserActivityLog">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -1868,7 +3222,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="PointerSecurityModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="NewPointerdbModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+            <EndProperty Name="aspnet_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="aspnet_Roles_RoleId" />
+            </EndProperty>
+            <EndProperty Name="aspnet_Users">
+              <ScalarProperty Name="UserId" ColumnName="aspnet_Users_UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="NewPointerdbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
@@ -1876,38 +3238,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="ActiveManager">
-            <EntityTypeMapping TypeName="PointerSecurityModel.ActiveManager">
-              <MappingFragment StoreEntitySet="ActiveManager">
-                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
-                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PermissionMapRole">
-            <EntityTypeMapping TypeName="PointerSecurityModel.PermissionMapRole">
-              <MappingFragment StoreEntitySet="PermissionMapRole">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BuildingUser">
-            <EntityTypeMapping TypeName="PointerSecurityModel.BuildingUser">
-              <MappingFragment StoreEntitySet="BuildingUser">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 using SecurityMonitor.Models;
 using SecurityMonitor.Workes;
 
@@ -14,7 +14,7 @@ namespace SecurityMonitor.Controllers
     //[Authorize(Roles = "Admin")]
     public class ModuleController : Controller
     {
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
 
 
 

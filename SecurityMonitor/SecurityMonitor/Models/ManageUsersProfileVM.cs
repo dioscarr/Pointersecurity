@@ -7,13 +7,13 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 
 namespace SecurityMonitor.Models
 {
     public class ManageUsersProfileVM
     {
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
         ApplicationDbContext context = new ApplicationDbContext();
         public int ID { get; set; }
         public List<string> RoleNames { get; set; }

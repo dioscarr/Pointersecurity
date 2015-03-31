@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 
 using Microsoft.AspNet.Identity;
 using PagedList;
@@ -32,7 +32,7 @@ namespace SecurityMonitor.Controllers
     public class BuildingController : Controller
     {
         //DB context
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
 
         
         //shared_layout

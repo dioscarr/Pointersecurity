@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 
 namespace SecurityMonitor.Workes
 {
     public class TenantWorker
     {
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
         public List<Tenant> TenantsOnApartment(int AptID)
         {
             try

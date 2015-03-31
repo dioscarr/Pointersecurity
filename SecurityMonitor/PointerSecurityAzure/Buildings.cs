@@ -16,12 +16,14 @@ namespace PointerSecurityAzure
     {
         public Buildings()
         {
+            this.ActiveManager = new HashSet<ActiveManager>();
             this.Apartment = new HashSet<Apartment>();
             this.PendingModules = new HashSet<PendingModules>();
-            this.ManagerBuilding = new HashSet<ManagerBuilding>();
-            this.UserActivityLog = new HashSet<UserActivityLog>();
-            this.ActiveManager = new HashSet<ActiveManager>();
             this.BuildingUser = new HashSet<BuildingUser>();
+            this.BuildingUserMapping = new HashSet<BuildingUserMapping>();
+            this.ManagerBuilding = new HashSet<ManagerBuilding>();
+            this.Shipment = new HashSet<Shipment>();
+            this.UserActivityLog = new HashSet<UserActivityLog>();
         }
     
         public int ID { get; set; }
@@ -36,13 +38,15 @@ namespace PointerSecurityAzure
         public string Manager { get; set; }
         public string ManagersID { get; set; }
     
+        public virtual ICollection<ActiveManager> ActiveManager { get; set; }
         public virtual ICollection<Apartment> Apartment { get; set; }
         public virtual Clients Clients { get; set; }
         public virtual Manager Manager1 { get; set; }
         public virtual ICollection<PendingModules> PendingModules { get; set; }
-        public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
-        public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
-        public virtual ICollection<ActiveManager> ActiveManager { get; set; }
         public virtual ICollection<BuildingUser> BuildingUser { get; set; }
+        public virtual ICollection<BuildingUserMapping> BuildingUserMapping { get; set; }
+        public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
+        public virtual ICollection<Shipment> Shipment { get; set; }
+        public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
     }
 }

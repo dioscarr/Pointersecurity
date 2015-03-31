@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 using SecurityMonitor.Models;
 using System.Net.Http;
 using System.Net;
@@ -16,7 +16,7 @@ namespace SecurityMonitor.Controllers
        [Authorize(Roles = "Admin")]
     public class DashBoardController : Controller
     {
-        PointerSecurityEntities db = new PointerSecurityEntities();
+        NewPointerdbEntities db = new NewPointerdbEntities();
         // GET: DashBoard
         public ActionResult Index()
         {

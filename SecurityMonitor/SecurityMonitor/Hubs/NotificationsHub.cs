@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
-using PointerSecurityDataLayer;
+using PointerSecurityAzure;
 using SecurityMonitor.Workes;
 
 namespace SecurityMonitor.Controllers
@@ -16,7 +16,7 @@ namespace SecurityMonitor.Controllers
 
         public void SendNotification(string author, string message)
         {
-            PointerSecurityEntities db = new PointerSecurityEntities();
+            NewPointerdbEntities db = new NewPointerdbEntities();
             SignalRMessageTable OBJM = new SignalRMessageTable()
             {
                  Name=author,
