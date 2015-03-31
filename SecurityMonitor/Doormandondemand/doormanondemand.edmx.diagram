@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc9900fb44084f79957ba78ac995152e" Name="Diagram1">
+        <EntityTypeShape EntityType="PointerdbModel.ActiveManager" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Apartment" Width="1.5" PointX="15.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetUsers" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Buildings" Width="1.5" PointX="13.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.BuildingUser" Width="1.5" PointX="15.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.BuildingUserMapping" Width="1.5" PointX="8.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Clients" Width="1.5" PointX="6" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.GanttLinkId" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.GanttTask" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.ListOfModule" Width="1.5" PointX="13.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Manager" Width="1.5" PointX="8.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.ManagerBuilding" Width="1.5" PointX="18.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.MasterProfileFields" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Module" Width="1.5" PointX="15.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Package" Width="1.5" PointX="23.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.PackageDeliveryStatus" Width="1.5" PointX="21" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.PackageType" Width="1.5" PointX="21" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.PendingModules" Width="1.5" PointX="15.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.PermissionMapRole" Width="1.5" PointX="8.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.ReqType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Requests" Width="1.5" PointX="23.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Role" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Shipment" Width="1.5" PointX="18" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.ShippingCarrier" Width="1.5" PointX="21" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.ShippingService" Width="1.5" PointX="21" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.SignalRMessageTable" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.States" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.Tenant" Width="1.5" PointX="21" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.User" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PointerdbModel.UserActivityLog" Width="1.5" PointX="15.75" PointY="21.25" IsExpanded="true" />
+        <AssociationConnector Association="PointerdbModel.FK_ActiveManager_To_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_ActiveManager_ToBuilding" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Apartment_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Shipment_Apartment" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Tenant_Apartment" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_PermissionMapRole_ASPNETRole" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Role_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_BuildingUserMapping_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Manager_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_PermissionMapRole_ASPNETUSERS" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Role_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Shipment_AspNETUser" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Tenant_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_UserActivityLog_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Buildings_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Buildings_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Buildings_PendingModules" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_BuildingUSer" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_BuildingUserMapping_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_ManagerBuilding_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Shipment_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_UserActivityLog_Buildings" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Manager_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Module_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Module_Listofmodule" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_PendingModuleRequests_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_PendingModuleRequests1_Buildings1" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_ManagerBuilding_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Package_PackageDeliveryStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Package_PackageType" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Package_Shipment" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Package_ShippingCarrier" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Package_ShippingService" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.FK_Request_Tenant" ManuallyRouted="false" />
+        <AssociationConnector Association="PointerdbModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
