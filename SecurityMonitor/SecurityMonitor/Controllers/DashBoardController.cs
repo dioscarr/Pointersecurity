@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SecurityMonitor.Controllers
 {
-       [Authorize(Roles = "Admin")]
+       //[Authorize(Roles = "Admin")]
     public class DashBoardController : Controller
     {
         PointerdbEntities db = new PointerdbEntities();

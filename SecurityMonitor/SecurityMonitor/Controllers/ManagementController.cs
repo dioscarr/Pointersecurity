@@ -14,7 +14,7 @@ using System.Data.Entity.Validation;
 
 namespace SecurityMonitor.Controllers
 {
-    [Authorize(Roles="Admin")]
+    //[Authorize(Roles="Admin")]
     public class ManagementController : Controller
     {
        PointerdbEntities db = new PointerdbEntities();

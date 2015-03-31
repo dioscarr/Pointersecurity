@@ -8,7 +8,7 @@ using Doormandondemand;
 
 namespace SecurityMonitor.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   // [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         PointerdbEntities db = new PointerdbEntities();
