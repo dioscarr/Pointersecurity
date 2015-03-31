@@ -30,7 +30,7 @@ using System.Text;
 namespace SecurityMonitor.Controllers
 {
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class BuildingController : Controller
     {
         //DB context

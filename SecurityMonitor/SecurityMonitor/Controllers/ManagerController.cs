@@ -14,7 +14,7 @@ using System.Data.Entity;
 
 namespace SecurityMonitor.Controllers
 {
-   //[Authorize(Roles = "Manager")]
+   [Authorize(Roles = "Manager")]
     public class ManagerController : Controller
     {
 
