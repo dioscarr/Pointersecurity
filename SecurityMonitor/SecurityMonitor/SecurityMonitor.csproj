@@ -789,7 +789,6 @@
     <Content Include="Views\Module\Delivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="App_Start\App_Data\" />
     <Folder Include="external\" />
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\generated-sources\annotations\" />
