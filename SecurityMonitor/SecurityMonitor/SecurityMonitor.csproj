@@ -667,7 +667,7 @@
     <Content Include="Scripts\HighChart\themes\grid.js" />
     <Content Include="Scripts\HighChart\themes\sand-signika.js" />
     <Content Include="Scripts\HighChart\themes\skies.js" />
-    <Content Include="App.Config" />
+    <None Include="App.Config" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
@@ -811,9 +811,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PointerSecurityAzure\PointerSecurityAzure.csproj">
-      <Project>{a2044151-dd90-438d-8f1f-bad23d41fd0e}</Project>
-      <Name>PointerSecurityAzure</Name>
+    <ProjectReference Include="..\Doormandondemand\Doormandondemand.csproj">
+      <Project>{29055abb-f27c-4786-9536-c181885bbb54}</Project>
+      <Name>Doormandondemand</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
