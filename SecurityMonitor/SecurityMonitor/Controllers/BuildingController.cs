@@ -32,7 +32,7 @@ namespace SecurityMonitor.Controllers
     public class BuildingController : Controller
     {
         //DB context
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
 
         
         //shared_layout

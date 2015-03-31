@@ -16,7 +16,7 @@ namespace SecurityMonitor.Controllers
 
         public void SendNotification(string author, string message)
         {
-            NewPointerdbEntities db = new NewPointerdbEntities();
+            PointerdbEntities db = new PointerdbEntities();
             SignalRMessageTable OBJM = new SignalRMessageTable()
             {
                  Name=author,

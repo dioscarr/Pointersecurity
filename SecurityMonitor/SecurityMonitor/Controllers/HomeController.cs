@@ -11,7 +11,7 @@ namespace SecurityMonitor.Controllers
     [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         public ActionResult Index()
         {
             return View();

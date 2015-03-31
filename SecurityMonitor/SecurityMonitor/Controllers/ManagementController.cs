@@ -17,7 +17,7 @@ namespace SecurityMonitor.Controllers
     [Authorize(Roles="Admin")]
     public class ManagementController : Controller
     {
-       NewPointerdbEntities db = new NewPointerdbEntities();
+       PointerdbEntities db = new PointerdbEntities();
        public ActionResult Index()
         {
 
@@ -156,7 +156,7 @@ namespace SecurityMonitor.Controllers
        {
           
             ApplicationDbContext context = new ApplicationDbContext();
-            NewPointerdbEntities db = new NewPointerdbEntities();
+            PointerdbEntities db = new PointerdbEntities();
 
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 

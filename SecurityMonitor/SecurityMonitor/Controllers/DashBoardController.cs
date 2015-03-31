@@ -16,7 +16,7 @@ namespace SecurityMonitor.Controllers
        [Authorize(Roles = "Admin")]
     public class DashBoardController : Controller
     {
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         // GET: DashBoard
         public ActionResult Index()
         {

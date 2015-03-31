@@ -13,7 +13,7 @@ namespace SecurityMonitor.Models
 {
     public class ManageUsersProfileVM
     {
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         ApplicationDbContext context = new ApplicationDbContext();
         public int ID { get; set; }
         public List<string> RoleNames { get; set; }

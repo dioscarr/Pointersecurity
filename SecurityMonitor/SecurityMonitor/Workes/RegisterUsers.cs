@@ -16,7 +16,7 @@ namespace SecurityMonitor.Workes
     {
 
         ApplicationDbContext context = new ApplicationDbContext();
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         public static string InserToRole(string RoleName, string UserID)
         {
             string results = InserToRoledb(RoleName, UserID);

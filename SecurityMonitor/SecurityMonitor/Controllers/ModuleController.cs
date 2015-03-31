@@ -14,7 +14,7 @@ namespace SecurityMonitor.Controllers
     //[Authorize(Roles = "Admin")]
     public class ModuleController : Controller
     {
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
 
 
 

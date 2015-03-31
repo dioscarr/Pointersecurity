@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NewPointerdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PointerdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActiveManager">
           <Key>
             <PropertyRef Name="Id" />
@@ -1090,7 +1090,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="NewPointerdbModelStoreContainer">
+        <EntityContainer Name="PointerdbModelStoreContainer">
           <EntitySet Name="ActiveManager" EntityType="Self.ActiveManager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Apartment" EntityType="Self.Apartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
@@ -1339,7 +1339,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NewPointerdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PointerdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ActiveManager">
           <Key>
             <PropertyRef Name="Id" />
@@ -2463,7 +2463,7 @@
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="NewPointerdbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PointerdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ActiveManager" EntityType="Self.ActiveManager" />
           <EntitySet Name="Apartment" EntityType="Self.Apartment" />
           <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" />
@@ -2703,9 +2703,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NewPointerdbModelStoreContainer" CdmEntityContainer="NewPointerdbEntities">
+        <EntityContainerMapping StorageEntityContainer="PointerdbModelStoreContainer" CdmEntityContainer="PointerdbEntities">
           <EntitySetMapping Name="ActiveManager">
-            <EntityTypeMapping TypeName="NewPointerdbModel.ActiveManager">
+            <EntityTypeMapping TypeName="PointerdbModel.ActiveManager">
               <MappingFragment StoreEntitySet="ActiveManager">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
@@ -2714,7 +2714,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Apartment">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Apartment">
+            <EntityTypeMapping TypeName="PointerdbModel.Apartment">
               <MappingFragment StoreEntitySet="Apartment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
@@ -2724,7 +2724,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Applications">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Applications">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_Applications">
               <MappingFragment StoreEntitySet="aspnet_Applications">
                 <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
                 <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
@@ -2734,7 +2734,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Membership">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Membership">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_Membership">
               <MappingFragment StoreEntitySet="aspnet_Membership">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -2761,7 +2761,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Paths">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Paths">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_Paths">
               <MappingFragment StoreEntitySet="aspnet_Paths">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="PathId" ColumnName="PathId" />
@@ -2771,7 +2771,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_PersonalizationAllUsers">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_PersonalizationAllUsers">
               <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
                 <ScalarProperty Name="PathId" ColumnName="PathId" />
                 <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
@@ -2780,7 +2780,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_PersonalizationPerUser">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_PersonalizationPerUser">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_PersonalizationPerUser">
               <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PathId" ColumnName="PathId" />
@@ -2791,7 +2791,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Profile">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Profile">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_Profile">
               <MappingFragment StoreEntitySet="aspnet_Profile">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
@@ -2802,7 +2802,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Roles">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Roles">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_Roles">
               <MappingFragment StoreEntitySet="aspnet_Roles">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -2813,7 +2813,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_SchemaVersions">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_SchemaVersions">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_SchemaVersions">
               <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
                 <ScalarProperty Name="Feature" ColumnName="Feature" />
                 <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
@@ -2822,7 +2822,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_Users">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_Users">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_Users">
               <MappingFragment StoreEntitySet="aspnet_Users">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -2835,7 +2835,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="aspnet_WebEvent_Events">
-            <EntityTypeMapping TypeName="NewPointerdbModel.aspnet_WebEvent_Events">
+            <EntityTypeMapping TypeName="PointerdbModel.aspnet_WebEvent_Events">
               <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
@@ -2856,7 +2856,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetRoles">
+            <EntityTypeMapping TypeName="PointerdbModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -2864,7 +2864,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetUserClaims">
+            <EntityTypeMapping TypeName="PointerdbModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -2874,7 +2874,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetUserLogins">
+            <EntityTypeMapping TypeName="PointerdbModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -2883,7 +2883,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="NewPointerdbModel.AspNetUsers">
+            <EntityTypeMapping TypeName="PointerdbModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -2901,7 +2901,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Buildings">
+            <EntityTypeMapping TypeName="PointerdbModel.Buildings">
               <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
@@ -2918,7 +2918,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BuildingUser">
-            <EntityTypeMapping TypeName="NewPointerdbModel.BuildingUser">
+            <EntityTypeMapping TypeName="PointerdbModel.BuildingUser">
               <MappingFragment StoreEntitySet="BuildingUser">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -2932,7 +2932,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BuildingUserMapping">
-            <EntityTypeMapping TypeName="NewPointerdbModel.BuildingUserMapping">
+            <EntityTypeMapping TypeName="PointerdbModel.BuildingUserMapping">
               <MappingFragment StoreEntitySet="BuildingUserMapping">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -2941,7 +2941,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="NewPointerdbModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="PointerdbModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="C__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -2951,7 +2951,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Clients">
+            <EntityTypeMapping TypeName="PointerdbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
@@ -2967,7 +2967,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GanttLinkId">
-            <EntityTypeMapping TypeName="NewPointerdbModel.GanttLinkId">
+            <EntityTypeMapping TypeName="PointerdbModel.GanttLinkId">
               <MappingFragment StoreEntitySet="GanttLinkId">
                 <ScalarProperty Name="GantLinkID" ColumnName="GantLinkID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -2977,7 +2977,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GanttTask">
-            <EntityTypeMapping TypeName="NewPointerdbModel.GanttTask">
+            <EntityTypeMapping TypeName="PointerdbModel.GanttTask">
               <MappingFragment StoreEntitySet="GanttTask">
                 <ScalarProperty Name="GantTaskID" ColumnName="GantTaskID" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
@@ -2991,7 +2991,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ListOfModule">
-            <EntityTypeMapping TypeName="NewPointerdbModel.ListOfModule">
+            <EntityTypeMapping TypeName="PointerdbModel.ListOfModule">
               <MappingFragment StoreEntitySet="ListOfModule">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
@@ -2999,7 +2999,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manager">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Manager">
+            <EntityTypeMapping TypeName="PointerdbModel.Manager">
               <MappingFragment StoreEntitySet="Manager">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -3010,7 +3010,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ManagerBuilding">
-            <EntityTypeMapping TypeName="NewPointerdbModel.ManagerBuilding">
+            <EntityTypeMapping TypeName="PointerdbModel.ManagerBuilding">
               <MappingFragment StoreEntitySet="ManagerBuilding">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -3020,7 +3020,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MasterProfileFields">
-            <EntityTypeMapping TypeName="NewPointerdbModel.MasterProfileFields">
+            <EntityTypeMapping TypeName="PointerdbModel.MasterProfileFields">
               <MappingFragment StoreEntitySet="MasterProfileFields">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Label" ColumnName="Label" />
@@ -3029,7 +3029,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Module">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Module">
+            <EntityTypeMapping TypeName="PointerdbModel.Module">
               <MappingFragment StoreEntitySet="Module">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -3039,7 +3039,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Package">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Package">
+            <EntityTypeMapping TypeName="PointerdbModel.Package">
               <MappingFragment StoreEntitySet="Package">
                 <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
                 <ScalarProperty Name="ShippingServiceID" ColumnName="ShippingServiceID" />
@@ -3054,7 +3054,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PackageDeliveryStatus">
-            <EntityTypeMapping TypeName="NewPointerdbModel.PackageDeliveryStatus">
+            <EntityTypeMapping TypeName="PointerdbModel.PackageDeliveryStatus">
               <MappingFragment StoreEntitySet="PackageDeliveryStatus">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -3062,7 +3062,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PackageType">
-            <EntityTypeMapping TypeName="NewPointerdbModel.PackageType">
+            <EntityTypeMapping TypeName="PointerdbModel.PackageType">
               <MappingFragment StoreEntitySet="PackageType">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PackageType1" ColumnName="PackageType" />
@@ -3070,7 +3070,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PendingModules">
-            <EntityTypeMapping TypeName="NewPointerdbModel.PendingModules">
+            <EntityTypeMapping TypeName="PointerdbModel.PendingModules">
               <MappingFragment StoreEntitySet="PendingModules">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
@@ -3080,7 +3080,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PermissionMapRole">
-            <EntityTypeMapping TypeName="NewPointerdbModel.PermissionMapRole">
+            <EntityTypeMapping TypeName="PointerdbModel.PermissionMapRole">
               <MappingFragment StoreEntitySet="PermissionMapRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3089,7 +3089,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReqType">
-            <EntityTypeMapping TypeName="NewPointerdbModel.ReqType">
+            <EntityTypeMapping TypeName="PointerdbModel.ReqType">
               <MappingFragment StoreEntitySet="ReqType">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ReqType1" ColumnName="ReqType1" />
@@ -3097,7 +3097,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Requests">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Requests">
+            <EntityTypeMapping TypeName="PointerdbModel.Requests">
               <MappingFragment StoreEntitySet="Requests">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RequestType" ColumnName="RequestType" />
@@ -3110,7 +3110,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Role">
+            <EntityTypeMapping TypeName="PointerdbModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3119,7 +3119,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shipment">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Shipment">
+            <EntityTypeMapping TypeName="PointerdbModel.Shipment">
               <MappingFragment StoreEntitySet="Shipment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -3141,7 +3141,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShippingCarrier">
-            <EntityTypeMapping TypeName="NewPointerdbModel.ShippingCarrier">
+            <EntityTypeMapping TypeName="PointerdbModel.ShippingCarrier">
               <MappingFragment StoreEntitySet="ShippingCarrier">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Services" ColumnName="Services" />
@@ -3149,7 +3149,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShippingService">
-            <EntityTypeMapping TypeName="NewPointerdbModel.ShippingService">
+            <EntityTypeMapping TypeName="PointerdbModel.ShippingService">
               <MappingFragment StoreEntitySet="ShippingService">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
@@ -3157,7 +3157,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SignalRMessageTable">
-            <EntityTypeMapping TypeName="NewPointerdbModel.SignalRMessageTable">
+            <EntityTypeMapping TypeName="PointerdbModel.SignalRMessageTable">
               <MappingFragment StoreEntitySet="SignalRMessageTable">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="message" ColumnName="message" />
@@ -3166,7 +3166,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="NewPointerdbModel.States">
+            <EntityTypeMapping TypeName="PointerdbModel.States">
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="State" ColumnName="State" />
@@ -3174,7 +3174,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="NewPointerdbModel.sysdiagrams">
+            <EntityTypeMapping TypeName="PointerdbModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -3185,7 +3185,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tenant">
-            <EntityTypeMapping TypeName="NewPointerdbModel.Tenant">
+            <EntityTypeMapping TypeName="PointerdbModel.Tenant">
               <MappingFragment StoreEntitySet="Tenant">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -3199,7 +3199,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="NewPointerdbModel.User">
+            <EntityTypeMapping TypeName="PointerdbModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -3211,7 +3211,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserActivityLog">
-            <EntityTypeMapping TypeName="NewPointerdbModel.UserActivityLog">
+            <EntityTypeMapping TypeName="PointerdbModel.UserActivityLog">
               <MappingFragment StoreEntitySet="UserActivityLog">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3222,7 +3222,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="NewPointerdbModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+          <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="PointerdbModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
             <EndProperty Name="aspnet_Roles">
               <ScalarProperty Name="RoleId" ColumnName="aspnet_Roles_RoleId" />
             </EndProperty>
@@ -3230,7 +3230,7 @@
               <ScalarProperty Name="UserId" ColumnName="aspnet_Users_UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="NewPointerdbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="PointerdbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>

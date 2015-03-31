@@ -49,177 +49,177 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveManager.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Apartment.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetRoles.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserClaims.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserLogins.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUsers.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Applications.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Membership.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Paths.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_PersonalizationAllUsers.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_PersonalizationPerUser.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Profile.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Roles.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_SchemaVersions.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_Users.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="aspnet_WebEvent_Events.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Buildings.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="BuildingUser.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="BuildingUserMapping.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Clients.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="GanttLinkId.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="GanttTask.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="ListOfModule.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="ManagerBuilding.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="MasterProfileFields.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Module.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="newPointerdb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>newPointerdb.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="newPointerdb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>newPointerdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="newPointerdb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>newPointerdb.edmx</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Package.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="PackageDeliveryStatus.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="PackageType.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="PendingModules.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="PermissionMapRole.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pointerdb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pointerdb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pointerdb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pointerdb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pointerdb.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReqType.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Requests.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Shipment.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="ShippingCarrier.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="ShippingService.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="SignalRMessageTable.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="States.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Tenant.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
     <Compile Include="UserActivityLog.cs">
-      <DependentUpon>newPointerdb.tt</DependentUpon>
+      <DependentUpon>Pointerdb.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="newPointerdb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>newPointerdb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="newPointerdb.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>newPointerdb.edmx</DependentUpon>
-      <LastGenOutput>newPointerdb.Context.cs</LastGenOutput>
-    </None>
-    <None Include="newPointerdb.edmx.diagram">
-      <DependentUpon>newPointerdb.edmx</DependentUpon>
-    </None>
-    <None Include="newPointerdb.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>newPointerdb.edmx</DependentUpon>
-      <LastGenOutput>newPointerdb.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="Pointerdb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Pointerdb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Pointerdb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Pointerdb.edmx</DependentUpon>
+      <LastGenOutput>Pointerdb.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Pointerdb.edmx.diagram">
+      <DependentUpon>Pointerdb.edmx</DependentUpon>
+    </None>
+    <None Include="Pointerdb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Pointerdb.edmx</DependentUpon>
+      <LastGenOutput>Pointerdb.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>
   <ItemGroup>

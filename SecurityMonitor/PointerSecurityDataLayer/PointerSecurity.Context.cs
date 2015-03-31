@@ -13,10 +13,10 @@ namespace PointerSecurityDataLayer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NewPointerdbEntities : DbContext
+    public partial class PointerdbEntities : DbContext
     {
-        public NewPointerdbEntities()
-            : base("name=NewPointerdbEntities")
+        public PointerdbEntities()
+            : base("name=PointerdbEntities")
         {
         }
     

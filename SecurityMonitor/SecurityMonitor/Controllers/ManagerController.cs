@@ -19,7 +19,7 @@ namespace SecurityMonitor.Controllers
     {
 
          //DB context
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         //Building Profile ==================================================================================
         
 

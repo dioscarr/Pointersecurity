@@ -1021,7 +1021,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PointerSecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="NewPointerdbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PointerdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ActiveManager" EntityType="PointerSecurityModel.ActiveManager" />
           <EntitySet Name="Apartment" EntityType="PointerSecurityModel.Apartment" />
           <EntitySet Name="AspNetRoles" EntityType="PointerSecurityModel.AspNetRoles" />
@@ -2079,7 +2079,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PointerSecurityModelStoreContainer" CdmEntityContainer="NewPointerdbEntities">
+        <EntityContainerMapping StorageEntityContainer="PointerSecurityModelStoreContainer" CdmEntityContainer="PointerdbEntities">
           <EntitySetMapping Name="ActiveManager">
             <EntityTypeMapping TypeName="PointerSecurityModel.ActiveManager">
               <MappingFragment StoreEntitySet="ActiveManager">

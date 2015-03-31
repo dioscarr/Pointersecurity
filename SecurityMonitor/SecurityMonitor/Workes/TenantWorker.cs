@@ -8,7 +8,7 @@ namespace SecurityMonitor.Workes
 {
     public class TenantWorker
     {
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         public List<Tenant> TenantsOnApartment(int AptID)
         {
             try

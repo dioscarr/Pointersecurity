@@ -14,7 +14,7 @@ namespace SecurityMonitor.Controllers
 {
     public class TenantsController : Controller
     {
-        private NewPointerdbEntities db = new NewPointerdbEntities();
+        private PointerdbEntities db = new PointerdbEntities();
 
         // GET: Tenants
         public async Task<ActionResult> Index()

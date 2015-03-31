@@ -10,7 +10,7 @@ namespace SecurityMonitor.Workes
 {
     public class DeliveryWorker
     {
-        NewPointerdbEntities db = new NewPointerdbEntities();
+        PointerdbEntities db = new PointerdbEntities();
         public BuildingUserMappingVM LoadUserBuildingID(string UserID)
         { 
             

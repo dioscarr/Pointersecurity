@@ -18,7 +18,7 @@ namespace SecurityMonitor.Controllers
 {
     public class UserVMsController : Controller
     {
-        private NewPointerdbEntities db = new NewPointerdbEntities();
+        private PointerdbEntities db = new PointerdbEntities();
         
         //============================ GET: UserVMs============================
         [HttpGet]

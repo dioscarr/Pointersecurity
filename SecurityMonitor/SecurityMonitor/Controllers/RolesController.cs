@@ -13,7 +13,7 @@ namespace SecurityMonitor.Controllers
 {
     public class RolesController : Controller
     {
-        private NewPointerdbEntities db = new NewPointerdbEntities();
+        private PointerdbEntities db = new PointerdbEntities();
 
         // GET: Roles
         public ActionResult Index()
