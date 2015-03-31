@@ -11,7 +11,7 @@ using SecurityMonitor.Workes;
 
 namespace SecurityMonitor.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ModuleController : Controller
     {
         PointerdbEntities db = new PointerdbEntities();
