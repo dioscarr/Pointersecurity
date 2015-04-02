@@ -23,7 +23,6 @@ namespace SecurityMonitor.Controllers
                   message = message
             };
 
-
             string password = PasswordGenerator.GeneratePassword("8").ToString(); 
             string string1 = "Hi Firstname and lastname, An Account has been created for you by PointerWebApp.com ";
             string string2 = "The login information for apartment: apartment#: is below";
@@ -46,6 +45,13 @@ namespace SecurityMonitor.Controllers
             db.SaveChanges();
             Clients.All.broadcastNotification(author, message);
         }
+
+
+        public void PackageAddedNotification(string BuildingID, string ApartmentID)
+        {
+            Clients.All.incomingPackageNotification(BuildingID, ApartmentID);
+        }
+        
 
 
         public void sendEmailNotification()

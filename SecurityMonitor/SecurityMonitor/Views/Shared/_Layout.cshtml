@@ -48,17 +48,7 @@
 
                  </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 coll-xs-6 " style="height:49px;">
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " style="padding-top:10px;">
-                        <input type="text" class=" form-control  pull-right" id="input-search">
-                        <!--search result-->
-
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-top:10px;">
-                        <input type="submit" value="Search" class="  pull-left btn btn-info  pull-right" />
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                        <div id="myguesslayout" class="myguesslist " style="padding-right:280px; position:relative; left:245px;"></div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -86,84 +76,84 @@
     $(document).ready(function (e) {
 
         //======================menu===========================================
-        $('#Others').mouseover(function()
-        {
-            //alert('it works');
-            $( this ).addClass("menuover");
+        //$('#Others').mouseover(function()
+        //{
+        //    //alert('it works');
+        //    $( this ).addClass("menuover");
 
 
-        }).mouseout(function(){
-            $( this ).removeClass("menuover");
-        });
+        //}).mouseout(function(){
+        //    $( this ).removeClass("menuover");
+        //});
 
-        $('#Settings').mouseover(function()
-        {
-            //alert('it works');
-            $( this ).addClass("menuover");
-
-
-        }).mouseout(function(){
-            $( this ).removeClass("menuover");
-        });
-
-        $('#Building').mouseover(function()
-        {
-            //alert('it works');
-            $( this ).addClass("menuover");
+        //$('#Settings').mouseover(function()
+        //{
+        //    //alert('it works');
+        //    $( this ).addClass("menuover");
 
 
-        }).mouseout(function(){
-            $( this ).removeClass("menuover");
-        });
-        $('#clients').mouseover(function()
-        {
-            //alert('it works');
-            $( this ).addClass("menuover");
+        //}).mouseout(function(){
+        //    $( this ).removeClass("menuover");
+        //});
+
+        //$('#Building').mouseover(function()
+        //{
+        //    //alert('it works');
+        //    $( this ).addClass("menuover");
 
 
-        }).mouseout(function(){
-            $( this ).removeClass("menuover");
-        });
+        //}).mouseout(function(){
+        //    $( this ).removeClass("menuover");
+        //});
+        //$('#clients').mouseover(function()
+        //{
+        //    //alert('it works');
+        //    $( this ).addClass("menuover");
+
+
+        //}).mouseout(function(){
+        //    $( this ).removeClass("menuover");
+        //});
 
         //Search bar resutl 
 
-        $('#input-search').on("focusout", function () {
-            $('#myguesslayout').fadeOut("slow").html('');
+        //$('#input-search').on("focusout", function () {
+        //    $('#myguesslayout').fadeOut("slow").html('');
 
-        });
+        //});
 
-        $('#input-search').keyup(function()
-        {
+        //$('#input-search').keyup(function()
+        //{
 
-            if( $('#input-search').val()=="")
-            {$('#myguesslayout').html('');
-            }
-            else{
-                $.ajax({
-                    url: "/Dashboard/getKeyupSearch",
-                    data: {mysearch :  $('#input-search').val()},
-                    context: document.body
-                }).done(function(tenant) {
+        //    if( $('#input-search').val()=="")
+        //    {$('#myguesslayout').html('');
+        //    }
+        //    else{
+        //        $.ajax({
+        //            url: "/Dashboard/getKeyupSearch",
+        //            data: {mysearch :  $('#input-search').val()},
+        //            context: document.body
+        //        }).done(function(tenant) {
 
-                    $('#myguesslayout').show("slow").html('<ul style="width:400px;"></ul>');
-                    for(var i=0; i< tenant.length; i++)
-                    {
-                        var aptURL = '/Building/ApartmentProfile?ApartmentID=' + tenant[i].ApartmentID;
-                        var RequestURL = '/Building/TenantRequest?TenantID=' + tenant[i].TenantID;
-                        $('#myguesslayout ul').append('<li class="clickme " style="width:270px;" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '"><a href=""  onClick="myfunction()" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '">' + tenant[i].FirstName + " " + tenant[i].LastName +
-                            ' ' + '<a href="' + aptURL + '"><div class="glyphicon glyphicon-info-sign" style="color:lightblue;"></div></a>' +
-                            ' ' + '<a href="' + RequestURL + '"><div class="glyphicon glyphicon-edit glyphicon glyphicon-" style="color:lightgreen;"></div></a></a>' +
-                            ' <div id="addressresultlayout" Style="font-size:9px; color:grey; ">Apt: ' + tenant[i].Apt + " -Address: " + tenant[i].Address +
-                            " " + tenant[i].city + " " + tenant[i].zipcode + '</div> </li>');
-                    }
-
-
-                });
-            }
+        //            $('#myguesslayout').show("slow").html('<ul style="width:400px;"></ul>');
+        //            for(var i=0; i< tenant.length; i++)
+        //            {
+        //                var aptURL = '/Building/ApartmentProfile?ApartmentID=' + tenant[i].ApartmentID;
+        //                var RequestURL = '/Building/TenantRequest?TenantID=' + tenant[i].TenantID;
+        //                $('#myguesslayout ul').append('<li class="clickme " style="width:270px;" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '"><a href=""  onClick="myfunction()" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '">' + tenant[i].FirstName + " " + tenant[i].LastName +
+        //                    ' ' + '<a href="' + aptURL + '"><div class="glyphicon glyphicon-info-sign" style="color:lightblue;"></div></a>' +
+        //                    ' ' + '<a href="' + RequestURL + '"><div class="glyphicon glyphicon-edit glyphicon glyphicon-" style="color:lightgreen;"></div></a></a>' +
+        //                    ' <div id="addressresultlayout" Style="font-size:9px; color:grey; ">Apt: ' + tenant[i].Apt + " -Address: " + tenant[i].Address +
+        //                    " " + tenant[i].city + " " + tenant[i].zipcode + '</div> </li>');
+        //            }
 
 
+        //        });
+        //    }
 
-        });
+
+
+        //});
 
 
         //loading request

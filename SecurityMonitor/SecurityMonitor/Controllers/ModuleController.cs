@@ -8,10 +8,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Doormandondemand;
 using SecurityMonitor.Models;
 using SecurityMonitor.Workes;
+using SecurityMonitor;
+
 
 namespace SecurityMonitor.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Delivery")]
     public class ModuleController : Controller
     {
         PointerdbEntities db = new PointerdbEntities();
@@ -19,6 +21,7 @@ namespace SecurityMonitor.Controllers
 
 
         //select available modeule
+    
         public ActionResult SelectModuleIndex(string UserID)
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -126,7 +129,8 @@ namespace SecurityMonitor.Controllers
 
                 //TODO: register OtherUsers in db.
                 //TODO: create table in db first.
-                       
+               
+            
             }
             return View();
         }
@@ -146,9 +150,10 @@ namespace SecurityMonitor.Controllers
                     DeliveryWorker DW = new DeliveryWorker();
                     var status = DW.AddShipment(model, User.Identity.GetUserId());
 
+                    var jsonObj = Json(model);
 
-                                    
-                
+                    var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
+                    hubContext.Clients.All.incomingPackageNotification(model.BuildingID, model.ApartmentID, jsonObj);
                 }
 
                 
