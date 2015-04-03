@@ -171,6 +171,24 @@ namespace SecurityMonitor.Controllers
             }
             return RedirectToAction("Delivery");
         }
+
+        public void GetPackages(string TenantID)
+        {
+            var obj = db.Package
+                .Where(c => c.PackageDeliveryStatus.Status != "Delivery")
+                .Where(c => c.Shipment.TenantID == TenantID)
+                .OrderByDescending(c => c.ArrivalTime)
+                .Select(c => new { TrackingNumber = c.TrackingNumber, ArrivalTime = c.ArrivalTime })
+                .Take(10)
+                .ToList();            
+            var Jsonpackages = Json(obj);
+
+
+            var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
+            hubContext.Clients.All.incomingListPackageNotification(Jsonpackages);
+
+          
+        }
         public ActionResult PackageSearch()
         { 
 

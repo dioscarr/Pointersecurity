@@ -939,9 +939,12 @@ namespace SecurityMonitor.Controllers
                 .Where(t => t.aptID == ApartmentID).ToListAsync();
 
             ViewBag.tenant = tenant;
+           
 
             return View(apartmentprofile);
         }
+
+        
 
         //===================Adding Tenant to apartment GET ==============
         [HttpGet]

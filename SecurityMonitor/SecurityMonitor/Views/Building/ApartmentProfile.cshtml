@@ -193,7 +193,7 @@
    <script type="text/javascript">
     $(document).ready(function (e) {
 
-
+        $(function () {
 
 
         var viewModel = function () {
@@ -222,11 +222,24 @@
             };
 
 
-            $(function () {
+            
                 // Reference the auto-generated proxy for the hub.
                 //Notification
                 var Notification = $.connection.notificationsHub;
+                Notification.client.incomingListPackageNotification = function (Jsonpackages) {
+                    self.TrackingNumbers.removeAll();
+                    
+                    var jsonresult = JSON.stringify(Jsonpackages.Data);// Json.stringify make an object into a json string
+                   
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++)
+                    {
 
+                        self.TrackingNumbers.push({ pkgsTrks: TrkPkgs[i].TrackingNumber, ArrivalDate: TrkPkgs[i].ArrivalTime });
+
+                    }
+                    
+                };
                 // Create a function that the hub can call back to display messages.
                 Notification.client.incomingPackageNotification = function (BuildingID, ApartmentID, jsonObj, Jsonpackages, TrackingCount)
                 {
@@ -293,15 +306,8 @@
                         }
                     }
                 };
-                // Start the connection.outgoing here
-                $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
-                //reconnect after disconect
-                $.connection.hub.disconnected(function () {
-                    setTimeout(function () {
-                        $.connection.hub.start();
-                    }, 5000); // Restart connection after 5 seconds.
-                });
-            });
+              
+            
             // Here's a custom Knockout binding that makes elements shown/hidden via jQuery's fadeIn()/fadeOut() methods
             // Could be stored in a separate utility library
             ko.bindingHandlers.fadeVisible = {
@@ -317,8 +323,17 @@
                     var value = valueAccessor();
                     //show element
                     $('.deliveryclass').on('click', function () {
-                            if ($(element).attr('data-ShowDeliveryKey') == $(this).attr('data-ShowDeliveryKey')) {
-                                ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp()
+                        var currentID = $(this).attr('data-ShowDeliveryKey');
+                        $(element).hide();
+                        if ($(element).attr('data-ShowDeliveryKey') == currentID) {
+                                ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp();
+
+                                $.ajaxSettings.traditional = true;
+                                $.ajax({
+                                    type: "GET",
+                                    url: '/Module/GetPackages/',
+                                    data: { TenantID: currentID }
+                                }).done(function () { });
                             }});
                     //hide element
                     $('.showdelivery').on('click', function () {
@@ -332,7 +347,21 @@
 
         };
 
+
+            // Start the connection.outgoing here
+        $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
+            //reconnect after disconect
+        $.connection.hub.disconnected(function () {
+            setTimeout(function () {
+                $.connection.hub.start();
+            }, 5000); // Restart connection after 5 seconds.
+        });
+
         ko.applyBindings(viewModel);
+        });
+       
+
+      
 
 
     });
