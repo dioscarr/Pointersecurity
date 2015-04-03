@@ -171,7 +171,8 @@ namespace SecurityMonitor.Controllers
             }
             return RedirectToAction("Delivery");
         }
-
+        [AllowAnonymous]
+        [HttpGet]
         public void GetPackages(string TenantID)
         {
             var obj = db.Package
