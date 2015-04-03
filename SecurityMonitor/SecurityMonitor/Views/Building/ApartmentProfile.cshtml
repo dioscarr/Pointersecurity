@@ -321,9 +321,8 @@
                             }});
                     //hide element
                     $('.showdelivery').on('click', function () {
-                        //alert($(element).attr('data-ShowDeliveryKey'));
                         if ($(element).attr('data-ShowDeliveryKey') == $(this).attr('data-hidedeliverykey')) {
-                            ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp()
+                           false ? $(element).slideDown() : $(element).slideUp()
                         } });
                 }   
             };
