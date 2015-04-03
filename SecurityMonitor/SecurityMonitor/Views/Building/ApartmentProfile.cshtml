@@ -313,6 +313,7 @@
                 },
                 update: function (element, valueAccessor) {
                     // Whenever the value subsequently changes, slowly fade the element in or out
+
                     var value = valueAccessor();
                     //show element
                     $('.deliveryclass').on('click', function () {
@@ -321,7 +322,9 @@
                             }});
                     //hide element
                     $('.showdelivery').on('click', function () {
-                        if ($(element).attr('data-ShowDeliveryKey') == $(this).attr('data-hidedeliverykey')) {
+                        var currentelement = $(this).attr('data-hidedeliverykey');
+                       
+                        if ($(element).attr('data-ShowDeliveryKey') == currentelement) {
                            false ? $(element).slideDown() : $(element).slideUp()
                         } });
                 }   
