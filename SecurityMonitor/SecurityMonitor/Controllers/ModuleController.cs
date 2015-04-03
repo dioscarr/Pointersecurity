@@ -150,10 +150,20 @@ namespace SecurityMonitor.Controllers
                     DeliveryWorker DW = new DeliveryWorker();
                     var status = DW.AddShipment(model, User.Identity.GetUserId());
 
+                    var obj = db.Package
+                        .Where(c => c.PackageDeliveryStatus.Status != "Delivery")
+                        .Where(c => c.Shipment.TenantID == model.UserID)
+                        .OrderByDescending(c => c.ArrivalTime)
+                        .Select(c => new {TrackingNumber = c.TrackingNumber, ArrivalTime = c.ArrivalTime })
+                        .Take(10)
+                        .ToList();
+                    var TrackingCount = obj.Count();
                     var jsonObj = Json(model);
+                    var Jsonpackages = Json(obj);
+
 
                     var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-                    hubContext.Clients.All.incomingPackageNotification(model.BuildingID, model.ApartmentID, jsonObj);
+                    hubContext.Clients.All.incomingPackageNotification(model.BuildingID, model.ApartmentID, jsonObj, Jsonpackages, TrackingCount);
                 }
 
                 

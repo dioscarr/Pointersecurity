@@ -16,6 +16,7 @@
 <!-- Small modal -->
 
 
+
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content"> 
@@ -34,8 +35,7 @@
                     <span data-bind="foreach: Trackings">
                         <br/>
                        <span>Tacking#: </span> <span data-bind="text:name"></span>
-                    </span>
-                     
+                    </span>                     
                 </p>
       </div>
         </div>
@@ -130,8 +130,7 @@
                 New Access Request
             </button>
             <br />
-            <button type="button" class="btn btn-link" style="margin:9px;"
-                    onclick="location.href = '@Url.Action("TenantDeliveryIndex", "Building", new { TenantID = @item.ID })'">
+            <button id="deliveryid" type="button" class="btn btn-link deliveryclass" style="margin:9px;" data-bind="click:ShowDeliveryFunc" data-showdeliverykey=@item.ID>
                 Deliveries
             </button>
             <br />
@@ -147,10 +146,28 @@
 
 
         </div>
+        <!--this section is for packages/ deliveries -->
+        
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " data-bind="fadeVisible:ShowDelivery" data-ShowDeliveryKey=@item.ID>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-9">
+                    <button type="button" class="btn btn-link showdelivery" style="margin:9px;" data-bind="click:HideDeliveryFunc" data-hidedeliverykey=@item.ID>
+                        Hide Delivery list
+                    </button>
+                </div>
+            </div>
 
-        <!--========================Request box===============================-->
-        @*<canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>*@
-    </div>
+            <div class="row scrollable" data-bind="foreach: TrackingNumbers" style="height:200px;  border-top:1px solid lightgrey; border-bottom:1px solid lightgrey;">
+                <div class="col-md-12 hollow2" style="height:30px; padding:20px 0; border-top:1px solid lightgrey; border-bottom:1px solid lightgrey;">
+                    <span class="col-md-6 " data-bind="text:pkgsTrks"></span> <span class="col-md-6 " data-bind="text:ArrivalDate"></span>
+                </div>
+            </div>
+
+        </div>
+
+            <!--========================Request box===============================-->
+            @*<canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>*@
+        </div>
 }
 
 <!--=================tenant ends==================-->
@@ -175,9 +192,9 @@
 <script src="~/Scripts/HighChart/modules/exporting.js"></script>*@
    <script type="text/javascript">
     $(document).ready(function (e) {
-       
 
-       
+
+
 
         var viewModel = function () {
 
@@ -189,6 +206,20 @@
             self.LName = ko.observable();
             self.Phone = ko.observable();
             self.Trackings = ko.observableArray();
+            self.TrackingNumbers = ko.observableArray();
+            self.ShowDelivery = ko.observable(false);
+
+            self.ShowDeliveryFunc = function (item, event) {
+                //var elementkey =$(event.target).prop('data-ShowDeliveryKey');
+                //alert(elementkey);
+
+                self.ShowDelivery(true);
+                return true;
+            };
+            self.HideDeliveryFunc = function () {
+                self.ShowDelivery(false);
+                return false;
+            };
 
 
             $(function () {
@@ -197,17 +228,22 @@
                 var Notification = $.connection.notificationsHub;
 
                 // Create a function that the hub can call back to display messages.
-                Notification.client.incomingPackageNotification = function (BuildingID, ApartmentID, jsonObj)
+                Notification.client.incomingPackageNotification = function (BuildingID, ApartmentID, jsonObj, Jsonpackages, TrackingCount)
                 {
-                    //incoming here 
+                    //incoming here
 
                     var jsonresult = JSON.stringify(jsonObj.Data);// Json.stringify make an object into a json string
                     var ReceiveCleanobj = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    var pkgsTrk = JSON.stringify(Jsonpackages.Data);//Json.stringify make an object into a json string
+                    var pkgsTrks = JSON.parse(pkgsTrk);  //JSON.parse makes a json string into a json object example obj.FirstName
+
+
                     var packagesCount = ReceiveCleanobj.Packages.length;
+                    var undeliveredPackagescount = TrackingCount;
                     var CurrentBuildingID = $('#buildingid').attr('data-BuildingID');
                     var CurrentAptID = $('#aptid').attr('data-AptID');
 
-                    // testing Data 
+                    // testing Data
                     console.log("current building id is: " + CurrentBuildingID);
                     console.log("current building id is: " + CurrentAptID);
                     console.log(" ");
@@ -218,17 +254,22 @@
                         self.FName(ReceiveCleanobj.FirstName);
                         self.LName(ReceiveCleanobj.LastName);
                         self.Phone(ReceiveCleanobj.Phone);
-                        JSON.stringify
-                        
-                        for (var i = 0; i < packagesCount; i++) 
+
+                        //display 10 packages Tracking and arrival date
+                        for (var i = 0; i < Jsonpackages.Data.length; i++)
                         {
-                            self.Trackings.push({ name: ReceiveCleanobj.Packages[i].Trackingnumber });                           
+
+                            self.TrackingNumbers.push({ pkgsTrks: pkgsTrks[i].TrackingNumber, ArrivalDate: pkgsTrks[i].ArrivalTime });
+                        }
+
+                        //this is the latest package that just arrived
+                        for (var i = 0; i < packagesCount; i++)
+                        {
+                            self.Trackings.push({ name: ReceiveCleanobj.Packages[i].Trackingnumber });
                         };
-                        
+
                         self.Packagecount(packagesCount);
                         $('.modal').modal('show');
-
-
                         console.log("A package just arrived for this apartment!");
                         console.log("FirstName: " + ReceiveCleanobj.FirstName);
                         console.log("LastName: " + ReceiveCleanobj.LastName);
@@ -247,9 +288,9 @@
                         console.log("isNewUser: " + ReceiveCleanobj.isNewUser);
                         console.log("Package Count: " + packagesCount);
                         for (var i = 0; i < packagesCount; i++)
-                        {         
+                        {
                             console.log("Tracking#: " + ReceiveCleanobj.Packages[i].Trackingnumber);
-                        }                         
+                        }
                     }
                 };
                 // Start the connection.outgoing here
@@ -261,93 +302,35 @@
                     }, 5000); // Restart connection after 5 seconds.
                 });
             });
+            // Here's a custom Knockout binding that makes elements shown/hidden via jQuery's fadeIn()/fadeOut() methods
+            // Could be stored in a separate utility library
+            ko.bindingHandlers.fadeVisible = {
+                init: function (element, valueAccessor) {
+                    // Initially set the element to be instantly visible/hidden depending on the value
+                    var value = valueAccessor();
+                   
+                    $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
+                },
+                update: function (element, valueAccessor) {
+                    // Whenever the value subsequently changes, slowly fade the element in or out
+                    var value = valueAccessor();
+                    //show element
+                    $('.deliveryclass').on('click', function () {
+                            if ($(element).attr('data-ShowDeliveryKey') == $(this).attr('data-ShowDeliveryKey')) {
+                                ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp()
+                            }});
+                    //hide element
+                    $('.showdelivery').on('click', function () {
+                        //alert($(element).attr('data-ShowDeliveryKey'));
+                        if ($(element).attr('data-ShowDeliveryKey') == $(this).attr('data-hidedeliverykey')) {
+                            ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp()
+                        } });
+                }   
+            };
+
         };
 
         ko.applyBindings(viewModel);
-           
-
-
-
-
-
-
-
-        
-        var canvascount = document.getElementsByTagName("canvas");
-       
-        
-        for (var i = 0; i <= canvascount.length - 1; i++)
-        {   var datachart =[];
-        var data_TenantID = canvascount[i].getAttribute("data-tenantid");
-       
-                
-     
-        $.ajax({
-            async: false,
-            type: "GET",
-            data:{TenantID: data_TenantID},
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/Building/getRequestsType/",
-            success: function(jsonData) {
-               
-                for(var j=0; j<jsonData.length; j++)
-                {
-                    //array of colors
-                    var colors = ["#0000FF",
-                                   "#8A2BE2",
-                                   "#6495ED",
-                                   "lightblue", 
-                                   "lightgreen", 
-                                   "orange",
-                                   "yellow",
-                                   "#32CD32",
-                                   "#FF4500", 
-                                   "#FF6347",
-                                   "#008080",
-                                   "#9ACD32",
-                                   "#FFE4B5",
-                                   "#FFE4E1",
-                                   "#0000CD",
-                                   "#9370DB",
-                                   "#B0C4DE",
-                                   "#7FFFD4"
-                    ];                
-                    var rand = Math.floor(Math.random()*colors.length);
-                 
-                    //Legend Data[].Key shows type name
-                    //Legend: Data[].(type) show the count of the type
-                    datachart.push({value:jsonData[j].AccessControl , color: colors[rand],label:  jsonData[j].key});    
-                   
-                }
-                drawmychart(datachart);
-             
-               
-            }
-        });
-          
-            function drawmychart(data1){
-                var options = { responsive: true }
-                var myDoughnut = new Chart(document.getElementById("doughNutChartLoc" + data_TenantID).getContext("2d")).Pie(data1,options);
-            }
-        };
-        //=====================Circle charts for the tenants ends==============================
-      
-        
-    
-
-        
-
-
-       
-      
-
-
-
-
-
-
-
 
 
     });

@@ -427,7 +427,6 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     City: self.City,
                     State: self.State,
                     Zipcode: self.Zipcode,
-                    UserID: self.Userkey,
                     isNewUser:self.isNewUser,
                     Packages: self.users                    
                 };
@@ -474,6 +473,8 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     self.LastName(item.LastName);
                     self.Phone(item.Phone);
                     self.ApartmentNumber(item.Apt);
+                    alert("UserID: " + item.TenantID + " UserKEY: " + item.Userkey);
+                    alert();
                     //from db keys vals
                     self.CurrentBuildingID(item.BuildingID);
                     self.ApartmentID(item.ApartmentID);
