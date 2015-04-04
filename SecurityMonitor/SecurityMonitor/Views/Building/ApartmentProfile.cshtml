@@ -149,7 +149,7 @@
         <!--this section is for packages/ deliveries -->
         
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " data-bind="fadeVisible:ShowDelivery" data-ShowDeliveryKey=@item.ID>
-            <div class="row">
+            <div class="row" style="background:lightgrey; border-top:1px solid grey; border-bottom:1px solid grey; " >
                 <div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-6 col-xs-offset-6">
                     <button type="button" class="btn btn-link showdelivery" style="margin:9px;" data-bind="click:HideDeliveryFunc" data-hidedeliverykey=@item.ID>
                         Hide Delivery list
@@ -160,6 +160,11 @@
             <div class="row scrollable" data-bind="foreach: TrackingNumbers" style="height:200px;  border-top:1px solid lightgrey; border-bottom:1px solid lightgrey;">
                 <div class="col-md-12 hollow2" style="height:30px; padding:20px 0; border-top:1px solid lightgrey; border-bottom:1px solid lightgrey;">
                     <span class="col-md-6 " data-bind="text:pkgsTrks"></span> <span class="col-md-6 " data-bind="text:ArrivalDate"></span>
+                </div>
+            </div>
+            <div class="row" style="background:lightgrey; border-top:1px solid grey; border-bottom:1px solid grey; height:50px; ">
+                <div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-6 col-xs-offset-6">
+                   
                 </div>
             </div>
 
@@ -326,7 +331,7 @@
                     //show element
                     $('.deliveryclass').on('click', function () {
                         var currentID = $(this).attr('data-ShowDeliveryKey');
-                        $(element).hide();
+                        $(element).hide()
                         if ($(element).attr('data-ShowDeliveryKey') == currentID) {
                                 ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp();
 

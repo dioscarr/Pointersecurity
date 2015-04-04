@@ -66,22 +66,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="row" style="margin-top:50px;">
     <div class="col-md-12 text-left">
         <p class="form-group">
@@ -189,7 +173,7 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                                     <!--loop through array Users[]-->
                                     <div class="col-md-2 ">
                                       
-                                        @Html.DropDownList("dropdowncarrierservices",@Model.carrierService,"Select", new{@class="form-control ",  @data_bind="value:Service"})
+                                        @Html.DropDownList("dropdowncarrierservices", @Model.carrierService, "Select", new { @class = "form-control ", @data_bind = "value:Service" })
                                         
                                         <br />
                                     </div>
@@ -326,6 +310,8 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                 self.searchOptionvisible = ko.observable(true);//set visibility for all search components
                 self.searchboxOptionvisible = ko.observable(true);//set visibility for SearchOptions 
                 self.Packagevisible = ko.observable(true);
+
+              
                
                 var optionsVM = [{ value: 1, name: 'UPS' },
                                  { value: 1, name: 'FeDex' },
@@ -350,7 +336,7 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     self.searchboxOptionvisible(true);
                     self.isNewUser(false);
                 };
-                //self.searchDiv = ko.observable(true);//set visibility for 
+               
                 self.otheruservisible.subscribe(function (value) {
                    
                     if (value == true)
@@ -400,17 +386,22 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     }else { self.TOA(""); }
                     
                 });
+
+              
                 //function to add to the arrays++++++++++++++++++++++++++++++++++++
                 self.addUser = function () {//create a function named addUsers
-                    
-                    //push from userform
                     self.users.push({
-                        Service: ko.observable(),//add field name to the array
-                        Trackingnumber: ko.observable(),
-                        PackageType: ko.observable(),
-                        shippingService: ko.observable()
-
-                    });
+                        
+                            Service: ko.observable(),
+                            Trackingnumber:  ko.observable(),
+                            PackageType:  ko.observable(),
+                            shippingService:  ko.observable()
+                        });
+                    }
+                        
+                   
+                    //push from userform
+                   
                     self.PackageCount(self.PackageCount() + 1);                 
 
                 };
@@ -464,6 +455,7 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
             };
                 self.getalldata = function (item, event)
                 {
+                    
                     self.isNewUser(false);
                     self.searchOptionvisible(false);
                     self.otheruservisible(false);
@@ -505,14 +497,13 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                         //alert(self.users().length);
                     }
                 };
+                ko.applyBindings(viewModel);
+               
+            });
+       
 
-                //output preview
-                //masterarray = ko.observablearray();
-            };
-            ko.applyBindings(viewModel);
 
-
-        });
+        
 
 
 
