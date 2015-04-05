@@ -1288,6 +1288,17 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = Search, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+
+        [HttpGet]
+        public ActionResult ClientHome()
+        {
+            ClientHomeVM CH = new ClientHomeVM();
+            return View(CH);
+        }
+
+
+
+
         //Tenant Delivary
         public ActionResult TenantDeliveryIndex(int TenantID)
         {
@@ -1295,7 +1306,12 @@ namespace SecurityMonitor.Controllers
         
         }
 
+
+
+
         //Tenant Messege Center
+
+
         public ActionResult TenantMessegeCenterIndex(int TenantID)
         {  
             return View();

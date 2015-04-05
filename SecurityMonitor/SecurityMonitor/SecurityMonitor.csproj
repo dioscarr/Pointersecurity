@@ -240,6 +240,7 @@
     <Compile Include="Models\ApplicationRoleManager.cs" />
     <Compile Include="Models\BuildingInfoVM.cs" />
     <Compile Include="Models\BuildingUserMappingVM.cs" />
+    <Compile Include="Models\ClientHomeVM.cs" />
     <Compile Include="Models\ClientsVM.cs" />
     <Compile Include="Models\DeliveryVM.cs" />
     <Compile Include="Models\DisplayClientBuilding.cs" />
@@ -787,6 +788,7 @@
     <Content Include="Views\Module\SelectModuleIndex.cshtml" />
     <Content Include="Views\Module\DeliveryDisplay.cshtml" />
     <Content Include="Views\Module\Delivery.cshtml" />
+    <Content Include="Views\Building\ClientHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />
