@@ -43,8 +43,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <!--================First Botton================-->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="height:50px;">
-                    <h5 style="color:white; display:inline;"><a href="@Url.Action("index", "Dashboard")" > Open Request </a><span id="openrequestid" class="badge " style="color:White; background:Orange;"></span></h5>
-                    <h5 style="color:white; display:inline;"><a href="@Url.Action("index", "Dashboard")"> Next 7 Days </a><span id="next7openrequestid" class="badge " style="color:White; background:Orange;"></span></h5>
+                    @*<h5 style="color:white; display:inline;"><a href="@Url.Action("index", "Dashboard")" > Open Request </a><span id="openrequestid" class="badge " style="color:White; background:Orange;"></span></h5>
+                    <h5 style="color:white; display:inline;"><a href="@Url.Action("index", "Dashboard")"> Next 7 Days </a><span id="next7openrequestid" class="badge " style="color:White; background:Orange;"></span></h5>*@
 
                  </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 coll-xs-6 " style="height:49px;">
@@ -75,88 +75,7 @@
     <script type="text/javascript">
     $(document).ready(function (e) {
 
-        //======================menu===========================================
-        //$('#Others').mouseover(function()
-        //{
-        //    //alert('it works');
-        //    $( this ).addClass("menuover");
-
-
-        //}).mouseout(function(){
-        //    $( this ).removeClass("menuover");
-        //});
-
-        //$('#Settings').mouseover(function()
-        //{
-        //    //alert('it works');
-        //    $( this ).addClass("menuover");
-
-
-        //}).mouseout(function(){
-        //    $( this ).removeClass("menuover");
-        //});
-
-        //$('#Building').mouseover(function()
-        //{
-        //    //alert('it works');
-        //    $( this ).addClass("menuover");
-
-
-        //}).mouseout(function(){
-        //    $( this ).removeClass("menuover");
-        //});
-        //$('#clients').mouseover(function()
-        //{
-        //    //alert('it works');
-        //    $( this ).addClass("menuover");
-
-
-        //}).mouseout(function(){
-        //    $( this ).removeClass("menuover");
-        //});
-
-        //Search bar resutl 
-
-        //$('#input-search').on("focusout", function () {
-        //    $('#myguesslayout').fadeOut("slow").html('');
-
-        //});
-
-        //$('#input-search').keyup(function()
-        //{
-
-        //    if( $('#input-search').val()=="")
-        //    {$('#myguesslayout').html('');
-        //    }
-        //    else{
-        //        $.ajax({
-        //            url: "/Dashboard/getKeyupSearch",
-        //            data: {mysearch :  $('#input-search').val()},
-        //            context: document.body
-        //        }).done(function(tenant) {
-
-        //            $('#myguesslayout').show("slow").html('<ul style="width:400px;"></ul>');
-        //            for(var i=0; i< tenant.length; i++)
-        //            {
-        //                var aptURL = '/Building/ApartmentProfile?ApartmentID=' + tenant[i].ApartmentID;
-        //                var RequestURL = '/Building/TenantRequest?TenantID=' + tenant[i].TenantID;
-        //                $('#myguesslayout ul').append('<li class="clickme " style="width:270px;" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '"><a href=""  onClick="myfunction()" data-tenantname="' + tenant[i].FirstName + " " + tenant[i].LastName + '">' + tenant[i].FirstName + " " + tenant[i].LastName +
-        //                    ' ' + '<a href="' + aptURL + '"><div class="glyphicon glyphicon-info-sign" style="color:lightblue;"></div></a>' +
-        //                    ' ' + '<a href="' + RequestURL + '"><div class="glyphicon glyphicon-edit glyphicon glyphicon-" style="color:lightgreen;"></div></a></a>' +
-        //                    ' <div id="addressresultlayout" Style="font-size:9px; color:grey; ">Apt: ' + tenant[i].Apt + " -Address: " + tenant[i].Address +
-        //                    " " + tenant[i].city + " " + tenant[i].zipcode + '</div> </li>');
-        //            }
-
-
-        //        });
-        //    }
-
-
-
-        //});
-
-
-        //loading request
+      
        
         $.ajax({
 
