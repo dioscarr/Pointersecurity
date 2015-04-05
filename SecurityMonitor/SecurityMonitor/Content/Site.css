@@ -840,6 +840,12 @@ margin-top:2px;
 .input-block-level {
   display: block;
   width: 100%;
-  min-height: 28px;        // Make inputs at least the height of their button counterpart
-  .box-sizing(border-box); // Makes inputs behave like true block-level elements
+  min-height: 28px;       
+ 
+}
+
+.ClientHomeCSSSettings {
+    table-layout:fixed;
+    min-height:200px;
+    max-height:200px;
 }
