@@ -179,7 +179,15 @@ namespace SecurityMonitor.Controllers
                 .Where(c => c.PackageDeliveryStatus.Status != "Delivery")
                 .Where(c => c.Shipment.TenantID == TenantID)
                 .OrderByDescending(c => c.ArrivalTime)
-                .Select(c => new { TrackingNumber = c.TrackingNumber, ArrivalTime = c.ArrivalTime })
+                .Select(c => new 
+                { 
+                    TrackingNumber = c.TrackingNumber, 
+                    ArrivalTime = c.ArrivalTime,
+                    CarrierService = c.ShippingCarrier.Services,
+                    Status = c.PackageDeliveryStatus.Status,
+                    Service = c.ShippingService.Service
+
+                })
                 .Take(10)
                 .ToList();            
             var Jsonpackages = Json(obj);

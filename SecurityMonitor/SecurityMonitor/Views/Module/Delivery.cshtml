@@ -248,7 +248,7 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
 
         $(document).ready(function () {
 
- //Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr
+            //Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr Signalr
             $(function () {
                 // Reference the auto-generated proxy for the hub.
                 //Notification
@@ -259,157 +259,159 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     //incoming here 
                     //alert(packagenotificationMessage);
                 };
-               
-                
-              
+
+
+
                 // Start the connection.outgoing here
                 $.connection.hub.start().done(function () {
                     $('#notifyme').click(function () {
                         // Call the PackageAddedNotification method on the hub.
                         Notification.server.packageAddedNotification("myuserID");
-                       
-                       
+
+
                     });
                 });
-            });
-           
 
-          
-//ko ko ko  ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko
-            function Task(data) {
-                this.title = ko.observable(data.title);
-                this.isDone = ko.observable(data.isDone);
-            }
-            var viewModel = function() {
-                var self = this;
-                this.clickme = function (item, event) {
-                    alert('yes');
+
+
+
+                //ko ko ko  ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko ko
+                function Task(data) {
+                    this.title = ko.observable(data.title);
+                    this.isDone = ko.observable(data.isDone);
                 }
-                self.Apartment = ko.observable();
-                self.FirstName = ko.observable("");
-                self.LastName = ko.observable("");
-                self.Phone = ko.observable("");
-                self.ApartmentNumber = ko.observable("");
-                self.Userkey = ko.observable("");
-                self.CurrentBuildingID = ko.observable(); //TODO
-                self.ApartmentID = ko.observable(); //TODO
-                self.ActiveUserForShipment = ko.observable(false);
-                self.PackageCount = ko.observable(0);
-                self.isNewUser = ko.observable(false);
+                var viewModel = function () {
+                    var self = this;
+                    this.clickme = function (item, event) {
+                        alert('yes');
+                    }
+                    self.Apartment = ko.observable();
+                    self.FirstName = ko.observable("");
+                    self.LastName = ko.observable("");
+                    self.Phone = ko.observable("");
+                    self.ApartmentNumber = ko.observable("");
+                    self.Userkey = ko.observable("");
+                    self.CurrentBuildingID = ko.observable(); //TODO
+                    self.ApartmentID = ko.observable(); //TODO
+                    self.ActiveUserForShipment = ko.observable(false);
+                    self.PackageCount = ko.observable(0);
+                    self.isNewUser = ko.observable(false);
 
-                //Address 
-                self.Address = ko.observable("");
-                self.City = ko.observable("");
-                self.State = ko.observable("");
-                self.Zipcode = ko.observable("");
+                    //Address 
+                    self.Address = ko.observable("");
+                    self.City = ko.observable("");
+                    self.State = ko.observable("");
+                    self.Zipcode = ko.observable("");
 
-                self.users = ko.observableArray();//create an array
-                
-                self.aptlisVisible = ko.observable(false);//set visibility for apartment list
-                self.otheruservisible = ko.observable(false);//set visibility for other user form
-                self.searchOptionvisible = ko.observable(true);//set visibility for all search components
-                self.searchboxOptionvisible = ko.observable(true);//set visibility for SearchOptions 
-                self.Packagevisible = ko.observable(true);
+                    self.users = ko.observableArray();//create an array
 
-              
-               
-                var optionsVM = [{ value: 1, name: 'UPS' },
-                                 { value: 1, name: 'FeDex' },
-                                 { value: 1, name: 'USPS' },
-                                 { value: 1, name: 'DHL' },
-                                 { value: 1, name: 'TNT' },
-                                 { value: 1, name: 'Other couriers' }]
-                items = ko.observableArray(optionsVM);
+                    self.aptlisVisible = ko.observable(false);//set visibility for apartment list
+                    self.otheruservisible = ko.observable(false);//set visibility for other user form
+                    self.searchOptionvisible = ko.observable(true);//set visibility for all search components
+                    self.searchboxOptionvisible = ko.observable(true);//set visibility for SearchOptions 
+                    self.Packagevisible = ko.observable(true);
 
 
 
-                self.mydefault = function (value) {
+                    var optionsVM = [{ value: 1, name: 'UPS' },
+                                     { value: 1, name: 'FeDex' },
+                                     { value: 1, name: 'USPS' },
+                                     { value: 1, name: 'DHL' },
+                                     { value: 1, name: 'TNT' },
+                                     { value: 1, name: 'Other couriers' }]
+                    items = ko.observableArray(optionsVM);
 
-                    self.FirstName("");
-                    self.LastName("");
-                    self.Phone("");
-                    self.ApartmentNumber("");
-                    self.ActiveUserForShipment(false);
-                    self.searchOptionvisible(true);
-                    self.otheruservisible(false);
-                    self.aptlisVisible(false);
-                    self.searchboxOptionvisible(true);
-                    self.isNewUser(false);
-                };
-               
-                self.otheruservisible.subscribe(function (value) {
-                   
-                    if (value == true)
-                    {
+
+
+                    self.mydefault = function (value) {
+
                         self.FirstName("");
                         self.LastName("");
                         self.Phone("");
                         self.ApartmentNumber("");
                         self.ActiveUserForShipment(false);
-                        self.searchOptionvisible(false);
-                        self.otheruservisible(true);
-                        self.aptlisVisible(false);
-                        self.searchboxOptionvisible(false);
-                        self.isNewUser(true);
-                    }
-                    else {
                         self.searchOptionvisible(true);
                         self.otheruservisible(false);
                         self.aptlisVisible(false);
                         self.searchboxOptionvisible(true);
-                        self.isNewUser(false)
-                    }
-
-                    self.setvisibilityForActiveUser = function ()
-                    {
-                        self.ActiveUserForShipment(true);
-                        self.otheruservisible(false);
-
+                        self.isNewUser(false);
                     };
-                });
-                self.hideUserSearchOptions = ko.computed(function () {
-                });
-                self.TOA = ko.observableArray();
-                // search for tenant on the current building 
-                self.search = ko.observable("");
-                self.search.subscribe(function (value) {
-                    self.searchOptionvisible(true);
-                    self.ActiveUserForShipment(false);
-                   
-                    var aptNumber = self.Apartment();
-                   
-                    var buildingID = $('#mybuildingID').attr("data-BuildingID");
-                    if (value != "") {
-                        $.ajax({url: "/Building/getKeyupSearch",
-                            data: { mysearch: value, BuildingID: buildingID, aptNumber: aptNumber },
-                                context: document.body }).done(function (tenant) {self.TOA(tenant);});
-                    }else { self.TOA(""); }
-                    
-                });
 
-              
-                //function to add to the arrays++++++++++++++++++++++++++++++++++++
-                self.addUser = function () {//create a function named addUsers
-                    self.users.push({
-                        
+                    self.otheruservisible.subscribe(function (value) {
+
+                        if (value == true) {
+                            self.FirstName("");
+                            self.LastName("");
+                            self.Phone("");
+                            self.ApartmentNumber("");
+                            self.ActiveUserForShipment(false);
+                            self.searchOptionvisible(false);
+                            self.otheruservisible(true);
+                            self.aptlisVisible(false);
+                            self.searchboxOptionvisible(false);
+                            self.isNewUser(true);
+                        }
+                        else {
+                            self.searchOptionvisible(true);
+                            self.otheruservisible(false);
+                            self.aptlisVisible(false);
+                            self.searchboxOptionvisible(true);
+                            self.isNewUser(false)
+                        }
+
+                        self.setvisibilityForActiveUser = function () {
+                            self.ActiveUserForShipment(true);
+                            self.otheruservisible(false);
+
+                        };
+                    });
+                    self.hideUserSearchOptions = ko.computed(function () {
+                    });
+
+                    self.TOA = ko.observableArray();
+                    // search for tenant on the current building 
+                    self.search = ko.observable("");
+                    self.search.subscribe(function (value) {
+                        self.searchOptionvisible(true);
+                        self.ActiveUserForShipment(false);
+
+                        var aptNumber = self.Apartment();
+
+                        var buildingID = $('#mybuildingID').attr("data-BuildingID");
+                        if (value != "") {
+                            $.ajax({
+                                url: "/Building/getKeyupSearch",
+                                data: { mysearch: value, BuildingID: buildingID, aptNumber: aptNumber },
+                                context: document.body
+                            }).done(function (tenant) { self.TOA(tenant); });
+                        } else { self.TOA(""); }
+
+                    });
+
+
+                    //function to add to the arrays++++++++++++++++++++++++++++++++++++
+                    self.addUser = function () {//create a function named addUsers
+                        self.users.push({
+
                             Service: ko.observable(),
-                            Trackingnumber:  ko.observable(),
-                            PackageType:  ko.observable(),
-                            shippingService:  ko.observable()
+                            Trackingnumber: ko.observable(),
+                            PackageType: ko.observable(),
+                            shippingService: ko.observable()
                         });
                     }
-                        
-                   
-                    //push from userform
-                   
-                    self.PackageCount(self.PackageCount() + 1);                 
 
-                };
+
+                    //push from userform
+
+                    self.PackageCount(self.PackageCount() + 1);
+
+               
+
                 var Shipment = {
                     FirstName: self.FirstName,
                     LastName: self.LastName,
                     Phone: self.Phone,
-                    ApartmentNumber: self.ApartmentNumber,                   
+                    ApartmentNumber: self.ApartmentNumber,
                     Package: self.PackageCount,
                     UserID: self.Userkey,
                     BuildingID: self.CurrentBuildingID,
@@ -418,14 +420,14 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     City: self.City,
                     State: self.State,
                     Zipcode: self.Zipcode,
-                    isNewUser:self.isNewUser,
-                    Packages: self.users                    
+                    isNewUser: self.isNewUser,
+                    Packages: self.users
                 };
                 //function ends to add to the arrays++++++++++++++++++++++++++++++++++++
 
                 self.save = function (fields) {
                     //debugger;
-                   // alert(ko.toJSON(Shipment));
+                    // alert(ko.toJSON(Shipment));
                     //  alert(ko.toJSON(Shipment));
                     $.ajaxSettings.traditional = true;
                     $.ajax({
@@ -438,40 +440,40 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                             alert(Shipment.BuildingID + " " + Shipment.ApartmentID);
                             if (data) {
                                 //window.location.href = "/Dashboard/PreviewTemplate/";
-                               
+
                             }
                         }
-                    }).done(function ()
-                    {
-                       
-
-
+                    }).complete(function () {
+                        self.users.removeAll();
+                        self.ActiveUserForShipment(false);
                     });
+
                 };
-                self.removeField = function (task) 
-                {
+
+
+
+                self.removeField = function (task) {
                     self.users.remove(task);
                     self.PackageCount(self.PackageCount() - 1)
-            };
-                self.getalldata = function (item, event)
-                {
-                    
+                };
+                self.getalldata = function (item, event) {
+
                     self.isNewUser(false);
                     self.searchOptionvisible(false);
                     self.otheruservisible(false);
-                    self.ActiveUserForShipment(true);                 
+                    self.ActiveUserForShipment(true);
                     //from db person info
                     self.FirstName(item.FirstName);
                     self.LastName(item.LastName);
                     self.Phone(item.Phone);
                     self.ApartmentNumber(item.Apt);
-                   
+
                     //from db keys vals
                     self.CurrentBuildingID(item.BuildingID);
                     self.ApartmentID(item.ApartmentID);
                     self.Userkey(item.Userkey);
 
-                  
+
                     //from db Address
                     self.Address(item.Address);
                     self.City(item.city);
@@ -479,13 +481,12 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     self.Zipcode(item.zipcode);
 
                     //setting up packages field
-                    if (self.users().length < 1)
-                    {
+                    if (self.users().length < 1) {
                         self.addUser();
                         //alert(self.users().length);
                     }
-                    
-                  
+
+
                 };
                 self.OtherUserFormToObservable = function () {
                     self.otheruservisible(false);
@@ -497,14 +498,16 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                         //alert(self.users().length);
                     }
                 };
+
+                };
                 ko.applyBindings(viewModel);
-               
+
             });
-       
+            
+           
 
 
-        
-
+        });
 
 
     </script>
