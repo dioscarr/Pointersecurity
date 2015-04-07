@@ -445,7 +445,20 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                         }
                     }).complete(function () {
                         self.users.removeAll();
+                        self.FirstName("");
+                        self.LastName("");
+                        self.Phone("");
+                        self.ApartmentNumber("");
+                        self.Userkey("");
                         self.ActiveUserForShipment(false);
+                        self.PackageCount(0);
+                        self.isNewUser(false);
+                        self.aptlisVisible(false);//set visibility for apartment list
+                        self.otheruservisible(false);//set visibility for other user form
+                        self.searchOptionvisible(true);//set visibility for all search components
+                        self.searchboxOptionvisible(true);//set visibility for SearchOptions 
+                        self.Packagevisible(true);
+
                     });
 
                 };

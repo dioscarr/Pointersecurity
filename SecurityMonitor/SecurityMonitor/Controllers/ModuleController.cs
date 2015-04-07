@@ -186,7 +186,7 @@ namespace SecurityMonitor.Controllers
                     CarrierService = c.ShippingCarrier.Services,
                     Status = c.PackageDeliveryStatus.Status,
                     Service = c.ShippingService.Service
-
+                    
                 })
                 .Take(10)
                 .ToList();            
