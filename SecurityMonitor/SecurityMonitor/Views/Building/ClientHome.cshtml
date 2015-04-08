@@ -28,37 +28,38 @@
         @for (var i = 0; i < 4; i++)
         {
              <!--vCard starts-->
-            <div class="col-md-3 col-lg-3 nopadding clientbox">
-                <!--header starts-->
-                <section class=" col-md-12">
-                    <section class=" boxhead col-md-12 col-lg-12 nopadding ">
-                        <div class=" boxname col-lg-8 col-md-8">
-                            @names[vcardIndex]
-                        </div>
-                        <img class="boxmenu  imgmenu col-lg-4 col-md-4 hollow3" src="~/img/menu.png" data-linkme=@generatedID />
-                    </section>
+    <div class="col-md-3 col-lg-3  nopadding clientbox">
+        <!--header starts-->
+        <section class=" col-md-12">
+            <section class=" boxhead col-md-12 col-lg-12 nopadding ">
+                <div class=" boxname col-lg-8 col-md-8">
+                    @names[vcardIndex]
+                </div>
+                <img class="boxmenu  imgmenu col-lg-4 col-md-4 hollow3" src="~/img/menu.png" data-linkme=@generatedID />
+            </section>
+        </section>
+        <!--header ends-->
+        <!--Content starts-->
+        <section class=" col-md-12 ">
+            <div class="col-md-12 boxContent vcardshadow-bottom">
+
+                <section class=" col-md-12 col-lg-12 text-center sectionaddress nopadding">
+                    <span class="boxbldsnumber ">4530 Broadway NY, NY 10040</span>
+
                 </section>
-                <!--header ends-->
-                <!--Content starts-->
-                <section class=" col-md-12">
-                    <div class="col-md-12 boxContent">
-                        
-                        <section class=" col-md-12 col-lg-12 nopadding">
-                            <span class="boxbldsnumber">4530 Broadway, NY, NY 10040</span>
 
-                        </section>
-
-                        <section class="col-md-12 col-lg-12 text-center  boxblds">
-                            <span style="padding:60px;">
-                                <span class="numberstyle">14</span>
-                                <span>blds</span>
-                            </span>
-                        </section>
+                <section class="col-md-12 col-lg-12  nopadding text-center  boxblds">
+                    <div class="col-md-12 boxbldsnumbercombine  text-center  ">
+                        <span class="numberstyle numberstyle-blds ">14</span>
+                        <span class=" numberstyle-blds blds ">blds</span>
                     </div>
                 </section>
-                <!--Content ends-->
 
             </div>
+        </section>
+        <!--Content ends-->
+
+    </div>
             <!--vCard ends-->
             
             vcardIndex = vcardIndex + 1;
@@ -69,19 +70,19 @@
     <div class="row extraContent" data-linked=@generatedID>
         <div class="col-md-12  ">
             <!--Client Information Information -->
-            <div class="col-md-6 extraContentinside ">
+            <div class="col-md-6 extraContentinside vcardshadow-bottom ">
                 <span>Brooklyn Terrance Inc</span>
             </div>
             <!--List of Building-->
-            <div class="col-md-6 scrollable extraContentinside boxbldsList" >
-               @for (var k = 0; k < 20; k++)
-               {
-                <div class="col-md-12 bldslistrows">
-                    row content
-                </div>
+            <div class="col-md-6 scrollable extraContentinside boxbldsList vcardshadow-bottom ">
+                @for (var k = 0; k < 20; k++)
+                {
+                    <div class="col-md-12 bldslistrows vcardshadow-bottom ">
+                        row content
+                    </div>
 
-               }
-               
+                }
+
             </div>
             
 
