@@ -134,8 +134,10 @@
 
         $('.imgmenu').click(function () {
             var menuid = $(this).attr("data-linkme");
-            $('.extraContent[data-linked ='+ menuid +']').slideToggle();           
-        });
+            $(this).toggleClass("hoveron");
+            $('.extraContent[data-linked =' + menuid + ']').slideToggle();
+        }
+        );
 
 
 
