@@ -844,8 +844,80 @@ margin-top:2px;
  
 }
 
-.ClientHomeCSSSettings {
+.clientbox {
     table-layout:fixed;
     min-height:200px;
     max-height:200px;
+    outline: 3px solid blue;
 }
+
+.boxhead {
+    background-color: #0071BC;
+    height: 60px;
+    border-bottom: 4px solid #005F93;
+}
+
+.boxmenu {
+    position:relative;
+    left: 220px;
+    bottom: 39px;
+    height: 40px;
+
+}
+
+.boxname {
+    position:relative;
+    top: 8px;
+    padding: 10px 0 0 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #F2F2F2;
+}
+
+.boxapartment {
+ position:relative;
+    top: 8px;
+    padding: 20px 30px 0 30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #3A3A3A;
+}
+.col-lg-3 {
+     padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.boxaptnumber {
+    position:relative;
+    top: 8px;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: #3A3A3A;
+    outline: 1px solid red;
+}
+
+.numberstyle {
+    width: 60px;
+    height: 60px;
+    background-color: #0071BC;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #f2f2f2;
+    line-height: 30px;
+}
+
+.numberstyle a {
+   position:relative;
+   top: 40px;
+
+}
+
+.aptdesc {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3A3A3A;
+    outline: 1px solid red;
+}
+
