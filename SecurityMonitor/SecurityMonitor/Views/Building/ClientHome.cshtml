@@ -13,62 +13,81 @@
     
     
     string[] names = { "Dioscar Rodriguez", "John Doe","Manuel Smith", "Greg Smith", "Jonh Aldo", "Marcos Diaz", "Ju Li", "Sam Smurf" };
+
+    var rowcount = names.Count() / 4;
+    var vcardIndex = 0;  
+   
 }
+@for (var j = 0; j < rowcount; j++)
+{
+    var generatedID = j;// id to manipulate the hidden div that wil expose the extra content 
 
-@for (var j = 0; j < 2; j++)
-    {
-    
+    <div class="row  clientBox clientboxrow">
 
-        var generatedID = j;
-    
-<div class="row  clientBox clientboxrow"  >
-
-    <!--loops 20 times so only needs to create one Client Card. each row contain four cards. The width is base on the the amount wof collumns-->
-    @for (var i = 0; i < 4; i++)
-    {
-        <div class="col-md-3 col-lg-3 nopadding clientbox">
-            <!--header starts-->
-            <section class=" col-md-12">
-                <section class=" boxhead col-md-12 col-lg-12 nopadding ">
-                    <div class=" boxname col-lg-8 col-md-8">
-                        @names[i]
-                    </div>
-                    <img class="boxmenu  imgmenu col-lg-4 col-md-4" src="~/img/menu.png" data-linkme=@generatedID />
+        <!--loops 20 times so only needs to create one Client Card. each row contain four cards. The width is base on the the amount wof collumns-->
+        @for (var i = 0; i < 4; i++)
+        {
+             <!--vCard starts-->
+            <div class="col-md-3 col-lg-3 nopadding clientbox">
+                <!--header starts-->
+                <section class=" col-md-12">
+                    <section class=" boxhead col-md-12 col-lg-12 nopadding ">
+                        <div class=" boxname col-lg-8 col-md-8">
+                            @names[vcardIndex]
+                        </div>
+                        <img class="boxmenu  imgmenu col-lg-4 col-md-4 hollow3" src="~/img/menu.png" data-linkme=@generatedID />
+                    </section>
                 </section>
-            </section>
-            <!--header ends-->
+                <!--header ends-->
+                <!--Content starts-->
+                <section class=" col-md-12">
+                    <div class="col-md-12 boxContent">
+                        
+                        <section class=" col-md-12 col-lg-12 nopadding">
+                            <span class="boxbldsnumber">4530 Broadway, NY, NY 10040</span>
 
-            <!--Content starts-->
-            <section class=" col-md-12" >
-                <div class="col-md-12 boxContent" >
-                    <section class=" col-md-12 col-lg-12 nopadding">
-                        <span class="boxbldsnumber">4530 Broadway, NY, NY 10040</span>
+                        </section>
 
-                    </section>
+                        <section class="col-md-12 col-lg-12 text-center  boxblds">
+                            <span style="padding:60px;">
+                                <span class="numberstyle">14</span>
+                                <span>blds</span>
+                            </span>
+                        </section>
+                    </div>
+                </section>
+                <!--Content ends-->
 
-                    <section class="col-md-12 col-lg-12 text-center  boxblds">
-                        <span style="padding:60px;">
-                            <span class="numberstyle">14</span>
-                            <span>blds</span>
-                        </span>
-                    </section>
+            </div>
+            <!--vCard ends-->
+            
+            vcardIndex = vcardIndex + 1;
+        }
+
+    </div>
+    <!--Hidden Div starts-->
+    <div class="row extraContent" data-linked=@generatedID>
+        <div class="col-md-12  ">
+            <!--Client Information Information -->
+            <div class="col-md-6 extraContentinside ">
+                <span>Brooklyn Terrance Inc</span>
+            </div>
+            <!--List of Building-->
+            <div class="col-md-6 scrollable extraContentinside boxbldsList" >
+               @for (var k = 0; k < 20; k++)
+               {
+                <div class="col-md-12 bldslistrows">
+                    row content
                 </div>
-            </section>
-            <!--Content ends-->
+
+               }
+               
+            </div>
+            
 
         </div>
-
-    }
-
-</div>
- <div class="row extraContent" data-linked=@generatedID >
-     <div class="col-md-12  ">
-         <div class="col-md-12 extraContentinside">
-             <span>sdfdsfvdffdgvf</span>
-         </div>
-        
-     </div>
- </div>
+    </div>
+    <!--Hidden div ends-->
     <div class="row rowheight "></div>
 }
 

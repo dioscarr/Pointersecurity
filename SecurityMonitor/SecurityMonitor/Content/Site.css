@@ -859,7 +859,8 @@ margin-top:2px;
 }
 
 .boxmenu {
-    height:50px;  
+    height:70px; 
+    padding-bottom:20px; 
 }
 
 .boxname {
@@ -954,4 +955,15 @@ padding:30px
 }
 .rowheight {
       margin-bottom:30px !important;
+}
+
+
+.boxbldsList {
+
+height:200px;
+}
+.bldslistrows {
+padding:10px;
+outline:1px solid green;
+
 }
