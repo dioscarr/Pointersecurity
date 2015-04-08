@@ -9,23 +9,31 @@
 <!--Jquery is already referenced-->
 <!--css is already referenced. The Files are under Content/Site.css -->
 <!--Start Html Code -->
+@{
+    
+    
+    string[] names = { "Dioscar Rodriguez", "John Doe","Manuel Smith", "Greg Smith", "Jonh Aldo", "Marcos Diaz", "Ju Li", "Sam Smurf" };
+}
 
-
-@for (var j = 0; j < 1; j++)
+@for (var j = 0; j < 2; j++)
     {
+    
+
+        var generatedID = j;
+    
 <div class="row  clientBox clientboxrow"  >
 
     <!--loops 20 times so only needs to create one Client Card. each row contain four cards. The width is base on the the amount wof collumns-->
-    @for (var i = 0; i < 1; i++)
+    @for (var i = 0; i < 4; i++)
     {
         <div class="col-md-3 col-lg-3 nopadding clientbox">
             <!--header starts-->
             <section class=" col-md-12">
                 <section class=" boxhead col-md-12 col-lg-12 nopadding ">
                     <div class=" boxname col-lg-8 col-md-8">
-                        John Doe
+                        @names[i]
                     </div>
-                    <img class="boxmenu  imgmenu col-lg-4 col-md-4" src="~/img/menu.png" />
+                    <img class="boxmenu  imgmenu col-lg-4 col-md-4" src="~/img/menu.png" data-linkme=@generatedID />
                 </section>
             </section>
             <!--header ends-->
@@ -53,7 +61,7 @@
     }
 
 </div>
- <div class="row extraContent" >
+ <div class="row extraContent" data-linked=@generatedID >
      <div class="col-md-12  ">
          <div class="col-md-12 extraContentinside">
              <span>sdfdsfvdffdgvf</span>
@@ -105,7 +113,8 @@
         //jquery here 
 
         $('.imgmenu').click(function () {
-            $('.extraContent').slideToggle();
+            var menuid = $(this).attr("data-linkme");
+            $('.extraContent[data-linked ='+ menuid +']').slideToggle();           
         });
 
 
