@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewBag.Title = "Dasboard";
 }
 <head>
@@ -22,10 +22,10 @@
     </div>
     <!--Client tile ends--> 
     <!--Search tile-->
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height lightdarkblue homebox">
-            <img src="~/img/Search.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
-            <span style="position:absolute; left:28%; bottom:10%; font-size:150%;">Search</span>
-        </div> 
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height lightdarkblue homebox" onclick="location.href = '@Url.Action("ClientHome", "Building")'">
+        <img src="~/img/Search.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
+        <span style="position:absolute; left:28%; bottom:10%; font-size:150%;">New Client Page</span>
+    </div> 
     <!--Search tile ends-->   
 </div>
 <div class="row ">

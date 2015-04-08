@@ -493,6 +493,7 @@
     <Content Include="img\errors1.jpg" />
     <Content Include="img\home.png" />
     <Content Include="img\M.png" />
+    <Content Include="img\menu.png" />
     <Content Include="img\R.png" />
     <Content Include="img\reports.png" />
     <Content Include="img\S.png" />
@@ -832,7 +833,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64083</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
