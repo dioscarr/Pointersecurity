@@ -10,82 +10,151 @@
 <!--css is already referenced. The Files are under Content/Site.css -->
 <!--Start Html Code -->
 @{
-    
-    
-    string[] names = { "Dioscar Rodriguez", "John Doe","Manuel Smith", "Greg Smith", "Jonh Aldo", "Marcos Diaz", "Ju Li", "Sam Smurf" };
+    string[] names = { "Dioscar Rodriguez", "John Doe", "Manuel Smith", "Greg Smith", "Jonh Aldo", "Marcos Diaz", "Ju Li", "Sam Smurf" };
 
     var rowcount = names.Count() / 4;
-    var vcardIndex = 0;  
-   
+    var vcardIndex = 0;
 }
+
+<div class="row ">
+
+    <div class="box">
+        <div class="container-4 ">
+            <input type="search" id="search" class=" text-center" placeholder="Search for Client..." />
+            <button class="icon"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+</div>
+<div class="row rowheight "></div>
+
 @for (var j = 0; j < rowcount; j++)
 {
-    var generatedID = j;// id to manipulate the hidden div that wil expose the extra content 
-
-    <div class="row  clientBox clientboxrow">
-
+    var generatedID = j;// id to manipulate the hidden div that wil expose the extra content
+    <div class="row hidden-sm hidden-xs clientBox clientboxrow">
         <!--loops 20 times so only needs to create one Client Card. each row contain four cards. The width is base on the the amount wof collumns-->
         @for (var i = 0; i < 4; i++)
         {
              <!--vCard starts-->
-    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3  nopadding clientbox">
-        <!--header starts-->
-        <section class=" col-md-12">
-            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
-                <div class=" boxname col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                    @names[vcardIndex]
-                </div>
-                <img class="boxmenu  imgmenu col-lg-4 col-md-4 col-sm-4 col-xs-4 hollow3" src="~/img/menu.png" data-linkme=@generatedID />
-            </section>
-        </section>
-        <!--header ends-->
-        <!--Content starts-->
-        <section class=" col-md-12 ">
-            <div class="col-md-12 boxContent vcardshadow-bottom">
-
-                <section class=" col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center sectionaddress nopadding">
-                    <span class="boxbldsnumber ">4530 Broadway NY, NY 10040</span>
-
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3  nopadding clientbox">
+                <!--header starts-->
+                <section class=" col-md-12">
+                    <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                        <div class=" boxname col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            @names[vcardIndex]
+                        </div>
+                        <img class="boxmenu  imgmenu col-lg-4 col-md-4 col-sm-4 col-xs-4 hollow3" src="~/img/menu.png" data-linkme=@generatedID />
+                    </section>
                 </section>
-
-                <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding text-center  boxblds">
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 boxbldsnumbercombine  text-center  ">
-                        <span class="numberstyle numberstyle-blds ">14</span>
-                        <span class=" numberstyle-blds blds ">blds</span>
+                <!--header ends-->
+                <!--Content starts-->
+                <section class=" col-md-12 ">
+                    <div class="col-md-12 boxContent ">
+                        <section class=" col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center sectionaddress nopadding">
+                            <span class="boxbldsnumber ">4530 Broadway NY, NY 10040</span>
+                        </section>
+                        <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding text-center  boxblds">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 boxbldsnumbercombine  text-center  ">
+                                <span class="numberstyle numberstyle-blds ">14</span>
+                                <span class=" numberstyle-blds blds ">blds</span>
+                            </div>
+                        </section>
                     </div>
                 </section>
-
+                <!--Content ends-->
             </div>
-        </section>
-        <!--Content ends-->
-
-    </div>
             <!--vCard ends-->
-            
             vcardIndex = vcardIndex + 1;
         }
-
     </div>
-    <!--Hidden Div starts-->
+
+
+
+
+  <!-- --------------------------------------this section will appear on small devices TODO: not finished---------------------------------------------- -->
+
+
+
+
+    <div class="row hidden-lg hidden-sm clientBox clientboxrow">
+        @{
+        var rowcount2 = names.Count() / 4;
+        var vcardIndex2 = 0;
+        }
+        <!--loops 20 times so only needs to create one Client Card. each row contain four cards. The width is base on the the amount wof collumns-->
+        @for (var r = 0; r < 2; r++)
+        {
+             <!--vCard starts-->
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6  nopadding clientbox">
+                <!--header starts-->
+                <section class=" col-md-12">
+                    <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                        <div class=" boxname col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            @names[vcardIndex2]
+                        </div>
+                        <img class="boxmenu  imgmenu col-lg-4 col-md-4 col-sm-4 col-xs-4 hollow3" src="~/img/menu.png" data-linkme=@generatedID />
+                    </section>
+                </section>
+                <!--header ends-->
+                <!--Content starts-->
+                <section class=" col-md-12 ">
+                    <div class="col-md-12 boxContent ">
+                        <section class=" col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center sectionaddress nopadding">
+                            <span class="boxbldsnumber ">4530 Broadway NY, NY 10040</span>
+                        </section>
+                        <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding text-center  boxblds">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 boxbldsnumbercombine  text-center  ">
+                                <span class="numberstyle numberstyle-blds ">14</span>
+                                <span class=" numberstyle-blds blds ">blds</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <!--Content ends-->
+            </div>
+            <!--vCard ends-->
+            vcardIndex2 = vcardIndex2 + 1;
+        }
+    </div>
+
+
+
+
+    <!-- ------------------------------------Hidden Div starts TODO:------------------------------------------------------------------------------------>
+    
+    
+    
     <div class="row extraContent" data-linked=@generatedID>
+
+
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  ">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 extraContentinsideHeader  ">
+            </div>
             <!--Client Information Information -->
-            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 extraContentinside vcardshadow-bottom ">
-                <span>Brooklyn Terrance Inc</span>
+            <div class="col-md-3 col-lg-3 extraContentinside  ">
+                <span class="col-lg-12 col-md-12 text-center clientContactinfoHeader ">Brooklyn Terrance Inc</span>
+                <span class="col-lg-12 col-md-12 text-center  clientContactinfo ">1411 Broadway</span>
+                <span class="col-lg-12 col-md-12 text-center clientContactinfo ">New York, N.Y. 10040</span>
+                <span class="col-lg-12 col-md-12 text-center ClientEmail ">JoeDoe@Hotmail.com</span>
+                <span class="col-lg-12 col-md-12 text-center ClientPhone ">Tel:878-998-9988</span>
+                <div class="col-lg-12 col-md-12 text-center Clientbuttoms ">
+                    <button class="btn btn-sm btn-primary">Edit</button>
+                    <button class="btn btn-sm btn-primary">Delete</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 extraContentinside  ">
+
             </div>
             <!--List of Building-->
-            <div class="ccol-md-6 col-lg-6 col-sm-6 col-xs-6 scrollable extraContentinside boxbldsList vcardshadow-bottom ">
+            <div class="ccol-md-6 col-lg-6 col-sm-6 col-xs-6 scrollable extraContentinside boxbldsList  ">
                 @for (var k = 0; k < 20; k++)
                 {
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bldslistrows vcardshadow-bottom ">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bldslistrows  ">
                         row content
                     </div>
-
                 }
-
             </div>
-
-
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 extraContentinsideFooter  ">
+            </div>
         </div>
     </div>
     <!--Hidden div ends-->
@@ -115,22 +184,19 @@
 
 
 
-
-
 <!--End Html Code-->
-
-
 <!--Start JavaScript code-->
-
 @section scripts
 {
-  <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
-<!--Reference the autogenerated SignalR hub script. -->
-<script src="~/signalr/hubs"></script>  
-        
+
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+
 
     <script type="text/javascript">
-        //jquery here 
+        //jquery here
 
         $('.imgmenu').click(function () {
             var menuid = $(this).attr("data-linkme");
