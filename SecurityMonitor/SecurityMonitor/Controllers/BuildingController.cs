@@ -1293,6 +1293,7 @@ namespace SecurityMonitor.Controllers
         public ActionResult ClientHome()
         {
             ClientHomeVM CH = new ClientHomeVM();
+            CH.clients = db.Clients.ToList();
             return View(CH);
         }
 

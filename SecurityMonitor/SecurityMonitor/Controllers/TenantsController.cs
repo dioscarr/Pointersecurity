@@ -12,6 +12,7 @@ using SecurityMonitor.Models;
 
 namespace SecurityMonitor.Controllers
 {
+    [Authorize(Roles="Tenant")]
     public class TenantsController : Controller
     {
         private PointerdbEntities db = new PointerdbEntities();
@@ -123,10 +124,6 @@ namespace SecurityMonitor.Controllers
         }
 
 
-        public ActionResult TenantProfile()
-        {
-            return View();
-        }
 
 
 
@@ -136,6 +133,33 @@ namespace SecurityMonitor.Controllers
 
             return View(TIvm);
         }
+
+
+        [HttpGet]
+        //Tenant profile ------------------------------------------------------------------------------------
+        public ActionResult TenantProfile(string UserID)
+        {
+            TenantVM tenantprofile = new TenantVM();
+            tenantprofile.ID = UserID;
+            return View(tenantprofile);
+        }
+        [HttpGet]
+        public ActionResult Repair(string tenantID)
+        {
+            RepairVM repair = new RepairVM();
+            
+            
+            return View(repair);
+        }
+
+        public string TenantRepairRequest(TenantRepairRequestVM model)
+        {
+          
+            //TODO: repair to db
+            return "";
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

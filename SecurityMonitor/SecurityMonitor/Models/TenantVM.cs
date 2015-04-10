@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Doormandondemand;
 
 namespace SecurityMonitor.Models
 {
@@ -25,6 +26,7 @@ namespace SecurityMonitor.Models
         public string isTempPWord { get; set; }
         public int BuildingID { get; set; }
         public int aptID { get; set; }
+        public List<Module> modules { set; get; }
         public bool EmailNotification { get; set; }
         public bool GenerateAutomaticPassword { get; set; }
     }

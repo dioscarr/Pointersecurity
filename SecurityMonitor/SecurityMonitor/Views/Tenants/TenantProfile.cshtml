@@ -1,0 +1,19 @@
+﻿@model SecurityMonitor.Models.TenantVM
+
+@{
+    ViewBag.Title = "TenantProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row text-center">
+    <h2>Page is under Construction</h2>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        @Html.ActionLink("Repair", "Repair", "Tenants", new {TenantID= @Model.ID },null)
+    </div>
+</div>

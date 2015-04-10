@@ -1,4 +1,16 @@
-﻿body {
+﻿@font-face {
+    font-family: 'overpassregular';
+    src: url('~/fonts/Overpass_Regular.eot');
+    src: url('~/fonts/Overpass_Regular.eot?#iefix') format('embedded-opentype'),
+         url('~/fonts/Overpass_Regular.woff2') format('woff2'),
+         url('~/fonts/Overpass_Regular.woff') format('woff'),
+         url('~/fonts/Overpass_Regular.ttf') format('truetype'),
+         url('~/fonts/Overpass_Regular.svg#overpassregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     background:black;
@@ -122,10 +134,7 @@ padding-top:20px;
 .AdminMEnu {
     height:60px; width:60px;
      padding:20px;
-/*height:50px;*/
  font-size:20px; 
- /*padding-top:20px;*/
- /*padding-left:14px;*/
  color:#C1CDCD;
 
  
@@ -1140,6 +1149,48 @@ font-size:22px;
     background: white;
   }
 
-#search:hover {
+.instructionrepair {
+ 
+   min-height:60px;
+}
+.instructionrepairbox
+{
+    margin:40px 0;
+     padding:40px;
+       min-height:100px;
+
+}
+.repairheight {
+
+height:700px;
+}
+
+.requestlogbox {
+       min-height:100px;
+}
+.Openrequestheader {
+    
+}
+.OpenRequestCollunm {
+    padding:20px 0;
+}
+.OpenRequestRows {
+
+}
+
+.headingopenerequests {
+
+padding:20px 0;
+}
+
+.displayinline {
+display:inline;
+}
+.OpenRequestsSettings {
+    padding-right:20px;
+}
+#openrequesttitle {
+    position:relative;
+    left:100px;
 
 }

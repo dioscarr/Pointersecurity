@@ -1,0 +1,71 @@
+﻿@model SecurityMonitor.Models.RepairVM
+
+@{
+    ViewBag.Title = "Repair";
+    Layout = "~/Views/Shared/_LayoutTenant .cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 text-center outline">
+       <h1> Repair Page</h1>
+    </div>
+</div>
+
+<div class="row repairheight">
+    <div class="col-lg-12 col-md-12 outline instructionrepairbox">
+        <div class="col-lg-12 col-md-12 outline instructionrepair ">
+            <p>The words requests and holds and reserves are interchangeable.
+             When you place a request, your name is put on a list of people 
+            waiting for an item in the Library’s collection. When the item 
+            becomes available for you, we notify you by telephone or email
+             to pick up the item, notify you and place the item on a bookmobile
+             for you, or mail the item to you.
+                The words requests and holds and reserves are interchangeable.
+                When you place a request, your name is put on a list of people
+                waiting for an item in the Library’s collection. When the item
+                becomes available for you, we notify you by telephone or email
+                to pick up the item, notify you and place the item on a bookmobile
+                for you, or mail the item to you.</p>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 outline requestlogbox nopadding">
+        <div class="col-lg-12 col-md-12 text-center outline headingopenerequests ">
+            <h1 id="openrequesttitle" class="displayinline  ">Open Request</h1>
+            <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>            
+            <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-3x"></button>
+            <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-3x"></button>
+        </div>
+        <div class="col-lg-12 col-md-12 outline nopadding Openrequestheader ">
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Date</span>
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Request#</span>
+            <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 outline">Repair Request</span>
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Status</span>
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Edit</span>
+        </div>
+        @for (var i = 0; i < 5; i++)
+        {
+            <div class="col-lg-12 col-md-12 outline nopadding OpenRequestRows">
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">12/03/2015</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">120320151</span>
+                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 outline">No heat</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">In progress</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">O</span>
+            </div>
+        }
+
+        
+    </div>
+    </div>
+
+@section scripts{
+
+    
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+    </script>
+
+}

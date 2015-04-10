@@ -15,7 +15,7 @@ using SecurityMonitor.Workes;
 
 namespace SecurityMonitor.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
