@@ -147,17 +147,25 @@ namespace SecurityMonitor.Controllers
         public ActionResult Repair(string tenantID)
         {
             RepairVM repair = new RepairVM();
+            repair.RepairRequest = db.RepairRequest.OrderBy(c=>c.RequestedDate).ToList();
+            repair.RequestCategories = db.RepairRequestCategories.Select(r => new SelectListItem { Text = r.Categories, Value = r.Id.ToString() }).ToList();
+            repair.TenantID = tenantID;
             
-            
+
             return View(repair);
         }
 
-        public string TenantRepairRequest(TenantRepairRequestVM model)
+        public ActionResult AddRequest(RepairRequest model)
         {
-          
-            //TODO: repair to db
-            return "";
+            if(model!=null)
+            {
+                db.RepairRequest.Add(model);
+                db.SaveChanges();
+
+            }
+            return View();
         }
+
 
 
 

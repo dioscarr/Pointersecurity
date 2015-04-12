@@ -321,7 +321,7 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                                      { value: 1, name: 'Other couriers' }]
                     items = ko.observableArray(optionsVM);
 
-
+                    
 
                     self.mydefault = function (value) {
 
@@ -338,7 +338,7 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
                     };
 
                     self.otheruservisible.subscribe(function (value) {
-
+       
                         if (value == true) {
                             self.FirstName("");
                             self.LastName("");

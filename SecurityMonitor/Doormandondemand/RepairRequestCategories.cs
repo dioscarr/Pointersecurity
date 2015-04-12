@@ -12,26 +12,18 @@ namespace Doormandondemand
     using System;
     using System.Collections.Generic;
     
-    public partial class Tenant
+    public partial class RepairRequestCategories
     {
-        public Tenant()
+        public RepairRequestCategories()
         {
             this.RepairRequest = new HashSet<RepairRequest>();
-            this.Requests = new HashSet<Requests>();
         }
     
-        public string ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Phone { get; set; }
-        public string Username { get; set; }
-        public System.DateTime Created { get; set; }
-        public string isTemPWord { get; set; }
-        public Nullable<int> aptID { get; set; }
+        public int Id { get; set; }
+        public string Categories { get; set; }
+        public int BuildingID { get; set; }
     
-        public virtual Apartment Apartment { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Buildings Buildings { get; set; }
         public virtual ICollection<RepairRequest> RepairRequest { get; set; }
-        public virtual ICollection<Requests> Requests { get; set; }
     }
 }

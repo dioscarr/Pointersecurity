@@ -5,15 +5,87 @@
     Layout = "~/Views/Shared/_LayoutTenant .cshtml";
 }
 
+
+<!--Request Form-->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header nopadding " id="modalheaderid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h4 class="modal-title" id="myModalLabel ">New Request</h4>
+                </div> 
+            </div>
+            <div class="modal-body lightgrey">
+                <div class="col-lg-12 col-md-12 ">
+                    <div class="col-lg-12 col-md-12  squarearoundform">
+                        <div class="col-lg-6 col-md-6 nopadding displayinline rformrowheight ">
+                            <span class="displayinline">Request</span>
+                            @Html.DropDownList("Categories", @Model.RequestCategories, "Select Category", new { @class = "displayinline form-control", data_bind = "value:Category" }) 
+                            @*<span data-bind="text:Category">oio</span>*@
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
+                            <span class="displayinline">Ugency 
+                            High @Html.RadioButton("rbtnHighlow","1",false, new { @class = "displayinline ", data_bind="checked:Urgency" }) 
+                            Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })</span>
+                            @*<span data-bind="text:Urgency">oio</span>*@
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
+                            <span class="displayinline">Phone <input type="text" class="displayinline form-control " placeholder="347.568.6699" data-bind="value:Phone, valueUpdate:'afterkeydown'" /></span>
+                            @*<span data-bind="text:Phone">oio</span>*@
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
+                            <span class="displayinline">Email <input type="text" class="form-control displayinline" placeholder="Examples@mail.com" data-bind="value:Email, valueUpdate:'afterkeydown'"  /> </span>
+                            @*<span data-bind="text:Email">oio</span>*@
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
+                            <span>Permission to Enter: 
+                            Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:permission" }) 
+                            NO @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:permission" })</span>
+                            @*<span data-bind="text:permission">oio</span>*@
+                        </div>
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight ">
+                            <span class="btn btn-default btn-file">Attach Photo: <input type="file" name="file" /></span><span data-bind="text:fileName"></span>
+
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 nopadding">
+                            <span >Enter Instructions: @Html.TextArea("instructions", new { @class = " rrform form-control", @cols = 300, @rows = 2, data_bind = "value:Instruction, valueUpdate:'afterkeydown'" })</span>
+                            <span data-bind="text:Instruction">oio</span>
+                        </div>
+                        <div class="col-lg-12 col-md-12 nopadding">
+                            <span >Problem Description: @Html.TextArea("Description", new { @class = " rrform form-control", rows = 8, data_bind = "value:Description, valueUpdate:'afterkeydown'" })</span>
+                            @*<span data-bind="text:Description">oio</span>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default "  data-dismiss="modal">Cancel</button>
+
+                <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:SendRequest">Send Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Request Form-->
+
+
 <div class="row">
-    <div class="col-lg-12 col-md-12 text-center outline">
+    <div class="col-lg-12 col-md-12 text-center  repairheading">
        <h1> Repair Page</h1>
     </div>
 </div>
 
 <div class="row repairheight">
-    <div class="col-lg-12 col-md-12 outline instructionrepairbox">
-        <div class="col-lg-12 col-md-12 outline instructionrepair ">
+    <div class="col-lg-12 col-md-12  instructionrepairbox">
+        <div class="col-lg-12 col-md-12  instructionrepair ">
             <p>The words requests and holds and reserves are interchangeable.
              When you place a request, your name is put on a list of people 
             waiting for an item in the Library’s collection. When the item 
@@ -29,28 +101,28 @@
         </div>
     </div>
 
-    <div class="col-lg-12 col-md-12 outline requestlogbox nopadding">
-        <div class="col-lg-12 col-md-12 text-center outline headingopenerequests ">
+    <div class="col-lg-12 col-md-12  requestlogbox nopadding">
+        <div class="col-lg-12 col-md-12 text-center  headingopenerequests ">
             <h1 id="openrequesttitle" class="displayinline  ">Open Request</h1>
             <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>            
             <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-3x"></button>
-            <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-3x"></button>
+            <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-3x" id="hitme" data-toggle="modal" data-target="#myModal"></button>
         </div>
-        <div class="col-lg-12 col-md-12 outline nopadding Openrequestheader ">
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Date</span>
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Request#</span>
-            <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 outline">Repair Request</span>
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Status</span>
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">Edit</span>
+        <div class="col-lg-12 col-md-12  nopadding Openrequestheader blueDefault">
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Date</span>
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Request#</span>
+            <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 ">Repair Request</span>
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
+            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
         </div>
         @for (var i = 0; i < 5; i++)
         {
-            <div class="col-lg-12 col-md-12 outline nopadding OpenRequestRows">
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">12/03/2015</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">120320151</span>
-                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 outline">No heat</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">In progress</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 outline">O</span>
+            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">12/03/2015</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">120320151</span>
+                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 ">No heat</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">In progress</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">O</span>
             </div>
         }
 
@@ -59,12 +131,97 @@
     </div>
 
 @section scripts{
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+        <script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/knockout.mapping-latest.js"></script>
+<script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="~/signalr/hubs"></script>
 
-    
-<link href="~/Content/font-awesome.css" rel="stylesheet" />
-<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 
     <script type="text/javascript">
+            
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(function () {
+
+
+           
+
+            var viewModel = function () {
+
+                var self = this;
+                self.Phone = ko.observable();
+                self.Email = ko.observable();
+                self.Urgency = ko.observable();
+                self.Category = ko.observable();
+                self.Instruction = ko.observable();
+                self.Description = ko.observable();
+                self.permission = ko.observable();
+
+                self.fileName = ko.observable();
+
+                $(document).ready(function () {
+                    $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+                        self.fileName(" "+ label)                        
+                    });
+                });
+
+                var request = {
+                    RepairRequestCategoriesID: self.Category,
+                    ProblemDescription: self.Description,
+                    UrgencyID: self.Urgency,
+                    ContactPhone: self.Phone,                   
+                    Permissiontoenter: self.permission,
+                    Email: self.Email,
+                    Instructions_: self.Instruction,
+                    PhotoUrl: "",
+                    TenantID: "@Model.TenantID",
+                    Status: "On process",
+                    RequestedDate: new Date()
+                };
+
+
+                self.SendRequest = function (fields) {
+                    alert(request);
+                    debugger;
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: "POST",
+                        url: '/Tenants/AddRequest/',
+                        data: ko.toJSON(request),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                           
+                        }
+                    }).complete(function () {
+                        //reset all observable to empty
+                    });
+
+                };
+                
+            };
+
+            ko.applyBindings(viewModel);
+            
+           
+
+
+
+
+
+
+        });
+        
+
+        
+
 
     </script>
 
