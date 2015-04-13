@@ -144,12 +144,12 @@ namespace SecurityMonitor.Controllers
             return View(tenantprofile);
         }
         [HttpGet]
-        public ActionResult Repair(string tenantID)
+        public async Task<ActionResult> Repair(string tenantID)
         {
             RepairVM repair = new RepairVM();
-            repair.RepairRequest = db.RepairRequest.OrderBy(c=>c.RequestedDate).ToList();
-            repair.RequestCategories = db.RepairRequestCategories.Select(r => new SelectListItem { Text = r.Categories, Value = r.Id.ToString() }).ToList();
-            repair.tenant = db.Tenant.Find(tenantID);
+            repair.RepairRequest = await db.RepairRequest.OrderBy(c=>c.RequestedDate).ToListAsync();
+            repair.RequestCategories = await  db.RepairRequestCategories.Select(r => new SelectListItem { Text = r.Categories, Value = r.Id.ToString() }).ToListAsync();
+            repair.tenant = await db.Tenant.FindAsync(tenantID);
             repair.TenantID = tenantID;
             
             
@@ -188,16 +188,16 @@ namespace SecurityMonitor.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public void loadRequest(string TenantID)
+        public async Task<string> loadRequest(string TenantID)
         {
-            var repairRequest = db.RepairRequest
+            var repairRequest =await  db.RepairRequest
                      .Where(c => c.TenantID == TenantID)
                      .Select(c => new
                      {
                          RequestedDate = c.RequestedDate,
                          ProblemDescription = c.ProblemDescription,
                          Status = c.Status
-                     }).OrderBy(c => c.RequestedDate).ToList();
+                     }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
             var Jsonpackages = Json(repairRequest);
@@ -205,7 +205,7 @@ namespace SecurityMonitor.Controllers
 
             var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
             hubContext.Clients.All.newRepairRequestList(Jsonpackages);
-          
+          return "";
         
         }
 
