@@ -187,6 +187,7 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public void loadRequest(string TenantID)
         {
             var repairRequest = db.RepairRequest
