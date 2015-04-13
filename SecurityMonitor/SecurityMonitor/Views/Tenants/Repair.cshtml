@@ -311,14 +311,17 @@
                 };
 
                 $(function () {
-                    $.ajaxSettings.traditional = true;
-                    $.ajax({
-                        type: "GET",
-                        url: '/Tenants/loadRequest/',
-                        data: { TenantID: "@Model.TenantID" },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json"
-                    });
+
+                    setTimeout(function () {
+                        $.ajaxSettings.traditional = true;
+                        $.ajax({
+                            type: "GET",
+                            url: '/Tenants/loadRequest/',
+                            data: { TenantID: "@Model.TenantID" },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json"
+                        });
+                    }, 10000);
 
                 });
 
