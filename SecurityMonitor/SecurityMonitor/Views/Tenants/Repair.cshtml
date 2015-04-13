@@ -293,9 +293,10 @@
 
 
 
-                self.SendRequest = function (fields) {
+                self.SendRequest = function (fields)
+                {
                    // alert(request);
-                    //debugger;
+                    debugger;
                     $.ajaxSettings.traditional = true;
                     self.request.removeAll();
                     $.ajax({
@@ -362,6 +363,7 @@
                 $(function () {
 
                     setTimeout(function () {
+                        $myvalue = 1;
                         $.ajaxSettings.traditional = true;
                         $.ajax({
                             type: "GET",
