@@ -344,9 +344,7 @@
                 self.counter = ko.observable(0);
                 
                               $(function () {
-                    setTimeout(function () {
-                        $('#mywidth').hide();
-                    }, 6000);
+                  
 
                     var counter = 0;
                     var interval = setInterval(function () {
@@ -382,18 +380,39 @@
                 var Notification = $.connection.notificationsHub;
                 Notification.client.newRepairRequestList = function (JsonRepairRequests) {
                   
-                    var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
-                   // debugger;
-                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                    for (var i = 0; i < TrkPkgs.length; i++) {
-                        
-                        self.request.push({
-                            rDate: TrkPkgs[i].RequestedDate,
-                            RequestNumber: "120320151",
-                            Description: TrkPkgs[i].ProblemDescription,
-                            Status: TrkPkgs[i].Status
-                        });
+                    if ($myvalue == 0) {
+                        var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
+                        // debugger;
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
 
+                            self.request.push({
+                                rDate: TrkPkgs[i].RequestedDate,
+                                RequestNumber: "120320151",
+                                Description: TrkPkgs[i].ProblemDescription,
+                                Status: TrkPkgs[i].Status
+                            });
+
+                        }
+                    }
+                    else {
+                        setTimeout(function () {
+                            $('#mywidth').hide();
+                      
+                        var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
+                        // debugger;
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            self.request.push({
+                                rDate: TrkPkgs[i].RequestedDate,
+                                RequestNumber: "120320151",
+                                Description: TrkPkgs[i].ProblemDescription,
+                                Status: TrkPkgs[i].Status
+                            });
+
+                        }
+                        }, 6000);
                     }
 
                    
