@@ -217,17 +217,6 @@
 
 
 
-        $(function () {
-            $.ajaxSettings.traditional = true;
-            $.ajax({
-                type: "GET",
-                url: '/Tenants/loadRequest/',
-                data: { TenantID: "@Model.TenantID" },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            });
-            
-        });
         
 
 
@@ -320,6 +309,19 @@
                     });
 
                 };
+
+                $(function () {
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: "GET",
+                        url: '/Tenants/loadRequest/',
+                        data: { TenantID: "@Model.TenantID" },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    });
+
+                });
+
 
                 // Reference the auto-generated proxy for the hub.
                 //Notification
