@@ -13,7 +13,7 @@ namespace SecurityMonitor.Models
         public List<RepairRequest> RepairRequest { get; set; }
         public List<SelectListItem> RequestCategories { get; set; }
         public List<SelectListItem> Urgency { get; set; }
-        
+        public Tenant tenant { get; set; }
 
     }
 }

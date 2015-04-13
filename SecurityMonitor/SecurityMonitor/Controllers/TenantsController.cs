@@ -149,11 +149,26 @@ namespace SecurityMonitor.Controllers
             RepairVM repair = new RepairVM();
             repair.RepairRequest = db.RepairRequest.OrderBy(c=>c.RequestedDate).ToList();
             repair.RequestCategories = db.RepairRequestCategories.Select(r => new SelectListItem { Text = r.Categories, Value = r.Id.ToString() }).ToList();
+            repair.tenant = db.Tenant.Find(tenantID);
             repair.TenantID = tenantID;
             
+            var repairRequest = db.RepairRequest
+                .Where(c => c.TenantID == tenantID)
+                .Select(c => new { 
+                                   RequestedDate=c.RequestedDate,
+                                   ProblemDescription=c.ProblemDescription,
+                                   Status=c.Status
+                }).OrderBy(c => c.RequestedDate).ToList();
+
+            var Jsonpackages = Json(repairRequest);
+
+
+            var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
+            hubContext.Clients.All.newRepairRequestList(Jsonpackages);
 
             return View(repair);
         }
+
 
         public ActionResult AddRequest(RepairRequest model)
         {
@@ -162,8 +177,47 @@ namespace SecurityMonitor.Controllers
                 db.RepairRequest.Add(model);
                 db.SaveChanges();
 
+
+                var repairRequest = db.RepairRequest
+                   .Where(c => c.TenantID == model.TenantID)
+                   .Select(c => new
+                   {
+                       RequestedDate = c.RequestedDate,
+                       ProblemDescription = c.ProblemDescription,
+                       Status = c.Status
+                   }).OrderBy(c => c.RequestedDate).ToList();
+
+
+               var Jsonpackages = Json(repairRequest);
+
+
+                var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
+                hubContext.Clients.All.newRepairRequestList(Jsonpackages);
+
             }
             return View();
+        }
+
+        [HttpGet]
+        public void loadRequest(string TenantID)
+        {
+            var repairRequest = db.RepairRequest
+                     .Where(c => c.TenantID == TenantID)
+                     .Select(c => new
+                     {
+                         RequestedDate = c.RequestedDate,
+                         ProblemDescription = c.ProblemDescription,
+                         Status = c.Status
+                     }).OrderBy(c => c.RequestedDate).ToList();
+
+
+            var Jsonpackages = Json(repairRequest);
+
+
+            var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
+            hubContext.Clients.All.newRepairRequestList(Jsonpackages);
+          
+        
         }
 
 

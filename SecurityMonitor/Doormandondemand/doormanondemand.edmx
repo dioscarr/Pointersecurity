@@ -392,6 +392,9 @@
           <Property Name="TenantID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RequestedDate" Type="datetime" Nullable="false" />
+          <Property Name="OtherContactPhone" Type="nvarchar" MaxLength="10" />
+          <Property Name="OtherContactName" Type="nvarchar" MaxLength="100" />
+          <Property Name="OtherContactEmail" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -2004,6 +2007,9 @@
           <NavigationProperty Name="RepairUrgency" Relationship="PointerdbModel.RepairRequest_Urgency" FromRole="RepairRequest" ToRole="RepairUrgency" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RequestedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OtherContactPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OtherContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OtherContactEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -3164,6 +3170,9 @@
           <EntitySetMapping Name="RepairRequest">
             <EntityTypeMapping TypeName="PointerdbModel.RepairRequest">
               <MappingFragment StoreEntitySet="RepairRequest">
+                <ScalarProperty Name="OtherContactEmail" ColumnName="OtherContactEmail" />
+                <ScalarProperty Name="OtherContactName" ColumnName="OtherContactName" />
+                <ScalarProperty Name="OtherContactPhone" ColumnName="OtherContactPhone" />
                 <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TenantID" ColumnName="TenantID" />

@@ -19,50 +19,94 @@
             <div class="modal-body lightgrey">
                 <div class="col-lg-12 col-md-12 ">
                     <div class="col-lg-12 col-md-12  squarearoundform">
-                        <div class="col-lg-6 col-md-6 nopadding displayinline rformrowheight ">
+                        <div class="col-lg-6 col-md-6 nopadding displayinline rformrowheight padding20px ">
                             <span class="displayinline">Request</span>
-                            @Html.DropDownList("Categories", @Model.RequestCategories, "Select Category", new { @class = "displayinline form-control", data_bind = "value:Category" }) 
+                            @Html.DropDownList("Categories", @Model.RequestCategories, "Select Category", new { @class = "displayinline form-control", data_bind = "value:Category" })
                             @*<span data-bind="text:Category">oio</span>*@
                         </div>
 
-                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
-                            <span class="displayinline">Ugency 
-                            High @Html.RadioButton("rbtnHighlow","1",false, new { @class = "displayinline ", data_bind="checked:Urgency" }) 
-                            Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })</span>
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight padding20px">
+                            <span class="displayinline">
+                                Ugency:
+                                <span class="padding-left20px">
+                                    <span class="backgroubdlightgrey;">
+                                        High @Html.RadioButton("rbtnHighlow", "1", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })
+                                    </span>
+                                    <span class="backgroubdlightgrey;">
+                                        Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })
+                                    </span>
+                                </span>
+                            </span>
                             @*<span data-bind="text:Urgency">oio</span>*@
                         </div>
+                        <div class="col-lg-12 col-md-12 nopadding rformrowheight1 ">
+                            <div class="col-lg-6 col-md-6 nopadding rformrowheight1 padding30px">
+                                 Contact(s) Information<br />
 
-                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
-                            <span class="displayinline">Phone <input type="text" class="displayinline form-control " placeholder="347.568.6699" data-bind="value:Phone, valueUpdate:'afterkeydown'" /></span>
-                            @*<span data-bind="text:Phone">oio</span>*@
+                            </div>
+                            <div class="col-lg-6 col-md-6 nopadding rformrowheight1 padding30px">
+                                <button class="btn btn-default btn-sm" id="primaryid">Primary contact</button>
+                                <button class="btn btn-default btn-sm" id="contactotherid">Add a secondary contact</button>
+                            </div>
+                        </div>                   
+
+                      
+                        <div class="col-lg-12 col-md-12 nopadding border-bottomcust" id="primaryinfomation">
+                            <div class="col-lg-2 col-md-2 othercontactinforowh text-left">
+                                Primary:
+                            </div>
+                            <div class="col-lg-3 col-md-3 othercontactinforowh text-left">
+                                Name: @Model.tenant.FirstName @Model.tenant.LastName
+                            </div>
+                            <div class="col-lg-3 col-md-3 othercontactinforowh  text-left">
+                                Phone: @Model.tenant.Phone
+                            </div>
+                            <div class="col-lg-4 col-md-4 othercontactinforowh  text-left">
+                                Email: @Model.tenant.Username
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 nopadding rformrowheight  blueDefault othercontactinfo ">
+                            
+                                <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
+                                    <span class="displayinline "> Full Name:</span> @Html.TextBox("OtherContactName", null, new { @Placeholder = "Enter Full Name", @class = "form-control displayinline input-sm ", Data_bind = "value:OtherContactName,valueUpdate:'afterkeydown'" })
+                                </div>
+                                <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
+                                    <span class="displayinline">Phone</span>: @Html.TextBox("OtherContactPhone", null, new { @Placeholder = "345.898.0099", @class = "form-control displayinline input-sm", Data_bind = "value:OtherContactPhone,valueUpdate:'afterkeydown'" })
+
+                                </div>
+                                <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
+                                    <span class="displayinline">Email</span>: @Html.TextBox("OtherContactEmail", null, new { @Placeholder = "Example@mail.com (Optional)", @class = "form-control displayinline input-sm", Data_bind = "value:OtherContactEmail,valueUpdate:'afterkeydown'" })
+
+                                </div>
+
+                            </div>
+                        
+
+
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight padding20px">
+                            <span class="">
+                                Permission to Enter:
+                                <span class="padding-left20px">
+                                    Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:permission" })
+                                    Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:permission" })
+                                </span>
+                            </span>
+                           
+                        </div>
+                        <div class="col-lg-6 col-md-6 nopadding rformrowheight  padding20px">
+                            <span class="btn btn-default btn-file btn-sm">Attach Photo: <input type="file" name="file" /></span><span data-bind="text:fileName"></span>
 
                         </div>
 
-                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
-                            <span class="displayinline">Email <input type="text" class="form-control displayinline" placeholder="Examples@mail.com" data-bind="value:Email, valueUpdate:'afterkeydown'"  /> </span>
-                            @*<span data-bind="text:Email">oio</span>*@
+                        <div class="col-lg-12 col-md-12 nopadding padding20px">
+                            <span>Enter Instructions: @Html.TextArea("instructions", new { @class = " rrform form-control", @cols = 300, @rows = 2, data_bind = "value:Instruction, valueUpdate:'afterkeydown'" })</span>
+                           
                         </div>
-
-                        <div class="col-lg-6 col-md-6 nopadding rformrowheight">
-                            <span>Permission to Enter: 
-                            Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:permission" }) 
-                            NO @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:permission" })</span>
-                            @*<span data-bind="text:permission">oio</span>*@
+                        <div class="col-lg-12 col-md-12 nopadding padding20px">
+                            <span>Problem Description: @Html.TextArea("Description", new { @class = " rrform form-control", rows = 8, data_bind = "value:Description, valueUpdate:'afterkeydown'" })</span>
+                           
                         </div>
-                        <div class="col-lg-6 col-md-6 nopadding rformrowheight ">
-                            <span class="btn btn-default btn-file">Attach Photo: <input type="file" name="file" /></span><span data-bind="text:fileName"></span>
-
                         </div>
-
-                        <div class="col-lg-12 col-md-12 nopadding">
-                            <span >Enter Instructions: @Html.TextArea("instructions", new { @class = " rrform form-control", @cols = 300, @rows = 2, data_bind = "value:Instruction, valueUpdate:'afterkeydown'" })</span>
-                            <span data-bind="text:Instruction">oio</span>
-                        </div>
-                        <div class="col-lg-12 col-md-12 nopadding">
-                            <span >Problem Description: @Html.TextArea("Description", new { @class = " rrform form-control", rows = 8, data_bind = "value:Description, valueUpdate:'afterkeydown'" })</span>
-                            @*<span data-bind="text:Description">oio</span>*@
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -115,16 +159,16 @@
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
         </div>
-        @for (var i = 0; i < 5; i++)
-        {
+        <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
             <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">12/03/2015</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">120320151</span>
-                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 ">No heat</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">In progress</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate">12/03/2015</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:RequestNumber">120320151</span>
+                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 " data-bind="text:Description">No heat</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:Status">In progress</span>
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">O</span>
             </div>
-        }
+        </div>
+        
 
         
     </div>
@@ -132,6 +176,7 @@
 
 @section scripts{
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
         <script src="~/Scripts/knockout-3.1.0.js"></script>
 <script src="~/Scripts/knockout.mapping-latest.js"></script>
 <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
@@ -148,12 +193,58 @@
             input.trigger('fileselect', [numFiles, label]);
         });
 
+
         $(function () {
 
+            $('#contactotherid').on('click', function () {
+                $('.othercontactinfo').slideToggle();
+                $('#contactotherid').toggleClass("btn-default");
+                $('#contactotherid').toggleClass("btn-primary");
+                
+            });
+        });
 
+        $(function () {
+
+            $('#primaryid').on('click', function () {
+                $('#primaryinfomation').slideToggle();
+                $('#primaryid').toggleClass("btn-default");
+                $('#primaryid').toggleClass("btn-primary");
+
+            });
+        });
+
+
+
+
+        $(function () {
+            $.ajaxSettings.traditional = true;
+            $.ajax({
+                type: "GET",
+                url: '/Tenants/loadRequest/',
+                data: { TenantID: "@Model.TenantID" },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+            
+        });
+        
+
+
+     
+
+        $(function () {
+
+            
            
 
             var viewModel = function () {
+
+              
+
+
+
+
 
                 var self = this;
                 self.Phone = ko.observable();
@@ -163,6 +254,17 @@
                 self.Instruction = ko.observable();
                 self.Description = ko.observable();
                 self.permission = ko.observable();
+
+                self.OtherContactPhone = ko.observable();
+                self.OtherContactName = ko.observable();
+                self.OtherContactEmail = ko.observable();
+
+                self.request = ko.observableArray();
+
+
+
+
+                
 
                 self.fileName = ko.observable();
 
@@ -176,20 +278,23 @@
                     RepairRequestCategoriesID: self.Category,
                     ProblemDescription: self.Description,
                     UrgencyID: self.Urgency,
-                    ContactPhone: self.Phone,                   
+                    ContactPhone: "@Model.tenant.Phone",                   
                     Permissiontoenter: self.permission,
-                    Email: self.Email,
+                    Email: "@Model.tenant.Username",
                     Instructions_: self.Instruction,
                     PhotoUrl: "",
                     TenantID: "@Model.TenantID",
                     Status: "On process",
-                    RequestedDate: new Date()
+                    RequestedDate: new Date(),
+                    OtherContactPhone: self.OtherContactPhone,
+                    OtherContactName:self.OtherContactName,
+                    OtherContactEmail:self.OtherContactEmail
                 };
 
 
                 self.SendRequest = function (fields) {
-                    alert(request);
-                    debugger;
+                   // alert(request);
+                    //debugger;
                     $.ajaxSettings.traditional = true;
                     $.ajax({
                         type: "POST",
@@ -202,9 +307,51 @@
                         }
                     }).complete(function () {
                         //reset all observable to empty
+                        self.Phone("");
+                        self.Email("");
+                        self.Urgency("");
+                        self.Category("");
+                        self.Instruction("");
+                        self.Description("");
+                        self.permission("");
+                        self.OtherContactPhone("");
+                        self.OtherContactName("");
+                        self.OtherContactEmail("");
                     });
 
                 };
+
+                // Reference the auto-generated proxy for the hub.
+                //Notification
+                var Notification = $.connection.notificationsHub;
+                Notification.client.newRepairRequestList = function (JsonRepairRequests) {
+                    
+
+                    var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
+
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+                        debugger;
+                        self.request.push({
+                            rDate: TrkPkgs[i].RequestedDate,
+                            RequestNumber: "120320151",
+                            Description: TrkPkgs[i].ProblemDescription,
+                            Status: TrkPkgs[i].Status
+                        });
+
+                    }
+
+                };
+
+
+                // Start the connection.outgoing here
+                $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
+                //reconnect after disconect
+                $.connection.hub.disconnected(function () {
+                    setTimeout(function () {
+                        $.connection.hub.start();
+                    }, 5000); // Restart connection after 5 seconds.
+                });
                 
             };
 

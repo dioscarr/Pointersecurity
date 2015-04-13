@@ -26,6 +26,9 @@ namespace Doormandondemand
         public string TenantID { get; set; }
         public string Status { get; set; }
         public System.DateTime RequestedDate { get; set; }
+        public string OtherContactPhone { get; set; }
+        public string OtherContactName { get; set; }
+        public string OtherContactEmail { get; set; }
     
         public virtual RepairRequestCategories RepairRequestCategories { get; set; }
         public virtual Tenant Tenant { get; set; }

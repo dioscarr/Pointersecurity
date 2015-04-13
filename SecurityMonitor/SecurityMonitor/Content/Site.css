@@ -1220,7 +1220,7 @@ body {
 
 .rformrowheight {
 height:60px;
-padding-top:20px;
+
 
 }
 
@@ -1288,3 +1288,55 @@ background-color:#0071bc;
 height:30px;
 }
 
+.othercontactinfo {
+
+display:none;
+height:90px;
+color:white;
+border-bottom:1px solid lightgrey;
+border-top:1px solid lightgrey;
+margin-bottom:20px;
+
+}
+.othercontactinforowh {
+padding:20px;
+
+}
+
+.padding20px {
+padding:20px 0 !important;
+}
+
+.padding-left20px {
+
+padding-left:20px !important;
+}
+
+.padding30px {
+    padding:20px 0 !important;
+}
+
+
+.rformrowheight1 {
+
+    height:60px;
+
+}
+
+rformrowheight2 {
+
+    height:150px;
+}
+
+.backgroubdlightgrey {
+background:lightgrey !important;
+border:1px solid lightgrey !important;
+padding:10px !important;
+}
+#primaryinfomation {
+height:60px;
+display:none;
+}
+.border-bottomcust{
+    border-bottom:1px solid lightgrey;
+}
