@@ -159,19 +159,27 @@
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
         </div>
-        <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
-            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate">12/03/2015</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:RequestNumber">120320151</span>
-                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 " data-bind="text:Description">No heat</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:Status">In progress</span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">O</span>
+        <div class="nopadding col-lg-12 col-md-12" id="mywidth">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active bar" role="progressbar"
+                     aria-valuenow="900" aria-valuemin="0" aria-valuemax="100" data-bind="style:{width:counter()+'%' }">
+                    <span data-bind="text:counter"></span>% Loading Requests..
+                </div>
             </div>
-        </div>
-        
+            </div>
+            <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
+                <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
+                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate"></span>
+                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:RequestNumber"></span>
+                    <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 " data-bind="text:Description"></span>
+                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:Status"></span>
+                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">o</span>
+                </div>
+            </div>
 
-        
-    </div>
+
+
+        </div>
     </div>
 
 @section scripts{
@@ -193,6 +201,8 @@
             input.trigger('fileselect', [numFiles, label]);
         });
 
+
+        
 
         $(function () {
 
@@ -217,17 +227,6 @@
 
 
 
-        $(function () {
-            $.ajaxSettings.traditional = true;
-            $.ajax({
-                type: "GET",
-                url: '/Tenants/loadRequest/',
-                data: { TenantID: "@Model.TenantID" },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            });
-            
-        });
         
 
 
@@ -292,6 +291,8 @@
                 };
 
 
+
+
                 self.SendRequest = function (fields) {
                    // alert(request);
                     //debugger;
@@ -323,6 +324,43 @@
 
                 };
 
+
+                self.counter = ko.observable(0);
+                
+                              $(function () {
+                    setTimeout(function () {
+                        $('#mywidth').hide();
+                    }, 6000);
+
+                    var counter = 0;
+                    var interval = setInterval(function () {
+                        counter++;
+                        self.counter(counter)+1;
+
+                        // Display 'counter' wherever you want to display it.
+                        if (counter == 96) {
+                            // Display a login box
+                            clearInterval(interval);
+                        }
+                    },62.5);
+                });
+
+                $(function () {
+
+                    setTimeout(function () {
+                        $.ajaxSettings.traditional = true;
+                        $.ajax({
+                            type: "GET",
+                            url: '/Tenants/loadRequest/',
+                            data: { TenantID: "@Model.TenantID" },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json"
+                        });
+                    }, 6000);
+
+                });
+
+
                 // Reference the auto-generated proxy for the hub.
                 //Notification
                 var Notification = $.connection.notificationsHub;
@@ -332,10 +370,10 @@
 
                     setTimeout(function () { 
                     var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
-
+                   // debugger;
                     var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                     for (var i = 0; i < TrkPkgs.length; i++) {
-                        debugger;
+                        
                         self.request.push({
                             rDate: TrkPkgs[i].RequestedDate,
                             RequestNumber: "120320151",
