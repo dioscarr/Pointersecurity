@@ -317,6 +317,8 @@
                         self.OtherContactPhone("");
                         self.OtherContactName("");
                         self.OtherContactEmail("");
+                        self.request.removeAll();
+
                     });
 
                 };
@@ -326,7 +328,9 @@
                 var Notification = $.connection.notificationsHub;
                 Notification.client.newRepairRequestList = function (JsonRepairRequests) {
                     
+                  
 
+                    setTimeout(function () { 
                     var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
 
                     var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
@@ -340,6 +344,7 @@
                         });
 
                     }
+                    },6000);
 
                 };
 
