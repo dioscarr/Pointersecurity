@@ -363,6 +363,7 @@
                 $(function () {
 
                     setTimeout(function () {
+                        debugger;
                         $myvalue = 1;
                         $.ajaxSettings.traditional = true;
                         $.ajax({
@@ -381,7 +382,7 @@
                 //Notification
                 var Notification = $.connection.notificationsHub;
                 Notification.client.newRepairRequestList = function (JsonRepairRequests) {
-                  
+                  debugger
                     if ($myvalue == 0) {
                         var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
                         // debugger;

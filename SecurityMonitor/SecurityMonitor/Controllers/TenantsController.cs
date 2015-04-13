@@ -157,7 +157,8 @@ namespace SecurityMonitor.Controllers
             return View(repair);
         }
 
-
+        [HttpPost]
+        [AllowAnonymous]
         public ActionResult AddRequest(RepairRequest model)
         {
             if(model!=null)
