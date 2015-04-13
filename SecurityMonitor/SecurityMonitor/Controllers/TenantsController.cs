@@ -152,19 +152,7 @@ namespace SecurityMonitor.Controllers
             repair.tenant = db.Tenant.Find(tenantID);
             repair.TenantID = tenantID;
             
-            var repairRequest = db.RepairRequest
-                .Where(c => c.TenantID == tenantID)
-                .Select(c => new { 
-                                   RequestedDate=c.RequestedDate,
-                                   ProblemDescription=c.ProblemDescription,
-                                   Status=c.Status
-                }).OrderBy(c => c.RequestedDate).ToList();
-
-            var Jsonpackages = Json(repairRequest);
-
-
-            var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-            hubContext.Clients.All.newRepairRequestList(Jsonpackages);
+            
 
             return View(repair);
         }
