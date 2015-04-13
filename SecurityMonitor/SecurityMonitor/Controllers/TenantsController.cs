@@ -159,22 +159,22 @@ namespace SecurityMonitor.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult AddRequest(RepairRequest model)
+        public async Task<string> AddRequest(RepairRequest model)
         {
             if(model!=null)
             {
                 db.RepairRequest.Add(model);
-                db.SaveChanges();
+               await db.SaveChangesAsync();
 
 
-                var repairRequest = db.RepairRequest
+                var repairRequest = await db.RepairRequest
                    .Where(c => c.TenantID == model.TenantID)
                    .Select(c => new
                    {
                        RequestedDate = c.RequestedDate,
                        ProblemDescription = c.ProblemDescription,
                        Status = c.Status
-                   }).OrderBy(c => c.RequestedDate).ToList();
+                   }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
                var Jsonpackages = Json(repairRequest);
@@ -184,7 +184,7 @@ namespace SecurityMonitor.Controllers
                 hubContext.Clients.All.newRepairRequestList(Jsonpackages);
 
             }
-            return View();
+            return "";
         }
 
         [HttpGet]

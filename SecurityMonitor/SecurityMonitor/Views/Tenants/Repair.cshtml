@@ -324,9 +324,10 @@
                         if (counter == 96) {
                             // Display a login box
                             clearInterval(interval);
-                            $('#mywidth').hide();
+                            
                         }
                     }, 62.5);
+                    
                         self.Phone("");
                         self.Email("");
                         self.Urgency("");
@@ -384,6 +385,7 @@
                 Notification.client.newRepairRequestList = function (JsonRepairRequests) {
                   debugger
                   if ($myvalue == 0) {
+                      $('#mywidth').hide();
                       $myvalue = 1;
                         var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
                         // debugger;
