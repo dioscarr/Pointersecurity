@@ -161,8 +161,9 @@
         </div>
         <div class="nopadding col-lg-12 col-md-12" id="mywidth">
             <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped bar" role="progressbar"  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" >
-                    <span class="sr-only">40% Complete (success)</span>
+                <div class="progress-bar progress-bar-striped active bar" role="progressbar"
+                     aria-valuenow="900" aria-valuemin="0" aria-valuemax="100" data-bind="style:{width:counter()+'%' }">
+                    <span data-bind="text:counter"></span>% Loading Requests..
                 </div>
             </div>
             </div>
@@ -201,10 +202,7 @@
         });
 
 
-        $(function () {
-            
-
-        });
+        
 
         $(function () {
 
@@ -293,6 +291,8 @@
                 };
 
 
+
+
                 self.SendRequest = function (fields) {
                    // alert(request);
                     //debugger;
@@ -321,6 +321,27 @@
                     });
 
                 };
+
+
+                self.counter = ko.observable(0);
+                
+                              $(function () {
+                    setTimeout(function () {
+                        $('#mywidth').hide();
+                    }, 6000);
+
+                    var counter = 0;
+                    var interval = setInterval(function () {
+                        counter++;
+                        self.counter(counter)+1;
+
+                        // Display 'counter' wherever you want to display it.
+                        if (counter == 96) {
+                            // Display a login box
+                            clearInterval(interval);
+                        }
+                    },62.5);
+                });
 
                 $(function () {
 
