@@ -364,7 +364,7 @@
 
                     setTimeout(function () {
                         debugger;
-                        $myvalue = 1;
+                       
                         $.ajaxSettings.traditional = true;
                         $.ajax({
                             type: "GET",
@@ -383,7 +383,8 @@
                 var Notification = $.connection.notificationsHub;
                 Notification.client.newRepairRequestList = function (JsonRepairRequests) {
                   debugger
-                    if ($myvalue == 0) {
+                  if ($myvalue == 0) {
+                      $myvalue = 1;
                         var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
                         // debugger;
                         var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
