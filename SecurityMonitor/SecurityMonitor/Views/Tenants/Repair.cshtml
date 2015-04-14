@@ -284,9 +284,7 @@
                     return dt.getMinutes();
 
                 }
-                //==========
-
-              
+                //==========              
 
                 $.ajaxSettings.traditional = true;
                 $.ajax({
@@ -432,60 +430,7 @@
                         self.OtherContactEmail("");
                     });
                 };
-                //initialized counter observable to 0
-                self.counter = ko.observable(0);
-               
-            
-                // Reference the auto-generated proxy for the hub.
-                //Notification
-                var Notification = $.connection.notificationsHub;
-                Notification.client.newRepairRequestList = function (JsonRepairRequests) {
-                    //debugger
-                    //$mvalue checks if the this is the first that signalr has been used. if 0 then yes it is first time
-                    if ($myvalue == 0) {
-                        //set time out of 6 secs. to give time everything loads then this will load
-                        $('#mywidth').hide();
-                        $myvalue = 1;
-                        var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
-                        // debugger;
-                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                        for (var i = 0; i < TrkPkgs.length; i++) {
-                            // debugger;
-                            self.request.push({
-                                rDate: TrkPkgs[i].RequestedDate,
-                                RequestNumber: "120320151",
-                                Description: TrkPkgs[i].ProblemDescription,
-                                Status: TrkPkgs[i].Status
-                            });
-                        }
-                    }
-                    else {
-                        //set time out of 6 secs. to give time everything loads then this will load
-                        setTimeout(function () {
-                            $('#mywidth').hide();//hide loading bar
-                            var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
-                            // debugger;
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-
-                                self.request.push({
-                                    rDate: TrkPkgs[i].RequestedDate,
-                                    RequestNumber: "120320151",
-                                    Description: TrkPkgs[i].ProblemDescription,
-                                    Status: TrkPkgs[i].Status
-                                });
-                            }
-                        }, 6000);
-                    }
-                };
-                // Start the connection.outgoing here
-                $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
-                //reconnect after disconect
-                $.connection.hub.disconnected(function () {
-                    setTimeout(function () {
-                        $.connection.hub.start();
-                    }, 5000); // Restart connection after 5 seconds.
-                });
+                
             };
             ko.applyBindings(viewModel);
         });
