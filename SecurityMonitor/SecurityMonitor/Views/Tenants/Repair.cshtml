@@ -150,7 +150,7 @@
    
 
     <div class="col-lg-12 col-md-12  requestlogbox nopadding">
-        <div class="col-lg-12 col-md-12 text-center  headingopenerequests ">
+        <div class="col-lg-12 col-md-12 text-center  headingopenerequests " id="three-icon">
             <h1 id="openrequesttitle" class="displayinline  ">Open Request</h1>
             <button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>
             <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-3x"></button>
@@ -173,14 +173,7 @@
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
         </div>
-        <div class="nopadding col-lg-12 col-md-12" id="mywidth">
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped active bar" role="progressbar"
-                     aria-valuenow="900" aria-valuemin="0" aria-valuemax="100" data-bind="style:{width:counter()+'%' }">
-                    <span data-bind="text:counter"></span>% Loading Requests..
-                </div>
-            </div>
-        </div>
+       
         <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
             <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate"></span>
@@ -210,10 +203,11 @@
         $(function () {
             $('#repairsearchloop').on("click", function () {
                 $('.instructionrepairbox').fadeToggle();
+                $('#three-icon').fadeToggle();
                 setTimeout(function () { $('.searchrepair').slideToggle(); },600);
             });
            
-        });
+       
 
         $(document).on('change', '.btn-file :file', function () {
             var input = $(this),
@@ -221,21 +215,27 @@
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
             input.trigger('fileselect', [numFiles, label]);
         });
-        $(function () {
+     
 
             $('#contactotherid').on('click', function () {
                 $('.othercontactinfo').slideToggle();
                 $('#contactotherid').toggleClass("btn-default");
                 $('#contactotherid').toggleClass("btn-primary");
             });
-        });
+       
 
-        $(function () {
+       
 
             $('#primaryid').on('click', function () {
                 $('#primaryinfomation').slideToggle();
                 $('#primaryid').toggleClass("btn-default");
                 $('#primaryid').toggleClass("btn-primary");
+            });
+
+            $('#search').on('focusout', function () {
+                $('.instructionrepairbox').fadeToggle();
+                $('#three-icon').fadeToggle();
+                $('.searchrepair').slideToggle();
             });
 
 
@@ -285,9 +285,8 @@
 
                 }
                 //==========      
-                $('#input').on
-
-
+               
+                
                 $.ajaxSettings.traditional = true;
                 $.ajax({
                     type: "GET",
