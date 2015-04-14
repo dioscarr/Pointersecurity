@@ -11,10 +11,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header nopadding " id="modalheaderid">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
                     <h4 class="modal-title" id="myModalLabel ">New Request</h4>
-                </div> 
+                </div>
             </div>
             <div class="modal-body lightgrey">
                 <div class="col-lg-12 col-md-12 ">
@@ -41,16 +41,16 @@
                         </div>
                         <div class="col-lg-12 col-md-12 nopadding rformrowheight1 ">
                             <div class="col-lg-6 col-md-6 nopadding rformrowheight1 padding30px">
-                                 Contact(s) Information<br />
+                                Contact(s) Information<br />
 
                             </div>
                             <div class="col-lg-6 col-md-6 nopadding rformrowheight1 padding30px">
                                 <button class="btn btn-default btn-sm" id="primaryid">Primary contact</button>
                                 <button class="btn btn-default btn-sm" id="contactotherid">Add a secondary contact</button>
                             </div>
-                        </div>                   
+                        </div>
 
-                      
+
                         <div class="col-lg-12 col-md-12 nopadding border-bottomcust" id="primaryinfomation">
                             <div class="col-lg-2 col-md-2 othercontactinforowh text-left">
                                 Primary:
@@ -66,21 +66,21 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 nopadding rformrowheight  blueDefault othercontactinfo ">
-                            
-                                <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
-                                    <span class="displayinline "> Full Name:</span> @Html.TextBox("OtherContactName", null, new { @Placeholder = "Enter Full Name", @class = "form-control displayinline input-sm ", Data_bind = "value:OtherContactName,valueUpdate:'afterkeydown'" })
-                                </div>
-                                <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
-                                    <span class="displayinline">Phone</span>: @Html.TextBox("OtherContactPhone", null, new { @Placeholder = "345.898.0099", @class = "form-control displayinline input-sm", Data_bind = "value:OtherContactPhone,valueUpdate:'afterkeydown'" })
 
-                                </div>
-                                <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
-                                    <span class="displayinline">Email</span>: @Html.TextBox("OtherContactEmail", null, new { @Placeholder = "Example@mail.com (Optional)", @class = "form-control displayinline input-sm", Data_bind = "value:OtherContactEmail,valueUpdate:'afterkeydown'" })
-
-                                </div>
+                            <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
+                                <span class="displayinline "> Full Name:</span> @Html.TextBox("OtherContactName", null, new { @Placeholder = "Enter Full Name", @class = "form-control displayinline input-sm ", Data_bind = "value:OtherContactName,valueUpdate:'afterkeydown'" })
+                            </div>
+                            <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
+                                <span class="displayinline">Phone</span>: @Html.TextBox("OtherContactPhone", null, new { @Placeholder = "345.898.0099", @class = "form-control displayinline input-sm", Data_bind = "value:OtherContactPhone,valueUpdate:'afterkeydown'" })
 
                             </div>
-                        
+                            <div class="col-lg-4 col-md-4 othercontactinforowh text-center">
+                                <span class="displayinline">Email</span>: @Html.TextBox("OtherContactEmail", null, new { @Placeholder = "Example@mail.com (Optional)", @class = "form-control displayinline input-sm", Data_bind = "value:OtherContactEmail,valueUpdate:'afterkeydown'" })
+
+                            </div>
+
+                        </div>
+
 
 
                         <div class="col-lg-6 col-md-6 nopadding rformrowheight padding20px">
@@ -91,7 +91,7 @@
                                     Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:permission" })
                                 </span>
                             </span>
-                           
+
                         </div>
                         <div class="col-lg-6 col-md-6 nopadding rformrowheight  padding20px">
                             <span class="btn btn-default btn-file btn-sm">Attach Photo: <input type="file" name="file" /></span><span data-bind="text:fileName"></span>
@@ -100,17 +100,17 @@
 
                         <div class="col-lg-12 col-md-12 nopadding padding20px">
                             <span>Enter Instructions: @Html.TextArea("instructions", new { @class = " rrform form-control", @cols = 300, @rows = 2, data_bind = "value:Instruction, valueUpdate:'afterkeydown'" })</span>
-                           
+
                         </div>
                         <div class="col-lg-12 col-md-12 nopadding padding20px">
                             <span>Problem Description: @Html.TextArea("Description", new { @class = " rrform form-control", rows = 8, data_bind = "value:Description, valueUpdate:'afterkeydown'" })</span>
-                           
+
                         </div>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default "  data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
 
                 <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:SendRequest">Send Request</button>
             </div>
@@ -123,35 +123,49 @@
 
 <div class="row">
     <div class="col-lg-12 col-md-12 text-center  repairheading">
-       <h1> Repair Page</h1>
+        <h1> Repair Page</h1>
     </div>
 </div>
 
 <div class="row repairheight">
     <div class="col-lg-12 col-md-12  instructionrepairbox">
         <div class="col-lg-12 col-md-12  instructionrepair ">
-            <p>The words requests and holds and reserves are interchangeable.
-             When you place a request, your name is put on a list of people 
-            waiting for an item in the Library’s collection. When the item 
-            becomes available for you, we notify you by telephone or email
-             to pick up the item, notify you and place the item on a bookmobile
-             for you, or mail the item to you.
+            <p>
                 The words requests and holds and reserves are interchangeable.
                 When you place a request, your name is put on a list of people
                 waiting for an item in the Library’s collection. When the item
                 becomes available for you, we notify you by telephone or email
                 to pick up the item, notify you and place the item on a bookmobile
-                for you, or mail the item to you.</p>
+                for you, or mail the item to you.
+                The words requests and holds and reserves are interchangeable.
+                When you place a request, your name is put on a list of people
+                waiting for an item in the Library’s collection. When the item
+                becomes available for you, we notify you by telephone or email
+                to pick up the item, notify you and place the item on a bookmobile
+                for you, or mail the item to you.
+            </p>
         </div>
     </div>
+
+   
 
     <div class="col-lg-12 col-md-12  requestlogbox nopadding">
         <div class="col-lg-12 col-md-12 text-center  headingopenerequests ">
             <h1 id="openrequesttitle" class="displayinline  ">Open Request</h1>
-            <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>            
+            <button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>
             <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-3x"></button>
             <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-3x" id="hitme" data-toggle="modal" data-target="#myModal"></button>
         </div>
+
+        <div class="col-lg-12 col-md-12 searchrepair ">
+            <div class="box">
+                <div class="container-4 ">
+                    <input type="search" id="search" class=" text-center input-sm" placeholder="Search for request" data-bind="value:KeydownSearh, valueUpdate:'afterkeydown'" />
+                    <button class="icon icon-search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div> 
+
         <div class="col-lg-12 col-md-12  nopadding Openrequestheader blueDefault">
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Date</span>
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Request#</span>
@@ -166,51 +180,53 @@
                     <span data-bind="text:counter"></span>% Loading Requests..
                 </div>
             </div>
-            </div>
-            <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
-                <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
-                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate"></span>
-                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:RequestNumber"></span>
-                    <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 " data-bind="text:Description"></span>
-                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:Status"></span>
-                    <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">o</span>
-                </div>
-            </div>
-
-
-
         </div>
+        <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
+            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate"></span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:RequestNumber"></span>
+                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 " data-bind="text:Description"></span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:Status"></span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">o</span>
+            </div>
+        </div>
+
+
+
     </div>
+</div>
 
 @section scripts{
-<script src="~/Scripts/jquery-2.1.3.min.js"></script>
-<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-        <script src="~/Scripts/knockout-3.1.0.js"></script>
-<script src="~/Scripts/knockout.mapping-latest.js"></script>
-<script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
-<!--Reference the autogenerated SignalR hub script. -->
-<script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
 
 
     <script type="text/javascript">
-            
+        $(function () {
+            $('#repairsearchloop').on("click", function () {
+                $('.instructionrepairbox').fadeToggle();
+                setTimeout(function () { $('.searchrepair').slideToggle(); },600);
+            });
+           
+        });
+
         $(document).on('change', '.btn-file :file', function () {
             var input = $(this),
                 numFiles = input.get(0).files ? input.get(0).files.length : 1,
                 label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
             input.trigger('fileselect', [numFiles, label]);
         });
-
-
-        
-
         $(function () {
 
             $('#contactotherid').on('click', function () {
                 $('.othercontactinfo').slideToggle();
                 $('#contactotherid').toggleClass("btn-default");
                 $('#contactotherid').toggleClass("btn-primary");
-                
             });
         });
 
@@ -220,32 +236,87 @@
                 $('#primaryinfomation').slideToggle();
                 $('#primaryid').toggleClass("btn-default");
                 $('#primaryid').toggleClass("btn-primary");
-
             });
+
+
+          
         });
-
-
-
-
-        
-
-
-     
-
         $(function () {
-
-            
-           
-
             var viewModel = function () {
+
+
+                // =====year=======
+                function YearC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return (dt.getFullYear());
+                }
+                // =====Month=======
+                function MonthC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return (dt.getMonth());
+                }
+                // =====Day=======
+                function DayC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return dt.getDate();
+
+                }
+
+                // =====Hour=======
+                function HoursC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return dt.getHours();
+
+                }
+                // =====Minutes=======
+                function MinutesC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return dt.getMinutes();
+
+                }
+                //==========
 
               
 
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/Tenants/loadRequest/',
+                    data: { TenantID: "@Model.TenantID" },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        self.request.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                        // debugger;
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            // debugger;
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                            //alert(RDate);
+                            self.request.push({
+                                rDate: RDate,
+                                RequestNumber: "120320151",
+                                Description: TrkPkgs[i].ProblemDescription,
+                                Status: TrkPkgs[i].Status
+                            });
+                        }
+
+                    }
+                });
 
 
 
-
-                var self = this;
                 self.Phone = ko.observable();
                 self.Email = ko.observable();
                 self.Urgency = ko.observable();
@@ -259,17 +330,45 @@
                 self.OtherContactEmail = ko.observable();
 
                 self.request = ko.observableArray();
-
-
-
-
-                
-
                 self.fileName = ko.observable();
+                self.KeydownSearh = ko.observable();
+
+                self.KeydownSearh.subscribe(function (value) {
+                   // debugger;
+
+                    
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                       
+                        type: "POST",
+                        url: '/Tenants/loadRequestbysearch/',
+                        data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter':value }),
+                        contentType: "application/json; charset=utf-8",
+                        context: document.body,
+                        success: function (data) {
+                            self.request.removeAll();
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                            // debugger;
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                // debugger;
+                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                                //alert(RDate);
+                                self.request.push({
+                                    rDate: RDate,
+                                    RequestNumber: "120320151",
+                                    Description: TrkPkgs[i].ProblemDescription,
+                                    Status: TrkPkgs[i].Status
+                                });
+                            }
+                        }
+                    });                   
+                });
+                
 
                 $(document).ready(function () {
                     $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-                        self.fileName(" "+ label)                        
+                        self.fileName(" " + label)
                     });
                 });
                 var $myvalue = 0;
@@ -277,26 +376,21 @@
                     RepairRequestCategoriesID: self.Category,
                     ProblemDescription: self.Description,
                     UrgencyID: self.Urgency,
-                    ContactPhone: "@Model.tenant.Phone",                   
+                    ContactPhone: "@Model.tenant.Phone",
                     Permissiontoenter: self.permission,
                     Email: "@Model.tenant.Username",
                     Instructions_: self.Instruction,
                     PhotoUrl: "",
                     TenantID: "@Model.TenantID",
-                    Status: "On process",
+                    Status: "Pending",
                     RequestedDate: new Date(),
                     OtherContactPhone: self.OtherContactPhone,
-                    OtherContactName:self.OtherContactName,
-                    OtherContactEmail:self.OtherContactEmail
+                    OtherContactName: self.OtherContactName,
+                    OtherContactEmail: self.OtherContactEmail
                 };
-
-
-
-
-                self.SendRequest = function (fields)
-                {
-                   // alert(request);
-                    debugger;
+                self.SendRequest = function (fields) {
+                    // alert(request);
+                    // debugger;
                     $.ajaxSettings.traditional = true;
                     self.request.removeAll();
                     $.ajax({
@@ -306,28 +400,26 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                           
-                        }
-                    }).complete(function () {
-                        //reset all observable to empty
-                       
-                        setTimeout(function () {
-                        }, 6000);
-                        self.counter(0);
-                    $('#mywidth').show();
-                    var counter = 0;
-                    var interval = setInterval(function () {
-                        counter++;
-                        self.counter(counter) + 1;
+                            self.request.removeAll();
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                            // debugger;
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                // debugger;
+                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                                //alert(RDate);
+                                self.request.push({
+                                    rDate: RDate,
+                                    RequestNumber: "120320151",
+                                    Description: TrkPkgs[i].ProblemDescription,
+                                    Status: TrkPkgs[i].Status
+                                });
+                            }
 
-                        // Display 'counter' wherever you want to display it.
-                        if (counter == 96) {
-                            // Display a login box
-                            clearInterval(interval);
-                            
                         }
-                    }, 62.5);
-                    
+                    }).complete(function () {                    
+                       
+                        //reset all observable to empty
                         self.Phone("");
                         self.Email("");
                         self.Urgency("");
@@ -339,92 +431,58 @@
                         self.OtherContactName("");
                         self.OtherContactEmail("");
                     });
-
                 };
-
-
+                //initialized counter observable to 0
                 self.counter = ko.observable(0);
-                
-                              $(function () {
-                  
-
-                    var counter = 0;
-                    var interval = setInterval(function () {
-                        counter++;
-                        self.counter(counter)+1;
-
-                        // Display 'counter' wherever you want to display it.
-                        if (counter == 96) {
-                            // Display a login box
-                            clearInterval(interval);
-                        }
-                    },62.5);
-                });
-
+               
                 $(function () {
-
                     setTimeout(function () {
-                        debugger;
+                        // debugger;
                        
-                        $.ajaxSettings.traditional = true;
-                        $.ajax({
-                            type: "GET",
-                            url: '/Tenants/loadRequest/',
-                            data: { TenantID: "@Model.TenantID" },
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json"
-                        });
                     }, 6000);
-
                 });
-
-
                 // Reference the auto-generated proxy for the hub.
                 //Notification
                 var Notification = $.connection.notificationsHub;
                 Notification.client.newRepairRequestList = function (JsonRepairRequests) {
-                  debugger
-                  if ($myvalue == 0) {
-                      $('#mywidth').hide();
-                      $myvalue = 1;
+                    //debugger
+                    //$mvalue checks if the this is the first that signalr has been used. if 0 then yes it is first time
+                    if ($myvalue == 0) {
+                        //set time out of 6 secs. to give time everything loads then this will load
+                        $('#mywidth').hide();
+                        $myvalue = 1;
                         var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
                         // debugger;
                         var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                         for (var i = 0; i < TrkPkgs.length; i++) {
-                            debugger;
+                            // debugger;
                             self.request.push({
                                 rDate: TrkPkgs[i].RequestedDate,
                                 RequestNumber: "120320151",
                                 Description: TrkPkgs[i].ProblemDescription,
                                 Status: TrkPkgs[i].Status
                             });
-
                         }
                     }
                     else {
+                        //set time out of 6 secs. to give time everything loads then this will load
                         setTimeout(function () {
-                            $('#mywidth').hide();
-                      
-                        var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
-                        // debugger;
-                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            $('#mywidth').hide();//hide loading bar
+                            var jsonresult = JSON.stringify(JsonRepairRequests.Data);// Json.stringify make an object into a json string
+                            // debugger;
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
 
-                            self.request.push({
-                                rDate: TrkPkgs[i].RequestedDate,
-                                RequestNumber: "120320151",
-                                Description: TrkPkgs[i].ProblemDescription,
-                                Status: TrkPkgs[i].Status
-                            });
-
-                        }
+                                self.request.push({
+                                    rDate: TrkPkgs[i].RequestedDate,
+                                    RequestNumber: "120320151",
+                                    Description: TrkPkgs[i].ProblemDescription,
+                                    Status: TrkPkgs[i].Status
+                                });
+                            }
                         }, 6000);
                     }
-
-                   
                 };
-
-
                 // Start the connection.outgoing here
                 $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
                 //reconnect after disconect
@@ -433,24 +491,9 @@
                         $.connection.hub.start();
                     }, 5000); // Restart connection after 5 seconds.
                 });
-                
             };
-
             ko.applyBindings(viewModel);
-            
-           
-
-
-
-
-
-
         });
-        
-
-        
-
-
-    </script>
+</script>
 
 }

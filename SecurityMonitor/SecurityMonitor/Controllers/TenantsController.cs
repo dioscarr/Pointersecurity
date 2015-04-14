@@ -159,37 +159,32 @@ namespace SecurityMonitor.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<string> AddRequest(RepairRequest model)
+        public async Task<JsonResult> AddRequest(RepairRequest model)
         {
             if(model!=null)
             {
                 db.RepairRequest.Add(model);
                await db.SaveChangesAsync();
 
-
-                var repairRequest = await db.RepairRequest
-                   .Where(c => c.TenantID == model.TenantID)
-                   .Select(c => new
-                   {
-                       RequestedDate = c.RequestedDate,
-                       ProblemDescription = c.ProblemDescription,
-                       Status = c.Status
-                   }).OrderBy(c => c.RequestedDate).ToListAsync();
-
-
-               var Jsonpackages = Json(repairRequest);
-
-
-                var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-                hubContext.Clients.All.newRepairRequestList(Jsonpackages);
-
             }
-            return "";
+
+            var repairRequest = await db.RepairRequest
+                .Where(c => c.TenantID == model.TenantID)
+                .Select(c => new
+                {
+                    RequestedDate = c.RequestedDate,
+                    ProblemDescription = c.ProblemDescription,
+                    Status = c.Status
+                }).OrderBy(c => c.RequestedDate).ToListAsync();
+
+
+            var Jsonpackages = Json(repairRequest);
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<string> loadRequest(string TenantID)
+        public async Task<JsonResult> loadRequest(string TenantID)
         {
             var repairRequest =await  db.RepairRequest
                      .Where(c => c.TenantID == TenantID)
@@ -204,10 +199,27 @@ namespace SecurityMonitor.Controllers
             var Jsonpackages = Json(repairRequest);
 
 
-            var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-            hubContext.Clients.All.newRepairRequestList(Jsonpackages);
-          return "";
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         
+        
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> loadRequestbysearch(string TenantID, string filter)
+        {
+            var repairRequest = await db.RepairRequest
+                     .Where(c=> c.TenantID == TenantID && c.ProblemDescription.Contains(filter))                   
+                     .Select(c => new
+                     {
+                         RequestedDate = c.RequestedDate,
+                         ProblemDescription = c.ProblemDescription,
+                         Status = c.Status
+                     }).OrderByDescending(c => c.RequestedDate).ToListAsync();
+            
+            var Jsonpackages = Json(repairRequest);
+
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
         }
 
 
