@@ -174,7 +174,20 @@ namespace SecurityMonitor.Controllers
                 {
                     RequestedDate = c.RequestedDate,
                     ProblemDescription = c.ProblemDescription,
-                    Status = c.Status
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RepairRequestCategoriesID,
+                    Category = c.RepairRequestCategories.Categories,
+                    Instruction = c.Instructions_,
+                    Urgency = c.RepairUrgency.Urgency,
+                    Permision =c.Permissiontoenter,
+                    imgUrl = c.PhotoUrl,
+                    PrimaryName = c.Tenant.FirstName +" " + c.Tenant.LastName,
+                    PrimaryPhone = c.Tenant.Phone,
+                    PrimaryEmail = c.Tenant.Username,
+                    SecondaryName = c.OtherContactName,
+                    SecondaryPhone = c.OtherContactPhone,
+                    SecondaryEmail = c.OtherContactEmail
                 }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
@@ -192,7 +205,20 @@ namespace SecurityMonitor.Controllers
                      {
                          RequestedDate = c.RequestedDate,
                          ProblemDescription = c.ProblemDescription,
-                         Status = c.Status
+                         Status = c.Status,
+                         ID = c.Id,
+                         RequestNumber = c.RepairRequestCategoriesID,
+                         Category = c.RepairRequestCategories.Categories,
+                         Instruction = c.Instructions_,
+                         Urgency = c.RepairUrgency.Urgency,
+                         Permision = c.Permissiontoenter,
+                         imgUrl = c.PhotoUrl,
+                         PrimaryName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                         PrimaryPhone = c.Tenant.Phone,
+                         PrimaryEmail = c.Tenant.Username,
+                         SecondaryName = c.OtherContactName,
+                         SecondaryPhone = c.OtherContactPhone,
+                         SecondaryEmail = c.OtherContactEmail
                      }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
@@ -213,7 +239,20 @@ namespace SecurityMonitor.Controllers
                      {
                          RequestedDate = c.RequestedDate,
                          ProblemDescription = c.ProblemDescription,
-                         Status = c.Status
+                         Status = c.Status,
+                         ID = c.Id,
+                         RequestNumber = c.RepairRequestCategoriesID,
+                         Category = c.RepairRequestCategories.Categories,
+                         Instruction = c.Instructions_,
+                         Urgency = c.RepairUrgency.Urgency,
+                         Permision = c.Permissiontoenter,
+                         imgUrl = c.PhotoUrl,
+                         PrimaryName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                         PrimaryPhone = c.Tenant.Phone,
+                         PrimaryEmail = c.Tenant.Username,
+                         SecondaryName = c.OtherContactName,
+                         SecondaryPhone = c.OtherContactPhone,
+                         SecondaryEmail = c.OtherContactEmail
                      }).OrderByDescending(c => c.RequestedDate).ToListAsync();
             
             var Jsonpackages = Json(repairRequest);

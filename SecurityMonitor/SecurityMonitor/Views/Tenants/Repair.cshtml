@@ -119,6 +119,96 @@
 </div>
 
 <!--Request Form-->
+<!--Request Form-->
+<div class="modal fade" id="myModalpreviewrequest" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header nopadding " id="modalheaderpreviewid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h4 class="modal-title" id="myModalpreviewLabel ">Preview request</h4>
+                </div>
+            </div>
+            <div class="modal-body lightgrey">
+
+                <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
+                    <div class="col-lg-4 col-md-4 text-center">
+                        <h6>Requested Date:</h6>
+                        <span data-bind="text:selectedDate"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 text-center">
+                        <h6>Category:</h6>
+                        <span data-bind="text:selectedCategory"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 text-center">
+                        <h6>Status:</h6>
+                        <span data-bind="text:selectedStatus"></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Problem:
+                    <span data-bind="text:selectedDescription"></span>
+                </div> 
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Primary Name:
+                    <span data-bind="text:selectedPrimaryName"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Primary Phone:
+                    <span data-bind="text:selectedPrimaryPhone"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Primary Email:
+                    <span data-bind="text:selectedPrimaryEmail"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Primary Phone:
+                    <span data-bind="text:selectedSecondaryName"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Secondary Name:
+                    <span data-bind="text:selectedSecondaryPhone"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Secondary Email:
+                    <span data-bind="text:selectedSecondaryEmail"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Instruction:
+                    <span data-bind="text:selectedInstruction"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Urgency:
+                    <span data-bind="text:selectedUrgency"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Permission:
+                    <span data-bind="text:selectedPermission"></span>
+                </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow">
+                    Image:
+                    <span data-bind="text:selectedimgUrl"></span>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Request Form-->
+
+
+
+
+
+
+
+
 
 
 <div class="row">
@@ -147,7 +237,7 @@
         </div>
     </div>
 
-   
+
 
     <div class="col-lg-12 col-md-12  requestlogbox nopadding">
         <div class="col-lg-12 col-md-12 text-center  headingopenerequests " id="three-icon">
@@ -164,7 +254,7 @@
                     <button class="icon icon-search"><i class="fa fa-search"></i></button>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <div class="col-lg-12 col-md-12  nopadding Openrequestheader blueDefault">
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Date</span>
@@ -173,14 +263,14 @@
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
         </div>
-       
-        <div class="nopadding col-lg-12 col-md-12" data-bind="foreach:request ">
-            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows">
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:rDate"></span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:RequestNumber"></span>
-                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 " data-bind="text:Description"></span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 " data-bind="text:Status"></span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">o</span>
+
+        <div class="nopadding col-lg-12 col-md-12  outline" data-bind="foreach:request ">
+            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows requestsrow " data-toggle="modal" data-target="#myModalpreviewrequest" data-bind="click:openinmodal, attr:{'data-rowkey':ID}">
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow  " data-bind=" text:rDate, attr:{'data-rowkey':ID}"></span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow " data-bind="text:RequestNumber, attr:{'data-rowkey':ID}"></span>
+                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 requestsrow " data-bind="text:Description, attr:{'data-rowkey':ID}"></span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow " data-bind="text:Status, attr:{'data-rowkey':ID}"></span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow ">o</span>
             </div>
         </div>
 
@@ -204,27 +294,34 @@
             $('#repairsearchloop').on("click", function () {
                 $('.instructionrepairbox').fadeToggle();
                 $('#three-icon').fadeToggle();
-                setTimeout(function () { $('.searchrepair').slideToggle(); },600);
+                setTimeout(function () { $('.searchrepair').slideToggle(); }, 600);
             });
-           
-       
 
-        $(document).on('change', '.btn-file :file', function () {
-            var input = $(this),
-                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [numFiles, label]);
-        });
-     
+            $(document).ready(function () {
+                $('.requestsrow').on("click", function () {
+                    alert("int");
+                    //var ID = $(this).attr('data-rowkey');
+                    //alert('key: ' + ID);
+                });
+
+            });
+
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
 
             $('#contactotherid').on('click', function () {
                 $('.othercontactinfo').slideToggle();
                 $('#contactotherid').toggleClass("btn-default");
                 $('#contactotherid').toggleClass("btn-primary");
             });
-       
 
-       
+
+
 
             $('#primaryid').on('click', function () {
                 $('#primaryinfomation').slideToggle();
@@ -239,7 +336,10 @@
             });
 
 
-          
+
+
+
+
         });
         $(function () {
             var viewModel = function () {
@@ -284,9 +384,9 @@
                     return dt.getMinutes();
 
                 }
-                //==========      
-               
-                
+                //==========
+
+
                 $.ajaxSettings.traditional = true;
                 $.ajax({
                     type: "GET",
@@ -307,7 +407,19 @@
                                 rDate: RDate,
                                 RequestNumber: "120320151",
                                 Description: TrkPkgs[i].ProblemDescription,
-                                Status: TrkPkgs[i].Status
+                                Status: TrkPkgs[i].Status,
+                                ID: TrkPkgs[i].ID,
+                                Category: TrkPkgs[i].Category,
+                                Instruction: TrkPkgs[i].Instruction,
+                                Urgency: TrkPkgs[i].Urgency,
+                                Permision: TrkPkgs[i].Permision,
+                                PrimaryName: TrkPkgs[i].PrimaryName,
+                                PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                                PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                                SecondaryName: TrkPkgs[i].SecondaryName,
+                                SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                                SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                                imgUrl: TrkPkgs[i].imgUrl
                             });
                         }
 
@@ -331,17 +443,52 @@
                 self.request = ko.observableArray();
                 self.fileName = ko.observable();
                 self.KeydownSearh = ko.observable();
+                //===============Preview repait request=======================
+                self.selectedDate = ko.observable();
+                self.selectedDescription = ko.observable();
+                self.selectedRequestNumber = ko.observable();
+                self.selectedCategory = ko.observable();
+                self.selectedPrimaryName = ko.observable();
+                self.selectedPrimaryPhone = ko.observable();
+                self.selectedPrimaryEmail = ko.observable();
+                self.selectedSecondaryName = ko.observable();
+                self.selectedSecondaryPhone = ko.observable();
+                self.selectedSecondaryEmail = ko.observable();
+                self.selectedInstruction = ko.observable();
+                self.selectedUrgency = ko.observable();
+                self.selectedPermission = ko.observable();
+                self.selectedimgUrl = ko.observable();
+                self.selectedStatus = ko.observable();
+
+                self.openinmodal = function (item, event) {
+                    var selected_values = JSON.stringify(item);
+                    var selected = JSON.parse(selected_values);
+                    self.selectedDate(selected.rDate);
+                    self.selectedDescription(selected.Description);
+                    self.selectedStatus(selected.Status);
+                    self.selectedCategory(selected.Category);
+                    self.selectedPrimaryName(selected.PrimaryName);
+                    self.selectedPrimaryPhone(selected.PrimaryPhone);
+                    self.selectedPrimaryEmail(selected.PrimaryEmail);
+                    self.selectedSecondaryName(selected.SecondaryName);
+                    self.selectedSecondaryPhone(selected.SecondaryPhone);
+                    self.selectedSecondaryEmail(selected.SecondaryEmail);
+                    self.selectedInstruction(selected.Instruction);
+                    self.selectedUrgency(selected.Urgency);
+                    self.selectedPermission(selected.Permision);
+                    self.selectedimgUrl(selected.imgUrl);
+                };
 
                 self.KeydownSearh.subscribe(function (value) {
-                   // debugger;
+                    // debugger;
 
-                    
+
                     $.ajaxSettings.traditional = true;
                     $.ajax({
-                       
+
                         type: "POST",
                         url: '/Tenants/loadRequestbysearch/',
-                        data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter':value }),
+                        data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter': value }),
                         contentType: "application/json; charset=utf-8",
                         context: document.body,
                         success: function (data) {
@@ -357,13 +504,26 @@
                                     rDate: RDate,
                                     RequestNumber: "120320151",
                                     Description: TrkPkgs[i].ProblemDescription,
-                                    Status: TrkPkgs[i].Status
+                                    Status: TrkPkgs[i].Status,
+                                    ID: TrkPkgs[i].ID,
+                                    Category: TrkPkgs[i].Category,
+                                    Instruction: TrkPkgs[i].Instruction,
+                                    Urgency: TrkPkgs[i].Urgency,
+                                    Permision: TrkPkgs[i].Permision,
+                                    PrimaryName: TrkPkgs[i].PrimaryName,
+                                    PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                                    PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                                    SecondaryName: TrkPkgs[i].SecondaryName,
+                                    SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                                    SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                                    imgUrl: TrkPkgs[i].imgUrl
+
                                 });
                             }
                         }
-                    });                   
+                    });
                 });
-                
+
 
                 $(document).ready(function () {
                     $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
@@ -411,13 +571,25 @@
                                     rDate: RDate,
                                     RequestNumber: "120320151",
                                     Description: TrkPkgs[i].ProblemDescription,
-                                    Status: TrkPkgs[i].Status
+                                    Status: TrkPkgs[i].Status,
+                                    ID: TrkPkgs[i].ID,
+                                    Category: TrkPkgs[i].Category,
+                                    Instruction: TrkPkgs[i].Instruction,
+                                    Urgency: TrkPkgs[i].Urgency,
+                                    Permision: TrkPkgs[i].Permision,
+                                    PrimaryName: TrkPkgs[i].PrimaryName,
+                                    PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                                    PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                                    SecondaryName: TrkPkgs[i].SecondaryName,
+                                    SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                                    SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                                    imgUrl: TrkPkgs[i].imgUrl
                                 });
                             }
 
                         }
-                    }).complete(function () {                    
-                       
+                    }).complete(function () {
+
                         //reset all observable to empty
                         self.Phone("");
                         self.Email("");
@@ -431,10 +603,13 @@
                         self.OtherContactEmail("");
                     });
                 };
-                
+
+
             };
             ko.applyBindings(viewModel);
+
+
         });
-</script>
+    </script>
 
 }

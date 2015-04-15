@@ -1357,3 +1357,9 @@ height:90px;
 
 margin-bottom:20px;
 }
+
+.previewcontentrow {
+
+padding:9px 0;
+outline:1px solid red;
+}
