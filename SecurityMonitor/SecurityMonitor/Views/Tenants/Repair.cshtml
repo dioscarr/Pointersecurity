@@ -21,7 +21,7 @@
                     <div class="col-lg-12 col-md-12  squarearoundform">
                         <div class="col-lg-6 col-md-6 nopadding displayinline rformrowheight padding20px ">
                             <span class="displayinline">Request</span>
-                            @Html.DropDownList("Categories", @Model.RequestCategories, "Select Category", new { @class = "displayinline form-control", data_bind = "value:Category" })
+                            <div >@Html.DropDownList("Categories", @Model.RequestCategories, "Select Category", new { @class = "displayinline form-control", @data_bind = "value:Category", })</div>
                             @*<span data-bind="text:Category">oio</span>*@
                         </div>
 
@@ -126,7 +126,8 @@
             <div class="modal-header nopadding " id="modalheaderpreviewid">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h4 class="modal-title" id="myModalpreviewLabel ">Preview request</h4>
+                     <h4  class="modal-title displayinline" id="myModalpreviewLabel ">Preview request</h4>
+                    <span class="fa fa-edit fa-2x font_color_lightblue pull-right displayinline padding-right_20px hollow3" id="editid" data-bind="click:edit"></span>
                 </div>
             </div>
             <div class="modal-body  mymodalclass">
@@ -139,7 +140,20 @@
                     <div class="col-lg-4 col-md-4 text-center">
                         <h6>Category:</h6>
                         <span data-bind="text:selectedCategory"></span>
+                        
+                        <span>
+                        <br />@Html.DropDownList("Categories",
+                        @Model.RequestCategories, "Select Category",
+                        new
+                        {
+                            @class = "displayinline form-control input-sm",
+                            data_bind = "value:Category,visible:letsee",
+                            @style = "background:lightblue;"
+                        })</span>
+
+
                     </div>
+                    
                     <div class="col-lg-4 col-md-4 text-center">
                         <h6>Status:</h6>
                         <span data-bind="text:selectedStatus"></span>
@@ -150,20 +164,59 @@
                     <div class="col-lg-4 col-md-4 text-center previewcontentrow">
                         <h6>Instruction:</h6>
                         <span data-bind="text:selectedInstruction"></span>
+                        
+                        <span>
+                        <br />@Html.TextArea("instructions",
+                        new
+                        {
+                            @class = " rrform form-control",
+                            @cols = 300,
+                            @rows = 1,
+                            data_bind = "value:Instruction, valueUpdate:'afterkeydown',visible:letsee",
+                            @style = "background:lightblue;"
+                        })</span>
+
                     </div>
                     <div class="col-lg-4 col-md-4 text-center previewcontentrow">
                         <h6>Urgency:</h6>
                         <span data-bind="text:selectedUrgency"></span>
+                        
+                        <span class="" style="background:lightblue;" data-bind="visible:letsee">
+                            <br />
+                            <span class="backgroubdlightgrey;">
+                                High @Html.RadioButton("rbtnHighlow", "1", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })
+                            </span>
+                            <span class="backgroubdlightgrey;">
+                                Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })
+                            </span>
+                        </span>
                     </div>
                     <div class="col-lg-4 col-md-4 text-center previewcontentrow">
                         <h6>Permission:</h6>
                         <span data-bind="text:selectedPermission "></span>
+                        <br/>
+                        <span class="padding-left20px" style="background:lightblue;" data-bind="visible:letsee">
+                            Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:permission" })
+                            Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:permission" })
+                        </span>
                     </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 border-bottomcust repairproblemsettings">
                     <h6 > Problem:</h6>
                     <span class="problempadding" data-bind="text:selectedDescription"></span>
+                  
+                    <span  data-bind="visible:letsee" ><br />@Html.TextArea("Description",
+                    new
+                    {
+                        @class = " rrform form-control",
+                        rows = 3,
+                        data_bind = "value:Description, valueUpdate:'afterkeydown'",
+                        @style = "background:lightblue;"
+                    })</span>
+
+                    <br/>
+
                 </div> 
 
                 
@@ -188,14 +241,32 @@
                     <div class="col-lg-12 col-md-12 text-center previewcontentrow">
                         <h6> Secondary Name:</h6>
                         <span data-bind="text:selectedSecondaryName"></span>
+                        @Html.TextBox("OtherContactName", null, 
+                        new { @Placeholder = "Enter Full Name", 
+                            @class = "form-control displayinline input-sm ",
+                              Data_bind = "value:OtherContactName,valueUpdate:'afterkeydown', visible:letsee",
+                              @style = "background:lightblue;"
+                        })
                     </div>
                     <div class="col-lg-12 col-md-12 text-center previewcontentrow">
                         <h6> Secondary Phone:</h6>
                         <span data-bind="text:selectedSecondaryPhone"></span>
+                        @Html.TextBox("OtherContactPhone", null,
+                        new { @Placeholder = "345.898.0099", 
+                            @class = "form-control displayinline input-sm",
+                              Data_bind = "value:OtherContactPhone,valueUpdate:'afterkeydown', visible:letsee",
+                              @style = "background:lightblue;"
+                        })
                     </div>
                     <div class="col-lg-12 col-md-12 text-center previewcontentrow">
                         <h6>Secondary Email:</h6>
                         <span data-bind="text:selectedSecondaryEmail"></span>
+                        <span > @Html.TextBox("OtherContactEmail", null, 
+                        new { @Placeholder = "Example@mail.com (Optional)",
+                            @class = "form-control displayinline input-sm",
+                              Data_bind = "value:OtherContactEmail,valueUpdate:'afterkeydown', visible:letsee",
+                              @style = "background:lightblue;"
+                        })</span>
                     </div>
 
                 </div>               
@@ -204,6 +275,12 @@
                     Image:
                     <span data-bind="text:selectedimgUrl"></span>
                 </div>
+                <div class="col-lg-12 col-md-12 previewcontentrow" data-bind="visible:letsee">
+                    <button type="button" class="btn btn-default input-sm pull-right btn-info">Update Changes</button>
+                    <button type="button" class="btn btn-default input-sm pull-right btn-info">Cancel</button>
+                   
+                </div>
+
 
 
             </div>
@@ -474,6 +551,21 @@
                 self.selectedPermission = ko.observable();
                 self.selectedimgUrl = ko.observable();
                 self.selectedStatus = ko.observable();
+
+                self.letsee = ko.observable(false);
+
+                self.edit = function () {
+                    if (self.letsee() == true) {
+                        self.letsee(false);
+                    } else {
+
+                        self.letsee(true);
+                    }
+                       
+
+                    
+                    
+                };
 
                 self.openinmodal = function (item, event) {
                     var selected_values = JSON.stringify(item);

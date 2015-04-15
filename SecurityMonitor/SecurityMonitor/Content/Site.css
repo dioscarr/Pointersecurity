@@ -1389,14 +1389,32 @@ border-bottom:1px solid lightgrey;
 }
 
 .problempadding {
-    padding:20px 0;
+    padding: 20px 0;
 }
-
 .mymodalclass {
 
-    min-height:760px;
+    min-height:900px;
 }
 
 .psrowheight {
     min-height:300px;
+}
+
+.font_color_white {
+color:white;
+}
+.font_color_lightgrey {
+color:lightgrey;
+}
+.font_color_lightblue {
+color:lightblue;
+}
+
+.font_color_blue {
+color:blue;
+}
+
+.padding-right_20px {
+
+padding-right:20px !important;
 }
