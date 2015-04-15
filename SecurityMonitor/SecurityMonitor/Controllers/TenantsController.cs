@@ -157,38 +157,47 @@ namespace SecurityMonitor.Controllers
             return View(repair);
         }
 
-
-        public ActionResult AddRequest(RepairRequest model)
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> AddRequest(RepairRequest model)
         {
             if(model!=null)
             {
                 db.RepairRequest.Add(model);
-                db.SaveChanges();
-
-
-                var repairRequest = db.RepairRequest
-                   .Where(c => c.TenantID == model.TenantID)
-                   .Select(c => new
-                   {
-                       RequestedDate = c.RequestedDate,
-                       ProblemDescription = c.ProblemDescription,
-                       Status = c.Status
-                   }).OrderBy(c => c.RequestedDate).ToList();
-
-
-               var Jsonpackages = Json(repairRequest);
-
-
-                var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-                hubContext.Clients.All.newRepairRequestList(Jsonpackages);
+               await db.SaveChangesAsync();
 
             }
-            return View();
+
+            var repairRequest = await db.RepairRequest
+                .Where(c => c.TenantID == model.TenantID)
+                .Select(c => new
+                {
+                    RequestedDate = c.RequestedDate,
+                    ProblemDescription = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RepairRequestCategoriesID,
+                    Category = c.RepairRequestCategories.Categories,
+                    Instruction = c.Instructions_,
+                    Urgency = c.RepairUrgency.Urgency,
+                    Permision =c.Permissiontoenter,
+                    imgUrl = c.PhotoUrl,
+                    PrimaryName = c.Tenant.FirstName +" " + c.Tenant.LastName,
+                    PrimaryPhone = c.Tenant.Phone,
+                    PrimaryEmail = c.Tenant.Username,
+                    SecondaryName = c.OtherContactName,
+                    SecondaryPhone = c.OtherContactPhone,
+                    SecondaryEmail = c.OtherContactEmail
+                }).OrderBy(c => c.RequestedDate).ToListAsync();
+
+
+            var Jsonpackages = Json(repairRequest);
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<string> loadRequest(string TenantID)
+        public async Task<JsonResult> loadRequest(string TenantID)
         {
             var repairRequest =await  db.RepairRequest
                      .Where(c => c.TenantID == TenantID)
@@ -196,17 +205,60 @@ namespace SecurityMonitor.Controllers
                      {
                          RequestedDate = c.RequestedDate,
                          ProblemDescription = c.ProblemDescription,
-                         Status = c.Status
+                         Status = c.Status,
+                         ID = c.Id,
+                         RequestNumber = c.RepairRequestCategoriesID,
+                         Category = c.RepairRequestCategories.Categories,
+                         Instruction = c.Instructions_,
+                         Urgency = c.RepairUrgency.Urgency,
+                         Permision = c.Permissiontoenter,
+                         imgUrl = c.PhotoUrl,
+                         PrimaryName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                         PrimaryPhone = c.Tenant.Phone,
+                         PrimaryEmail = c.Tenant.Username,
+                         SecondaryName = c.OtherContactName,
+                         SecondaryPhone = c.OtherContactPhone,
+                         SecondaryEmail = c.OtherContactEmail
                      }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
             var Jsonpackages = Json(repairRequest);
 
 
-            var hubContext = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<NotificationsHub>();
-            hubContext.Clients.All.newRepairRequestList(Jsonpackages);
-          return "";
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         
+        
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> loadRequestbysearch(string TenantID, string filter)
+        {
+            var repairRequest = await db.RepairRequest
+                     .Where(c=> c.TenantID == TenantID && c.ProblemDescription.Contains(filter))                   
+                     .Select(c => new
+                     {
+                         RequestedDate = c.RequestedDate,
+                         ProblemDescription = c.ProblemDescription,
+                         Status = c.Status,
+                         ID = c.Id,
+                         RequestNumber = c.RepairRequestCategoriesID,
+                         Category = c.RepairRequestCategories.Categories,
+                         Instruction = c.Instructions_,
+                         Urgency = c.RepairUrgency.Urgency,
+                         Permision = c.Permissiontoenter,
+                         imgUrl = c.PhotoUrl,
+                         PrimaryName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                         PrimaryPhone = c.Tenant.Phone,
+                         PrimaryEmail = c.Tenant.Username,
+                         SecondaryName = c.OtherContactName,
+                         SecondaryPhone = c.OtherContactPhone,
+                         SecondaryEmail = c.OtherContactEmail
+                     }).OrderByDescending(c => c.RequestedDate).ToListAsync();
+            
+            var Jsonpackages = Json(repairRequest);
+
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
         }
 
 
