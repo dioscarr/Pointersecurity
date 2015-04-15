@@ -129,10 +129,10 @@
                     <h4 class="modal-title" id="myModalpreviewLabel ">Preview request</h4>
                 </div>
             </div>
-            <div class="modal-body lightgrey">
+            <div class="modal-body  mymodalclass">
 
                 <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
-                    <div class="col-lg-4 col-md-4 text-center">
+                    <div class="col-lg-4 col-md-4 text-center ">
                         <h6>Requested Date:</h6>
                         <span data-bind="text:selectedDate"></span>
                     </div>
@@ -145,46 +145,61 @@
                         <span data-bind="text:selectedStatus"></span>
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Problem:
-                    <span data-bind="text:selectedDescription"></span>
+
+                <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
+                    <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                        <h6>Instruction:</h6>
+                        <span data-bind="text:selectedInstruction"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                        <h6>Urgency:</h6>
+                        <span data-bind="text:selectedUrgency"></span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                        <h6>Permission:</h6>
+                        <span data-bind="text:selectedPermission "></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 border-bottomcust repairproblemsettings">
+                    <h6 > Problem:</h6>
+                    <span class="problempadding" data-bind="text:selectedDescription"></span>
                 </div> 
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Primary Name:
-                    <span data-bind="text:selectedPrimaryName"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Primary Phone:
-                    <span data-bind="text:selectedPrimaryPhone"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Primary Email:
-                    <span data-bind="text:selectedPrimaryEmail"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Primary Phone:
-                    <span data-bind="text:selectedSecondaryName"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Secondary Name:
-                    <span data-bind="text:selectedSecondaryPhone"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Secondary Email:
-                    <span data-bind="text:selectedSecondaryEmail"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Instruction:
-                    <span data-bind="text:selectedInstruction"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Urgency:
-                    <span data-bind="text:selectedUrgency"></span>
-                </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Permission:
-                    <span data-bind="text:selectedPermission"></span>
-                </div>
+
+                
+
+                <div class="col-lg-6 col-md-6 nopadding previewcontentrow psrowheight">
+                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
+                        <h6> Primary Name:</h6>
+                        <span data-bind="text:selectedPrimaryName"></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
+                        <h6> Primary Phone:</h6>
+                        <span data-bind="text:selectedPrimaryPhone"></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
+                        <h6>Primary Email:</h6>
+                        <span data-bind="text:selectedPrimaryEmail"></span>
+                    </div>
+                    
+                </div>               
+
+                <div class="col-lg-6 col-md-6 nopadding previewcontentrow">
+                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
+                        <h6> Secondary Name:</h6>
+                        <span data-bind="text:selectedSecondaryName"></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
+                        <h6> Secondary Phone:</h6>
+                        <span data-bind="text:selectedSecondaryPhone"></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
+                        <h6>Secondary Email:</h6>
+                        <span data-bind="text:selectedSecondaryEmail"></span>
+                    </div>
+
+                </div>               
+                               
                 <div class="col-lg-12 col-md-12 previewcontentrow">
                     Image:
                     <span data-bind="text:selectedimgUrl"></span>
@@ -264,8 +279,8 @@
             <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
         </div>
 
-        <div class="nopadding col-lg-12 col-md-12  outline" data-bind="foreach:request ">
-            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows requestsrow " data-toggle="modal" data-target="#myModalpreviewrequest" data-bind="click:openinmodal, attr:{'data-rowkey':ID}">
+        <div class="nopadding col-lg-12 col-md-12  " data-bind="foreach:request ">
+            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows requestsrow hollow5 " data-toggle="modal" data-target="#myModalpreviewrequest" data-bind="click:openinmodal, attr:{'data-rowkey':ID}">
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow  " data-bind=" text:rDate, attr:{'data-rowkey':ID}"></span>
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow " data-bind="text:RequestNumber, attr:{'data-rowkey':ID}"></span>
                 <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 requestsrow " data-bind="text:Description, attr:{'data-rowkey':ID}"></span>
