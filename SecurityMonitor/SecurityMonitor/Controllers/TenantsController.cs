@@ -261,6 +261,81 @@ namespace SecurityMonitor.Controllers
 
         }
 
+         [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> UpdateRequest(RepairRequest model)
+        {
+            if(model!=null)
+            {
+
+                db.RepairRequest.Attach(model);
+                var Entry = db.Entry(model);
+                if (model.RepairRequestCategoriesID != 0)
+                {
+                    Entry.Property(r => r.RepairRequestCategoriesID).IsModified = true;
+                }
+                else if (model.Instructions_!="")
+                {
+                    Entry.Property(r => r.Instructions_).IsModified = true;
+                }
+                else if (model.UrgencyID!=0)
+                {
+                    Entry.Property(r => r.UrgencyID).IsModified = true;                
+                }
+                else if (model.Permissiontoenter!="")
+                {
+                    Entry.Property(r => r.Permissiontoenter).IsModified = true;
+                }
+                else if (model.ProblemDescription!="")
+                {
+                    Entry.Property(r => r.ProblemDescription).IsModified = true;                
+                }
+                else if (model.OtherContactName!="")
+                {
+                 Entry.Property(r => r.OtherContactName).IsModified = true;
+                }
+                else if (model.OtherContactPhone!="")
+                {
+                     Entry.Property(r => r.OtherContactPhone).IsModified = true;                
+                }
+                else if (model.OtherContactEmail!="")
+                {
+                    Entry.Property(r => r.OtherContactEmail).IsModified = true;                           
+                }            
+                
+               await db.SaveChangesAsync();
+
+            }
+
+            var repairRequest = await db.RepairRequest
+                .Where(c => c.TenantID == model.TenantID)
+                .Select(c => new
+                {
+                    RequestedDate = c.RequestedDate,
+                    ProblemDescription = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RepairRequestCategoriesID,
+                    Category = c.RepairRequestCategories.Categories,
+                    Instruction = c.Instructions_,
+                    Urgency = c.RepairUrgency.Urgency,
+                    Permision =c.Permissiontoenter,
+                    imgUrl = c.PhotoUrl,
+                    PrimaryName = c.Tenant.FirstName +" " + c.Tenant.LastName,
+                    PrimaryPhone = c.Tenant.Phone,
+                    PrimaryEmail = c.Tenant.Username,
+                    SecondaryName = c.OtherContactName,
+                    SecondaryPhone = c.OtherContactPhone,
+                    SecondaryEmail = c.OtherContactEmail
+                }).OrderBy(c => c.RequestedDate).ToListAsync();
+
+
+            var Jsonpackages = Json(repairRequest);
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        
+
 
 
 

@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="modal-body  mymodalclass">
-
+                @Html.Hidden("dd", "0", new { @data_bind = "text:currentID" })
                 <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
                     <div class="col-lg-4 col-md-4 text-center ">
                         <h6>Requested Date:</h6>
@@ -147,7 +147,7 @@
                         new
                         {
                             @class = "displayinline form-control input-sm",
-                            data_bind = "value:Category,visible:letsee",
+                            data_bind = "value:UpdateCatetegory,visible:letsee",
                             @style = "background:lightblue;"
                         })</span>
 
@@ -172,7 +172,7 @@
                             @class = " rrform form-control",
                             @cols = 300,
                             @rows = 1,
-                            data_bind = "value:Instruction, valueUpdate:'afterkeydown',visible:letsee",
+                            data_bind = "value:UpdateInstrutions, valueUpdate:'afterkeydown',visible:letsee",
                             @style = "background:lightblue;"
                         })</span>
 
@@ -184,10 +184,10 @@
                         <span class="" style="background:lightblue;" data-bind="visible:letsee">
                             <br />
                             <span class="backgroubdlightgrey;">
-                                High @Html.RadioButton("rbtnHighlow", "1", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })
+                                High @Html.RadioButton("rbtnHighlow", "1", false, new { @class = "displayinline ", data_bind = "checked:UpdateUrgency" })
                             </span>
                             <span class="backgroubdlightgrey;">
-                                Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:Urgency" })
+                                Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:UpdateUrgency" })
                             </span>
                         </span>
                     </div>
@@ -196,8 +196,8 @@
                         <span data-bind="text:selectedPermission "></span>
                         <br/>
                         <span class="padding-left20px" style="background:lightblue;" data-bind="visible:letsee">
-                            Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:permission" })
-                            Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:permission" })
+                            Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:UpdatePermission" })
+                            Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:UpdatePermission" })
                         </span>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                     {
                         @class = " rrform form-control",
                         rows = 3,
-                        data_bind = "value:Description, valueUpdate:'afterkeydown'",
+                        data_bind = "value:UpdateProblem, valueUpdate:'afterkeydown'",
                         @style = "background:lightblue;"
                     })</span>
 
@@ -244,7 +244,7 @@
                         @Html.TextBox("OtherContactName", null, 
                         new { @Placeholder = "Enter Full Name", 
                             @class = "form-control displayinline input-sm ",
-                              Data_bind = "value:OtherContactName,valueUpdate:'afterkeydown', visible:letsee",
+                              Data_bind = "value:UpdateSName,valueUpdate:'afterkeydown', visible:letsee",
                               @style = "background:lightblue;"
                         })
                     </div>
@@ -254,7 +254,7 @@
                         @Html.TextBox("OtherContactPhone", null,
                         new { @Placeholder = "345.898.0099", 
                             @class = "form-control displayinline input-sm",
-                              Data_bind = "value:OtherContactPhone,valueUpdate:'afterkeydown', visible:letsee",
+                              Data_bind = "value:UpdateSPhone,valueUpdate:'afterkeydown', visible:letsee",
                               @style = "background:lightblue;"
                         })
                     </div>
@@ -264,7 +264,7 @@
                         <span > @Html.TextBox("OtherContactEmail", null, 
                         new { @Placeholder = "Example@mail.com (Optional)",
                             @class = "form-control displayinline input-sm",
-                              Data_bind = "value:OtherContactEmail,valueUpdate:'afterkeydown', visible:letsee",
+                              Data_bind = "value:UpdateSEmail,valueUpdate:'afterkeydown', visible:letsee",
                               @style = "background:lightblue;"
                         })</span>
                     </div>
@@ -276,8 +276,8 @@
                     <span data-bind="text:selectedimgUrl"></span>
                 </div>
                 <div class="col-lg-12 col-md-12 previewcontentrow" data-bind="visible:letsee">
-                    <button type="button" class="btn btn-default input-sm pull-right btn-info">Update Changes</button>
-                    <button type="button" class="btn btn-default input-sm pull-right btn-info">Cancel</button>
+                    <button type="button" class="btn btn-default input-sm pull-right btn-info" data-bind="click:Update" data-dismiss="modal">Update Changes</button>
+                    <button type="button" class="btn btn-default input-sm pull-right btn-info" data-bind="click:previewcancel" data-dismiss="modal">Cancel</button>
                    
                 </div>
 
@@ -382,108 +382,108 @@
 
 
     <script type="text/javascript">
-        $(function () {
-            $('#repairsearchloop').on("click", function () {
-                $('.instructionrepairbox').fadeToggle();
-                $('#three-icon').fadeToggle();
-                setTimeout(function () { $('.searchrepair').slideToggle(); }, 600);
+    $(function () {
+        $('#repairsearchloop').on("click", function () {
+            $('.instructionrepairbox').fadeToggle();
+            $('#three-icon').fadeToggle();
+            setTimeout(function () { $('.searchrepair').slideToggle(); }, 600);
+        });
+
+        $(document).ready(function () {
+            $('.requestsrow').on("click", function () {
+                alert("int");
+                //var ID = $(this).attr('data-rowkey');
+                //alert('key: ' + ID);
             });
-
-            $(document).ready(function () {
-                $('.requestsrow').on("click", function () {
-                    alert("int");
-                    //var ID = $(this).attr('data-rowkey');
-                    //alert('key: ' + ID);
-                });
-
-            });
-
-            $(document).on('change', '.btn-file :file', function () {
-                var input = $(this),
-                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [numFiles, label]);
-            });
-
-
-            $('#contactotherid').on('click', function () {
-                $('.othercontactinfo').slideToggle();
-                $('#contactotherid').toggleClass("btn-default");
-                $('#contactotherid').toggleClass("btn-primary");
-            });
-
-
-
-
-            $('#primaryid').on('click', function () {
-                $('#primaryinfomation').slideToggle();
-                $('#primaryid').toggleClass("btn-default");
-                $('#primaryid').toggleClass("btn-primary");
-            });
-
-            $('#search').on('focusout', function () {
-                $('.instructionrepairbox').fadeToggle();
-                $('#three-icon').fadeToggle();
-                $('.searchrepair').slideToggle();
-            });
-
-
-
-
-
 
         });
-        $(function () {
-            var viewModel = function () {
+
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
 
 
-                // =====year=======
-                function YearC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return (dt.getFullYear());
-                }
-                // =====Month=======
-                function MonthC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return (dt.getMonth());
-                }
-                // =====Day=======
-                function DayC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return dt.getDate();
-
-                }
-
-                // =====Hour=======
-                function HoursC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return dt.getHours();
-
-                }
-                // =====Minutes=======
-                function MinutesC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return dt.getMinutes();
-
-                }
-                //==========
+        $('#contactotherid').on('click', function () {
+            $('.othercontactinfo').slideToggle();
+            $('#contactotherid').toggleClass("btn-default");
+            $('#contactotherid').toggleClass("btn-primary");
+        });
 
 
-                $.ajaxSettings.traditional = true;
-                $.ajax({
-                    type: "GET",
-                    url: '/Tenants/loadRequest/',
-                    data: { TenantID: "@Model.TenantID" },
+
+
+        $('#primaryid').on('click', function () {
+            $('#primaryinfomation').slideToggle();
+            $('#primaryid').toggleClass("btn-default");
+            $('#primaryid').toggleClass("btn-primary");
+        });
+
+        $('#search').on('focusout', function () {
+            $('.instructionrepairbox').fadeToggle();
+            $('#three-icon').fadeToggle();
+            $('.searchrepair').slideToggle();
+        });
+
+
+
+
+
+
+    });
+    $(function () {
+        var viewModel = function () {
+
+
+            // =====year=======
+            function YearC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return (dt.getFullYear());
+            }
+            // =====Month=======
+            function MonthC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return (dt.getMonth());
+            }
+            // =====Day=======
+            function DayC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getDate();
+
+            }
+
+            // =====Hour=======
+            function HoursC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getHours();
+
+            }
+            // =====Minutes=======
+            function MinutesC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getMinutes();
+
+            }
+            //==========
+
+
+            $.ajaxSettings.traditional = true;
+            $.ajax({
+                type: "GET",
+                url: '/Tenants/loadRequest/',
+                data: { TenantID: "@Model.TenantID" },
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
@@ -551,172 +551,268 @@
                 self.selectedPermission = ko.observable();
                 self.selectedimgUrl = ko.observable();
                 self.selectedStatus = ko.observable();
-
-                self.letsee = ko.observable(false);
-
-                self.edit = function () {
-                    if (self.letsee() == true) {
-                        self.letsee(false);
-                    } else {
-
-                        self.letsee(true);
-                    }
-                       
-
-                    
-                    
-                };
-
-                self.openinmodal = function (item, event) {
-                    var selected_values = JSON.stringify(item);
-                    var selected = JSON.parse(selected_values);
-                    self.selectedDate(selected.rDate);
-                    self.selectedDescription(selected.Description);
-                    self.selectedStatus(selected.Status);
-                    self.selectedCategory(selected.Category);
-                    self.selectedPrimaryName(selected.PrimaryName);
-                    self.selectedPrimaryPhone(selected.PrimaryPhone);
-                    self.selectedPrimaryEmail(selected.PrimaryEmail);
-                    self.selectedSecondaryName(selected.SecondaryName);
-                    self.selectedSecondaryPhone(selected.SecondaryPhone);
-                    self.selectedSecondaryEmail(selected.SecondaryEmail);
-                    self.selectedInstruction(selected.Instruction);
-                    self.selectedUrgency(selected.Urgency);
-                    self.selectedPermission(selected.Permision);
-                    self.selectedimgUrl(selected.imgUrl);
-                };
-
-                self.KeydownSearh.subscribe(function (value) {
-                    // debugger;
+                self.currentID = ko.observable();
 
 
-                    $.ajaxSettings.traditional = true;
-                    $.ajax({
-
-                        type: "POST",
-                        url: '/Tenants/loadRequestbysearch/',
-                        data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter': value }),
-                        contentType: "application/json; charset=utf-8",
-                        context: document.body,
-                        success: function (data) {
-                            self.request.removeAll();
-                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                            // debugger;
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-                                // debugger;
-                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
-                                //alert(RDate);
-                                self.request.push({
-                                    rDate: RDate,
-                                    RequestNumber: "120320151",
-                                    Description: TrkPkgs[i].ProblemDescription,
-                                    Status: TrkPkgs[i].Status,
-                                    ID: TrkPkgs[i].ID,
-                                    Category: TrkPkgs[i].Category,
-                                    Instruction: TrkPkgs[i].Instruction,
-                                    Urgency: TrkPkgs[i].Urgency,
-                                    Permision: TrkPkgs[i].Permision,
-                                    PrimaryName: TrkPkgs[i].PrimaryName,
-                                    PrimaryPhone: TrkPkgs[i].PrimaryPhone,
-                                    PrimaryEmail: TrkPkgs[i].PrimaryEmail,
-                                    SecondaryName: TrkPkgs[i].SecondaryName,
-                                    SecondaryPhone: TrkPkgs[i].SecondaryPhone,
-                                    SecondaryEmail: TrkPkgs[i].SecondaryEmail,
-                                    imgUrl: TrkPkgs[i].imgUrl
-
-                                });
-                            }
-                        }
-                    });
-                });
+                //update fields
+                self.UpdateCatetegory = ko.observable();
+                self.UpdateInstrutions = ko.observable();
+                self.UpdateUrgency = ko.observable();
+                self.UpdatePermission = ko.observable();
+                self.UpdateProblem = ko.observable();
+                self.UpdateSName = ko.observable();
+                self.UpdateSPhone = ko.observable();
+                self.UpdateSEmail = ko.observable();
 
 
-                $(document).ready(function () {
-                    $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-                        self.fileName(" " + label)
-                    });
-                });
-                var $myvalue = 0;
-                var request = {
-                    RepairRequestCategoriesID: self.Category,
-                    ProblemDescription: self.Description,
-                    UrgencyID: self.Urgency,
+                var UpdatedrepairRequest =
+                {
+                    Id: self.currentID,
+                    RepairRequestCategoriesID: self.UpdateCatetegory,
+                    ProblemDescription: self.UpdateProblem,
+                    UrgencyID: self.UpdateUrgency,
                     ContactPhone: "@Model.tenant.Phone",
-                    Permissiontoenter: self.permission,
+                    Permissiontoenter: self.UpdatePermission,
                     Email: "@Model.tenant.Username",
-                    Instructions_: self.Instruction,
+                    Instructions_: self.UpdateInstrutions,
                     PhotoUrl: "",
                     TenantID: "@Model.TenantID",
-                    Status: "Pending",
+                    Status: "Pending Edited",
                     RequestedDate: new Date(),
-                    OtherContactPhone: self.OtherContactPhone,
-                    OtherContactName: self.OtherContactName,
-                    OtherContactEmail: self.OtherContactEmail
-                };
-                self.SendRequest = function (fields) {
-                    // alert(request);
-                    // debugger;
-                    $.ajaxSettings.traditional = true;
+                    OtherContactPhone: self.UpdateSPhone,
+                    OtherContactName: self.UpdateSName,
+                    OtherContactEmail: self.UpdateSEmail
+
+        };
+            self.Update = function () {
+                debugger;
+            $.ajaxSettings.traditional = true;
+            $.ajax({
+                type: "POST",
+                url: '/Tenants/UpdateRequest/',
+                data: ko.toJSON(UpdatedrepairRequest),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
                     self.request.removeAll();
-                    $.ajax({
-                        type: "POST",
-                        url: '/Tenants/AddRequest/',
-                        data: ko.toJSON(request),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            self.request.removeAll();
-                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                            // debugger;
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-                                // debugger;
-                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
-                                //alert(RDate);
-                                self.request.push({
-                                    rDate: RDate,
-                                    RequestNumber: "120320151",
-                                    Description: TrkPkgs[i].ProblemDescription,
-                                    Status: TrkPkgs[i].Status,
-                                    ID: TrkPkgs[i].ID,
-                                    Category: TrkPkgs[i].Category,
-                                    Instruction: TrkPkgs[i].Instruction,
-                                    Urgency: TrkPkgs[i].Urgency,
-                                    Permision: TrkPkgs[i].Permision,
-                                    PrimaryName: TrkPkgs[i].PrimaryName,
-                                    PrimaryPhone: TrkPkgs[i].PrimaryPhone,
-                                    PrimaryEmail: TrkPkgs[i].PrimaryEmail,
-                                    SecondaryName: TrkPkgs[i].SecondaryName,
-                                    SecondaryPhone: TrkPkgs[i].SecondaryPhone,
-                                    SecondaryEmail: TrkPkgs[i].SecondaryEmail,
-                                    imgUrl: TrkPkgs[i].imgUrl
-                                });
-                            }
+                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                    // debugger;
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+                        // debugger;
+                        var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                        //alert(RDate);
+                        self.request.push({
+                            rDate: RDate,
+                            RequestNumber: "120320151",
+                            Description: TrkPkgs[i].ProblemDescription,
+                            Status: TrkPkgs[i].Status,
+                            ID: TrkPkgs[i].ID,
+                            Category: TrkPkgs[i].Category,
+                            Instruction: TrkPkgs[i].Instruction,
+                            Urgency: TrkPkgs[i].Urgency,
+                            Permision: TrkPkgs[i].Permision,
+                            PrimaryName: TrkPkgs[i].PrimaryName,
+                            PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                            PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                            SecondaryName: TrkPkgs[i].SecondaryName,
+                            SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                            SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                            imgUrl: TrkPkgs[i].imgUrl
+                        });
+                    }
 
-                        }
-                    }).complete(function () {
+                }
+            }).complete(function () {
+                self.UpdateCatetegory("");
+                self.UpdateInstrutions("");
+                self.UpdateUrgency("");
+                self.UpdatePermission("");
+                self.UpdateProblem("");
+                self.UpdateSName("");
+                self.UpdateSPhone("");;
+                self.UpdateSEmail("");
+                self.letsee(false);
 
-                        //reset all observable to empty
-                        self.Phone("");
-                        self.Email("");
-                        self.Urgency("");
-                        self.Category("");
-                        self.Instruction("");
-                        self.Description("");
-                        self.permission("");
-                        self.OtherContactPhone("");
-                        self.OtherContactName("");
-                        self.OtherContactEmail("");
-                    });
-                };
+            });
+
+        };
+
+        self.letsee = ko.observable(false);
+
+        self.edit = function () {
+            if (self.letsee() == true) {
+                self.letsee(false);
+            } else {
+
+                self.letsee(true);
+            }
+        };
+
+        self.previewcancel = function () {
+            self.UpdateCatetegory("");
+            self.UpdateInstrutions("");
+            self.UpdateUrgency("");
+            self.UpdatePermission("");
+            self.UpdateProblem("");
+            self.UpdateSName("");
+            self.UpdateSPhone("");;
+            self.UpdateSEmail("");
+            self.letsee(false);
+
+        };
+
+        self.openinmodal = function (item, event) {
+            var selected_values = JSON.stringify(item);
+            var selected = JSON.parse(selected_values);
+            self.currentID(selected.ID)
+            self.selectedDate(selected.rDate);
+            self.selectedDescription(selected.Description);
+            self.selectedStatus(selected.Status);
+            self.selectedCategory(selected.Category);
+            self.selectedPrimaryName(selected.PrimaryName);
+            self.selectedPrimaryPhone(selected.PrimaryPhone);
+            self.selectedPrimaryEmail(selected.PrimaryEmail);
+            self.selectedSecondaryName(selected.SecondaryName);
+            self.selectedSecondaryPhone(selected.SecondaryPhone);
+            self.selectedSecondaryEmail(selected.SecondaryEmail);
+            self.selectedInstruction(selected.Instruction);
+            self.selectedUrgency(selected.Urgency);
+            self.selectedPermission(selected.Permision);
+            self.selectedimgUrl(selected.imgUrl);
+        };
+
+        self.KeydownSearh.subscribe(function (value) {
+            // debugger;
 
 
-            };
-            ko.applyBindings(viewModel);
+            $.ajaxSettings.traditional = true;
+            $.ajax({
 
+                type: "POST",
+                url: '/Tenants/loadRequestbysearch/',
+                data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter': value }),
+                contentType: "application/json; charset=utf-8",
+                context: document.body,
+                success: function (data) {
+                    self.request.removeAll();
+                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                    // debugger;
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+                        // debugger;
+                        var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                        //alert(RDate);
+                        self.request.push({
+                            rDate: RDate,
+                            RequestNumber: "120320151",
+                            Description: TrkPkgs[i].ProblemDescription,
+                            Status: TrkPkgs[i].Status,
+                            ID: TrkPkgs[i].ID,
+                            Category: TrkPkgs[i].Category,
+                            Instruction: TrkPkgs[i].Instruction,
+                            Urgency: TrkPkgs[i].Urgency,
+                            Permision: TrkPkgs[i].Permision,
+                            PrimaryName: TrkPkgs[i].PrimaryName,
+                            PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                            PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                            SecondaryName: TrkPkgs[i].SecondaryName,
+                            SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                            SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                            imgUrl: TrkPkgs[i].imgUrl
 
+                        });
+                    }
+                }
+            });
         });
+
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+                self.fileName(" " + label)
+            });
+        });
+        var $myvalue = 0;
+        var request = {
+            RepairRequestCategoriesID: self.Category,
+            ProblemDescription: self.Description,
+            UrgencyID: self.Urgency,
+            ContactPhone: "@Model.tenant.Phone",
+            Permissiontoenter: self.permission,
+            Email: "@Model.tenant.Username",
+            Instructions_: self.Instruction,
+            PhotoUrl: "",
+            TenantID: "@Model.TenantID",
+            Status: "Pending",
+            RequestedDate: new Date(),
+            OtherContactPhone: self.OtherContactPhone,
+            OtherContactName: self.OtherContactName,
+            OtherContactEmail: self.OtherContactEmail
+        };
+        self.SendRequest = function (fields) {
+            // alert(request);
+            // debugger;
+            $.ajaxSettings.traditional = true;
+            self.request.removeAll();
+            $.ajax({
+                type: "POST",
+                url: '/Tenants/AddRequest/',
+                data: ko.toJSON(request),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    self.request.removeAll();
+                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                    // debugger;
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+                        // debugger;
+                        var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                        //alert(RDate);
+                        self.request.push({
+                            rDate: RDate,
+                            RequestNumber: "120320151",
+                            Description: TrkPkgs[i].ProblemDescription,
+                            Status: TrkPkgs[i].Status,
+                            ID: TrkPkgs[i].ID,
+                            Category: TrkPkgs[i].Category,
+                            Instruction: TrkPkgs[i].Instruction,
+                            Urgency: TrkPkgs[i].Urgency,
+                            Permision: TrkPkgs[i].Permision,
+                            PrimaryName: TrkPkgs[i].PrimaryName,
+                            PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                            PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                            SecondaryName: TrkPkgs[i].SecondaryName,
+                            SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                            SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                            imgUrl: TrkPkgs[i].imgUrl
+                        });
+                    }
+
+                }
+            }).complete(function () {
+
+                //reset all observable to empty
+                self.Phone("");
+                self.Email("");
+                self.Urgency("");
+                self.Category("");
+                self.Instruction("");
+                self.Description("");
+                self.permission("");
+                self.OtherContactPhone("");
+                self.OtherContactName("");
+                self.OtherContactEmail("");
+            });
+        };
+
+
+    };
+    ko.applyBindings(viewModel);
+
+
+    });
     </script>
 
 }
