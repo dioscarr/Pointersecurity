@@ -1,0 +1,272 @@
+﻿@model SecurityMonitor.Models.RepairManagement
+
+@{
+    ViewBag.Title = "RepairManagement";
+    Layout = "~/Views/Shared/_LayoutTenant .cshtml";
+}
+
+@{
+        List<SelectListItem> items = new List<SelectListItem>();
+        items.Add(new SelectListItem { Text = "Assign to New", Value = "1" });
+
+}
+
+
+
+<!--Request Form-->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header nopadding " id="modalheaderid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h4 class="modal-title" id="myModalLabel " style="color:white;">Modify Repair Request</h4>
+                </div>
+            </div>
+            <div class="modal-body lightgrey">
+                <div class="col-lg-12 col-md-12">
+                <div data-bind="text:selectedRequestDate"></div>
+                <div data-bind="text:selectedDescription"></div>
+                <div data-bind="text:selectedStatus"></div>
+                <div data-bind="text:selectedRequestNumber"></div>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <button class="btn btn-link">Assign to existing company</button>
+                    <button class="btn btn-link">Assign to a New Company</button>
+                   
+
+
+                </div>
+                <!--Form-->
+                <div class="col-lg-12 col-md-12 blueDefault" data-bind="foreach:buildingUsers">
+                     <div data-bind="text:BuildingUserName">
+
+                     </div>        
+                    
+                    
+                              
+                </div>
+                <!--Form-->
+                <div class="col-lg-12 col-md-12 blueDefault" >
+                    <!--Form Rows-->
+                    <div class="col-lg-12 col-md-12 padding30px outline">
+                        <div class="col-lg-4 col-md-4 "> <input type="text" class="form-control input-sm" placeholder="Company Name" /></div>
+                        <div class="col-lg-4 col-md-4 "><input type="text" class="form-control input-sm" placeholder="Company Address" /></div>
+                        <div class="col-lg-4 col-md-4 "><input type="text" class="form-control input-sm" placeholder="Company Phone" /></div>
+                    </div>
+                    <!--Form Rows-->
+                    <div class="col-lg-12 col-md-12 padding30px outline">
+                        <div class="col-lg-4 col-md-4 "><input type="text" class="form-control input-sm" placeholder="Company Email " /></div>
+                        <div class="col-lg-4 col-md-4 "><input type="text" class="form-control input-sm" placeholder="Contact Name"/></div>
+                        <div class="col-lg-4 col-md-4 "><input type="text" class="form-control input-sm" placeholder="Contact Phone"/></div>
+                    </div>
+                    <!--Form Rows-->
+                    <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 outline ">
+                        <textarea class="outline " style="width:100%;" 
+                                  placeholder="Write company descriptions" rows="3" ></textarea>
+                        </div>                        
+                    </div>                   
+                </div>
+               </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+
+                <button class="btn btn-info " type="button" data-dismiss="modal">Send Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row " data-bind="foreach:RepairRequest">
+    <div class="col-lg-12 col-md-12 nopadding border-bottomcust padding_up_down_10px outline "
+         data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
+
+        <span class="col-mlg-2 col-md-2" 
+              data-bind="text:RequestedDate, click:selectedRequest">
+
+        </span>
+
+        <div class="col-lg-1 col-md-1"  data-bind="text:RequestNumber, click:selectedRequest">
+
+        </div>
+
+        <div class="col-lg-7 col-md-7" 
+             data-bind="text:Description, click:selectedRequest">
+
+        </div>
+        <div class="col-lg-2 col-md-2" 
+             data-bind="text:Status, click:selectedRequest">
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script type="text/javascript">
+       // alert("dss");
+        $(function () {
+            var viewModel = function () {
+                // =====year=======
+                function YearC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return (dt.getFullYear());
+                }
+                // =====Month=======
+                function MonthC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return (dt.getMonth());
+                }
+                // =====Day=======
+                function DayC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return dt.getDate();
+
+                }
+
+                // =====Hour=======
+                function HoursC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);l
+                    var dt = new Date(parseFloat(results[1]));
+                    return dt.getHours();
+                }
+                // =====Minutes=======
+                function MinutesC(value) {
+                    var pattern = /Date\(([^)]+)\)/;
+                    var results = pattern.exec(value);
+                    var dt = new Date(parseFloat(results[1]));
+                    return dt.getMinutes();
+                }
+
+                var self = this;               
+
+                var items = ([{ Text: "Assign To New", Value: "1" }, { Text: "Assign To Existing", Value: "2" }, { Text: "Close Ticket", Value: "3" }]);
+                
+                self.itemsoptions = ko.observableArray(items);
+                self.RepairRequest = ko.observableArray();
+                self.value_changed = ko.observable();
+                self.selectedRequestDate = ko.observable();
+                self.selectedAssignto = ko.observable();
+                self.selectedDescription = ko.observable();
+                self.selectedID = ko.observable();
+                self.selectedStatus = ko.observable();
+                self.selectedRequestNumber = ko.observable();
+
+                self.selectedRequest = function (value, event) {
+                    
+                    var myvalue = ko.toJSON(value);
+                    var myjson = JSON.parse(myvalue);
+                    self.selectedRequestDate(myjson.RequestedDate);
+                    
+                    self.selectedAssignto(myjson.RequestedDate);
+                    self.selectedDescription(myjson.Description);
+                    self.selectedID(myjson.ID);
+                    self.selectedStatus(myjson.Status);
+                    self.selectedRequestNumber(myjson.RequestNumber);
+
+                    var updatedRequest =
+                        {
+                            selectedRequestDate: ko.observable(myjson.RequestedDate)
+                            
+                        }
+                };
+                
+              
+                self.buildingUsers = ko.observableArray();
+                
+
+                self.ListBuildingUsers = function ()
+                {
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                        type: "GET",
+                        url: '/building/BuildingUsersList/',
+                        data: { buildingID: "@Model.buildingID" },
+                        dataType: "json",
+                        success: function (data)
+                        {
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++)
+                            {
+
+                               
+
+                                self.buildingUsers.push({
+                                    BuildingUserName: ko.observable("Fullname")
+
+                                });
+                            }
+                        }
+                    });
+                
+
+
+                };
+              
+               
+                
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquest/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {                      
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                         
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                         
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                          
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber
+                            });
+                        }
+                    }
+                });
+
+
+                //when a selected value this will get the value related with the element
+                self.value_changed.subscribe(function (value) {
+                    var myvalue = ko.toJSON(value);
+                    var myjson = JSON.parse(myvalue);
+
+
+                    alert(myvalue);
+                });
+            };
+
+            ko.applyBindings(viewModel);
+
+        });
+
+
+
+
+    </script>
+    
+    
+    
+    
+}

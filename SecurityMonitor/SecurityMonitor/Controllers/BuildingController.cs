@@ -1297,6 +1297,25 @@ namespace SecurityMonitor.Controllers
             return View(CH);
         }
 
+        [HttpGet]
+        public ActionResult RepairManagement(int buildingID)
+        {
+            RepairManagement r = new RepairManagement();
+           r.RepairsRequests = r.LoadAllRequest(buildingID);
+           r.buildingID = buildingID;
+
+            return View(r);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult BuildingRepairResquest(int buildingID)
+        {
+             RepairManagement r = new RepairManagement();
+            var BRR = r.LoadAllRequest(buildingID);
+            var mydata = Json(BRR);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
 
 
@@ -1305,6 +1324,22 @@ namespace SecurityMonitor.Controllers
         {
             return View();
         
+        }
+
+        public JsonResult BuildingUsersList(int buildingID)
+        {
+
+            var BUL = db.BuildingUser.Select(c => new 
+            {
+                FullName = c.FirstName + " " + c.LastName,
+                Phone = c.Phone,
+                Email = c.Email,
+                UserID = c.UserID,
+                BuildingID = c.BuildingID
+            }).ToList();
+
+            var mydata = Json(BUL);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
 

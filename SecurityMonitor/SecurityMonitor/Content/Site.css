@@ -1382,6 +1382,11 @@ margin-bottom:20px;
 
 border-bottom:1px solid lightgrey;
 }
+.previewcontentrowimgurl {
+   height:40px; 
+
+border-bottom:1px solid lightgrey;
+}
 
 .repairproblemsettings {
     min-height:100px;
@@ -1393,7 +1398,7 @@ border-bottom:1px solid lightgrey;
 }
 .mymodalclass {
 
-    min-height:900px;
+    min-height:620px;
 }
 
 .psrowheight {
@@ -1417,4 +1422,17 @@ color:blue;
 .padding-right_20px {
 
 padding-right:20px !important;
+}
+
+#myModalLabel {
+
+color:white;
+font-weight:600;
+}
+
+.padding_up_down_10px {
+
+    padding:10px 0 !important;
+    min-height:20px !important;
+   z-index:1;
 }

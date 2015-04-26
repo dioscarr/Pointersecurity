@@ -13,7 +13,7 @@
             <div class="modal-header nopadding " id="modalheaderid">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h4 class="modal-title" id="myModalLabel ">New Request</h4>
+                    <h4 class="modal-title" id="myModalLabel " style="color:white;">New Request</h4>
                 </div>
             </div>
             <div class="modal-body lightgrey">
@@ -121,52 +121,54 @@
 <!--Request Form-->
 <!--Request Form-->
 <div class="modal fade" id="myModalpreviewrequest" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
+    <div class="modal-dialog modal-lg ">
         <div class="modal-content">
             <div class="modal-header nopadding " id="modalheaderpreviewid">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                     <h4  class="modal-title displayinline" id="myModalpreviewLabel ">Preview request</h4>
+                    <h4 class="modal-title displayinline" id="myModalpreviewLabel " style="color:white;">Preview Request</h4>
                     <span class="fa fa-edit fa-2x font_color_lightblue pull-right displayinline padding-right_20px hollow3" id="editid" data-bind="click:edit"></span>
                 </div>
             </div>
-            <div class="modal-body  mymodalclass">
-                @Html.Hidden("dd", "0", new { @data_bind = "text:currentID" })
-                <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
-                    <div class="col-lg-4 col-md-4 text-center ">
-                        <h6>Requested Date:</h6>
-                        <span data-bind="text:selectedDate"></span>
-                    </div>
-                    <div class="col-lg-4 col-md-4 text-center">
-                        <h6>Category:</h6>
-                        <span data-bind="text:selectedCategory"></span>
-                        
-                        <span>
-                        <br />@Html.DropDownList("Categories",
+            <div class="modal-body  mymodalclass ">
+                <div class="col-lg-12 col-md-12">
+                    @Html.Hidden("dd", "0", new { @data_bind = "text:currentID" })
+                    <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
+                        <div class="col-lg-4 col-md-4 text-center ">
+                            <h6>Requested Date:</h6>
+                            <span data-bind="text:selectedDate"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center">
+                            <h6>Category:</h6>
+                            <span data-bind="text:selectedCategory"></span>
+
+                            <span>
+                                <br />@Html.DropDownList("Categories",
                         @Model.RequestCategories, "Select Category",
                         new
                         {
                             @class = "displayinline form-control input-sm",
                             data_bind = "value:UpdateCatetegory,visible:letsee",
                             @style = "background:lightblue;"
-                        })</span>
+                        })
+                            </span>
 
 
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 text-center">
+                            <h6>Status:</h6>
+                            <span data-bind="text:selectedStatus"></span>
+                        </div>
                     </div>
-                    
-                    <div class="col-lg-4 col-md-4 text-center">
-                        <h6>Status:</h6>
-                        <span data-bind="text:selectedStatus"></span>
-                    </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
-                    <div class="col-lg-4 col-md-4 text-center previewcontentrow">
-                        <h6>Instruction:</h6>
-                        <span data-bind="text:selectedInstruction"></span>
-                        
-                        <span>
-                        <br />@Html.TextArea("instructions",
+                    <div class="col-lg-12 col-md-12 nopadding previewcontentrow">
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6>Instruction:</h6>
+                            <span data-bind="text:selectedInstruction"></span>
+
+                            <span>
+                                <br />@Html.TextArea("instructions",
                         new
                         {
                             @class = " rrform form-control",
@@ -174,115 +176,127 @@
                             @rows = 1,
                             data_bind = "value:UpdateInstrutions, valueUpdate:'afterkeydown',visible:letsee",
                             @style = "background:lightblue;"
-                        })</span>
+                        })
+                            </span>
 
-                    </div>
-                    <div class="col-lg-4 col-md-4 text-center previewcontentrow">
-                        <h6>Urgency:</h6>
-                        <span data-bind="text:selectedUrgency"></span>
-                        
-                        <span class="" style="background:lightblue;" data-bind="visible:letsee">
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6>Urgency:</h6>
+                            <span data-bind="text:selectedUrgency"></span>
+
+                            <span class="" style="background:lightblue;" data-bind="visible:letsee">
+                                <br />
+                                <span class="backgroubdlightgrey;">
+                                    High @Html.RadioButton("rbtnHighlow", "1", false, new { @class = "displayinline ", data_bind = "checked:UpdateUrgency" })
+                                </span>
+                                <span class="backgroubdlightgrey;">
+                                    Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:UpdateUrgency" })
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6>Permission:</h6>
+                            <span data-bind="text:selectedPermission "></span>
                             <br />
-                            <span class="backgroubdlightgrey;">
-                                High @Html.RadioButton("rbtnHighlow", "1", false, new { @class = "displayinline ", data_bind = "checked:UpdateUrgency" })
+                            <span class="padding-left20px" style="background:lightblue;" data-bind="visible:letsee">
+                                Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:UpdatePermission" })
+                                Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:UpdatePermission" })
                             </span>
-                            <span class="backgroubdlightgrey;">
-                                Low @Html.RadioButton("rbtnHighlow", "2", false, new { @class = "displayinline ", data_bind = "checked:UpdateUrgency" })
-                            </span>
-                        </span>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 text-center previewcontentrow">
-                        <h6>Permission:</h6>
-                        <span data-bind="text:selectedPermission "></span>
-                        <br/>
-                        <span class="padding-left20px" style="background:lightblue;" data-bind="visible:letsee">
-                            Yes @Html.RadioButton("permissionr", "Yes", false, new { data_bind = "checked:UpdatePermission" })
-                            Schedule @Html.RadioButton("permissionr", "No", false, new { data_bind = "checked:UpdatePermission" })
-                        </span>
-                    </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 border-bottomcust repairproblemsettings">
-                    <h6 > Problem:</h6>
-                    <span class="problempadding" data-bind="text:selectedDescription"></span>
-                  
-                    <span  data-bind="visible:letsee" ><br />@Html.TextArea("Description",
+                    <div class="col-lg-12 col-md-12 border-bottomcust repairproblemsettings">
+                        <h6> Problem:</h6>
+                        <span class="problempadding" data-bind="text:selectedDescription"></span>
+
+                        <span data-bind="visible:letsee">
+                            <br />@Html.TextArea("Description",
                     new
                     {
                         @class = " rrform form-control",
-                        rows = 3,
+                        rows = 2,
                         data_bind = "value:UpdateProblem, valueUpdate:'afterkeydown'",
                         @style = "background:lightblue;"
-                    })</span>
+                    })
+                        </span>
 
-                    <br/>
+                        <br />
 
-                </div> 
-
-                
-
-                <div class="col-lg-6 col-md-6 nopadding previewcontentrow psrowheight">
-                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
-                        <h6> Primary Name:</h6>
-                        <span data-bind="text:selectedPrimaryName"></span>
                     </div>
-                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
-                        <h6> Primary Phone:</h6>
-                        <span data-bind="text:selectedPrimaryPhone"></span>
-                    </div>
-                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
-                        <h6>Primary Email:</h6>
-                        <span data-bind="text:selectedPrimaryEmail"></span>
-                    </div>
-                    
-                </div>               
 
-                <div class="col-lg-6 col-md-6 nopadding previewcontentrow">
-                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
-                        <h6> Secondary Name:</h6>
-                        <span data-bind="text:selectedSecondaryName"></span>
-                        @Html.TextBox("OtherContactName", null, 
-                        new { @Placeholder = "Enter Full Name", 
+
+
+                    <div class="col-lg-12 col-md-12 nopadding previewcontentrow   ">
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6> Primary Name:</h6>
+                            <span data-bind="text:selectedPrimaryName"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6> Primary Phone:</h6>
+                            <span data-bind="text:selectedPrimaryPhone"></span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6>Primary Email:</h6>
+                            <span data-bind="text:selectedPrimaryEmail"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 nopadding previewcontentrow ">
+                        <div class="col-lg-4 col-md-4 text-center  previewcontentrow">
+                            <h6> Secondary Name:</h6>
+                            <span data-bind="text:selectedSecondaryName"></span>
+                            @Html.TextBox("OtherContactName", null,
+                        new
+                        {
+                            @Placeholder = "Enter Full Name",
                             @class = "form-control displayinline input-sm ",
-                              Data_bind = "value:UpdateSName,valueUpdate:'afterkeydown', visible:letsee",
-                              @style = "background:lightblue;"
+                            Data_bind = "value:UpdateSName,valueUpdate:'afterkeydown', visible:letsee",
+                            @style = "background:lightblue;"
                         })
-                    </div>
-                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
-                        <h6> Secondary Phone:</h6>
-                        <span data-bind="text:selectedSecondaryPhone"></span>
-                        @Html.TextBox("OtherContactPhone", null,
-                        new { @Placeholder = "345.898.0099", 
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6> Secondary Phone:</h6>
+                            <span data-bind="text:selectedSecondaryPhone"></span>
+                            @Html.TextBox("OtherContactPhone", null,
+                        new
+                        {
+                            @Placeholder = "345.898.0099",
                             @class = "form-control displayinline input-sm",
-                              Data_bind = "value:UpdateSPhone,valueUpdate:'afterkeydown', visible:letsee",
-                              @style = "background:lightblue;"
+                            Data_bind = "value:UpdateSPhone,valueUpdate:'afterkeydown', visible:letsee",
+                            @style = "background:lightblue;"
                         })
-                    </div>
-                    <div class="col-lg-12 col-md-12 text-center previewcontentrow">
-                        <h6>Secondary Email:</h6>
-                        <span data-bind="text:selectedSecondaryEmail"></span>
-                        <span > @Html.TextBox("OtherContactEmail", null, 
-                        new { @Placeholder = "Example@mail.com (Optional)",
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center previewcontentrow">
+                            <h6>Secondary Email:</h6>
+                            <span data-bind="text:selectedSecondaryEmail"></span>
+                            <span>
+                                @Html.TextBox("OtherContactEmail", null,
+                        new
+                        {
+                            @Placeholder = "Example@mail.com (Optional)",
                             @class = "form-control displayinline input-sm",
-                              Data_bind = "value:UpdateSEmail,valueUpdate:'afterkeydown', visible:letsee",
-                              @style = "background:lightblue;"
-                        })</span>
+                            Data_bind = "value:UpdateSEmail,valueUpdate:'afterkeydown', visible:letsee",
+                            @style = "background:lightblue;"
+                        })
+                            </span>
+                        </div>
+
                     </div>
 
-                </div>               
-                               
-                <div class="col-lg-12 col-md-12 previewcontentrow">
-                    Image:
-                    <span data-bind="text:selectedimgUrl"></span>
+                    <div class="col-lg-12 col-md-12  previewcontentrowimgurl">
+                        Image:
+                        <span data-bind="text:selectedimgUrl"></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 " data-bind="visible:letsee">
+                       
+                        <button type="button" class="btn btn-default input-sm pull-right btn-info" data-bind="click:previewcancel" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default input-sm pull-right btn-info" data-bind="click:Update" data-dismiss="modal">Update Changes</button>
+                    </div>
+
+
+
                 </div>
-                <div class="col-lg-12 col-md-12 previewcontentrow" data-bind="visible:letsee">
-                    <button type="button" class="btn btn-default input-sm pull-right btn-info" data-bind="click:Update" data-dismiss="modal">Update Changes</button>
-                    <button type="button" class="btn btn-default input-sm pull-right btn-info" data-bind="click:previewcancel" data-dismiss="modal">Cancel</button>
-                   
-                </div>
-
-
-
             </div>
             <div class="modal-footer">
 
@@ -305,7 +319,7 @@
 
 <div class="row">
     <div class="col-lg-12 col-md-12 text-center  repairheading">
-        <h1> Repair Page</h1>
+        <h1 style="color:white;"> Repair Page</h1>
     </div>
 </div>
 

@@ -88,18 +88,18 @@ items.Add(new SelectListItem { Text = "1", Value = "1" });
 
     //headings
     <div class="row" style="background:lightgrey; padding:10px 0; margin-bottom:10px;" data-bind="visible:searchboxOptionvisible">
-    <div class="col-md-3" id="aptdropid" data-bind="visible:aptlisVisible">
-        <span class="displayinline">Filter by apartment</span>
-        @Html.DropDownList("Apartment", @Model.ApatList,"no selection", new { @class = " form-control", @data_bind = "value:Apartment" })
-    </div>
-    <div class="col-md-5">
-        <span class="displayinline">Name</span>
-        @Html.TextBox("Name", null, new { @class = " form-control displayinline ", data_bind = "value:search, valueUpdate: 'afterkeydown' " })
-    </div>
+        <div class="col-md-3" id="aptdropid" data-bind="visible:aptlisVisible">
+            <span class="displayinline">Filter by apartment</span>
+            @Html.DropDownList("Apartment", @Model.ApatList, "no selection", new { @class = " form-control", @data_bind = "value:Apartment" })
+        </div>
+        <div class="col-md-5">
+            <span class="displayinline">Name</span>
+            @Html.TextBox("Name", null, new { @class = " form-control displayinline ", data_bind = "value:search, valueUpdate: 'afterkeydown' " })
+        </div>
 
 
-    <div class="col-md-4"></div>
-</div>
+        <div class="col-md-4"></div>
+    </div>
 }
 
 
