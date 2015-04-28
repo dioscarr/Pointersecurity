@@ -17,21 +17,21 @@
     </div>
 </div>
 <div class="row rowheight "></div>
-    
-    <div class="row clientBox clientboxrow outline " data-bind="foreach:ClientList">
-    <!--vCard starts-->
-        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  nopadding clientbox" data-bind="click:getBuildinginfo">
-            <!--header starts-->
-            <section class=" col-md-12 paddingupdown20px text-center" data-toggle="modal" data-target="#myModal">
-                <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
-                    <div class=" boxname col-lg-8 col-md-8 col-sm-8 col-xs-8" data-bind="text:ClientName">
 
-                    </div>
-                    <img class="boxmenu  imgmenu col-lg-4 col-md-4 col-sm-4 col-xs-4 hollow3" src="~/img/menu.png" />
-                </section>
+<div class="row clientBox clientboxrow outline " data-bind="foreach:ClientList">
+    <!--vCard starts-->
+    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  nopadding clientbox" data-bind="click:getBuildinginfo">
+        <!--header starts-->
+        <section class=" col-md-12 paddingupdown20px text-center" data-toggle="modal" data-target="#myModal">
+            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                <div class=" boxname col-lg-8 col-md-8 col-sm-8 col-xs-8" data-bind="text:ClientName">
+
+                </div>
+                <img class="boxmenu  imgmenu col-lg-4 col-md-4 col-sm-4 col-xs-4 hollow3" src="~/img/menu.png" />
             </section>
-            <!--header ends-->
-            @*<!--Content starts-->
+        </section>
+        <!--header ends-->
+        @*<!--Content starts-->
             <section class=" col-md-12 ">
                 <div class="col-md-12 boxContent ">
                     <section class=" col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center sectionaddress nopadding">
@@ -46,7 +46,7 @@
                 </div>
             </section>
             <!--Content ends-->*@
-        </div>
+    </div>
     <!--vCard ends-->
 
 </div>
@@ -65,7 +65,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault repairrequestformheader headerDefault">
 
                 </div>
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  repairrequestformheader text-center headerDefault " >
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  repairrequestformheader text-center headerDefault ">
                     <h2 class="modal-title" id="myModalLabel " style="color:white; " data-bind="text:SelectedClientName"></h2>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault">
@@ -76,9 +76,9 @@
             <div class="modal-body lightgrey">
 
 
-                <div class="row ">                    
+                <div class="row ">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  ">
-                       
+
                         <!--Client Information Information -->
                         <div class="col-lg-2 col-md-2 hidden-sm hidden-xs extraContentinside">
 
@@ -101,9 +101,9 @@
                         </div>
                         <!--List of Building-->
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault" style=" min-height:70px;"></div>
-                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center  blueDefault " style="min-height:70px;">
-                           <h2 style="color:white;">BUILDINGS</h2>
-                       </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center  blueDefault " style="min-height:70px;">
+                            <h2 style="color:white;">BUILDINGS</h2>
+                        </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault" style="min-height:70px;">
                             <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-2x font_color_white" id="hitme" data-toggle="modal" data-target="#myModal"></button>
                         </div>
@@ -119,10 +119,10 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
-                
+
             </div>
         </div>
     </div>
@@ -132,7 +132,7 @@
 
 <!--Request Form-->
 <div class="modal fade" id="myModalEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header nopadding " id="modalheaderid">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -143,79 +143,111 @@
             <div class="modal-body lightgrey">
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building Name
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building Name
+                    </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientName" /></div>
-                </div >
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building Address
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientAddress" /></div>
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building City
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientCity" /></div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientName" />
+                    </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building State
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building Address
+                    </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientState" /></div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building Zipcode
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientZipcode" /></div>
-                </div>
-
-
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building Fax
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientFax" /></div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientAddress" />
+                    </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    Building Phone
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building City
+                    </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientPhone" /></div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientCity" />
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building State
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientState" />
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building Zipcode
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientZipcode" />
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building Fax
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px form-group">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control col-lg-2 col-md-2" data-bind="value:SelectedClientFax" />
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building Phone
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientPhone" />
+                    </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
-                Building Email
-            </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                <div class="marginleftclientedit"><input type="text" class="form-control" data-bind="value:SelectedClientEmail" /></div>
-            </div>
-
-                
-
-             
-
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        Building Email
+                    </div>
                 </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 outline">
+                        <input type="text" class="form-control" data-bind="value:SelectedClientEmail" />
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
             <div class="modal-footer">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <button type="button" class="btn btn-info input-sm" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-info input-sm" data-dismiss="modal" data-bind="click:UpdateClientNow">Update</button>
                 </div>
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -243,9 +275,9 @@
 <!--Start JavaScript code-->
 @section scripts
 {
-<script src="~/Scripts/jquery-2.1.3.min.js"></script>
-<script src="~/Scripts/knockout-3.1.0.js"></script>
-<script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
 
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
@@ -254,61 +286,61 @@
 
 
     <script type="text/javascript">
-    //jquery here
+        //jquery here
 
-    $('.imgmenu').click(function () {
-        var menuid = $(this).attr("data-linkme");
-        $(this).toggleClass("hoveron");
-        $('.extraContent[data-linked =' + menuid + ']').slideToggle();
-    }
-    );
-    $(function () {
+        $('.imgmenu').click(function () {
+            var menuid = $(this).attr("data-linkme");
+            $(this).toggleClass("hoveron");
+            $('.extraContent[data-linked =' + menuid + ']').slideToggle();
+        }
+        );
+        $(function () {
 
-        var viewModel = function () {
-            var self = this;
+            var viewModel = function () {
+                var self = this;
 
-            self.Search = ko.observable();
-            self.Search.subscribe(function () {
+                self.Search = ko.observable();
+                self.Search.subscribe(function () {
 
-            });
-            
+                });
 
-            self.SelectedClientName = ko.observable();
-            self.SelectedClientFullAddress = ko.observable();
-            self.SelectedClientPhone = ko.observable();
-            self.SelectedClientEmail = ko.observable();
-            self.SelectedClientFax = ko.observable();
-            self.SelectedClientID = ko.observable();
 
-            self.SelectedClientAddress= ko.observable();
-            self.SelectedClientCity= ko.observable();                               
-            self.SelectedClientState= ko.observable();
-            self.SelectedClientZipcode = ko.observable();
+                self.SelectedClientName = ko.observable();
+                self.SelectedClientFullAddress = ko.observable();
+                self.SelectedClientPhone = ko.observable();
+                self.SelectedClientEmail = ko.observable();
+                self.SelectedClientFax = ko.observable();
+                self.SelectedClientID = ko.observable();
 
-            self.BuildingList = ko.observableArray();
+                self.SelectedClientAddress = ko.observable();
+                self.SelectedClientCity = ko.observable();
+                self.SelectedClientState = ko.observable();
+                self.SelectedClientZipcode = ko.observable();
 
-            self.citystatezip = ko.computed(function () {
-                return self.SelectedClientCity() + " " + self.SelectedClientState() + ", " + self.SelectedClientZipcode();
-            });
+                self.BuildingList = ko.observableArray();
 
-            self.getBuildinginfo = function (value, event) {
-                var myvalue = ko.toJSON(value);
-               
-                var myjson = JSON.parse(myvalue);             
-               
-                self.SelectedClientName(myjson.ClientName);
-                self.SelectedClientFullAddress(myjson.ClientFullAddress);
-                self.SelectedClientPhone(myjson.ClientPhone);
-                self.SelectedClientEmail(myjson.ClientEmail);
-                self.SelectedClientFax(myjson.ClientFax);
-                self.SelectedClientID(myjson.ClientID);
+                self.citystatezip = ko.computed(function () {
+                    return self.SelectedClientCity() + " " + self.SelectedClientState() + ", " + self.SelectedClientZipcode();
+                });
 
-                self.SelectedClientAddress(myjson.ClientAddress);
-                self.SelectedClientCity(myjson.ClientCity);
-                self.SelectedClientState(myjson.ClientState);
-                self.SelectedClientZipcode(myjson.ClientZipcode);
+                self.getBuildinginfo = function (value, event) {
+                    var myvalue = ko.toJSON(value);
 
-              
+                    var myjson = JSON.parse(myvalue);
+
+                    self.SelectedClientName(myjson.ClientName);
+                    self.SelectedClientFullAddress(myjson.ClientFullAddress);
+                    self.SelectedClientPhone(myjson.ClientPhone);
+                    self.SelectedClientEmail(myjson.ClientEmail);
+                    self.SelectedClientFax(myjson.ClientFax);
+                    self.SelectedClientID(myjson.ClientID);
+
+                    self.SelectedClientAddress(myjson.ClientAddress);
+                    self.SelectedClientCity(myjson.ClientCity);
+                    self.SelectedClientState(myjson.ClientState);
+                    self.SelectedClientZipcode(myjson.ClientZipcode);
+
+
 
                     $.ajaxSettings.traditional = true;
                     $.ajax(
@@ -324,7 +356,7 @@
                                 var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                                 for (var i = 0; i < TrkPkgs.length; i++) {
                                     self.BuildingList.push({
-                                        BLBuildingName: ko.observable(TrkPkgs[i].BuildingName),                                      
+                                        BLBuildingName: ko.observable(TrkPkgs[i].BuildingName),
                                         BLBuildingAddress: ko.observable(TrkPkgs[i].BuildingAddress),
                                         BLPhone: ko.observable(TrkPkgs[i].Phone),
                                         BLbuildingID: ko.observable(TrkPkgs[i].BuildingID)
@@ -332,133 +364,131 @@
                                     });
                                 }
                             }
-                        });                 
-           
+                        });
+
+                };
+
+                self.ClientList = ko.observableArray();
+                $.ajaxSettings.traditional = true;
+                $.ajax(
+                    {
+                        type: "GET",
+                        url: '/building/ClientList/',
+                        dataType: "json",
+                        success: function (data) {
+
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+
+                                self.ClientList.push({
+                                    ClientID: ko.observable(TrkPkgs[i].BUildingID),
+                                    ClientName: ko.observable(TrkPkgs[i].ClientName),
+                                    ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
+                                    ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                    ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
+                                    ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                    ClientCity: ko.observable(TrkPkgs[i].ClientCity),
+                                    ClientState: ko.observable(TrkPkgs[i].ClientState),
+                                    ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
+                                    ClientFax: ko.observable(TrkPkgs[i].ClientFax)
+                                });
+                            }
+                        }
+                    });
+
+                self.SelectedBuildingName = ko.observable();
+                self.SelectedBuildingAddress = ko.observable();
+                self.SelectedPhone = ko.observable();
+
+                self.BuildingSelected = function (value, event) {
+                    var myvalue = ko.toJSON(value);
+
+                    var myjson = JSON.parse(myvalue);
+
+                    self.SelectedBuildingName(myjson.BLBuildingName);
+                    self.SelectedBuildingAddress(myjson.BLBuildingAddress);
+                    self.SelectedPhone(myjson.BLPhone);
+
+                    window.location.href = "/Building/BuildingProfile?BuildingID=" + myjson.BLbuildingID;
+
+                };
+
+                //Edited client information
+
+                var UpdateClient =
+                    {
+                        ID: self.SelectedClientID,
+                        ClientName: self.SelectedClientName,
+                        Address: self.SelectedClientAddress,
+                        City: self.SelectedClientCity,
+                        State: self.SelectedClientState,
+                        Phone: self.SelectedClientPhone,
+                        ZipCode: self.SelectedClientZipcode,
+                        Fax: self.SelectedClientFax,
+                        Email: self.SelectedClientEmail
+                    };
+
+
+                self.UpdateClientNow = function () {
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/EditClientAjax/',
+                            data: UpdateClient,
+                            dataType: "json",
+                            success: function (data) {
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+
+                                self.ClientList.removeAll();
+
+
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+
+                                    self.ClientList.push({
+                                        ClientID: ko.observable(TrkPkgs[i].BUildingID),
+                                        ClientName: ko.observable(TrkPkgs[i].ClientName),
+                                        ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
+                                        ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
+                                        ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientCity: ko.observable(TrkPkgs[i].ClientCity),
+                                        ClientState: ko.observable(TrkPkgs[i].ClientState),
+                                        ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
+                                        ClientFax: ko.observable(TrkPkgs[i].ClientFax)
+                                    });
+                                }
+                            }
+                        });
+
+
+                };
+
+
+
+
+
+
+                self.UpdatedBuilding = function () {
+
+                };
+
+
+
+
             };
 
-            self.ClientList = ko.observableArray();
-            $.ajaxSettings.traditional = true;
-            $.ajax(
-                {
-                    type: "GET",
-                    url: '/building/ClientList/',                    
-                    dataType: "json",
-                    success: function (data) {
-                        
-                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                       
-                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                       
-                        for (var i = 0; i < TrkPkgs.length; i++) {
-                            
-                            self.ClientList.push({
-                                ClientID:ko.observable(TrkPkgs[i].BUildingID),
-                                ClientName: ko.observable(TrkPkgs[i].ClientName),
-                                ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
-                                ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
-                                ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
-                                ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
-                                ClientCity: ko.observable(TrkPkgs[i].ClientCity),                               
-                                ClientState: ko.observable(TrkPkgs[i].ClientState),
-                                ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
-                                ClientFax: ko.observable(TrkPkgs[i].ClientFax)
-                            });
-                        }
-                    }
-                });
-
-            self.SelectedBuildingName = ko.observable();
-            self.SelectedBuildingAddress=ko.observable();
-            self.SelectedPhone = ko.observable();           
-                
-           self.BuildingSelected = function(value, event)
-            {
-                var myvalue = ko.toJSON(value);
-                
-                var myjson = JSON.parse(myvalue);
-
-                self.SelectedBuildingName(myjson.BLBuildingName);
-                self.SelectedBuildingAddress(myjson.BLBuildingAddress);
-                self.SelectedPhone(myjson.BLPhone);
-
-                window.location.href = "/Building/BuildingProfile?BuildingID=" + myjson.BLbuildingID;
-
-           };
-
-           //Edited client information
-          
-           var UpdateClient =
-               {
-                   ID:self.SelectedClientID,
-                   ClientName: self.SelectedClientName,
-                   Address: self.SelectedClientAddress,
-                   City: self.SelectedClientCity,
-                   State: self.SelectedClientState,
-                   Phone: self.SelectedClientPhone,
-                   ZipCode: self.SelectedClientZipcode,
-                   Fax: self.SelectedClientFax,
-                   Email: self.SelectedClientEmail
-               };
-           
-
-           self.UpdateClientNow = function () {
-             
-               $.ajaxSettings.traditional = true;
-               $.ajax(
-                   {
-                       type: "GET",
-                       url: '/building/EditClientAjax/',
-                       data: UpdateClient,
-                       dataType: "json",
-                       success: function (data) {
-                           var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-
-
-                           var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-
-
-                           self.ClientList.removeAll();
-
-
-                           for (var i = 0; i < TrkPkgs.length; i++) {
-
-                               self.ClientList.push({
-                                   ClientID: ko.observable(TrkPkgs[i].BUildingID),
-                                   ClientName: ko.observable(TrkPkgs[i].ClientName),
-                                   ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
-                                   ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
-                                   ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
-                                   ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
-                                   ClientCity: ko.observable(TrkPkgs[i].ClientCity),
-                                   ClientState: ko.observable(TrkPkgs[i].ClientState),
-                                   ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
-                                   ClientFax: ko.observable(TrkPkgs[i].ClientFax)
-                               });
-                           }
-                       }
-                   });
-
-
-           };
-           
-
-            
-
-
-
-        self.UpdatedBuilding = function(){
-        
-        };
-        
-
-        
-          
-        };
-
-        ko.applyBindings(viewModel);
-    });
+            ko.applyBindings(viewModel);
+        });
 
     </script>
-
 }
 <!--End JavaScript code-->
