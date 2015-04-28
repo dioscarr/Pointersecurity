@@ -7,22 +7,22 @@
   <!--yo-->
 
 <div class="row ">
-    <!--Dashboard tile-->
+    @*<!--Dashboard tile-->
         <div id="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4  tile_height lightblue homebox ">
          <img src="~/img/D.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
             <span style="position:absolute; left:28%; bottom:10%; font-size:150%;">Dasboard</span>
         </div>
 
-    <!--Dashboard tile ends-->
+    <!--Dashboard tile ends-->*@
     
     <!--Client tile-->
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height darkfine homebox" onclick="location.href = '@Url.Action("ClientIndex", "Building")'">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height darkfine homebox" onclick="location.href = '@Url.Action("ClientHome", "Building")'">
         <img src="~/img/client.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
         <span style="position:absolute; left:25%; bottom:10%; font-size:150%;">Clients</span>
     </div>
     <!--Client tile ends--> 
     <!--Search tile-->
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height lightdarkblue homebox" onclick="location.href = '@Url.Action("ClientHome", "Building")'">
+    @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height lightdarkblue homebox" onclick="location.href = '@Url.Action("ClientHome", "Building")'">
         <img src="~/img/Search.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
         <span style="position:absolute; left:28%; bottom:10%; font-size:150%;">New Client Page</span>
     </div> 
@@ -45,10 +45,10 @@
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height darkblue homebox" onclick="location.href = '@Url.Action("index", "Dashboard")'">
         <img src="~/img/R.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
         <span style="position:absolute; left:30%; bottom:10%; font-size:150%;">Requests</span>
-    </div>
+    </div>*@
     <!--Requests tile ends-->
 </div>
-<div class="row ">
+@*<div class="row ">
     <!--Delivery tile-->
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 tile_height darkblue homebox" >
         <img src="~/img/Delivery.png" style="position:absolute; left:15%; top:8%; width:70%; height:70%;" />
@@ -66,7 +66,7 @@
         <span style="position:absolute; left:31%; bottom:10%; font-size:150%;">Settings</span>
     </div>
     
-</div>
+</div>*@
 
 @section scripts
 {

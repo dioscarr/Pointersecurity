@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
 using Doormandondemand;
-using Doormandondemand;
+
 
 
 using Microsoft.AspNet.Identity;
@@ -1322,13 +1322,12 @@ namespace SecurityMonitor.Controllers
         //Tenant Delivary
         public ActionResult TenantDeliveryIndex(int TenantID)
         {
-            return View();
-        
+            return View();        
         }
-
+        [HttpGet]
+        [AllowAnonymous]
         public JsonResult BuildingUsersList(int buildingID)
         {
-
             var BUL = db.BuildingUser.Select(c => new 
             {
                 FullName = c.FirstName + " " + c.LastName,
@@ -1341,7 +1340,85 @@ namespace SecurityMonitor.Controllers
             var mydata = Json(BUL);
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult ClientBuildingList(int ClientID)
+        {
+            var CBL = db.Buildings.Where(c => c.Clients.ID == ClientID).Select(c => new 
+            { 
+                BuildingName =c.BuildingName,
+                BuildingAddress = c.Address + " " + c.City + ", " + c.State + " " + c.Zipcode,
+                Phone = c.BuildingPhone,
+                BuildingID = c.ID
+    
+             }).ToList();
 
+            var mydata = Json(CBL);
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult ClientList()
+        {
+            ClientHomeVM CH = new ClientHomeVM();
+            var clientList = db.Clients.Select(c=> new 
+            {
+                ClientName = c.ClientName, 
+                ClientPhone = c.Phone, 
+                ClientFullAddress =c.Address +" "+c.City +" "+c.State+" "+c.ZipCode,
+                ClientEmail = c.Email,
+                ClientFax = c.Fax ,
+                ClientAddress = c.Address,
+                ClientCity = c.City,
+                ClientState = c.State,
+                ClientZipcode = c.ZipCode,
+                BUildingID = c.ID
+
+            }).ToList();
+            var mydata = Json(clientList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult EditClientAjax(Clients model)
+        {
+
+            if (model != null)
+            {               
+                db.Clients.Attach(model);
+                var Entry = db.Entry(model);
+                Entry.Property(c => c.ClientName).IsModified = true;
+                Entry.Property(c => c.Address).IsModified = true;
+                Entry.Property(c => c.City).IsModified = true;
+                Entry.Property(c => c.State).IsModified = true;
+                Entry.Property(c => c.Phone).IsModified = true;
+                Entry.Property(c => c.Fax).IsModified = true;
+                Entry.Property(c => c.Email).IsModified = true;
+                Entry.Property(c => c.BuildingCount).IsModified = true;
+                Entry.Property(c => c.ZipCode).IsModified = true;
+
+                db.SaveChanges();
+
+            }
+
+
+            var clientList = db.Clients.Select(c => new
+            {
+                ClientName = c.ClientName,
+                ClientPhone = c.Phone,
+                ClientFullAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZipCode,
+                ClientEmail = c.Email,
+                ClientFax = c.Fax,
+                ClientAddress = c.Address,
+                ClientCity = c.City,
+                ClientState = c.State,
+                ClientZipcode = c.ZipCode,
+                BUildingID = c.ID
+            }).ToList();
+            var mydata = Json(clientList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
 
 
