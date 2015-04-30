@@ -1420,6 +1420,17 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        public ActionResult States()
+        {
+            var states = db.States.Select(c => new
+            {
+                Text = c.State, Value = c.ID
+
+            }).ToList();
+
+            var mydata = Json(states);
+              return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
 
         //Tenant Messege Center

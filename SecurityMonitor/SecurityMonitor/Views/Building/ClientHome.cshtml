@@ -20,7 +20,7 @@
 
 <div class="row clientBox clientboxrow  " data-bind="foreach:ClientList">
     <!--vCard starts-->
-    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  nopadding clientbox" data-bind="click:getBuildinginfo">
+    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  nopadding clientbox" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
         <section class=" col-md-12 paddingupdown20px text-center" data-toggle="modal" data-target="#myModal">
             <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
@@ -90,7 +90,7 @@
                             <span class="col-lg-12 col-md-12 text-center col-sm-12 col-xs-12  ClientPhone " data-bind="text:SelectedClientEmail"></span>
                             <span class="col-lg-12 col-md-12 text-center col-sm-12 col-xs-12 ClientPhone " data-bind="text:SelectedClientPhone"></span>
                             <div class="col-lg-12 col-md-12 text-center col-sm-12 col-xs-12 Clientbuttoms ">
-                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModalEdit">Edit</button>
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModalEdit" data-bind="click:editme">Edit</button>
                                 <button class="btn btn-sm btn-primary">Delete</button>
                                 <button class="btn btn-sm btn-primary">MAP</button>
                                 <button class="btn btn-sm btn-primary">SHARE</button>
@@ -105,14 +105,18 @@
                             <h2 style="color:white;">BUILDINGS</h2>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault" style="min-height:70px;">
-                            <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-2x font_color_white" id="hitme" data-toggle="modal" data-target="#myModal"></button>
+                            <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-2x font_color_white" id="hitme" data-toggle="modal" data-target="#myModalBuilding"></button>
                         </div>
                         <div class="ccol-md-12 col-lg-12 col-sm-12 col-xs-12 scrollable extraContentinside boxbldsList  "
                              data-bind="foreach:BuildingList">
-                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bldslistrows border-bottomcust hollow5 " data-bind="click:BuildingSelected">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bldslistrows border-bottomcust hollow5 text-center " data-bind="click:BuildingSelected">
                                 <span class="displayinline padding-right_20px" data-bind="text:BLBuildingName"></span>
                                 <span class="displayinline padding-right_20px" data-bind=" text:BLBuildingAddress"></span>
                                 <span class="displayinline padding-right_20px" data-bind="text:BLPhone"></span>
+                               
+                                <button type="button" class="btn btn-primary input-sm pull-right ">Delete</button>
+                                <button type="button" class="btn btn-primary input-sm pull-right ">Edit</button>
+                                
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 extraContentinsideFooter  ">
@@ -128,6 +132,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="myModalBuilding" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header nopadding " id="modalheaderid">
+                <div class="col=-lg-12 col-md-12 col-sm-12 col-xs-12 blueDefault">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault repairrequestformheader headerDefault">
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  repairrequestformheader text-center headerDefault ">
+                    <h2 class="modal-title" id="myModalLabel " style="color:white; " data-bind="text:SelectedClientName"></h2>
+                </div>
+               
+            </div>
+            <div class="modal-body lightgrey">
+                <!--New building-->
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!--Request Form-->
@@ -136,108 +165,127 @@
         <div class="modal-content">
             <div class="modal-header nopadding " id="modalheaderid">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="col-lg-12 colmd-12  repairrequestformheader text-center " data-bind="text:SelectedClientName">
-                    <h4 class="modal-title" id="myModalLabel " style="color:white; " data-bind="text:SelectedClientName"></h4>
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center " data-bind=" text:SelectedClientName">
+                    <h2 class="modal-title" id="myModalLabel " style="color:white; " data-bind="text:SelectedClientName"></h2>
                 </div>
             </div>
             <div class="modal-body lightgrey">
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building Name
+                <!--==============================line 1===================================================-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noppading" style="margin-top:20px !important;">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            Building Name
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientName" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientName" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building Address
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Building Address
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientAddress" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientAddress" />
+                        </div>
                     </div>
-                </div>
+                    <!--=======================================line 2===================================================-->
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building City
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Building City
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientCity" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientCity" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building State
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Building State
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientState" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientState" />
+                            <select data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text', optionsCaption:SelectedClientState,value:SelectedClientState"></select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building Zipcode
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Building Zipcode
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientZipcode" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientZipcode" />
+                        </div>
                     </div>
-                </div>
 
 
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building Fax
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Building Fax
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control col-lg-2 col-md-2" data-bind="value:SelectedClientFax" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control col-lg-2 col-md-2" data-bind="value:SelectedClientFax" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building Phone
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Building Phone
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientPhone" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientPhone" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        Building Email
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
+                            Building Email
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingBottom20px">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 col-xs-offset-3 ">
-                        <input type="text" class="form-control" data-bind="value:SelectedClientEmail" />
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:SelectedClientEmail" />
+                        </div>
                     </div>
+
                 </div>
-
-
 
 
 
@@ -299,12 +347,39 @@
             var viewModel = function () {
                 var self = this;
 
+                self.editme = function () {
+                    alert(self.SelectedClientState());
+
+                }
+                
                 self.Search = ko.observable();
                 self.Search.subscribe(function () {
 
                 });
 
+                self.StateList = ko.observableArray();
+                $.ajaxSettings.traditional = true;
+                $.ajax(
+                    {
+                        type: "GET",
+                        url: '/building/States/',                        
+                        dataType: "json",
+                        success: function (data) {
+                            
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 
+                            self.StateList(TrkPkgs);
+
+                           
+                            
+                        }
+                    });
+
+            
+
+
+                self.offoron = ko.observable(false);
                 self.SelectedClientName = ko.observable();
                 self.SelectedClientFullAddress = ko.observable();
                 self.SelectedClientPhone = ko.observable();
@@ -376,7 +451,7 @@
                         url: '/building/ClientList/',
                         dataType: "json",
                         success: function (data) {
-
+                            self.offoron(true);
                             var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
                             var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
