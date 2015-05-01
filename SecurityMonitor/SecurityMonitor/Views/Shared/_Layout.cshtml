@@ -10,7 +10,7 @@
     <script src="~/Scripts/dhtmlxgantt/dhtmlxgantt.js"></script>
     <link href="~/Content/dhtmlxgantt/dhtmlxgantt.css" rel="stylesheet" />
    
-  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-2.1.3.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -57,42 +57,7 @@
 
 
     <script type="text/javascript">
-    $(document).ready(function (e) {
-
-      
-       
-        $.ajax({
-
-            type: "GET",
-            //data: { buildingID: buildingID },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/Building/shared_layoutAllOpenRequests/",
-            success: function (jsonData) {
-                // alert(jsonData);
-                $('#openrequestid').html(jsonData);
-
-            }
-        });
-
-        //loading request
-
-        $.ajax({
-
-            type: "GET",
-            //data: { buildingID: buildingID },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/Building/shared_layoutnext7Requests/",
-            success: function (jsonData) {
-                // alert(jsonData);
-                $('#next7openrequestid').html(jsonData);
-
-            }
-        });
-       
-
-    });
+        
 
         </script>
         </body>

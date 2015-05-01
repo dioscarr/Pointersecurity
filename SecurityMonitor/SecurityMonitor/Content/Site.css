@@ -36,6 +36,8 @@ margin: 0;
 overflow: auto;
 }
 
+
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -1503,11 +1505,12 @@ padding-right:50px !important;
 margin-right:80px !important;
 }
 
-.bluegradient {
 
-  background-image:  linear-gradient(to bottom,#337ab7 0,#265a88 100%);
-
-  color:white;
+.ClientIconbox {
+      background-image:  linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+      font-size:30px;
+       border:1px solid grey;
+        color:white;
 
 }
 
