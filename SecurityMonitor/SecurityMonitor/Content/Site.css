@@ -893,8 +893,13 @@ margin-top:2px;
 
 .boxhead {
     background-color: #0071BC;
-    height: 60px;
-    border-bottom: 4px solid #005F93;
+   min-height: 80px;
+
+     /* curved border radius */
+ 
+  -webkit-box-shadow: 3px 3px 7px #777;
+  -moz-box-shadow: 3px 3px 7px #777;
+    
 }
 
 .boxmenu {
@@ -903,8 +908,8 @@ margin-top:2px;
 }
 
 .boxname {
-    height:50px;
-    padding: 16px 0 0 30px;
+    min-height:50px;
+   padding:30px 0;
     font-size: 14px;
     font-weight: bold;
     color: #F2F2F2;
@@ -1094,52 +1099,40 @@ font-size:22px;
  min-width:100%;
   height: 50px;
   background:rgb(247,249,248);
- 
   font-size: 26px;
   float: left;
-  color: #65737e;
-  border-bottom:3px solid rgb(247,249,248);
-  border-top:1px solid rgb(247,249,248);
-   border: 1px solid #0071BC;
+  color: lightgrey;   
   padding-left: 15px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+
 }
 
+
+
 .container-4 input#search::-webkit-input-placeholder {
-   color: #65737e;
+   color: lightgrey;
 }
  
 .container-4 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
+   color: lightgrey;  
 }
  
 .container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
+   color: lightgrey;  
 }
  
 .container-4 input#search:-ms-input-placeholder {  
-   color: #65737e;  
+   color: lightgrey;  
 }
 .container-4 input#search:hover{  
    background:white; 
     font-size:26px;
-   -webkit-transition: all .55s ease;
-  -moz-transition: all .55s ease;
-  -ms-transition: all .55s ease;
-  -o-transition: all .55s ease;
-  transition: all .55s ease;
+   
 }
 .container-4 input#search:focus{  
    background:white; 
   color: #0071BC;
    font-size:26px;
-   -webkit-transition: all .55s ease;
-  -moz-transition: all .55s ease;
-  -ms-transition: all .55s ease;
-  -o-transition: all .55s ease;
-  transition: all .55s ease;
+  
 }
 .container-4 button.icon{
   -webkit-border-top-right-radius: 5px;
@@ -1159,11 +1152,7 @@ font-size:22px;
   margin-left: -50px;
     border: 1px solid #0071BC;
  
-  -webkit-transition: all .55s ease;
-  -moz-transition: all .55s ease;
-  -ms-transition: all .55s ease;
-  -o-transition: all .55s ease;
-  transition: all .55s ease;
+  
 }
 .container-4:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon{
     outline: none;
@@ -1236,7 +1225,7 @@ body {
 
 .repairrequestformheader {
     background-color:#0071bc;
-    padding:20px 0;
+    
 }
 
 .rformrowheight {
@@ -1449,11 +1438,38 @@ font-weight:600;
 
 .headerDefault {
 
-min-height:90px;
-max-height:90px;
+
 }
 
 .marginleftclientedit {
 
 margin-left:23%;
+}
+
+.clientbuildinglist {
+
+min-height:45px;
+
+}
+
+.Padding_right_50px {
+padding-right:50px !important;
+}
+
+.margin_right_80px {
+   
+margin-right:80px !important;
+}
+
+.bluegradient {
+
+  background-image:  linear-gradient(to bottom,#337ab7 0,#265a88 100%);
+
+  color:white;
+
+}
+
+.margin_top_20px {
+
+margin-top:20px;
 }

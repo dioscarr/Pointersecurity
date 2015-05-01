@@ -1432,6 +1432,29 @@ namespace SecurityMonitor.Controllers
               return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult SearchClientList(string Search)
+        {
+            
+            var clientList = db.Clients.Where(c=>c.ClientName.Contains(Search)).Select(c => new
+            {
+                ClientName = c.ClientName,
+                ClientPhone = c.Phone,
+                ClientFullAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZipCode,
+                ClientEmail = c.Email,
+                ClientFax = c.Fax,
+                ClientAddress = c.Address,
+                ClientCity = c.City,
+                ClientState = c.State,
+                ClientZipcode = c.ZipCode,
+                BUildingID = c.ID
+
+            }).ToList();
+            var mydata = Json(clientList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
 
         //Tenant Messege Center
 

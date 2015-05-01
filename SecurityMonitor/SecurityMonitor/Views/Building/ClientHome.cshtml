@@ -6,14 +6,20 @@
 }
 
 
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center headerDefault paddingupdown20px  blueDefault margin_top_20px font_color_white">
+            <h4>Client's Page</h4>
+        </div>
+    </div>
 
-
+</div>
 <div class="row ">
 
     <div class="box">
-        <div class="container-4 ">
-            <input type="search" id="search" class=" text-center" placeholder="Search for Client..." />
-            <button class="icon"><i class="fa fa-search"></i></button>
+        <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+            <input type="search" id="search" class=" form-control input-sm" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
+          
         </div>
     </div>
 </div>
@@ -23,37 +29,17 @@
     <!--vCard starts-->
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  nopadding clientbox" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
-        <section class=" col-md-12 paddingupdown20px text-center" data-toggle="modal" data-target="#myModal">
-            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
-                <div class=" boxname col-lg-8 col-md-8 col-sm-8 col-xs-8" data-bind="text:ClientName">
-
-                </div>
-                <img class="boxmenu  imgmenu col-lg-4 col-md-4 col-sm-4 col-xs-4 hollow3" src="~/img/menu.png" />
+        <section class=" col-md-12 paddingupdown20px text-center " data-toggle="modal" data-target="#myModal">
+            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding  " sytle="min-height:100px;">
+                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
+                </div>               
             </section>
         </section>
-        <!--header ends-->
-        @*<!--Content starts-->
-            <section class=" col-md-12 ">
-                <div class="col-md-12 boxContent ">
-                    <section class=" col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center sectionaddress nopadding">
-                        <span class="boxbldsnumber " data-bind="text:ClientAddress"></span>
-                    </section>
-                    <section class="col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding text-center  boxblds">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 boxbldsnumbercombine  text-center  ">
-                            <span class="numberstyle numberstyle-blds ">count</span>
-                            <span class=" numberstyle-blds blds ">blds</span>
-                        </div>
-                    </section>
-                </div>
-            </section>
-            <!--Content ends-->*@
+        
     </div>
     <!--vCard ends-->
 
 </div>
-
-
-
 
 <!--Request Form-->
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -63,39 +49,38 @@
                 <div class="col=-lg-12 col-md-12 col-sm-12 col-xs-12 blueDefault">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault repairrequestformheader headerDefault">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault repairrequestformheader headerDefault clientbuildinglist">
 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  repairrequestformheader text-center headerDefault ">
-                    <h2 class="modal-title" id="myModalLabel " style="color:white; " data-bind="text:SelectedClientName"></h2>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  repairrequestformheader text-center headerDefault clientbuildinglist  ">
+                    <h4 class="modal-title" id="myModalLabel " style="color:white; " data-bind="text:SelectedClientName"></h4>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault">
-                    <button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-2x font_color_white"></button>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
+                    
+                    <button data-toggle="popover"
+                            title="Client Advance Settings"
+                            class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-2x padding-right_20px font_color_white margin_right_80px "></button>
 
-                    <button data-toggle="popover" 
-                            title="Client Advance Settings" 
-                            
-                            class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-2x padding-right_20px font_color_white"></button>
-                
                     <div id="popover_content_wrapper" style="display: none; ">
                         <div class=" " style="padding:20px 0 100px 0;">
                             <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center rowheight">
-                                <button class="btn btn-sm  fa fa-pencil-square-o hollow5" style="font-size:30px; border:1px solid grey;" data-toggle="modal" data-target="#myModalEdit" data-bind="click:editme"></button>
+                                <button class="btn btn-sm  fa fa-pencil-square-o hollow5 bluegradient" style="font-size:30px; border:1px solid grey;" data-toggle="modal" data-target="#myModalEdit" data-bind="click:editme"></button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center rowheight">
-                                <button class="btn btn-sm fa fa-trash hollow5" style="font-size:30px; border:1px solid grey;"></button>
+                                <button class="btn btn-sm fa fa-trash hollow5 bluegradient" style="font-size:30px; border:1px solid grey;"></button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center rowheight">
-                                <button class="btn btn-sm fa fa-map-marker hollow5" style="font-size:30px; border:1px solid grey; margin-bottom:20px;"></button>
+                                <button class="btn btn-sm fa fa-map-marker hollow5 bluegradient" style="font-size:30px; border:1px solid grey; margin-bottom:20px;"></button>
                             </div>
-                          
+                            <hr/>
+
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center rowheight">
-                                <button class="btn btn-sm fa fa-share-alt hollow5" style="font-size:30px; border:1px solid grey;"></button>
+                                <button class="btn btn-sm fa fa-share-alt hollow5 bluegradient" style="font-size:30px; border:1px solid grey;"></button>
                             </div>
-                            
+
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="modal-body lightgrey">
 
 
@@ -123,12 +108,14 @@
 
                         </div>
                         <!--List of Building-->
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault" style=" min-height:70px;"></div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center  blueDefault " style="min-height:70px;">
-                            <h2 style="color:white;">BUILDINGS</h2>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault clientbuildinglist" ></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center  blueDefault clientbuildinglist" >
+                            <h4 style="color:white;">BUILDINGS</h4>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault" style="min-height:70px;">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault clientbuildinglist">
                             <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-2x font_color_white" id="hitme" data-toggle="modal" data-target="#myModalBuilding"></button>
+                            <button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-2x font_color_white"></button>
+
                         </div>
                         <div class="ccol-md-12 col-lg-12 col-sm-12 col-xs-12 scrollable extraContentinside boxbldsList  "
                              data-bind="foreach:BuildingList">
@@ -154,6 +141,7 @@
         </div>
     </div>
 </div>
+    </div>
 
 <div class="modal fade" id="myModalBuilding" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -180,7 +168,6 @@
         </div>
     </div>
 </div>
-
 
 <!--Request Form-->
 <div class="modal fade" id="myModalEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -246,7 +233,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientState" />
+                           
                             <select data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text', optionsCaption:SelectedClientState,value:SelectedClientState"></select>
                         </div>
                     </div>
@@ -323,25 +310,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!--End Html Code-->
 <!--Start JavaScript code-->
 @section scripts
@@ -382,13 +350,50 @@
             var viewModel = function () {
                 var self = this;
 
+
+
+
+
                 self.editme = function () {
                     alert(self.SelectedClientState());
 
                 }
                 
                 self.Search = ko.observable();
-                self.Search.subscribe(function () {
+                self.Search.subscribe(function (value) {
+                   
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/SearchClientList/',
+                            dataType: "json",
+                            data: { Search: value },
+                            success: function (data) {
+
+                                self.ClientList.removeAll();
+                                self.offoron(true);
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+
+                                    self.ClientList.push({
+                                        ClientID: ko.observable(TrkPkgs[i].BUildingID),
+                                        ClientName: ko.observable(TrkPkgs[i].ClientName),
+                                        ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
+                                        ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
+                                        ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientCity: ko.observable(TrkPkgs[i].ClientCity),
+                                        ClientState: ko.observable(TrkPkgs[i].ClientState),
+                                        ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
+                                        ClientFax: ko.observable(TrkPkgs[i].ClientFax)
+                                    });
+                                }
+                            }
+                        });
 
                 });
 
