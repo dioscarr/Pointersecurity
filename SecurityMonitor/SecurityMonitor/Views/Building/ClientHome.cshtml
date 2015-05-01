@@ -5,11 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerDefault">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Home", "index", "Home",null, new {@class="breadcrumblink"})</li>
+            <li>Client's Page</li>
+        </ol>
+    </div>
 
+</div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center headerDefault paddingupdown20px  blueDefault margin_top_20px font_color_white">
-            <h4>Client's Page</h4>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center headerDefault paddingupdown20px  blueDefault font_color_white">
+            <h3>Client's Page</h3>
         </div>
     </div>
 
@@ -18,21 +26,21 @@
 
     <div class="box">
         <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-            <input type="search" id="search" class=" form-control input-sm" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
+            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
           
         </div>
     </div>
 </div>
 <div class="row rowheight "></div>
 
-<div class="row clientBox clientboxrow  " data-bind="foreach:ClientList">
+<div class="row clientboxcontainer" data-bind="foreach:ClientList">
     <!--vCard starts-->
-    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  nopadding clientbox" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
+    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
-        <section class=" col-md-12 paddingupdown20px text-center " data-toggle="modal" data-target="#myModal">
-            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding  " sytle="min-height:100px;">
+        <section class=" col-md-12 text-center clientboxrow" data-toggle="modal" data-target="#myModal">
+            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
                 <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
-                </div>               
+                </div>
             </section>
         </section>
         

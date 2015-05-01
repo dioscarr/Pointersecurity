@@ -24,6 +24,7 @@ html {overflow-y: scroll;}
     padding-left: 15px;
     padding-right: 15px;
       font-family:Overpass !important;
+      
 }
 
 body.modal-open {
@@ -47,7 +48,7 @@ textarea {
     background: white;
 }
 .container {
-background:white;
+background:#ededed;
 
 }
 
@@ -79,6 +80,28 @@ font-style:oblique;
 
 background:#171F27;
 }
+
+/************************************************* NAVEGATION ***********************************************/
+
+.navbar-nav {
+position: relative;
+right: 6px;
+}
+
+.menuheader {
+
+
+}
+
+.menuheader li {
+margin: 0px;
+
+}
+
+
+
+
+/************************************************* VSDVSVDVSDV ***********************************************/ 
 
 
 .boxtitle{
@@ -883,38 +906,60 @@ margin-top:2px;
  
 }
 
-.clientbox {
-    table-layout:fixed;
-    min-height:100%;
-    max-height:100%;
-    margin-bottom:20px;
-   
+    /*********************************************************Bradcrumb *************************************************************************/
+
+.breadcrumb {
+  margin: 15px 0 0 0;
+  border-radius: 0px;
+  background-color: #0b68a8;
+
 }
+
+.breadcrumb li {
+  color: #f2f2f2;
+
+}
+
+.breadcrumblink {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+.breadcrumblink:hover {
+  color: #fff;
+    text-decoration: none;
+
+}
+
+    /********************************************************** Client Boxes *************************************************************************/
+
+.clientboxcontainer {
+
+
+}
+
+.clientboxrow {
+    margin: 0 0 10px 0;
+}
+
 
 .boxhead {
-    background-color: #0071BC;
-   min-height: 80px;
-
-     /* curved border radius */
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;
  
-  -webkit-box-shadow: 3px 3px 7px #777;
-  -moz-box-shadow: 3px 3px 7px #777;
-    
-}
-
-.boxmenu {
-    height:70px; 
-    padding-bottom:20px; 
 }
 
 .boxname {
     min-height:50px;
-   padding:30px 0;
     font-size: 14px;
     font-weight: bold;
-    color: #F2F2F2;
+    color: rgba(50, 50, 50, 0.75);
+
 }
 
+    /********************************************************** This is a single-line comment **********************************************************/
+ 
 .col-lg-3 {
      padding-left: 0 !important;
     padding-right: 0 !important;
@@ -971,11 +1016,6 @@ padding:30px
      padding:10px 0 0 0;
 }
 
-.clientbox {
-   
-   
-   
-}
 
 .extraContent {
     
@@ -1087,22 +1127,23 @@ font-size:22px;
 
 .container-4{
   overflow: hidden;
-  width: 100%;
   vertical-align: middle;
   white-space: nowrap;
    width:100%;
    margin-top:20px;
-   
+   position:relative;
+   top:12px;
+   padding: 0 15px 15px 15px;
+
 }
 
 .container-4 input#search{
- min-width:100%;
-  height: 50px;
+  min-width:100%;
+  height: 40px;
   background:rgb(247,249,248);
-  font-size: 26px;
+  font-size: 18px;
   float: left;
   color: lightgrey;   
-  padding-left: 15px;
 
 }
 
@@ -1125,13 +1166,13 @@ font-size:22px;
 }
 .container-4 input#search:hover{  
    background:white; 
-    font-size:26px;
+
    
 }
 .container-4 input#search:focus{  
    background:white; 
   color: #0071BC;
-   font-size:26px;
+
   
 }
 .container-4 button.icon{
@@ -1290,6 +1331,7 @@ background-color:#0071bc;
 
 .blueDefault {
       background-color:#0071bc;
+      border-bottom: 4px solid #116ba8;
 }
 
 .headerheight {
