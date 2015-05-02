@@ -1023,16 +1023,26 @@ padding:30px
     
      height:200px; display:none; 
     
-     
-}
-.extraContentinside {
+             
 
-    height:200px;
+}
+
+
+
+
+.BoxClientbuildingList
+{ 
+    line-height:100px;
+    height:100%;
     background:white;
     color:black;
-   
-     
 }
+.boxclientContent
+{
+    height:100%;
+
+}
+
 .extraContentinsideHeader {
 
     height:40px;
@@ -1052,10 +1062,7 @@ padding:30px
 }
 
 
-.boxbldsList {
 
-height:300px;
-}
 .bldslistrows {
 padding:10px;
 margin:5px 0;
@@ -1336,6 +1343,11 @@ background-color:#0071bc;
       border-bottom: 4px solid #116ba8;
 }
 
+.blueDefault_no_border {
+      background-color:#0071bc;
+      
+}
+
 .headerheight {
 
 
@@ -1517,4 +1529,63 @@ margin-right:80px !important;
 .margin_top_20px {
 
 margin-top:20px;
+}
+
+.Row_Client_Box {
+    
+}
+.Row_Client_Contact_header {
+    display:block;
+    color:grey;
+    line-height:25px;   
+    border-bottom:1px solid lightgrey;
+}
+.Row_Client_Contact
+ {  
+    display:block;
+    color:black;
+    line-height:25px;   
+    
+}
+.BoxClientInfo {
+      background:white;
+       min-height:150px;
+    height:150px;
+    background:white;
+    color:black;
+    border-right:1px solid lightgrey;
+   
+     
+}
+
+.BoxClientInforight {
+
+    height:150px;
+    background:white;
+    color:black;
+    border-right:1px solid lightgrey;
+   
+     
+}
+
+.BoxClientInfo::before {
+    height:200px;
+    position:relative;
+    right:18px;
+
+       border-right:4px solid white;
+       content:" ";
+}
+
+.BoxClientInfo::after {
+    
+    position:relative;
+    right:22px;
+    top:133px;
+       border-right:4px solid white;
+       content:" ";
+}
+
+.Client_Searchloop {
+    line-height:25px !important;
 }
