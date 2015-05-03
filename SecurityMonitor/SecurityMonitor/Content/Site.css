@@ -1589,3 +1589,42 @@ margin-top:20px;
 .Client_Searchloop {
     line-height:25px !important;
 }
+
+
+#popover_Searchloop_wrapper {
+
+    width:400px !important;
+}
+
+.clearinputfield {
+
+position:relative;
+top:24px;
+left:10px;
+color:black;
+z-index:1;
+}
+
+.closingx {
+
+position:relative;
+bottom:35px;
+
+
+}
+#popoverparent .popover {
+
+    
+   
+}
+
+#popoverparent .popover .arrow {
+
+   
+}
+
+
+
+
+
+

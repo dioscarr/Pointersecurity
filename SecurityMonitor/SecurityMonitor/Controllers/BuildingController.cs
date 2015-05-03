@@ -1357,6 +1357,25 @@ namespace SecurityMonitor.Controllers
 
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult Search4Building(int ClientID, string Search)
+        {
+            var CBL = db.Buildings.Where(c => c.Clients.ID == ClientID && c.Address.Contains(Search) || c.Clients.ID == ClientID && c.Zipcode.Contains(Search)).Select(c => new
+            {
+                BuildingName = c.BuildingName,
+                BuildingAddress = c.Address + " " + c.City + ", " + c.State + " " + c.Zipcode,
+                Phone = c.BuildingPhone,
+                BuildingID = c.ID
+
+            }).ToList();
+
+            var mydata = Json(CBL);
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public JsonResult ClientList()

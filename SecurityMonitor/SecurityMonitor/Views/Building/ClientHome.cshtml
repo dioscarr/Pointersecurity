@@ -131,17 +131,32 @@
                                 </div>
                                 <!--=================================================================List of Building=================================================-===-->
 
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault clientbuildinglist"></div><!--empty div-->
-                                <!--======================================================Building Row's content starts=========================================-->
+                                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs blueDefault clientbuildinglist"></div><!--empty div-->
+                               
+                             <!--======================================================Building Row's content starts=========================================-->
 
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center  blueDefault clientbuildinglist">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center  blueDefault clientbuildinglist">
                                     <h4 style="color:white;">BUILDINGS</h4>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault clientbuildinglist">
-                                    <button class="btn btn-link pull-right displayinline openrequestssettings Client_Searchloop fa fa-plus-circle fa-1x font_color_white" id="hitme" data-toggle="modal" data-target="#myModalBuilding"></button>
-                                    <button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings Client_Searchloop fa fa-search fa-1x font_color_white"></button>
+                            <div id="popoverparent" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 blueDefault clientbuildinglist">
+                                <button class="btn btn-link pull-right displayinline openrequestssettings Client_Searchloop fa fa-plus-circle fa-1x font_color_white" id="hitme" data-toggle="modal" data-target="#myModalBuilding"></button>
+                                <button data-bind="popover: {options: { title: 'filter by', placement: 'top' }, template: 'popoverBindingTemplate'}"
+                                        class="btn btn-link pull-right displayinline OpenRequestsSettings Client_Searchloop fa fa-search fa-1x font_color_white"></button>
 
-                                </div>
+                                <script type="text/html" id="popoverBindingTemplate">
+                                    <button class="close pull-right closingx" type="button" data-dismiss="popover">×</button>
+                                    <button class="close pull-right clearinputfield" type="button" data-bind="click:clearinputfield">×</button>
+                                    <form>
+                                        <input type="text" data-bind="value: buildingSearch, valueUpdate:'afterkeydown'" />
+                                    </form>
+                                </script>
+
+                            </div>
+<!--=======================================================================search loop bar=========================================================-->
+                           
+                                
+                           
+
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  BoxClientbuildingList   " data-bind="foreach:BuildingList">
                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 bldslistrows border-bottomcust hollow5 text-center " data-bind="click:BuildingSelected">
                                         <span class="displayinline padding-right_20px" data-bind="text:BLBuildingName"></span>
@@ -347,6 +362,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="~/Scripts/knockout-bootstrap.min.js"></script>
     <script type="text/javascript">
         //jquery here
 
@@ -357,7 +373,7 @@
         }
         );
         $(function () {
-
+            //popover advance options 
             $('[data-toggle="popover"]').popover({
                 placement: 'bottom',
                 html: true,
@@ -366,11 +382,22 @@
                 }
             });
 
+            ////popover building search
+            //$('[data-toggle="popoverBuildingSearch"]').popover({
+            //    placement: 'left',
+            //    html: true,
+            //    id:"searchloopid1",
+                
+            //    content: function () {
+            //        return $('#popover_Searchloop_wrapper').html();
+            //    }
+            //});
+           
+
+
+
             var viewModel = function () {
                 var self = this;
-
-
-
 
 
                 self.editme = function () {
@@ -380,6 +407,7 @@
 
                 self.Search = ko.observable();
                 self.Search.subscribe(function (value) {
+                    
 
                     $.ajaxSettings.traditional = true;
                     $.ajax(
@@ -436,8 +464,6 @@
                     });
 
 
-
-
                 self.offoron = ko.observable(false);
                 self.SelectedClientName = ko.observable();
                 self.SelectedClientFullAddress = ko.observable();
@@ -452,6 +478,50 @@
                 self.SelectedClientZipcode = ko.observable();
 
                 self.BuildingList = ko.observableArray();
+                
+
+                self.clearinputfield = function () {
+                    self.buildingSearch("");
+                    
+                }
+
+
+
+
+                self.buildingSearch = ko.observable();
+
+                self.buildingSearch.subscribe(function (value) {
+
+                  
+                    
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/Search4Building/',
+                            data: { Search: value, ClientID: self.SelectedClientID() },
+                            dataType: "json",
+                            success: function (data) {
+                                self.BuildingList.removeAll();
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+                                    self.BuildingList.push({
+                                        BLBuildingName: ko.observable(TrkPkgs[i].BuildingName),
+                                        BLBuildingAddress: ko.observable(TrkPkgs[i].BuildingAddress),
+                                        BLPhone: ko.observable(TrkPkgs[i].Phone),
+                                        BLbuildingID: ko.observable(TrkPkgs[i].BuildingID)
+
+                                    });
+                                }
+                            }
+                        });
+
+                });
+
+
 
                 self.citystatezip = ko.computed(function () {
                     return self.SelectedClientCity() + " " + self.SelectedClientState() + ", " + self.SelectedClientZipcode();
@@ -474,6 +544,7 @@
                     self.SelectedClientState(myjson.ClientState);
                     self.SelectedClientZipcode(myjson.ClientZipcode);
 
+                   
 
 
                     $.ajaxSettings.traditional = true;
