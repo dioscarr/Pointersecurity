@@ -11,13 +11,21 @@
     font-style: normal;
 
 }
+html{
+  height: 100%;
+}
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
     background:black;
     font-family:Overpass !important;
+ min-height: 100%;
 
 }
+
+
+
 html {overflow-y: scroll;}
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -935,8 +943,7 @@ margin-top:2px;
     /********************************************************** Client Boxes *************************************************************************/
 
 .clientboxcontainer {
-    min-height:300px;
-
+  min-height:100%!important;
 }
 
 .clientboxrow {

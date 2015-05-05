@@ -38,7 +38,7 @@
 </div>
 <div class="row rowheight "></div>
 
-<div class="row clientboxcontainer" data-bind="foreach:ClientList">
+<div class="row hidden-sm hidden-xs clientboxcontainer" data-bind="foreach:ClientList">
     <!--vCard starts-->
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
@@ -47,6 +47,22 @@
             <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
             </div>
         </section>
+        </section>
+
+    </div>
+    <!--vCard ends-->
+
+</div>
+
+<div class="row hidden-lg hidden-md clientboxcontainer" data-bind="foreach:ClientList" style="min-height:900px !important;">
+    <!--vCard starts-->
+    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
+        <!--header starts-->
+        <section class=" col-md-12 text-center clientboxrow" data-toggle="modal" data-target="#myModal">
+            <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
+                </div>
+            </section>
         </section>
 
     </div>
