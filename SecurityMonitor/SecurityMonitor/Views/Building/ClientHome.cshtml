@@ -209,7 +209,7 @@
 
             <div class="modal-header  " id="modalheaderid">
                 <div class="col=-lg-12 col-md-12 col-sm-12 col-xs-12 blueDefault_no_border">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button id="clientpagepopupid" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault repairrequestformheader headerDefault clientbuildinglist">
 
@@ -532,7 +532,7 @@
     @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">*@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="~/Scripts/knockout-bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -722,13 +722,18 @@
                             }
                         }).done(function () {
                             
-                            //$('.$("#myModal").modal('hide').on('hidden.bs.modal', functionThatEndsUpDestroyingTheDOM);').modal('hide');
-                            $(".modal").modal('hide');
+                           // //$('.$("#myModal").modal('hide').on('hidden.bs.modal', functionThatEndsUpDestroyingTheDOM);').modal('hide');
+                           // $(".modal").modal('hide');
 
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                            $(".modal").removeAttr('hide');
-                           // $('.fade').remove();
+                           // $('body').removeClass('modal-open');
+                           
+                           // $(".modal").removeAttr('hide');
+                            //// $('.fade').remove();
+
+
+                            //$('#clientpagepopupid').trigger("click");
+                            // $('.modal-backdrop').remove();
+
                         });
 
                 };            
