@@ -54,7 +54,7 @@
 
 </div>
 
-<div class="row hidden-lg hidden-md clientboxcontainer" data-bind="foreach:ClientList" style="min-height:900px !important;">
+<div class="row hidden-lg hidden-md clientboxcontainer" data-bind="foreach:ClientList" style="min-height:600px !important;">
     <!--vCard starts-->
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
@@ -225,7 +225,9 @@
 
             <div class="modal-header  " id="modalheaderid">
                 <div class="col=-lg-12 col-md-12 col-sm-12 col-xs-12 blueDefault_no_border">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="xbuttonclientid" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault repairrequestformheader headerDefault clientbuildinglist">
 
@@ -238,7 +240,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
 
-                    <button data-toggle="popover"
+                    <button data-toggle="popover" id="facongid"
                             title="Client Advance Settings"
                             class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-1x padding-right_20px font_color_white margin_right_80px "></button>
 
@@ -514,16 +516,16 @@
 <div class="modal fade" id="myModalDelete" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-header blueDefault  " id="modalheaderid" >
-                Are you sure?
+            <div class="modal-header blueDefault   " id="modalheaderid" >
+                Are you sure you want delete <span data-bind="text:SelectedClientName"></span>?
             </div>
             <div class="modal-body deletebox ">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-default" data-dismiss="modal" id="deletecancelid">Cancel</button>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
-                        <button class="btn btn-default" data-bind="click:deleteclient" data-dismiss="modal">Delete</button>
+                        <button class="btn btn-default" data-bind="click:deleteclient" data-dismiss="modal" id="deleteid" onclick="fakeClick(event, document.getElementById('xbuttonclientid'))">Delete</button>
                     </div>
                 </div>
             </div>
@@ -553,6 +555,23 @@
 <script src="~/Scripts/knockout-bootstrap.min.js"></script>
     <script type="text/javascript">
         //jquery here
+        function fakeClick(event, anchorObj) {
+            if (anchorObj.click) {
+                anchorObj.click()
+            } else if (document.createEvent) {
+                if (event.target !== anchorObj) {
+                    var evt = document.createEvent("MouseEvents");
+                    evt.initMouseEvent("click", true, true, window,
+                        0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    var allowDefault = anchorObj.dispatchEvent(evt);
+                    // you can check allowDefault for false to see if
+                    // any handler called evt.preventDefault().
+                    // Firefox will *not* redirect to anchorObj.href
+                    // for you. However every other browser will.
+                }
+            }
+        }
+
 
         $('.imgmenu').click(function () {
             var menuid = $(this).attr("data-linkme");
@@ -570,6 +589,19 @@
                 }
             });
 
+            $('#deletecancelid').click(function () {
+                $('#facongid').trigger("click");
+           
+
+            });
+
+            $('#deleteid').click(function () {
+                $('#facongid').trigger("click");
+              
+            });
+
+           
+            
            
            
 
