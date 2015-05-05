@@ -1612,19 +1612,16 @@ bottom:35px;
 
 
 }
-#popoverparent .popover {
 
-    
-   
+.Addclientclass {
+color:white;
+margin:0 0 0 40px;
+
+
 }
 
-#popoverparent .popover .arrow {
-
-   
+.deletebox {
+min-height:100px !important;
+padding:30px;
 }
-
-
-
-
-
 

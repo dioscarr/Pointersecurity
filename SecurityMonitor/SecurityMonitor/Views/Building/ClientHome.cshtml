@@ -7,17 +7,22 @@
 
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerDefault">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="line-height:20px;" id="clientbreadcrumbid">
             <li>@Html.ActionLink("Home", "index", "Home", null, new { @class = "breadcrumblink" })</li>
-            <li>Client's Page</li>
+            <li>Client's Page</li>            
         </ol>
+
+       
     </div>
+    
 
 </div>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center headerDefault paddingupdown20px  blueDefault font_color_white">
-            <h3>Client's Page</h3>
+           <h3 class="displayinline">Client's Page</h3>
+            <span class="hollow3 fa fa-plus-circle fa-2x  Addclientclass" id="Addclient"
+                  data-toggle="modal" data-target="#myModalAdd" data-bind="click:GetStates"></span> 
         </div>
     </div>
 
@@ -37,17 +42,161 @@
     <!--vCard starts-->
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
-        <section class=" col-md-12 text-center clientboxrow" data-toggle="modal" data-target="#myModal">
+        <section class=" col-md-12 text-center clientboxrow" data-toggle="modal" data-target="#myModal" data-backdrop="static">
             <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
-                </div>
-            </section>
+            <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
+            </div>
+        </section>
         </section>
 
     </div>
     <!--vCard ends-->
 
 </div>
+
+<!--============================================================================Add Client=======================================================================-->
+
+<div class="modal fade" id="myModalAdd" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--=================================================================header ADD client information===========================================================-->
+            <div class="modal-header nopadding " id="modalheaderid">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h2 class="modal-title" id="myModalLabel " style="color:white; ">Add Client</h2>
+                </div>
+            </div><!--Ending tag fo r edit client information-->
+            <!--================================================================================Add cliet form================================================================-->
+
+           
+           
+            
+             <div class="modal-body lightgrey">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noppading" style="margin-top:20px !important;">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            Clietn's Name
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            <input type="text" class="form-control" data-bind="value:ClientName" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Clietn' Address
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                            <input type="text" class="form-control" data-bind="value:ClientAddress" />
+                        </div>
+                    </div>
+                    <!--=======================================line 2===================================================-->
+
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Clietn' City
+                        </div>
+                    </div>
+                   
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:ClientCity" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Clietn' State
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+
+                            <select data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text',value:ClientState"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Clietn' Zipcode
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:ClientZipcode" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Clietn' Fax
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control col-lg-2 col-md-2" data-bind="value:ClientFax" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            Clietn' Phone
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:ClientPhone" />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
+                            Clietn' Email
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                            <input type="text" class="form-control" data-bind="value:ClientEmail" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-info input-sm" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-info input-sm" data-dismiss="modal" data-bind="click:AddClient">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--Edit client information Form Ends-->
+
 
 <!--=================================================================Client Page===================================================================================-->
 
@@ -86,7 +235,7 @@
                                         data-toggle="modal" data-target="#myModalEdit" data-bind="click:editme"></button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center rowheight">
-                                <button class="btn btn-sm fa fa-trash hollow5 ClientIconbox "></button>
+                                <button class="btn btn-sm fa fa-trash hollow5 ClientIconbox " id="deleteme" data-toggle="modal" data-target="#myModalDelete"></button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center rowheight">
                                 <button class="btn btn-sm fa fa-map-marker hollow5 ClientIconbox"></button>
@@ -344,6 +493,29 @@
     </div>
 </div><!--Edit client information Form Ends-->
 
+
+
+<div class="modal fade" id="myModalDelete" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header blueDefault  " id="modalheaderid" >
+                Are you sure?
+            </div>
+            <div class="modal-body deletebox ">
+                <div class="col-lg-12 col=md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-6 col=md-6 col-sm-6 col-xs-6">
+                        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="col-lg-6 col=md-6 col-sm-6 col-xs-6">
+                        <button class="btn btn-default" data-bind="click:deleteclient" data-dismiss="modal">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--End Html Code-->
 <!--Start JavaScript code-->
 @section scripts
@@ -382,6 +554,9 @@
                 }
             });
 
+           
+           
+
             ////popover building search
             //$('[data-toggle="popoverBuildingSearch"]').popover({
             //    placement: 'left',
@@ -393,11 +568,171 @@
             //    }
             //});
            
-
-
+           
 
             var viewModel = function () {
                 var self = this;
+
+
+ //===================================================================Add Client============================================================================
+
+                self.StateList = ko.observableArray();
+
+                self.ClientName = ko.observable("Golden Real State");
+                self.ClientAddress = ko.observable("1372 Broadway");
+                self.ClientCity = ko.observable("New York");
+                self.ClientState = ko.observable("NY");
+                self.ClientZipcode = ko.observable("10018");
+                self.ClientPhone = ko.observable("3476990088");
+                self.ClientFax = ko.observable("3475889988");
+                self.ClientEmail = ko.observable("Golden@mail.com");
+                self.ClientContactName = ko.observable();
+                self.ClientContactPhone = ko.observable();
+                self.ClientContactEmail = ko.observable();
+
+                self.offoron = ko.observable(false);
+                self.SelectedClientName = ko.observable();
+                self.SelectedClientFullAddress = ko.observable();
+                self.SelectedClientPhone = ko.observable();
+                self.SelectedClientEmail = ko.observable();
+                self.SelectedClientFax = ko.observable();
+                self.SelectedClientID = ko.observable();
+
+                self.SelectedClientAddress = ko.observable();
+                self.SelectedClientCity = ko.observable();
+                self.SelectedClientState = ko.observable();
+                self.SelectedClientZipcode = ko.observable();
+
+                self.ClientList = ko.observableArray();
+
+                self.Search = ko.observable();
+
+                self.BuildingList = ko.observableArray();
+
+                //Get states
+                self.GetStates = function () {
+                   
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/States/',
+                            dataType: "json",
+                            success: function (data) {
+
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                self.StateList(TrkPkgs);
+
+
+
+                            }
+                        });
+
+                };
+
+                var AddClienttodb =
+                    {
+                        //match db fields
+                        ClientName: self.ClientName,
+                        Address: self.ClientAddress,
+                        Phone: self.ClientPhone,
+                        Fax: self.ClientFax,
+                        Email: self.ClientEmail,
+                        City: self.ClientCity,
+                        State: self.ClientState,
+                        ZipCode: self.ClientZipcode
+                    }
+
+                self.AddClient = function () {
+
+
+                   
+                    // add ajax code to pass AddClienttodb 
+                    //on success add populate clientlist
+                    
+
+                  
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "Post",
+                            url: '/building/AddClient/',
+                            dataType: "json",
+                            data:AddClienttodb,
+                            success: function (data) {
+                                self.ClientList.removeAll();
+                                self.offoron(true);
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+
+                                    self.ClientList.push({
+                                        ClientID: ko.observable(TrkPkgs[i].BUildingID),
+                                        ClientName: ko.observable(TrkPkgs[i].ClientName),
+                                        ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
+                                        ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
+                                        ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientCity: ko.observable(TrkPkgs[i].ClientCity),
+                                        ClientState: ko.observable(TrkPkgs[i].ClientState),
+                                        ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
+                                        ClientFax: ko.observable(TrkPkgs[i].ClientFax)
+                                    });
+                                }
+                            }
+                        });
+                };
+
+                self.deleteclient =  function () {
+                   
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "Post",
+                            url: '/building/deleteClient/',
+                            dataType: "json",
+                            data: { ClientID: self.SelectedClientID() },
+                            success: function (data) {
+                                self.ClientList.removeAll();
+                                self.offoron(true);
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+
+                                    self.ClientList.push({
+                                        ClientID: ko.observable(TrkPkgs[i].BUildingID),
+                                        ClientName: ko.observable(TrkPkgs[i].ClientName),
+                                        ClientPhone: ko.observable(TrkPkgs[i].ClientPhone),
+                                        ClientFullAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientEmail: ko.observable(TrkPkgs[i].ClientEmail),
+                                        ClientAddress: ko.observable(TrkPkgs[i].ClientAddress),
+                                        ClientCity: ko.observable(TrkPkgs[i].ClientCity),
+                                        ClientState: ko.observable(TrkPkgs[i].ClientState),
+                                        ClientZipcode: ko.observable(TrkPkgs[i].ClientZipcode),
+                                        ClientFax: ko.observable(TrkPkgs[i].ClientFax)
+                                    });
+                                }
+                            }
+                        }).done(function () {
+                            
+                            //$('.$("#myModal").modal('hide').on('hidden.bs.modal', functionThatEndsUpDestroyingTheDOM);').modal('hide');
+                            $(".modal").modal('hide');
+
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                            $(".modal").removeAttr('hide');
+                           // $('.fade').remove();
+                        });
+
+                };            
+                   
 
 
                 self.editme = function () {
@@ -405,7 +740,7 @@
 
                 }
 
-                self.Search = ko.observable();
+              
                 self.Search.subscribe(function (value) {
                     
 
@@ -444,7 +779,7 @@
 
                 });
 
-                self.StateList = ko.observableArray();
+               
                 $.ajaxSettings.traditional = true;
                 $.ajax(
                     {
@@ -464,20 +799,7 @@
                     });
 
 
-                self.offoron = ko.observable(false);
-                self.SelectedClientName = ko.observable();
-                self.SelectedClientFullAddress = ko.observable();
-                self.SelectedClientPhone = ko.observable();
-                self.SelectedClientEmail = ko.observable();
-                self.SelectedClientFax = ko.observable();
-                self.SelectedClientID = ko.observable();
-
-                self.SelectedClientAddress = ko.observable();
-                self.SelectedClientCity = ko.observable();
-                self.SelectedClientState = ko.observable();
-                self.SelectedClientZipcode = ko.observable();
-
-                self.BuildingList = ko.observableArray();
+               
                 
 
                 self.clearinputfield = function () {

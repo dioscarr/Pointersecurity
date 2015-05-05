@@ -160,45 +160,35 @@ namespace SecurityMonitor.Controllers
         //}
 
         [HttpPost]
-        public ActionResult AddClient(ClientsVM model, int? buildingcount, int? ContactID)
+        public JsonResult AddClient(Clients model)
         {
-
-
-
-
             try 
             {
 
                 if (ModelState.IsValid)
                 {
-
-                    if (buildingcount == null)
-                    {
-                        //TO DO: this needs to be handle on while adding buildin. 
-                        // cound should increase when adding building and decrease when deleting building
-                        buildingcount = 0;
-                    }
-                    var newclient = new Clients
-                    {
-                        ClientName = model.ClientName,
-                        BuildingCount = (int)buildingcount,
-                        Address = model.Address,
-                        City = model.city,
-                        State = model.State,
-                        ZipCode = model.zipcode,
-                        Fax = model.Fax,
-                        Phone = model.Phone,
-                        Email = model.Email
-                    };
-
-                    db.Clients.Add(newclient);
+                    db.Clients.Add(model);
                     db.SaveChanges();
                 }
-                else
+
+                var clientList = db.Clients.Select(c => new
                 {
-                    return RedirectToAction("clientIndex");
-                    
-                }
+                    ClientName = c.ClientName,
+                    ClientPhone = c.Phone,
+                    ClientFullAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZipCode,
+                    ClientEmail = c.Email,
+                    ClientFax = c.Fax,
+                    ClientAddress = c.Address,
+                    ClientCity = c.City,
+                    ClientState = c.State,
+                    ClientZipcode = c.ZipCode,
+                    BUildingID = c.ID
+                }).ToList();
+                var mydata = Json(clientList);
+                return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+
+              
          } 
             catch(Exception e)
             {
@@ -206,7 +196,7 @@ namespace SecurityMonitor.Controllers
                 return null;
             }
 
-            return RedirectToAction("ClientIndex");
+          
         }
         //client Edit
         [HttpGet]
@@ -256,19 +246,34 @@ namespace SecurityMonitor.Controllers
         }
         //Client Delete
         [HttpPost]
-        public async Task<ActionResult> deleteClient(Clients model)
+        public async Task<JsonResult> deleteClient(int ClientID)
         {
 
             if (ModelState.IsValid)
             {
+                Clients model = db.Clients.Find(ClientID);
                 var client = await db.Clients.FindAsync(model.ID);
                 db.Clients.Remove(client);
                 await db.SaveChangesAsync();
             }
+            
+            var clientList = db.Clients.Select(c => new
+             {
+                 ClientName = c.ClientName,
+                 ClientPhone = c.Phone,
+                 ClientFullAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZipCode,
+                 ClientEmail = c.Email,
+                 ClientFax = c.Fax,
+                 ClientAddress = c.Address,
+                 ClientCity = c.City,
+                 ClientState = c.State,
+                 ClientZipcode = c.ZipCode,
+                 BUildingID = c.ID
 
+             }).ToList();
+            var mydata = Json(clientList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
-              
-            return RedirectToAction("ClientIndex");
         }
     [HttpGet]
         public async Task<ActionResult> BuildingIndex(int ClientID) 
@@ -1474,6 +1479,7 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+      
 
         //Tenant Messege Center
 
