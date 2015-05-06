@@ -314,7 +314,7 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddBuilding(BuildingInfoVM apartmentvm)
+        public async Task<JsonResult> AddBuilding(Buildings apartmentvm)
         {if (ModelState.IsValid)
             {
                 //if (User.Identity.IsAuthenticated)
@@ -325,14 +325,14 @@ namespace SecurityMonitor.Controllers
                     {
                         BuildingName = apartmentvm.BuildingName,
                         Address = apartmentvm.Address,
-                        BuildingPhone = apartmentvm.BuildingPhone,
-                        NumberOfApartment = apartmentvm.NumberOfApart,
+                        BuildingPhone = apartmentvm.BuildingPhone,                      
                         City = apartmentvm.City,
-                        State = apartmentvm.States,
-                        Zipcode = apartmentvm.ZipCode,
+                        State = apartmentvm.State,
+                        Zipcode = apartmentvm.Zipcode,
                         Manager = apartmentvm.Manager,
                         ClientID = apartmentvm.ClientID
                     };
+
                     db.Buildings.Add(apartment);
                     await db.SaveChangesAsync();
                    
@@ -340,10 +340,18 @@ namespace SecurityMonitor.Controllers
                 //}
             //TODO Exception 
             }
+        var CBL = db.Buildings.Where(c => c.Clients.ID == apartmentvm.ClientID).Select(c => new
+                {
+                    BuildingName = c.BuildingName,
+                    BuildingAddress = c.Address + " " + c.City + ", " + c.State + " " + c.Zipcode,
+                    Phone = c.BuildingPhone,
+                    BuildingID = c.ID
 
+                }).ToList();
 
+                var mydata = Json(CBL);
 
-        return RedirectToAction("BuildingIndex", new { ClientID = apartmentvm.ClientID });
+                return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         //Delete building ##########################################################################################################
@@ -653,7 +661,7 @@ namespace SecurityMonitor.Controllers
                       City = c.City,
                       ZipCode = c.Zipcode,
                       Manager = c.Manager,
-                      NumberOfApart = (int)c.NumberOfApartment,
+                     
                       States = c.State
                   }).FirstAsync();
             Session["Building"] = buildinginfo;
@@ -1478,6 +1486,25 @@ namespace SecurityMonitor.Controllers
             var mydata = Json(clientList);
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        public ActionResult ClientProfile(int ClientID)
+        {
+
+            var c = db.Clients.Find(ClientID);
+            ViewBag.ClientID = ClientID;
+            ViewBag.ClientName = c.ClientName;
+            ViewBag.FullAddress = c.Address + " " + c.City + " " + c.State + " " + c.ZipCode;
+            ViewBag.City = c.City;
+            ViewBag.State = c.State;
+            ViewBag.Zipcode = c.ZipCode;
+            ViewBag.Phone = c.Phone;
+            ViewBag.Fax = c.Fax;
+            ViewBag.Email = c.Email;
+            ViewBag.Address = c.Address;
+
+            return View();
+        }
+
 
       
 

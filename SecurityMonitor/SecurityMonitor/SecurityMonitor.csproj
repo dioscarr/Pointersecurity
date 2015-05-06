@@ -1645,6 +1645,7 @@
     <Content Include="Views\Tenants\Repair.cshtml" />
     <Content Include="Views\Building\RepairManagement.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Building\ClientProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

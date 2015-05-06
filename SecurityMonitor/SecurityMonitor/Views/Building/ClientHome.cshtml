@@ -42,9 +42,9 @@
     <!--vCard starts-->
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12   paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
-        <section class=" col-md-12 text-center clientboxrow " data-toggle="modal" data-target="#myModal">
-            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
+        <section class=" col-md-12 text-center clientboxrow " @*data-toggle="modal" data-target="#myModal"*@>
+            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding" >
+                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12"data-bind="text:ClientName">
                 </div>
             </section>
         </section>
@@ -58,7 +58,7 @@
     <!--vCard starts-->
     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
         <!--header starts-->
-        <section class=" col-md-12 text-center clientboxrow" data-toggle="modal" data-target="#myModal">
+        <section class=" col-md-12 text-center clientboxrow" @*data-toggle="modal" data-target="#myModal"*@>
             <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
                 <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
                 </div>
@@ -362,123 +362,133 @@
             <div class="modal-body lightgrey">
                 <!--New building-->
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noppading" style="margin-top:20px !important;">
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                            Building Name
-                        </div>
-                    </div>
+                <!--Left-->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="margin-top:20px !important;">
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientName" />
+                    
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12   nopadding  ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                Building Name
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            Building Address
-                        </div>
-                    </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientAddress" />
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                <input type="text" class="form-control" data-bind="value:NewBuildingName" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                Building Address
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                <input type="text" class="form-control" data-bind="value:NewBuildingtAddress" />
+                            </div>
+                        </div>
+                       
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                Building City
+                            </div>
+                        </div>
+                    
+         
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                <input type="text" class="form-control" data-bind="value:NewBuildingtCity" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding  ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                Building State
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+
+                                <select class="form-control" data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text', optionsCaption:SelectedClientState,value:NewBuildingState"></select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding  ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                Building Zipcode
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                            <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                <input type="text" class="form-control" data-bind="value:NewBuildingtZipcode" />
+                            </div>
                         </div>
                     </div>
-                    <!--=======================================line 2===================================================-->
+               
+                <!--Right-->
+                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="margin-top:20px !important;">
 
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            Building City
-                        </div>
-                    </div>
+                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding  ">
+                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                             Building Fax
+                         </div>
+                     </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientCity" />
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            Building State
-                        </div>
-                    </div>
+                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                             <input type="text" class="form-control col-lg-2 col-md-2" data-bind="value:SelectedClientFax" />
+                         </div>
+                     </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 nopadding ">
+                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                             Building Phone
+                         </div>
+                     </div>
 
-                            <select data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text', optionsCaption:SelectedClientState,value:SelectedClientState"></select>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            Building Zipcode
-                        </div>
-                    </div>
+                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                             <input type="text" class="form-control" data-bind="value:SelectedClientPhone" />
+                         </div>
+                     </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientZipcode" />
-                        </div>
-                    </div>
+                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12  nopadding  ">
+                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
+                             Building Email
+                         </div>
+                     </div>
 
-
-
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            Building Fax
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            <input type="text" class="form-control col-lg-2 col-md-2" data-bind="value:SelectedClientFax" />
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            Building Phone
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientPhone" />
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
-                            Building Email
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                            <input type="text" class="form-control" data-bind="value:SelectedClientEmail" />
-                        </div>
-                    </div>
+                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                         <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                             <input type="text" class="form-control" data-bind="value:SelectedClientEmail" />
+                         </div>
+                     </div>
                 </div>
-
-            </div>
+                </div>
             <div class="modal-footer">
+                <div class=" col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                </div>
+                <div class=" col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-default" data-dismiss="modal" data-bind="click:AddNewBuilding">Add</button>
+                </div>
 
             </div>
         </div>
@@ -700,6 +710,7 @@
                 $('#facongid').trigger("click");
               
             });
+            $('#search').focus();
 
            
             
@@ -744,7 +755,7 @@
                 self.NewBuildingtCity = ko.observable("New York");
                 self.NewBuildingState = ko.observable("NY");
                 self.NewBuildingtZipcode = ko.observable("10018");
-                self.NewBuildingtPhone = ko.observable("3476990088");
+                
                
 
                 self.offoron = ko.observable(false);
@@ -766,6 +777,51 @@
 
                 self.BuildingList = ko.observableArray();
 
+
+                //gotoclientprofile
+               
+
+
+                //Add Building
+                var NewBuilding = {
+                    BuildingName: self.NewBuildingName,
+                    Address: self.NewBuildingtAddress,
+                    City: self.NewBuildingtCity,
+                    State: self.NewBuildingState,
+                    Zipcode: self.NewBuildingtZipcode,
+                    ClientID: SelectedClientID
+                };
+
+                self.AddNewBuilding = function () {
+                    alert("yes");
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "Post",
+                            url: '/building/AddBuilding/',
+                            dataType: "json",
+                            data: NewBuilding,
+                            success: function (data) {
+
+                                self.BuildingList.removeAll();
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+                                    self.BuildingList.push({
+                                        BLBuildingName: ko.observable(TrkPkgs[i].BuildingName),
+                                        BLBuildingAddress: ko.observable(TrkPkgs[i].BuildingAddress),
+                                        BLPhone: ko.observable(TrkPkgs[i].Phone),
+                                        BLbuildingID: ko.observable(TrkPkgs[i].BuildingID)
+
+                                    });
+                                }
+
+                            }
+                        });
+
+                };
+
                 //Get states
                 self.GetStates = function () {
                    
@@ -780,7 +836,7 @@
                                 var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
                                 var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 
-                                self.StateList(TrkPkgs);
+                              
 
 
 
@@ -1017,6 +1073,8 @@
                     self.SelectedClientEmail(myjson.ClientEmail);
                     self.SelectedClientFax(myjson.ClientFax);
                     self.SelectedClientID(myjson.ClientID);
+
+                    window.location.href = "/Building/Clientprofile?ClientID=" + self.SelectedClientID();
 
                     self.SelectedClientAddress(myjson.ClientAddress);
                     self.SelectedClientCity(myjson.ClientCity);

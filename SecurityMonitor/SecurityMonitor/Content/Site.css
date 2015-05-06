@@ -1637,3 +1637,8 @@ padding:30px;
 
 
 }
+
+.round_padding {
+
+padding:0 20px 20px 20px !important;
+}
