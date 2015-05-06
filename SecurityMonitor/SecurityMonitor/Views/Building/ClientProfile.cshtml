@@ -292,28 +292,28 @@
                         style="color:white; "
                         data-bind="text:SelectedClientName"></h4>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
+                <div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
 
                     <button data-toggle="popover" id="facongid"
                             title="Client Advance Settings"
-                            class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-1x padding-right_20px font_color_white margin_right_80px "></button>
+                            class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-1x  font_color_white  "></button>
 
                     <!--======================================================Advance setting for client page===================================================-->
 
                     <div id="popover_content_wrapper" style="display: none; ">
-                        <div class=" " style="padding:20px 0 100px 0;">
-                            <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center rowheight">
+                        <div class=" " style="">
+                            <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight">
                                 <button class="btn btn-sm  fa fa-pencil-square-o hollow5 ClientIconbox"
                                         data-toggle="modal" data-target="#myModalEdit" data-bind="click:editme"></button>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center rowheight">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
                                 <button class="btn btn-sm fa fa-trash hollow5 ClientIconbox " id="deleteme" data-toggle="modal" data-target="#myModalDelete"></button>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center rowheight">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
                                 <button class="btn btn-sm fa fa-map-marker hollow5 ClientIconbox"></button>
                             </div>
                             <hr />
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center rowheight">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center nopadding rowheight">
                                 <button class="btn btn-sm fa fa-share-alt hollow5 ClientIconbox"></button>
                             </div>
 
@@ -772,7 +772,7 @@
     $(function () {
         //popover advance options
         $('[data-toggle="popover"]').popover({
-            placement: 'bottom',
+            placement: 'left',
             html: true,
             content: function () {
                 return $('#popover_content_wrapper').html();
