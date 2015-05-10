@@ -1486,7 +1486,8 @@ namespace SecurityMonitor.Controllers
             var mydata = Json(clientList);
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-
+    [HttpGet]
+    [AllowAnonymous]
         public ActionResult ClientProfile(int ClientID)
         {
 
@@ -1504,10 +1505,73 @@ namespace SecurityMonitor.Controllers
 
             return View();
         }
+        
 
+        /// <summary>
+        /// Get Client Contact
+        /// </summary>
+        /// <param name="ClientID"></param>
+        /// <returns></returns>
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetClientContact(int ClientID)
+        {
+
+            var clientContactList = db.ClientContact.Where(c => c.ClientID == ClientID).ToList();
+            var mydata = Json(clientContactList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult DeleteClientContact(int ClientContactID, int ClientID)
+        {
+
+            ClientContact cc = db.ClientContact.Find(ClientContactID);
+            db.ClientContact.Remove(cc);
+            db.SaveChanges();
+
+            var clientContactList = db.ClientContact.Where(c => c.ClientID == ClientID).ToList();
+            var mydata = Json(clientContactList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+               
+        /// <summary>
+        /// Create new client Contact
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult NewClientContact(ClientContact model)
+        {
+            if (ModelState.IsValid)
+            {           
+                db.ClientContact.Add(model);
+                db.SaveChanges();
+            }
+            var clientContactList = db.ClientContact.Where(c=>c.ClientID==model.ClientID).ToList();
+            var mydata = Json(clientContactList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult Upload()
+        {
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i]; //Uploaded file
+                //Use the following properties to get file's name, size and MIMEType
+                int fileSize = file.ContentLength;
+                string fileName = file.FileName;
+                string mimeType = file.ContentType;
+                System.IO.Stream fileContent = file.InputStream;
+                //To save file, use SaveAs method
+                file.SaveAs(Server.MapPath("~/Uploads/") + fileName); //File will be saved in application root
+            }
+            return Json("Uploaded " + Request.Files.Count + " files");
+        }
       
-
         //Tenant Messege Center
 
 

@@ -105,6 +105,9 @@
     <Compile Include="BuildingUserMapping.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClientContact.cs">
+      <DependentUpon>doormanondemand.tt</DependentUpon>
+    </Compile>
     <Compile Include="Clients.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>

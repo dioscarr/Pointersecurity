@@ -636,7 +636,7 @@ height:800px;
 
 
 .hollow5 {
- 
+  font-family: 'overpassregular'!important;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   -webkit-transition-property: background;
@@ -661,7 +661,8 @@ height:800px;
 
 p {
 
-font-family:Baskerville;
+ font-family: 'overpassregular';
+
 }
 
 .ClientEditrows {
@@ -1309,7 +1310,7 @@ background:lightgrey;
 
 
 p {
-
+color: #100f0f;
 font-family:Overpass,overpassregular !important;
 }
 
@@ -1476,10 +1477,30 @@ color:blue;
 padding-right:20px !important;
 }
 
-#myModalLabel {
+.pull-right {
+position: relative;
+top: 8px;
+border: 0px none;
+}
+
+.myModalLabel {
 
 color:white;
-font-weight:600;
+text-transform: uppercase;
+font-size: 16px;
+font-weight:400;
+position: relative;
+top: 12px;
+min-height: 35px;
+line-height: 25px;
+}
+
+
+
+.fa-close {
+ position: relative;
+ top: -20px;
+ height:10px;
 }
 
 .padding_up_down_10px {
@@ -1512,7 +1533,6 @@ margin-left:23%;
 .clientbuildinglist {
 
 min-height:45px;
-
 }
 
 .Padding_right_50px {
@@ -1594,20 +1614,28 @@ margin-top:20px;
 }
 
 .Client_Searchloop {
-    line-height:25px !important;
+    position:relative;
+    top: 10px;
+    left: -5px;
+}
+
+.fa-search {
+    position:relative;
+    left: 15px;
 }
 
 
-#popover_Searchloop_wrapper {
 
+#popover_Searchloop_wrapper {
+    
     width:400px !important;
 }
 
 .clearinputfield {
 
-position:relative;
-top:24px;
-left:10px;
+position:absolute;
+top:14px;
+left:170px;
 color:black;
 z-index:1;
 }
@@ -1651,4 +1679,59 @@ padding:0 20px 20px 20px !important;
     right:1000px !important;
     width:400px;
   }
+
+.ClientContact {
+    padding:20px 0;
+border-bottom:1px solid lightgrey;
+
+}
+.ClientContact_img {
+    padding:20px 20px 0 0;
+    min-height:181px;
+    max-height:300px;
+    border-bottom:1px solid lightgrey;
+    
+}
+.Client_Contact_labels
+{
+
+    font-weight:800;    
+}
+.linkdefault {
+color:blue;
+}
+
+#myModalViewClientContact {
+background-color:transparent;
+
+}
+
+
+#popoverparent .popover{
+    
+    
+    position:absolute;
+    top:10px !important;
+    left:0px !important;
+   
+    min-width:200px;
+    
+
+}
+
+
+#popoverparent .popover-content{
+    
+    min-width:200px;
+    
+
+}
+
+#popoverparent .arrow{
+  display:none;
+    
+
+
+outline:1px solid red;
+}
 
