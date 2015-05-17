@@ -585,6 +585,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\customJSFile.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\dhtmlxgantt\dhtmlxgantt.js" />
     <Content Include="Scripts\dhtmlxgantt\ext\dhtmlxgantt_marker.js" />

@@ -448,6 +448,11 @@ namespace SecurityMonitor.Controllers
        [HttpGet]
        public ActionResult ManagementBuilding(int BuildingID)
         {
+
+
+
+            ViewBag.ClientID = db.Buildings.Where(b => b.ID == BuildingID).FirstOrDefault().Clients.ID;
+            ViewBag.BuildingName=  db.Buildings.Where(b => b.ID == BuildingID).FirstOrDefault().BuildingName;
             var ObjMB = new ManagementBuilding();
             //---------------------------------------------------------------------------------------------
             ObjMB.managerVM = db.ManagerBuilding
@@ -489,6 +494,10 @@ namespace SecurityMonitor.Controllers
        [HttpPost]
        public async Task<ActionResult> AddManagerTobuilding(ManagementBuilding model, ManagerVM  model2)
         {
+
+            ViewBag.ClientID = db.Buildings.Where(b => b.ID == model.buildingID).FirstOrDefault().Clients.ID;
+            ViewBag.BuildingName = db.Buildings.Where(b => b.ID == model.buildingID).FirstOrDefault().BuildingName;
+
             try
             {
             if (!ModelState.IsValid)
@@ -570,6 +579,8 @@ namespace SecurityMonitor.Controllers
        [HttpGet]
        public ActionResult RemoveManager(int BuildingID, int ClientID, string ManagerID)
         {
+            ViewBag.ClientID = db.Buildings.Where(b => b.ID == BuildingID).FirstOrDefault().Clients.ID;
+            ViewBag.BuildingName = db.Buildings.Where(b => b.ID == BuildingID).FirstOrDefault().BuildingName;
             ApplicationDbContext context = new ApplicationDbContext();
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
@@ -594,6 +605,10 @@ namespace SecurityMonitor.Controllers
         }
        public ActionResult ActivateManager(string managerid, int buildingid)
         {
+
+            ViewBag.ClientID = db.Buildings.Where(b => b.ID == buildingid).FirstOrDefault().Clients.ID;
+            ViewBag.BuildingName = db.Buildings.Where(b => b.ID == buildingid).FirstOrDefault().BuildingName;
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("ManagementBuilding", new { BuildingID = buildingid });

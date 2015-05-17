@@ -661,7 +661,7 @@ namespace SecurityMonitor.Controllers
                       City = c.City,
                       ZipCode = c.Zipcode,
                       Manager = c.Manager,
-                     
+                      ClientID = c.Clients.ID,                     
                       States = c.State
                   }).FirstAsync();
             Session["Building"] = buildinginfo;
@@ -928,6 +928,7 @@ namespace SecurityMonitor.Controllers
                     BuildingID = b.ID,
                     BuildingName = b.BuildingName,
                     BuildingPhone = b.BuildingPhone,
+                
                     Address = b.Address,
                     City = b.City,
                     ZipCode = b.Zipcode,
@@ -1552,6 +1553,37 @@ namespace SecurityMonitor.Controllers
             }
             var clientContactList = db.ClientContact.Where(c=>c.ClientID==model.ClientID).ToList();
             var mydata = Json(clientContactList);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult LoadApartments(int buildingID)
+        {
+
+            var apartmentdata = db.Apartment
+               .Where(c => c.Buildings.ID ==buildingID).Select(c => new { 
+                    AptID = c.ID, 
+                    Apt = c.ApartmentNumber
+                    
+                }).ToList();
+
+            var mydata = Json(apartmentdata);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult LoadApartmentsSearch(string search, int BuildingID)
+        {
+
+            var apartmentdata = db.Apartment
+               .Where(c => c.ApartmentNumber.Contains(search) && c.Buildings.ID==BuildingID).Select(c => new
+               {
+                   AptID = c.ID,
+                   Apt = c.ApartmentNumber
+
+               }).ToList();
+
+            var mydata = Json(apartmentdata);
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpPost]

@@ -205,3 +205,4 @@
 /// <reference path="angular-ui-router.min.js" />
 /// <reference path="angular-ui/ui-bootstrap.js" />
 /// <reference path="knockout-bootstrap.min.js" />
+/// <reference path="customjsfile.js" />

@@ -1,13 +1,32 @@
 ﻿@model IEnumerable<Doormandondemand.Module>
-@{
-    if (@Model.Count() > 0)
-    {
-        foreach (var item in Model)
+<section style="margin-bottom:50px;">
+    @{
+
+        if (@Model.Count() > 0)
         {
-            <div class="col-md-2 text-center servicescells hollow3"
-                 style="">
-                    @item.ServiceName
-            </div>
+            foreach (var item in Model)
+            {
+
+               
+                    <!--vCard starts-->
+                    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12   paddingBottom20px nopadding">
+                        <!--header starts-->
+                        <section class=" col-md-12 text-center clientboxrow ">
+                            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                                    @item.ServiceName
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+               
+
+
+
+
+               
+            }
         }
+
     }
-}
+</section>
