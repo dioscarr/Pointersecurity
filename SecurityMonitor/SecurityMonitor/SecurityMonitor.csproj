@@ -1551,7 +1551,6 @@
     <Content Include="Scripts\TimePicket\jquery.datetimepicker.css" />
     <Content Include="Scripts\TimePicket\jquery.datetimepicker.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Uploads\10655154_10203044350402160_423058743321272297_o.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1658,6 +1657,7 @@
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\generated-sources\annotations\" />
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-convert\target\surefire\" />
     <Folder Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\generated-sources\annotations\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\GoogleMaps\" />
     <Folder Include="Views\Roles\" />
