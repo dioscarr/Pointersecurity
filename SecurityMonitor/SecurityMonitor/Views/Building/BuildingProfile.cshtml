@@ -7,7 +7,13 @@
     ViewBag.Title = "Userprofile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ var building = (BuildingInfoVM)ViewBag.buildingInfo; }
+@{ var building = (BuildingInfoVM)ViewBag.buildingInfo;
+   
+    }
+
+
+<input type="hidden" data-clientid="@building.ClientID" id="buildingclientid"/>
+
 <div class="row">
     <input type="hidden" data-buildingid="@building.ID" id="buildingidforcustomjs" />
 
@@ -29,48 +35,78 @@
     <!--======================================================Advance setting for client page===================================================-->
     <div id="popover_content_wrapper" style="display: none; ">
         <div class=" " style="">
-            <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm  fa fa-pencil-square-o hollow5 "
-                        data-toggle="modal" data-target="#myModalEdit">
-                    <span id="" class="badge badge-warning " style="background:Green;"> E</span>
+            <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight" >
+                <button class="btn btn-sm  fa fa-pencil-square-o fa-2x hollow5 "
+                        data-toggle="modal" data-target="#myModalBuildingInfoEdit" id="editidminimenu"
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Edit Building Information'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()">
+                    @*<span id="" class="badge badge-warning " style="background:Green;"> E</span>*@
                 </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm fa fa-trash hollow5  " id="deleteme" data-toggle="modal" data-target="#myModalDelete"> <span id="" class="badge badge-warning " style="background:Green;"> T</span></button>
+                <button class="btn btn-sm fa fa-trash fa-2x hollow5  "
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Delete Building'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        id="deleteme" data-toggle="modal" data-target="#myModalDelete">
+                    @*<span id="" class="badge badge-warning " style="background:Green;"> T</span>*@
+                </button>
 
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm fa fa-map-marker hollow5 "><span id="" class="badge badge-warning " style="background:Green;">M</span></button>
+                <button class="btn btn-sm fa fa-map-marker fa-2x hollow5 "
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Map Building Location'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        data-toggle="modal" data-target="#myModalMap" id="showlocationmap">
+                    @*<span id="" class="badge badge-warning " style="background:Green;">M</span>*@
+                </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm fa fa-share-alt hollow5 "> <span id="" class="badge badge-warning " style="background:Green;"> S</span></button>
+                <button class="btn btn-sm fa fa-share-alt fa-2x hollow5 "
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Share Building Information'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()">
+                    @*<span id="" class="badge badge-warning " style="background:Green;"> S</span>*@
+                </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
                 <button type="button"
                         data-toggle="modal"
                         data-target="#myModalAddApt"
                         title="Add Apartment"
-                        class="btn btn-sm fa fa-building-o hollow5"  >
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Add Apartment'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        class="btn btn-sm fa fa-building-o fa-2x hollow5">
                     @*onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'"*@
-                    <span id="" class="badge badge-warning " style="background:Green;"> +</span>
+                    @*<span id="" class="badge badge-warning " style="background:Green;"> +</span>*@
                 </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button id="ShowURL" type="button" title="Get URL" class="btn btn-sm fa fa-link hollow3"> <span id="" class="badge badge-warning " style="background:Green;"> L</span></button>
+                <button id="ShowURL" type="button" title="Get URL"
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Copy Building URL'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        class="btn btn-sm fa fa-link fa-2x hollow3">
+                    @*<span id="" class="badge badge-warning " style="background:Green;"> L</span>*@
+                </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
                 <button type="button" class="btn btn-sm fa fa-inbox hollow5"
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('View Requests'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
                         onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
                     <span id="Requestscount" class="badge badge-warning " style="background:orange;">0</span>
                 </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
                 <button type="button" class="btn btn-sm fa fa-users hollow5 "
+                        onmouseover="(function () {$('.minimenuDisplayBox').html('Apartments contacts'); })()"
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
                         onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
                     <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
                 </button>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 minimenuDisplayBox" >
+
             </div>
         </div>
     </div><!--ending for Advance settings-->
@@ -317,14 +353,14 @@
                             name
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("name", new { htmlAttributes = new { id = "ideditname", @class = "form-control", @data_bind = "value:Name, valueUpdate:'afterkeydown'" } })
+                            @Html.Editor("name", new { htmlAttributes = new { id = "ideditname", @class = "form-control", @data_bind = "value:BuildingName, valueUpdate:'afterkeydown'" } })
                             <div id="idName" class="" style="position:relative; left:290px; top:-25px;"></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
                             Addess
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("Address", new { htmlAttributes = new { id = "ideditaddress", @class = "form-control", @data_bind = "value:Address, valueUpdate:'afterkeydown'" } })
+                            @Html.Editor("Address", new { htmlAttributes = new { id = "ideditaddress", @class = "form-control", @data_bind = "value:BuildingAddress, valueUpdate:'afterkeydown'" } })
 
                             <div id="idAddress" class="" style="position:relative; left:290px; top:-25px;"></div>
                         </div>
@@ -332,7 +368,7 @@
                             City
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("City", new { htmlAttributes = new { id = "ideditcity", @class = "form-control", @data_bind = "value:City, valueUpdate:'afterkeydown'" } })
+                            @Html.Editor("City", new { htmlAttributes = new { id = "ideditcity", @class = "form-control", @data_bind = "value:BuildingCity, valueUpdate:'afterkeydown'" } })
                             <div id="idCity" class="" style="position:relative; left:290px; top:-25px;"></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
@@ -340,15 +376,15 @@
                             State:
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("State", new { htmlAttributes = new { id = "ideditstate", @class = "form-control", @data_bind = "value:State, valueUpdate:'afterkeydown'" } })
-
+                            
+                            <select class="form-control" data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text',value:BuildingState"></select>
                             <div id="idState" class="" style="position:relative; left:290px; top:-25px;"></div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
                             Zipcode
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("Zipcode", new { htmlAttributes = new { id = "ideditzipcode", @class = "form-control", @data_bind = "value:Zipcode, valueUpdate:'afterkeydown'" } })
+                            @Html.Editor("Zipcode", new { htmlAttributes = new { id = "ideditzipcode", @class = "form-control", @data_bind = "value:BuildingZipcode, valueUpdate:'afterkeydown'" } })
 
                             <div id="idZipcode" class="" style="position:relative; left:290px; top:-25px;"></div>
                         </div>
@@ -357,7 +393,7 @@
                             Phone
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("Phone", new { htmlAttributes = new { id = "ideditphone", @class = "form-control", @data_bind = "value:Phone, valueUpdate:'afterkeydown'" } })
+                            @Html.Editor("Phone", new { htmlAttributes = new { id = "ideditphone", @class = "form-control", @data_bind = "value:BuildingPhone, valueUpdate:'afterkeydown'" } })
 
                             <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
                         </div>
@@ -366,7 +402,7 @@
                             <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows text-center">
-                            <input type="submit" value="Save" class="btn btn-default form-control " data-dismiss="modal"/>
+                            <input type="submit" value="Save" data-bind="click:EditBuildingInfo" class="btn btn-default form-control " data-dismiss="modal" />
                         </div>
                     </div>
                 </div>
@@ -384,22 +420,19 @@
                     <div class="row" style="">
                         <!--Info setion-->
                         <section>
-                            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 text-center"
-                                 style="background:white;">
+                            <!--Right Side-->
+                            <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-center" style="background:white;">
                                 <section>
                                     <div class="row border text-center" style="height:180px;">
-                                        <p style="font-size:18px;">@building.BuildingName</p>
-                                        <p style="font-size:18px;">
-                                            @building.Address
-                                            @building.City
-                                            @building.States
-                                            @building.ZipCode
+                                        <p style="font-size:18px;" data-bind="text:BuildingName"></p>
+                                        <p style="font-size:18px;" data-bind="text:BuildingFullAddress">
+                                           
                                         </p>
 
                                         <p style="font-size:18px;"> Tel: @building.BuildingPhone</p>
                                         <p>
-                                            | <a href="#" data-toggle="modal" data-target="#myModalBuildingInfoEdit">Edit Information</a>     | <a href="#" data-toggle="modal" data-target="#myModalMap" id="showlocationmap">Show Map</a> |
-                                            <a href="#" data-toggle="modal" data-target="#myModalStaffs" >Show Staff</a> | <a href="#" data-toggle="modal" data-target="#myModalModules" id="">Modules</a>
+                                              | <a href="#" class="fa fa-map-marker" data-toggle="modal" data-target="#myModalMap" id="showlocationmap"></a> |
+                                            <a href="#" class="fa fa-users"  data-toggle="modal" data-target="#myModalStaffs"></a> |
 
                                         </p> <!--active Manager ToDO: use current add manager page.  -->
                                         @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
@@ -412,6 +445,15 @@
                                         }
                                         <p style="display:inline;"> @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null) </p>
                                     </div>
+                                </section>
+                                <div class="row  text-center"
+                                     style="background:white;">
+                                </div>
+                            </div>
+                            <!--left side-->
+                            <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-center modulesbox" style="background:white;">
+                                <section>
+                                    <a href="#" data-toggle="modal" data-target="#myModalModules" id="">Modules</a>
                                 </section>
                                 <div class="row  text-center"
                                      style="background:white;">
@@ -485,22 +527,7 @@
     <script type="text/javascript">
         $(function () {
 
-            $('body').on('click', function (e) {
-                $('[data-toggle="popover"]').each(function () {
-                    //the 'is' for buttons that trigger popups
-                    //the 'has' for icons within a button that triggers a popup
-                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                        $(this).popover('hide');
-                    }
-                });
-            });
-
-            $('html').on('click', function (e) {
-                if (typeof $(e.target).data('original-title') == 'undefined' &&
-                   !$(e.target).parents().is('.popover.in')) {
-                    $('[data-original-title]').popover('hide');
-                }
-            });
+           
 
             $('.fa-search').on("click", function () {
                 $('#buildingsearchid').focus();

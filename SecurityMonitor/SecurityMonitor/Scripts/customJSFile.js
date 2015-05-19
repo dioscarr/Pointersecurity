@@ -1,14 +1,138 @@
 ﻿$(function () {
 
 
+    $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+            //the 'is' for buttons that trigger popups
+            //the 'has' for icons within a button that triggers a popup
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                $(this).popover('hide');
+            }
+        });
+    });
+
+    $('.btn').on('click', function (e) {
+        if (typeof $(e.target).data('original-title') == 'undefined' &&
+           !$(e.target).parents().is('.popover.in')) {
+            $('[data-original-title]').popover('hide');
+        }
+    });
+
+    $('html').on('click', function (e) {
+
+        $('#popover_content_wrapper').popover('hide');
+
+        if (typeof $(e.target).data('original-title') == 'undefined' &&
+           !$(e.target).parents().is('.popover.in')) {
+            $('[data-original-title]').popover('hide');
+        }
+    });
+
+    function tryme() {
+        alert("this works");
+
+    };
+
+   
             
     function ViewModel() {
-       
-        var buildingID = $('#buildingidforcustomjs').attr("data-buildingid");
-       
-
-
         var self = this;
+        var buildingID = $('#buildingidforcustomjs').attr("data-buildingid");
+        var ClientID = $('#buildingclientid').attr("data-clientid");
+       
+        self.BuildingName = ko.observable("");
+        self.BuildingAddress = ko.observable("");
+        self.BuildingCity = ko.observable("");
+        self.BuildingState = ko.observable("");
+        self.BuildingZipcode = ko.observable("");
+        self.BuildingPhone = ko.observable("");
+        self.StateList = ko.observableArray("");
+        self.miniMenuText = ko.observable("");
+
+      
+       
+        
+
+
+        self.BuildingFullAddress = ko.computed(function () {
+            return self.BuildingAddress() +
+                " " + self.BuildingCity() +
+                " " + self.BuildingState() +
+                " " + self.BuildingZipcode();
+        });
+
+        var buildingInfoEdit = {
+            BuildingName: self.BuildingName,
+            Address: self.BuildingAddress,
+            City: self.BuildingCity,
+            State: self.BuildingState,
+            Zipcode: self.BuildingZipcode,
+            ClientID: ClientID,
+            ID: buildingID,
+            BuildingPhone: self.BuildingPhone
+        };
+
+
+            $.ajaxSettings.traditional = true;
+            $.ajax(
+                {
+                    type: "GET",
+                    url: '/building/BuildingEdit/',
+                    dataType: "json",
+                    data: { id: buildingID },
+                    success: function (data) {
+
+                       
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                               var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        
+                        //alert("This is the building's name: "+TrkPkgs.BuildingName);
+
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.BuildingName(TrkPkgs[i].BuildingName);
+                            self.BuildingAddress(TrkPkgs[i].BuildingAddress);
+                            self.BuildingCity(TrkPkgs[i].BuildingCity);
+                            self.BuildingState(TrkPkgs[i].BuildingState);
+                            self.BuildingZipcode(TrkPkgs[i].BuildingZipcode);
+                            self.BuildingPhone(TrkPkgs[i].BuildingPhone);
+                        }
+                    }
+                });
+
+
+        self.EditBuildingInfo = function () {
+           
+            $.ajaxSettings.traditional = true;
+            $.ajax(
+                {
+                    type: "Post",
+                    url: '/building/BuildingEdit/',
+                    dataType: "json",
+                    data: buildingInfoEdit,
+                    success: function (data) {
+
+                        
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.BuildingName(TrkPkgs[i].BuildingName);
+                            self.BuildingAddress(TrkPkgs[i].BuildingAddress);
+                            self.BuildingCity(TrkPkgs[i].BuildingCity);
+                            self.BuildingState(TrkPkgs[i].BuildingState);
+                            self.BuildingZipcode(TrkPkgs[i].BuildingZipcode);
+                            self.BuildingPhone(TrkPkgs[i].BuildingPhone);
+                        }
+                    }
+                });
+
+        };
+        
+
+
+        
+
+      
         
         self.AparmentNumber = ko.observableArray();
 
@@ -64,23 +188,25 @@
         });
 
 
+        
+
+        $.ajaxSettings.traditional = true;
+        $.ajax(
+            {
+                type: "GET",
+                url: '/building/States/',
+                dataType: "json",
+                success: function (data) {
+
+                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                    self.StateList(TrkPkgs);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                }
+            });
 
 
 
@@ -111,11 +237,11 @@
                //}});
                this.chrName = ko.computed(function ()
                { 
-                   if (Name().length > 0  ) {
+                   if (self.BuildingName.length > 0  ) {
                        $('#idName').css("color", "green");
                        $('#idName').removeClass('glyphicon glyphicon-asterisk');
                        $('#idName').addClass('glyphicon glyphicon-ok');
-                       return 'chars: ' + Name().length;
+                       return 'chars: ' + self.BuildingName.length;
                    } else {
                        $('#idName').removeClass('glyphicon glyphicon-ok');
                        $('#idName').css("color", "red");
@@ -140,12 +266,12 @@
 
                this.chrAddress = ko.computed(function ()
                {
-                   if (Address().length > 0)
+                   if (self.BuildingAddress.length > 0)
                    {
                        $('#idAddress').css("color", "green");
                        $('#idAddress').removeClass('glyphicon glyphicon-asterisk');
                        $('#idAddress').addClass('glyphicon glyphicon-ok');
-                       return 'chars: ' + Address().length;
+                       return 'chars: ' + self.BuildingAddress.length;
                    } else
                    {
                        $('#idAddress').removeClass('glyphicon glyphicon-ok');
@@ -156,12 +282,12 @@
                //City
                this.chrCity = ko.computed(function ()
                {
-                   if (City().length > 0)
+                   if (self.BuildingCity.length > 0)
                    {
                        $('#idCity').css("color", "green");
                        $('#idCity').removeClass('glyphicon glyphicon-asterisk');
                        $('#idCity').addClass('glyphicon glyphicon-ok');
-                       return 'chars: ' + Address().length;
+                       return 'chars: ' + self.BuildingCity.length;
                    }
                    else {
                        $('#idCity').removeClass('glyphicon glyphicon-ok');
@@ -172,12 +298,12 @@
 
                this.chrState = ko.computed(function ()
                {
-                   if (State().length > 0)
+                   if (self.BuildingState.length > 0)
                    {
                        $('#idState').css("color", "green");
                        $('#idState').removeClass('glyphicon glyphicon-asterisk');
                        $('#idState').addClass('glyphicon glyphicon-ok');
-                       return 'chars: ' + State().length;
+                       return 'chars: ' + self.BuildingState.length;
                    }
                    else {
                        $('#idState').removeClass('glyphicon glyphicon-ok');
@@ -189,11 +315,11 @@
                
                
                this.chrPhone = ko.computed(function () {
-                   if (Phone().length > 0) {
+                   if (self.BuildingPhone.length > 0) {
                        $('#idPhone').css("color", "green");
                        $('#idPhone').removeClass('glyphicon glyphicon-asterisk');
                        $('#idPhone').addClass('glyphicon glyphicon-ok');
-                       return 'chars: ' + Phone().length;
+                       return 'chars: ' + self.BuildingPhone.length;
                    }
                    else {
                        $('#idPhone').removeClass('glyphicon glyphicon-ok');
@@ -217,11 +343,11 @@
                });
 
                this.chrZipcode = ko.computed(function () {
-                   if (Zipcode().length > 0) {
+                   if (self.BuildingZipcode.length > 0) {
                        $('#idZipcode').css("color", "green");
                        $('#idZipcode').removeClass('glyphicon glyphicon-asterisk');
                        $('#idZipcode').addClass('glyphicon glyphicon-ok');
-                       return 'chars: ' + Zipcode().length;
+                       return 'chars: ' + self.BuildingZipcode.length;
                    }
                    else {
                        $('#idZipcode').removeClass('glyphicon glyphicon-ok');
@@ -242,16 +368,21 @@
                        $('#idEmail').addClass('glyphicon glyphicon-asterisk');
                    }
                });
-               //  
+        //  self.BuildingName = ko.observable();
+               //self.BuildingAddress = ko.observable();
+               //self.BuildingCity = ko.observable();
+               //self.BuildingState = ko.observable();
+               //self.BuildingZipcode = ko.observable();
+               //self.BuildingPhone = ko.observable();
                this.btnStat = ko.computed(function () {
                    //debugger;
-                   if (State().length > 0 &&
-                       Name().length >0 &&
+                   if (self.BuildingState.length > 0 &&
+                       self.BuildingName.length > 0 &&
                       // Manager().length > 0 &&
-                       Address().length > 0 &&
-                       City().length > 0 &&
-                       Phone().length > 0 &&
-                       Zipcode().length > 0)
+                       self.BuildingAddress.length > 0 &&
+                      self.BuildingCity.length > 0 &&
+                       self.BuildingPhone.length > 0 &&
+                       self.BuildingZipcodeFse.length > 0)
                    {
                        $('#submitlgmd').prop("disabled", false);
                        $('#submitlgmd_B').prop("disabled", false);

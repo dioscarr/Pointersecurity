@@ -421,15 +421,25 @@ namespace SecurityMonitor.Controllers
             return RedirectToAction("BuildingIndex", new { ClientID = ClientID });
         }
 
-        public ActionResult BuildingEdit(int id)
+        [AllowAnonymous]
+        public JsonResult BuildingEdit(int id)
         {
-            var building = db.Buildings.Find(id);
+            var building = db.Buildings.Where(c=>c.ID == id).Select(c=> new {
+            
+                BuildingName = c.BuildingName,
+                BuildingAddress = c.Address,
+                BuildingCity = c.City,
+                BuildingState = c.State,
+                BuildingZipcode =c.Zipcode,
+                BuildingPhone = c.BuildingPhone
+            });
 
-            return View(building);
-        
+            var mydata = Json(building);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpPost]
-        public async Task<ActionResult> BuildingEdit(Buildings model, int id)
+        [AllowAnonymous]
+        public async Task<JsonResult> BuildingEdit(Buildings model)
         {
             if (ModelState.IsValid)
             {
@@ -446,7 +456,20 @@ namespace SecurityMonitor.Controllers
             
             }
 
-            return RedirectToAction("buildingIndex", new {ClientID = model.ClientID });
+            var building = db.Buildings.Where(c => c.ID == model.ID).Select(c => new
+            {
+
+                BuildingName = c.BuildingName,
+                BuildingAddress = c.Address,
+                BuildingCity = c.City,
+                BuildingState = c.State,
+                BuildingZipcode = c.Zipcode,
+                BuildingPhone = c.BuildingPhone
+            }).FirstOrDefault();
+
+            var mydata = Json(building);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        
         
         }
         
@@ -1546,6 +1569,11 @@ namespace SecurityMonitor.Controllers
         [AllowAnonymous]
         public JsonResult NewClientContact(ClientContact model)
         {
+            if(isajax)
+            {
+
+
+            }
             if (ModelState.IsValid)
             {           
                 db.ClientContact.Add(model);
@@ -1613,5 +1641,7 @@ namespace SecurityMonitor.Controllers
         }
 
 
+
+        public bool isajax { get; set; }
     }
 }

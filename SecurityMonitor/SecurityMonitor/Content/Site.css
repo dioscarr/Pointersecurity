@@ -1747,3 +1747,15 @@ outline:1px solid red;
 min-height:100px;
 margin:50px 0 0 0!important;
 }
+
+.modulesbox {
+min-height:180px;
+border:1px solid grey;
+
+}
+.minimenuDisplayBox {
+min-height:30px;
+border-top:1px solid lightgrey;
+color:black;
+
+}

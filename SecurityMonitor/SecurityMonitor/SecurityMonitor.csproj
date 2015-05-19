@@ -1539,6 +1539,8 @@
     <Content Include="Scripts\knockout-bootstrap.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\knockout.validation.min.js" />
     <Content Include="Scripts\koLogic.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
@@ -1648,6 +1650,7 @@
     <Content Include="Views\Building\RepairManagement.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Building\ClientProfile.cshtml" />
+    <Content Include="Scripts\knockout.validation.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\App_Data\" />

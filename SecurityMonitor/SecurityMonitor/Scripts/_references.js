@@ -206,3 +206,4 @@
 /// <reference path="angular-ui/ui-bootstrap.js" />
 /// <reference path="knockout-bootstrap.min.js" />
 /// <reference path="customjsfile.js" />
+/// <reference path="knockout.validation.min.js" />
