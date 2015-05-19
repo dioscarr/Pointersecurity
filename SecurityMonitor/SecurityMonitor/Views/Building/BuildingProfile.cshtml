@@ -39,7 +39,8 @@
                 <button class="btn btn-sm  fa fa-pencil-square-o fa-2x hollow5 "
                         data-toggle="modal" data-target="#myModalBuildingInfoEdit" id="editidminimenu"
                         onmouseover="(function () {$('.minimenuDisplayBox').html('Edit Building Information'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()">
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        onclick="(function () { $('html').click(); })()">
                     @*<span id="" class="badge badge-warning " style="background:Green;"> E</span>*@
                 </button>
             </div>
@@ -47,6 +48,7 @@
                 <button class="btn btn-sm fa fa-trash fa-2x hollow5  "
                         onmouseover="(function () {$('.minimenuDisplayBox').html('Delete Building'); })()"
                         onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        onclick="(function () { $('html').click(); })()"
                         id="deleteme" data-toggle="modal" data-target="#myModalDelete">
                     @*<span id="" class="badge badge-warning " style="background:Green;"> T</span>*@
                 </button>
@@ -56,6 +58,7 @@
                 <button class="btn btn-sm fa fa-map-marker fa-2x hollow5 "
                         onmouseover="(function () {$('.minimenuDisplayBox').html('Map Building Location'); })()"
                         onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        onclick="(function () { $('html').click(); })()"
                         data-toggle="modal" data-target="#myModalMap" id="showlocationmap">
                     @*<span id="" class="badge badge-warning " style="background:Green;">M</span>*@
                 </button>
@@ -63,7 +66,8 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
                 <button class="btn btn-sm fa fa-share-alt fa-2x hollow5 "
                         onmouseover="(function () {$('.minimenuDisplayBox').html('Share Building Information'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()">
+                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        onclick="(function () { $('html').click(); })()">
                     @*<span id="" class="badge badge-warning " style="background:Green;"> S</span>*@
                 </button>
             </div>
@@ -74,6 +78,7 @@
                         title="Add Apartment"
                         onmouseover="(function () {$('.minimenuDisplayBox').html('Add Apartment'); })()"
                         onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        onclick="(function () { $('html').click(); })()"
                         class="btn btn-sm fa fa-building-o fa-2x hollow5">
                     @*onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'"*@
                     @*<span id="" class="badge badge-warning " style="background:Green;"> +</span>*@
@@ -83,6 +88,7 @@
                 <button id="ShowURL" type="button" title="Get URL"
                         onmouseover="(function () {$('.minimenuDisplayBox').html('Copy Building URL'); })()"
                         onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        onclick="(function () { $('html').click(); })()"
                         class="btn btn-sm fa fa-link fa-2x hollow3">
                     @*<span id="" class="badge badge-warning " style="background:Green;"> L</span>*@
                 </button>
@@ -91,6 +97,7 @@
                 <button type="button" class="btn btn-sm fa fa-inbox hollow5"
                         onmouseover="(function () {$('.minimenuDisplayBox').html('View Requests'); })()"
                         onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                        
                         onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
                     <span id="Requestscount" class="badge badge-warning " style="background:orange;">0</span>
                 </button>
