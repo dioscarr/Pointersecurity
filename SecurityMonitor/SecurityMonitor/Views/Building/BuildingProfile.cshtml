@@ -31,7 +31,7 @@
 <div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
     <section data-toggle="popover" id="facongid"
              title="Client Advance Settings"
-             class="btn pull-right displayinline OpenRequestsSettings fa fa-cog fa-1x  font_color_white  "></section>
+             class="btn pull-right displayinline OpenRequestsSettings fa fa-bars fa-1x  font_color_white  "></section>
     <!--======================================================Advance setting for client page===================================================-->
     <div id="popover_content_wrapper" style="display: none; ">
         <div class=" " style="">
@@ -112,7 +112,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 minimenuDisplayBox" >
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center minimenuDisplayBox" >
 
             </div>
         </div>
@@ -428,18 +428,37 @@
                         <!--Info setion-->
                         <section>
                             <!--Right Side-->
-                            <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-center" style="background:white;">
+                            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center " >
                                 <section>
-                                    <div class="row border text-center" style="height:180px;">
+                                    <div class="row  text-center BuildingTopBoxes">
                                         <p style="font-size:18px;" data-bind="text:BuildingName"></p>
                                         <p style="font-size:18px;" data-bind="text:BuildingFullAddress">
-                                           
+
                                         </p>
 
                                         <p style="font-size:18px;"> Tel: @building.BuildingPhone</p>
                                         <p>
-                                              | <a href="#" class="fa fa-map-marker" data-toggle="modal" data-target="#myModalMap" id="showlocationmap"></a> |
-                                            <a href="#" class="fa fa-users"  data-toggle="modal" data-target="#myModalStaffs"></a> |
+                                             <a href="#" class="fa fa-map-marker fa-2x" data-toggle="modal" data-target="#myModalMap"
+                                                 onmouseover="(function () { $('.quickiconDisplayBox').html('Map Building Location'); })()"
+                                                 onmouseout="(function () { $('.quickiconDisplayBox').html(''); })()"
+                                                 id="showlocationmap"></a>
+                                            | <a href="#" class="fa fa-users fa-2x"
+                                                 onmouseover="(function () { $('.quickiconDisplayBox').html('Building Staff Management'); })()"
+                                                 onmouseout="(function () { $('.quickiconDisplayBox').html(''); })()"
+                                                 data-toggle="modal" data-target="#myModalStaffs"></a>
+                                            | @Html.ActionLink(" ", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID },
+                                               new
+                                               {
+                                                   @class = "fa  fa-user-secret fa-2x",
+                                                   @onmouseover = "(function () { $('.quickiconDisplayBox').html('Manager Management'); })()",
+                                                   @onmouseout = "(function () { $('.quickiconDisplayBox').html(''); })()"
+                                               })
+
+
+
+
+
+
 
                                         </p> <!--active Manager ToDO: use current add manager page.  -->
                                         @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
@@ -450,7 +469,12 @@
                                         else
                                         {
                                         }
-                                        <p style="display:inline;"> @Html.ActionLink("Manage", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID }, null) </p>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center quickiconDisplayBoxouter">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center quickiconDisplayBox">
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </section>
                                 <div class="row  text-center"
@@ -458,9 +482,25 @@
                                 </div>
                             </div>
                             <!--left side-->
-                            <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-center modulesbox" style="background:white;">
-                                <section>
-                                    <a href="#" data-toggle="modal" data-target="#myModalModules" id="">Modules</a>
+                            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center modulesbox BuildingTopBoxes" >
+                                
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white">
+
+
+                                 
+                                    <section style="min-height:100px; padding-top:20px;">
+                                        @{if (ViewBag.ModuleCount > 0)
+                                        {
+                                            <div class=" servicesrow">
+                                                @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
+                                            </div>
+                                        }
+                                        }
+                                    </section>
+
+                                </div>
+                                <section class="pull-right moduleviewmorebox">
+                                    <a href="#" data-toggle="modal" data-target="#myModalModules" >View more modules and settings</a>
                                 </section>
                                 <div class="row  text-center"
                                      style="background:white;">

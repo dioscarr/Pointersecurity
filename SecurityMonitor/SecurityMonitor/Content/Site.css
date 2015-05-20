@@ -968,6 +968,16 @@ margin-top:2px;
 
 }
 
+.boxnameBuilding {
+    min-height:50px;
+    line-height:20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(50, 50, 50, 0.75);
+
+}
+
+
     /********************************************************** This is a single-line comment **********************************************************/
  
 .col-lg-3 {
@@ -1757,5 +1767,66 @@ border:1px solid grey;
 min-height:30px;
 border-top:1px solid lightgrey;
 color:black;
+
+}
+
+
+.quickiconDisplayBox {
+
+    border-top:1px solid lightgrey;
+    /*outline:1px solid red;*/
+    line-height:28px;
+    min-height:30px;
+    color:#cccccc;
+    font-size:12px;
+color:black;
+
+}
+.quickiconDisplayBoxouter {
+padding:0 100px 0 100px !important;
+
+}
+.BuildingTopBoxes{
+    padding-top:10px;
+    background-color:white;
+    border:1px solid lightgrey;
+    min-height:210px;
+    max-height:210px;
+}
+.requestinfobox {
+font-size:12px;
+color:gray;
+padding:0px!important;
+margin:0px!important;
+position:absolute;
+bottom:-2px;
+right:-2px;
+/*outline:1px solid red;*/
+}
+
+.moduleDueTodaylabel {
+position:relative;
+bottom:-19px;
+left:-20px;
+color:red
+/*outline:1px solid blue;*/
+}
+.moduletotalOpenRequests {
+position:relative;
+bottom:-19px;
+right:5px;
+color:orange;
+/*outline:1px solid orange;*/
+}
+
+.outermodulebox {
+margin-bottom:16px !important;
+}
+
+.moduleviewmorebox {
+    
+    position:relative;
+    top:-10px;
+    left:-30px;
 
 }
