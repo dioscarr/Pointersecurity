@@ -26,427 +26,440 @@
         </ol>
     </div>
 </div>
-<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 blueDefault headerDefault clientbuildinglist">
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center blueDefault headerDefault clientbuildinglist">
+
 </div>
-<div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
-    <section data-toggle="popover" id="facongid"
-             title="Client Advance Settings"
-             class="btn pull-right displayinline OpenRequestsSettings fa fa-bars fa-1x  font_color_white  "></section>
-    <!--======================================================Advance setting for client page===================================================-->
-    <div id="popover_content_wrapper" style="display: none; ">
-        <div class=" " style="">
-            <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight" >
-                <button class="btn btn-sm  fa fa-pencil-square-o fa-2x hollow5 "
-                        data-toggle="modal" data-target="#myModalBuildingInfoEdit" id="editidminimenu"
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Edit Building Information'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="(function () { $('html').click(); })()">
-                    @*<span id="" class="badge badge-warning " style="background:Green;"> E</span>*@
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm fa fa-trash fa-2x hollow5  "
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Delete Building'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="(function () { $('html').click(); })()"
-                        id="deleteme" data-toggle="modal" data-target="#myModalDelete">
-                    @*<span id="" class="badge badge-warning " style="background:Green;"> T</span>*@
-                </button>
-
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm fa fa-map-marker fa-2x hollow5 "
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Map Building Location'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="(function () { $('html').click(); })()"
-                        data-toggle="modal" data-target="#myModalMap" id="showlocationmap">
-                    @*<span id="" class="badge badge-warning " style="background:Green;">M</span>*@
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button class="btn btn-sm fa fa-share-alt fa-2x hollow5 "
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Share Building Information'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="(function () { $('html').click(); })()">
-                    @*<span id="" class="badge badge-warning " style="background:Green;"> S</span>*@
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button type="button"
-                        data-toggle="modal"
-                        data-target="#myModalAddApt"
-                        title="Add Apartment"
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Add Apartment'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="(function () { $('html').click(); })()"
-                        class="btn btn-sm fa fa-building-o fa-2x hollow5">
-                    @*onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'"*@
-                    @*<span id="" class="badge badge-warning " style="background:Green;"> +</span>*@
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button id="ShowURL" type="button" title="Get URL"
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Copy Building URL'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="(function () { $('html').click(); })()"
-                        class="btn btn-sm fa fa-link fa-2x hollow3">
-                    @*<span id="" class="badge badge-warning " style="background:Green;"> L</span>*@
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button type="button" class="btn btn-sm fa fa-inbox hollow5"
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('View Requests'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        
-                        onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
-                    <span id="Requestscount" class="badge badge-warning " style="background:orange;">0</span>
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                <button type="button" class="btn btn-sm fa fa-users hollow5 "
-                        onmouseover="(function () {$('.minimenuDisplayBox').html('Apartments contacts'); })()"
-                        onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
-                        onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
-                    <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
-                </button>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center minimenuDisplayBox" >
-
-            </div>
-        </div>
-    </div><!--ending for Advance settings-->
-</div><!--ending for header-->
-<div class="modal fade" id="myModalModules" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!--=================================================================header ADD client information===========================================================-->
-            <div class="modal-header nopadding " id="modalheaderid">
-                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h6 class="modal-title myModalLabel " style="color:white; ">
-                        @building.Address
-                        @building.City,
-                        @building.States
-                        @building.ZipCode
-                    </h6>
-                </div>
-            </div><!--Ending tag fo r edit client information-->
-            <!--================================================================================Add cliet form================================================================-->
-            <div class="modal-body ">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white">
-
-
-                    <!--Add Module section-->
-                    <section style="margin:50px 0 50px 0;">
-                        <!--vCard starts-->
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12   paddingBottom20px nopadding">
-                            <!--header starts-->
-                            <section class=" col-md-12 text-center clientboxrow ">
-                                <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" 
-                                         onclick="location.href = '@Url.Action("ModuleAdd", "Module", new { BuildingID = ViewBag.buildingInfo.ID })'">
-                                        Add new services to this building
-                                    </div>
-                                </section>
-                            </section>
-                        </div>
-
-                       
-                    </section>
-                    <section style="min-height:100px;">
-                        @{if (ViewBag.ModuleCount > 0)
-                        {         
-                            <div class=" servicesrow">
-                                @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
-                            </div>
-                        }
-                        }
-                    </section>
-
-                </div>
-            </div>
-        </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6l text-center blueDefault headerDefault clientbuildinglist">
+        <section class=" myModalLabel ">@ViewBag.ClientName</section>
     </div>
-</div><!--Edit client information Form Ends-->
-<div class="modal fade" id="myModalStaffs" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <!--=================================================================header ADD client information===========================================================-->
-            <div class="modal-header nopadding " id="modalheaderid">
-                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h6 class="modal-title myModalLabel " style="color:white; ">
-                        @building.Address
-                        @building.City,
-                        @building.States
-                        @building.ZipCode
-                    </h6>
+    <div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
+        <section data-toggle="popover" id="facongid"
+                 title="Client Advance Settings"
+                 class="btn pull-right displayinline OpenRequestsSettings fa fa-bars fa-1x  font_color_white  "></section>
+        <!--======================================================Advance setting for client page===================================================-->
+        <div id="popover_content_wrapper" style="display: none; ">
+            <div class=" " style="">
+                <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button class="btn btn-sm  fa fa-pencil-square-o fa-2x hollow5 "
+                            data-toggle="modal" data-target="#myModalBuildingInfoEdit" id="editidminimenu"
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Edit Building Information'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="(function () { $('html').click(); })()">
+                        @*<span id="" class="badge badge-warning " style="background:Green;"> E</span>*@
+                    </button>
                 </div>
-            </div><!--Ending tag fo r edit client information-->
-            <!--================================================================================Add cliet form================================================================-->
-            <div class="modal-body background-white">
-                <div class="row  ">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="   border-white SettingBPUsers text-center" style=" height:40px;  background:#282D33; color:white; ">
-                            @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID }, null)
-                        </div>
-                        @{ List<BuildingUser> ObjBU = (List<BuildingUser>)ViewBag.BuildingUsers;
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button class="btn btn-sm fa fa-trash fa-2x hollow5  "
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Delete Building'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="(function () { $('html').click(); })()"
+                            id="deleteme" data-toggle="modal" data-target="#myModalDelete">
+                        @*<span id="" class="badge badge-warning " style="background:Green;"> T</span>*@
+                    </button>
 
-                         if (ObjBU.Count >= 0)
-                         {
-                             foreach (var item in ObjBU)
-                             {
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button class="btn btn-sm fa fa-map-marker fa-2x hollow5 "
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Map Building Location'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="(function () { $('html').click(); })()"
+                            data-toggle="modal" data-target="#myModalMap" id="showlocationmap">
+                        @*<span id="" class="badge badge-warning " style="background:Green;">M</span>*@
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button class="btn btn-sm fa fa-share-alt fa-2x hollow5 "
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Share Building Information'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="(function () { $('html').click(); })()">
+                        @*<span id="" class="badge badge-warning " style="background:Green;"> S</span>*@
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button type="button"
+                            data-toggle="modal"
+                            data-target="#myModalAddApt"
+                            title="Add Apartment"
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Add Apartment'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="(function () { $('html').click(); })()"
+                            class="btn btn-sm fa fa-building-o fa-2x hollow5">
+                        @*onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'"*@
+                        @*<span id="" class="badge badge-warning " style="background:Green;"> +</span>*@
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button id="ShowURL" type="button" title="Get URL"
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Copy Building URL'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="(function () { $('html').click(); })()"
+                            class="btn btn-sm fa fa-link fa-2x hollow3">
+                        @*<span id="" class="badge badge-warning " style="background:Green;"> L</span>*@
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button type="button" class="btn btn-sm fa fa-inbox hollow5"
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('View Requests'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @ViewBag.BuildingID })'">
+                        <span id="Requestscount" class="badge badge-warning " style="background:orange;">0</span>
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    <button type="button" class="btn btn-sm fa fa-users hollow5 "
+                            onmouseover="(function () {$('.minimenuDisplayBox').html('Apartments contacts'); })()"
+                            onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                            onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @ViewBag.buildingInfo.ID })'">
+                        <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center minimenuDisplayBox">
 
-                            <!--vCard starts-->
-                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12   paddingBottom20px ">
-                                    <!--header starts-->
-                                    <section class=" col-md-12 text-center clientboxrow ">
-                                        <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                                            <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" >
-                                                <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px;">@item.FirstName @item.LastName </p></div>
-                                                <div class="col-md-6" style="padding-left:30px;">
-                                                    @Html.RadioButton("permission", false, new { data_chkID = @item.UserID, @class = "checkbox mycheckbosex", @style = "display:inline;" })
-                                                    Show permission
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </div>
-
-
-
-                      
-                        }
-                        }
-                        else
-                        {
-                        <p> no User assign yet!</p>
-                        }
-
-                        }
-
-
-
-                        <!--Manage building Users-->
-                       
+                </div>
+            </div>
+        </div><!--ending for Advance settings-->
+    </div><!--ending for header-->
+    <div class="modal fade" id="myModalModules" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!--=================================================================header ADD client information===========================================================-->
+                <div class="modal-header nopadding " id="modalheaderid">
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            @building.Address
+                            @building.City,
+                            @building.States
+                            @building.ZipCode
+                        </h6>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 permissiontable " style="display:none;">
-                        <div class=" background-white text-center border-white"
-                             style="z-index:1;
+                </div><!--Ending tag fo r edit client information-->
+                <!--================================================================================Add cliet form================================================================-->
+                <div class="modal-body ">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white">
+
+
+                        <!--Add Module section-->
+                        <section style="margin:50px 0 50px 0;">
+                            <!--vCard starts-->
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12   paddingBottom20px nopadding">
+                                <!--header starts-->
+                                <section class=" col-md-12 text-center clientboxrow ">
+                                    <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                        <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                             onclick="location.href = '@Url.Action("ModuleAdd", "Module", new { BuildingID = ViewBag.buildingInfo.ID })'">
+                                            Add new services to this building
+                                        </div>
+                                    </section>
+                                </section>
+                            </div>
+
+
+                        </section>
+                        <section style="min-height:100px;">
+                            @{if (ViewBag.ModuleCount > 0)
+                            {
+                                <div class=" servicesrow">
+                                    @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
+                                </div>
+                            }
+                            }
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--Edit client information Form Ends-->
+    <div class="modal fade" id="myModalStaffs" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!--=================================================================header ADD client information===========================================================-->
+                <div class="modal-header nopadding " id="modalheaderid">
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            @building.Address
+                            @building.City,
+                            @building.States
+                            @building.ZipCode
+                        </h6>
+                    </div>
+                </div><!--Ending tag fo r edit client information-->
+                <!--================================================================================Add cliet form================================================================-->
+                <div class="modal-body background-white">
+                    <div class="row  ">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div id="scroller" class="   border-white SettingBPUsers text-center" style=" height:40px;  background:#282D33; color:white; ">
+                                @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID }, null)
+                            </div>
+                            @{ 
+                                List<BuildingUser> ObjBU = (List<BuildingUser>)ViewBag.BuildingUsers;
+                             //if (ObjBU.Count >= 0)
+                                 //{foreach (var item in ObjBU)
+                                 //    {
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding " data-bind="foreach:BuildingUsers">
+                                    <!--vCard starts-->
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12   paddingBottom20px ">
+                                        <!--header starts-->
+                                        <section class=" col-md-12 text-center clientboxrow ">
+                                            <!--real box-->
+                                            <section class=" boxheadPermission  col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                <div class=" boxnamePermission col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center ClientContact_img imgbox_buildingStaff">
+                                                        <img src="~/img/person.gif" class="img-circle" />
+                                                        <p data-bind="text:FullName">Name</p>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 permissionBoxesouter nopadding">
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:BSP">
+
+
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 permissionBoxes  ">
+                                                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 hollow5 permissionBoxesinsider  boxheadPermissioninsider">
+                                                                    <div class="col-md-6"><p style="font-size:14px;  display:inline; padding-left:15px;" data-bind="text:P"> </p></div>
+                                                                    <div class="col-md-6" style="padding-left:30px;">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12  Nextarrow ">
+                                                        <span class="fa fa-arrow-circle-right fa-4x NextArrowimg hollow6"></span>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </section>
+                                        </section>
+                                    </div>
+                                </div>
+                                 @*}}else{ <p> no User assign yet!</p>}*@
+}
+                            <!--Manage building Users-->
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 permissiontable " style="display:none;">
+                            <div class=" background-white text-center border-white"
+                                 style="z-index:1;
                          padding:9px 0;
                          background:#282D33;
                          color:white; ">
-                            Active permission(s)
+                                Active permission(s)
+                            </div>
+                            <div id="permissionlist" class=" background-white  ">
+                            </div>
+
                         </div>
-                        <div id="permissionlist" class=" background-white  ">
-                        </div>
-                        
+
+
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
-</div><!--Edit client information Form Ends-->
-<div class="modal fade" id="myModalMap" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!--=================================================================header ADD client information===========================================================-->
-            <div class="modal-header nopadding " id="modalheaderid">
-                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h6 class="modal-title myModalLabel " style="color:white; ">
-                        @building.Address
-                        @building.City,
-                        @building.States
-                        @building.ZipCode
-                        
-                    </h6>
+    </div><!--Edit client information Form Ends-->
+    <div class="modal fade" id="myModalMap" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!--=================================================================header ADD client information===========================================================-->
+                <div class="modal-header nopadding " id="modalheaderid">
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            @building.Address
+                            @building.City,
+                            @building.States
+                            @building.ZipCode
+
+                        </h6>
+                    </div>
+                </div><!--Ending tag fo r edit client information-->
+                <!--================================================================================Add cliet form================================================================-->
+                <div class="modal-body lightgrey">
+                    <div id="map" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:500px;"></div>
                 </div>
-            </div><!--Ending tag fo r edit client information-->
-            <!--================================================================================Add cliet form================================================================-->
-            <div class="modal-body lightgrey">
-                <div id="map" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:500px;"></div>
             </div>
         </div>
-    </div>
-</div><!--Edit client information Form Ends-->
-<div class="modal fade" id="myModalAddApt" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!--=================================================================header ADD client information===========================================================-->
-            <div class="modal-header nopadding " id="modalheaderid">
-                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h6 class="modal-title myModalLabel " style="color:white; ">
-                        @building.Address
-                        @building.City,
-                        @building.States
-                        @building.ZipCode
-                        --- Add Apts
+    </div><!--Edit client information Form Ends-->
+    <div class="modal fade" id="myModalAddApt" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!--=================================================================header ADD client information===========================================================-->
+                <div class="modal-header nopadding " id="modalheaderid">
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            @building.Address
+                            @building.City,
+                            @building.States
+                            @building.ZipCode
+                            --- Add Apts
 
-                    </h6>
-                </div>
-            </div><!--Ending tag fo r edit client information-->
-            <!--================================================================================Add cliet form================================================================-->
-            <div class="modal-body background-white">
-              
-
-
-             
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white text-center">
-                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4  aptbox">
+                        </h6>
                     </div>
-                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
+                </div><!--Ending tag fo r edit client information-->
+                <!--================================================================================Add cliet form================================================================-->
+                <div class="modal-body background-white">
 
 
-                        @Html.Editor("ApartmentNumber", new { htmlAttributes = new { @class = "form-control", @PlaceHolder = "Enter Apartment #" } })
-                        <input type="submit" value="Create" class="btn btn-default" style="width:100%!important;" />
-                    </div>
-                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
-                    </div>
 
-                    @using (Html.BeginForm("ProcessCsv", "Building", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white text-center">
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4  aptbox">
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
+
+
+                            @Html.Editor("ApartmentNumber", new { htmlAttributes = new { @class = "form-control", @PlaceHolder = "Enter Apartment #" } })
+                            <input type="submit" value="Create" class="btn btn-default" style="width:100%!important;" />
+                        </div>
                         <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
                         </div>
-    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
+
+                        @using (Html.BeginForm("ProcessCsv", "Building", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
+                            </div>
+                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 aptbox">
 
 
-       
-        <div class="control-group">
-            <div class="controls">
-                <input id="model" type="file" accept="csv" name="model" data-val="true" data-val-required="File is required" />
+
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input id="model" type="file" accept="csv" name="model" data-val="true" data-val-required="File is required" />
+                                    </div>
+                                </div>
+                                <input class="btn btn-primary" type="submit" value="Import" />
+
+                            </div>
+                        }
+                    </div>
+
+
+
+                </div>
+
+
             </div>
         </div>
-        <input class="btn btn-primary" type="submit" value="Import" />
-
-    </div>
-                    }
-                </div>
-
-
-
-</div>
-
-
-    </div>
-    </div>
-</div><!--Edit client information Form Ends-->
-
-<!-- ===================  ===========================   =================Building Info Edit starts======================   ===========================   =========================-->
-<div class="modal fade" id="myModalBuildingInfoEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!--=================================================================header ADD client information===========================================================-->
-            <div class="modal-header nopadding " id="modalheaderid">
-                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                    <h6 class="modal-title myModalLabel " style="color:white; ">
-                        @building.Address
-                        @building.City,
-                        @building.States
-                        @building.ZipCode
-                        ---Change Building Information
-                    </h6>
-                </div>
-            </div><!--Ending tag fo r edit client information-->
-            <!--================================================================================Add cliet form================================================================-->
-            <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row background-white">
+    </div><!--Edit client information Form Ends-->
+    <!-- ===================  ===========================   =================Building Info Edit starts======================   ===========================   =========================-->
+    <div class="modal fade" id="myModalBuildingInfoEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!--=================================================================header ADD client information===========================================================-->
+                <div class="modal-header nopadding " id="modalheaderid">
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            @building.Address
+                            @building.City,
+                            @building.States
+                            @building.ZipCode
+                            ---Change Building Information
+                        </h6>
+                    </div>
+                </div><!--Ending tag fo r edit client information-->
+                <!--================================================================================Add cliet form================================================================-->
+                <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row background-white">
 
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
-                            name
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("name", new { htmlAttributes = new { id = "ideditname", @class = "form-control", @data_bind = "value:BuildingName, valueUpdate:'afterkeydown'" } })
-                            <div id="idName" class="" style="position:relative; left:290px; top:-25px;"></div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
-                            Addess
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("Address", new { htmlAttributes = new { id = "ideditaddress", @class = "form-control", @data_bind = "value:BuildingAddress, valueUpdate:'afterkeydown'" } })
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
+                                name
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
+                                @Html.Editor("name", new { htmlAttributes = new { id = "ideditname", @class = "form-control", @data_bind = "value:BuildingName, valueUpdate:'afterkeydown'" } })
+                                <div id="idName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
+                                Addess
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
+                                @Html.Editor("Address", new { htmlAttributes = new { id = "ideditaddress", @class = "form-control", @data_bind = "value:BuildingAddress, valueUpdate:'afterkeydown'" } })
 
-                            <div id="idAddress" class="" style="position:relative; left:290px; top:-25px;"></div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
-                            City
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("City", new { htmlAttributes = new { id = "ideditcity", @class = "form-control", @data_bind = "value:BuildingCity, valueUpdate:'afterkeydown'" } })
-                            <div id="idCity" class="" style="position:relative; left:290px; top:-25px;"></div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
+                                <div id="idAddress" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
+                                City
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
+                                @Html.Editor("City", new { htmlAttributes = new { id = "ideditcity", @class = "form-control", @data_bind = "value:BuildingCity, valueUpdate:'afterkeydown'" } })
+                                <div id="idCity" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
 
-                            State:
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            
-                            <select class="form-control" data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text',value:BuildingState"></select>
-                            <div id="idState" class="" style="position:relative; left:290px; top:-25px;"></div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
-                            Zipcode
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("Zipcode", new { htmlAttributes = new { id = "ideditzipcode", @class = "form-control", @data_bind = "value:BuildingZipcode, valueUpdate:'afterkeydown'" } })
+                                State:
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
 
-                            <div id="idZipcode" class="" style="position:relative; left:290px; top:-25px;"></div>
-                        </div>
+                                <select class="form-control" data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text',value:BuildingState"></select>
+                                <div id="idState" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
+                                Zipcode
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
+                                @Html.Editor("Zipcode", new { htmlAttributes = new { id = "ideditzipcode", @class = "form-control", @data_bind = "value:BuildingZipcode, valueUpdate:'afterkeydown'" } })
 
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
-                            Phone
-                        </div>
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
-                            @Html.Editor("Phone", new { htmlAttributes = new { id = "ideditphone", @class = "form-control", @data_bind = "value:BuildingPhone, valueUpdate:'afterkeydown'" } })
+                                <div id="idZipcode" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
 
-                            <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
-                        </div>
-                       
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows text-center">
-                            <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows text-center">
-                            <input type="submit" value="Save" data-bind="click:EditBuildingInfo" class="btn btn-default form-control " data-dismiss="modal" />
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 ClientEditrows">
+                                Phone
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ClientEditrows">
+                                @Html.Editor("Phone", new { htmlAttributes = new { id = "ideditphone", @class = "form-control", @data_bind = "value:BuildingPhone, valueUpdate:'afterkeydown'" } })
+
+                                <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows text-center">
+                                <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows text-center">
+                                <input type="submit" value="Save" data-bind="click:EditBuildingInfo" class="btn btn-default form-control " data-dismiss="modal" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div><!--=========================     ====================      ===============Edit building's information Form Ends  ===========================  ===================== =========================    ========-->
-<div class=" row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+    </div><!--=========================     ====================      ===============Edit building's information Form Ends  ===========================  ===================== =========================    ========-->
+    <div class=" row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-            @using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get, new { BuildingID = @ViewBag.BuildingID }))
-            {
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                @using (Html.BeginForm("BuildingProfile", "Building", FormMethod.Get, new { BuildingID = @ViewBag.BuildingID }))
+                {
     <!--top left square -->
-                <section>
-                    <div class="row" style="">
-                        <!--Info setion-->
-                        <section>
-                            <!--Right Side-->
-                            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center " >
-                                <section>
-                                    <div class="row  text-center BuildingTopBoxes">
-                                        <p style="font-size:18px;" data-bind="text:BuildingName"></p>
-                                        <p style="font-size:18px;" data-bind="text:BuildingFullAddress">
+                    <section>
+                        <div class="row" style="">
+                            <!--Info setion-->
+                            <section>
+                                <!--Right Side-->
+                                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center ">
+                                    <section>
+                                        <div class="row  text-center BuildingTopBoxes">
+                                            <p style="font-size:18px;" data-bind="text:BuildingName"></p>
+                                            <p style="font-size:18px;" data-bind="text:BuildingFullAddress">
 
-                                        </p>
+                                            </p>
 
-                                        <p style="font-size:18px;"> Tel: @building.BuildingPhone</p>
-                                        <p>
-                                             <a href="#" class="fa fa-map-marker fa-2x" data-toggle="modal" data-target="#myModalMap"
-                                                 onmouseover="(function () { $('.quickiconDisplayBox').html('Map Building Location'); })()"
-                                                 onmouseout="(function () { $('.quickiconDisplayBox').html(''); })()"
-                                                 id="showlocationmap"></a>
-                                            | <a href="#" class="fa fa-users fa-2x"
-                                                 onmouseover="(function () { $('.quickiconDisplayBox').html('Building Staff Management'); })()"
-                                                 onmouseout="(function () { $('.quickiconDisplayBox').html(''); })()"
-                                                 data-toggle="modal" data-target="#myModalStaffs"></a>
-                                            | @Html.ActionLink(" ", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID },
+                                            <p style="font-size:18px;"> Tel: @building.BuildingPhone</p>
+                                            <p>
+                                                <a href="#" class="fa fa-map-marker fa-2x" data-toggle="modal" data-target="#myModalMap"
+                                                   onmouseover="(function () { $('.quickiconDisplayBox').html('Map Building Location'); })()"
+                                                   onmouseout="(function () { $('.quickiconDisplayBox').html(''); })()"
+                                                   id="showlocationmap"></a>
+                                                | <a href="#" class="fa fa-users fa-2x"
+                                                     data-bind="click:LoadSP"
+                                                     onmouseover="(function () { $('.quickiconDisplayBox').html('Building Staff Management'); })()"
+                                                     onmouseout="(function () { $('.quickiconDisplayBox').html(''); })()"
+                                                     data-toggle="modal" data-target="#myModalStaffs"></a>
+                                                | @Html.ActionLink(" ", "ManagementBuilding", "Management", new { BuildingID = ViewBag.BuildingID, ClientID = building.ClientID },
                                                new
                                                {
                                                    @class = "fa  fa-user-secret fa-2x",
@@ -456,303 +469,301 @@
 
 
 
+                                            </p> <!--active Manager ToDO: use current add manager page.  -->
+                                            @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
+                                            @if (ObjActiveManager != null)
+                                            {
+                                                <p style="display:inline;">Manager: @ObjActiveManager.myManager.FirstName @ObjActiveManager.myManager.LastName</p>
+                                            }
+                                            else
+                                            {
+                                            }
 
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center quickiconDisplayBoxouter">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center quickiconDisplayBox">
 
-
-
-                                        </p> <!--active Manager ToDO: use current add manager page.  -->
-                                        @{var ObjActiveManager = (ActiveManagerVM)ViewBag.Activemanager;}
-                                        @if (ObjActiveManager != null)
-                                        {
-                                            <p style="display:inline;">Manager: @ObjActiveManager.myManager.FirstName @ObjActiveManager.myManager.LastName</p>
-                                        }
-                                        else
-                                        {
-                                        }
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center quickiconDisplayBoxouter">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center quickiconDisplayBox">
-
+                                                </div>
                                             </div>
                                         </div>
+                                    </section>
+                                    <div class="row  text-center"
+                                         style="background:white;">
                                     </div>
-                                </section>
-                                <div class="row  text-center"
-                                     style="background:white;">
                                 </div>
-                            </div>
-                            <!--left side-->
-                            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center modulesbox BuildingTopBoxes" >
-                                
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white">
+                                <!--left side-->
+                                <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 text-center modulesbox BuildingTopBoxes">
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white">
 
 
-                                 
-                                    <section style="min-height:100px; padding-top:20px;">
-                                        @{if (ViewBag.ModuleCount > 0)
-                                        {
-                                            <div class=" servicesrow">
-                                                @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
-                                            </div>
-                                        }
-                                        }
-                                    </section>
 
-                                </div>
-                                <section class="pull-right moduleviewmorebox">
-                                    <a href="#" data-toggle="modal" data-target="#myModalModules" >View more modules and settings</a>
-                                </section>
-                                <div class="row  text-center"
-                                     style="background:white;">
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </section>
-                <div class="">
-                    @Html.Hidden("BuildingID", "@ViewBag.BuildingID")
-                    <div class="row  hidden">
-                        <!--hidden-->
-                        <div class="col-md-4 ">
-                            @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
-                        </div>
-                    </div>
-                    <div class="row nopadding">
-                        <div class="box">
-                            <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-                                <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:AptSearch, valueUpdate:'afterkeydown'" />
-                            </div>
-                        </div>
-                    </div>
-                    <dliv class="row  text-center">
-                        <div>
-                        </div>
-                    </dliv>
-                    <div class="row  " style="border:1px solid lightgrey;">
-                        <div style=" margin-top:20px; margin-bottom:20px;">
-                            @{var apartmentList = ViewBag.apartmentlist;}
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="foreach:AparmentNumber">
-                                <!--vCard starts-->
-                                <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12   paddingBottom20px nopadding">
-                                    <!--header starts-->
-                                    <section class=" col-md-12 text-center clientboxrow ">
-                                        <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                                            <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:Apt">
-                                            </div>
+                                        <section style="min-height:100px; padding-top:20px;">
+                                            @{if (ViewBag.ModuleCount > 0)
+                                            {
+                                                <div class=" servicesrow">
+                                                    @{Html.RenderPartial("~/Views/Module/_ModuleView.cshtml", (List<Module>)ViewBag.Module);}
+                                                </div>
+                                            }
+                                            }
                                         </section>
+
+                                    </div>
+                                    <section class="pull-right moduleviewmorebox">
+                                        <a href="#" data-toggle="modal" data-target="#myModalModules">View more modules and settings</a>
                                     </section>
+                                    <div class="row  text-center"
+                                         style="background:white;">
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                    <div class="">
+                        @Html.Hidden("BuildingID", "@ViewBag.BuildingID")
+                        <div class="row  hidden">
+                            <!--hidden-->
+                            <div class="col-md-4 ">
+                                @{Html.RenderPartial("_BuildingInfo", (BuildingInfoVM)ViewBag.buildingInfo);}
+                            </div>
+                        </div>
+                        <div class="row nopadding">
+                            <div class="box">
+                                <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                    <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:AptSearch, valueUpdate:'afterkeydown'" />
+                                </div>
+                            </div>
+                        </div>
+                        <dliv class="row  text-center">
+                            <div>
+                            </div>
+                        </dliv>
+                        <div class="row  " style="border:1px solid lightgrey;">
+                            <div style=" margin-top:20px; margin-bottom:20px;">
+                                @{var apartmentList = ViewBag.apartmentlist;}
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="foreach:AparmentNumber">
+                                    <!--vCard starts-->
+                                    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12   paddingBottom20px nopadding">
+                                        <!--header starts-->
+                                        <section class=" col-md-12 text-center clientboxrow ">
+                                            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:Apt">
+                                                </div>
+                                            </section>
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
-</div>
 
 
 
-<!--Form ends-->
-@section scripts
+    <!--Form ends-->
+    @section scripts
 {
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="~/Scripts/knockout-3.1.0.js"></script>
-    <script src="~/Scripts/koLogic.js"></script>
-    <script src="~/Scripts/knockout-bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="~/Scripts/knockout-3.1.0.js"></script>
+        <script src="~/Scripts/koLogic.js"></script>
+        <script src="~/Scripts/knockout-bootstrap.min.js"></script>
 
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/customJSFile.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="~/Scripts/customJSFile.js"></script>
 
-    <script type="text/javascript">
-        $(function () {
+        <script type="text/javascript">
+            $(function () {
 
-           
-
-            $('.fa-search').on("click", function () {
-                $('#buildingsearchid').focus();
-            });
+                
 
 
 
+                $('.fa-search').on("click", function () {
+                    $('#buildingsearchid').focus();
+                });
 
 
-        });
-
-
-        $(function () {
-
-            $('[data-toggle="popover"]').popover({
-                placement: 'left',
-                html: true,
-                content: function () {
-                    return $('#popover_content_wrapper').html();
-                }
-            });
-
-
-
-
-        });
-
-
-        $(function () {
-            $('#search').focus();
-            $('#showlocationmap').on("click", function () {
 
 
 
             });
 
-            $('#myModalMap').on('shown.bs.modal', function () {
 
+            $(function () {
 
-                // var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                showLocationMap();
-                google.maps.event.trigger(map, "resize");
-
-            });
-
-            //googlemaps
-            function showLocationMap() {
-
-                var data_address = $('.googlemapsdata').attr('data-address');
-                var data_city = $('.googlemapsdata-city').attr('data-city');
-                var data_state = $('.googlemapsdata-state').attr('data-state');
-                var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
-                var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
-
-
-                initialize();
-                codeAddress();
-
-                //========initializes the map======================================
-                var geocoder;
-                var map;
-                function initialize() {
-                    geocoder = new google.maps.Geocoder();
-                    var latlng = new google.maps.LatLng(-34.397, 150.644);
-                    var mapOptions = {
-                        zoom: 16,
-                        center: latlng
-                        // mapTypeId: google.maps.MapTypeId.SATELLITE
+                $('[data-toggle="popover"]').popover({
+                    placement: 'left',
+                    html: true,
+                    content: function () {
+                        return $('#popover_content_wrapper').html();
                     }
-                    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                }
-                //============This section search your address
-                function codeAddress() {
-                    var address = BuildingAddress;
-                    geocoder.geocode({ 'address': address }, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            map.setCenter(results[0].geometry.location);
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: results[0].geometry.location
-                            });
-                        } else {
-                            alert("Geocode was not successful for the following reason: " + status);
-                        }
-                    });
-                }
-
-                map.setZoom(map.getZoom());
-                //google maps ends
-
-            };
-        });
+                });
 
 
-        $(document).ready(function (e) {
-            //show google map
-            $('#showgooglemap').on("click", function () {
-                $('.permissiontable').hide();
 
-                $('.mycheckbosex').prop("checked", false);
+
             });
 
-            //Building User Section
-            $('.mycheckbosex').change(function () {
-                if ($(this).is(':checked') == true) {
-                    $('.permissiontable').hide();
-                    $('.permissiontable').fadeIn(500);
+
+            $(function () {
+                $('#search').focus();
+                $('#showlocationmap').on("click", function () {
 
 
-                    var data_chkID = $(this).attr('data-chkID');
-                    // alert(data_chkID);
 
-                    $.ajax({
+                });
 
-                        type: "GET",
-                        data: { BuildingIDUserID: data_chkID },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        url: "/Management/Loadingbuildinguserpermissions/",
-                        success: function (jsonData) {
-                            // alert(jsonData[0]);
-                            $('#permissionlist').html("");
-                            var i = 0;
-                            for (var item in jsonData) {
-                                //alert(i);
-                                $('#permissionlist').append(" <div class='col-md-12 hollow3 permissionrowsettings'>" + jsonData[i] + "</div>");
-                                i++;
+                $('#myModalMap').on('shown.bs.modal', function () {
+
+
+                    // var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    showLocationMap();
+                    google.maps.event.trigger(map, "resize");
+
+                });
+
+                //googlemaps
+                function showLocationMap() {
+
+                    var data_address = $('.googlemapsdata').attr('data-address');
+                    var data_city = $('.googlemapsdata-city').attr('data-city');
+                    var data_state = $('.googlemapsdata-state').attr('data-state');
+                    var data_zipcode = $('.googlemapsdata-zipcode').attr('data-zipcode');
+                    var BuildingAddress = data_address + " " + data_city + " " + data_state + " " + data_zipcode;
+
+
+                    initialize();
+                    codeAddress();
+
+                    //========initializes the map======================================
+                    var geocoder;
+                    var map;
+                    function initialize() {
+                        geocoder = new google.maps.Geocoder();
+                        var latlng = new google.maps.LatLng(-34.397, 150.644);
+                        var mapOptions = {
+                            zoom: 16,
+                            center: latlng
+                            // mapTypeId: google.maps.MapTypeId.SATELLITE
+                        }
+                        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    }
+                    //============This section search your address
+                    function codeAddress() {
+                        var address = BuildingAddress;
+                        geocoder.geocode({ 'address': address }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                map.setCenter(results[0].geometry.location);
+                                var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: results[0].geometry.location
+                                });
+                            } else {
+                                alert("Geocode was not successful for the following reason: " + status);
                             }
-                        }
-                    });
+                        });
+                    }
 
-                }
-                else {
+                    map.setZoom(map.getZoom());
+                    //google maps ends
 
-                    $('.permissiontable').hide();
-
-                }
+                };
             });
 
-            //var Viewmodel;
 
-            //$(function () {
+            $(document).ready(function (e) {
+                //show google map
+                $('#showgooglemap').on("click", function () {
+                    $('.permissiontable').hide();
 
-            //    Viewmodel = {
-            //        mapsresize: ko.observable(false),
-            //        name: ko.observable("dioscar")
-            //    };
+                    $('.mycheckbosex').prop("checked", false);
+                });
 
-
-            //    ko.applyBindings(Viewmodel);
-            //});
-
-            //$('#btn_make_map_large').click(function () {
-
-            //    $('#map').toggle(function () {
-            //        Viewmodel.mapsresize(true);
-
-            //    }, function () {
-
-            //        Viewmodel.mapsresize(false);
-            //        $('#map').addClass("riginalwidth");
-            //    });
-
-            //});
+                //Building User Section
+                $('.mycheckbosex').change(function () {
+                    if ($(this).is(':checked') == true) {
+                        $('.permissiontable').hide();
+                        $('.permissiontable').fadeIn(500);
 
 
-            @*if ($('#search').va() != "Filter Apartments") {
+                        var data_chkID = $(this).attr('data-chkID');
+                        // alert(data_chkID);
+
+                        $.ajax({
+
+                            type: "GET",
+                            data: { BuildingIDUserID: data_chkID },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            url: "/Management/Loadingbuildinguserpermissions/",
+                            success: function (jsonData) {
+                                // alert(jsonData[0]);
+                                $('#permissionlist').html("");
+                                var i = 0;
+                                for (var item in jsonData) {
+                                    //alert(i);
+                                    $('#permissionlist').append(" <div class='col-md-12 hollow3 permissionrowsettings'>" + jsonData[i] + "</div>");
+                                    i++;
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+
+                        $('.permissiontable').hide();
+
+                    }
+                });
+
+                //var Viewmodel;
+
+                //$(function () {
+
+                //    Viewmodel = {
+                //        mapsresize: ko.observable(false),
+                //        name: ko.observable("dioscar")
+                //    };
+
+
+                //    ko.applyBindings(Viewmodel);
+                //});
+
+                //$('#btn_make_map_large').click(function () {
+
+                //    $('#map').toggle(function () {
+                //        Viewmodel.mapsresize(true);
+
+                //    }, function () {
+
+                //        Viewmodel.mapsresize(false);
+                //        $('#map').addClass("riginalwidth");
+                //    });
+
+                //});
+
+
+                @*if ($('#search').va() != "Filter Apartments") {
 
                 var search = "@ViewBag.search";
                 $('#search').prop("Placeholder", search);
             };*@
 
-            $('#ShowURL').click(function () {
-                $('#myURL').html('<div class="alert alert-success alert-success" role="alert">' +
-                '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
-                ' http://localhost:64083/Building/BuildingProfile?BuildingID=&BuildingID=@ViewBag.BuildingID' +
-            '</div>');
-            });
+                $('#ShowURL').click(function () {
+                    $('#myURL').html('<div class="alert alert-success alert-success" role="alert">' +
+                    '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +
+                    ' http://localhost:64083/Building/BuildingProfile?BuildingID=&BuildingID=@ViewBag.BuildingID' +
+                '</div>');
+                });
 
 
 
@@ -760,74 +771,74 @@
 
 
 
-            $('#search').focusin(function () {
+                $('#search').focusin(function () {
 
-                $('#ApartmentNumber').prop("checked", true).trigger("change");
+                    $('#ApartmentNumber').prop("checked", true).trigger("change");
 
-            });
+                });
 
-            $('#search').focusin(function () { });
+                $('#search').focusin(function () { });
 
 
-            //=============Radio button functions ================================
-            $('#ApartmentNumber').change(function () {
-                //alert('yes');
-                if ($('#ApartmentNumber').is(':Checked')) {
-                    $('#search').attr("name", "search");
-                    $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');
+                //=============Radio button functions ================================
+                $('#ApartmentNumber').change(function () {
                     //alert('yes');
-                }
+                    if ($('#ApartmentNumber').is(':Checked')) {
+                        $('#search').attr("name", "search");
+                        $('#ApartmentNumber').attr("name", "searchBy").val('ApartmentNumber');
+                        //alert('yes');
+                    }
+
+                });
+
+
+                //loading request
+                var buildingID = "@ViewBag.buildingInfo.ID";
+                $.ajax({
+
+                    type: "GET",
+                    data: { buildingID: buildingID },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: "/Building/LoadBuildingReq/",
+                    success: function (jsonData) {
+                        // alert(jsonData);
+                        $('#Requestscount').html(jsonData);
+
+                    }
+                });
+
+                //loading request
+                var buildingID = "@ViewBag.buildingInfo.ID";
+                $.ajax({
+
+                    type: "GET",
+                    data: { buildingID: buildingID },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: "/Building/LoadBuildingReq/",
+                    success: function (jsonData) {
+                        // alert(jsonData);
+                        $('#Requestscount').html(jsonData);
+
+                    }
+                });
+
+                $.ajax({
+
+                    type: "GET",
+                    data: { buildingID: buildingID },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: "/Building/ContactBookCount/",
+                    success: function (jsonData) {
+                        // alert(jsonData);
+                        $('#RequestCountContactBook').html(jsonData);
+
+                    }
+                });
+
 
             });
-
-
-            //loading request
-            var buildingID = "@ViewBag.buildingInfo.ID";
-            $.ajax({
-
-                type: "GET",
-                data: { buildingID: buildingID },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                url: "/Building/LoadBuildingReq/",
-                success: function (jsonData) {
-                    // alert(jsonData);
-                    $('#Requestscount').html(jsonData);
-
-                }
-            });
-
-            //loading request
-            var buildingID = "@ViewBag.buildingInfo.ID";
-            $.ajax({
-
-                type: "GET",
-                data: { buildingID: buildingID },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                url: "/Building/LoadBuildingReq/",
-                success: function (jsonData) {
-                    // alert(jsonData);
-                    $('#Requestscount').html(jsonData);
-
-                }
-            });
-
-            $.ajax({
-
-                type: "GET",
-                data: { buildingID: buildingID },
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                url: "/Building/ContactBookCount/",
-                success: function (jsonData) {
-                    // alert(jsonData);
-                    $('#RequestCountContactBook').html(jsonData);
-
-                }
-            });
-
-
-        });
-    </script>
-}
+        </script>
+    }

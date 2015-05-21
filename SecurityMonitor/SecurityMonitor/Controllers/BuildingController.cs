@@ -655,6 +655,7 @@ namespace SecurityMonitor.Controllers
             ManageUsersProfileVM ObjBU = new ManageUsersProfileVM();
             List<BuildingUser> ListBU = ObjBU.LoadBuildingUsers(BuildingID);
             ViewBag.BuildingUsers = ListBU;
+            ViewBag.ClientName = db.Buildings.Find(BuildingID).Clients.ClientName;
            
             ViewBag.Manager = db.ManagerBuilding
                .Where(c => c.BuildingID == BuildingID)
@@ -1631,6 +1632,33 @@ namespace SecurityMonitor.Controllers
             }
             return Json("Uploaded " + Request.Files.Count + " files");
         }
+        //Load building staffs
+        public async Task<JsonResult> LoadStaffPermissions(int BuildingID)
+        {
+            var data = await db.BuildingUser.Where(c => c.BuildingID == BuildingID).Select(c => new {             
+            FullName = c.FirstName + " "+ c.LastName,
+            Email = c.UserName,
+            Phone = c.Phone,
+            UserID = c.UserID            
+            }).ToListAsync();          
+            List<StaffmixPermissions> ObjTPs = new List<StaffmixPermissions>();
+            RegisterUsers getuserspermission = new RegisterUsers();  
+            foreach(var item in data)
+            {
+                StaffmixPermissions ObjTP = new StaffmixPermissions();
+                ObjTP.FullName = item.FullName;
+                ObjTP.Email = item.Email;
+                ObjTP.Phone = item.Phone;
+                ObjTP.UserID = item.UserID;
+                ObjTP.PermisionNames = getuserspermission.LoadBuildingUserPermission(item.UserID);
+                ObjTPs.Add(ObjTP);               
+            };
+            var mydata = Json(ObjTPs);
+
+            return  new  JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            
+        }
+        
       
         //Tenant Messege Center
 

@@ -270,6 +270,7 @@
     <Compile Include="Models\RequestForTodayVM.cs" />
     <Compile Include="Models\RequestVM.cs" />
     <Compile Include="Models\ShipmentVM.cs" />
+    <Compile Include="Models\StaffmixPermissions.cs" />
     <Compile Include="Models\TenantIndexVM.cs" />
     <Compile Include="Models\TenantRepairRequestVM.cs" />
     <Compile Include="Models\TenantSearch.cs" />
@@ -529,6 +530,7 @@
     <Content Include="img\AddingTenant.jpg" />
     <Content Include="img\AddingTenant1.png" />
     <Content Include="img\ajax-loader.gif" />
+    <Content Include="img\arrow.png" />
     <Content Include="img\B.png" />
     <Content Include="img\building.png" />
     <Content Include="img\client.png" />
@@ -541,6 +543,7 @@
     <Content Include="img\home.png" />
     <Content Include="img\M.png" />
     <Content Include="img\menu.png" />
+    <Content Include="img\person.gif" />
     <Content Include="img\R.png" />
     <Content Include="img\reports.png" />
     <Content Include="img\S.png" />

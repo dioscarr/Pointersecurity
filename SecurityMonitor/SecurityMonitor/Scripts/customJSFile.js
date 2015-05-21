@@ -1,5 +1,7 @@
 ﻿$(function () {
 
+ 
+
 
     $('body').on('click', function (e) {
         $('[data-toggle="popover"]').each(function () {
@@ -34,7 +36,7 @@
     };
 
    
-            
+          //model binded to the page  
     function ViewModel() {
         var self = this;
         var buildingID = $('#buildingidforcustomjs').attr("data-buildingid");
@@ -49,9 +51,58 @@
         self.StateList = ko.observableArray("");
         self.miniMenuText = ko.observable("");
 
-      
-       
+        //loading Building staff when needed
+        //hold permissions
+        self.BuildingUsers = ko.observableArray();
+        //function call on click
+        self.LoadSP = function ()
+        {
+
+
+
+        };
+
+
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^load building staff and permissions^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        setTimeout(function ()
+        {
+            $.ajax({
+                type: "GET",
+                data: { BuildingID: buildingID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "/building/LoadStaffPermissions/",
+                success: function (jsonData) {
+                    var jsonresult = JSON.stringify(jsonData.Data);// Json.stringify make an object into a json string                        
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName                        
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+                        //permissions
+                        var permissiondata = JSON.stringify(TrkPkgs[i].PermisionNames);
+                        var TrkPkgsP = JSON.parse(permissiondata);
+                        self.P = ko.observableArray();
+                        for (var j = 0; j < TrkPkgsP.length; j++) {
+                            //alert(TrkPkgsP[j]);
+                            self.P.push({ P: TrkPkgsP[j] });
+                        }
+                        //alert(self.P());
+                        self.BuildingUsers.push(
+                            {
+                                FullName: TrkPkgs[i].FullName,
+                                Email: TrkPkgs[i].Email,
+                                Phone: TrkPkgs[i].Phone,
+                                UserID: TrkPkgs[i].UserID,
+                                BSP: self.P()
+                            });
+                    }
+                    //alert(JSON.stringify(self.BuildingUsers()));
+                }
+            });
+        },2000);
         
+
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^load building staff and permissions^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
 
         self.BuildingFullAddress = ko.computed(function () {
