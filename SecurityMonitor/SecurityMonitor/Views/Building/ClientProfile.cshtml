@@ -26,331 +26,7 @@
 
 
 </div>
-@*<div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center headerDefault paddingupdown20px  blueDefault font_color_white">
-                <h3 class="displayinline">Client's Page</h3>
-                <span class="hollow3 fa fa-plus-circle fa-2x  Addclientclass" id="Addclient"
-                      data-toggle="modal" data-target="#myModalAdd" data-bind="click:GetStates"></span>
-            </div>
-        </div>
 
-    </div>*@
-@*<div class="row ">
-
-        <div class="box">
-            <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-                <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
-
-            </div>
-        </div>
-    </div>
-    <div class="row rowheight "></div>*@
-
-@*<div class="row hidden-sm hidden-xs clientboxcontainer" data-bind="foreach:ClientList">
-<!--vCard starts-->
-        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12   paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
-<!--header starts-->
-            <section class=" col-md-12 text-center clientboxrow " data-toggle="modal" data-target="#myModal">
-                <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
-                    </div>
-                </section>
-            </section>
-
-        </div>
-<!--vCard ends-->
-    </div>*@
-
-@*<div class="row hidden-lg hidden-md clientboxcontainer" data-bind="foreach:ClientList" style="min-height:600px !important;">
-<!--vCard starts-->
-        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12  paddingBottom20px nopadding" style="display:none;" data-bind="click:getBuildinginfo, visible:offoron">
-<!--header starts-->
-            <section class=" col-md-12 text-center clientboxrow" data-toggle="modal" data-target="#myModal">
-                <section class=" boxhead col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:ClientName">
-                    </div>
-                </section>
-            </section>
-
-        </div>
-<!--vCard ends-->
-    </div>*@
-
-<!--============================================================================Add Client=======================================================================-->
-
-
-
-
-
-
-
-<!--============================================================================Client Contact==================================================================-->
-
-
-<div class="row nopadding  ">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 round_padding  ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginleftclientedit">
-            <div class="modal fade" id="myModalClientContact" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <!--=================================================================header ADD client information===========================================================-->
-                        <div class="modal-header nopadding " id="modalheaderid">
-                            <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                                <h3 class="modal-title myModalLabel " style="color:white; ">Add Client</h3>
-                            </div>
-                        </div><!--Ending tag fo r edit client information-->
-                        <!--================================================================================Add cliet form================================================================-->
-
-
-
-
-                        <div class="modal-body ">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noppading" style="margin-top:20px !important;">
-                               
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                                            Contact's First Name
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                                            <input type="text" class="form-control" data-bind="value:CCFirstName" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                                            Contact's Last Name
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                                            <input type="text" class="form-control" data-bind="value:CCLastName" />
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            Contact's Address
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-                                            <input type="text" class="form-control" data-bind="value:CCAddress" />
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            Contact's City
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            <input type="text" class="form-control" data-bind="value:CCCity" />
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            Contact's State
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
-
-                                            <select class="form-control" data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text',value:CCState"></select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            Contact's Zipcode
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            <input type="text" class="form-control" data-bind="value:CCZipcode" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            Contact's Phone
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            <input type="text" class="form-control" data-bind="value:CCPhone" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
-                                            Contact's Email
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                        <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                            <input type="text" class="form-control" data-bind="value:CCEmail" />
-                                        </div>
-                                    </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
-                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
-                                        Contact's Title
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                        <input type="text" class="form-control" data-bind="value:CCTitle" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
-                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
-                                        Upload Pic 140 x 140
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
-                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
-                                        <input id="fileInput" type="file" class="form-control" />
-                                    </div>
-                                </div>
-                               
-                        </div>
-                        <div class="modal-footer">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" class="btn btn-info input-sm" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-info input-sm" data-dismiss="modal" data-bind="click:SaveNewContact">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--Edit client information Form Ends-->
-        </div>
-    </div>
-</div>
-
-
-<!--============================================================================Client Contact==================================================================-->
-
-
-
-
-
-
-
-
-
-    <div class="row nopadding  ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 round_padding  ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginleftclientedit">
-                <div class="modal fade" id="myModalViewClientContact" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header nopadding " id="modalheaderid">
-                                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
-                                    <h3 class="modal-title" id="myModalLabel " style="color:white; ">Contact Information</h3>
-                                </div>
-                            </div>
-                            <div class="modal-body ">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top:20px !important;">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  text-center noppading"
-                                         data-bind="foreach:ClientContacts">
-                                       
-                                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right ClientContact_img">
-
-                                                <div data-bind="if:PhotoUrlCheck">
-                                                    <img data-bind="attr:{src: PhotoName}" width="140" height="140" alt="..." class="img-circle">
-
-                                                </div>
-                                                <div data-bind="ifnot:PhotoUrlCheck">
-                                                    <span class="fa fa-user fa-5x img-circle" width="140" height="140" alt="..." ></span>
-
-                                                </div>
-
-
-
-                                            </div>
-                                            <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right ClientContact">
-                                                <div class="Client_Contact_labels"> Name:&nbsp;</div>
-                                                <div class="Client_Contact_labels">Address:&nbsp;</div>
-                                                <br />
-                                                <div class="Client_Contact_labels">Phone:&nbsp;</div>
-                                                <div class="Client_Contact_labels">Email:&nbsp;</div>
-                                                <div class="Client_Contact_labels">Title:&nbsp;</div>
-                                                <br />
-
-                                            </div>
-                                            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left  ClientContact">
-                                                <div data-bind="text:FullName"></div>
-                                                <div data-bind="text:Address"></div>
-                                                <div data-bind="text:FullAddress"></div>
-                                                <div data-bind="text:Phone"></div>
-                                                <div data-bind="text:Email"></div>
-                                                <div data-bind="text:CCTitle"></div>
-                                                <div><span class="linkdefault">Edit </span> | <span class="linkdefault hollow5" data-bind="click:deleteClientContact"> Delete</span> </div>
-                                            </div>
-                                            <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2  text-left ClientContact">
-                                                <span class="  hollow5">Share <span class="fa fa-share"></span></span><br /><br />
-                                                <span class="  hollow5" data-bind="click:printmyinfo">
-                                                    Print  <span class="fa fa-print"></span>
-                                                </span><br /><br />
-                                                <span class="  hollow5">
-                                                    Download <span class="fa fa-download"></span>
-                                                </span>
-
-
-                                                <br />
-                                                <br />
-                                                <br />
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <button type="button" class="btn btn-info input-sm" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -793,6 +469,270 @@
         </div>
     </div>
 </div><!--Edit client information Form Ends-->
+
+<!--============================================================================Client Contact==================================================================-->
+
+
+<div class="row nopadding  ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="modal fade" id="myModalClientContact" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!--=================================================================header ADD client information===========================================================-->
+                        <div class="modal-header nopadding " id="modalheaderid">
+                            <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                                <h3 class="modal-title myModalLabel " style="color:white; ">Add Client</h3>
+                            </div>
+                        </div><!--Ending tag fo r edit client information-->
+                        <!--================================================================================Add cliet form================================================================-->
+
+
+
+
+                        <div class="modal-body ">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 noppading" style="margin-top:20px !important;">
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                        Contact's First Name
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" data-bind="value:CCFirstName" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12   nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                        Contact's Last Name
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px  nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" data-bind="value:CCLastName" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        Contact's Address
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                        <input type="text" class="form-control" data-bind="value:CCAddress" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        Contact's City
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        <input type="text" class="form-control" data-bind="value:CCCity" />
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        Contact's State
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+
+                                        <select class="form-control" data-bind=" options:StateList,optionsText:'Text', optionsValue:'Text',value:CCState"></select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        Contact's Zipcode
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        <input type="text" class="form-control" data-bind="value:CCZipcode" />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        Contact's Phone
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        <input type="text" class="form-control" data-bind="value:CCPhone" />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
+                                        Contact's Email
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        <input type="text" class="form-control" data-bind="value:CCEmail" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
+                                        Contact's Title
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        <input type="text" class="form-control" data-bind="value:CCTitle" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12  nopadding  ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6   ">
+                                        Upload Pic 140 x 140
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 paddingBottom20px nopadding ">
+                                    <div class="hidden-lg hidden-md col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6  ">
+                                        <input id="fileInput" type="file" class="form-control" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-info input-sm" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-info input-sm" data-dismiss="modal" data-bind="click:SaveNewContact">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--Edit client information Form Ends-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--============================================================================Client Contact==================================================================-->
+
+
+
+<div class="row nopadding  ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12   ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+            <div class="modal fade" id="myModalViewClientContact" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header nopadding " id="modalheaderid">
+                            <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                                <h3 class="modal-title" id="myModalLabel " style="color:white; ">Contact Information</h3>
+                            </div>
+                        </div>
+                        <div class="modal-body ">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="margin-top:20px !important;">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  text-center noppading"
+                                     data-bind="foreach:ClientContacts">
+
+                                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right ClientContact_img">
+
+                                        <div data-bind="if:PhotoUrlCheck">
+                                            <img data-bind="attr:{src: PhotoName}" width="140" height="140" alt="..." class="img-circle">
+
+                                        </div>
+                                        <div data-bind="ifnot:PhotoUrlCheck">
+                                            <span class="fa fa-user fa-5x img-circle" width="140" height="140" alt="..."></span>
+
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right ClientContact">
+                                        <div class="Client_Contact_labels"> Name:&nbsp;</div>
+                                        <div class="Client_Contact_labels">Address:&nbsp;</div>
+                                        <br />
+                                        <div class="Client_Contact_labels">Phone:&nbsp;</div>
+                                        <div class="Client_Contact_labels">Email:&nbsp;</div>
+                                        <div class="Client_Contact_labels">Title:&nbsp;</div>
+                                        <br />
+
+                                    </div>
+                                    <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left  ClientContact">
+                                        <div data-bind="text:FullName"></div>
+                                        <div data-bind="text:Address"></div>
+                                        <div data-bind="text:FullAddress"></div>
+                                        <div data-bind="text:Phone"></div>
+                                        <div data-bind="text:Email"></div>
+                                        <div data-bind="text:CCTitle"></div>
+                                        <div><span class="linkdefault">Edit </span> | <span class="linkdefault hollow5" data-bind="click:deleteClientContact"> Delete</span> </div>
+                                    </div>
+                                    <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2  text-left ClientContact">
+                                        <span class="  hollow5">Share <span class="fa fa-share"></span></span><br /><br />
+                                        <span class="  hollow5" data-bind="click:printmyinfo">
+                                            Print  <span class="fa fa-print"></span>
+                                        </span><br /><br />
+                                        <span class="  hollow5">
+                                            Download <span class="fa fa-download"></span>
+                                        </span>
+
+
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-info input-sm" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 

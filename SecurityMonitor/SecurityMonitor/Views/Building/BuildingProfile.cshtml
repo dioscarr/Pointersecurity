@@ -32,7 +32,7 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center blueDefault headerDefault clientbuildinglist">
         <section class=" myModalLabel ">@ViewBag.ClientName</section>
     </div>
-    <div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
+    <div  id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
         <section data-toggle="popover" id="facongid"
                  title="Client Advance Settings"
                  class="btn pull-right displayinline OpenRequestsSettings fa fa-bars fa-1x  font_color_white  "></section>
@@ -190,9 +190,14 @@
                 <div class="modal-body background-white">
                     <div class="row  ">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div id="scroller" class="   border-white SettingBPUsers text-center" style=" height:40px;  background:#282D33; color:white; ">
+                            <div id="scroller" class="    SettingBPUsers text-center" >
                                 @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID }, null)
                             </div>
+
+
+
+
+
                             @{ 
                                 List<BuildingUser> ObjBU = (List<BuildingUser>)ViewBag.BuildingUsers;
                              //if (ObjBU.Count >= 0)
@@ -217,9 +222,17 @@
 
 
                                                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 permissionBoxes  ">
-                                                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 hollow5 permissionBoxesinsider  boxheadPermissioninsider">
-                                                                    <div class="col-md-6"><p  data-bind="text:P"> </p></div>
-                                                                    <div class="col-md-6" style="padding-left:30px;">
+                                                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 hollow5 nopadding permissionBoxesinsider  boxheadPermissioninsider">
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left ">
+                                                                        <span class="text-left" data-bind="text:P"></span>
+
+                                                                    </div>
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left requestinfobox">
+                                                                        <span class="moduleDueTodaylabel">Due Today: 2</span>
+                                                                    </div>
+                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right requestinfobox">
+                                                                        <span class="moduletotalOpenRequests"><span class="badge">42</span></span>
+                                                                    
 
                                                                     </div>
                                                                 </div>
