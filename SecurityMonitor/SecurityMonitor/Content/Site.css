@@ -686,6 +686,7 @@ p {
 .ClientEditrows {
     padding-top:20px;
     padding-bottom:20px;
+    min-height:130px;
 }
 .whity {
 
@@ -843,9 +844,11 @@ background:white;
 }
 
 .SettingBPUsers{
-    height:40px;
-     padding:10px 0;
-     background:#b7b7b7;
+    height:50px;
+    line-height:40px;
+    padding:10px 0 0 0;
+    background:#f7f7f7;
+    margin:2px 0 20px 0;
 
 }
 
@@ -1172,7 +1175,7 @@ font-size:22px;
 
 }
 .ClientSearchbox {
-    width:100%;
+    min-width:100%!important;
 }
 
 
@@ -1196,6 +1199,16 @@ font-size:22px;
   float: left;
   color: lightgrey;   
 
+}
+.SettingBPUsers input#search {
+    
+  min-width:90%;
+  height: 30px;
+  background:rgb(247,249,248);
+  font-size: 12px;
+  margin-left:30px;
+  color: lightgrey; 
+   
 }
 
 
@@ -1928,3 +1941,38 @@ min-height:150px;
 margin:50px 0 0 0;
 }
 
+.apartmentsettings-leftside {
+border-right:1px solid lightgrey;
+}
+
+.apartmentsettings{
+    background:white;
+    min-height:200px;
+}
+
+.Apartment-tenant{
+    background:#f2f2f2
+}
+.vcard-tenant{
+    margin:40px 0 0 0;
+    
+}
+
+.piechart-tenant{
+   display:block;
+   position:relative;
+   left:-260px;
+     width:200%;
+    height: 200px;
+
+
+}
+
+.piechart-tenant-sm {
+position:relative;
+   left:0px;
+     width:100%;
+    height: 200px;
+
+
+}

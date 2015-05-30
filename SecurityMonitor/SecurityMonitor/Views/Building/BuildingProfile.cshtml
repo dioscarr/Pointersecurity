@@ -26,9 +26,9 @@
         </ol>
     </div>
 </div>
-<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center blueDefault headerDefault clientbuildinglist">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center blueDefault headerDefault clientbuildinglist">
 
-</div>
+    </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center blueDefault headerDefault clientbuildinglist">
         <section class=" myModalLabel ">@ViewBag.ClientName</section>
     </div>
@@ -190,8 +190,18 @@
                 <div class="modal-body background-white">
                     <div class="row  ">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div id="scroller" class="    SettingBPUsers text-center" >
-                                @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID }, null)
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 SettingBPUsers text-center">
+
+                                        <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:AptSearch, valueUpdate:'afterkeydown'" />
+
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        @Html.ActionLink("Manage Users", "ManageUsersProfile", "Management", new { BuildingID = ViewBag.buildingInfo.ID }, null)
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -558,7 +568,7 @@
                                     <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12   paddingBottom20px nopadding">
                                         <!--header starts-->
                                         <section class=" col-md-12 text-center clientboxrow ">
-                                            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding " data-bind="click:$root.takemetoApt">
                                                 <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:Apt">
                                                 </div>
                                             </section>
@@ -598,19 +608,11 @@
 
                 
 
-
-
                 $('.fa-search').on("click", function () {
                     $('#buildingsearchid').focus();
                 });
 
-
-
-
-
             });
-
-
             $(function () {
 
                 $('[data-toggle="popover"]').popover({
@@ -620,24 +622,12 @@
                         return $('#popover_content_wrapper').html();
                     }
                 });
-
-
-
-
             });
-
-
             $(function () {
                 $('#search').focus();
                 $('#showlocationmap').on("click", function () {
-
-
-
                 });
-
                 $('#myModalMap').on('shown.bs.modal', function () {
-
-
                     // var map = new google.maps.Map(document.getElementById("map"), mapOptions);
                     showLocationMap();
                     google.maps.event.trigger(map, "resize");

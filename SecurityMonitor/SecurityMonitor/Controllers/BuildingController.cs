@@ -938,7 +938,7 @@ namespace SecurityMonitor.Controllers
         //====================apartmenprofile ==========-==========
 
         [HttpGet]
-        public async Task<ActionResult> ApartmentProfile(int? ApartmentID, int BuildingID) 
+        public async Task<ActionResult> ApartmentProfile(int ApartmentID, int BuildingID) 
         {
 
 

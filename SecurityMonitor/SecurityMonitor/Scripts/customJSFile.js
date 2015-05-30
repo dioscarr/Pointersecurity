@@ -63,6 +63,24 @@
         };
 
 
+
+        //"""""""""""""""""""""""""""""""""Nav to apartment """"""""""""""""""""""""""""""""""""""""""""""""
+
+        self.takemetoApt = function (value, event) {
+            var myvalue = ko.toJSON(value);
+
+            var myjson = JSON.parse(myvalue);
+           // alert(myjson.AptID);
+           // debugger;
+
+            window.location.href = "/building/ApartmentProfile?ApartmentID=" + myjson.AptID + "&BuildingID=" + buildingID;
+
+        };
+
+
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^load building staff and permissions^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         setTimeout(function ()
         {
@@ -124,6 +142,9 @@
         };
 
 
+       
+        
+
             $.ajaxSettings.traditional = true;
             $.ajax(
                 {
@@ -132,7 +153,6 @@
                     dataType: "json",
                     data: { id: buildingID },
                     success: function (data) {
-
                        
                         var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
                                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
@@ -211,6 +231,8 @@
                             Apt:TrkPkgs[i].Apt
                         });
                     }
+
+                  
                 }
             });
         });

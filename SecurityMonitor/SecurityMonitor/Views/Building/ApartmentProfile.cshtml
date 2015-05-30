@@ -12,80 +12,484 @@
     @Html.Hidden("AptID", buildinginfo.AptID, new {id="aptid", @data_AptID = buildinginfo.AptID })
 
 }
+<!--nAV bAR-->
+<div class="row">
+    
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerDefault">
+        <ol class="breadcrumb" style="line-height:20px;" id="clientbreadcrumbid">
+            <li>@Html.ActionLink("Home", "index", "Home", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Page", "ClientHome", "building", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Profile", "ClientProfile", "building", new { ClientID = @buildinginfo.ClientID }, new { @class = "breadcrumblink" })</li>            
+             <li> @Html.ActionLink((string)@buildinginfo.BuildingName, "BuildingProfile", "building", new { buildingID = @buildinginfo.BuildingID }, new { @class = "breadcrumblink" })</li>
+            <li>@foreach (var item in Model)
+                {
+                    @Html.DisplayFor(modelItem => item.ApartmentNumber)
+                }
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center blueDefault headerDefault clientbuildinglist">
+
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center blueDefault headerDefault clientbuildinglist">
+            <section class=" myModalLabel ">@buildinginfo.BuildingName - <span class="" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span></section>
+        </div>
+        <div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
+            <section data-toggle="popover" id="facongid"
+                     title="Client Advance Settings"
+                     class="btn pull-right displayinline OpenRequestsSettings fa fa-bars fa-1x  font_color_white  "></section>
+            <!--======================================================Advance setting for client page===================================================-->
+            <div id="popover_content_wrapper" style="display: none; ">
+                <div class=" " style="">
+                    <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button class="btn btn-sm  fa fa-pencil-square-o fa-2x hollow5 "
+                                data-toggle="modal" data-target="#myModalBuildingInfoEdit" id="editidminimenu"
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Edit Building Information'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="(function () { $('html').click(); })()">
+                            @*<span id="" class="badge badge-warning " style="background:Green;"> E</span>*@
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button class="btn btn-sm fa fa-trash fa-2x hollow5  "
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Delete Building'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="(function () { $('html').click(); })()"
+                                id="deleteme" data-toggle="modal" data-target="#myModalDelete">
+                            @*<span id="" class="badge badge-warning " style="background:Green;"> T</span>*@
+                        </button>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button class="btn btn-sm fa fa-map-marker fa-2x hollow5 "
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Map Building Location'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="(function () { $('html').click(); })()"
+                                data-toggle="modal" data-target="#myModalMap" id="showlocationmap">
+                            @*<span id="" class="badge badge-warning " style="background:Green;">M</span>*@
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button class="btn btn-sm fa fa-share-alt fa-2x hollow5 "
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Share Building Information'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="(function () { $('html').click(); })()">
+                            @*<span id="" class="badge badge-warning " style="background:Green;"> S</span>*@
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button type="button"
+                                data-toggle="modal"
+                                data-target="#myModalAddApt"
+                                title="Add Apartment"
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Add Apartment'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="(function () { $('html').click(); })()"
+                                class="btn btn-sm fa fa-building-o fa-2x hollow5">
+                            @*onclick="location.href = '@Url.Action("AddApartment", "Building", new { BuildingID = ViewBag.buildingInfo.ID })'"*@
+                            @*<span id="" class="badge badge-warning " style="background:Green;"> +</span>*@
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button id="ShowURL" type="button" title="Get URL"
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Copy Building URL'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="(function () { $('html').click(); })()"
+                                class="btn btn-sm fa fa-link fa-2x hollow3">
+                            @*<span id="" class="badge badge-warning " style="background:Green;"> L</span>*@
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button type="button" class="btn btn-sm fa fa-inbox hollow5"
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('View Requests'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="location.href = '@Url.Action("BuildingRequestHistoryIndex", "Building", new { BuildingID = @buildinginfo.ID })'">
+                            <span id="Requestscount" class="badge badge-warning " style="background:orange;">0</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                        <button type="button" class="btn btn-sm fa fa-users hollow5 "
+                                onmouseover="(function () {$('.minimenuDisplayBox').html('Apartments contacts'); })()"
+                                onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
+                                onclick="location.href = '@Url.Action("ContactBook", "Building", new { BuildingID = @buildinginfo.ID })'">
+                            <span id="RequestCountContactBook" class="badge badge-warning " style="background:Green;">0</span>
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center nopadding rowheight">
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center minimenuDisplayBox">
+
+                    </div>
+                </div>
+            </div><!--ending for Advance settings-->
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  Apartment-tenant" >            
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 apartmentsettings-leftside apartmentsettings ">
+
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 apartmentsettings">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div id="piechart" class="hidden-sm col-lg-12 col-md-12 col-sm-12 col-xs-12  piechart-tenant"></div>
+                         <div id="piechartxs" class="hidden-lg hidden-md col-lg-12 col-md-12 col-sm-12 col-xs-12 outline piechart-tenant-sm"></div>
+                    </div>
+                </div>
+            @foreach (Tenant item in ViewBag.tenant)
+            {
+                    <!--tenant information-->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 nopadding"> 
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                            <!--vCard starts-->
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12    nopadding">
+                                <!--header starts-->
+                                <section class=" col-md-12 text-center clientboxrow  vcard-tenant">
+                                    <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                                        <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <img src="~/img/person.gif" class="img-circle" />                                           
+                                            <h4>@item.FirstName @item.LastName</h4>
+                                            <div class="" style="position:relative; top:-15px;">
+                                                <span>Phone: @item.Phone</span><br/>
+                                                <span>Created on @item.Created</span>
+                                                <br />
+                                                <button class="btn btn-sm fa fa-edit" data-target="#myModalBuildingInfoEdit" data-toggle="modal"></button>
+                                                <button class="btn btn-sm fa fa-trash" onclick="location.href = '@Url.Action("TenantDelete", "Building", new { TenantID = @item.ID })'"></button>
+                                                <button class="btn btn-sm fa fa-envelope-o deliveryclass" dalta-bind="click:ShowDeliveryFunc" data-showdeliverykey=@item.ID data-target="#myModaldeliveries" data-toggle="modal"></button>
+                                                <button class="btn btn-sm fa fa-plus-square" data-target="#myModalTenantRequest" data-toggle="modal"></button>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <!--advance options-->
+            }
+              
+            </div>
+
+        </div>
+</div>
+<!--'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'--'-'-'-'-'-'-'-'-'-'-'-'--'-'-'-'-'-'-'-'-'-'-'-''--'--'-'-'-'-'-'-'-''-'--''--''-'--'-'-'-'-'--->
+
+<!-- ===================  ===========================   =================Building Info Edit starts======================   ===========================   =========================-->
+<div class="modal fade" id="myModalBuildingInfoEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--=================================================================header ADD client information===========================================================-->
+            <div class="modal-header nopadding " id="modalheaderid">
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                       @buildinginfo.BuildingName - <span class="" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span>
+                    </h6>
+                </div>
+            </div><!--Ending tag fo r edit client information-->
+            <!--================================================================================Add cliet form================================================================-->
+            <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row background-white">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                    
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <!--Title-->
+                            <div class=" text-left col-md-12" style="padding-left:100px;">
+                                <h1>Moving in!</h1>
+                            </div>                            
+                            <!--FirstName input box-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.Editor("FirstName", new {htmlAttributes = new { @class = "form-control", @placeholder = "First Name", @data_bind = "value:FNameTenant, valueUpdate:'afterkeydown'"}})
+                                <div id="idFirstName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <!--LastName InputBox-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name", @data_bind = "value:LNameTenant, valueUpdate:'afterkeydown'" } })
+                                <div id="idLastName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <!--Phone Number-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.Editor("Phone", new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone", @data_bind = "value:PhoneTenant, valueUpdate:'afterkeydown'", @maxlength = "10" } })
+                                <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <!--Username box-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.TextBox("Username", null, new { @class = "form-control", @placeholder = "Username Email", @data_bind = "value:UsernameTenant, valueUpdate:'afterkeydown'", @maxlength = "100" })
+                                <div id="idUsername" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.CheckBox("generatePasswordid", new { id = "generatePasswordid", @data_bind = "checked:Check" }) @Html.Label("Genarate Password")
+                                <div hidden="hidden" class="autogepassword" data-bind="value:Check">autogenerated password</div>
+                                @Html.Editor("Password", new { htmlAttributes = new { @class = "form-control hideme", @placeholder = "Password", @data_bind = "value:PasswordTenant, valueUpdate:'afterkeydown'", @maxlength = "20" } })
+                                <div id="idPassword" class="" style="position:relative; left:290px; top:-25px;"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows"><p> @Html.CheckBox("EmailNotification", true) @Html.Label(" Email/Notification")</p></div>      
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows">
+                            <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows ">
+                            <input type="submit" value="Save"  class="btn btn-default form-control " data-dismiss="modal" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--=========================     ====================      ===============Edit building's information Form Ends  ===========================  ===================== =========================    ========-->
+<!--ioioioioiooiooioioioooooioooiooioioioioioioioioioioioioioioiiiioiioioioioioioioioiooioioioioioioioioioiioioioioiioioioioioioioioio Deliveries popup iioiooiiooiioioioioioioioioioiioioioioioioioioioioioioioioioioioioio-->
+<!--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
+
+<!--mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mai mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail  mail mail mail mail -->
+<div class="modal fade" id="myModaldeliveries" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--=================================================================header ADD client information===========================================================-->
+            <div class="modal-header nopadding " id="modalheaderid">
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        @buildinginfo.BuildingName - <span class="" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span>
+                    </h6>
+                </div>
+            </div><!--Ending tag fo r edit client information-->
+            <!--================================================================================Add cliet form================================================================-->
+            <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row background-white">
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="foreach: TrackingNumbers" style=" border-top:1px solid lightgrey; border-bottom:1px solid lightgrey;">
+                            <div class="col-md-12 hollow2" style="background:#f2f2f2; margin:5px; padding:12px 0; border:1px solid lightgrey;">
+                                <span class="col-md-4 " data-bind="text:pkgsTrks"></span>
+                                <span class="col-md-3 " data-bind="text:ArrivalDate"></span>
+                                <span class="col-md-1 " data-bind="text:CarrierService"></span>
+                                <span class="col-md-2 " data-bind="text:Status"></span>
+                                <span class="col-md-2 " data-bind="text:Service"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mai mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail  mail mail mail mail -->
+<!--Tenant request-->
+
+<div class="modal fade" id="myModalTenantRequest" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--=================================================================header ADD client information===========================================================-->
+            <div class="modal-header nopadding " id="modalheaderid">
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        @buildinginfo.BuildingName - <span class="" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span>
+                    </h6>
+                </div>
+            </div><!--Ending tag fo r edit client information-->
+            <!--================================================================================Add cliet form================================================================-->
+            <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row background-white">
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="">
+                            <div class="row " style="padding-top:20px;">
+
+                                <div class="col-md-3"></div>
+                                <!--form begins-->
+                                <div class="col-md-6 col-sm-6 requestformbox text-center crema" style="">
+
+                                    <div class="col-md-12 text-center">
+                                        <h2 style="font-family:'Script MT'; color:grey; ">Tenant Request</h2>
+
+                                        <hr />
+                                        <br />
+                                    </div>
+
+                                    @*@{IEnumerable<SelectListItem> ReqType = ViewBag.ReqType;}*@
+                                    @*@using (Html.BeginForm(new { BuildingID = (int)@ViewBag.RequestBuildingID, TenantID = (string)@ViewBag.TenantID }))
+                                    {
+                                        @Html.AntiForgeryToken()*@
+
+
+
+
+                                        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+
+                                        <div class="col-md-4 col-sm-4 col-xs-4 newrequestform newrequestform text-right">
+                                            @Html.Label("Request Type", new { @class = "ResquestFont" })
+                                        </div>
+                                        <div class="col-md-8 newrequestform ">
+
+                                            @*@Html.DropDownListFor(model => model.Reque, ReqType, new { @class = "form-control" })*@
+                                           
+                                        </div>
+                                        <div class="col-md-4 col-sm-4  col-xs-4 newrequestform text-right">
+                                            @Html.Label("Description", new { @class = "ResquestFont" })
+                                        </div>
+                                        <div class="col-md-7 newrequestform">
+                                            @Html.TextArea("Description", new { PlaceHolder = "Tell us How can we help!", @class = "form-control", @rows = "6", @maxlength = "250", id = "descriptionarea" })                                           
+                                        </div>
+                                        <div class="col-md-1"><div id="wordcount"></div></div>
+
+
+                                        <div class="col-md-4 col-sm-4  col-xs-4 newrequestform text-right">
+                                            @Html.Label("From", new { @class = "ResquestFont" })
+                                        </div>
+                                        <div class="col-md-8 newrequestform">
+                                            @Html.Editor("FromDate", new { htmlAttributes = new { @class = "form-control", id = "datetimepickerfrom" } })
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4 newrequestform text-right">
+                                            @Html.Label("To", new { @class = "ResquestFont" })
+                                        </div>
+                                        <div class="col-md-8 newrequestform">
+                                            @Html.Editor("ToDate", new { htmlAttributes = new { @class = "form-control", id = "datetimepickerto" } })
+                                        </div>
+
+
+                                        <div class="col-md-4 col-sm-4  col-xs-4 newrequestform text-right">
+                                            @Html.Label("PIN", new { @class = "ResquestFont" })
+                                        </div>
+                                        <div class="col-md-8 newrequestform">
+                                            @Html.Editor("PIN", new { htmlAttributes = new { PlaceHolder = "Enter PIN here please", @class = "form-control" } })
+                                        </div>
+
+                                        <div class="col-md-4 col-sm-4 col-xs-4 newrequestform">
+                                        </div>
+                                        <div class="col-md-8 newrequestform   ">
+
+                                            <input type="submit" value="Create" class=" form-control " />
+
+                                        </div>
+
+
+
+
+
+
+
+
+                                    @*}*@
+                                    <div class="col-md-3"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--/'/'/'/''/'/''''/'/'/'''/'/'''/'/''/''/'/'/'/'/'/''/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'/''/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'/'-->
+
+
+
 
 <!-- Small modal -->
 
 
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content"> 
+<div class="modal fade bs-example-modal-sm" id="myModalPackagenotification" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Mail Notification</h4>
-            </div>   
+            </div>
             <div class="modal-body">
-                <p> 
-                    The Mailroom just receive                
-                    <span data-bind="text:Packagecount"></span> 
+                <p>
+                    The Mailroom just receive
+                    <span data-bind="text:Packagecount"></span>
                     package(s) for
                     <span data-bind="text:FName"></span>
                     <span data-bind="text:LName"></span>.
                     The Information about the package(s) is bellow.
                     <span data-bind="foreach: Trackings">
-                        <br/>
-                       <span>Tacking#: </span> <span data-bind="text:name"></span>
-                    </span>                     
+                        <br />
+                        <span>Tacking#: </span> <span data-bind="text:name"></span>
+                    </span>
                 </p>
-      </div>
+            </div>
         </div>
     </div>
 </div>
 
+
 <!--========================Top section====================-->
-<div class="row " style="height:500px; background-image:url(/img/whiteinterior.jpg); background-size:cover; background-position-y:center;">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px;" 
-    onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = @buildinginfo.BuildingID })'">
-        <span style="color:white;">Return To Building</span>
+    
 
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4    " style="padding-top:0px; padding-bottom:0px;">
-        <h1 > @buildinginfo.BuildingName</h1>
-        <br /><span class="" style="color:white; font-size:20px;">@buildinginfo.Address</span>
-        <br /><span class="" style="color:white;">@buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span>
-    </div>
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8  " style="height:178px;">
 
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " style="padding-top:50px;">
-        <button type="button" class="btn btn-default "
-                onclick="location.href = '@Url.Action("deleteApartment", "Building", new { ApartmentID = @buildinginfo.ID })'">
-            Delete this Apartment
-        </button>
-
-        @foreach (var item in Model)
-        {
-
-            <button type="button" class="btn btn-default pull-right"
-                    onclick="location.href = '@Url.Action("AddingTenant", "Building", new { apartmentID = @item.ID, BuildingID = @buildinginfo.ID })'">
-                Add Tenant to this apartment
-            </button>
-        }
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  whity ">
-        @foreach (var item in Model)
-        {
-            <h1 style="font-size:170px; color:white; ">@Html.DisplayFor(modelItem => item.ApartmentNumber)</h1>
-        }
-    </div>
-</div>
-
-<!--=====================modules====================-->
-<div class="row" style="height: 50px;">
-    <span id="buildingdeliveryid" class="badge" style="color:white; background:green; margin:10px 0;">1</span>
-
-</div>
 
 <div class="row " style="padding-bottom:40px;">
     <!--=================Tenant==================-->
@@ -95,60 +499,9 @@
     </div>
 </div>
 
-@foreach (Tenant item in ViewBag.tenant)
-{
-    <div class=" row " style="border-bottom:1px solid lightgrey; ">
-        <!--tenant information-->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height:200px;">
 
-            <div class=" glyphicon glyphicon-user " style="font-size:40px; padding-top:10px; "></div>
-            <button type="button" class="btn btn-link "
-                    onclick="location.href = '@Url.Action("TenantEdit", "Building", new { TenantID = @item.ID })'">
-                Edit
-            </button>
-            <br />
-            <h4>@item.FirstName @item.LastName</h4><br />
-            <div class="" style="position:relative; top:-15px;">
-                Phone: @item.Phone <br />
-                Created on @item.Created
-                <br />
-
-
-                <button type="button" class="btn btn-link " style="margin-left:-10px;"
-                        onclick="location.href = '@Url.Action("TenantDelete", "Building", new { TenantID = @item.ID })'">
-                    Remove this Tenant
-                </button>
-            </div>
-        </div>
-        <!--advance options-->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="height:160px;">
-
-
-
-            <button type="button" class="btn btn-link" style="margin:9px;"
-                    onclick="location.href = '@Url.Action("TenantRequest", "Building", new { TenantID = @item.ID, BuildingID = @buildinginfo.BuildingID,  })'">
-                New Access Request
-            </button>
-            <br />
-            <button id="deliveryid" type="button" class="btn btn-link deliveryclass" style="margin:9px;" data-bind="click:ShowDeliveryFunc" data-showdeliverykey=@item.ID>
-                Deliveries
-            </button>
-            <br />
-            <button type="button" class="btn btn-link" style="margin:9px;"
-                    onclick="location.href = '@Url.Action("TenantMessegeCenterIndex", "Building", new { TenantID = @item.ID })'">
-                Message Center
-            </button>
-            <br />
-            <button type="button" class="btn btn-link" style="margin:9px;"
-                    onclick="location.href = '@Url.Action("RequestHistoryIndex", "Building", new { TenantID = @item.ID })'">
-                History
-            </button>
-
-
-        </div>
         <!--this section is for packages/ deliveries -->
-        
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " data-bind="fadeVisible:ShowDelivery" data-ShowDeliveryKey=@item.ID>
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " data-bind="fadeVisible:ShowDelivery" data-ShowDeliveryKey=@item.ID>
             <div class="row" style="background:lightgrey; border-top:1px solid grey; border-bottom:1px solid grey; " >
                 <div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-6 col-xs-offset-6">
                     <button type="button" class="btn btn-link showdelivery" style="margin:9px;" data-bind="click:HideDeliveryFunc" data-hidedeliverykey=@item.ID>
@@ -159,225 +512,434 @@
 
             <div class="row scrollable" data-bind="foreach: TrackingNumbers" style="height:200px;  border-top:1px solid lightgrey; border-bottom:1px solid lightgrey;">
                 <div class="col-md-12 hollow2" style="background:#f2f2f2; margin:5px; padding:12px 0; border:1px solid lightgrey;">
-                    <span class="col-md-4 " data-bind="text:pkgsTrks"></span> 
+                    <span class="col-md-4 " data-bind="text:pkgsTrks"></span>
                     <span class="col-md-3 " data-bind="text:ArrivalDate"></span>
                     <span class="col-md-1 " data-bind="text:CarrierService"></span>
-                    <span class="col-md-2 " data-bind="text:Status"></span>                        
+                    <span class="col-md-2 " data-bind="text:Status"></span>
                     <span class="col-md-2 " data-bind="text:Service"></span>
                 </div>
             </div>
             <div class="row" style="background:lightgrey; border-top:1px solid grey; border-bottom:1px solid grey; height:50px; ">
                 <div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-6 col-xs-offset-6">
-                   
+
                 </div>
             </div>
 
-        </div>
+        </div>*@
 
             <!--========================Request box===============================-->
             @*<canvas id="doughNutChartLoc@(item.ID)" data-tenantid="@item.ID" class="mygraph" height="100" width="100" ></canvas>*@
-        </div>
-}
+       
 
 <!--=================tenant ends==================-->
- 
+
 @section scripts
 {
-     
-
-
-  
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+@*<script src="~/Scripts/jquery-2.1.1.min.js"></script>*@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="~/Scripts/knockout-3.1.0.js"></script>
 <script src="~/Scripts/knockout.mapping-latest.js"></script>
 <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
-
+<link href="~/Scripts/TimePicket/jquery.datetimepicker.css" rel="stylesheet" />
+<script src="~/Scripts/TimePicket/jquery.datetimepicker.js"></script>
+<script src="~/Scripts/Chart.min.js"></script>
 <!--Reference the autogenerated SignalR hub script. -->
 <script src="~/signalr/hubs"></script>
-
-    @*<script src="~/Scripts/Chart.min.js"></script>*@
-@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>*@
-@*<script src="~/Scripts/HighChart/highcharts.js"></script>
-<script src="~/Scripts/HighChart/modules/exporting.js"></script>*@
-   <script type="text/javascript">
-    $(document).ready(function (e) {
-
-        $(function () {
-
-
-        var viewModel = function () {
-
-            var self = this;
-
-            self.DeliveryData = ko.observable();
-            self.Packagecount = ko.observable();
-            self.FName = ko.observable();
-            self.LName = ko.observable();
-            self.Phone = ko.observable();
-            self.Trackings = ko.observableArray();
-            self.TrackingNumbers = ko.observableArray();
-            self.TrackingNumbersNotification = ko.observableArray();
-            self.ShowDelivery = ko.observable(false);
-
-            self.ShowDeliveryFunc = function (item, event) {
-                //var elementkey =$(event.target).prop('data-ShowDeliveryKey');
-                //alert(elementkey);
-
-                self.ShowDelivery(true);
-                self.Trackings.removeAll();
-                return true;
-            };
-            self.HideDeliveryFunc = function () {
-                self.ShowDelivery(false);
-                self.Trackings.removeAll();
-                return false;
-            };
-
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
 
             
-                // Reference the auto-generated proxy for the hub.
-                //Notification
-                var Notification = $.connection.notificationsHub;
-                Notification.client.incomingListPackageNotification = function (Jsonpackages) {
-                    self.TrackingNumbers.removeAll();
-                    
-                    var jsonresult = JSON.stringify(Jsonpackages.Data);// Json.stringify make an object into a json string
-                   
-                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                    for (var i = 0; i < TrkPkgs.length; i++)
-                    {
-                        debugger;
-                        self.TrackingNumbers.push({
-                            pkgsTrks: TrkPkgs[i].TrackingNumber,
-                            ArrivalDate: TrkPkgs[i].ArrivalTime,
-                            CarrierService:TrkPkgs[i].CarrierService,
-                            Status : TrkPkgs[i].Status,
-                            Service:TrkPkgs[i].Service
+            @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>*@
+            @*<script src="~/Scripts/HighChart/highcharts.js"></script>
+        <script src="~/Scripts/HighChart/modules/exporting.js"></script>*@
+                <script type="text/javascript">
+                    $(document).ready(function (e) {
 
+
+
+                        $(function () {
+
+
+                            google.setOnLoadCallback(drawChart);
+                            function drawChart() {
+
+                                var data = google.visualization.arrayToDataTable([
+                                  ['USPS', 'Hours per Day'],
+                                  ['DHL', 11],
+                                  ['FedEx', 2],
+                                  ['UPS', 2],
+                                  ['Others', 2]
+                                ]);
+
+                                var options = {
+                                    title: 'Total Package(s) for this apartment'
+                                };
+
+                                var chart = (document.getElementById('piechart'));
+                               
+                                if (chart != null)
+                                {
+                                   
+                                    chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                                }
+                                else
+                                {
+
+                                    chart = new google.visualization.PieChart(document.getElementById('piechartxs'));
+
+                                }
+                               
+
+                                chart.draw(data, options);
+                            }
+
+
+                            //============================================tenant request =====================================================================
+
+                            $('#descriptionarea').keyup(function () {
+                                var maxl = $(this).attr("maxlength") - 1;
+                                var input = $(this).val().length;
+
+                                var totalused = maxl + 1 - input;
+                                if (input != 0) {
+                                    $('#wordcount').html('<p style="color:red;">-' + input + '</p>' + "<P>of</P>" + '<p style="color:green;">' + totalused + '</p>');
+
+                                } else {
+                                    $('#wordcount').html("");
+                                }
+
+
+
+                            });
+
+                            $('#datetimepickerfrom').datetimepicker({
+                                timepicker: true,
+                                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
+                                formatDate: 'y.m.d',
+                                formatTime: 'g:i a',
+                                step: 5
+
+
+                            });
+
+                            $('#datetimepickerto').datetimepicker({
+                                timepicker: true,
+                                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
+                                formatDate: 'y.m.d',
+                                formatTime: 'g:i a',
+                                step: 5
+                            });
+
+
+
+                            //=========================================================================================================================================
+
+
+                            $('[data-toggle="popover"]').popover({
+                                placement: 'left',
+                                html: true,
+                                content: function () {
+                                    return $('#popover_content_wrapper').html();
+                                }
+                            });
+                            $('body').on('click', function (e) {
+                                $('[data-toggle="popover"]').each(function () {
+                                    //the 'is' for buttons that trigger popups
+                                    //the 'has' for icons within a button that triggers a popup
+                                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                                        $(this).popover('hide');
+                                    }
+                                });
+                            });
+
+                            $('.btn').on('click', function (e) {
+                                if (typeof $(e.target).data('original-title') == 'undefined' &&
+                                   !$(e.target).parents().is('.popover.in')) {
+                                    $('[data-original-title]').popover('hide');
+                                }
+                            });
+
+                            $('html').on('click', function (e) {
+
+                                $('#popover_content_wrapper').popover('hide');
+
+                                if (typeof $(e.target).data('original-title') == 'undefined' &&
+                                   !$(e.target).parents().is('.popover.in')) {
+                                    $('[data-original-title]').popover('hide');
+                                }
+                            });
+
+
+                            // ==================================================Add Client form=====================================================
+                            $('#generatePasswordid').change(function () {
+                                if ($(this).is(':checked') == true) {
+                                    //alert("it is checked");
+                                    $('.hideme').hide();
+                                    $('.autogepassword').show();
+
+                                }
+                                else {
+                                    //alert("it is not checked");
+                                    $('.hideme').show();
+                                    $('.autogepassword').hide();
+                                }
+                            });
+                            //=======================================================================================================================
+
+                            var viewModel = function () {
+                                var self = this;
+                                //=====================================================Adding Tenant old viewModel====================================
+
+                                self.FNameTenant = ko.observable("");
+                                self.LNameTenant = ko.observable("");
+                                self.PhoneTenant = ko.observable("");
+                                self.UsernameTenant = ko.observable("");
+                                self.PasswordTenant = ko.observable("");
+                                Check = ko.observable();
+                                this.Checkboxpassword = ko.computed(function () {
+                                    if (Check() == true) { self.PasswordTenant("");}
+                                    else {self.PasswordTenant("");}
+                                });                                
+                                //Checks if Fname has chr
+                                this.ComputeFName = ko.computed(function () {
+                                    if (self.FNameTenant().length > 0) {
+                                       
+                                        $('#idFirstName').css("color", "green");
+                                        $('#idFirstName').removeClass('glyphicon glyphicon-asterisk');
+                                        $('#idFirstName').addClass('glyphicon glyphicon-ok');
+                                        return 'chars: ' + self.FNameTenant.length;
+                                    } else {
+                                       
+                                        $('#idFirstName').removeClass('glyphicon glyphicon-ok');
+                                        $('#idFirstName').css("color", "red");
+                                        $('#idFirstName').addClass('glyphicon glyphicon-asterisk');
+                                    }
+                                });
+                                //Checks if Lname has chr
+                                this.ComputeLName = ko.computed(function () {
+                                    if (self.LNameTenant().length > 0) {
+                                        $('#idLastName').css("color", "green");
+                                        $('#idLastName').removeClass('glyphicon glyphicon-asterisk');
+                                        $('#idLastName').addClass('glyphicon glyphicon-ok');
+                                        return 'chars: ' + self.LNameTenant().length;
+                                    } else {
+                                        $('#idLastName').removeClass('glyphicon glyphicon-ok');
+                                        $('#idLastName').css("color", "red");
+                                        $('#idLastName').addClass('glyphicon glyphicon-asterisk');
+                                    }
+                                });
+                                //Checks if  has Phone digits
+                                this.ComputePhone = ko.computed(function () {
+                                    if (self.PhoneTenant().length > 0) {
+                                        $('#idPhone').css("color", "green");
+                                        $('#idPhone').removeClass('glyphicon glyphicon-asterisk');
+                                        $('#idPhone').addClass('glyphicon glyphicon-ok');
+                                        return 'chars: ' + self.PhoneTenant().length;
+                                    }
+                                    else {
+                                        $('#idPhone').removeClass('glyphicon glyphicon-ok');
+                                        $('#idPhone').css("color", "red");
+                                        $('#idPhone').addClass('glyphicon glyphicon-asterisk');
+                                    }
+                                });
+                                //Checks if Username has chr
+                                this.Computeusername = ko.computed(function () {
+                                    if (self.UsernameTenant().length > 0) {
+                                        $('#idUsername').css("color", "green");
+                                        $('#idUsername').removeClass('glyphicon glyphicon-asterisk');
+                                        $('#idUsername').addClass('glyphicon glyphicon-ok');
+                                        return 'chars: ' + self.UsernameTenant().length;
+                                    } else {
+                                        $('#idUsername').removeClass('glyphicon glyphicon-ok');
+                                        $('#idUsername').css("color", "red");
+                                        $('#idUsername').addClass('glyphicon glyphicon-asterisk');
+                                    }
+                                });
+                                //Checks if password has chr
+                                this.Computepassword = ko.computed(function () {
+                                    if (self.PasswordTenant().length > 0) {
+                                        $('#idPassword').css("color", "green");
+                                        $('#idPassword').removeClass('glyphicon glyphicon-asterisk');
+                                        $('#idPassword').addClass('glyphicon glyphicon-ok');
+                                        return 'chars: ' + self.PasswordTenant().length;
+                                    } else {
+                                        $('#idPassword').removeClass('glyphicon glyphicon-ok');
+                                        $('#idPassword').css("color", "red");
+                                        $('#idPassword').addClass('glyphicon glyphicon-asterisk');
+                                    }
+                                });
+                                this.btnStat = ko.computed(function () {
+                                    //debugger;
+                                    if (
+                                        self.FNameTenant().length > 0 &&
+                                        self.LNameTenant().length > 0 &&
+                                        self.PhoneTenant().length > 0 &&
+                                        self.UsernameTenant().length > 0 &&
+                                        self.PasswordTenant().length > 0
+                                        ) {
+                                        $('#submitlgmd').prop("disabled", false);
+                                        //$('#submitlgmd_B').prop("disabled", false);
+                                    }
+                                    else {
+                                        $('#submitlgmd').prop("disabled", true);
+                                        //$('#submitlgmd_B').prop("disabled", true);
+                                    }
+                                }, this);
+                                //====================================================================================================================
+
+                                self.DeliveryData = ko.observable();
+                                self.Packagecount = ko.observable();
+                                self.FName = ko.observable();
+                                self.LName = ko.observable();
+                                self.Phone = ko.observable();
+                                self.Trackings = ko.observableArray();
+                                self.TrackingNumbers = ko.observableArray();
+                                self.TrackingNumbersNotification = ko.observableArray();
+                                self.ShowDelivery = ko.observable(false);
+
+                                self.ShowDeliveryFunc = function (item, event) {
+                                    //var elementkey =$(event.target).prop('data-ShowDeliveryKey');
+                                    //alert(elementkey);
+
+                                    self.ShowDelivery(true);
+                                    self.Trackings.removeAll();
+                                    return true;
+                                };
+                                self.HideDeliveryFunc = function () {
+                                    self.ShowDelivery(false);
+                                    self.Trackings.removeAll();
+                                    return false;
+                                };
+                                // Reference the auto-generated proxy for the hub.
+                                //Notification
+                                var Notification = $.connection.notificationsHub;
+                                Notification.client.incomingListPackageNotification = function (Jsonpackages) {
+                                    self.TrackingNumbers.removeAll();
+
+                                    var jsonresult = JSON.stringify(Jsonpackages.Data);// Json.stringify make an object into a json string
+
+                                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                    for (var i = 0; i < TrkPkgs.length; i++) {
+                                        
+                                        self.TrackingNumbers.push({
+                                            pkgsTrks: TrkPkgs[i].TrackingNumber,
+                                            ArrivalDate: TrkPkgs[i].ArrivalTime,
+                                            CarrierService: TrkPkgs[i].CarrierService,
+                                            Status: TrkPkgs[i].Status,
+                                            Service: TrkPkgs[i].Service
+                                        });
+
+                                    }
+
+                                };
+                                // Create a function that the hub can call back to display messages.
+                                Notification.client.incomingPackageNotification = function (BuildingID, ApartmentID, jsonObj, Jsonpackages, TrackingCount) {
+                                    //incoming here
+
+                                    var jsonresult = JSON.stringify(jsonObj.Data);// Json.stringify make an object into a json string
+                                    var ReceiveCleanobj = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                    var pkgsTrk = JSON.stringify(Jsonpackages.Data);//Json.stringify make an object into a json string
+                                    var pkgsTrks = JSON.parse(pkgsTrk);  //JSON.parse makes a json string into a json object example obj.FirstName
+
+
+                                    var packagesCount = ReceiveCleanobj.Packages.length;
+                                    var undeliveredPackagescount = TrackingCount;
+                                    var CurrentBuildingID = $('#buildingid').attr('data-BuildingID');
+                                    var CurrentAptID = $('#aptid').attr('data-AptID');
+
+                                    // testing Data
+                                    console.log("current building id is: " + CurrentBuildingID);
+                                    console.log("current building id is: " + CurrentAptID);
+                                    console.log(" ");
+                                    console.log("ConnectionID, Receive from other client" + $.connection.hub.id);
+                                    console.log("For BuildingID: " + BuildingID + " and ApartmentID: " + ApartmentID);
+                                    if (CurrentBuildingID == BuildingID && CurrentAptID == ApartmentID) {
+                                        self.FName(ReceiveCleanobj.FirstName);
+                                        self.LName(ReceiveCleanobj.LastName);
+                                        self.Phone(ReceiveCleanobj.Phone);
+
+
+                                        //this is the latest package that just arrived
+                                        for (var i = 0; i < packagesCount; i++) {
+                                            self.Trackings.push({ name: ReceiveCleanobj.Packages[i].Trackingnumber });
+                                        };
+
+                                        self.Packagecount(packagesCount);
+                                        $('#myModalPackagenotification').modal('show');
+                                        console.log("A package just arrived for this apartment!");
+                                        console.log("FirstName: " + ReceiveCleanobj.FirstName);
+                                        console.log("LastName: " + ReceiveCleanobj.LastName);
+                                        console.log("Phone: " + ReceiveCleanobj.Phone);
+                                        console.log("ApartmentNumber: " + ReceiveCleanobj.ApartmentNumber);
+                                        console.log("UserID: " + ReceiveCleanobj.UserID);
+                                        console.log("BuildingID: " + ReceiveCleanobj.BuildingID);
+                                        console.log("ApartmentID: " + ReceiveCleanobj.ApartmentID);
+                                        console.log("BuildingID: " + ReceiveCleanobj.BuildingID);
+                                        console.log("Address: " + ReceiveCleanobj.Address);
+                                        console.log("City: " + ReceiveCleanobj.City);
+                                        console.log("State: " + ReceiveCleanobj.State);
+                                        console.log("City: " + ReceiveCleanobj.City);
+                                        console.log("Zipcode: " + ReceiveCleanobj.Zipcode);
+                                        console.log("UserID: " + ReceiveCleanobj.UserID);
+                                        console.log("isNewUser: " + ReceiveCleanobj.isNewUser);
+                                        console.log("Package Count: " + packagesCount);
+                                        for (var i = 0; i < packagesCount; i++) {
+                                            console.log("Tracking#: " + ReceiveCleanobj.Packages[i].Trackingnumber);
+                                        }
+                                    }
+                                };
+
+                                // Here's a custom Knockout binding that makes elements shown/hidden via jQuery's fadeIn()/fadeOut() methods
+                                // Could be stored in a separate utility library
+                                ko.bindingHandlers.fadeVisible = {
+                                    init: function (element, valueAccessor) {
+                                        // Initially set the element to be instantly visible/hidden depending on the value
+                                        var value = valueAccessor();
+
+                                        $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
+                                    },
+                                    update: function (element, valueAccessor) {
+                                        // Whenever the value subsequently changes, slowly fade the element in or out
+
+                                        var value = valueAccessor();
+                                        //show element
+                                        $('.deliveryclass').on('click', function () {
+                                            var currentID = $(this).attr('data-ShowDeliveryKey');
+                                            $(element).hide()
+                                            if ($(element).attr('data-ShowDeliveryKey') == currentID) {
+                                                ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp();
+
+                                                $.ajaxSettings.traditional = true;
+                                                $.ajax({
+                                                    type: "GET",
+                                                    url: '/Module/GetPackages/',
+                                                    data: { TenantID: currentID }
+                                                }).done(function () { });
+                                            }
+                                        });
+                                        //hide element
+                                        $('.showdelivery').on('click', function () {
+                                            var currentelement = $(this).attr('data-hidedeliverykey');
+
+                                            if ($(element).attr('data-ShowDeliveryKey') == currentelement) {
+                                                false ? $(element).slideDown() : $(element).slideUp()
+                                            }
+                                        });
+                                    }
+                                };
+                                // Start the connection.outgoing here
+                                $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
+                                //reconnect after disconect
+                                $.connection.hub.disconnected(function () {
+                                    setTimeout(function () {
+                                        $.connection.hub.start();
+                                    }, 5000); // Restart connection after 5 seconds.
+                                });
+                            };
+
+                            ko.applyBindings(viewModel);
                         });
 
-                    }
-                    
-                };
-                // Create a function that the hub can call back to display messages.
-                Notification.client.incomingPackageNotification = function (BuildingID, ApartmentID, jsonObj, Jsonpackages, TrackingCount)
-                {
-                    //incoming here
-
-                    var jsonresult = JSON.stringify(jsonObj.Data);// Json.stringify make an object into a json string
-                    var ReceiveCleanobj = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                    var pkgsTrk = JSON.stringify(Jsonpackages.Data);//Json.stringify make an object into a json string
-                    var pkgsTrks = JSON.parse(pkgsTrk);  //JSON.parse makes a json string into a json object example obj.FirstName
-
-
-                    var packagesCount = ReceiveCleanobj.Packages.length;
-                    var undeliveredPackagescount = TrackingCount;
-                    var CurrentBuildingID = $('#buildingid').attr('data-BuildingID');
-                    var CurrentAptID = $('#aptid').attr('data-AptID');
-
-                    // testing Data
-                    console.log("current building id is: " + CurrentBuildingID);
-                    console.log("current building id is: " + CurrentAptID);
-                    console.log(" ");
-                    console.log("ConnectionID, Receive from other client" + $.connection.hub.id);
-                    console.log("For BuildingID: " + BuildingID + " and ApartmentID: " + ApartmentID);
-                    if (CurrentBuildingID == BuildingID && CurrentAptID == ApartmentID)
-                    {
-                        self.FName(ReceiveCleanobj.FirstName);
-                        self.LName(ReceiveCleanobj.LastName);
-                        self.Phone(ReceiveCleanobj.Phone);
-
-                       
-                        //this is the latest package that just arrived
-                        for (var i = 0; i < packagesCount; i++)
-                        {
-                            self.Trackings.push({ name: ReceiveCleanobj.Packages[i].Trackingnumber });
-                        };
-
-                        self.Packagecount(packagesCount);
-                        $('.modal').modal('show');
-                        console.log("A package just arrived for this apartment!");
-                        console.log("FirstName: " + ReceiveCleanobj.FirstName);
-                        console.log("LastName: " + ReceiveCleanobj.LastName);
-                        console.log("Phone: " + ReceiveCleanobj.Phone);
-                        console.log("ApartmentNumber: " + ReceiveCleanobj.ApartmentNumber);
-                        console.log("UserID: " + ReceiveCleanobj.UserID);
-                        console.log("BuildingID: " + ReceiveCleanobj.BuildingID);
-                        console.log("ApartmentID: " + ReceiveCleanobj.ApartmentID);
-                        console.log("BuildingID: " + ReceiveCleanobj.BuildingID);
-                        console.log("Address: " + ReceiveCleanobj.Address);
-                        console.log("City: " + ReceiveCleanobj.City);
-                        console.log("State: " + ReceiveCleanobj.State);
-                        console.log("City: " + ReceiveCleanobj.City);
-                        console.log("Zipcode: " + ReceiveCleanobj.Zipcode);
-                        console.log("UserID: " + ReceiveCleanobj.UserID);
-                        console.log("isNewUser: " + ReceiveCleanobj.isNewUser);
-                        console.log("Package Count: " + packagesCount);
-                        for (var i = 0; i < packagesCount; i++)
-                        {
-                            console.log("Tracking#: " + ReceiveCleanobj.Packages[i].Trackingnumber);
-                        }
-                    }
-                };
-              
-            
-            // Here's a custom Knockout binding that makes elements shown/hidden via jQuery's fadeIn()/fadeOut() methods
-            // Could be stored in a separate utility library
-            ko.bindingHandlers.fadeVisible = {
-                init: function (element, valueAccessor) {
-                    // Initially set the element to be instantly visible/hidden depending on the value
-                    var value = valueAccessor();
-                   
-                    $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
-                },
-                update: function (element, valueAccessor) {
-                    // Whenever the value subsequently changes, slowly fade the element in or out
-
-                    var value = valueAccessor();
-                    //show element
-                    $('.deliveryclass').on('click', function () {
-                        var currentID = $(this).attr('data-ShowDeliveryKey');
-                        $(element).hide()
-                        if ($(element).attr('data-ShowDeliveryKey') == currentID) {
-                                ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp();
-
-                                $.ajaxSettings.traditional = true;
-                                $.ajax({
-                                    type: "GET",
-                                    url: '/Module/GetPackages/',
-                                    data: { TenantID: currentID }
-                                }).done(function () { });
-                            }});
-                    //hide element
-                    $('.showdelivery').on('click', function () {
-                        var currentelement = $(this).attr('data-hidedeliverykey');
-                       
-                        if ($(element).attr('data-ShowDeliveryKey') == currentelement) {
-                           false ? $(element).slideDown() : $(element).slideUp()
-                        } });
-                }   
-            };
-            // Start the connection.outgoing here
-            $.connection.hub.start().done(function () { console.log("connected, Connection ID: " + $.connection.hub.id) });
-            //reconnect after disconect
-            $.connection.hub.disconnected(function () {
-                setTimeout(function () {
-                    $.connection.hub.start();
-                }, 5000); // Restart connection after 5 seconds.
-            });
-        };
-
-
-        
-
-        ko.applyBindings(viewModel);
-        });
-       
-
-      
-
-
-    });
-</script>
-
-}
+                    });
+                </script>
+                }
