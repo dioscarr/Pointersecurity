@@ -2040,3 +2040,66 @@ margin:0 0 30px 0;
 margin:20px 0 20px 0;
 
 }
+.passowrdupdae {
+   padding:20px;
+}
+
+.passowrdupdae::before {    
+   content:'';
+   display:inline-block;
+   line-height:70px;
+   margin-right:10px;
+     min-height:14px;
+    min-width:14px;
+    background:green;
+    border-radius:50%;
+
+}
+
+
+.PhoneUpdate
+{
+    padding:20px;
+}
+    .PhoneUpdate::before {
+    
+    content:'';
+   display:inline-block;
+   line-height:70px;
+   margin-right:10px;
+     min-height:14px;
+    min-width:14px;
+    background:red;
+    border-radius:50%;
+    
+    }
+#apartmentActivitylabel {
+    font-size:10px;
+    margin-bottom:6px;
+}
+
+.activitybox {
+
+min-height:100px;
+
+}
+
+.aptRequest {
+
+    padding:20px;
+}
+
+.aptRequest::before 
+{
+    
+    content:'';
+   display:inline-block;
+   line-height:70px;
+   margin-right:10px;
+     min-height:14px;
+    min-width:14px;
+    background:blue;
+    border-radius:50%;
+}
+
+
