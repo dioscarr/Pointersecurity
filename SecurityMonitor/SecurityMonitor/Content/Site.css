@@ -684,9 +684,9 @@ p {
 }
 
 .ClientEditrows {
-    padding-top:20px;
-    padding-bottom:20px;
-    min-height:130px;
+    padding-top:5px;
+    padding-bottom:5px;
+    min-height:40px;
 }
 .whity {
 
@@ -1870,7 +1870,7 @@ margin-bottom:16px !important;
 }
 
 .img-circle {
-    background:white;
+    background:lightgray;
     width:124px;
     height:124px;
 }
@@ -1975,4 +1975,14 @@ position:relative;
     height: 200px;
 
 
+}
+
+.Addtenantfield {
+min-width:100%;
+
+
+}
+
+.AuthenticateIcon {
+position:relative; left:406px; top:-25px;
 }

@@ -198,6 +198,56 @@ namespace SecurityMonitor.Controllers
 
           
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult PackageCount(int ApartmentID)
+        {
+
+            var AC = db.Package.Where(p => p.Shipment.aptID == ApartmentID).Select(p => new { packagetype = p.ShippingCarrier.Services   }).ToList();
+
+            var packagesCount = new PackagesCount();
+            var UPSCount =0;
+            var FedExCount = 0;
+            var USPSCount = 0;
+            var DHLCount = 0;
+            var OthersCount = 0;
+            var TNTCount = 0;
+           
+            foreach (var item in AC)
+            {
+                switch (item.packagetype.ToString())
+                { 
+                    case "UPS ":
+                        UPSCount++;
+                        packagesCount.UPSCount = UPSCount;
+                        break;
+                    case "USPS":
+                        USPSCount++;
+                        packagesCount.USPSCount = USPSCount;
+                        break;
+                    case "FeDex":
+                        FedExCount++;
+                        packagesCount.FedExCount = FedExCount;
+                        break;
+                    case "DHL":
+                        DHLCount++;
+                        packagesCount.DHLCount = DHLCount;
+                        break;
+                    case "Others":
+                        OthersCount++;
+                        packagesCount.OtherCount = OthersCount;
+                        break;
+                    case "TNT":
+                        TNTCount++;
+                        packagesCount.TNTCount = TNTCount;
+                        break;
+                }        
+            }
+            var mydata = Json(packagesCount);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
         public ActionResult PackageSearch()
         { 
 

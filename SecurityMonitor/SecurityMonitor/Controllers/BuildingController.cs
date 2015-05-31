@@ -996,8 +996,9 @@ namespace SecurityMonitor.Controllers
 
         //============= Adding Tenant to apartment Post ==============
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddingTenant(TenantVM newTenant)
+        //[ValidateAntiForgeryToken]
+            [AllowAnonymous]
+        public async Task<JsonResult> AddingTenant(TenantVM newTenant)
         {
             try { 
             
@@ -1048,8 +1049,12 @@ namespace SecurityMonitor.Controllers
                     msg.Body = x;
                     gmail.Send(msg);
                 }
+
+                var mydata = Json("");
+
+                return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
              
-                return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID, BuildingID= newTenant.BuildingID });
+                //return RedirectToAction("ApartmentProfile", new { ApartmentID = newTenant.aptID, BuildingID= newTenant.BuildingID });
 
             }
             }
@@ -1058,7 +1063,9 @@ namespace SecurityMonitor.Controllers
                     ViewBag.Message = e.Message;
                 
             }
-            return View();
+            var mydata1 = Json("");
+
+            return new JsonResult { Data = mydata1, JsonRequestBehavior = JsonRequestBehavior.AllowGet }; ;
         }
 
 
@@ -1070,7 +1077,8 @@ namespace SecurityMonitor.Controllers
             return View(tn);        
         }
         [HttpPost]
-        public ActionResult TenantEdit(Tenant model,int ApartmentID, int BuildingID)
+        [AllowAnonymous]
+        public JsonResult TenantEdit(Tenant model)
         {   //this i use forthe link since model didn't pass Nav properties
            
  
@@ -1082,8 +1090,12 @@ namespace SecurityMonitor.Controllers
             Entry.Property(c => c.Username).IsModified = true;
             
             db.SaveChanges();
-           
-            return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID =BuildingID});
+            
+            
+            var mydata = Json("");
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+           // return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID =BuildingID});
         }
         //===================DeleteTenant=============
         [HttpGet]

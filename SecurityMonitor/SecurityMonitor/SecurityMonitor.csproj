@@ -259,6 +259,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\managementVM.cs" />
     <Compile Include="Models\Otherusers.cs" />
+    <Compile Include="Models\PackagesCount.cs" />
     <Compile Include="Models\PackageSearchVM.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\RegisterManagerVM.cs" />

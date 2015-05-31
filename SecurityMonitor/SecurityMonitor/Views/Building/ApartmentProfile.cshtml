@@ -47,8 +47,8 @@
             <div id="popover_content_wrapper" style="display: none; ">
                 <div class=" " style="">
                     <div class="col-lg-4 col-md-43 col-sm-4 col-xs-4 text-center nopadding rowheight">
-                        <button class="btn btn-sm  fa fa-pencil-square-o fa-2x hollow5 "
-                                data-toggle="modal" data-target="#myModalBuildingInfoEdit" id="editidminimenu"
+                        <button class="btn btn-sm  fa fa-plus-square fa-2x hollow5 "
+                                data-toggle="modal" data-target="#myModalAddTenant" id="editidminimenu"
                                 onmouseover="(function () {$('.minimenuDisplayBox').html('Edit Building Information'); })()"
                                 onmouseout="(function () {$('.minimenuDisplayBox').html(''); })()"
                                 onclick="(function () { $('html').click(); })()">
@@ -158,9 +158,9 @@
                                                 <span>Phone: @item.Phone</span><br/>
                                                 <span>Created on @item.Created</span>
                                                 <br />
-                                                <button class="btn btn-sm fa fa-edit" data-target="#myModalBuildingInfoEdit" data-toggle="modal"></button>
+                                                <button class="btn btn-sm fa fa-edit" data-target="#myModalEditTenant" data-tenantID=@item.ID data-toggle="modal"></button>
                                                 <button class="btn btn-sm fa fa-trash" onclick="location.href = '@Url.Action("TenantDelete", "Building", new { TenantID = @item.ID })'"></button>
-                                                <button class="btn btn-sm fa fa-envelope-o deliveryclass" dalta-bind="click:ShowDeliveryFunc" data-showdeliverykey=@item.ID data-target="#myModaldeliveries" data-toggle="modal"></button>
+                                                <button class="btn btn-sm fa fa-envelope-o deliveryclass" data-bind="fadeVisible:itistrue" data-showdeliverykey=@item.ID data-target="#myModaldeliveries" data-toggle="modal"></button>
                                                 <button class="btn btn-sm fa fa-plus-square" data-target="#myModalTenantRequest" data-toggle="modal"></button>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@
 <!--'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'-'--'-'-'-'-'-'-'-'-'-'-'-'--'-'-'-'-'-'-'-'-'-'-'-''--'--'-'-'-'-'-'-'-''-'--''--''-'--'-'-'-'-'--->
 
 <!-- ===================  ===========================   =================Building Info Edit starts======================   ===========================   =========================-->
-<div class="modal fade" id="myModalBuildingInfoEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModalAddTenant" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!--=================================================================header ADD client information===========================================================-->
@@ -202,38 +202,40 @@
                             </div>                            
                             <!--FirstName input box-->
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
-                                @Html.Editor("FirstName", new {htmlAttributes = new { @class = "form-control", @placeholder = "First Name", @data_bind = "value:FNameTenant, valueUpdate:'afterkeydown'"}})
-                                <div id="idFirstName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                                @Html.Editor("FirstName", new {htmlAttributes = new { @class = "form-control Addtenantfield input-sm", @placeholder = "First Name", @data_bind = "value:FNameTenant, valueUpdate:'afterkeydown'"}})
+                                <div id="idFirstName" class="AuthenticateIcon" ></div>
                             </div>
                             <!--LastName InputBox-->
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
-                                @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name", @data_bind = "value:LNameTenant, valueUpdate:'afterkeydown'" } })
-                                <div id="idLastName" class="" style="position:relative; left:290px; top:-25px;"></div>
+                                @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm", @placeholder = "Last Name", @data_bind = "value:LNameTenant, valueUpdate:'afterkeydown'" } })
+                                <div id="idLastName" class="AuthenticateIcon" ></div>
                             </div>
                             <!--Phone Number-->
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
-                                @Html.Editor("Phone", new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone", @data_bind = "value:PhoneTenant, valueUpdate:'afterkeydown'", @maxlength = "10" } })
-                                <div id="idPhone" class="" style="position:relative; left:290px; top:-25px;"></div>
+                                @Html.Editor("Phone", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm", @placeholder = "Phone", @data_bind = "value:PhoneTenant, valueUpdate:'afterkeydown'", @maxlength = "10" } })
+                                <div id="idPhone" class="AuthenticateIcon" ></div>
                             </div>
                             <!--Username box-->
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
-                                @Html.TextBox("Username", null, new { @class = "form-control", @placeholder = "Username Email", @data_bind = "value:UsernameTenant, valueUpdate:'afterkeydown'", @maxlength = "100" })
-                                <div id="idUsername" class="" style="position:relative; left:290px; top:-25px;"></div>
+                                @Html.TextBox("Username", null, new { @class = "form-control Addtenantfield input-sm", @placeholder = "Username Email", @data_bind = "value:UsernameTenant, valueUpdate:'afterkeydown'", @maxlength = "100" })
+                                <div id="idUsername" class="AuthenticateIcon" ></div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
                                 @Html.CheckBox("generatePasswordid", new { id = "generatePasswordid", @data_bind = "checked:Check" }) @Html.Label("Genarate Password")
                                 <div hidden="hidden" class="autogepassword" data-bind="value:Check">autogenerated password</div>
-                                @Html.Editor("Password", new { htmlAttributes = new { @class = "form-control hideme", @placeholder = "Password", @data_bind = "value:PasswordTenant, valueUpdate:'afterkeydown'", @maxlength = "20" } })
-                                <div id="idPassword" class="" style="position:relative; left:290px; top:-25px;"></div>
+                                @Html.Editor("Password", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm hideme", @placeholder = "Password", @data_bind = "value:PasswordTenant, valueUpdate:'afterkeydown'", @maxlength = "20" } })
+                                <div id="idPassword" class="AuthenticateIcon" ></div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows"><p> @Html.CheckBox("EmailNotification", true) @Html.Label(" Email/Notification")</p></div>      
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows"><p> @Html.CheckBox("EmailNotification", new { id = "generatePasswordid", @data_bind = "checked:EmailNotification" }) @Html.Label(" Email/Notification")</p></div>      
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows">
-                            <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows ">
-                            <input type="submit" value="Save"  class="btn btn-default form-control " data-dismiss="modal" />
-                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows">
+                                <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows ">
+                                <input type="submit" value="Save" class="btn btn-default form-control " data-dismiss="modal" data-bind="click:AddTenant" />
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -241,6 +243,72 @@
     </div>
 </div><!--=========================     ====================      ===============Edit building's information Form Ends  ===========================  ===================== =========================    ========-->
 <!--ioioioioiooiooioioioooooioooiooioioioioioioioioioioioioioioiiiioiioioioioioioioioiooioioioioioioioioioiioioioioiioioioioioioioioio Deliveries popup iioiooiiooiioioioioioioioioioiioioioioioioioioioioioioioioioioioioio-->
+
+
+<div class="modal fade" id="myModalEditTenant" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--=================================================================header ADD client information===========================================================-->
+            <div class="modal-header nopadding " id="modalheaderid">
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        @buildinginfo.BuildingName - <span class="" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span>
+                    </h6>
+                </div>
+            </div><!--Ending tag fo r edit client information-->
+            <!--================================================================================Add cliet form================================================================-->
+            <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row background-white">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <!--Title-->
+                            
+                            <!--FirstName input box-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.Editor("FirstName", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm", @placeholder = "First Name", @data_bind = "value:FNameTenant, valueUpdate:'afterkeydown'" } })
+                                <div id="idFirstName" class="AuthenticateIcon"></div>
+                            </div>
+                            <!--LastName InputBox-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.Editor("LastName", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm", @placeholder = "Last Name", @data_bind = "value:LNameTenant, valueUpdate:'afterkeydown'" } })
+                                <div id="idLastName" class="AuthenticateIcon"></div>
+                            </div>
+                            <!--Phone Number-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.Editor("Phone", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm", @placeholder = "Phone", @data_bind = "value:PhoneTenant, valueUpdate:'afterkeydown'", @maxlength = "10" } })
+                                <div id="idPhone" class="AuthenticateIcon"></div>
+                            </div>
+                            <!--Username box-->
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.TextBox("Username", null, new { @class = "form-control Addtenantfield input-sm", @placeholder = "Username Email", @data_bind = "value:UsernameTenant, valueUpdate:'afterkeydown'", @maxlength = "100" })
+                                <div id="idUsername" class="AuthenticateIcon"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                @Html.CheckBox("generatePasswordid", new { id = "generatePasswordid", @data_bind = "checked:Check" }) @Html.Label("Genarate Password")
+                                <div hidden="hidden" class="autogepassword" data-bind="value:Check">autogenerated password</div>
+                                @Html.Editor("Password", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm hideme", @placeholder = "Password", @data_bind = "value:PasswordTenant, valueUpdate:'afterkeydown'", @maxlength = "20" } })
+                                <div id="idPassword" class="AuthenticateIcon"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows"><p> @Html.CheckBox("EmailNotification", new { id = "generatePasswordid", @data_bind = "checked:EmailNotification" }) @Html.Label(" Email/Notification")</p></div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows">
+                                <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows ">
+                                <input type="submit" value="Save" class="btn btn-default form-control " data-dismiss="modal" data-bind="click:EditTenant" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!--ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo-->
 
 <!--mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mai mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail mail  mail mail mail mail -->
@@ -552,264 +620,273 @@
             @*<script src="~/Scripts/HighChart/highcharts.js"></script>
         <script src="~/Scripts/HighChart/modules/exporting.js"></script>*@
                 <script type="text/javascript">
-                    $(document).ready(function (e) {
+    $(document).ready(function (e) {
 
 
 
-                        $(function () {
-
-
-                            google.setOnLoadCallback(drawChart);
-                            function drawChart() {
-
-                                var data = google.visualization.arrayToDataTable([
-                                  ['USPS', 'Hours per Day'],
-                                  ['DHL', 11],
-                                  ['FedEx', 2],
-                                  ['UPS', 2],
-                                  ['Others', 2]
-                                ]);
-
-                                var options = {
-                                    title: 'Total Package(s) for this apartment'
-                                };
-
-                                var chart = (document.getElementById('piechart'));
-                               
-                                if (chart != null)
-                                {
-                                   
-                                    chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-                                }
-                                else
-                                {
-
-                                    chart = new google.visualization.PieChart(document.getElementById('piechartxs'));
-
-                                }
-                               
-
-                                chart.draw(data, options);
-                            }
-
-
-                            //============================================tenant request =====================================================================
-
-                            $('#descriptionarea').keyup(function () {
-                                var maxl = $(this).attr("maxlength") - 1;
-                                var input = $(this).val().length;
-
-                                var totalused = maxl + 1 - input;
-                                if (input != 0) {
-                                    $('#wordcount').html('<p style="color:red;">-' + input + '</p>' + "<P>of</P>" + '<p style="color:green;">' + totalused + '</p>');
-
-                                } else {
-                                    $('#wordcount').html("");
-                                }
+        $(function () {
 
 
 
-                            });
 
-                            $('#datetimepickerfrom').datetimepicker({
-                                timepicker: true,
-                                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
-                                formatDate: 'y.m.d',
-                                formatTime: 'g:i a',
-                                step: 5
+            //============================================tenant request =====================================================================
 
+            $('#descriptionarea').keyup(function () {
+                var maxl = $(this).attr("maxlength") - 1;
+                var input = $(this).val().length;
 
-                            });
+                var totalused = maxl + 1 - input;
+                if (input != 0) {
+                    $('#wordcount').html('<p style="color:red;">-' + input + '</p>' + "<P>of</P>" + '<p style="color:green;">' + totalused + '</p>');
 
-                            $('#datetimepickerto').datetimepicker({
-                                timepicker: true,
-                                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
-                                formatDate: 'y.m.d',
-                                formatTime: 'g:i a',
-                                step: 5
-                            });
+                } else {
+                    $('#wordcount').html("");
+                }
 
 
 
-                            //=========================================================================================================================================
+            });
+
+            $('#datetimepickerfrom').datetimepicker({
+                timepicker: true,
+                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
+                formatDate: 'y.m.d',
+                formatTime: 'g:i a',
+                step: 5
 
 
-                            $('[data-toggle="popover"]').popover({
-                                placement: 'left',
-                                html: true,
-                                content: function () {
-                                    return $('#popover_content_wrapper').html();
-                                }
-                            });
-                            $('body').on('click', function (e) {
-                                $('[data-toggle="popover"]').each(function () {
-                                    //the 'is' for buttons that trigger popups
-                                    //the 'has' for icons within a button that triggers a popup
-                                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                                        $(this).popover('hide');
-                                    }
-                                });
-                            });
+            });
 
-                            $('.btn').on('click', function (e) {
-                                if (typeof $(e.target).data('original-title') == 'undefined' &&
-                                   !$(e.target).parents().is('.popover.in')) {
-                                    $('[data-original-title]').popover('hide');
-                                }
-                            });
-
-                            $('html').on('click', function (e) {
-
-                                $('#popover_content_wrapper').popover('hide');
-
-                                if (typeof $(e.target).data('original-title') == 'undefined' &&
-                                   !$(e.target).parents().is('.popover.in')) {
-                                    $('[data-original-title]').popover('hide');
-                                }
-                            });
+            $('#datetimepickerto').datetimepicker({
+                timepicker: true,
+                minDate: '-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01
+                formatDate: 'y.m.d',
+                formatTime: 'g:i a',
+                step: 5
+            });
 
 
-                            // ==================================================Add Client form=====================================================
-                            $('#generatePasswordid').change(function () {
-                                if ($(this).is(':checked') == true) {
-                                    //alert("it is checked");
-                                    $('.hideme').hide();
-                                    $('.autogepassword').show();
 
-                                }
-                                else {
-                                    //alert("it is not checked");
-                                    $('.hideme').show();
-                                    $('.autogepassword').hide();
-                                }
-                            });
-                            //=======================================================================================================================
+            //=========================================================================================================================================
 
-                            var viewModel = function () {
-                                var self = this;
-                                //=====================================================Adding Tenant old viewModel====================================
 
-                                self.FNameTenant = ko.observable("");
-                                self.LNameTenant = ko.observable("");
-                                self.PhoneTenant = ko.observable("");
-                                self.UsernameTenant = ko.observable("");
-                                self.PasswordTenant = ko.observable("");
-                                Check = ko.observable();
-                                this.Checkboxpassword = ko.computed(function () {
-                                    if (Check() == true) { self.PasswordTenant("");}
-                                    else {self.PasswordTenant("");}
-                                });                                
-                                //Checks if Fname has chr
-                                this.ComputeFName = ko.computed(function () {
-                                    if (self.FNameTenant().length > 0) {
-                                       
-                                        $('#idFirstName').css("color", "green");
-                                        $('#idFirstName').removeClass('glyphicon glyphicon-asterisk');
-                                        $('#idFirstName').addClass('glyphicon glyphicon-ok');
-                                        return 'chars: ' + self.FNameTenant.length;
-                                    } else {
-                                       
-                                        $('#idFirstName').removeClass('glyphicon glyphicon-ok');
-                                        $('#idFirstName').css("color", "red");
-                                        $('#idFirstName').addClass('glyphicon glyphicon-asterisk');
-                                    }
-                                });
-                                //Checks if Lname has chr
-                                this.ComputeLName = ko.computed(function () {
-                                    if (self.LNameTenant().length > 0) {
-                                        $('#idLastName').css("color", "green");
-                                        $('#idLastName').removeClass('glyphicon glyphicon-asterisk');
-                                        $('#idLastName').addClass('glyphicon glyphicon-ok');
-                                        return 'chars: ' + self.LNameTenant().length;
-                                    } else {
-                                        $('#idLastName').removeClass('glyphicon glyphicon-ok');
-                                        $('#idLastName').css("color", "red");
-                                        $('#idLastName').addClass('glyphicon glyphicon-asterisk');
-                                    }
-                                });
-                                //Checks if  has Phone digits
-                                this.ComputePhone = ko.computed(function () {
-                                    if (self.PhoneTenant().length > 0) {
-                                        $('#idPhone').css("color", "green");
-                                        $('#idPhone').removeClass('glyphicon glyphicon-asterisk');
-                                        $('#idPhone').addClass('glyphicon glyphicon-ok');
-                                        return 'chars: ' + self.PhoneTenant().length;
-                                    }
-                                    else {
-                                        $('#idPhone').removeClass('glyphicon glyphicon-ok');
-                                        $('#idPhone').css("color", "red");
-                                        $('#idPhone').addClass('glyphicon glyphicon-asterisk');
-                                    }
-                                });
-                                //Checks if Username has chr
-                                this.Computeusername = ko.computed(function () {
-                                    if (self.UsernameTenant().length > 0) {
-                                        $('#idUsername').css("color", "green");
-                                        $('#idUsername').removeClass('glyphicon glyphicon-asterisk');
-                                        $('#idUsername').addClass('glyphicon glyphicon-ok');
-                                        return 'chars: ' + self.UsernameTenant().length;
-                                    } else {
-                                        $('#idUsername').removeClass('glyphicon glyphicon-ok');
-                                        $('#idUsername').css("color", "red");
-                                        $('#idUsername').addClass('glyphicon glyphicon-asterisk');
-                                    }
-                                });
-                                //Checks if password has chr
-                                this.Computepassword = ko.computed(function () {
-                                    if (self.PasswordTenant().length > 0) {
-                                        $('#idPassword').css("color", "green");
-                                        $('#idPassword').removeClass('glyphicon glyphicon-asterisk');
-                                        $('#idPassword').addClass('glyphicon glyphicon-ok');
-                                        return 'chars: ' + self.PasswordTenant().length;
-                                    } else {
-                                        $('#idPassword').removeClass('glyphicon glyphicon-ok');
-                                        $('#idPassword').css("color", "red");
-                                        $('#idPassword').addClass('glyphicon glyphicon-asterisk');
-                                    }
-                                });
-                                this.btnStat = ko.computed(function () {
-                                    //debugger;
-                                    if (
-                                        self.FNameTenant().length > 0 &&
-                                        self.LNameTenant().length > 0 &&
-                                        self.PhoneTenant().length > 0 &&
-                                        self.UsernameTenant().length > 0 &&
-                                        self.PasswordTenant().length > 0
-                                        ) {
-                                        $('#submitlgmd').prop("disabled", false);
-                                        //$('#submitlgmd_B').prop("disabled", false);
-                                    }
-                                    else {
-                                        $('#submitlgmd').prop("disabled", true);
-                                        //$('#submitlgmd_B').prop("disabled", true);
-                                    }
-                                }, this);
-                                //====================================================================================================================
+            $('[data-toggle="popover"]').popover({
+                placement: 'left',
+                html: true,
+                content: function () {
+                    return $('#popover_content_wrapper').html();
+                }
+            });
+            $('body').on('click', function (e) {
+                $('[data-toggle="popover"]').each(function () {
+                    //the 'is' for buttons that trigger popups
+                    //the 'has' for icons within a button that triggers a popup
+                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                        $(this).popover('hide');
+                    }
+                });
+            });
 
-                                self.DeliveryData = ko.observable();
-                                self.Packagecount = ko.observable();
-                                self.FName = ko.observable();
-                                self.LName = ko.observable();
-                                self.Phone = ko.observable();
-                                self.Trackings = ko.observableArray();
-                                self.TrackingNumbers = ko.observableArray();
-                                self.TrackingNumbersNotification = ko.observableArray();
-                                self.ShowDelivery = ko.observable(false);
+            $('.btn').on('click', function (e) {
+                if (typeof $(e.target).data('original-title') == 'undefined' &&
+                   !$(e.target).parents().is('.popover.in')) {
+                    $('[data-original-title]').popover('hide');
+                }
+            });
 
-                                self.ShowDeliveryFunc = function (item, event) {
-                                    //var elementkey =$(event.target).prop('data-ShowDeliveryKey');
-                                    //alert(elementkey);
+            $('html').on('click', function (e) {
 
-                                    self.ShowDelivery(true);
-                                    self.Trackings.removeAll();
-                                    return true;
-                                };
-                                self.HideDeliveryFunc = function () {
-                                    self.ShowDelivery(false);
-                                    self.Trackings.removeAll();
-                                    return false;
-                                };
+                $('#popover_content_wrapper').popover('hide');
+
+                if (typeof $(e.target).data('original-title') == 'undefined' &&
+                   !$(e.target).parents().is('.popover.in')) {
+                    $('[data-original-title]').popover('hide');
+                }
+            });
+
+
+            // ==================================================Add Client form=====================================================
+            $('#generatePasswordid').change(function () {
+                if ($(this).is(':checked') == true) {
+                    //alert("it is checked");
+                    $('.hideme').hide();
+                    $('.autogepassword').show();
+
+                }
+                else {
+                    //alert("it is not checked");
+                    $('.hideme').show();
+                    $('.autogepassword').hide();
+                }
+            });
+            //=======================================================================================================================
+
+            var viewModel = function () {
+                var self = this;
+                //=====================================================Adding Tenant old viewModel====================================
+
+                self.FNameTenant = ko.observable("");
+                self.LNameTenant = ko.observable("");
+                self.PhoneTenant = ko.observable("");
+                self.UsernameTenant = ko.observable("");
+                self.PasswordTenant = ko.observable("");
+                self.StateList = ko.observableArray("");
+                self.EmailNotification = ko.observable(true);
+                self.itistrue = ko.observable(true);
+                self.UPSCount = ko.observable("");
+                self.USPSCount = ko.observable("");
+                self.FedExCount = ko.observable("");
+                self.DHLCount = ko.observable("");
+                self.TNTCount = ko.observable("");
+                self.OthersCount = ko.observable("");
+
+
+                self.Check = ko.observable();
+                this.Checkboxpassword = ko.computed(function () {
+                    if (Check() == true) { self.PasswordTenant("");}
+                    else {self.PasswordTenant("");}
+                });
+                //Checks if Fname has chr
+                this.ComputeFName = ko.computed(function () {
+                    if (self.FNameTenant().length > 0) {
+
+                        $('#idFirstName').css("color", "green");
+                        $('#idFirstName').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idFirstName').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + self.FNameTenant.length;
+                    } else {
+
+                        $('#idFirstName').removeClass('glyphicon glyphicon-ok');
+                        $('#idFirstName').css("color", "red");
+                        $('#idFirstName').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+                //Checks if Lname has chr
+                this.ComputeLName = ko.computed(function () {
+                    if (self.LNameTenant().length > 0) {
+                        $('#idLastName').css("color", "green");
+                        $('#idLastName').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idLastName').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + self.LNameTenant().length;
+                    } else {
+                        $('#idLastName').removeClass('glyphicon glyphicon-ok');
+                        $('#idLastName').css("color", "red");
+                        $('#idLastName').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+                //Checks if  has Phone digits
+                this.ComputePhone = ko.computed(function () {
+                    if (self.PhoneTenant().length > 0) {
+                        $('#idPhone').css("color", "green");
+                        $('#idPhone').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idPhone').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + self.PhoneTenant().length;
+                    }
+                    else {
+                        $('#idPhone').removeClass('glyphicon glyphicon-ok');
+                        $('#idPhone').css("color", "red");
+                        $('#idPhone').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+                //Checks if Username has chr
+                this.Computeusername = ko.computed(function () {
+                    if (self.UsernameTenant().length > 0) {
+                        $('#idUsername').css("color", "green");
+                        $('#idUsername').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idUsername').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + self.UsernameTenant().length;
+                    } else {
+                        $('#idUsername').removeClass('glyphicon glyphicon-ok');
+                        $('#idUsername').css("color", "red");
+                        $('#idUsername').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+                //Checks if password has chr
+                this.Computepassword = ko.computed(function () {
+                    if (self.PasswordTenant().length > 0) {
+                        $('#idPassword').css("color", "green");
+                        $('#idPassword').removeClass('glyphicon glyphicon-asterisk');
+                        $('#idPassword').addClass('glyphicon glyphicon-ok');
+                        return 'chars: ' + self.PasswordTenant().length;
+                    } else {
+                        $('#idPassword').removeClass('glyphicon glyphicon-ok');
+                        $('#idPassword').css("color", "red");
+                        $('#idPassword').addClass('glyphicon glyphicon-asterisk');
+                    }
+                });
+                this.btnStat = ko.computed(function () {
+                    //debugger;
+                    if (
+                        self.FNameTenant().length > 0 &&
+                        self.LNameTenant().length > 0 &&
+                        self.PhoneTenant().length > 0 &&
+                        self.UsernameTenant().length > 0 &&
+                        self.PasswordTenant().length > 0
+                        ) {
+                        $('#submitlgmd').prop("disabled", false);
+                        //$('#submitlgmd_B').prop("disabled", false);
+                    }
+                    else {
+                        $('#submitlgmd').prop("disabled", true);
+                        //$('#submitlgmd_B').prop("disabled", true);
+                    }
+                }, this);
+                //====================================================================================================================
+
+                self.DeliveryData = ko.observable();
+                self.Packagecount = ko.observable();
+                self.FName = ko.observable();
+                self.LName = ko.observable();
+                self.Phone = ko.observable();
+                self.Trackings = ko.observableArray();
+                self.TrackingNumbers = ko.observableArray();
+                self.TrackingNumbersNotification = ko.observableArray();
+                self.ShowDelivery = ko.observable(false);
+
+                self.ShowDeliveryFunc = function (item, event) {
+                    //var elementkey =$(event.target).prop('data-ShowDeliveryKey');
+                    //alert(elementkey);
+
+                    self.ShowDelivery(true);
+                    self.Trackings.removeAll();
+                    return true;
+                };
+                self.HideDeliveryFunc = function () {
+                    self.ShowDelivery(false);
+                    self.Trackings.removeAll();
+                    return false;
+                };
+
+                //................................................................................................................................
+                //pagecounts
+                $.ajaxSettings.traditional = true;
+                $.ajax(
+                    {
+                        type: "GET",
+                        url: '/Module/PackageCount/',
+                        dataType: "json",
+                        data: {ApartmentID:@buildinginfo.AptID },
+                                        success: function (data) {
+
+
+                                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                            self.UPSCount(TrkPkgs.UPSCount);
+                                            self.USPSCount(TrkPkgs.USPSCount);
+                                            self.FedExCount(TrkPkgs.FedExCount);
+                                            self.DHLCount(TrkPkgs.DHLCount);
+                                            self.TNTCount(TrkPkgs.TNTCount);
+                                            self.OthersCount(TrkPkgs.OtherCount);
+
+                                            drawChart();
+
+                                        }
+                                    });
+
+                                //................................................................................................................................
+
                                 // Reference the auto-generated proxy for the hub.
                                 //Notification
                                 var Notification = $.connection.notificationsHub;
@@ -820,7 +897,7 @@
 
                                     var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                                     for (var i = 0; i < TrkPkgs.length; i++) {
-                                        
+
                                         self.TrackingNumbers.push({
                                             pkgsTrks: TrkPkgs[i].TrackingNumber,
                                             ArrivalDate: TrkPkgs[i].ArrivalTime,
@@ -857,7 +934,7 @@
                                         self.FName(ReceiveCleanobj.FirstName);
                                         self.LName(ReceiveCleanobj.LastName);
                                         self.Phone(ReceiveCleanobj.Phone);
-
+                                        self.UPSCount(TrackingCount);
 
                                         //this is the latest package that just arrived
                                         for (var i = 0; i < packagesCount; i++) {
@@ -905,7 +982,7 @@
                                         //show element
                                         $('.deliveryclass').on('click', function () {
                                             var currentID = $(this).attr('data-ShowDeliveryKey');
-                                            $(element).hide()
+                                           // $(element).hide();
                                             if ($(element).attr('data-ShowDeliveryKey') == currentID) {
                                                 ko.unwrap(value) ? $(element).slideDown() : $(element).slideUp();
 
@@ -935,6 +1012,124 @@
                                         $.connection.hub.start();
                                     }, 5000); // Restart connection after 5 seconds.
                                 });
+                    //....................................................................................................................................
+                                google.setOnLoadCallback(drawChart);
+                                function drawChart() {
+
+                                    var data = google.visualization.arrayToDataTable([
+                                      ['Label', 'Hours per Day'],
+                                      ['USPS', self.USPSCount()],
+                                      ['DHL', self.DHLCount()],
+                                      ['FedEx', self.FedExCount()],
+                                      ['UPS', self.UPSCount()],
+                                      ['Others', self.OthersCount()],
+                                      ['TNT', self.TNTCount()]
+                                    ]);
+
+                                    var options = {
+                                        title: 'Total Package(s) for this apartment'
+                                    };
+
+                                    var chart = (document.getElementById('piechart'));
+
+                                    if (chart != null) {
+
+                                        chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                                    }
+                                    //else
+                                    //{
+
+                                    //    chart = new google.visualization.PieChart(document.getElementById('piechartxs'));
+
+                                    //}
+
+
+                                    chart.draw(data, options);
+                                };
+
+                    //........................................................................................................................................
+
+                                //$.ajaxSettings.traditional = true;
+                                //$.ajax(
+                                //    {
+                                //        type: "GET",
+                                //        url: '/building/States/',
+                                //        dataType: "json",
+                                //        success: function (data) 
+                                //        {
+                                //            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                //            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                //            self.StateList(TrkPkgs);
+                                //        }
+                                //    });
+
+                        //........................................................................................................................................
+                               
+                                $('.deliveryclass').on('click', function () {
+                                    var TenantID = $(this).attr('data-tenantID');
+                                });
+                                var Tenant =
+                                            {
+                                                ID:TenantID,
+                                                FirstName : self.FNameTenant,
+                                                LastName :self.LNameTenant,
+                                                Phone :self.PhoneTenant,
+                                                Username :self.UsernameTenant,
+                                                Password : self.PasswordTenant,
+                                                aptID :@buildinginfo.AptID,
+                                                EmailNotification:self.EmailNotification,
+                                                GenerateAutomaticPassword:self.Check
+
+                                            }
+                
+
+               
+                self.AddTenant = function()
+                {
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: '/building/AddingTenant/',
+                            dataType: "json",
+                            data:Tenant,
+                            success: function (data) {
+                                //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                //self.StateList(TrkPkgs);
+                            }
+                        });
+                };
+
+
+                var TenantID = "";
+                
+               
+
+                self.EditTenant = function()
+                {
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: '/building/TenantEdit/',
+                            dataType: "json",
+                            data:Tenant,
+                            success: function (data) {
+                                //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                //self.StateList(TrkPkgs);
+                            }
+                        });
+                };
+
+
+
                             };
 
                             ko.applyBindings(viewModel);
