@@ -354,10 +354,10 @@ box-shadow:         0px 3px 10px 1px rgba(48, 50, 50, 0.47);
 
 
 .ResquestFont {
-font-family:'Script MT';
+    min-height:100%;
 color: darkgray;
 font-weight:100;
- text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.4); 
+text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.4); 
 }
 .col-sx-12 {
 
@@ -1985,4 +1985,16 @@ min-width:100%;
 
 .AuthenticateIcon {
 position:relative; left:406px; top:-25px;
+}
+
+.TenantRequestflied {
+min-width:100%;
+
+}
+
+#wordcount {
+position:absolute;
+right:35px;
+top:-50px;
+
 }
