@@ -207,3 +207,4 @@
 /// <reference path="knockout-bootstrap.min.js" />
 /// <reference path="customjsfile.js" />
 /// <reference path="knockout.validation.min.js" />
+/// <reference path="buildingstaffmgr.js" />

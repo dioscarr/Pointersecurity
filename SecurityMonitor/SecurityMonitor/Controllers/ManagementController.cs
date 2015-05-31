@@ -647,7 +647,7 @@ namespace SecurityMonitor.Controllers
             ManageUsersProfileVM mupvm = new ManageUsersProfileVM();
             mupvm.BuildingID = BuildingID;
             ViewBag.BuildingUsers = mupvm.LoadBuildingUsers(BuildingID);
-
+            ViewBag.BuildingInfo = db.Buildings.Find(BuildingID);
            return View(mupvm);
         }
         [HttpPost]

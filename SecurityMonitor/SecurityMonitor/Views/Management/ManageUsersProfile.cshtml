@@ -5,15 +5,29 @@
     ViewBag.Title = "ManageUsersProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row text-center hollow3 whity" style=" padding-top:30px; padding-bottom:30px; margin-bottom:50px;"
-     onclick="location.href = '@Url.Action("buildingProfile", "Building", new { buildingID = @Model.BuildingID })'">
-    <span style="color:white;">Return To Building</span>
 
+
+<div class="row">
+
+   @{ var BInfo = (Buildings)@ViewBag.BuildingInfo;}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerDefault">
+        <ol class="breadcrumb" style="line-height:20px;" id="clientbreadcrumbid">
+            <li>@Html.ActionLink("Home", "index", "Home", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Page", "ClientHome", "building", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Profile", "ClientProfile", "building", new { ClientID = BInfo.ClientID }, new { @class = "breadcrumblink" })</li>
+            <li> @Html.ActionLink((string)@BInfo.BuildingName, "BuildingProfile", "building", new { buildingID = @Model.BuildingID }, new { @class = "breadcrumblink" })</li>
+            <li>
+                Create New Staff
+        </li>
+    </ol>
+</div>
 </div>
 
 
 
-<div class="row " style="padding:0px 0; background:white; padding-bottom:100px; height:400px; ">
+
+<div class="row ">
 
     
    
@@ -21,111 +35,195 @@
 {
 
     List<string> myRoles = new List<string> { "Repair2", "Repair3", "Repair4" };
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border:1px solid lightgrey; height:400px; background:#f5f3f3;">
+            @Html.HiddenFor(model => model.RoleNames, myRoles)
 
-    <div class="col-md-offset-1 col-md-4 form-group " style="border:1px solid lightgrey; height:400px; background:#f5f3f3;">
-        @Html.HiddenFor(model => model.RoleNames, myRoles)
-       
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <section>
-                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center">
-                    <p style="font-size:20px; padding-top:20px;">Manage User(s)</p>
-                </div>
-                @Html.TextBox("FullName", null, new { placeholder = "Full Name", @class = "form-control col-md-12 col-sm-12 col-xs-12 input-sm  ", @style = " max-width: 100%; margin-bottom: 10px; margin-top:30px; " })
-                @Html.TextBox("Email", null, new { placeholder = "Email", @class = " form-control col-md-12 col-sm-12 col-xs-12 input-sm", @style = " max-width: 100%; margin-bottom: 10px;" })
-                @Html.TextBox("Phone", null, new { placeholder = "Phone", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = " max-width: 50%;margin-bottom: 10px;" })
-                @Html.TextBox("UserName", null, new { placeholder = "UserName", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
-                @Html.Password("Password", null, new { placeholder = "Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
-                @Html.Password("ConfirmPassword", null, new { placeholder = "Confirm Password", @class = "form-control col-md-6 col-sm-6 col-xs-6 input-sm", @style = "max-width: 50%; margin-bottom: 10px;" })
 
-                @Html.Hidden("BuildingID", Model.BuildingID)
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  text-center">
+                <p style="font-size:20px; padding-top:20px;">Create New Building Staff</p>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @Html.TextBox("FullName", null, new { placeholder = "Full Name", @class = "form-control newstafffield" })
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+             @Html.TextBox("Email", null, new { placeholder = "Email", @class = " form-control newstafffield" })
+            </div>
+           
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                @Html.TextBox("Phone", null, new { placeholder = "Phone", @class = "form-control newstafffield " })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                @Html.TextBox("UserName", null, new { placeholder = "UserName", @class = "form-control newstafffield " })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                @Html.Password("Password", null, new { placeholder = "Password", @class = "form-control newstafffield " })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                @Html.Password("ConfirmPassword", null, new { placeholder = "Confirm Password", @class = "form-control newstafffield " })
+            </div>
+           
+          
+           
            
 
-                <div>
-                    <button type="submit" class="btn btn-default col-lg-12 col-md-12 col-sm-12 col-xs-12">Add Manager</button>
-                    <button id='upClick' type="button" class="btn btn-link">Edit Users Permission(s)</button>
-
-                </div>
+            @Html.Hidden("BuildingID", Model.BuildingID)
 
 
-            </section>
-        
-    </div>
-    <div class="col-md-6" style="background: #f5f3f3;border:1px solid lightgrey; ">
-        <div class="row ">
-            <div class="col-md-6" style="background: #f5f3f3; border-right:1px solid lightgrey; ">
+            
 
-                <div class="col-md-12 text-center permission " style="padding-top:25px; ">
-                    Modules Permissions
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Repair:
-                    @Html.CheckBoxFor(c => c.permission.permission.Repair, new { })
 
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Acess Control:
-                    @Html.CheckBoxFor(c => c.permission.permission.Accesscontrol)
-
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    News:
-                    @Html.CheckBoxFor(c => c.permission.permission.News)
-
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Events:
-                    @Html.CheckBoxFor(c => c.permission.permission.Events)
-
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Legal Docs:
-                    @Html.CheckBoxFor(c => c.permission.permission.LegalDocs)
-
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Delivery:
-                    @Html.CheckBoxFor(c => c.permission.permission.Delivery)
-
-                </div>
-            </div>
-            <!--bUILDING pERMISSION-->
-            <div class="col-md-6" style="background: #f5f3f3;  ">
-
-                <div class="col-md-12 text-center permission " style="padding-top:25px; ">
-                    Building Permission
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Contact Book:
-                    @Html.CheckBoxFor(c => c.permission.permission.Contactbook)
-
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Apartments:
-                    @Html.CheckBoxFor(c => c.permission.permission.Apartment)
-
-                </div>
-                <div class="col-md-12 text-center permission hollow3">
-                    Basic Building Features:
-                    @Html.CheckBoxFor(c => c.permission.permission.BasicFeatures)
-
-                </div>
-
-            </div>
 
 
         </div>
-
     </div>
 
-}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 
-   
 
-   
+        
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+
+                <h4>Add Permissions</h4>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="foreach:Permissions">
+                <!--Add Module section-->
+                <section style="margin:50px 0 50px 0;">
+                    <!--vCard starts-->
+                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3   paddingBottom20px nopadding">
+                        <!--header starts-->
+                        <section class=" col-md-12 text-center clientboxrow ">
+                            <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:Name, click:removePermission">
+
+                                </div>
+                            </section>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            </div>
+
+
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="border:1px solid lightgrey;  background:#f5f3f3;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding text-center">
+
+                    <h4>Added Permissions</h4>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="foreach:AddedPermissions">
+                    <!--Add Module section-->
+                    <section style="margin:50px 0 50px 0;">
+                        <!--vCard starts-->
+                        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3   paddingBottom20px nopadding">
+                            <!--header starts-->
+                            <section class=" col-md-12 text-center clientboxrow dragme " >
+                                <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="text:Name, click:removeAddedPermission"></div>
+                                </section>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
     
-</div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white" style="min-height:100px;">
+        
+            <div>
+                <button type="submit" class="btn btn-default">Add Staff</button>
+                <button type="submit" class="btn btn-default">Cancel</button>
+                
+                <br />
+                <button id='upClick' type="button" class="btn btn-link">Edit Users Permission(s)</button>
+            </div>
+        </div>
+    </div>
+    
+    
+        @*<div class="col-md-12" style="background: #f5f3f3;border:1px solid lightgrey; ">
+            <div class="row ">
+                <div class="col-md-12" style="background: #f5f3f3; border-right:1px solid lightgrey; ">
+
+                    <div class="col-md-12 text-center permission " style="padding-top:25px; ">
+                        Modules Permissions
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        Repair:
+                        @Html.CheckBoxFor(c => c.permission.permission.Repair, new { })
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        Acess Control:
+                        @Html.CheckBoxFor(c => c.permission.permission.Accesscontrol)
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        News:
+                        @Html.CheckBoxFor(c => c.permission.permission.News)
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        Events:
+                        @Html.CheckBoxFor(c => c.permission.permission.Events)
+
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        Legal Docs:
+                        @Html.CheckBoxFor(c => c.permission.permission.LegalDocs)*@
+
+                    @*</div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        Delivery:
+                        @Html.CheckBoxFor(c => c.permission.permission.Delivery)
+
+                    </div>
+
+                    <div class="col-md-12 text-center permission " style="padding-top:25px; ">
+                        Building Permission
+                    </div>
+                    <div class="col-md-12 text-center permission hollow3">
+                        Contact Book:
+                        @Html.CheckBoxFor(c => c.permission.permission.Contactbook)
+
+                    </div>*@
+                    @*<div class="col-md-12 text-center permission hollow3">
+                        Apartments:
+                        @Html.CheckBoxFor(c => c.permission.permission.Apartment)
+
+                    </div>*@
+                    @*<div class="col-md-12 text-center permission hollow3">
+                        Basic Building Features:
+                        @Html.CheckBoxFor(c => c.permission.permission.BasicFeatures)*@
+
+                    @*</div>
+                </div>*@
+                <!--bUILDING pERMISSION-->
+                @*<div class="col-md-6" style="background: #f5f3f3;  ">*@
+
+
+                @*</div>
+
+
+            </div>
+
+        </div>*@
+
+        }
+
+
+
+
+
+    </div>
 
 <div class="row EditpermissionSection" style="display:none;">
     <div class="col-md-offset-1 col-md-10">
@@ -275,10 +373,12 @@
 
 @section scripts
 {
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/knockout-3.1.0.js"></script>
-<script src="~/Scripts/jquery-2.1.1.min.js"></script>
 
+<script src="~/Scripts/BuildingStaffMgr.js"></script>
    <script type="text/javascript">
        $(document).ready(function () {
 
@@ -388,6 +488,45 @@
            $('#EditEventsid').prop("checked", false);
            $('#EditLDid').prop("checked", false);
        }
+
+
+
+       $(function () {
+
+
+           $(".dragme").draggable();
+
+          var viewModel=function(){
+               self = this;
+
+               var data = [{ Name: "Repair" },
+                   { Name: "Delivery" },
+               { Name: "Acess Control" },
+               { Name: "News" },
+               { Name: "Events" },
+               { Name: "Legal Docs" },
+               { Name: "Building Permission" },
+               { Name: "Contact Book" },
+               { Name: "Apartments" }];
+               self.Permissions = ko.observableArray(data);
+               self.AddedPermissions = ko.observableArray();
+               self.removePermission = function (task) {
+                   self.Permissions.remove(task);
+                   self.AddedPermissions.push(task);
+                  // alert(JSON.stringify( self.Permissions()));
+               };
+               self.removeAddedPermission = function (task) {
+                   self.AddedPermissions.remove(task);
+                   self.Permissions.push(task);
+                   // alert(JSON.stringify( self.Permissions()));
+               };
+           };
+
+
+           ko.applyBindings(viewModel);
+
+
+       });
       
 
     </script>

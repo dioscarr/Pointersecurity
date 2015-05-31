@@ -980,14 +980,35 @@ margin-top:2px;
   -webkit-box-shadow: 1px 1px 2px #b7b7b7;
   -moz-box-shadow: 3px 3px 7px #b7b7b7e;
    line-height: 54px;
+   
  
+}
+
+.boxheadHome 
+{
+    min-height:250px;
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;  
 }
 
 
 
 
 
+
 .boxname {
+    min-height:50px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(50, 50, 50, 0.75);
+
+}
+
+
+.boxnameHome {
+    margin:40px 0 0 0px;
     min-height:50px;
     font-size: 14px;
     font-weight: bold;
@@ -1996,5 +2017,26 @@ min-width:100%;
 position:absolute;
 right:35px;
 top:-50px;
+
+}
+
+.newstafffield {
+min-width:100%;
+margin:20px 0 0 0;
+}
+
+.img-circle.hometiles {
+margin:60px 0 0 0;
+
+}
+
+.logintile {
+min-width:100%;
+margin:0 0 30px 0;
+
+}
+
+.img-circle.hometileslogin {
+margin:20px 0 20px 0;
 
 }
