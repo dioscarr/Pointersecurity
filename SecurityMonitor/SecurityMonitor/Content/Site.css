@@ -2103,3 +2103,20 @@ min-height:100px;
 }
 
 
+.newtenant {
+    
+    padding:20px;
+}
+    .newtenant::before {
+     content:'';
+   display:inline-block;
+   line-height:70px;
+   margin-right:10px;
+     min-height:14px;
+    min-width:14px;
+    background:orange;
+    border-radius:50%;
+    
+    }
+
+
