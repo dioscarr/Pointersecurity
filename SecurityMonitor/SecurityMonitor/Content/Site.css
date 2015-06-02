@@ -1964,11 +1964,14 @@ margin:50px 0 0 0;
 
 .apartmentsettings-leftside {
 border-right:1px solid lightgrey;
+
 }
+
 
 .apartmentsettings{
     background:white;
-    min-height:200px;
+    min-height:270px;
+    margin-top:20px;
 }
 
 .Apartment-tenant{
@@ -1980,11 +1983,16 @@ border-right:1px solid lightgrey;
 }
 
 .piechart-tenant{
-   display:block;
+   /*display:block;
    position:relative;
-   left:-260px;
+   left:0px;
      width:200%;
-    height: 200px;
+    height: 200px;*/
+
+   margin-top:10px;
+   min-width:400px;
+   margin:auto 0;
+  
 
 
 }
@@ -2119,4 +2127,7 @@ min-height:100px;
     
     }
 
+.sencondchartapt {
+margin-top:40px !important;
 
+}

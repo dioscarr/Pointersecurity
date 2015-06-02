@@ -37,7 +37,7 @@
 
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center blueDefault headerDefault clientbuildinglist">
-            <section class=" myModalLabel ">@buildinginfo.BuildingName - <span class="" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span></section>
+            <section class=" myModalLabel ">@buildinginfo.BuildingName - <span class="hidden-xs" style="color:white;">@buildinginfo.Address @buildinginfo.City @buildinginfo.States @buildinginfo.ZipCode </span></section>
         </div>
         <div id="miniMenuid" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 blueDefault headerDefault clientbuildinglist">
             <section data-toggle="popover" id="facongid"
@@ -131,38 +131,41 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  Apartment-tenant" >            
 
             <!--Left Top Section -->
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 apartmentsettings-leftside apartmentsettings ">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 apartmentsettings-leftside apartmentsettings ">
                     <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                         <h4>Activity Log</h4>
                         <span id="apartmentActivitylabel" class="pull-left">Earlier this Month</span>
                     </div>
                     <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 activitybox text-left">
                         <hr class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" />
-                        <span class="col-lg-10 col-md-10 col-sm-10 col-xs-10 passowrdupdae nopadding">Password change for Roi</span><span class="col-lg-2 col-md-2 col-sm-2 col-xs-2 dateactivitylog">5/25/215</span>
+                        <span class="col-lg-10 col-md-10 col-sm-12 col-xs-12 passowrdupdae nopadding">Password change for Roi</span><span class="col-lg-2 col-md-2 col-sm-12 col-xs-12 dateactivitylog">5/25/215</span>
                         <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" />
-                        <span class="col-lg-10 col-md-10 col-sm-10 col-xs-10 PhoneUpdate nopadding">Tel. Update for Young Rodriguez</span><span class="col-lg-2 col-md-2 col-sm-2 col-xs-2 dateactivitylog">5/10/215</span>
+                        <span class="col-lg-10 col-md-10 col-sm-12 col-xs-12 PhoneUpdate nopadding">Tel. Update for Young Rodriguez</span><span class="col-lg-2 col-md-2 col-sm-12 col-xs-12 dateactivitylog">5/10/215</span>
                         <hr class="nopadding" />
-                        <span class="col-lg-10 col-md-10 col-sm-10 col-xs-10 aptRequest nopadding"><a href="#">New Access Control Request</a> by Karla Wallace...</span><span class="col-lg-2 col-md-2 col-sm-2 col-xs-2 dateactivitylog">5/08/215</span>
+                        <span class="col-lg-10 col-md-10 col-sm-12 col-xs-12 aptRequest nopadding"><a href="#">New Access Control Request</a> by Karla Wallace...</span><span class="col-lg-2 col-md-2 col-sm-12 col-xs-12 dateactivitylog">5/08/215</span>
                         <hr class="nopadding" />
-                        <span class="col-lg-10 col-md-10 col-sm-10 col-xs-10 newtenant nopadding">New Tenant was added to this apartment</span><span class="col-lg-2 col-md-2 col-sm-2 col-xs-2 dateactivitylog">5/05/215</span>
+                        <span class="col-lg-10 col-md-10 col-sm-12 col-xs-12 newtenant nopadding">New Tenant was added to this apartment</span><span class="col-lg-2 col-md-2 col-sm-12 col-xs-12 dateactivitylog">5/05/215</span>
                         <hr class="nopadding" />
                     </div>
                     <div class="viewmoreapatActivities pull-right" ><a href="#">View more Activities</a></div>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 apartmentsettings">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                        <div id="piechart" class=" piechart-tenant "></div>                        
+                    </div>
+
+                   
+                    @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-lg hidden-md sencondchartapt">
+                        <div id="piechartxs" class="  col-lg-12 col-md-12 col-sm-12 col-xs-12 outline piechart-tenant-sm"></div>
+                    </div>*@
 
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div id="piechart" class="hidden-sm col-lg-12 col-md-12 col-sm-12 col-xs-12  piechart-tenant"></div>
-                         <div id="piechartxs" class="hidden-lg hidden-md col-lg-12 col-md-12 col-sm-12 col-xs-12 outline piechart-tenant-sm"></div>
-                    </div>
-                </div>
             @foreach (Tenant item in ViewBag.tenant)
             {
                     <!--tenant information-->
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 nopadding"> 
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding"> 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                             <!--vCard starts-->
                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12    nopadding">
@@ -972,7 +975,20 @@
                                     }, 5000); // Restart connection after 5 seconds.
                                 });
                     //....................................................................................................................................
+                              
+                                $(window).resize(function(){
+                                    drawChart();
+                                
+                                });
+                                
+                                
+                                
                                 google.setOnLoadCallback(drawChart);
+                                $(window).on("throttledresize", function (event) {
+                                    alert("resize");
+                                    drawChart();
+                                    console.log("screen just resized");
+                                });
                                 function drawChart() {
 
                                     var data = google.visualization.arrayToDataTable([
@@ -985,8 +1001,17 @@
                                       ['TNT', self.TNTCount()]
                                     ]);
 
+
+                                    //var options = {
+                                    //    'legend':'left',
+                                    //    'title':'My Big Pie Chart',
+                                    //    'is3D':true,
+                                       
+                                    //}
                                     var options = {
-                                        title: 'Total Package(s) for this apartment'
+                                        title: 'Total Package(s) for this apartment',
+                                        'width':'100%',
+                                        'height':250
                                     };
 
                                     var chart = (document.getElementById('piechart'));
@@ -1099,6 +1124,9 @@
                             ko.applyBindings(viewModel);
                         });
 
-                    });
+    });
+
+
+                 
                 </script>
                 }
