@@ -208,3 +208,5 @@
 /// <reference path="customjsfile.js" />
 /// <reference path="knockout.validation.min.js" />
 /// <reference path="buildingstaffmgr.js" />
+/// <reference path="gviz-api.js" />
+/// <reference path="thelibrary/timejs.js" />

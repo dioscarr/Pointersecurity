@@ -1070,12 +1070,39 @@ namespace SecurityMonitor.Controllers
 
 
         //Tenant Edit
+        //[HttpGet]
+        //public ActionResult TenantEdit(string TenantID)
+        //{
+        //    Tenant tn = db.Tenant.Find(TenantID);
+        //    return View(tn);        
+        //}
+       
+
+
+        
+
         [HttpGet]
-        public ActionResult TenantEdit(string TenantID)
-        {
-            Tenant tn = db.Tenant.Find(TenantID);
-            return View(tn);        
+        [AllowAnonymous]
+        public JsonResult loadTenant(int apartmentID)
+        {   //this i use forthe link since model didn't pass Nav properties
+
+            var tenants = db.Tenant.Where(c => c.aptID == apartmentID).Select(c => new 
+            { 
+                ID=c.ID,
+                FirstName = c.FirstName, 
+                LastName = c.LastName, 
+                Phone = c.Phone, 
+                UserName = c.Username, 
+                CreatedDate = c.Created 
+            }).ToList();
+
+            var mydata = Json(tenants);
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+           // return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID =BuildingID});
         }
+
+
         [HttpPost]
         [AllowAnonymous]
         public JsonResult TenantEdit(Tenant model)
@@ -1090,9 +1117,20 @@ namespace SecurityMonitor.Controllers
             Entry.Property(c => c.Username).IsModified = true;
             
             db.SaveChanges();
-            
-            
-            var mydata = Json("");
+
+
+
+            var tenants = db.Tenant.Where(c => c.aptID == model.aptID).Select(c => new 
+            { 
+                ID=c.ID,
+                FirstName = c.FirstName, 
+                LastName = c.LastName, 
+                Phone = c.Phone, 
+                UserName = c.Username, 
+                CreatedDate = c.Created 
+            }).ToList();
+
+            var mydata = Json(tenants);
 
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
            // return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID =BuildingID});
@@ -1669,6 +1707,23 @@ namespace SecurityMonitor.Controllers
 
             return  new  JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             
+        }
+
+
+
+        [HttpGet]
+        public JsonResult TenantEdit(string TenantID)
+        {
+            Tenant tn = db.Tenant.Find(TenantID);
+            Tenant obj = new Tenant();
+            obj.ID = tn.ID;
+            obj.FirstName = tn.FirstName;
+            obj.LastName = tn.LastName;
+            obj.Username = tn.Username;
+            obj.Phone = tn.Phone;
+            var mydata = Json(obj);
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         
       

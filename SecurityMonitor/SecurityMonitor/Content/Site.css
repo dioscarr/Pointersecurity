@@ -2131,3 +2131,18 @@ min-height:100px;
 margin-top:40px !important;
 
 }
+
+.editTenant {
+    padding: 50px;
+    margin:0 20px 0 20px!important;
+
+}
+.edittenantcontrol {
+padding:0 60px 30px 60px;
+}
+
+.edittenantformcontrollers {
+
+    margin-left:35px;
+
+}

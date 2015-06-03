@@ -158,12 +158,13 @@
 
                    
                     @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-lg hidden-md sencondchartapt">
-                        <div id="piechartxs" class="  col-lg-12 col-md-12 col-sm-12 col-xs-12 outline piechart-tenant-sm"></div>
+                        <div id="piechartxs" class="  col-lg-12 col-md-12 col-sm-12 col-xs-12  piechart-tenant-sm"></div>
                     </div>*@
 
                     </div>
-            @foreach (Tenant item in ViewBag.tenant)
+            @*@foreach (Tenant item in ViewBag.tenant)
             {
+                
                     <!--tenant information-->
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding"> 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
@@ -179,7 +180,7 @@
                                                 <span>Phone: @item.Phone</span><br/>
                                                 <span>Created on @item.Created</span>
                                                 <br />
-                                                <button class="btn btn-sm fa fa-edit deliveryclass" data-target="#myModalEditTenant" data-tenantid=@item.ID data-toggle="modal"></button>
+                                                <button class="btn btn-sm fa fa-edit deliveryclass" data-bind="click:loadTenantInfo" data-target="#myModalEditTenant" data-tenantid=@item.ID data-toggle="modal"></button>
                                                 <button class="btn btn-sm fa fa-trash deliveryclass" onclick="location.href = '@Url.Action("TenantDelete", "Building", new { TenantID = @item.ID })'"></button>
                                                 <button class="btn btn-sm fa fa-envelope-o deliveryclass" data-bind="fadeVisible:itistrue" data-showdeliverykey=@item.ID data-target="#myModaldeliveries" data-toggle="modal"></button>
                                                 <button class="btn btn-sm fa fa-plus-square deliveryclass" data-target="#myModalTenantRequest" data-toggle="modal"></button>
@@ -191,8 +192,43 @@
                         </div>
                     </div>
                     <!--advance options-->
-            }
-              
+            }*@
+
+
+
+          
+
+                    <!--tenant information-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:Tenants">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <!--vCard starts-->
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12    nopadding">
+                            <!--header starts-->
+                            <section class=" col-md-12 text-center clientboxrow  vcard-tenant">
+                                <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <img src="~/img/person.gif" class="img-circle" />
+                                        <h4 data-bind="text:FirstName"></h4><h4 data-bind="text:LastName"></h4>
+                                        <div class="" style="position:relative; top:-15px;">
+                                            <span data-bind="text:Phone"></span><br />
+                                            <span data-bind="text:CreatedDate"></span>
+                                            <br />
+                                            <button class="btn btn-sm fa fa-edit deliveryclass" data-bind="click:loadTenantInfo, attr:{'data-tenantid':ID}" data-target="#myModalEditTenant"  data-toggle="modal"></button>
+                                            <button class="btn btn-sm fa fa-trash deliveryclass" ></button>
+                                            <button class="btn btn-sm fa fa-envelope-o deliveryclass"  data-bind="fadeVisible:itistrue, click:loadTenantInfo, attr:{'data-showdeliverykey':ID}"  data-target="#myModaldeliveries" data-toggle="modal"></button>
+                                            <button class="btn btn-sm fa fa-plus-square deliveryclass" data-target="#myModalTenantRequest" data-toggle="modal"></button>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!--advance options-->
+
+
             </div>
 
         </div>
@@ -279,7 +315,7 @@
             <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row background-white">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="form-horizontal">
+                        <div class="form-horizontal editTenant ">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <!--Title-->
                             
@@ -303,19 +339,19 @@
                                 @Html.TextBox("Username", null, new { @class = "form-control Addtenantfield input-sm", @placeholder = "Username Email", @data_bind = "value:UsernameTenant, valueUpdate:'afterkeydown'", @maxlength = "100" })
                                 <div id="idUsername" class="AuthenticateIcon"></div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                            @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
                                 @Html.CheckBox("generatePasswordid", new { id = "generatePasswordid", @data_bind = "checked:Check" }) @Html.Label("Genarate Password")
                                 <div hidden="hidden" class="autogepassword" data-bind="value:Check">autogenerated password</div>
                                 @Html.Editor("Password", new { htmlAttributes = new { @class = "form-control Addtenantfield input-sm hideme", @placeholder = "Password", @data_bind = "value:PasswordTenant, valueUpdate:'afterkeydown'", @maxlength = "20" } })
                                 <div id="idPassword" class="AuthenticateIcon"></div>
-                            </div>
+                            </div>*@
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows"><p> @Html.CheckBox("EmailNotification", new { id = "generatePasswordid", @data_bind = "checked:EmailNotification" }) @Html.Label(" Email/Notification")</p></div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows">
-                                <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 edittenantcontrol ">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
+                                <input type="submit" value="cancel" class="btn btn-default form-control   " data-dismiss="modal" />
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows ">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows ">
                                 <input type="submit" value="Save" class="btn btn-default form-control " data-dismiss="modal" data-bind="click:EditTenant" />
                             </div>
                         </div>
@@ -573,8 +609,9 @@
 <script src="~/Scripts/Chart.min.js"></script>
 <!--Reference the autogenerated SignalR hub script. -->
 <script src="~/signalr/hubs"></script>
+<script src="~/Scripts/gviz-api.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
-
+<script src="~/Scripts/TheLibrary/TimeJS.js"></script>
             
             @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>*@
             @*<script src="~/Scripts/HighChart/highcharts.js"></script>
@@ -684,10 +721,10 @@
             var viewModel = function () {
                 var self = this;
                 //=====================================================Adding Tenant old viewModel====================================
-
+                self.Tenants = ko.observableArray("");
                 self.FNameTenant = ko.observable("");
                 self.LNameTenant = ko.observable("");
-                self.PhoneTenant = ko.observable("");
+                self.PhoneTenant =ko.observable("");
                 self.UsernameTenant = ko.observable("");
                 self.PasswordTenant = ko.observable("");
                 self.StateList = ko.observableArray("");
@@ -818,7 +855,7 @@
                     self.Trackings.removeAll();
                     return false;
                 };
-
+              
                 //................................................................................................................................
                 //pagecounts
                 $.ajaxSettings.traditional = true;
@@ -1052,9 +1089,9 @@
                                
                                 $('.deliveryclass').on('click', function () {
                                     debugger;
-                                    var TenantID = $(this).attr('data-tenantID');
-                                    self.TenantID(TenantID);
-
+                                    var $TenantID = $(this).attr('data-tenantid');
+                                    self.TenantID($TenantID);
+                                    
                                 });
                                 var Tenant =
                                             {
@@ -1067,14 +1104,9 @@
                                                 aptID :@buildinginfo.AptID,
                                                 EmailNotification:self.EmailNotification,
                                                 GenerateAutomaticPassword:self.Check
-
                                             }
-                
-
-               
                 self.AddTenant = function()
                 {
-                    debugger;
                     $.ajaxSettings.traditional = true;
                     $.ajax(
                         {
@@ -1090,17 +1122,34 @@
                             }
                         });
                 };
-
-
-                var TenantID = "";
-                
-               
+                self.loadTenantInfo = function( value){
+                    var TInfo = JSON.stringify(value);
+                    var TenantInfo = JSON.parse(TInfo); 
+                    self.TenantID(TenantInfo.ID);
+                    
+                    $.ajaxSettings.traditional = true;
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/TenantEdit/',   
+                            dataType: "json",
+                            data: {TenantID: TenantInfo.ID},
+                            success: function (data) {
+                               
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                //alert(jsonresult);
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                self.FNameTenant(TrkPkgs.FirstName);
+                                self.LNameTenant(TrkPkgs.LastName);
+                                self.PhoneTenant(TrkPkgs.Phone);
+                                self.UsernameTenant(TrkPkgs.Username);     
+                                drawChart();
+                            }
+                        });
+                };
 
                 self.EditTenant = function()
                 {
-
-                    
-
                     $.ajaxSettings.traditional = true;
                     $.ajax(
                         {
@@ -1109,24 +1158,57 @@
                             dataType: "json",
                             data:Tenant,
                             success: function (data) {
-                                //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                                //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                self.Tenants.removeAll();
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                               
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 
-                                //self.StateList(TrkPkgs);
+                                for (var i = 0; i < TrkPkgs.length; i++) 
+                                {
+                                    self.Tenants.push(
+                                        {
+                                            ID:TrkPkgs[i].ID,
+                                            FirstName:TrkPkgs[i].FirstName,
+                                            LastName:TrkPkgs[i].LastName,
+                                            Phone:TrkPkgs[i].Phone,
+                                            UserName:TrkPkgs[i].UserName,
+                                            CreatedDate: MonthC(TrkPkgs[i].CreatedDate) +"/"+DayC(TrkPkgs[i].CreatedDate)+"/"+ YearC(TrkPkgs[i].CreatedDate)
+                                    
+                                        });
+                                };
                             }
                         });
                 };
+                $.ajax(
+                     {
+                         type: "GET",
+                         url: '/building/loadTenant/',
+                         dataType: "json",
+                         data:{apartmentID:@buildinginfo.AptID},
+                         success: function (data) {
+                             var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                             
+                             var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 
-
-
+                             for (var i = 0; i < TrkPkgs.length; i++) 
+                             {
+                                 self.Tenants.push(
+                                     {
+                                         ID:TrkPkgs[i].ID,
+                                         FirstName:TrkPkgs[i].FirstName,
+                                         LastName:TrkPkgs[i].LastName,
+                                         Phone:TrkPkgs[i].Phone,
+                                         UserName:TrkPkgs[i].UserName,
+                                         CreatedDate: MonthC(TrkPkgs[i].CreatedDate) +"/"+DayC(TrkPkgs[i].CreatedDate)+"/"+ YearC(TrkPkgs[i].CreatedDate)
+                                    
+                                     });
+                             };
+                         }
+                     });
                             };
 
                             ko.applyBindings(viewModel);
                         });
-
     });
-
-
-                 
                 </script>
                 }

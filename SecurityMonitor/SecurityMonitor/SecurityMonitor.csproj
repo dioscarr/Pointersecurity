@@ -297,6 +297,7 @@
     <Content Include="Content\dhtmlxgantt\dhtmlxgantt_skyblue.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Scripts\gviz-api.js" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\stylesheet.css" />
@@ -1555,6 +1556,7 @@
     <Content Include="Scripts\perpetuum.knockout.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\TheLibrary\TimeJS.js" />
     <Content Include="Scripts\TimePicket\jquery.datetimepicker.css" />
     <Content Include="Scripts\TimePicket\jquery.datetimepicker.js" />
     <Content Include="Scripts\_references.js" />
