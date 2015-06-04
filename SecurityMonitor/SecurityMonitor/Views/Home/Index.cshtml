@@ -25,15 +25,42 @@
                 </section>
             </div>
         </section>
-        <section style="margin:50px 0 50px 0;">
+        <section style="margin:50px 0 50px 0; z-index:999;position:relative">
             <!--vCard starts-->
-            <div class="col-md-4 col-lg-4col-sm-12 col-xs-12   paddingBottom20px nopadding">
+            <div id="buildingid" class="col-md-4 col-lg-4col-sm-12 col-xs-12   paddingBottom20px nopadding">
                 <!--header starts-->
                 <section class=" col-md-12 text-center clientboxrow ">
                     <section class=" boxheadHome hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
                         <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <img src="~/img/building.png" class="img-circle hometiles" />
                             <h4>Buildings</h4>
+                            <input type="text" class="form-control buildingsearchHome" data-bind="value:searchbuildings, valueUpdate:'afterkeydown'" />
+                            <div id="BuildingsTilesResultBox" data-bind="foreach:GlobalBresult " class="scrollable" style="min-height:600px; max-height:600px;">
+
+                                <section style="margin:50px 0 50px 0;">
+                                    <!--vCard starts-->
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12   paddingBottom20px nopadding">
+                                        <!--header starts-->
+                                        <section class=" col-md-12 text-center clientboxrow " data-bind="click:takemetobuilding">
+                                            <section class=" boxheadGlobalBuildingResult hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding text-center">
+
+                                                    <p class="nopadding" style="line-height:40px; padding-top:10px;" data-bind="text:BName"></p>
+                                                    <hr class="nopadding" />
+                                                    <p class="BCity " style="line-height:16px;" data-bind="text:FullAddress" ></p>
+                                                    <hr class="nopadding" />
+                                                    <p class="BState" style="line-height:16px;" data-bind="text:FullCityStateZip"></p>
+                                                    <hr class="nopadding" />
+                                                    <p class="BPhone" style="line-height:16px;" data-bind="text:BPhone"></p>
+                                                  
+                                                </div>
+                                            </section>
+                                        </section>
+                                    </div>
+                                </section>
+
+
+                            </div>
                         </div>
                     </section>
                 </section>
@@ -41,13 +68,14 @@
         </section>
         <section style="margin:50px 0 50px 0;">
             <!--vCard starts-->
-            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+            <div id="Tenantid" class=" col-md-4 col-lg-4 col-sm-12 col-xs-12  paddingBottom20px nopadding">
                 <!--header starts-->
                 <section class=" col-md-12 text-center clientboxrow ">
                     <section class=" boxheadHome hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
                         <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <img src="~/img/person.gif" class="img-circle hometiles" />
-                            <h4>Managers</h4>
+                            <h4>Tenants</h4>
+                            <input type="text" class="form-control TenantsearchHome" />
 
                         </div>
                     </section>
@@ -221,6 +249,8 @@
 {
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+
 
     <script type="text/javascript">
 
@@ -231,6 +261,109 @@
 
         //});
 
+
+        $(function () {
+
+
+            $('#buildingid').mouseover(function () {
+                $('.buildingsearchHome').show();
+                $('.buildingsearchHome').focus();
+             
+
+            }).mouseout(function () {
+
+                $('.buildingsearchHome').hide();
+              
+            });
+
+            $('#Tenantid').mouseover(function () {
+                $('.TenantsearchHome').show();
+                $('.TenantsearchHome').focus();
+
+
+            }).mouseout(function () {
+
+                $('.TenantsearchHome').hide();
+            });
+            //viewmodel starts
+            var viewModel = function () {
+
+
+
+
+                self = this;
+
+
+
+
+                self.GlobalBresult = ko.observableArray();
+
+                self.searchbuildings = ko.observable();
+
+                self.takemetobuilding = function (data) {
+
+                    var TInfo = JSON.stringify(data);
+                    var TenantInfo = JSON.parse(TInfo);
+                   
+                    window.location.href = " /Building/BuildingProfile?BuildingID=" + TenantInfo.BID;
+                };
+                
+                self.searchbuildings.subscribe(function (input) {
+
+                    
+
+                    if (input != "") {
+                        $('#BuildingsTilesResultBox').show();
+
+                        $.ajax(
+                   {
+                       type: "GET",
+                       url: '/Home/GlobalSearchBuilding/',
+                       dataType: "json",
+                       data: {searchGobal:input},
+                       success: function (data) {
+                           self.GlobalBresult.removeAll();
+
+                           var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                           
+                           var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                           for (var i = 0; i < TrkPkgs.length; i++) {
+                               self.GlobalBresult.push({
+                                   BID:TrkPkgs[i].BID,
+                                   BClientID:TrkPkgs[i].BClientID,
+                                   BName:TrkPkgs[i].BName,
+                                   BAddress:TrkPkgs[i].BAddress,
+                                   BCity:TrkPkgs[i].BCity,
+                                   BState:TrkPkgs[i].BState,
+                                   BZipcode: TrkPkgs[i].BZipcode,
+                                   BPhone: TrkPkgs[i].BPhone,
+                                   FullAddress: TrkPkgs[i].BAddress,
+                                   FullCityStateZip: TrkPkgs[i].BCity + " " + TrkPkgs[i].BState + ", " + TrkPkgs[i].BZipcode
+                               });
+                           }
+                       }
+                   });
+
+
+
+                
+
+                    }
+                    else {
+                        $('#BuildingsTilesResultBox').hide();
+                        self.GlobalBresult.removeAll();
+
+                    }
+                });
+
+            };
+            
+            ko.applyBindings(viewModel);
+
+
+        });
+       
+        
 
     </script>
 

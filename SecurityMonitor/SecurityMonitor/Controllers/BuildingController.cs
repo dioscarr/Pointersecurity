@@ -1069,6 +1069,15 @@ namespace SecurityMonitor.Controllers
         }
 
 
+        public ActionResult resetpwd(string ID)
+        {
+            var result = PasswordGenerator.ResetPassword(ID);
+            var mydata1 = Json(result);
+
+            return new JsonResult { Data = mydata1, JsonRequestBehavior = JsonRequestBehavior.AllowGet }; ;
+        }
+
+
         //Tenant Edit
         //[HttpGet]
         //public ActionResult TenantEdit(string TenantID)
@@ -1722,6 +1731,15 @@ namespace SecurityMonitor.Controllers
             obj.Username = tn.Username;
             obj.Phone = tn.Phone;
             var mydata = Json(obj);
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult Searchforusername(string search)
+        {
+
+            var Email = db.AspNetUsers.Where(c => c.Email.Contains(search)).Select(c=> new {Email = c.Email}).ToList();
+            var mydata = Json(Email);
 
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }

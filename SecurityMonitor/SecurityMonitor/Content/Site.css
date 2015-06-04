@@ -974,6 +974,10 @@ margin-top:2px;
 
 }
 
+.boxheadHome {
+z-index:10;
+}
+
 
 .boxhead {
     background-color:#f7f7f7;  
@@ -993,6 +997,15 @@ margin-top:2px;
    line-height: 54px;  
 }
 
+.boxheadGlobalBuildingResult 
+{
+    min-height:90px;
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;  
+}
+
 
 
 
@@ -1003,7 +1016,7 @@ margin-top:2px;
     font-size: 14px;
     font-weight: bold;
     color: rgba(50, 50, 50, 0.75);
-
+    
 }
 
 
@@ -2048,6 +2061,7 @@ margin:0 0 30px 0;
 margin:20px 0 20px 0;
 
 }
+
 .passowrdupdae {
    padding:20px;
 }
@@ -2146,3 +2160,53 @@ padding:0 60px 30px 60px;
     margin-left:35px;
 
 }
+
+#validateemailid {
+
+color:red;
+}
+
+.addtenantbox {
+margin:50px;
+}
+
+.addtenantcontrollers {
+    
+margin:40px 0px 30px 0px;
+}
+
+
+
+
+.buildingsearchHome {
+    display:none;
+    position:absolute;
+bottom:180px; 
+left:35px;
+width:75%;
+}
+
+
+.TenantsearchHome {
+    display:none;
+    position:absolute;
+bottom:180px; 
+left:35px;
+}
+
+#BuildingsTilesResultBox {
+   display:none;
+    min-width:100%;
+    min-height:500px;
+    background:white;
+    position:absolute;
+    left:0px;
+
+
+}
+
+
+
+
+
+

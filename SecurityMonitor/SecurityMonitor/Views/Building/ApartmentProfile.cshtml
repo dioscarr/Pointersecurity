@@ -214,6 +214,7 @@
                                             <span data-bind="text:Phone"></span><br />
                                             <span data-bind="text:CreatedDate"></span>
                                             <br />
+                                            <button class="btn btn-sm fa fa-unlock-alt deliveryclass" data-bind="click:ResetTenantPassword" ></button>
                                             <button class="btn btn-sm fa fa-edit deliveryclass" data-bind="click:loadTenantInfo, attr:{'data-tenantid':ID}" data-target="#myModalEditTenant"  data-toggle="modal"></button>
                                             <button class="btn btn-sm fa fa-trash deliveryclass" ></button>
                                             <button class="btn btn-sm fa fa-envelope-o deliveryclass"  data-bind="fadeVisible:itistrue, click:loadTenantInfo, attr:{'data-showdeliverykey':ID}"  data-target="#myModaldeliveries" data-toggle="modal"></button>
@@ -251,7 +252,7 @@
             <div class="modal-body col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row background-white">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                    
-                        <div class="form-horizontal">
+                        <div class="form-horizontal addtenantbox ">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <!--Title-->
                                                      
@@ -272,8 +273,9 @@
                             </div>
                             <!--Username box-->
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
-                                @Html.TextBox("Username", null, new { @class = "form-control Addtenantfield input-sm", @placeholder = "Username Email", @data_bind = "value:UsernameTenant, valueUpdate:'afterkeydown'", @maxlength = "100" })
+                                @Html.TextBox("Username", null, new { @class = "form-control Addtenantfield input-sm", @placeholder = "Username Email", @data_bind = "value:UsernameTenant", @maxlength = "100" })
                                 <div id="idUsername" class="AuthenticateIcon" ></div>
+                                <div id="validateemailid"></div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
                                 @Html.CheckBox("generatePasswordid", new { id = "generatePasswordid", @data_bind = "checked:Check" }) @Html.Label("Genarate Password")
@@ -283,9 +285,9 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows"><p> @Html.CheckBox("EmailNotification", new { id = "generatePasswordid", @data_bind = "checked:EmailNotification" }) @Html.Label(" Email/Notification")</p></div>      
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  addtenantcontrollers">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows">
-                                <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" />
+                                <input type="submit" value="cancel" class="btn btn-default form-control  " data-dismiss="modal" data-bind="click:Cancelform" />
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ClientEditrows ">
                                 <input type="submit" value="Save" class="btn btn-default form-control " data-dismiss="modal" data-bind="click:AddTenant" />
@@ -349,7 +351,7 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 edittenantcontrol ">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows">
-                                <input type="submit" value="cancel" class="btn btn-default form-control   " data-dismiss="modal" />
+                                <input type="submit" value="cancel" class="btn btn-default form-control "  data-dismiss="modal" />
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ClientEditrows ">
                                 <input type="submit" value="Save" class="btn btn-default form-control " data-dismiss="modal" data-bind="click:EditTenant" />
@@ -721,6 +723,7 @@
             var viewModel = function () {
                 var self = this;
                 //=====================================================Adding Tenant old viewModel====================================
+                self.CheckonUserName = ko.observable();
                 self.Tenants = ko.observableArray("");
                 self.FNameTenant = ko.observable("");
                 self.LNameTenant = ko.observable("");
@@ -736,11 +739,89 @@
                 self.DHLCount = ko.observable("");
                 self.TNTCount = ko.observable("");
                 self.OthersCount = ko.observable("");
+               
 
                 self.TenantID = ko.observable("");
 
 
                 self.Check = ko.observable();
+
+                self.ResetTenantPassword = function(obj){
+                    var TInfo = JSON.stringify(obj);
+                    var TenantInfo = JSON.parse(TInfo); 
+                    
+
+                    
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/resetpwd/',   
+                            dataType: "json",
+                            data: {id:TenantInfo.ID},
+                            success: function (data) {
+                                 
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                alert(jsonresult);
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                               
+
+                                
+                               
+                            }
+                        });
+
+
+                };
+
+                self.UsernameTenant.subscribe(function(input){
+                 
+                    var result = isValidEmailAddress(input);
+                    if (result==true)
+                    {
+                    
+                    
+                        $.ajax(
+                            {
+                                type: "GET",
+                                url: '/building/Searchforusername/',   
+                                dataType: "json",
+                                data: {search:input},
+                                success: function (data) {
+                                 
+                                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                    //alert(jsonresult);
+                                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                    for (var i = 0; i < TrkPkgs.length; i++) {
+                                        if(TrkPkgs[i].Email  ==input)
+                                        {
+                                           
+                                            $('#validateemailid').html("<span>This email address is already taken");
+                                        }
+                                    
+                                    }
+                                
+                                
+                               
+                                }
+                            });
+
+                    }
+                    else if(input=="")
+                    {
+
+                        $('#validateemailid').html("");
+                        
+                    }
+                    else{
+                    
+                        $('#validateemailid').html("<span>invalid Email Address!");
+
+                    }
+                   
+                    
+                    console.log(input+" ");});
+
+
                 this.Checkboxpassword = ko.computed(function () {
                     if (Check() == true) { self.PasswordTenant("");}
                     else {self.PasswordTenant("");}
@@ -1105,6 +1186,20 @@
                                                 EmailNotification:self.EmailNotification,
                                                 GenerateAutomaticPassword:self.Check
                                             }
+                function resetformfields()
+                {
+                    self.FNameTenant = ko.observable("");
+                    self.LNameTenant = ko.observable("");
+                    self.PhoneTenant =ko.observable("");
+                    self.UsernameTenant = ko.observable("");
+                    self.PasswordTenant = ko.observable("");                
+                
+                }
+
+                self.Cancelform = function(){
+                    resetformfields();
+                };
+                
                 self.AddTenant = function()
                 {
                     $.ajaxSettings.traditional = true;
@@ -1114,7 +1209,10 @@
                             url: '/building/AddingTenant/',
                             dataType: "json",
                             data:Tenant,
-                            success: function (data) {
+                            success: function (data) 
+                            {
+                                
+                                resetformfields();
                                 //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
                                 //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 

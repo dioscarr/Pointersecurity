@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
+using Doormandondemand;
+using Microsoft.AspNet.Identity;
 
 namespace SecurityMonitor.Workes
 {
+    
+
     public class PasswordGenerator
     {
+
+
+        PointerdbEntities db = new PointerdbEntities();
         /// <summary>
         /// This will generate a Temp Password
         /// </summary>
@@ -48,8 +56,68 @@ namespace SecurityMonitor.Workes
                 //For Testing purposes, I used a label on the front end to show me the generated password.
                 //lblProduct.Text = IDString;
             }
-
+            
             return NewPassword;
+        }
+
+
+
+        private static string ResetPwdSendNotification(string ID)
+        {
+            PointerdbEntities db1 = new PointerdbEntities();
+            try
+            {
+
+                 var password = GeneratePassword("8").ToString();
+                 
+                 PasswordHasher passwordsher = new PasswordHasher();
+                 var pwdhashed = passwordsher.HashPassword(password);
+               
+                Tenant ObjTenant = db1.Tenant.Find(ID);
+                AspNetUsers ObjAspnet = db1.AspNetUsers.Where(c => c.Email == ObjTenant.Username).FirstOrDefault();
+                ObjAspnet.PasswordHash = pwdhashed;
+                db1.AspNetUsers.Attach(ObjAspnet);
+                var Entry = db1.Entry(ObjAspnet);
+                Entry.Property(c=>c.PasswordHash).IsModified = true;
+                db1.SaveChanges();
+
+            if (ObjTenant!= null)
+            {
+                var aptNumber = db1.Apartment.Find(ObjTenant.aptID).ApartmentNumber;
+
+
+                string string1 = "Hi " + ObjTenant.FirstName + " " + ObjTenant.LastName + ", your password has been reset by PointerWebApp.com ";
+                string string2 = "The login information for apartment: " + aptNumber + " is below";
+                string string3 = "Username: " + ObjTenant.Username;
+                string string4 = "Temporary password: " + password;
+                string string5 = "Click the on this http://localhost:64083/Account/Manage link and follow the instructions to initiate your account ";
+                string string6 = "Company Description";
+                string string7 = "Find more information...";
+
+                string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+
+                Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+                MailMessage msg = new MailMessage("pointerwebapp@gmail.com", ObjTenant.Username);
+                msg.Subject = "Pointer Security Password Reset Notification";
+                msg.Body = x;
+                gmail.Send(msg);
+            }
+
+
+
+            return "successful";
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        
+        }
+        public static string ResetPassword(string ID)
+        {
+            var result = ResetPwdSendNotification(ID);
+            return result;
         }
 
     }

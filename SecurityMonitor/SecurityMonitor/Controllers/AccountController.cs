@@ -72,7 +72,7 @@ namespace SecurityMonitor.Controllers
                 if (user != null)
                 {
 
-
+                    
                     await SignInAsync(user, model.RememberMe);
 
                   

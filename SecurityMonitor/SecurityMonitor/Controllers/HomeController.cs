@@ -69,6 +69,30 @@ namespace SecurityMonitor.Controllers
             return new  JsonResult { Data = jsonData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+
+        public JsonResult GlobalSearchBuilding(string searchGobal)
+      {
+          var Bresult = db.Buildings.Where(c => c.Address.Contains(searchGobal) ||
+              c.Zipcode.Contains(searchGobal) ||
+              c.BuildingName.Contains(searchGobal) ||
+              c.State.Contains(searchGobal) ||
+              c.BuildingPhone.Contains(searchGobal) ||
+              c.City.Contains(searchGobal)).Select(c => new { 
+              BID =c.ID,
+              BClientID = c.Clients.ID,
+              BName = c.BuildingName,
+              BAddress =c.Address,
+              BCity = c.City,
+              BState =c.State,
+              BZipcode =c.Zipcode,
+              BPhone =c.BuildingPhone             
+              }).ToList();
+
+          var mydata = Json(Bresult);
+          return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+      }
+        
+
        
     }
 }
