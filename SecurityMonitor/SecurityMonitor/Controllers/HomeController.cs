@@ -86,11 +86,30 @@ namespace SecurityMonitor.Controllers
               BState =c.State,
               BZipcode =c.Zipcode,
               BPhone =c.BuildingPhone             
-              }).ToList();
+              }).Take(10).ToList();
 
           var mydata = Json(Bresult);
           return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
       }
+        public JsonResult GlobalTenantSearch(string SearechTanantGlobal)
+        {
+            var OBJGT = db.Tenant.Where(c => c.FirstName.Contains(SearechTanantGlobal) || 
+                c.LastName.Contains(SearechTanantGlobal) ||
+                c.Phone.Contains(SearechTanantGlobal) ||
+                c.Username.Contains(SearechTanantGlobal))
+                .Select(c => new { 
+                FullName = c.FirstName +""+c.LastName,
+                Email = c.Username,
+                Phone=c.Phone,
+                ID = c.ID,
+                AptID =c.Apartment.ID,
+                BID = c.Apartment.Buildings.ID
+
+                }).Take(10).ToList();
+            var data = Json(OBJGT);
+
+            return new JsonResult { Data = data, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+       }
         
 
        

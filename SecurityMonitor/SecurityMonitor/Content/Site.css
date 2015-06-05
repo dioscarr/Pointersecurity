@@ -2178,20 +2178,22 @@ margin:40px 0px 30px 0px;
 
 
 
-.buildingsearchHome {
+input.buildingsearchHome {
     display:none;
     position:absolute;
-bottom:180px; 
-left:35px;
-width:75%;
+bottom:210px; 
+left:0px;
+max-width:100%!important;
 }
 
 
-.TenantsearchHome {
+input.TenantsearchHome {
     display:none;
     position:absolute;
-bottom:180px; 
-left:35px;
+bottom:210px; 
+left:0px;
+max-width:100%!important;
+
 }
 
 #BuildingsTilesResultBox {
@@ -2205,6 +2207,17 @@ left:35px;
 
 }
 
+#TenantTilesResultBox {
+   display:none;
+    min-width:100%;
+    min-height:500px;
+    background:white;
+    position:absolute;
+    left:0px;
+    z-index:20; position:absolute;
+
+
+}
 
 
 
@@ -2213,3 +2226,5 @@ left:35px;
 p {
  font-family:Overpass !important;
 }
+
+
