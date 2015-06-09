@@ -997,6 +997,31 @@ z-index:10;
    line-height: 54px;  
 }
 
+.boxheadTenantBottom {
+      min-height:340px;
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;
+}
+.boxheadTenantBottomModulesbox {
+
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;
+}
+
+
+.boxheadTenant 
+{
+    min-height:220px;
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;  
+}
+
 .boxheadGlobalBuildingResult 
 {
     min-height:90px;
@@ -2228,3 +2253,156 @@ p {
 }
 
 
+
+#TenantTopSectionBox {
+    min-height:200px;
+    padding:40px 0 40px 0!important;
+
+}
+
+#TenantmiddleSectionBox {
+min-height:500PX;
+
+}
+
+
+.buildingcontactandform {
+   
+    background:#0071BC;
+    color:rgba(249,254,255,1);
+min-height:50px;
+margin: 0 0 20px 0 !important;
+}
+
+#tenantBuildinganouncement {
+border:1px solid #C1CDCD;
+background:white;
+min-height:230px;
+padding-top:10px;
+
+}
+
+
+.Tenantprofilecontactinfo {
+display:block;
+line-height:25px;
+}
+
+
+.headingsettingstenant {
+margin:10px 0 0 0!important;
+color:#0071BC;
+max-height:0px!important;
+
+}
+
+.headingsettingstenant4{
+margin:10px 0 0 0!important;
+color:#0071BC;
+max-height:65px!important;
+
+}
+
+
+
+/*anouncements*/
+.Acouncementtenant {   
+    padding:10px;
+    line-height:10px;   
+   font-size:14px;
+   font-weight:100;
+    min-width:90px;
+    max-width:500px;
+     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+/*anouncements*/
+.Acouncementtenant::before {
+    content:'';
+    display:inline-block;
+    line-height:20px;
+    margin-right:10px;
+    min-height:14px;
+    min-width:14px;
+    background:#0071BC;
+    border-radius:50%;     
+}
+
+/*anouncements*/
+.AcouncementtenantHeat {   
+    padding:10px;
+    line-height:10px;   
+   font-size:14px;
+   font-weight:100;
+    min-width:90px;
+    max-width:500px;
+     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+/*anouncements*/
+.AcouncementtenantHeat::before {
+    content:'';
+    display:inline-block;
+    line-height:20px;
+    margin-right:10px;
+    min-height:14px;
+    min-width:14px;
+    background:#ff0000;
+    border-radius:50%;     
+}
+
+/*anouncements*/
+.AcouncementtenantElevator {   
+    padding:10px;
+    line-height:10px;   
+   font-size:14px;
+   font-weight:100;
+    min-width:90px;
+    max-width:500px;
+     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+/*anouncements*/
+.AcouncementtenantElevator::before {
+    content:'';
+    display:inline-block;
+    line-height:20px;
+    margin-right:10px;
+    min-height:14px;
+    min-width:14px;
+    background:green;
+    border-radius:50%;     
+}
+
+
+
+
+
+
+.headingsettingstenantbuildinginfo {
+
+    min-height:150px;
+   
+}
+
+
+.nolineheight {
+    display:block;
+line-height:25px;
+max-height:50px;
+}
+#questionteantprofile {
+position:relative; 
+right:-200px;
+top:-40px;
+}
+
+.tenantfooter {
+    font-size:12px;
+   font-weight:100;
+   border-right:1px solid black;
+
+}
