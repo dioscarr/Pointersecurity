@@ -1744,11 +1744,7 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public ActionResult RepairManagement(int BuildingID)
-        {
-            //var m = db.Module.Where(c=>c.ListOfModule.)
-            return View();
-        }
+        
         
       
         //Tenant Messege Center
