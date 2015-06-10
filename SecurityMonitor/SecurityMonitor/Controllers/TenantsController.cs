@@ -122,16 +122,22 @@ namespace SecurityMonitor.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
-
-
-
-
+                
         public ActionResult TenantIndex(string TenantID)
         {   //TODO: Tenant Dashboard
-            TenantIndexVM TIvm = new TenantIndexVM();
 
-            return View(TIvm);
+            var T = db.Tenant.Find(TenantID);
+            var A = db.Apartment.Find(T.Apartment.ID);
+            var B = db.Buildings.Find(A.Buildings.ID);
+            var M = db.Module.Where(c => c.BuildingID == B.ID).ToList();
+
+            var FT = new TenantFrontEnd();
+            FT.tenant = T;
+            FT.apartment = A;
+            FT.building = B;
+            FT.modules = M;
+            //TenantIndexVM TIvm = new TenantIndexVM();
+            return View(FT);
         }
 
 
@@ -139,9 +145,18 @@ namespace SecurityMonitor.Controllers
         //Tenant profile ------------------------------------------------------------------------------------
         public ActionResult TenantProfile(string UserID)
         {
-            TenantVM tenantprofile = new TenantVM();
-            tenantprofile.ID = UserID;
-            return View(tenantprofile);
+
+            var T = db.Tenant.Find(UserID);
+            var A = db.Apartment.Find(T.Apartment.ID);
+            var B = db.Buildings.Find(A.Buildings.ID);
+            var M = db.Module.Where(c => c.BuildingID == B.ID).ToList();
+
+            var FT = new TenantFrontEnd();
+            FT.tenant = T;
+            FT.apartment = A;
+            FT.building = B;
+            FT.modules = M;
+            return View(FT);
         }
         [HttpGet]
         public async Task<ActionResult> Repair(string tenantID)
@@ -333,6 +348,10 @@ namespace SecurityMonitor.Controllers
             var Jsonpackages = Json(repairRequest);
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+   
+
+        
 
         
 

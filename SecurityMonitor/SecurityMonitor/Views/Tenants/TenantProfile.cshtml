@@ -1,4 +1,4 @@
-﻿@model SecurityMonitor.Models.TenantVM
+﻿@model SecurityMonitor.Models.TenantFrontEnd
 
 @{
     ViewBag.Title = "TenantProfile";
@@ -33,15 +33,15 @@
                                         <span id="questionteantprofile" class="fa fa-question-circle fa-2x hidden-md hidden-sm hidden-xs" ></span>
                                     </div>
                                     <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <span class="Tenantprofilecontactinfo">Dioscar Rqodriguez</span>
+                                        <span class="Tenantprofilecontactinfo">@Model.tenant.FirstName @Model.tenant.LastName</span>
                                         <hr class="nopadding" />
-                                        <span class="Tenantprofilecontactinfo">4530 Broadway apt3k</span>
+                                        <span class="Tenantprofilecontactinfo">@Model.building.Address @Model.apartment.ApartmentNumber</span>
                                         <hr class="nopadding" />
-                                        <span class="Tenantprofilecontactinfo">New York, NY 10040</span>
+                                        <span class="Tenantprofilecontactinfo">@Model.building.City @Model.building.State @Model.building.Zipcode</span>
                                         <hr class="nopadding" />
-                                        <span class="Tenantprofilecontactinfo">Disocarr@gmail.com</span>
+                                        <span class="Tenantprofilecontactinfo">@Model.tenant.Username</span>
                                         <hr class="nopadding" />
-                                        <span class="Tenantprofilecontactinfo">3472009415</span>
+                                        <span class="Tenantprofilecontactinfo">@Model.tenant.Phone </span>
                                     </div>
                                 </div>
                             </section>
@@ -61,20 +61,20 @@
                                     <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12 headingsettingstenant">
                                         <h4>Building Information</h4>
                                     </div>
-                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12 headingsettingstenantbuildinginfo">
-                                        <span class="nolineheight">Brandon</span>
+                                    <span class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12 headingsettingstenantbuildinginfo">
+                                        <span class="nolineheight">@Model.building.BuildingName</span>
                                         <hr class="nopadding" />
-                                        <span class="nolineheight">1411 Broadway</span>
+                                        <span class="nolineheight">@Model.building.Address</span>
                                         <hr class="nopadding" />
-                                        <span class="nolineheight">New York, NY 10018</span>
+                                        <span class="nolineheight">@Model.building.City @Model.building.State @Model.building.Zipcode</span>
                                         <hr class="nopadding" />
-                                        <span class="nolineheight">Tel:2122668899</span>
+                                        <span class="nolineheight">@Model.building.BuildingPhone</span>
                                         <hr class="nopadding" />
-                                        <span class="nolineheight">Email:BrandonProperties@gmail.com</span>
+                                        <span class="nolineheight"><span>Email US: <span class="fa fa-inbox fa-2x"></span></span></span>
                                     </div>
 
 
-                                </div>
+                               
                             </section>
                         </section>
                     </div>
@@ -89,20 +89,20 @@
                         <!--header starts-->
                         <section class=" col-md-12 text-center clientboxrow ">
                             <section class=" boxheadTenantBottom  col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding white">
-                                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12 tenantmodulessettings">
                                     <!--modules loop this-->
                                     
                                     
-                                    @for (var i = 0; i < 6; i++)
+                                    @foreach(var item  in @Model.modules)
                                     {                                    
                                     <section style="margin:20px 0 0px 0; ">
                                         <!--vCard starts-->
-                                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6   paddingBottom20px  ">
+                                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6   paddingBottom20px  route" data-route="@item.ServiceName">
                                             <!--header starts-->
                                             <section class="hollow5 boxheadTenantBottomModulesbox col-md-12 text-center clientboxrow ">
                                                 <section class="   col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
                                                     <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <h4>Modules</h4>
+                                                        <h4>@item.ServiceName</h4>
                                                     </div>
                                                 </section>
                                             </section>
@@ -169,7 +169,7 @@
 
 <div class="row">
     <div class="col-md-12 col-lg-12">
-        @Html.ActionLink("Repair", "Repair", "Tenants", new { TenantID = @Model.ID }, null)
+       
     </div>
 </div>
 
@@ -188,7 +188,19 @@
 
         $(function(){
         
-            $('.Acouncementtenant').length()
+            $('.route').click(function () {
+                var route = $(this).attr("data-route");
+             
+                switch(route)
+                {
+                    case "Repair":
+                       
+                        window.location.href = "/Tenants/Repair?TenantID=e64825af-7d5c-4af3-bc26-62e746e80a31";
+                        break;
+                
+                
+                }
+            });
 
         })
 

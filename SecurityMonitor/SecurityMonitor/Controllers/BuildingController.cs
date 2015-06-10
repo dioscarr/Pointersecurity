@@ -1743,14 +1743,47 @@ namespace SecurityMonitor.Controllers
 
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        public ActionResult RepairManagement(int BuildingID)
+        {
+            //var m = db.Module.Where(c=>c.ListOfModule.)
+            return View();
+        }
         
       
         //Tenant Messege Center
 
 
-        public ActionResult TenantMessegeCenterIndex(int TenantID)
-        {  
-            return View();
+       
+
+        public async Task<JsonResult> loadRequestbysearch(int BuildingID, string filter)
+        {
+            var repairRequest = await db.RepairRequest
+                     .Where(c => c.Tenant.Apartment.Buildings.ID == BuildingID && c.ProblemDescription.Contains(filter))
+                     .Select(c => new
+                     {
+                         RequestedDate = c.RequestedDate,
+                         ProblemDescription = c.ProblemDescription,
+                         Status = c.Status,
+                         ID = c.Id,
+                         RequestNumber = c.RepairRequestCategoriesID,
+                         Category = c.RepairRequestCategories.Categories,
+                         Instruction = c.Instructions_,
+                         Urgency = c.RepairUrgency.Urgency,
+                         Permision = c.Permissiontoenter,
+                         imgUrl = c.PhotoUrl,
+                         PrimaryName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                         PrimaryPhone = c.Tenant.Phone,
+                         PrimaryEmail = c.Tenant.Username,
+                         SecondaryName = c.OtherContactName,
+                         SecondaryPhone = c.OtherContactPhone,
+                         SecondaryEmail = c.OtherContactEmail
+                     }).OrderByDescending(c => c.RequestedDate).ToListAsync();
+
+            var Jsonpackages = Json(repairRequest);
+
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
         }
 
 
