@@ -261,6 +261,7 @@
     <Compile Include="Models\Otherusers.cs" />
     <Compile Include="Models\PackagesCount.cs" />
     <Compile Include="Models\PackageSearchVM.cs" />
+    <Compile Include="Models\PartialModuleandCounts.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\RegisterManagerVM.cs" />
     <Compile Include="Models\RepairManagement.cs" />

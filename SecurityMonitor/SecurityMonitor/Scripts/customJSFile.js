@@ -1,22 +1,40 @@
 ﻿$(function () {
 
 
-    //debugger;
-    //var allrouteElem = document.getElementsByClassName('route').getAttribute('data-route');
-    
-    //var routeVal = allrouteElem[0].attributes('data-route');
+    var repairflag = "off";
+    var allrouteElem = document.querySelectorAll('.route');
 
-    
-    //var route = $('.route').attr("data-route");
-
-        //var BID = $('#buildingidforcustomjs').attr("data-buildingid");
-        //switch (route) {
-        //    case "Repair":
-        //        window.location.href = "/building/Repairmanagement?BuildingID=" + BID;
-        //        break;
-        //}
-  
-
+    var lengthofElem = allrouteElem.length;
+   
+    for (var i = 0; i < lengthofElem; i++)
+    {
+        var elem = allrouteElem[i].dataset.route;
+        switch (elem)
+        {
+            case "Repair":
+                if (repairflag == "off")
+                {
+                    repairflag = "on";
+                   
+                    var $BID = $('#buildingidforcustomjs').attr("data-buildingid");
+                    //ajax call to retreive count from repair 
+                    $.ajax({
+                        type: "GET",
+                        data: { BuildingID: $BID },
+                        dataType: "json",
+                        url: "/building/LoadOpenRepair/",
+                        success: function (jsonData) {
+                          
+                            var jsonresult = JSON.stringify(jsonData.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                           
+                            $('[data-open-Count="Repair"]').html(jsonresult);
+                        }
+                    });
+                }
+                break;
+        }
+    }
 
 
     $('.route').click(function () {

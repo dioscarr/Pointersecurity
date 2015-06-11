@@ -1788,6 +1788,14 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
         }
+       [HttpGet]
+        public JsonResult LoadOpenRepair(int BuildingID)
+        {
+            var objrepair = db.RepairRequest.Where(c => c.BuildingID == BuildingID).Count();
+
+            var Jsonpackages = Json(objrepair);
+            return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
 
 
