@@ -1789,9 +1789,9 @@ namespace SecurityMonitor.Controllers
 
         }
        [HttpGet]
-        public JsonResult LoadOpenRepair(int BuildingID)
+        public async Task<JsonResult> LoadOpenRepair(int BuildingID)
         {
-            var objrepair = db.RepairRequest.Where(c => c.BuildingID == BuildingID).Count();
+            var objrepair = await db.RepairRequest.Where(c => c.BuildingID == BuildingID).CountAsync(); ;
 
             var Jsonpackages = Json(objrepair);
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
