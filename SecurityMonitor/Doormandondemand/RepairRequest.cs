@@ -29,9 +29,11 @@ namespace Doormandondemand
         public string OtherContactPhone { get; set; }
         public string OtherContactName { get; set; }
         public string OtherContactEmail { get; set; }
+        public int BuildingID { get; set; }
     
         public virtual RepairRequestCategories RepairRequestCategories { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual RepairUrgency RepairUrgency { get; set; }
+        public virtual Buildings Buildings { get; set; }
     }
 }

@@ -202,7 +202,8 @@ namespace SecurityMonitor.Controllers
                     PrimaryEmail = c.Tenant.Username,
                     SecondaryName = c.OtherContactName,
                     SecondaryPhone = c.OtherContactPhone,
-                    SecondaryEmail = c.OtherContactEmail
+                    SecondaryEmail = c.OtherContactEmail,
+                    BuildingID = c.BuildingID
                 }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
@@ -233,7 +234,8 @@ namespace SecurityMonitor.Controllers
                          PrimaryEmail = c.Tenant.Username,
                          SecondaryName = c.OtherContactName,
                          SecondaryPhone = c.OtherContactPhone,
-                         SecondaryEmail = c.OtherContactEmail
+                         SecondaryEmail = c.OtherContactEmail,
+                         BuildingID = c.BuildingID
                      }).OrderBy(c => c.RequestedDate).ToListAsync();
 
 
@@ -267,7 +269,8 @@ namespace SecurityMonitor.Controllers
                          PrimaryEmail = c.Tenant.Username,
                          SecondaryName = c.OtherContactName,
                          SecondaryPhone = c.OtherContactPhone,
-                         SecondaryEmail = c.OtherContactEmail
+                         SecondaryEmail = c.OtherContactEmail,
+                         BuildingID = c.BuildingID
                      }).OrderByDescending(c => c.RequestedDate).ToListAsync();
             
             var Jsonpackages = Json(repairRequest);

@@ -17,6 +17,7 @@ namespace SecurityMonitor.Models
         public int id { get; set; }
         public List<RepairRequestmock> RepairsRequests { get; set; }
         public int buildingID { get; set; }
+        public Buildings building { get; set; }
                 
         /// <summary>
         /// Loads all the records that belongs to a specific building
@@ -25,15 +26,24 @@ namespace SecurityMonitor.Models
         /// <returns> Returns a List all type RepairRequest</returns>
         public List<RepairRequestmock> LoadAllRequest(int buildingID)
         {
-            List<RepairRequestmock> R = new List<RepairRequestmock>();
-            R = db.RepairRequest
-                .Where(r => r.Tenant.Apartment.Buildings.ID == buildingID)
+           
+           var R = db.RepairRequest
+                .Where(r => r.BuildingID == buildingID)
                 .Select(c =>new RepairRequestmock{
-                     RequestedDate = c.RequestedDate,
-                      Description = c.ProblemDescription,
+                      RequestedDate = c.RequestedDate,
+                      Description = c.ProblemDescription,                   
+                      Status = c.Status,
                       ID = c.Id,
                       RequestNumber="04/23/2015",
-                      Status = c.Status
+                      Category = c.RepairRequestCategories.Categories,
+                      PhotoUrl = c.PhotoUrl,
+                      Urgency = c.RepairUrgency.Urgency,
+                      CName = c.OtherContactName,
+                      CEmail = c.OtherContactEmail,
+                      CPhone = c.OtherContactPhone,
+                      PName = c.Tenant.FirstName+" "+c.Tenant.LastName,
+                      PEmail =c.Tenant.Username,
+                      PPhone = c.Tenant.Phone
             }).ToList();
             return R;
         }

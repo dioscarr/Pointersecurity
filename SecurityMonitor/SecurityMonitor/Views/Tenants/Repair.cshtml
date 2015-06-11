@@ -498,113 +498,6 @@
                 type: "GET",
                 url: '/Tenants/loadRequest/',
                 data: { TenantID: "@Model.TenantID" },
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        self.request.removeAll();
-                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                        // debugger;
-                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                        for (var i = 0; i < TrkPkgs.length; i++) {
-                            // debugger;
-                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
-                            //alert(RDate);
-                            self.request.push({
-                                rDate: RDate,
-                                RequestNumber: "120320151",
-                                Description: TrkPkgs[i].ProblemDescription,
-                                Status: TrkPkgs[i].Status,
-                                ID: TrkPkgs[i].ID,
-                                Category: TrkPkgs[i].Category,
-                                Instruction: TrkPkgs[i].Instruction,
-                                Urgency: TrkPkgs[i].Urgency,
-                                Permision: TrkPkgs[i].Permision,
-                                PrimaryName: TrkPkgs[i].PrimaryName,
-                                PrimaryPhone: TrkPkgs[i].PrimaryPhone,
-                                PrimaryEmail: TrkPkgs[i].PrimaryEmail,
-                                SecondaryName: TrkPkgs[i].SecondaryName,
-                                SecondaryPhone: TrkPkgs[i].SecondaryPhone,
-                                SecondaryEmail: TrkPkgs[i].SecondaryEmail,
-                                imgUrl: TrkPkgs[i].imgUrl
-                            });
-                        }
-
-                    }
-                });
-
-
-
-                self.Phone = ko.observable();
-                self.Email = ko.observable();
-                self.Urgency = ko.observable();
-                self.Category = ko.observable();
-                self.Instruction = ko.observable();
-                self.Description = ko.observable();
-                self.permission = ko.observable();
-
-                self.OtherContactPhone = ko.observable();
-                self.OtherContactName = ko.observable();
-                self.OtherContactEmail = ko.observable();
-
-                self.request = ko.observableArray();
-                self.fileName = ko.observable();
-                self.KeydownSearh = ko.observable();
-                //===============Preview repait request=======================
-                self.selectedDate = ko.observable();
-                self.selectedDescription = ko.observable();
-                self.selectedRequestNumber = ko.observable();
-                self.selectedCategory = ko.observable();
-                self.selectedPrimaryName = ko.observable();
-                self.selectedPrimaryPhone = ko.observable();
-                self.selectedPrimaryEmail = ko.observable();
-                self.selectedSecondaryName = ko.observable();
-                self.selectedSecondaryPhone = ko.observable();
-                self.selectedSecondaryEmail = ko.observable();
-                self.selectedInstruction = ko.observable();
-                self.selectedUrgency = ko.observable();
-                self.selectedPermission = ko.observable();
-                self.selectedimgUrl = ko.observable();
-                self.selectedStatus = ko.observable();
-                self.currentID = ko.observable();
-
-
-                //update fields
-                self.UpdateCatetegory = ko.observable();
-                self.UpdateInstrutions = ko.observable();
-                self.UpdateUrgency = ko.observable();
-                self.UpdatePermission = ko.observable();
-                self.UpdateProblem = ko.observable();
-                self.UpdateSName = ko.observable();
-                self.UpdateSPhone = ko.observable();
-                self.UpdateSEmail = ko.observable();
-
-
-                var UpdatedrepairRequest =
-                {
-                    Id: self.currentID,
-                    RepairRequestCategoriesID: self.UpdateCatetegory,
-                    ProblemDescription: self.UpdateProblem,
-                    UrgencyID: self.UpdateUrgency,
-                    ContactPhone: "@Model.tenant.Phone",
-                    Permissiontoenter: self.UpdatePermission,
-                    Email: "@Model.tenant.Username",
-                    Instructions_: self.UpdateInstrutions,
-                    PhotoUrl: "",
-                    TenantID: "@Model.TenantID",
-                    Status: "Pending Edited",
-                    RequestedDate: new Date(),
-                    OtherContactPhone: self.UpdateSPhone,
-                    OtherContactName: self.UpdateSName,
-                    OtherContactEmail: self.UpdateSEmail
-
-        };
-            self.Update = function () {
-                debugger;
-            $.ajaxSettings.traditional = true;
-            $.ajax({
-                type: "POST",
-                url: '/Tenants/UpdateRequest/',
-                data: ko.toJSON(UpdatedrepairRequest),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
@@ -637,7 +530,141 @@
                     }
 
                 }
-            }).complete(function () {
+            });
+
+
+
+            self.Phone = ko.observable();
+            self.Email = ko.observable();
+            self.Urgency = ko.observable();
+            self.Category = ko.observable();
+            self.Instruction = ko.observable();
+            self.Description = ko.observable();
+            self.permission = ko.observable();
+
+            self.OtherContactPhone = ko.observable();
+            self.OtherContactName = ko.observable();
+            self.OtherContactEmail = ko.observable();
+
+            self.request = ko.observableArray();
+            self.fileName = ko.observable();
+            self.KeydownSearh = ko.observable();
+            //===============Preview repait request=======================
+            self.selectedDate = ko.observable();
+            self.selectedDescription = ko.observable();
+            self.selectedRequestNumber = ko.observable();
+            self.selectedCategory = ko.observable();
+            self.selectedPrimaryName = ko.observable();
+            self.selectedPrimaryPhone = ko.observable();
+            self.selectedPrimaryEmail = ko.observable();
+            self.selectedSecondaryName = ko.observable();
+            self.selectedSecondaryPhone = ko.observable();
+            self.selectedSecondaryEmail = ko.observable();
+            self.selectedInstruction = ko.observable();
+            self.selectedUrgency = ko.observable();
+            self.selectedPermission = ko.observable();
+            self.selectedimgUrl = ko.observable();
+            self.selectedStatus = ko.observable();
+            self.currentID = ko.observable();
+
+
+            //update fields
+            self.UpdateCatetegory = ko.observable();
+            self.UpdateInstrutions = ko.observable();
+            self.UpdateUrgency = ko.observable();
+            self.UpdatePermission = ko.observable();
+            self.UpdateProblem = ko.observable();
+            self.UpdateSName = ko.observable();
+            self.UpdateSPhone = ko.observable();
+            self.UpdateSEmail = ko.observable();
+
+
+            var UpdatedrepairRequest =
+            {
+                Id: self.currentID,
+                RepairRequestCategoriesID: self.UpdateCatetegory,
+                ProblemDescription: self.UpdateProblem,
+                UrgencyID: self.UpdateUrgency,
+                ContactPhone: "@Model.tenant.Phone",
+                Permissiontoenter: self.UpdatePermission,
+                Email: "@Model.tenant.Username",
+                Instructions_: self.UpdateInstrutions,
+                PhotoUrl: "",
+                TenantID: "@Model.TenantID",
+                Status: "Pending Edited",
+                RequestedDate: new Date(),
+                OtherContactPhone: self.UpdateSPhone,
+                OtherContactName: self.UpdateSName,
+                OtherContactEmail: self.UpdateSEmail,
+                BuildingID:@Model.tenant.Apartment.ID
+
+                };
+            self.Update = function () {
+                debugger;
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "POST",
+                    url: '/Tenants/UpdateRequest/',
+                    data: ko.toJSON(UpdatedrepairRequest),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        self.request.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                        // debugger;
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            // debugger;
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                            //alert(RDate);
+                            self.request.push({
+                                rDate: RDate,
+                                RequestNumber: "120320151",
+                                Description: TrkPkgs[i].ProblemDescription,
+                                Status: TrkPkgs[i].Status,
+                                ID: TrkPkgs[i].ID,
+                                Category: TrkPkgs[i].Category,
+                                Instruction: TrkPkgs[i].Instruction,
+                                Urgency: TrkPkgs[i].Urgency,
+                                Permision: TrkPkgs[i].Permision,
+                                PrimaryName: TrkPkgs[i].PrimaryName,
+                                PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                                PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                                SecondaryName: TrkPkgs[i].SecondaryName,
+                                SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                                SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                                imgUrl: TrkPkgs[i].imgUrl
+                            });
+                        }
+
+                    }
+                }).complete(function () {
+                    self.UpdateCatetegory("");
+                    self.UpdateInstrutions("");
+                    self.UpdateUrgency("");
+                    self.UpdatePermission("");
+                    self.UpdateProblem("");
+                    self.UpdateSName("");
+                    self.UpdateSPhone("");;
+                    self.UpdateSEmail("");
+                    self.letsee(false);
+
+                });
+
+            };
+
+            self.letsee = ko.observable(false);
+
+            self.edit = function () {
+                if (self.letsee() == true) {
+                    self.letsee(false);
+                } else {
+
+                    self.letsee(true);
+                }
+            };
+
+            self.previewcancel = function () {
                 self.UpdateCatetegory("");
                 self.UpdateInstrutions("");
                 self.UpdateUrgency("");
@@ -648,121 +675,96 @@
                 self.UpdateSEmail("");
                 self.letsee(false);
 
-            });
+            };
 
-        };
+            self.openinmodal = function (item, event) {
+                var selected_values = JSON.stringify(item);
+                var selected = JSON.parse(selected_values);
+                self.currentID(selected.ID)
+                self.selectedDate(selected.rDate);
+                self.selectedDescription(selected.Description);
+                self.selectedStatus(selected.Status);
+                self.selectedCategory(selected.Category);
+                self.selectedPrimaryName(selected.PrimaryName);
+                self.selectedPrimaryPhone(selected.PrimaryPhone);
+                self.selectedPrimaryEmail(selected.PrimaryEmail);
+                self.selectedSecondaryName(selected.SecondaryName);
+                self.selectedSecondaryPhone(selected.SecondaryPhone);
+                self.selectedSecondaryEmail(selected.SecondaryEmail);
+                self.selectedInstruction(selected.Instruction);
+                self.selectedUrgency(selected.Urgency);
+                self.selectedPermission(selected.Permision);
+                self.selectedimgUrl(selected.imgUrl);
+            };
 
-        self.letsee = ko.observable(false);
-
-        self.edit = function () {
-            if (self.letsee() == true) {
-                self.letsee(false);
-            } else {
-
-                self.letsee(true);
-            }
-        };
-
-        self.previewcancel = function () {
-            self.UpdateCatetegory("");
-            self.UpdateInstrutions("");
-            self.UpdateUrgency("");
-            self.UpdatePermission("");
-            self.UpdateProblem("");
-            self.UpdateSName("");
-            self.UpdateSPhone("");;
-            self.UpdateSEmail("");
-            self.letsee(false);
-
-        };
-
-        self.openinmodal = function (item, event) {
-            var selected_values = JSON.stringify(item);
-            var selected = JSON.parse(selected_values);
-            self.currentID(selected.ID)
-            self.selectedDate(selected.rDate);
-            self.selectedDescription(selected.Description);
-            self.selectedStatus(selected.Status);
-            self.selectedCategory(selected.Category);
-            self.selectedPrimaryName(selected.PrimaryName);
-            self.selectedPrimaryPhone(selected.PrimaryPhone);
-            self.selectedPrimaryEmail(selected.PrimaryEmail);
-            self.selectedSecondaryName(selected.SecondaryName);
-            self.selectedSecondaryPhone(selected.SecondaryPhone);
-            self.selectedSecondaryEmail(selected.SecondaryEmail);
-            self.selectedInstruction(selected.Instruction);
-            self.selectedUrgency(selected.Urgency);
-            self.selectedPermission(selected.Permision);
-            self.selectedimgUrl(selected.imgUrl);
-        };
-
-        self.KeydownSearh.subscribe(function (value) {
-            // debugger;
+            self.KeydownSearh.subscribe(function (value) {
+                // debugger;
 
 
-            $.ajaxSettings.traditional = true;
-            $.ajax({
+                $.ajaxSettings.traditional = true;
+                $.ajax({
 
-                type: "POST",
-                url: '/Tenants/loadRequestbysearch/',
-                data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter': value }),
-                contentType: "application/json; charset=utf-8",
-                context: document.body,
-                success: function (data) {
-                    self.request.removeAll();
-                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                    // debugger;
-                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                    for (var i = 0; i < TrkPkgs.length; i++) {
+                    type: "POST",
+                    url: '/Tenants/loadRequestbysearch/',
+                    data: JSON.stringify({ 'TenantID': '@Model.TenantID', 'filter': value }),
+                    contentType: "application/json; charset=utf-8",
+                    context: document.body,
+                    success: function (data) {
+                        self.request.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
                         // debugger;
-                        var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
-                        //alert(RDate);
-                        self.request.push({
-                            rDate: RDate,
-                            RequestNumber: "120320151",
-                            Description: TrkPkgs[i].ProblemDescription,
-                            Status: TrkPkgs[i].Status,
-                            ID: TrkPkgs[i].ID,
-                            Category: TrkPkgs[i].Category,
-                            Instruction: TrkPkgs[i].Instruction,
-                            Urgency: TrkPkgs[i].Urgency,
-                            Permision: TrkPkgs[i].Permision,
-                            PrimaryName: TrkPkgs[i].PrimaryName,
-                            PrimaryPhone: TrkPkgs[i].PrimaryPhone,
-                            PrimaryEmail: TrkPkgs[i].PrimaryEmail,
-                            SecondaryName: TrkPkgs[i].SecondaryName,
-                            SecondaryPhone: TrkPkgs[i].SecondaryPhone,
-                            SecondaryEmail: TrkPkgs[i].SecondaryEmail,
-                            imgUrl: TrkPkgs[i].imgUrl
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            // debugger;
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                            //alert(RDate);
+                            self.request.push({
+                                rDate: RDate,
+                                RequestNumber: "120320151",
+                                Description: TrkPkgs[i].ProblemDescription,
+                                Status: TrkPkgs[i].Status,
+                                ID: TrkPkgs[i].ID,
+                                Category: TrkPkgs[i].Category,
+                                Instruction: TrkPkgs[i].Instruction,
+                                Urgency: TrkPkgs[i].Urgency,
+                                Permision: TrkPkgs[i].Permision,
+                                PrimaryName: TrkPkgs[i].PrimaryName,
+                                PrimaryPhone: TrkPkgs[i].PrimaryPhone,
+                                PrimaryEmail: TrkPkgs[i].PrimaryEmail,
+                                SecondaryName: TrkPkgs[i].SecondaryName,
+                                SecondaryPhone: TrkPkgs[i].SecondaryPhone,
+                                SecondaryEmail: TrkPkgs[i].SecondaryEmail,
+                                imgUrl: TrkPkgs[i].imgUrl
 
-                        });
+                            });
+                        }
                     }
-                }
+                });
             });
-        });
 
 
-        $(document).ready(function () {
-            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-                self.fileName(" " + label)
+            $(document).ready(function () {
+                $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+                    self.fileName(" " + label)
+                });
             });
-        });
-        var $myvalue = 0;
-        var request = {
-            RepairRequestCategoriesID: self.Category,
-            ProblemDescription: self.Description,
-            UrgencyID: self.Urgency,
-            ContactPhone: "@Model.tenant.Phone",
-            Permissiontoenter: self.permission,
-            Email: "@Model.tenant.Username",
-            Instructions_: self.Instruction,
-            PhotoUrl: "",
-            TenantID: "@Model.TenantID",
+            var $myvalue = 0;
+            var request = {
+                RepairRequestCategoriesID: self.Category,
+                ProblemDescription: self.Description,
+                UrgencyID: self.Urgency,
+                ContactPhone: "@Model.tenant.Phone",
+                Permissiontoenter: self.permission,
+                Email: "@Model.tenant.Username",
+                Instructions_: self.Instruction,
+                PhotoUrl: "",
+                TenantID: "@Model.TenantID",
             Status: "Pending",
             RequestedDate: new Date(),
             OtherContactPhone: self.OtherContactPhone,
             OtherContactName: self.OtherContactName,
-            OtherContactEmail: self.OtherContactEmail
+            OtherContactEmail: self.OtherContactEmail,
+            BuildingID:@Model.tenant.Apartment.ID
         };
         self.SendRequest = function (fields) {
             // alert(request);

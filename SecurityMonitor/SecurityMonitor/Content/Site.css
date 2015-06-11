@@ -2412,3 +2412,33 @@ top:-40px;
 
 
 }
+
+.requestmanagementrows {
+    margin:5px 0 0 0;
+    padding:10px 0px;
+    min-height:60px;
+    color:#333333;
+    background-color:#f7f7f7;  
+    -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+    -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+    line-height: 54px;  
+}
+
+.requestmanagementHeaderrows {
+
+    margin:30px 0 0 0;
+    padding:2px 0px;
+    min-height:30px;
+    color:#333333;
+    background-color:#ffffff;  
+    -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+    -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+    line-height: 30px;  
+    font-weight:500;
+    font-size:16px; 
+}
+.repairmanagementdescription {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

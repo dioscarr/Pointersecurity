@@ -25,6 +25,7 @@ namespace Doormandondemand
             this.RepairRequestCategories = new HashSet<RepairRequestCategories>();
             this.Shipment = new HashSet<Shipment>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
+            this.RepairRequest = new HashSet<RepairRequest>();
         }
     
         public int ID { get; set; }
@@ -50,5 +51,6 @@ namespace Doormandondemand
         public virtual ICollection<RepairRequestCategories> RepairRequestCategories { get; set; }
         public virtual ICollection<Shipment> Shipment { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
+        public virtual ICollection<RepairRequest> RepairRequest { get; set; }
     }
 }

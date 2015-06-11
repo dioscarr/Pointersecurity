@@ -1,6 +1,33 @@
 ﻿$(function () {
 
 
+    //debugger;
+    //var allrouteElem = document.getElementsByClassName('route').getAttribute('data-route');
+    
+    //var routeVal = allrouteElem[0].attributes('data-route');
+
+    
+    //var route = $('.route').attr("data-route");
+
+        //var BID = $('#buildingidforcustomjs').attr("data-buildingid");
+        //switch (route) {
+        //    case "Repair":
+        //        window.location.href = "/building/Repairmanagement?BuildingID=" + BID;
+        //        break;
+        //}
+  
+
+
+
+    $('.route').click(function () {
+        var route = $(this).attr("data-route");
+        var BID = $('#buildingidforcustomjs').attr("data-buildingid");
+        switch (route) {
+            case "Repair":
+                window.location.href = "/building/Repairmanagement?BuildingID=" + BID;
+                break;
+        }
+    });
 
 
     $('body').on('click', function (e) {
@@ -50,6 +77,13 @@
         self.BuildingPhone = ko.observable("");
         self.StateList = ko.observableArray("");
         self.miniMenuText = ko.observable("");
+
+        self.ModuleRoute =function (data) {
+            var myvalue = ko.toJSON(value);
+
+            var myjson = JSON.parse(myvalue);
+            
+        };
 
         //loading Building staff when needed
         //hold permissions

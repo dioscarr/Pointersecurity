@@ -11,6 +11,84 @@
 
 }
 
+<!--nAV bAR-->
+<div class="row">
+
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerDefault">
+        <ol class="breadcrumb" style="line-height:20px;" id="clientbreadcrumbid">
+            <li>@Html.ActionLink("Home", "index", "Home", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Page", "ClientHome", "building", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Profile", "ClientProfile", "building", new { ClientID = @Model.building.ClientID }, new { @class = "breadcrumblink" })</li>
+            <li> @Html.ActionLink((string)@Model.building.BuildingName, "BuildingProfile", "building", new { buildingID = @Model.building.ID }, new { @class = "breadcrumblink" })</li>
+            <li>Repair Management</li>
+        </ol>
+    </div>
+</div>
+<div class="row ">
+
+    <div class="box">
+        <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." @*data-bind="value:Search, valueUpdate:'afterkeydown'"*@ />
+
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementHeaderrows  ">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1   " style="border-right:1px solid #808080;">
+                Date
+            </div>
+
+            <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
+                Status
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
+                Urgency
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
+                Request#
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 repairmanagementdescription  " style="border-right:1px solid #808080;">
+                Problem Description
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
+                AssignTo
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--this are the rows-->
+<div class="row " data-bind="foreach:RepairRequest">
+    
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementrows hollow5 " data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1   " data-bind="text:RequestedDate">
+                        6/9/2015
+                    </div>
+
+                    <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1  " data-bind="text:Status">
+                        Open
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:Urgency">
+                        High
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:RequestNumber">
+                        692015355
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 repairmanagementdescription  " data-bind="text:Description">
+                        Ceiling is coming down on us please send some one to fix it.
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
+                        Kevin Sandiego
+                    </div>
+                </div>  
+        </div>
+    </div>
 
 
 <!--Request Form-->
@@ -32,19 +110,14 @@
                 </div>
                 <div class="col-lg-12 col-md-12">
                     <button class="btn btn-link">Assign to existing company</button>
-                    <button class="btn btn-link">Assign to a New Company</button>
-                   
-
-
+                    <button class="btn btn-link">Assign to a New Company</button>                   
+                    
                 </div>
                 <!--Form-->
                 <div class="col-lg-12 col-md-12 blueDefault" data-bind="foreach:buildingUsers">
                      <div data-bind="text:BuildingUserName">
 
-                     </div>        
-                    
-                    
-                              
+                     </div>   
                 </div>
                 <!--Form-->
                 <div class="col-lg-12 col-md-12 blueDefault" >
@@ -79,29 +152,6 @@
 </div>
 
 
-<div class="row " data-bind="foreach:RepairRequest">
-    <div class="col-lg-12 col-md-12 nopadding border-bottomcust padding_up_down_10px outline "
-         data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
-
-        <span class="col-mlg-2 col-md-2" 
-              data-bind="text:RequestedDate, click:selectedRequest">
-
-        </span>
-
-        <div class="col-lg-1 col-md-1"  data-bind="text:RequestNumber, click:selectedRequest">
-
-        </div>
-
-        <div class="col-lg-7 col-md-7" 
-             data-bind="text:Description, click:selectedRequest">
-
-        </div>
-        <div class="col-lg-2 col-md-2" 
-             data-bind="text:Status, click:selectedRequest">
-        </div>
-    </div>
-
-</div>
 
 @section scripts
 {
@@ -226,12 +276,14 @@
                     url: '/building/BuildingRepairResquest/',
                     data: { buildingID: "@Model.buildingID" },
                     dataType: "json",
-                    success: function (data) {                      
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
                         var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                         
+                      
                         var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                         for (var i = 0; i < TrkPkgs.length; i++) {
                          
+
                             var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
                           
                             self.RepairRequest.push({
@@ -240,7 +292,17 @@
                                 Description: TrkPkgs[i].Description,
                                 ID: TrkPkgs[i].ID,
                                 Status: TrkPkgs[i].Status,
-                                RequestNumber: TrkPkgs[i].RequestNumber
+                                RequestNumber: TrkPkgs[i].RequestNumber,                                
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName : TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName : TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone
+
                             });
                         }
                     }

@@ -1400,6 +1400,7 @@ namespace SecurityMonitor.Controllers
             RepairManagement r = new RepairManagement();
            r.RepairsRequests = r.LoadAllRequest(buildingID);
            r.buildingID = buildingID;
+           r.building = db.Buildings.Find(buildingID);
 
             return View(r);
         }
@@ -1749,7 +1750,11 @@ namespace SecurityMonitor.Controllers
       
         //Tenant Messege Center
 
-
+        public ActionResult RepairModuleManagement(int BuildingID)
+        {
+            var B = db.Buildings.Find(BuildingID);
+            return View(B);
+        }
        
 
         public async Task<JsonResult> loadRequestbysearch(int BuildingID, string filter)
@@ -1777,6 +1782,8 @@ namespace SecurityMonitor.Controllers
                      }).OrderByDescending(c => c.RequestedDate).ToListAsync();
 
             var Jsonpackages = Json(repairRequest);
+
+
 
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
