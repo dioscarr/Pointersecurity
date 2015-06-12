@@ -1145,20 +1145,24 @@ namespace SecurityMonitor.Controllers
            // return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID =BuildingID});
         }
         //===================DeleteTenant=============
-        [HttpGet]
-        public ActionResult TenantDelete(string TenantID)
-        {
-            Tenant tn = db.Tenant.Find(TenantID);
-            return View(tn);
-        }
+        //[HttpGet]
+        //public ActionResult TenantDelete(string TenantID)
+        //{
+        //    Tenant tn = db.Tenant.Find(TenantID);
+        //    return View(tn);
+        //}
         //======================Delete Tenant POST=======================
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult TenantDelete(string TenantID, int ApartmentID, int BuildingID)
+        [HttpPost]        
+        public JsonResult TenantDelete(string TenantID)
         {
-            try 
 
-            {
+            var BID = db.Tenant.Where(c => c.ID == TenantID).FirstOrDefault().Apartment.Buildings.ID;
+            var AID = db.Tenant.Where(c => c.ID == TenantID).FirstOrDefault().Apartment.ID;
+
+
+            try {
+              
+                
                 ApplicationDbContext context = new ApplicationDbContext();
                 ApplicationUser AppUser = new ApplicationUser();
                 var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
@@ -1177,7 +1181,8 @@ namespace SecurityMonitor.Controllers
                 AppUser = userManager.FindById(TenantID);
                 //delete tenant applicationuser
                 var result = userManager.Delete(AppUser);
-               
+
+              
                
             }
             catch (Exception e)
@@ -1185,10 +1190,21 @@ namespace SecurityMonitor.Controllers
                 ViewBag.Message = e.Message;
 
             }
+
+            var tenants = db.Tenant.Where(c => c.aptID == (int?)AID).Select(c => new
+            {
+                ID = c.ID,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Phone = c.Phone,
+                UserName = c.Username,
+                CreatedDate = c.Created
+            }).ToList();
+
+            var mydata = Json(tenants);
+
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                
-            return RedirectToAction("ApartmentProfile", new { ApartmentID = ApartmentID, BuildingID = BuildingID });
-            
-           
         }
 
         //======================TenantRequest======================

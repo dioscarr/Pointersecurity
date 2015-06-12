@@ -216,7 +216,7 @@
                                             <br />
                                             <button class="btn btn-sm fa fa-unlock-alt deliveryclass" data-bind="click:ResetTenantPassword" ></button>
                                             <button class="btn btn-sm fa fa-edit deliveryclass" data-bind="click:loadTenantInfo, attr:{'data-tenantid':ID}" data-target="#myModalEditTenant"  data-toggle="modal"></button>
-                                            <button class="btn btn-sm fa fa-trash deliveryclass" ></button>
+                                            <button class="btn btn-sm fa fa-trash deliveryclass" data-bind="click:DeleteTenant"></button>
                                             <button class="btn btn-sm fa fa-envelope-o deliveryclass"  data-bind="fadeVisible:itistrue, click:loadTenantInfo, attr:{'data-showdeliverykey':ID}"  data-target="#myModaldeliveries" data-toggle="modal"></button>
                                             <button class="btn btn-sm fa fa-plus-square deliveryclass" data-target="#myModalTenantRequest" data-toggle="modal"></button>
                                         </div>
@@ -1284,6 +1284,7 @@
                          dataType: "json",
                          data:{apartmentID:@buildinginfo.AptID},
                          success: function (data) {
+                             self.Tenants.removeAll();
                              var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
                              
                              var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
@@ -1303,6 +1304,44 @@
                              };
                          }
                      });
+
+                self.DeleteTenant = function(data){
+                    var TInfo = JSON.stringify(data);
+                    var TenantInfo = JSON.parse(TInfo); 
+                    
+
+                    $.ajax(
+                      {
+                          type: "post",
+                          url: '/building/TenantDelete/',
+                          dataType: "json",
+                          data:{TenantID:TenantInfo.ID},
+                          success: function (data) {
+
+                              self.Tenants.removeAll();
+                              var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                             
+                              var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                              for (var i = 0; i < TrkPkgs.length; i++) 
+                              {
+                                  self.Tenants.push(
+                                      {
+                                          ID:TrkPkgs[i].ID,
+                                          FirstName:TrkPkgs[i].FirstName,
+                                          LastName:TrkPkgs[i].LastName,
+                                          Phone:TrkPkgs[i].Phone,
+                                          UserName:TrkPkgs[i].UserName,
+                                          CreatedDate: MonthC(TrkPkgs[i].CreatedDate) +"/"+DayC(TrkPkgs[i].CreatedDate)+"/"+ YearC(TrkPkgs[i].CreatedDate)
+                                    
+                                      });
+                              };
+                          }
+                      });
+
+                }
+
+
                             };
 
                             ko.applyBindings(viewModel);
