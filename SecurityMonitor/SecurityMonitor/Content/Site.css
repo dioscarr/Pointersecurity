@@ -2267,9 +2267,7 @@ min-height:500PX;
 
 
 .buildingcontactandform {
-   position:absolute;
-   bottom:-230px;
-   left:0px;
+  padding-top:15px;
     background:#0071BC;
     color:rgba(249,254,255,1);
 min-height:50px;
@@ -2409,7 +2407,7 @@ top:-40px;
 
 }
 .tenantmodulessettings {
-
+    min-height:292px;
 
 }
 
