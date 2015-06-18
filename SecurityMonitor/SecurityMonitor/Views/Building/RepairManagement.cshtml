@@ -113,8 +113,43 @@
 
                 </div>
                 <div class="col-lg-12 col-md-12">
-                    <button class="btn btn-default">Contractor</button>
-                    <button class="btn btn-default">Building Staff</button>                   
+
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="#SBS" data-toggle="tab">Select Building Staff</a></li>
+                        <li role="presentation"><a href="#NewContact" data-toggle="tab">New Contractor</a></li>
+                        <li role="presentation"><a href="#SC" data-toggle="tab">Select Contractor</a></li>
+                        
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="SBS">
+                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
+                               @for (var i = 0; i < 10; i++)
+                               {
+                                <div class="sbsrows">
+                                    <div class="col-lg-11 col-md-11 col-sm-10 col-xs-8 sbsrows_inside_left ">
+                                        <span>Joe Doe</span>
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-4 sbsrows_inside_right hollow5">
+                                        <h4 class="assignto fa fa-hand-o-up fa-3x"></h4>
+                                    </div>
+                                </div>
+                               }
+                               
+
+                           </div>
+
+                            
+                        </div>
+                        <div class="tab-pane fade" id="NewContact">
+                            Create New Contractor
+                        </div>
+                        <div class="tab-pane fade" id="SC">
+                            Select Contrator
+                        </div>
+                    </div>
+
+
+                                     
                     
                 </div>
                 <!--Form-->
@@ -144,6 +179,13 @@
     <script type="text/javascript">
        // alert("dss");
         $(function () {
+
+            $('#NewContractor a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+
+
             var viewModel = function () {
                 // =====year=======
                 function YearC(value) {
@@ -183,7 +225,21 @@
                     return dt.getMinutes();
                 }
 
-                var self = this;               
+                var self = this;
+
+
+                //this section belongs to the tabs
+                self.applySBS = ko.observable(false);
+                self.applysc = ko.observable(false);
+
+                
+                
+
+
+
+
+
+
 
                 var items = ([{ Text: "Assign To New", Value: "1" }, { Text: "Assign To Existing", Value: "2" }, { Text: "Close Ticket", Value: "3" }]);
                 

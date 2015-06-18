@@ -2440,3 +2440,38 @@ top:-40px;
     overflow:hidden;
     text-overflow:ellipsis;
 }
+
+.sbsrows {
+display:block;
+min-height:100px;
+ margin:10px 0 0 0;
+    padding:10px 0px;
+    border:1px solid #b7b7b7;
+      
+
+background-color:#f7f7f7;  
+    -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+    -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+    line-height: 54px;  
+
+}
+.sbsrows_inside_left {
+min-height:75px;
+
+}
+.sbsrows_inside_right {
+min-height:75px;
+background:#3A3A3A;
+content:"";
+}
+.assignto {
+/*outline:1px solid red;*/
+font-size:30px;
+color:white;
+margin:auto 0;
+padding:20px 0 0 0px;
+line-height:75px;
+
+
+
+}
