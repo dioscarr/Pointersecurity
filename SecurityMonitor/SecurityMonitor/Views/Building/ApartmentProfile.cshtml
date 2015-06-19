@@ -151,53 +151,10 @@
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 apartmentsettings">
-
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                         <div id="piechart" class=" piechart-tenant "></div>                        
                     </div>
-
-                   
-                    @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-lg hidden-md sencondchartapt">
-                        <div id="piechartxs" class="  col-lg-12 col-md-12 col-sm-12 col-xs-12  piechart-tenant-sm"></div>
-                    </div>*@
-
-                    </div>
-            @*@foreach (Tenant item in ViewBag.tenant)
-            {
-                
-                    <!--tenant information-->
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding"> 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
-                            <!--vCard starts-->
-                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12    nopadding">
-                                <!--header starts-->
-                                <section class=" col-md-12 text-center clientboxrow  vcard-tenant">
-                                    <section class=" boxhead hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
-                                        <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <img src="~/img/person.gif" class="img-circle" />                                           
-                                            <h4>@item.FirstName @item.LastName</h4>
-                                            <div class="" style="position:relative; top:-15px;">
-                                                <span>Phone: @item.Phone</span><br/>
-                                                <span>Created on @item.Created</span>
-                                                <br />
-                                                <button class="btn btn-sm fa fa-edit deliveryclass" data-bind="click:loadTenantInfo" data-target="#myModalEditTenant" data-tenantid=@item.ID data-toggle="modal"></button>
-                                                <button class="btn btn-sm fa fa-trash deliveryclass" onclick="location.href = '@Url.Action("TenantDelete", "Building", new { TenantID = @item.ID })'"></button>
-                                                <button class="btn btn-sm fa fa-envelope-o deliveryclass" data-bind="fadeVisible:itistrue" data-showdeliverykey=@item.ID data-target="#myModaldeliveries" data-toggle="modal"></button>
-                                                <button class="btn btn-sm fa fa-plus-square deliveryclass" data-target="#myModalTenantRequest" data-toggle="modal"></button>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                    <!--advance options-->
-            }*@
-
-
-
-          
-
+                    </div>           
                     <!--tenant information-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:Tenants">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding">
@@ -228,8 +185,6 @@
                 </div>
                 </div>
                 <!--advance options-->
-
-
             </div>
 
         </div>

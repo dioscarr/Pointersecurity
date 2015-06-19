@@ -677,11 +677,18 @@ height:800px;
 .riginalwidth
 {width:100%;}
 
-p {
-
+p{
+    font-weight:100;
+    font-size:large;
  font-family: 'overpassregular';
 
 }
+span {
+    font-weight:100;
+    font-size:large;
+ font-family: 'overpassregular';
+}
+
 
 .ClientEditrows {
     padding-top:5px;
@@ -2445,7 +2452,7 @@ top:-40px;
 display:block;
 min-height:100px;
  margin:10px 0 0 0;
-    padding:10px 0px;
+    padding:24px 0px;
     border:1px solid #b7b7b7;
       
 
@@ -2461,7 +2468,7 @@ min-height:75px;
 }
 .sbsrows_inside_right {
 min-height:75px;
-background:#3A3A3A;
+
 content:"";
 }
 .assignto {
@@ -2474,4 +2481,22 @@ line-height:75px;
 
 
 
+}
+
+.SBS_Font {
+    font-weight:100;
+font-size:18px;
+}
+
+.assigntobox {
+    margin:0 0 20px 0;
+border-bottom:1px solid #f2f2f2;
+
+}
+
+#contactformvia {
+margin:0 0 0 20px;
+}
+.dopdownvia {
+    margin:0 0 0 20px;
 }
