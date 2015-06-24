@@ -1840,12 +1840,15 @@ namespace SecurityMonitor.Controllers
 
            var Worker = db.BuildingUser.Where(c=>c.UserID == UserID).FirstOrDefault();
 
-           string string1 = "Hi " + Worker.FirstName + " " + Worker.LastName + ", ";          
-           string string5 = "You have a new assignemt and the description is bellow:";
-           string string6 = RR.ProblemDescription;
+           string string1 = "<div style='font-size:20px; colo:blue;'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
+           string string2 = "You have a new assignemt and the description is bellow:";
+           string string3 = "The Category of this Request is "+RR.RepairRequestCategories.Categories;
+           string string4 = "The Decription of the request is: " + RR.ProblemDescription;
+           string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
+           string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
            string string7 = "Find more information...";
 
-           string x = string.Format("{0}\n{1}\n{2}\n{3}\n", string1, string5, string6, string7);
+           string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n", string1, string2, string3, string4, string5, string6, string7);
 
            Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
            MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
