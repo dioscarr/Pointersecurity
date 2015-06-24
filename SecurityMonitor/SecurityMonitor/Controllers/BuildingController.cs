@@ -1848,7 +1848,7 @@ namespace SecurityMonitor.Controllers
            string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
            string string7 = "Find more information...";
 
-           string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n", string1, string2, string3, string4, string5, string6, string7);
+           string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{7}\n", string1, string2, string3, string4, string5, string6, string7);
 
            Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
            MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
