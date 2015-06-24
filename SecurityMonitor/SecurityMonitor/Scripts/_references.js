@@ -210,3 +210,4 @@
 /// <reference path="buildingstaffmgr.js" />
 /// <reference path="gviz-api.js" />
 /// <reference path="thelibrary/timejs.js" />
+/// <reference path="handyfunc.js" />

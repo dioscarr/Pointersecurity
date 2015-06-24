@@ -43,7 +43,10 @@ namespace SecurityMonitor.Models
                       CPhone = c.OtherContactPhone,
                       PName = c.Tenant.FirstName+" "+c.Tenant.LastName,
                       PEmail =c.Tenant.Username,
-                      PPhone = c.Tenant.Phone
+                      PPhone = c.Tenant.Phone,
+                      AssignToID = c.BuildingUser.Id,
+                      AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName
+
             }).ToList();
             return R;
         }

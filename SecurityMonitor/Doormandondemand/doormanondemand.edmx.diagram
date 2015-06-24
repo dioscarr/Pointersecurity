@@ -5,54 +5,56 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="fc9900fb44084f79957ba78ac995152e" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="PointerdbModel.ActiveManager" Width="1.5" PointX="6.75" PointY="34.875" />
-        <EntityTypeShape EntityType="PointerdbModel.Apartment" Width="1.5" PointX="11.875" PointY="24.375" />
+        <EntityTypeShape EntityType="PointerdbModel.ActiveManager" Width="1.5" PointX="12.75" PointY="24.125" />
+        <EntityTypeShape EntityType="PointerdbModel.Apartment" Width="1.5" PointX="12.75" PointY="33.625" />
         <EntityTypeShape EntityType="PointerdbModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="7.875" />
         <EntityTypeShape EntityType="PointerdbModel.aspnet_Membership" Width="1.5" PointX="3" PointY="6.5" />
-        <EntityTypeShape EntityType="PointerdbModel.aspnet_Paths" Width="1.5" PointX="3" PointY="15.75" />
-        <EntityTypeShape EntityType="PointerdbModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="0.5" PointY="18" />
-        <EntityTypeShape EntityType="PointerdbModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="7.5" PointY="12.75" />
-        <EntityTypeShape EntityType="PointerdbModel.aspnet_Profile" Width="1.5" PointX="7.5" PointY="9.375" />
-        <EntityTypeShape EntityType="PointerdbModel.aspnet_Roles" Width="1.5" PointX="3" PointY="12.625" />
+        <EntityTypeShape EntityType="PointerdbModel.aspnet_Paths" Width="1.5" PointX="3" PointY="12.625" />
+        <EntityTypeShape EntityType="PointerdbModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="5.25" PointY="16" />
+        <EntityTypeShape EntityType="PointerdbModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="5.25" PointY="12.625" />
+        <EntityTypeShape EntityType="PointerdbModel.aspnet_Profile" Width="1.5" PointX="7.5" PointY="8.875" />
+        <EntityTypeShape EntityType="PointerdbModel.aspnet_Roles" Width="1.5" PointX="3" PointY="15.75" />
         <EntityTypeShape EntityType="PointerdbModel.aspnet_SchemaVersions" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointerdbModel.aspnet_Users" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="PointerdbModel.aspnet_Users" Width="1.5" PointX="5.25" PointY="8.375" />
         <EntityTypeShape EntityType="PointerdbModel.aspnet_WebEvent_Events" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointerdbModel.AspNetRoles" Width="1.5" PointX="1.125" PointY="24.25" />
-        <EntityTypeShape EntityType="PointerdbModel.AspNetUserClaims" Width="1.5" PointX="6.125" PointY="29.875" />
-        <EntityTypeShape EntityType="PointerdbModel.AspNetUserLogins" Width="1.5" PointX="5.75" PointY="32.25" />
-        <EntityTypeShape EntityType="PointerdbModel.AspNetUsers" Width="1.5" PointX="3.5" PointY="20.875" />
-        <EntityTypeShape EntityType="PointerdbModel.Buildings" Width="1.5" PointX="13.375" PointY="36.375" />
-        <EntityTypeShape EntityType="PointerdbModel.BuildingUser" Width="1.5" PointX="15.75" PointY="46.75" />
-        <EntityTypeShape EntityType="PointerdbModel.BuildingUserMapping" Width="1.5" PointX="8.25" PointY="31" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="25.375" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="29.625" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="36" />
+        <EntityTypeShape EntityType="PointerdbModel.AspNetUsers" Width="1.5" PointX="3" PointY="26.5" />
+        <EntityTypeShape EntityType="PointerdbModel.Buildings" Width="1.5" PointX="10.5" PointY="22.375" />
+        <EntityTypeShape EntityType="PointerdbModel.BuildingUser" Width="1.5" PointX="12.75" PointY="29.75" />
+        <EntityTypeShape EntityType="PointerdbModel.BuildingUserMapping" Width="1.5" PointX="8.25" PointY="28.125" />
         <EntityTypeShape EntityType="PointerdbModel.C__MigrationHistory" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointerdbModel.Clients" Width="1.5" PointX="11.25" PointY="30.375" />
+        <EntityTypeShape EntityType="PointerdbModel.ClientContact" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PointerdbModel.Clients" Width="1.5" PointX="6" PointY="19.5" />
         <EntityTypeShape EntityType="PointerdbModel.GanttLinkId" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="PointerdbModel.GanttTask" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="PointerdbModel.ListOfModule" Width="1.5" PointX="16.5" PointY="27.875" />
-        <EntityTypeShape EntityType="PointerdbModel.Manager" Width="1.5" PointX="4.25" PointY="34.875" />
-        <EntityTypeShape EntityType="PointerdbModel.ManagerBuilding" Width="1.5" PointX="15.75" PointY="38.875" />
+        <EntityTypeShape EntityType="PointerdbModel.ListOfModule" Width="1.5" PointX="10.5" PointY="19" />
+        <EntityTypeShape EntityType="PointerdbModel.Manager" Width="1.5" PointX="8.25" PointY="23.625" />
+        <EntityTypeShape EntityType="PointerdbModel.ManagerBuilding" Width="1.5" PointX="15.75" PointY="24" />
         <EntityTypeShape EntityType="PointerdbModel.MasterProfileFields" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointerdbModel.Module" Width="1.5" PointX="18.75" PointY="27.875" />
-        <EntityTypeShape EntityType="PointerdbModel.Package" Width="1.5" PointX="23.25" PointY="31.625" />
-        <EntityTypeShape EntityType="PointerdbModel.PackageDeliveryStatus" Width="1.5" PointX="21" PointY="28.25" />
-        <EntityTypeShape EntityType="PointerdbModel.PackageType" Width="1.5" PointX="21" PointY="43.875" />
-        <EntityTypeShape EntityType="PointerdbModel.PendingModules" Width="1.5" PointX="19.25" PointY="36" />
-        <EntityTypeShape EntityType="PointerdbModel.PermissionMapRole" Width="2.625" PointX="0.75" PointY="30.75" />
-        <EntityTypeShape EntityType="PointerdbModel.RepairRequest" Width="1.5" PointX="14" PointY="20.625" />
-        <EntityTypeShape EntityType="PointerdbModel.RepairRequestCategories" Width="1.5" PointX="15.75" PointY="44" />
-        <EntityTypeShape EntityType="PointerdbModel.RepairUrgency" Width="1.5" PointX="21.375" PointY="36.5" />
+        <EntityTypeShape EntityType="PointerdbModel.Module" Width="1.5" PointX="12.75" PointY="17" />
+        <EntityTypeShape EntityType="PointerdbModel.Package" Width="1.5" PointX="20.25" PointY="27.375" />
+        <EntityTypeShape EntityType="PointerdbModel.PackageDeliveryStatus" Width="1.5" PointX="18" PointY="36.625" />
+        <EntityTypeShape EntityType="PointerdbModel.PackageType" Width="1.5" PointX="18" PointY="23.875" />
+        <EntityTypeShape EntityType="PointerdbModel.PendingModules" Width="1.5" PointX="12.75" PointY="21" />
+        <EntityTypeShape EntityType="PointerdbModel.PermissionMapRole" Width="1.5" PointX="5.25" PointY="23.625" />
+        <EntityTypeShape EntityType="PointerdbModel.RepairRequest" Width="1.5" PointX="20.25" PointY="32.75" />
+        <EntityTypeShape EntityType="PointerdbModel.RepairRequestCategories" Width="1.5" PointX="12.75" PointY="36.75" />
+        <EntityTypeShape EntityType="PointerdbModel.RepairRequestNote" Width="1.5" PointX="18" PointY="43.875" />
+        <EntityTypeShape EntityType="PointerdbModel.RepairUrgency" Width="1.5" PointX="18" PointY="41.5" />
         <EntityTypeShape EntityType="PointerdbModel.ReqType" Width="1.5" PointX="9.75" PointY="3.75" />
-        <EntityTypeShape EntityType="PointerdbModel.Requests" Width="1.5" PointX="9.25" PointY="25.375" />
-        <EntityTypeShape EntityType="PointerdbModel.Role" Width="1.5" PointX="0.5" PointY="28" />
-        <EntityTypeShape EntityType="PointerdbModel.Shipment" Width="1.5" PointX="21" PointY="31.125" />
-        <EntityTypeShape EntityType="PointerdbModel.ShippingCarrier" Width="1.5" PointX="21" PointY="46.25" />
-        <EntityTypeShape EntityType="PointerdbModel.ShippingService" Width="1.5" PointX="21" PointY="25.5" />
+        <EntityTypeShape EntityType="PointerdbModel.Requests" Width="1.5" PointX="17.25" PointY="33" />
+        <EntityTypeShape EntityType="PointerdbModel.Role" Width="1.5" PointX="5.25" PointY="26.625" />
+        <EntityTypeShape EntityType="PointerdbModel.Shipment" Width="1.5" PointX="18" PointY="26.75" />
+        <EntityTypeShape EntityType="PointerdbModel.ShippingCarrier" Width="1.5" PointX="18" PointY="39" />
+        <EntityTypeShape EntityType="PointerdbModel.ShippingService" Width="1.5" PointX="18" PointY="21.25" />
         <EntityTypeShape EntityType="PointerdbModel.SignalRMessageTable" Width="1.5" PointX="9.75" PointY="6.75" />
         <EntityTypeShape EntityType="PointerdbModel.States" Width="1.5" PointX="9.75" PointY="9.75" />
         <EntityTypeShape EntityType="PointerdbModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PointerdbModel.Tenant" Width="1.5" PointX="9" PointY="21.125" />
+        <EntityTypeShape EntityType="PointerdbModel.Tenant" Width="1.5" PointX="15" PointY="31.625" />
         <EntityTypeShape EntityType="PointerdbModel.User" Width="1.5" PointX="11.75" PointY="3.75" />
-        <EntityTypeShape EntityType="PointerdbModel.UserActivityLog" Width="1.5" PointX="15.75" PointY="31.25" />
+        <EntityTypeShape EntityType="PointerdbModel.UserActivityLog" Width="1.5" PointX="15.75" PointY="27.75" />
         <AssociationConnector Association="PointerdbModel.FK_ActiveManager_To_Manager" />
         <AssociationConnector Association="PointerdbModel.FK_ActiveManager_ToBuilding" />
         <AssociationConnector Association="PointerdbModel.FK_Apartment_Buildings" />
@@ -84,9 +86,11 @@
         <AssociationConnector Association="PointerdbModel.FK_BuildingUSer" />
         <AssociationConnector Association="PointerdbModel.FK_BuildingUserMapping_Buildings1" />
         <AssociationConnector Association="PointerdbModel.FK_ManagerBuilding_Buildings" />
+        <AssociationConnector Association="PointerdbModel.FK_RepairRequest_Building" />
         <AssociationConnector Association="PointerdbModel.FK_RepairRequestCategories_Buildings" />
         <AssociationConnector Association="PointerdbModel.FK_Shipment_Buildings" />
         <AssociationConnector Association="PointerdbModel.FK_UserActivityLog_Buildings" />
+        <AssociationConnector Association="PointerdbModel.FK_RepairRequest_BuildingUser" />
         <AssociationConnector Association="PointerdbModel.FK_Manager_Clients" />
         <AssociationConnector Association="PointerdbModel.FK_Module_Buildings1" />
         <AssociationConnector Association="PointerdbModel.FK_Module_Listofmodule" />
@@ -98,14 +102,13 @@
         <AssociationConnector Association="PointerdbModel.FK_Package_Shipment" />
         <AssociationConnector Association="PointerdbModel.FK_Package_ShippingCarrier" />
         <AssociationConnector Association="PointerdbModel.FK_Package_ShippingService" />
+        <AssociationConnector Association="PointerdbModel.FK_RepairRequest_RepairRequestNote" />
         <AssociationConnector Association="PointerdbModel.RepairRequest_RepairRequests" />
         <AssociationConnector Association="PointerdbModel.RepairRequest_Tenant" />
         <AssociationConnector Association="PointerdbModel.RepairRequest_Urgency" />
         <AssociationConnector Association="PointerdbModel.FK_Request_Tenant" />
         <AssociationConnector Association="PointerdbModel.aspnet_UsersInRoles" />
         <AssociationConnector Association="PointerdbModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="PointerdbModel.ClientContact" Width="1.5" PointX="12.375" PointY="6.75" />
-        <AssociationConnector Association="PointerdbModel.FK_RepairRequest_Building" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -30,10 +30,14 @@ namespace Doormandondemand
         public string OtherContactName { get; set; }
         public string OtherContactEmail { get; set; }
         public int BuildingID { get; set; }
+        public string AssignID { get; set; }
+        public Nullable<int> RepairRequestNoteID { get; set; }
     
+        public virtual Buildings Buildings { get; set; }
+        public virtual BuildingUser BuildingUser { get; set; }
+        public virtual RepairRequestNote RepairRequestNote { get; set; }
         public virtual RepairRequestCategories RepairRequestCategories { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual RepairUrgency RepairUrgency { get; set; }
-        public virtual Buildings Buildings { get; set; }
     }
 }

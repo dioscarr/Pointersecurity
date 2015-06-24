@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Doormandondemand;
 
+
 namespace SecurityMonitor.Models
 {
     public class UserActivityLogVM

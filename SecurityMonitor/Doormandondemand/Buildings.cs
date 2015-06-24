@@ -22,10 +22,10 @@ namespace Doormandondemand
             this.BuildingUser = new HashSet<BuildingUser>();
             this.BuildingUserMapping = new HashSet<BuildingUserMapping>();
             this.ManagerBuilding = new HashSet<ManagerBuilding>();
+            this.RepairRequest = new HashSet<RepairRequest>();
             this.RepairRequestCategories = new HashSet<RepairRequestCategories>();
             this.Shipment = new HashSet<Shipment>();
             this.UserActivityLog = new HashSet<UserActivityLog>();
-            this.RepairRequest = new HashSet<RepairRequest>();
         }
     
         public int ID { get; set; }
@@ -48,9 +48,9 @@ namespace Doormandondemand
         public virtual ICollection<BuildingUser> BuildingUser { get; set; }
         public virtual ICollection<BuildingUserMapping> BuildingUserMapping { get; set; }
         public virtual ICollection<ManagerBuilding> ManagerBuilding { get; set; }
+        public virtual ICollection<RepairRequest> RepairRequest { get; set; }
         public virtual ICollection<RepairRequestCategories> RepairRequestCategories { get; set; }
         public virtual ICollection<Shipment> Shipment { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
-        public virtual ICollection<RepairRequest> RepairRequest { get; set; }
     }
 }

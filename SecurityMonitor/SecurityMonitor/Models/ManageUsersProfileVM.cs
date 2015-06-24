@@ -22,7 +22,7 @@ namespace SecurityMonitor.Models
         public ManagerVM managerVM { get; set; }
         public Permission permission { get; set; }
 
-
+        
         public string InserUserPermission(string RoleName, string UserID)
         {
             string results = InserUserPermissiondb(RoleName, UserID);
@@ -45,44 +45,44 @@ namespace SecurityMonitor.Models
         /// </summary>
         /// <param name="ConvertToRoleNames"></param>
         /// <returns></returns>
-        public List<string> ConvertToRoleNames(ManageUsersProfileVM model)
+        public List<string> ConvertToRoleNames(PermissionBase model)
         { 
              List<string> myRoles = new List<string> ();
 
 
-             if (model.permission.permission.News == true)
+             if (model.News == true)
              {
                  myRoles.Add("News");
              }
-             if (model.permission.permission.Accesscontrol == true)
+             if (model.Accesscontrol == true)
              {
                  myRoles.Add("AccessControl");
              }
-             if (model.permission.permission.Delivery == true)
+             if (model.Delivery == true)
              {
                  myRoles.Add("Delivery");
              }
-             if (model.permission.permission.Events == true)
+             if (model.Events == true)
              {
                  myRoles.Add("Events");
              }
-             if (model.permission.permission.LegalDocs == true)
+             if (model.LegalDocs == true)
              {
                  myRoles.Add("LegalDocs");
              }
-             if (model.permission.permission.Repair == true)
+             if (model.Repair == true)
              {
                  myRoles.Add("Repair");
              }
-             if (model.permission.permission.BasicFeatures == true)
+             if (model.BasicFeatures == true)
              {
                  myRoles.Add("BasicFeatures");
              }
-             if (model.permission.permission.Apartment == true)
+             if (model.Apartment == true)
              {
                  myRoles.Add("Apartment");
              }
-             if (model.permission.permission.Contactbook == true)
+             if (model.Contactbook == true)
              {
                  myRoles.Add("Contactbook");
              }
@@ -96,6 +96,7 @@ namespace SecurityMonitor.Models
            
             BuildingUser ObjBU = new BuildingUser() 
             {
+             Id = AspnetUserID,
              BuildingID = model.BuildingID,
              FirstName = FullName[0].ToString(),
              LastName = FullName[1].ToString(),
@@ -107,7 +108,7 @@ namespace SecurityMonitor.Models
             db.BuildingUser.Add(ObjBU);
             db.SaveChanges();
 
-            return "";
+            return AspnetUserID;
         }
        
         public List<BuildingUser> LoadBuildingUsers(int BuildingID)

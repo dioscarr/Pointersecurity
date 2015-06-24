@@ -21,6 +21,9 @@ namespace SecurityMonitor.Models
         public string PName { get; set; }
         public string PEmail { get; set; }
         public string PPhone { get; set; }
+        public string AssignToID { get; set; }
+        public string AssignedFullName { get; set; }
+       
 
     }
 }

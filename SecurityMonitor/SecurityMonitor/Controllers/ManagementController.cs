@@ -650,27 +650,43 @@ namespace SecurityMonitor.Controllers
             ViewBag.BuildingInfo = db.Buildings.Find(BuildingID);
            return View(mupvm);
         }
+
+        /// <summary>
+        /// This Method handles Creating Building Staff and inserting all given roles. 
+        /// </summary>
+        /// <param name="BuildingID"></param>
+        /// <param name="model_User"></param>
+        /// <param name="model_permissions"></param>
+        /// <param name="model4"></param>
+        /// <returns></returns>
         [HttpPost]
-       public ActionResult AddUser(int BuildingID, ManagerVM model_User, Permission model_permissions, ManageUsersProfileVM model4)
+        [AllowAnonymous]
+       public JsonResult AddUser(int BuildingID, ManagerVM model_User, PermissionBase Permission, ManageUsersProfileVM model4)
         {
-            ManageUsersProfileVM Obj = new ManageUsersProfileVM();            
+            ManageUsersProfileVM Obj = new ManageUsersProfileVM();
+            model4.managerVM = model_User;
+         
             Obj.managerVM = model_User;
-            var UserID = Obj.InsertUser(Obj);           
-            var RoleNames = Obj.ConvertToRoleNames(model4);
-            Obj.AddBuildingUser(model_User, UserID);
-            foreach (var item in RoleNames)
+            var UserID = Obj.InsertUser(Obj);  //Create a user to the mail aspNetUser table.         
+            var RoleNames = Obj.ConvertToRoleNames(Permission);//Pass all permissions and return a list type string of accepted roles
+          var returnUserID = Obj.AddBuildingUser(model_User, UserID);// Insert building staff.
+            foreach (var item in RoleNames)// loop throught the list of roles
             {
-                Obj.InserUserPermission(item, UserID);
+                Obj.InserUserPermission(item, returnUserID); // Insert one permission at a time. 
             }
-            return RedirectToAction("ManageUsersProfile", new {BuildingID = BuildingID });
+
+
+            var mydata = Json("");
+            return new JsonResult {Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         [HttpPost]
-        public async Task<ActionResult> EditBUPermissions(int BuildingID, ManageUsersProfileVM model, string UserID)
+        public async Task<ActionResult> EditBUPermissions(int BuildingID, PermissionBase permission, ManageUsersProfileVM model, string UserID)
         {
             
             ManageUsersProfileVM ObjBU = new ManageUsersProfileVM();
+           
 
-            var RoleNames = ObjBU.ConvertToRoleNames(model);
+            var RoleNames = ObjBU.ConvertToRoleNames(permission);
             await ObjBU.EditbuildingUserPermission(RoleNames, UserID);
             return RedirectToAction("ManageUsersProfile", new { BuildingID = BuildingID });
         }

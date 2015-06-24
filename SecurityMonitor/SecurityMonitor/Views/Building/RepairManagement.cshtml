@@ -68,23 +68,23 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementrows hollow5 " data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1   " data-bind="text:RequestedDate">
-                6/9/2015
+                
             </div>
 
             <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1  " data-bind="text:Status">
-                Open
+               
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:Urgency">
-                High
+              
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:RequestNumber">
-                692015355
+               
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 repairmanagementdescription  " data-bind="text:Description">
-                Ceiling is coming down on us please send some one to fix it.
+             
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
-                Kevin Sandiego
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  " data-bind="text:AssignedFullName">
+               
             </div>
         </div>
     </div>
@@ -105,13 +105,17 @@
                     <div data-bind="text:selectedDescription"></div>
                     <div data-bind="text:selectedStatus"></div>
                     <div data-bind="text:selectedRequestNumber"></div>
+                    <div data-bind="text:selectedPName"></div>
+                    <div data-bind=" text:selectedPEmail"></div>
+                    <div data-bind="text:selectedPPhone"></div>
+                  
 
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left assigntobox">
                     <hr />
                     <h4 style="display:inline;">Assign To:</h4>
                     <span data-bind="text:ContactName" style="background-color:yellow;"> </span>
-                   
+
                     <span>
                         <button type="button" class="btn btn-link" data-bind="click:removelink, visible:isvisible"> Remove</button>
                     </span>
@@ -164,7 +168,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
-                <button class="btn btn-info " type="button" data-dismiss="modal">Send Request</button>
+                <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate">Apply Update</button>
             </div>
         </div>
     </div>
@@ -229,6 +233,8 @@
 
                 var self = this;
 
+                LoadFirst();
+
                 
 
 
@@ -258,6 +264,9 @@
                 self.ContactLastName = ko.observable();
                 self.ViaType = ko.observable("Email");
 
+                self.UpdateAssignID = ko.observable();
+                self.UpdateRequestID = ko.observable()
+                self.UpdateNotes = ko.observable("this is a note");
                 
 
                 self.txtVia = ko.observable();
@@ -269,8 +278,11 @@
 
 
                 self.assigntofunction = function (data) {
+
+
                     var myvalue = ko.toJSON(data);
                     var myjson = JSON.parse(myvalue);
+                    self.UpdateAssignID(myjson.UserID)
 
                     self.ContactName(myjson.FullName);
                     self.BSArray.removeAll();
@@ -308,6 +320,9 @@
                     //console.log(selectedText);
                     //alert(JSON.stringify(data));
                 };
+
+
+                
 
                 self.displayStaff = function (data, event) {
                     if (AjaxBUaccess == true) {
@@ -375,7 +390,7 @@
                 self.selectedRequestDate = ko.observable();
                 self.selectedAssignto = ko.observable();
                 self.selectedDescription = ko.observable();
-                self.selectedID = ko.observable();
+                self.selectedID = ko.observable();//------needed to update request -----
                 self.selectedStatus = ko.observable();
                 self.selectedRequestNumber = ko.observable();
                 self.selectedCategory = ko.observable();
@@ -386,7 +401,15 @@
                 self.selectedPEmail = ko.observable();
                 self.selectedPPhone = ko.observable();
                 self.selectedPhotoURL = ko.observable();
+
+
+                //alert(selectedID());
+                
+                //self.UpdateRequestID(self.selectedID());
+
+
                 self.selectedRequest = function (value, event) {
+
                     var myvalue = ko.toJSON(value);
                     var myjson = JSON.parse(myvalue);
                     self.selectedRequestDate(myjson.RequestedDate);
@@ -395,11 +418,92 @@
                     self.selectedID(myjson.ID);
                     self.selectedStatus(myjson.Status);
                     self.selectedRequestNumber(myjson.RequestNumber);
-                    var updatedRequest =
-                        {
-                            selectedRequestDate: ko.observable(myjson.RequestedDate)
-                        }
+                    self.selectedPName(myjson.PName);
+                    self.selectedPEmail(myjson.PEmail);
+                    self.selectedPPhone(myjson.PPhone);
+
+
+                    if (myjson.AssignToID != null)
+                    {
+                        $.ajax(
+                     {
+                         type: "GET",
+                         url: '/building/LoadingAssignTo/',
+                         data: { UserID: myjson.AssignToID },
+                         dataType: "json",
+                         success: function (data) {
+                             var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                             var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                             for (var i = 0; i < TrkPkgs.length; i++) {
+                                 self.buildingUsers.push({
+
+
+                                     BuildingUserName: ko.observable("Fullname")
+                                 });
+                             }
+                         }
+                     });
+
+                    }
+
+
+                  
+
+                   
+
+                    
+                    self.UpdateRequestID(myjson.ID);
+
+                  
+
+                  
+
+
+
+
+
+                    //var updatedRequest =
+                    //    {
+                    //        selectedRequestDate: ko.observable(myjson.RequestedDate)
+                    //    }
+
+
+                 
                 };
+                //----------------apply updates to save on db--------------------
+                self.ApplyUpdate = function () {
+                  //  alert(self.UpdateAssignID() + " " + self.selectedID() + " " + self.UpdateNotes())
+
+                    $.ajax(
+                       {
+                           type: "POST",
+                           url: '/building/ApplyUpdatesRepairRequest/',
+                           data: { UserID: self.UpdateAssignID(), RepairRequestID: self.selectedID(), Notes: self.UpdateNotes() },
+                           dataType: "json",
+                           success: function (data) {
+                               LoadFirst();
+                               AjaxBUaccess = true;
+
+                               self.displayStaff();
+                               self.ContactName(""),
+                                 self.ContactLastName("")
+                               self.isvisible(false);
+
+
+                               //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                               //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                               //for (var i = 0; i < TrkPkgs.length; i++) {
+                               //    self.buildingUsers.push({
+                               //        BuildingUserName: ko.observable("Fullname")
+                               //    });
+                               //}
+                           }
+                       });
+
+                };
+                //----------------End apply updates to save on db--------------------
                 self.buildingUsers = ko.observableArray();
                 self.ListBuildingUsers = function () {
                     $.ajaxSettings.traditional = true;
@@ -421,43 +525,55 @@
                             }
                         });
                 };
-                $.ajaxSettings.traditional = true;
-                $.ajax({
-                    type: "GET",
-                    url: '/building/BuildingRepairResquest/',
-                    data: { buildingID: "@Model.buildingID" },
-                    dataType: "json",
-                    success: function (data) {
-                        self.RepairRequest.removeAll();
-                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-
-                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                        for (var i = 0; i < TrkPkgs.length; i++) {
 
 
-                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                function LoadFirst() {
 
-                            self.RepairRequest.push({
-                                RequestedDate: ko.observable(RDate),
-                                Assignto: ko.observableArray(items),
-                                Description: TrkPkgs[i].Description,
-                                ID: TrkPkgs[i].ID,
-                                Status: TrkPkgs[i].Status,
-                                RequestNumber: TrkPkgs[i].RequestNumber,
-                                Category: TrkPkgs[i].Category,
-                                PhotoUrl: TrkPkgs[i].PhotoUrl,
-                                Urgency: TrkPkgs[i].Urgency,
-                                CName: TrkPkgs[i].CName,
-                                CEmail: TrkPkgs[i].CEmail,
-                                CPhone: TrkPkgs[i].CPhone,
-                                PName: TrkPkgs[i].PName,
-                                PEmail: TrkPkgs[i].PEmail,
-                                PPhone: TrkPkgs[i].PPhone
+                  //  alert("I am First");
 
-                            });
+
+
+                    $.ajaxSettings.traditional = true;
+                    $.ajax({
+                        type: "GET",
+                        url: '/building/BuildingRepairResquest/',
+                        data: { buildingID: "@Model.buildingID" },
+                        dataType: "json",
+                        success: function (data) {
+                            self.RepairRequest.removeAll();
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                                self.RepairRequest.push({
+                                    RequestedDate: ko.observable(RDate),
+                                    Assignto: ko.observableArray(items),
+                                    Description: TrkPkgs[i].Description,
+                                    ID: TrkPkgs[i].ID,
+                                    Status: TrkPkgs[i].Status,
+                                    RequestNumber: TrkPkgs[i].RequestNumber,
+                                    Category: TrkPkgs[i].Category,
+                                    PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                    Urgency: TrkPkgs[i].Urgency,
+                                    CName: TrkPkgs[i].CName,
+                                    CEmail: TrkPkgs[i].CEmail,
+                                    CPhone: TrkPkgs[i].CPhone,
+                                    PName: TrkPkgs[i].PName,
+                                    PEmail: TrkPkgs[i].PEmail,
+                                    PPhone: TrkPkgs[i].PPhone,
+                                    AssignToID: TrkPkgs[i].AssignToID,
+                                    AssignedFullName: TrkPkgs[i].AssignedFullName
+
+                                });
+                            }
                         }
-                    }
-                });
+                    });
+
+                };
 
 
                 //when a selected value this will get the value related with the element
@@ -468,6 +584,9 @@
 
                     alert(myvalue);
                 });
+
+
+
             };
 
             ko.applyBindings(viewModel);

@@ -729,6 +729,7 @@
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\classes\log4j.properties" />
     <Content Include="Highcharts-4.0.4\exporting-server\java\highcharts-export\highcharts-export-web\target\highcharts-export-web\WEB-INF\classes\com\highcharts\export\controller\ExportController.class" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\HandyFunc.js" />
     <Content Include="Scripts\HighChart\adapters\standalone-framework.js" />
     <Content Include="Scripts\HighChart\adapters\standalone-framework.src.js" />
     <Content Include="Scripts\HighChart\highcharts-3d.js" />

@@ -5,6 +5,14 @@
     ViewBag.Title = "ManageUsersProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*self.NewFullName = ko.observable();
+    self.NewEmail = ko.observable();
+    self.NewPhone = ko.observable();
+    self.UserName = ko.observable();
+    self.NewPassword = ko.observable();
+    self.NewConfirmPassword = ko.observable();*@
+
+
 
 
 <div class="row">
@@ -25,19 +33,14 @@
 </div>
 
 
-
-
 <div class="row ">
 
-    
-   
-@using (Html.BeginForm("AddUser", "Management"))
-{
 
-    List<string> myRoles = new List<string> { "Repair2", "Repair3", "Repair4" };
+
+    
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border:1px solid lightgrey; height:400px; background:#f5f3f3;">
-            @Html.HiddenFor(model => model.RoleNames, myRoles)
+        
 
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -47,24 +50,28 @@
                 <p style="font-size:20px; padding-top:20px;">Create New Building Staff</p>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                @Html.TextBox("FullName", null, new { placeholder = "Full Name", @class = "form-control newstafffield" })
-            </div>
+                <input type="text" class="form-control newstafffield" placeholder="Full Name" name=" FullName" data-bind="value:NewFullName" />
+                    
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-             @Html.TextBox("Email", null, new { placeholder = "Email", @class = " form-control newstafffield" })
+                <input type="text" class="form-control newstafffield" placeholder="Email" name=" Email" data-bind="value:NewEmail" />
+                <div id="validateemailid"></div>
             </div>
            
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                @Html.TextBox("Phone", null, new { placeholder = "Phone", @class = "form-control newstafffield " })
+                <input type="text" class="form-control newstafffield" placeholder="Phone" name="Phone" data-bind="value:NewPhone" />
+          
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                @Html.TextBox("UserName", null, new { placeholder = "UserName", @class = "form-control newstafffield " })
+                <input type="text" class="form-control newstafffield" placeholder="UserName" name="UserName" data-bind="value:UserName" />
+                
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                @Html.Password("Password", null, new { placeholder = "Password", @class = "form-control newstafffield " })
+                <input type="text" class="form-control newstafffield" placeholder="Password" name="Password" data-bind="value:NewPassword" />
+               
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                @Html.Password("ConfirmPassword", null, new { placeholder = "Confirm Password", @class = "form-control newstafffield " })
+                <input type="text" class="form-control newstafffield" placeholder="ConfirmPassword" name="ConfirmPassword" data-bind="value:NewConfirmPassword" />
+              
             </div>
            
           
@@ -139,7 +146,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 background-white" style="min-height:100px;">
         
             <div>
-                <button type="submit" class="btn btn-default">Add Staff</button>
+                <button type="button" class="btn btn-default" data-bind="click:addnewBuildingStaff">Add Staff</button>
                 <button type="submit" class="btn btn-default">Cancel</button>
                 
                 <br />
@@ -217,12 +224,11 @@
 
         </div>*@
 
-        }
+    
 
 
 
-
-
+</div>
     </div>
 
 <div class="row EditpermissionSection" style="display:none;">
@@ -355,9 +361,11 @@
             </div>
 
         </div>
+       
 
 
-    }}
+    }
+    }
 </div>
 @*<div class="row" id="myURL">
     <div class="alert alert-success alert-success" role="alert" style="display:none;">
@@ -373,6 +381,7 @@
 
 @section scripts
 {
+<script src="~/Scripts/TheLibrary/TimeJS.js"></script>
     <script src="~/Scripts/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
@@ -497,7 +506,23 @@
            $(".dragme").draggable();
 
           var viewModel=function(){
-               self = this;
+              self = this;
+
+              //addUser 
+              self.NewFullName = ko.observable();
+              self.NewEmail = ko.observable();
+              self.NewPhone = ko.observable();
+              self.UserName = ko.observable();
+              self.NewPassword = ko.observable();
+              self.NewConfirmPassword = ko.observable();
+              //Permissions
+              self.NewRepair = ko.observable(false);
+              self.NewDelivery = ko.observable(false);
+              self.NewAccessControl = ko.observable(false);
+              self.NewEvents = ko.observable(false);
+              self.NewNews = ko.observable(false);
+              self.NewLegalDocs = ko.observable(false);
+
 
                var data = [{ Name: "Repair" },
                    { Name: "Delivery" },
@@ -510,16 +535,162 @@
                { Name: "Apartments" }];
                self.Permissions = ko.observableArray(data);
                self.AddedPermissions = ko.observableArray();
+               
+
+              //Add permission to Builsing Staff
                self.removePermission = function (task) {
+                   
                    self.Permissions.remove(task);
                    self.AddedPermissions.push(task);
+                   settingup(task.Name);
+
+                  
                   // alert(JSON.stringify( self.Permissions()));
                };
+
+
+               function settingup(task)
+               {
+
+                   switch (task)
+                   {
+                       case "Repair":
+                           self.NewRepair(true);
+                           break;
+                       case "Delivery":
+                           self.NewDelivery(true);
+                           break;
+                       case "Acess Control":
+                           self.NewAccessControl(true);
+                           break;
+                       case "Events":
+                           self.NewEvents(true);
+                           break;
+                       case "News":
+                           self.NewNews(true);
+                           break;
+                       case "Legal Docs":
+                           self.NewLegalDocs(false);
+                           break;
+                   };
+               
+               };
+
+              //remove added permission from buildingstaff deck
                self.removeAddedPermission = function (task) {
+                  
                    self.AddedPermissions.remove(task);
                    self.Permissions.push(task);
+                   settingoff(task.Name);
+
+                  
                    // alert(JSON.stringify( self.Permissions()));
                };
+
+               function settingoff(task){
+                   switch (task) {
+                       case "Repair":
+                           self.NewRepair(false);
+                           break;
+                       case "Delivery":
+                           self.NewDelivery(false);
+                           break;
+                       case "Acess Control":
+                           self.NewAccessControl(false);
+                           break;
+                       case "Events":
+                           self.NewEvents(false);
+                           break;
+                       case "News":
+                           self.NewNews(false);
+                           break;
+                       case "Legal Docs":
+                           self.NewLegalDocs(false);
+                           break;
+                   }
+               };           
+
+            
+
+               self.addnewBuildingStaff = function () {
+                 
+                   $.ajax({
+                       type: "POST",
+                       data: {
+                           BuildingID: "@Model.BuildingID",
+                           Repair: "true",
+                           Delivery: self.NewDelivery(),
+                           Accesscontrol: self.NewAccessControl(),
+                           News: self.NewNews(),
+                           Events: self.NewEvents(),
+                           LegalDocs: self.NewLegalDocs(),
+                           FullName: self.NewFullName(),
+                           Email:self.NewEmail(),
+                           Phone:self.NewPhone(),
+                           Username:self.UserName(),
+                           Password:self.NewPassword(),
+                           ConfirmPassword:self.NewConfirmPassword()
+                       },
+                       dataType: "json",
+                       url: "/Management/AddUser/",
+                       success: function (jsonData) {
+
+                           self.NewFullName("");
+                           self.NewEmail("");
+                           self.NewPhone("");
+                           self.UserName("");
+                           self.NewPassword("");
+                           self.NewConfirmPassword("");
+                           //Permissions
+                           self.NewRepair(false);
+                           self.NewDelivery(false);
+                           self.NewAccessControl(false);
+                           self.NewEvents(false);
+                           self.NewNews(false);
+                           self.NewLegalDocs(false);
+
+                       }
+                   });
+               };
+
+
+
+
+
+              self.NewEmail.subscribe(function (input) {
+                  var result = isValidEmailAddress(input);
+                  if (result == true) {
+                      $.ajax(
+                          {
+                              type: "GET",
+                              url: '/building/Searchforusername/',
+                              dataType: "json",
+                              data: { search: input },
+                              success: function (data) {
+
+                                  var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                  //alert(jsonresult);
+                                  var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                  for (var i = 0; i < TrkPkgs.length; i++) {
+                                      if (TrkPkgs[i].Email == input) {
+                                          $('#validateemailid').html("<span>This email address is already in use");
+                                      }
+                                  }
+                              }
+                          });
+                  }
+                  else if (input == "") {
+                      $('#validateemailid').html("");
+                  }
+                  else {
+                      $('#validateemailid').html("<span>invalid Email Address!");
+                  }
+                  console.log(input + " ");
+              });
+
+
+
+
            };
 
 

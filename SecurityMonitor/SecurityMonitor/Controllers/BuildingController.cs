@@ -1813,6 +1813,71 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        [HttpPost]
+       public JsonResult ApplyUpdatesRepairRequest(string UserID, int RepairRequestID, string Notes)
+       {
+           RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
+
+           RepairRequestNote RN = new RepairRequestNote { 
+            DateCreated = DateTime.Now,
+            Notes = Notes
+                     
+           };
+
+           db.RepairRequestNote.Add(RN);
+           db.SaveChanges();
+
+           RR.RepairRequestNoteID = RN.Id;
+           RR.AssignID = UserID;
+
+           db.RepairRequest.Attach(RR);
+           var Entry = db.Entry(RR);
+
+           Entry.Property(c=>c.RepairRequestNoteID ).IsModified=true;
+           Entry.Property(c => c.AssignID).IsModified = true;
+
+           db.SaveChanges();
+
+           var Worker = db.BuildingUser.Where(c=>c.UserID == UserID).FirstOrDefault();
+
+           string string1 = "Hi " + Worker.FirstName + " " + Worker.LastName + ", ";          
+           string string5 = "You have a new assignemt and the description is bellow:";
+           string string6 = RR.ProblemDescription;
+           string string7 = "Find more information...";
+
+           string x = string.Format("{0}\n{1}\n{2}\n{3}\n", string1, string5, string6, string7);
+
+           Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+           MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
+           msg.Subject = "New Assignment Notification";
+           msg.Body = x;
+           gmail.Send(msg);
+           
+            
+           var JSONdATA = Json("");
+           return new JsonResult {Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+       }
+
+        [HttpGet]
+        public JsonResult LoadingAssignTo(string UserID)
+        {
+
+            var u = db.BuildingUser
+                .Where(c => c.UserID == UserID)
+                .Select(c => new 
+                {   ID = c.Id, 
+                    AspNetUserID = c.UserID, 
+                    FirstName = c.FirstName,
+                    LastName = c.LastName, 
+                    Phone = c.Phone, 
+                    UserName = c.UserName 
+                }).FirstOrDefault();
+
+            var JSONdATA = Json(u);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+           
+        }
+
 
 
         public bool isajax { get; set; }

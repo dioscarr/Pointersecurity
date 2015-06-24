@@ -45,6 +45,7 @@ namespace Doormandondemand
         public virtual DbSet<BuildingUser> BuildingUser { get; set; }
         public virtual DbSet<BuildingUserMapping> BuildingUserMapping { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<ClientContact> ClientContact { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<GanttLinkId> GanttLinkId { get; set; }
         public virtual DbSet<GanttTask> GanttTask { get; set; }
@@ -60,6 +61,7 @@ namespace Doormandondemand
         public virtual DbSet<PermissionMapRole> PermissionMapRole { get; set; }
         public virtual DbSet<RepairRequest> RepairRequest { get; set; }
         public virtual DbSet<RepairRequestCategories> RepairRequestCategories { get; set; }
+        public virtual DbSet<RepairRequestNote> RepairRequestNote { get; set; }
         public virtual DbSet<RepairUrgency> RepairUrgency { get; set; }
         public virtual DbSet<ReqType> ReqType { get; set; }
         public virtual DbSet<Requests> Requests { get; set; }
@@ -73,6 +75,5 @@ namespace Doormandondemand
         public virtual DbSet<Tenant> Tenant { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
-        public virtual DbSet<ClientContact> ClientContact { get; set; }
     }
 }

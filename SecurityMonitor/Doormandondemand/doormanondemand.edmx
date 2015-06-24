@@ -224,14 +224,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="BuildingID" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="225" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="225" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Skill" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="BuildingUserMapping">
           <Key>
@@ -413,6 +414,8 @@
           <Property Name="OtherContactName" Type="nvarchar" MaxLength="100" />
           <Property Name="OtherContactEmail" Type="nvarchar" MaxLength="250" />
           <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="AssignID" Type="nvarchar" MaxLength="128" />
+          <Property Name="RepairRequestNoteID" Type="int" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -421,6 +424,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Categories" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="BuildingID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RepairRequestNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="RepairUrgency">
           <Key>
@@ -1035,6 +1046,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RepairRequest_BuildingUser">
+          <End Role="BuildingUser" Type="Self.BuildingUser" Multiplicity="0..1" />
+          <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RepairRequest">
+              <PropertyRef Name="AssignID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RepairRequest_RepairRequestNote">
+          <End Role="RepairRequestNote" Type="Self.RepairRequestNote" Multiplicity="0..1" />
+          <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepairRequestNote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RepairRequest">
+              <PropertyRef Name="RepairRequestNoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RepairRequestCategories_Buildings">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
           <End Role="RepairRequestCategories" Type="Self.RepairRequestCategories" Multiplicity="*" />
@@ -1242,6 +1277,7 @@
           <EntitySet Name="PermissionMapRole" EntityType="Self.PermissionMapRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairRequest" EntityType="Self.RepairRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairRequestCategories" EntityType="Self.RepairRequestCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepairRequestNote" EntityType="Self.RepairRequestNote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairUrgency" EntityType="Self.RepairUrgency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
@@ -1415,6 +1451,14 @@
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="RepairRequest" EntitySet="RepairRequest" />
           </AssociationSet>
+          <AssociationSet Name="FK_RepairRequest_BuildingUser" Association="Self.FK_RepairRequest_BuildingUser">
+            <End Role="BuildingUser" EntitySet="BuildingUser" />
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RepairRequest_RepairRequestNote" Association="Self.FK_RepairRequest_RepairRequestNote">
+            <End Role="RepairRequestNote" EntitySet="RepairRequestNote" />
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_RepairRequestCategories_Buildings" Association="Self.FK_RepairRequestCategories_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="RepairRequestCategories" EntitySet="RepairRequestCategories" />
@@ -1497,6 +1541,7 @@
           <EntitySet Name="BuildingUser" EntityType="PointerdbModel.BuildingUser" />
           <EntitySet Name="BuildingUserMapping" EntityType="PointerdbModel.BuildingUserMapping" />
           <EntitySet Name="C__MigrationHistory" EntityType="PointerdbModel.C__MigrationHistory" />
+          <EntitySet Name="ClientContact" EntityType="PointerdbModel.ClientContact" />
           <EntitySet Name="Clients" EntityType="PointerdbModel.Clients" />
           <EntitySet Name="GanttLinkId" EntityType="PointerdbModel.GanttLinkId" />
           <EntitySet Name="GanttTask" EntityType="PointerdbModel.GanttTask" />
@@ -1512,6 +1557,7 @@
           <EntitySet Name="PermissionMapRole" EntityType="PointerdbModel.PermissionMapRole" />
           <EntitySet Name="RepairRequest" EntityType="PointerdbModel.RepairRequest" />
           <EntitySet Name="RepairRequestCategories" EntityType="PointerdbModel.RepairRequestCategories" />
+          <EntitySet Name="RepairRequestNote" EntityType="PointerdbModel.RepairRequestNote" />
           <EntitySet Name="RepairUrgency" EntityType="PointerdbModel.RepairUrgency" />
           <EntitySet Name="ReqType" EntityType="PointerdbModel.ReqType" />
           <EntitySet Name="Requests" EntityType="PointerdbModel.Requests" />
@@ -1649,6 +1695,10 @@
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
           </AssociationSet>
+          <AssociationSet Name="FK_RepairRequest_Building" Association="PointerdbModel.FK_RepairRequest_Building">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_RepairRequestCategories_Buildings" Association="PointerdbModel.FK_RepairRequestCategories_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="RepairRequestCategories" EntitySet="RepairRequestCategories" />
@@ -1660,6 +1710,10 @@
           <AssociationSet Name="FK_UserActivityLog_Buildings" Association="PointerdbModel.FK_UserActivityLog_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="UserActivityLog" EntitySet="UserActivityLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RepairRequest_BuildingUser" Association="PointerdbModel.FK_RepairRequest_BuildingUser">
+            <End Role="BuildingUser" EntitySet="BuildingUser" />
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Manager_Clients" Association="PointerdbModel.FK_Manager_Clients">
             <End Role="Clients" EntitySet="Clients" />
@@ -1705,6 +1759,10 @@
             <End Role="ShippingService" EntitySet="ShippingService" />
             <End Role="Package" EntitySet="Package" />
           </AssociationSet>
+          <AssociationSet Name="FK_RepairRequest_RepairRequestNote" Association="PointerdbModel.FK_RepairRequest_RepairRequestNote">
+            <End Role="RepairRequestNote" EntitySet="RepairRequestNote" />
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
+          </AssociationSet>
           <AssociationSet Name="RepairRequest_RepairRequests" Association="PointerdbModel.RepairRequest_RepairRequests">
             <End Role="RepairRequestCategories" EntitySet="RepairRequestCategories" />
             <End Role="RepairRequest" EntitySet="RepairRequest" />
@@ -1728,11 +1786,6 @@
           <AssociationSet Name="AspNetUserRoles" Association="PointerdbModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="ClientContact" EntityType="PointerdbModel.ClientContact" />
-          <AssociationSet Name="FK_RepairRequest_Building" Association="PointerdbModel.FK_RepairRequest_Building">
-            <End Role="Buildings" EntitySet="Buildings" />
-            <End Role="RepairRequest" EntitySet="RepairRequest" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ActiveManager">
@@ -1981,24 +2034,26 @@
           <NavigationProperty Name="BuildingUser" Relationship="PointerdbModel.FK_BuildingUSer" FromRole="Buildings" ToRole="BuildingUser" />
           <NavigationProperty Name="BuildingUserMapping" Relationship="PointerdbModel.FK_BuildingUserMapping_Buildings1" FromRole="Buildings" ToRole="BuildingUserMapping" />
           <NavigationProperty Name="ManagerBuilding" Relationship="PointerdbModel.FK_ManagerBuilding_Buildings" FromRole="Buildings" ToRole="ManagerBuilding" />
+          <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="Buildings" ToRole="RepairRequest" />
           <NavigationProperty Name="RepairRequestCategories" Relationship="PointerdbModel.FK_RepairRequestCategories_Buildings" FromRole="Buildings" ToRole="RepairRequestCategories" />
           <NavigationProperty Name="Shipment" Relationship="PointerdbModel.FK_Shipment_Buildings" FromRole="Buildings" ToRole="Shipment" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointerdbModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
-          <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="Buildings" ToRole="RepairRequest" />
         </EntityType>
         <EntityType Name="BuildingUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BuildingID" Type="Int32" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Skill" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_BuildingUSer" FromRole="BuildingUser" ToRole="Buildings" />
+          <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairRequest_BuildingUser" FromRole="BuildingUser" ToRole="RepairRequest" />
         </EntityType>
         <EntityType Name="BuildingUserMapping">
           <Key>
@@ -2019,6 +2074,23 @@
           <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ClientContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name_" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name_" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address_" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -2191,11 +2263,15 @@
           <Property Name="OtherContactPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="OtherContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="OtherContactEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="AssignID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RepairRequestNoteID" Type="Int32" />
+          <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="RepairRequest" ToRole="Buildings" />
+          <NavigationProperty Name="BuildingUser" Relationship="PointerdbModel.FK_RepairRequest_BuildingUser" FromRole="RepairRequest" ToRole="BuildingUser" />
+          <NavigationProperty Name="RepairRequestNote" Relationship="PointerdbModel.FK_RepairRequest_RepairRequestNote" FromRole="RepairRequest" ToRole="RepairRequestNote" />
           <NavigationProperty Name="RepairRequestCategories" Relationship="PointerdbModel.RepairRequest_RepairRequests" FromRole="RepairRequest" ToRole="RepairRequestCategories" />
           <NavigationProperty Name="Tenant" Relationship="PointerdbModel.RepairRequest_Tenant" FromRole="RepairRequest" ToRole="Tenant" />
           <NavigationProperty Name="RepairUrgency" Relationship="PointerdbModel.RepairRequest_Urgency" FromRole="RepairRequest" ToRole="RepairUrgency" />
-          <Property Name="BuildingID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="RepairRequest" ToRole="Buildings" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -2206,6 +2282,15 @@
           <Property Name="BuildingID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_RepairRequestCategories_Buildings" FromRole="RepairRequestCategories" ToRole="Buildings" />
           <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.RepairRequest_RepairRequests" FromRole="RepairRequestCategories" ToRole="RepairRequest" />
+        </EntityType>
+        <EntityType Name="RepairRequestNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairRequest_RepairRequestNote" FromRole="RepairRequestNote" ToRole="RepairRequest" />
         </EntityType>
         <EntityType Name="RepairUrgency">
           <Key>
@@ -2728,6 +2813,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RepairRequest_Building">
+          <End Type="PointerdbModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RepairRequest">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RepairRequestCategories_Buildings">
           <End Type="PointerdbModel.Buildings" Role="Buildings" Multiplicity="1" />
           <End Type="PointerdbModel.RepairRequestCategories" Role="RepairRequestCategories" Multiplicity="*" />
@@ -2761,6 +2858,18 @@
             </Principal>
             <Dependent Role="UserActivityLog">
               <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RepairRequest_BuildingUser">
+          <End Type="PointerdbModel.BuildingUser" Role="BuildingUser" Multiplicity="0..1" />
+          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RepairRequest">
+              <PropertyRef Name="AssignID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2896,6 +3005,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RepairRequest_RepairRequestNote">
+          <End Type="PointerdbModel.RepairRequestNote" Role="RepairRequestNote" Multiplicity="0..1" />
+          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepairRequestNote">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RepairRequest">
+              <PropertyRef Name="RepairRequestNoteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="RepairRequest_RepairRequests">
           <End Type="PointerdbModel.RepairRequestCategories" Role="RepairRequestCategories" Multiplicity="1" />
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
@@ -2951,35 +3072,6 @@
         <Association Name="AspNetUserRoles">
           <End Type="PointerdbModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="PointerdbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityType Name="ClientContact">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="First_Name_" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Last_Name_" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Address_" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ClientID" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhotoName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_RepairRequest_Building">
-          <End Type="PointerdbModel.Buildings" Role="Buildings" Multiplicity="1" />
-          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Buildings">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="RepairRequest">
-              <PropertyRef Name="BuildingID" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -3203,6 +3295,7 @@
           <EntitySetMapping Name="BuildingUser">
             <EntityTypeMapping TypeName="PointerdbModel.BuildingUser">
               <MappingFragment StoreEntitySet="BuildingUser">
+                <ScalarProperty Name="Skill" ColumnName="Skill" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -3230,6 +3323,24 @@
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientContact">
+            <EntityTypeMapping TypeName="PointerdbModel.ClientContact">
+              <MappingFragment StoreEntitySet="ClientContact">
+                <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address_" ColumnName="Address " />
+                <ScalarProperty Name="Last_Name_" ColumnName="Last Name " />
+                <ScalarProperty Name="First_Name_" ColumnName="First Name " />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3374,6 +3485,8 @@
           <EntitySetMapping Name="RepairRequest">
             <EntityTypeMapping TypeName="PointerdbModel.RepairRequest">
               <MappingFragment StoreEntitySet="RepairRequest">
+                <ScalarProperty Name="RepairRequestNoteID" ColumnName="RepairRequestNoteID" />
+                <ScalarProperty Name="AssignID" ColumnName="AssignID" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
                 <ScalarProperty Name="OtherContactEmail" ColumnName="OtherContactEmail" />
                 <ScalarProperty Name="OtherContactName" ColumnName="OtherContactName" />
@@ -3398,6 +3511,15 @@
               <MappingFragment StoreEntitySet="RepairRequestCategories">
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
                 <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepairRequestNote">
+            <EntityTypeMapping TypeName="PointerdbModel.RepairRequestNote">
+              <MappingFragment StoreEntitySet="RepairRequestNote">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3560,24 +3682,6 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="ClientContact">
-            <EntityTypeMapping TypeName="PointerdbModel.ClientContact">
-              <MappingFragment StoreEntitySet="ClientContact">
-                <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address_" ColumnName="Address " />
-                <ScalarProperty Name="Last_Name_" ColumnName="Last Name " />
-                <ScalarProperty Name="First_Name_" ColumnName="First Name " />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
