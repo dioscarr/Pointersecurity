@@ -1814,48 +1814,98 @@ namespace SecurityMonitor.Controllers
         }
 
         [HttpPost]
-       public JsonResult ApplyUpdatesRepairRequest(string UserID, int RepairRequestID, string Notes)
+       public JsonResult ApplyUpdatesRepairRequest(string UserID, int RepairRequestID, string Notes, bool whichone)
        {
-           RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
 
-           RepairRequestNote RN = new RepairRequestNote { 
-            DateCreated = DateTime.Now,
-            Notes = Notes
-                     
-           };
+           if (whichone == true) //Building Staff========================================================================
+           {
 
-           db.RepairRequestNote.Add(RN);
-           db.SaveChanges();
 
-           RR.RepairRequestNoteID = RN.Id;
-           RR.AssignID = UserID;
+               RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
 
-           db.RepairRequest.Attach(RR);
-           var Entry = db.Entry(RR);
+               RepairRequestNote RN = new RepairRequestNote
+               {
+                   DateCreated = DateTime.Now,
+                   Notes = Notes
 
-           Entry.Property(c=>c.RepairRequestNoteID ).IsModified=true;
-           Entry.Property(c => c.AssignID).IsModified = true;
+               };
 
-           db.SaveChanges();
+               db.RepairRequestNote.Add(RN);
+               db.SaveChanges();
 
-           var Worker = db.BuildingUser.Where(c=>c.UserID == UserID).FirstOrDefault();
+               RR.RepairRequestNoteID = RN.Id;
+               RR.AssignID = UserID;
 
-           string string1 = "<div style='font-size:20px; colo:blue;'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
-           string string2 = "You have a new assignemt and the description is bellow:";
-           string string3 = "The Category of this Request is "+RR.RepairRequestCategories.Categories;
-           string string4 = "The Decription of the request is: " + RR.ProblemDescription;
-           string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
-           string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
-           string string7 = "Find more information...";
+               db.RepairRequest.Attach(RR);
+               var Entry = db.Entry(RR);
 
-           string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+               Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
+               Entry.Property(c => c.AssignID).IsModified = true;
 
-           Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
-           MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
-           msg.Subject = "New Assignment Notification";
-           msg.Body = x;
-           gmail.Send(msg);
+               db.SaveChanges();
+
+               var Worker = db.BuildingUser.Where(c => c.UserID == UserID).FirstOrDefault();
+
+               string string1 = "<div style='font-size:20px; colo:blue;'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
+               string string2 = "You have a new assignemt and the description is bellow:";
+               string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
+               string string4 = "The Decription of the request is: " + RR.ProblemDescription;
+               string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
+               string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
+               string string7 = "Find more information...";
+
+               string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+
+               Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+               MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
+               msg.Subject = "New Assignment Notification";
+               msg.Body = x;
+               gmail.Send(msg);
+           }
+           else if (whichone == false) //Company========================================================================================================
+           {
+               RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
+
+               RepairRequestNote RN = new RepairRequestNote
+               {
+                   DateCreated = DateTime.Now,
+                   Notes = Notes
+
+               };
+
+               db.RepairRequestNote.Add(RN);
+               db.SaveChanges();
+
+               RR.RepairRequestNoteID = RN.Id;
+               RR.AssignID = UserID;
+
+               db.RepairRequest.Attach(RR);
+               var Entry = db.Entry(RR);
+
+               Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
+               Entry.Property(c => c.AssignID).IsModified = true;
+
+               db.SaveChanges();
+
+               var Worker = db.Contractor.Where(c => c.Id == UserID).FirstOrDefault();
+
+               string string1 = "Hi " + Worker.CompanyName ;
+               string string2 = "You have a new assignemt and the description is bellow:";
+               string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
+               string string4 = "The Decription of the request is: " + RR.ProblemDescription;
+               string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
+               string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
+               string string7 = "Find more information...";
+
+               string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+
+               Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+               MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
+               msg.Subject = "New Assignment Notification";
+               msg.Body = x;
+               gmail.Send(msg);
            
+           }
             
            var JSONdATA = Json("");
            return new JsonResult {Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -1879,6 +1929,145 @@ namespace SecurityMonitor.Controllers
             var JSONdATA = Json(u);
             return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
            
+        }
+        /// <summary>
+        /// Create a New Contractor and return a list of contractor
+        /// </summary>
+        /// <param name="model">Accept a NewContractor Model</param>
+        /// <returns>Return a Json Object</returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult InsertNewContractor(NewContractor model)
+        {
+            //1)creat aspnetuserID
+            string password = PasswordGenerator.GeneratePassword("8").ToString();
+            //2) insert user
+            var UserID = RegisterUsers.InsertUser(model.Email, model.CMainPhone, password);
+            //3) insert User Role Contractor
+            var result = RegisterUsers.InserToRole("Contractor", UserID);
+            //4) add Contractor
+            //Transfer
+            Contractor objC = new Contractor
+            {
+                 Id = UserID,
+                 CompanyName = model.CName,
+                 Address = model.CAddress,
+                 City = model.CCity,
+                 State = model.CState,
+                 Zipcode = model.CZipcode,
+                 Phone = model.CMainPhone,
+                 ContactName = model.PName,
+                 ContractPhone = model.PPhone,
+                 Comments = model.Comments,
+                 Email = model.Email,
+                 SendNewPass = model.SendNewPassword,
+                 CategoryName = model.CatName,
+                 BuildingID = model.BuildingID                   
+            };
+
+            db.Contractor.Add(objC);
+            db.SaveChanges();
+
+            var objList = db.Contractor.Where(c=>c.BuildingID == objC.BuildingID).Select(c => new {
+                      ID = c.Id,
+                      CompanyName = c.CompanyName,
+                      Address = c.Address,
+                      City = c.City,
+                      State = c.State,
+                      Zipcode = c.Zipcode,
+                      Phone = c.Phone,
+                      ContactName = c.ContactName,
+                      ContactPhone = c.ContractPhone,
+                      Comments = c.Comments,
+                      Email = c.Email,
+                      SendNewPassword = c.SendNewPass,
+                      Category = c.CategoryName,
+                      BuildingID = c.BuildingID
+            }).ToList();
+            var JSONdATA = Json(objList);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };          
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LoadContractors(int BuildingID)
+        {
+              var objList = db.Contractor.Where(c=>c.BuildingID == BuildingID).Select(c => new {
+                      ID = c.Id,
+                      CompanyName = c.CompanyName,
+                      Address = c.Address,
+                      City = c.City,
+                      State = c.State,
+                      Zipcode = c.Zipcode,
+                      Phone = c.Phone,
+                      ContactName = c.ContactName,
+                      ContactPhone = c.ContractPhone,
+                      Comments = c.Comments,
+                      Email = c.Email,
+                      SendNewPassword = c.SendNewPass,
+                      Category = c.CategoryName,
+                      BuildingID = c.BuildingID
+            }).ToList();
+            var JSONdATA = Json(objList);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };          
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult UpdateContractor(NewContractor model)
+        {
+            Contractor objC = new Contractor
+            {
+                Id = model.ASPNETUSERID,
+                CompanyName = model.CName,
+                Address = model.CAddress,
+                City = model.CCity,
+                State = model.CState,
+                Zipcode = model.CZipcode,
+                Phone = model.CMainPhone,
+                ContactName = model.PName,
+                ContractPhone = model.PPhone,
+                Comments = model.Comments,
+                Email = model.Email,
+                SendNewPass = model.SendNewPassword,
+                CategoryName = model.CatName,
+                BuildingID = model.BuildingID
+            };
+
+            db.Contractor.Attach(objC);
+            var Entry = db.Entry(objC);
+            Entry.Property(c => c.CategoryName).IsModified = true;
+            Entry.Property(c => c.Address).IsModified = true;
+            Entry.Property(c => c.State).IsModified = true;
+            Entry.Property(c => c.Zipcode).IsModified = true;
+            Entry.Property(c => c.Phone).IsModified = true;
+            Entry.Property(c => c.ContactName).IsModified = true;
+            Entry.Property(c => c.ContractPhone).IsModified = true;
+            Entry.Property(c => c.Email).IsModified = true;
+            Entry.Property(c => c.CategoryName).IsModified = true;
+
+            db.SaveChanges();
+          
+
+            var objList = db.Contractor.Where(c => c.BuildingID == model.BuildingID).Select(c => new
+            {
+                ID = c.Id,
+                CompanyName = c.CompanyName,
+                Address = c.Address,
+                City = c.City,
+                State = c.State,
+                Zipcode = c.Zipcode,
+                Phone = c.Phone,
+                ContactName = c.ContactName,
+                ContactPhone = c.ContractPhone,
+                Comments = c.Comments,
+                Email = c.Email,
+                SendNewPassword = c.SendNewPass,
+                Category = c.CategoryName,
+                BuildingID = c.BuildingID
+            }).ToList();
+            var JSONdATA = Json(objList);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };          
         }
 
 

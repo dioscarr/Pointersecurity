@@ -258,6 +258,7 @@
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\managementVM.cs" />
+    <Compile Include="Models\NewContractor.cs" />
     <Compile Include="Models\Otherusers.cs" />
     <Compile Include="Models\PackagesCount.cs" />
     <Compile Include="Models\PackageSearchVM.cs" />

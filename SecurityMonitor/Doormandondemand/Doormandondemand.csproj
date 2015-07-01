@@ -111,6 +111,9 @@
     <Compile Include="Clients.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>
+    <Compile Include="Contractor.cs">
+      <DependentUpon>doormanondemand.tt</DependentUpon>
+    </Compile>
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>
@@ -129,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>doormanondemand.edmx</DependentUpon>
     </Compile>
+    <Compile Include="doormanondemanpartial.cs" />
     <Compile Include="GanttLinkId.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>

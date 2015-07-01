@@ -2500,3 +2500,58 @@ margin:0 0 0 20px;
 .dopdownvia {
     margin:0 0 0 20px;
 }
+
+
+.boxnotes {
+    display:block;
+    min-height:100px;
+
+}
+#requestNotes {
+margin:20px 0 0 0;
+min-width:100%;
+min-height:100px;
+
+
+}
+#labeladditionalinfo {
+margin:20px 0 0 0;
+}
+
+.technoterow {
+
+border:1px solid #b7b7b7;
+min-height:30px;
+padding:20px 0;
+margin:10px auto;
+}
+
+#textareatechnote {
+min-width:100%;
+min-height:200px;
+}
+
+.contractorRow {
+display:block;
+border:1px solid #b7b7b7;
+min-height:40px;
+padding:20px 0;
+margin:5px 0;
+}
+
+.ContratorRowContent {
+padding:10px;
+}
+
+#NewContact {
+background:#f2f2f2;
+
+}
+
+#NewContact div{
+background:#f2f2f2;
+
+}
+#tabs {
+background:#f2f2f2;
+}

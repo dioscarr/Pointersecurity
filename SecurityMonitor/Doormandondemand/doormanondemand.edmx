@@ -284,6 +284,25 @@
           <Property Name="State" Type="nvarchar" MaxLength="2" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="5" />
         </EntityType>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContractPhone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SendNewPass" Type="bit" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="GanttLinkId">
           <Key>
             <PropertyRef Name="GantLinkID" />
@@ -826,6 +845,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contractor_ASPNMetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractor">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contractor_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contractor">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1263,6 +1306,7 @@
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientContact" EntityType="Self.ClientContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contractor" EntityType="Self.Contractor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttLinkId" EntityType="Self.GanttLinkId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GanttTask" EntityType="Self.GanttTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListOfModule" EntityType="Self.ListOfModule" Schema="dbo" store:Type="Tables" />
@@ -1378,6 +1422,14 @@
           <AssociationSet Name="FK_BuildingUserMapping_Buildings1" Association="Self.FK_BuildingUserMapping_Buildings1">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contractor_ASPNMetUsers" Association="Self.FK_Contractor_ASPNMetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Contractor" EntitySet="Contractor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contractor_Buildings" Association="Self.FK_Contractor_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Contractor" EntitySet="Contractor" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1787,7 +1839,16 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Contractor" EntityType="PointerdbModel.Contractor" />
+          <AssociationSet Name="FK_Contractor_ASPNMetUsers" Association="PointerdbModel.FK_Contractor_ASPNMetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Contractor" EntitySet="Contractor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contractor_Buildings" Association="PointerdbModel.FK_Contractor_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Contractor" EntitySet="Contractor" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="ActiveManager">
           <Key>
             <PropertyRef Name="Id" />
@@ -2010,6 +2071,7 @@
           <NavigationProperty Name="Tenant" Relationship="PointerdbModel.FK_Tenant_AspNetUsers" FromRole="AspNetUsers" ToRole="Tenant" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointerdbModel.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUsers" ToRole="UserActivityLog" />
           <NavigationProperty Name="AspNetRoles" Relationship="PointerdbModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Contractor" Relationship="PointerdbModel.FK_Contractor_ASPNMetUsers" FromRole="AspNetUsers" ToRole="Contractor" />
         </EntityType>
         <EntityType Name="Buildings">
           <Key>
@@ -2038,6 +2100,7 @@
           <NavigationProperty Name="RepairRequestCategories" Relationship="PointerdbModel.FK_RepairRequestCategories_Buildings" FromRole="Buildings" ToRole="RepairRequestCategories" />
           <NavigationProperty Name="Shipment" Relationship="PointerdbModel.FK_Shipment_Buildings" FromRole="Buildings" ToRole="Shipment" />
           <NavigationProperty Name="UserActivityLog" Relationship="PointerdbModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
+          <NavigationProperty Name="Contractor" Relationship="PointerdbModel.FK_Contractor_Buildings" FromRole="Buildings" ToRole="Contractor" />
         </EntityType>
         <EntityType Name="BuildingUser">
           <Key>
@@ -3073,6 +3136,51 @@
           <End Type="PointerdbModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="PointerdbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <EntityType Name="Contractor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContractPhone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SendNewPass" Type="Boolean" Nullable="false" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="PointerdbModel.FK_Contractor_ASPNMetUsers" FromRole="Contractor" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_Contractor_Buildings" FromRole="Contractor" ToRole="Buildings" />
+        </EntityType>
+        <Association Name="FK_Contractor_ASPNMetUsers">
+          <End Type="PointerdbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="PointerdbModel.Contractor" Role="Contractor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractor">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contractor_Buildings">
+          <End Type="PointerdbModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointerdbModel.Contractor" Role="Contractor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contractor">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3682,6 +3790,26 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Contractor">
+            <EntityTypeMapping TypeName="PointerdbModel.Contractor">
+              <MappingFragment StoreEntitySet="Contractor">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="SendNewPass" ColumnName="SendNewPass" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ContractPhone" ColumnName="ContractPhone" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

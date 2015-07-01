@@ -75,5 +75,6 @@ namespace Doormandondemand
         public virtual DbSet<Tenant> Tenant { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
+        public virtual DbSet<Contractor> Contractor { get; set; }
     }
 }

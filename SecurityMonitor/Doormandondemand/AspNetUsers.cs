@@ -49,5 +49,6 @@ namespace Doormandondemand
         public virtual Tenant Tenant { get; set; }
         public virtual ICollection<UserActivityLog> UserActivityLog { get; set; }
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual Contractor Contractor { get; set; }
     }
 }

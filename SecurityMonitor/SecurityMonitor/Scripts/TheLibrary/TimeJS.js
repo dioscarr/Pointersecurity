@@ -45,3 +45,29 @@ function YearC(value) {
     };
 
 
+
+
+/*
+
+
+NewEmail
+NewCompanyName
+NewAddress
+NewCity
+NewState
+NewZipcode
+NewMainPhone
+NewPName
+NewPPhone
+NewPassword
+NewComments
+
+
+
+
+
+
+
+*/
+
+
