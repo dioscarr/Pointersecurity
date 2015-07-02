@@ -120,153 +120,167 @@
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Repair Request Details</h4>
+            <div class=" noppading">
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                      Repair Request Details
+                    </h6>
+                </div>
             </div>
             <div class="modal-body lightgrey">
-                <div class="col-lg-12 col-md-12">
-                    <div data-bind="text:selectedCategory"></div>
-                    <div data-bind="text:selectedUrgency"></div>
-                    <div data-bind="text:selectedRequestDate"></div>
-                    <div data-bind="text:selectedDescription"></div>
-                    <div data-bind="text:selectedStatus"></div>
-                    <div data-bind="text:selectedRequestNumber"></div>
-                    <div data-bind="text:selectedPName"></div>
-                    <div data-bind=" text:selectedPEmail"></div>
-                    <div data-bind="text:selectedPPhone"></div>
+                <div class="col-lg-6 col-md-6  RPRInformationbox">
+                   <div class="displayinline">Category: </div> <div class="displayinline" data-bind="text:selectedCategory"></div>
+                    <br/>
+                    <div class="displayinline">Priority: </div> <div class="displayinline" data-bind="text:selectedUrgency"></div>
+                    <br/>
+                    <div class="displayinline">Status: </div> <div class="displayinline" data-bind="text:selectedStatus"></div>
+                    <br/>
+                    <div class="displayinline">Issued On: </div> <div class="displayinline" data-bind="text:selectedRequestDate"></div>
+                    
+                    <br />
+                    <div class="assignedbox"  >
+                        <div class="displayinline"> Handler: </div>
+                        <div class="displayinline" data-bind="text:ContactName"></div>
+                        <span><button type="button" class="btn btn-link" style=" color:white;" data-bind="click:removelink, visible:isvisible"> Remove</button></span>
+                        <span> <button type="button" class="btn btn-link" style=" color:white;"  data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button></span>
+                    </div>
+                  
+                   
+                   
+                
+                   
+                   
+
+                   
+                  
+                </div>
+              
+                <div class="col-lg-6 col-md-6  RPRInformationbox">
+
+                    <div class="displayinline">Person to Contact: </div> <div class="displayinline" data-bind="text:selectedPName"></div>
+                    <br/>
+                    <div class="displayinline">Email: </div>  <div class="displayinline" data-bind=" text:selectedPEmail"></div>
+                    <br/>
+                    <div class="displayinline">Tel: </div> <div class="displayinline" data-bind="text:selectedPPhone"></div>
 
                     <div data-bind="text:selectedCName"></div>
                     <div data-bind="text:selectedCEmail"></div>
                     <div data-bind="text:selectedCphone"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="">Problem: </div> 
+                    <div class="displayinline" data-bind="text:selectedDescription"></div>
+                    <span><button data-toggle="modal" data-target="#popupnotehistory" id="notebutton" class="btn btn-link pull-right"  data-bind="attr:{'data-mycount':Technotecount}"><span id="tenotebutton">Notes</span></button></span> 
+               
+                <div ></div>
+                 </div>
                    
-                    <span><button data-toggle="modal" data-target="#popupnotehistory" class="btn btn-link">Tech's Notes</button></span> 
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left assigntobox">
-                    <hr />
-                    <h4 style="display:inline;">Assign To:</h4>
-                    <span data-bind="text:ContactName" style="background-color:yellow;"> </span>
 
-                    <span>
-                        <button type="button" class="btn btn-link" data-bind="click:removelink, visible:isvisible"> Remove</button>
-                    </span>
-                    <span>
-                        <button type="button" class="btn btn-link" data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button>
-                    </span>
-                    <hr />
-                    <p data-bind="visible:isvisible">
-                        <span data-bind="text:ContactName" style="background-color:yellow;"></span>
-                            will be assign to complete this request.
-                            <span data-bind="text:ContactName" style="background-color:yellow;"> </span> will be notified via
-                            <span data-bind="text:ViaType"> </span> of this request
-                    </p>
-                </div>
-             
-                <div class="boxnotes col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="visible:isvisible, visible:isnotevisible">
-                    <span id="labeladditionalinfo">Please share adition information with this request. </span>
-                    <textarea type="text" class="form-control" data-bind="value:UpdateNotes" id="requestNotes"></textarea>
-                    <span class="pull-right"><button type="button" class="btn btn-link" data-bind="click:removeNotelink,">Remove Notes</button></span>
-                   
-                </div>
-                <div class="col-lg-12 col-md-12" id="tabs">
-                    <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="#SBS" data-toggle="tab" data-bind="click:displayStaff">Select Building Staff</a></li>                       
-                        <li role="presentation"><a href="#SC" data-toggle="tab">Select Contractor</a></li>
-                        <li role="presentation"><a href="#NewContact" data-toggle="tab">New Contractor</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="SBS">
-                            <p style="margin: 20px 0 20px 0;">Please assign this request to one of the following building member by clicking on the hand.</p>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:BSArray">
-                                <div class="sbsrows">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 sbsrows_inside_left ">
+                    <div class="boxnotes col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="visible:isvisible, visible:isnotevisible">
+                        <span id="labeladditionalinfo">Please share adition information with this request. </span>
+                        <textarea type="text" class="form-control" data-bind="value:UpdateNotes" id="requestNotes"></textarea>
+                        <span class="pull-right"><button type="button" class="btn btn-link" data-bind="click:removeNotelink,">Remove Notes</button></span>
 
-                                        <span class="SBS_Font" data-bind="text:FullName"></span>
-                                        <span class="SBS_Font" data-bind="text:Tel" style="margin-left:20px;"></span>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 sbsrows_inside_left ">
-                                        <select class=" form-control displayinline dopdownvia" data-bind="options:ViaDropDown,  optionsText:'Name',optionsValue:'value', event:{change:  onChange}"></select>
-                                    </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12" id="tabs">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#SBS" data-toggle="tab" data-bind="click:displayStaff">Select Building Staff</a></li>
+                            <li role="presentation"><a href="#SC" data-toggle="tab">Select Contractor</a></li>
+                            <li role="presentation"><a href="#NewContact" data-toggle="tab">New Contractor</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="SBS">
+                                <p style="margin: 20px 0 20px 0;">Please assign this request to one of the following building member by clicking on the hand.</p>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:BSArray">
+                                    <div class="sbsrows">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 sbsrows_inside_left ">
+
+                                            <span class="SBS_Font" data-bind="text:FullName"></span>
+                                            <span class="SBS_Font" data-bind="text:Tel" style="margin-left:20px;"></span>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 sbsrows_inside_left ">
+                                            <select class=" form-control displayinline dopdownvia" data-bind="options:ViaDropDown,  optionsText:'Name',optionsValue:'value', event:{change:  onChange}"></select>
+                                        </div>
                                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 sbsrows_inside_right " data-bind="click:assigntofunction">
                                             <button type="button" class="btn btn-primary">assign</button>
                                         </div>
                                     </div>
-                            </div>
-                        </div>
-
-                       
-                       
-                        <div class="tab-pane fade" id="SC">
-                            Select Contrator
-                            <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:DisplayAllContractor ">
-                                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" data-bind="click:assignCompany">
-                                    <span data-bind="text:CompanyName" class="ContratorRowContent"> </span>
-                                    <span data-bind="text:Address" class="ContratorRowContent"> </span>
-                                    <span data-bind="text:Phone" class="ContratorRowContent"> </span>
-                                    <span data-bind="text:Category" class="ContratorRowContent"> </span>
-                                    <span data-bind="text:Email" class="ContratorRowContent"> </span>
-
                                 </div>
                             </div>
 
 
 
+                            <div class="tab-pane fade" id="SC">
+                                Select Contrator
+                                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:DisplayAllContractor ">
+                                    <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" data-bind="click:assignCompany">
+                                        <span data-bind="text:CompanyName" class="ContratorRowContent"> </span>
+                                        <span data-bind="text:Address" class="ContratorRowContent"> </span>
+                                        <span data-bind="text:Phone" class="ContratorRowContent"> </span>
+                                        <span data-bind="text:Category" class="ContratorRowContent"> </span>
+                                        <span data-bind="text:Email" class="ContratorRowContent"> </span>
 
-                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="tab-pane fade" id="NewContact">
-                           
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Mostly Focus on:</span><span><select class="form-control" data-bind="options:CompanyCat, value:NewCatName"></select></span>
+
+
+
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company Email/UserName</span><span><input type="email" class="form-control" data-bind="value:NewEmail" /></span>
-                                <div id="validateemailid"></div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company Name</span><span><input type="text" class="form-control" data-bind="value:NewCompanyName" /></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company Address</span><span><input type="text" class="form-control" data-bind="value:NewAddress" /></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company City</span><span><input type="text" class="form-control" data-bind="value:NewCity" /></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company State</span><span><select type="text" class="form-control" data-bind="options:ListStates,  value:NewState"></select></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company Zipcode</span><span><input type="text" class="form-control" data-bind="value:NewZipcode" /></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Company Main Phone</span><span><input type="text" class="form-control" data-bind="value:NewMainPhone" /></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Primary Contact</span><span><input type="text" class="form-control" data-bind="value:NewPName" /></span>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <span>Primary Phone</span><span><input type="text" class="form-control" data-bind="value:NewPPhone" /></span>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <span>Permanent Password Auto Generated</span><span><input type="checkbox" class=" displayinline" data-bind="checked:NewPassword" /></span>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <span><button type="button" class="btn btn-link">Add Comments</button> </span>
-                                <span><textarea class="form-control" style="min-width:100%;" data-bind="value:NewComments"></textarea></span>
-                                <button type="button" class="btn btn-link pull-right">Don't Add Comments</button>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <button type="button" class="btn btn-default" data-bind="click:InsertContractor">Save New Contractor</button>
+
+                            <div class="tab-pane fade" id="NewContact">
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Mostly Focus on:</span><span><select class="form-control" data-bind="options:CompanyCat, value:NewCatName"></select></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company Email/UserName</span><span><input type="email" class="form-control" data-bind="value:NewEmail" /></span>
+                                    <div id="validateemailid"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company Name</span><span><input type="text" class="form-control" data-bind="value:NewCompanyName" /></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company Address</span><span><input type="text" class="form-control" data-bind="value:NewAddress" /></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company City</span><span><input type="text" class="form-control" data-bind="value:NewCity" /></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company State</span><span><select type="text" class="form-control" data-bind="options:ListStates,  value:NewState"></select></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company Zipcode</span><span><input type="text" class="form-control" data-bind="value:NewZipcode" /></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Company Main Phone</span><span><input type="text" class="form-control" data-bind="value:NewMainPhone" /></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Primary Contact</span><span><input type="text" class="form-control" data-bind="value:NewPName" /></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <span>Primary Phone</span><span><input type="text" class="form-control" data-bind="value:NewPPhone" /></span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span>Permanent Password Auto Generated</span><span><input type="checkbox" class=" displayinline" data-bind="checked:NewPassword" /></span>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span><button type="button" class="btn btn-link">Add Comments</button> </span>
+                                    <span><textarea class="form-control" style="min-width:100%;" data-bind="value:NewComments"></textarea></span>
+                                    <button type="button" class="btn btn-link pull-right">Don't Add Comments</button>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-default" data-bind="click:InsertContractor">Save New Contractor</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--Form-->
-                <div class="col-lg-12 col-md-12 blueDefault" data-bind="foreach:buildingUsers">
-                    <div data-bind="text:BuildingUserName">
+                    <!--Form-->
+                    <div class="col-lg-12 col-md-12 blueDefault" data-bind="foreach:buildingUsers">
+                        <div data-bind="text:BuildingUserName">
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
                 <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate" >Apply Update</button>
@@ -293,21 +307,30 @@
                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="visible:technotetextarea">
                     <textarea id="textareatechnote" class="form-control" data-bind="value:TechNoteValue"></textarea>
+                   
+                    <button class="btn btn-info pull-right" type="button" data-bind="click:InsertTechNote">Insert</button>
                     <button class="btn btn-link pull-right" data-bind="click:CloseTechNote">Don't Add Note</button>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "style="border:1px solid #eeeeee;" data-bind="foreach:technotes">
 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 technoterow">
-                            This is a tech note...
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " >
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 technoterow" data-bind="text:Notes">
+
+                            </div>
+                            <button  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-sm btn btn-info" data-bind="click:DeleteTechNote">
+                                Delete Note
+                            </button>
                         </div>
+                       
+
                     </div>
                     </div>
 
                 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
-                <button class="btn btn-info " type="button" data-dismiss="modal" >Insert</button>
+                <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Close</button>
+
             </div>
         </div>
     </div>
@@ -548,10 +571,13 @@
                         alert(JSON.stringify(errordata));
                     });
                 }
+
+
                 
-                self.technotes = ko.observable(count);
+                self.technotes = ko.observableArray();
                 self.technotetextarea = ko.observable(false);
                 self.TechNoteValue = ko.observable();
+                self.Technotecount = ko.observable();
                 self.AddTechNote = function () {
 
                     self.technotetextarea(true);
@@ -559,6 +585,91 @@
                 self.CloseTechNote = function () {
                     self.technotetextarea(false);
                     self.TechNoteValue("");
+                };
+
+                //DeleteRepairTechNote
+
+                self.DeleteTechNote = function () {
+                    $.ajax({
+                        type: "get",
+                        url: "/building/DeleteRepairTechNote/",
+                        data: { RequestID: self.selectedID() },
+                        datatype: "json",
+                        success: function (returnedData) {
+
+                            self.technotes.removeAll();
+                            var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            self.Technotecount(TrkPkgs.length);
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                self.technotes.push({
+                                    Notes: TrkPkgs[i].Notes
+
+                                });
+
+                            }
+
+                            self.TechNoteValue("");
+                        }
+
+                    });
+
+                };
+
+                self.LoadTechNote = function () {
+                    $.ajax({
+                        type: "get",
+                        url: "/building/LoadRepairTechNotes/",
+                        data: { RequestID: self.selectedID() },
+                        datatype: "json",
+                        success: function (returnedData) {
+
+                            self.technotes.removeAll();
+                            var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            self.Technotecount(TrkPkgs.length);
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                self.technotes.push({
+                                    Notes: TrkPkgs[i].Notes
+
+                                });
+
+                            }
+
+                            self.TechNoteValue("");
+                        }
+
+                    });
+
+
+                }
+
+                self.InsertTechNote = function () {
+                    $.ajax({
+                        type: "post",
+                        url: "/building/InsertRepairTechNote/",
+                        data:{    RepairRequestID: self.selectedID(), Notes: self.TechNoteValue () },
+                        datatype: "json",
+                        success: function (returnedData) {
+                           
+                            self.technotes.removeAll();
+                            var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            self.Technotecount(TrkPkgs.length);
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                self.technotes.push({
+                                    Notes: TrkPkgs[i].Notes
+
+                                });
+
+                            }
+
+                            self.TechNoteValue("");
+                        }
+
+                    })
+                    
+
                 };
 
                
@@ -802,6 +913,8 @@
                     self.selectedCphone(myjson.Cphone);
                     self.selectedCategory(myjson.Category);
 
+                    self.LoadTechNote();
+                    self.CloseTechNote();
 
                     //true = staff || false =  Comapny
                     self.whichone = ko.observable();

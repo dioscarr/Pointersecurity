@@ -14,6 +14,11 @@ namespace Doormandondemand
     
     public partial class RepairRequest
     {
+        public RepairRequest()
+        {
+            this.RepairTechNote = new HashSet<RepairTechNote>();
+        }
+    
         public int Id { get; set; }
         public int RepairRequestCategoriesID { get; set; }
         public string ProblemDescription { get; set; }
@@ -39,5 +44,6 @@ namespace Doormandondemand
         public virtual RepairRequestCategories RepairRequestCategories { get; set; }
         public virtual Tenant Tenant { get; set; }
         public virtual RepairUrgency RepairUrgency { get; set; }
+        public virtual ICollection<RepairTechNote> RepairTechNote { get; set; }
     }
 }

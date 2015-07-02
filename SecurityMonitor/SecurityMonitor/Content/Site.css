@@ -2555,3 +2555,52 @@ background:#f2f2f2;
 #tabs {
 background:#f2f2f2;
 }
+.RPRInformationbox {
+min-height:180px;
+padding:20px 20px;
+
+}
+#tenotebutton {
+position:relative;
+bottom:5px;
+}
+#notebutton {
+
+
+    padding:20px 0;
+    min-height:40px;
+    text-decoration:none;
+    border:none;
+
+}
+
+#notebutton::before {
+content:attr(data-mycount);
+padding:15px;
+font-size:26px;
+    display:inline-block;
+    line-height:20px;
+    margin-right:10px;
+    min-height:50px;
+    min-width:50px;
+    background:rgba(0,0,0,0.09);
+    border-radius:50%;   
+    border:1px solid #b7b7b7;
+    color:green;
+
+
+}
+.assignedbox
+{
+    min-height:60px;
+    display:inline-block;
+    padding:10px 2px;
+    color:white;
+    border:1px solid #389ce6;
+    background:#388be6;
+        
+}
+    .assignedbox span {
+     color:white;
+    }
+

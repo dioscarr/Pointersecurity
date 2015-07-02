@@ -452,6 +452,14 @@
           <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="RepairTechNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RepairRequestID" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="RepairUrgency">
           <Key>
             <PropertyRef Name="Id" />
@@ -1125,6 +1133,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RepairTechNote_RepairRequest">
+          <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="1" />
+          <End Role="RepairTechNote" Type="Self.RepairTechNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepairRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RepairTechNote">
+              <PropertyRef Name="RepairRequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Request_Tenant">
           <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
@@ -1322,6 +1342,7 @@
           <EntitySet Name="RepairRequest" EntityType="Self.RepairRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairRequestCategories" EntityType="Self.RepairRequestCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairRequestNote" EntityType="Self.RepairRequestNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RepairTechNote" EntityType="Self.RepairTechNote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairUrgency" EntityType="Self.RepairUrgency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
@@ -1514,6 +1535,10 @@
           <AssociationSet Name="FK_RepairRequestCategories_Buildings" Association="Self.FK_RepairRequestCategories_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="RepairRequestCategories" EntitySet="RepairRequestCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RepairTechNote_RepairRequest" Association="Self.FK_RepairTechNote_RepairRequest">
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
+            <End Role="RepairTechNote" EntitySet="RepairTechNote" />
           </AssociationSet>
           <AssociationSet Name="FK_Request_Tenant" Association="Self.FK_Request_Tenant">
             <End Role="Tenant" EntitySet="Tenant" />
@@ -1847,6 +1872,11 @@
           <AssociationSet Name="FK_Contractor_Buildings" Association="PointerdbModel.FK_Contractor_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Contractor" EntitySet="Contractor" />
+          </AssociationSet>
+          <EntitySet Name="RepairTechNote" EntityType="PointerdbModel.RepairTechNote" />
+          <AssociationSet Name="FK_RepairTechNote_RepairRequest" Association="PointerdbModel.FK_RepairTechNote_RepairRequest">
+            <End Role="RepairRequest" EntitySet="RepairRequest" />
+            <End Role="RepairTechNote" EntitySet="RepairTechNote" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="ActiveManager">
@@ -2335,6 +2365,7 @@
           <NavigationProperty Name="RepairRequestCategories" Relationship="PointerdbModel.RepairRequest_RepairRequests" FromRole="RepairRequest" ToRole="RepairRequestCategories" />
           <NavigationProperty Name="Tenant" Relationship="PointerdbModel.RepairRequest_Tenant" FromRole="RepairRequest" ToRole="Tenant" />
           <NavigationProperty Name="RepairUrgency" Relationship="PointerdbModel.RepairRequest_Urgency" FromRole="RepairRequest" ToRole="RepairUrgency" />
+          <NavigationProperty Name="RepairTechNote" Relationship="PointerdbModel.FK_RepairTechNote_RepairRequest" FromRole="RepairRequest" ToRole="RepairTechNote" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -3181,6 +3212,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RepairTechNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RepairRequestID" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairTechNote_RepairRequest" FromRole="RepairTechNote" ToRole="RepairRequest" />
+        </EntityType>
+        <Association Name="FK_RepairTechNote_RepairRequest">
+          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="1" />
+          <End Type="PointerdbModel.RepairTechNote" Role="RepairTechNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RepairRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RepairTechNote">
+              <PropertyRef Name="RepairRequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3806,6 +3858,15 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepairTechNote">
+            <EntityTypeMapping TypeName="PointerdbModel.RepairTechNote">
+              <MappingFragment StoreEntitySet="RepairTechNote">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="RepairRequestID" ColumnName="RepairRequestID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

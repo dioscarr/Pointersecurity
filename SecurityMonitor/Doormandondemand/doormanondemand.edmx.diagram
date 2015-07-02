@@ -112,6 +112,8 @@
         <EntityTypeShape EntityType="PointerdbModel.Contractor" Width="1.5" PointX="15.75" PointY="19.125" />
         <AssociationConnector Association="PointerdbModel.FK_Contractor_ASPNMetUsers" />
         <AssociationConnector Association="PointerdbModel.FK_Contractor_Buildings" />
+        <EntityTypeShape EntityType="PointerdbModel.RepairTechNote" Width="1.5" PointX="22.5" PointY="34.75" />
+        <AssociationConnector Association="PointerdbModel.FK_RepairTechNote_RepairRequest" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

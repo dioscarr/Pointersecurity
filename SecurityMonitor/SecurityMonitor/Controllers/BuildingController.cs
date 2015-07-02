@@ -2070,6 +2070,42 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };          
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult InsertRepairTechNote(RepairTechNote model)
+        {
+           if(ModelState.IsValid)
+           {
+               db.RepairTechNote.Add(model);
+               db.SaveChanges();
+           }
+
+        var returndata =   db.RepairTechNote.Where(c => c.RepairRequestID == model.RepairRequestID).Select(c => new {id = c.Id, RepairRequestID = c.RepairRequestID, Notes = c.Notes }).ToList();
+        var JSONdATA = Json(returndata);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        public JsonResult LoadRepairTechNotes(int RequestID)
+        {
+            var returndata = db.RepairTechNote.Where(c => c.RepairRequestID == RequestID).Select(c => new { id = c.Id, RepairRequestID = c.RepairRequestID, Notes = c.Notes }).ToList();
+            var JSONdATA = Json(returndata);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpGet]
+        public ActionResult DeleteRepairTechNote(int RequestID)
+        {
+            var obj = db.RepairTechNote.Where(c => c.RepairRequestID == RequestID).FirstOrDefault();
+            db.RepairTechNote.Remove(obj);
+            db.SaveChanges();
+            var returndata = db.RepairTechNote.Where(c => c.RepairRequestID == RequestID).Select(c => new { id = c.Id, RepairRequestID = c.RepairRequestID, Notes = c.Notes }).ToList();
+            var JSONdATA = Json(returndata);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+
+
+
 
 
         public bool isajax { get; set; }
