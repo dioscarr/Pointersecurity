@@ -125,6 +125,17 @@
                     <h6 class="modal-title myModalLabel " style="color:white; ">
                       Repair Request Details
                     </h6>
+
+
+
+                    <div class="dropcomplete">Closed this ticket
+                        <div>
+                            <div>Are you sure ?</div>
+                            <button class="btn btn-info input-sm">Close ticket</button>
+                            <button class="btn btn-info input-sm">Cancel</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <div class="modal-body lightgrey">
@@ -170,7 +181,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="">Problem: </div> 
                     <div class="displayinline" data-bind="text:selectedDescription"></div>
-                    <span><button data-toggle="modal" data-target="#popupnotehistory" id="notebutton" class="btn btn-link pull-right"  data-bind="attr:{'data-mycount':Technotecount}"><span id="tenotebutton">Notes</span></button></span> 
+                    <span><span data-toggle="modal" data-target="#popupnotehistory" id="notebutton" class="btn btn-link pull-right"  data-bind="attr:{'data-mycount':Technotecount}"><span id="tenotebutton">Notes</span></span></span> 
                
                 <div ></div>
                  </div>
@@ -190,9 +201,34 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="SBS">
-                                <p style="margin: 20px 0 20px 0;">Please assign this request to one of the following building member by clicking on the hand.</p>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
+                                   Select Building Staff
+
+                                </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:BSArray">
-                                    <div class="sbsrows">
+
+                                    <section style="margin:5px 0 5px 0;">
+                                        <!--vCard starts-->
+                                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                                            <!--header starts-->
+                                            <section class=" col-md-12 text-center clientboxrow ">
+                                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                       
+                                                        <span class="SBS_Font" data-bind="text:FullName"></span>
+                                                        <span class="SBS_Font" data-bind="text:Tel" style="margin-left:20px;"></span>
+                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 sbsrows_inside_right " data-bind="click:assigntofunction">
+                                                            <button type="button" class="btn btn-primary">assign</button>
+                                                        </div>
+
+                                                    </div>
+                                                </section>
+                                            </section>
+                                        </div>
+                                    </section>
+
+                                    @*<div class="sbsrows">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 sbsrows_inside_left ">
 
                                             <span class="SBS_Font" data-bind="text:FullName"></span>
@@ -204,23 +240,47 @@
                                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 sbsrows_inside_right " data-bind="click:assigntofunction">
                                             <button type="button" class="btn btn-primary">assign</button>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
 
 
 
                             <div class="tab-pane fade" id="SC">
-                                Select Contrator
-                                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:DisplayAllContractor ">
-                                    <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" data-bind="click:assignCompany">
-                                        <span data-bind="text:CompanyName" class="ContratorRowContent"> </span>
-                                        <span data-bind="text:Address" class="ContratorRowContent"> </span>
-                                        <span data-bind="text:Phone" class="ContratorRowContent"> </span>
-                                        <span data-bind="text:Category" class="ContratorRowContent"> </span>
-                                        <span data-bind="text:Email" class="ContratorRowContent"> </span>
 
-                                    </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
+                                    Select Contractor
+
+                                </div>
+                                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:DisplayAllContractor ">
+
+                                    <section style="margin:5px 0 5px 0;">
+                                        <!--vCard starts-->
+                                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                                            <!--header starts-->
+                                            <section class=" col-md-12 text-center clientboxrow  " data-bind="click:assignCompany">
+                                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                                       <div class="displayinline">Company: </div> <div class="displayinline ContratorRowContent" data-bind="text:CompanyName"> </div>
+                                                       
+                                                        <div>Company: </div>  <span data-bind="text:Address" class="ContratorRowContent displayinline"> </span>
+                                                        <span data-bind="text:Phone" class="ContratorRowContent"> </span>
+                                                        <span data-bind="text:Category" class="ContratorRowContent"> </span>
+                                                        <span data-bind="text:Email" class="ContratorRowContent"> </span>
+
+                                                    </div>
+                                                </section>
+                                            </section>
+                                        </div>
+                                    </section>
+
+
+
+                                    @*<div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" >
+                                      
+
+                                    </div>*@
                                 </div>
 
 
@@ -230,39 +290,52 @@
 
                             <div class="tab-pane fade" id="NewContact">
 
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
+                                    New Contractor
+                                   
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Mostly Focus on:</span><span><select class="form-control" data-bind="options:CompanyCat, value:NewCatName"></select></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company Email/UserName</span><span><input type="email" class="form-control" data-bind="value:NewEmail" /></span>
                                     <div id="validateemailid"></div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company Name</span><span><input type="text" class="form-control" data-bind="value:NewCompanyName" /></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company Address</span><span><input type="text" class="form-control" data-bind="value:NewAddress" /></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company City</span><span><input type="text" class="form-control" data-bind="value:NewCity" /></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company State</span><span><select type="text" class="form-control" data-bind="options:ListStates,  value:NewState"></select></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company Zipcode</span><span><input type="text" class="form-control" data-bind="value:NewZipcode" /></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Company Main Phone</span><span><input type="text" class="form-control" data-bind="value:NewMainPhone" /></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Primary Contact</span><span><input type="text" class="form-control" data-bind="value:NewPName" /></span>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <span>Primary Phone</span><span><input type="text" class="form-control" data-bind="value:NewPPhone" /></span>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span>Permanent Password Auto Generated</span><span><input type="checkbox" class=" displayinline" data-bind="checked:NewPassword" /></span>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-sx-12 nopadding autogenaratedpwdrepair" >
+                                        
+                                        <span>                                        
+                                            <input type="checkbox" id="ossm" name="ossm" class=" displayinline" data-bind="checked:NewPassword">
+                                            <label class=" displayinline" for="ossm">Generated Pwd:</label> 
+                                        
+                                        </span>
+                                    </div>
+                                
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <span><button type="button" class="btn btn-link">Add Comments</button> </span>
@@ -281,9 +354,12 @@
                         </div>
                     </div>
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
-                <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate" >Apply Update</button>
+            <div class="modal-footer noppading ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 footerrepairpopup">
+                    <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
+                    <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate">Apply Update</button>
+                </div>
+             
             </div>
         </div>
     </div>
@@ -305,7 +381,7 @@
                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:50px; padding:10px;">
                    <span><button class="btn btn-default input-sm" data-bind="click:AddTechNote">Add Tech Note</button></span>
                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-bind="visible:technotetextarea">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 textareatouterbox" data-bind="visible:technotetextarea">
                     <textarea id="textareatechnote" class="form-control" data-bind="value:TechNoteValue"></textarea>
                    
                     <button class="btn btn-info pull-right" type="button" data-bind="click:InsertTechNote">Insert</button>

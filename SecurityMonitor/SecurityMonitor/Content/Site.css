@@ -1004,6 +1004,15 @@ z-index:10;
    line-height: 54px;  
 }
 
+.boxheadassign
+{
+    min-height:60px;
+    background-color:#f7f7f7;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+   line-height: 54px;  
+}
+
 .boxheadTenantBottom {
       min-height:340px;
     background-color:#f7f7f7;  
@@ -1098,6 +1107,8 @@ z-index:10;
     line-height: 50px;
     
 }
+
+
 
 
 
@@ -2540,7 +2551,7 @@ margin:5px 0;
 }
 
 .ContratorRowContent {
-padding:10px;
+padding:2px;
 }
 
 #NewContact {
@@ -2603,4 +2614,87 @@ font-size:26px;
     .assignedbox span {
      color:white;
     }
+
+.footerrepairpopup {
+
+    min-height:60px;
+padding:20px 10px;
+
+}
+
+.modal-footer {
+border-radius:0px!important;
+
+}
+
+.autogenaratedpwdrepair {
+min-height:60px;
+margin:20px 0!important;
+    display:inline-block;
+    padding:20px !important;
+    color:white;
+    border:1px solid #389ce6;
+    background:#388be6!important;
+
+}
+
+ .autogenaratedpwdrepair input[type=checkbox] + div.autogenaratedpwdrepair {
+  color: #ccc;
+  font-style: italic;
+  background:black;
+} 
+.autogenaratedpwdrepair input[type=checkbox]:checked + label {
+  color: green;
+  font-style: normal;
+}
+.textareatouterbox {
+margin-bottom:10px; 
+padding-bottom:20px;
+
+
+}
+
+.dropcomplete {
+     min-height:10px;
+     max-height:20px;
+    min-width:240px;
+    width:200px;
+    background:lightgrey;
+    position:absolute;
+    color:black;
+    top:45px;
+    left:40%;
+    -webkit-transition:width .5s !important;
+     transition:width .5s !important;
+
+     -webkit-transition:min-height .5s !important;
+     transition:min-height .5s !important;
+       z-index:1;
+
+}
+ .dropcomplete > div {
+    
+ opacity:0;
+
+
+
+
+    }
+
+
+
+.dropcomplete:hover {  
+
+    min-height:90px;
+}
+
+.dropcomplete:hover > div{  
+
+opacity:100;
+-webkit-transition-delay: .2s; /* Safari */
+    transition-delay: .2s;
+ -webkit-transition:opacity .5s ease-out .2s  ;
+}
+
+
 
