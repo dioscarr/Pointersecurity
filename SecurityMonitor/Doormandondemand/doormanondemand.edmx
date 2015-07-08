@@ -459,6 +459,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RepairRequestID" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="RepairUrgency">
           <Key>
@@ -3219,6 +3220,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RepairRequestID" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairTechNote_RepairRequest" FromRole="RepairTechNote" ToRole="RepairRequest" />
         </EntityType>
         <Association Name="FK_RepairTechNote_RepairRequest">
@@ -3865,6 +3867,7 @@
           <EntitySetMapping Name="RepairTechNote">
             <EntityTypeMapping TypeName="PointerdbModel.RepairTechNote">
               <MappingFragment StoreEntitySet="RepairTechNote">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="RepairRequestID" ColumnName="RepairRequestID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

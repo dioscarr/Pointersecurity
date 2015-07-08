@@ -17,6 +17,7 @@ namespace Doormandondemand
         public int Id { get; set; }
         public int RepairRequestID { get; set; }
         public string Notes { get; set; }
+        public System.DateTime CreatedDate { get; set; }
     
         public virtual RepairRequest RepairRequest { get; set; }
     }
