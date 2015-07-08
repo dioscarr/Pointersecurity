@@ -2703,7 +2703,7 @@ opacity:100;
 #handlerid 
 {
     
-    width:100px;
+    width:400px;
     margin-top:10px;
     min-height:60px;
     display:inline-block;
@@ -2711,20 +2711,15 @@ opacity:100;
     color:white;
     border:1px solid #389ce6;
     background:#388be6;
-    opacity:0;
+   
 
-transition:width .5s  !important;
--webkit-transition:width .5s !important;
-
-transition:opacity 2s !important;
--webkit-transition:opacity 2s !important;
 
 
 
 
 }
 
-.assignedbox
+/*.assignedbox
 {
      width:100px;
     min-height:60px;
@@ -2733,17 +2728,17 @@ transition:opacity 2s !important;
     color:white;
     border:1px solid #389ce6;
     background:#388be6;
-     opacity:0;
     
-    }
+    
+    }*/
 #handlerid span {
      color:white;
  }
 
-#handlerid:target {
+/*#handlerid:target {
     opacity:100;
 width:100%;
-}
+}*/
 
 
 

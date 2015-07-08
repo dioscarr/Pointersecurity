@@ -149,7 +149,7 @@
                     <div class="displayinline">Issued On: </div> <div class="displayinline" data-bind="text:selectedRequestDate"></div>
                     
                     <br />
-                    <div class="assignedbox" id="handlerid" >
+                    <div class="assignedbox" id="handlerid" style="display:none;" >
                         <div class="displayinline handlerclass"> Handler: </div>
                         <div class="displayinline handlerclass" data-bind="text:ContactName"></div>
                         <span><button type="button" class="btn btn-link handlerclass" style=" color:white;" onclick="location.href = '#assignedbox'" data-bind="    click: removelink, visible: isvisible"> Remove</button></span>
@@ -825,6 +825,7 @@
                 //Assign Company
 
                 self.assignCompany = function (data) {
+                    self.showhidehandler();
                     self.displayStaff();
                     AjaxBUaccess = true;
                   
@@ -864,8 +865,15 @@
                     self.txtVia(via);
                 };
 
+                self.showhidehandler = function () {
+
+                    $('.assignedbox').fadeToggle("slow");
+                }
+
                 var AjaxBUaccess = true;
                 self.assigntofunction = function (data) {
+
+                    self.showhidehandler();
                     self.LoadComp();
                     var myvalue = ko.toJSON(data);
                     var myjson = JSON.parse(myvalue);
@@ -887,6 +895,7 @@
                 };
 
                 self.removelink = function () {
+                    self.showhidehandler();
                     self.whichone();
                     AjaxBUaccess = true;
                     self.isnotevisible(false);
