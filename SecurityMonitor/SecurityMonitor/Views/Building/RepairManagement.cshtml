@@ -128,8 +128,9 @@
 
 
 
-                    <div class="dropcomplete">Closed this ticket
+                    <div class="dropcomplete">Close this ticket
                         <div>
+                            <div><textarea class="form-control ticketresolution" placeholder="Enter a resolution (required)" ></textarea> </div>
                             <div>Are you sure ?</div>
                             <button class="btn btn-info input-sm">Close ticket</button>
                             <button class="btn btn-info input-sm">Cancel</button>
@@ -139,7 +140,7 @@
                 </div>
             </div>
             <div class="modal-body lightgrey">
-                <div class="col-lg-6 col-md-6  RPRInformationbox">
+                <div class="col-lg-6 col-md-6  RPRInformationbox ">
                    <div class="displayinline">Category: </div> <div class="displayinline" data-bind="text:selectedCategory"></div>
                     <br/>
                     <div class="displayinline">Priority: </div> <div class="displayinline" data-bind="text:selectedUrgency"></div>
@@ -148,13 +149,8 @@
                     <br/>
                     <div class="displayinline">Issued On: </div> <div class="displayinline" data-bind="text:selectedRequestDate"></div>
                     
-                    <br />
-                    <div class="assignedbox" id="handlerid" style="display:none;" >
-                        <div class="displayinline handlerclass"> Handler: </div>
-                        <div class="displayinline handlerclass" data-bind="text:ContactName"></div>
-                        <span><button type="button" class="btn btn-link handlerclass" style=" color:white;" onclick="location.href = '#assignedbox'" data-bind="    click: removelink, visible: isvisible"> Remove</button></span>
-                        <span> <button type="button" class="btn btn-link handlerclass" style=" color:white;" data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button></span>
-                    </div>
+                   
+                   
                   
                 </div>
               
@@ -170,6 +166,16 @@
                     <div data-bind="text:selectedCEmail"></div>
                     <div data-bind="text:selectedCphone"></div>
                 </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="assignedbox" id="handlerid" style="display:none;">
+                        <div class="displayinline handlerclass"> Handler: </div>
+                        <div class="displayinline handlerclass" data-bind="text:ContactName"></div>
+                        <span><button type="button" class="btn btn-link handlerclass" style=" color:white;" onclick="location.href = '#assignedbox'" data-bind="    click: removelink, visible: isvisible"> Remove</button></span>
+                        <span> <button type="button" class="btn btn-link handlerclass" style=" color:white;" data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button></span>
+                    </div>
+                </div>
+
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="">Problem: </div> 
                     <div class="displayinline" data-bind="text:selectedDescription"></div>
@@ -501,6 +507,8 @@
                 var CompCat = ["Plumer", "Electric", "Carpentry"];
 
                 self.CompanyCat = ko.observableArray(CompCat);
+
+                self.ClearorNot = ko.observable(false);
 
                 self.NewEmail = ko.observable();
                 self.NewCompanyName = ko.observable();
@@ -866,8 +874,9 @@
                 };
 
                 self.showhidehandler = function () {
-
+                    
                     $('.assignedbox').fadeToggle("slow");
+                    self.ClearorNot(true);
                 }
 
                 var AjaxBUaccess = true;
@@ -895,7 +904,13 @@
                 };
 
                 self.removelink = function () {
-                    self.showhidehandler();
+                    //if the below statement is true thenhandler section will hide
+                    if (self.ClearorNot() == true)
+                    {
+                        self.showhidehandler();
+                        self.ClearorNot(false)
+                    }
+                   
                     self.whichone();
                     AjaxBUaccess = true;
                     self.isnotevisible(false);

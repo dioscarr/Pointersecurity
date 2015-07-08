@@ -2567,7 +2567,7 @@ background:#f2f2f2;
 background:#f2f2f2;
 }
 .RPRInformationbox {
-min-height:180px;
+min-height:120px;
 padding:20px 20px;
 
 }
@@ -2653,7 +2653,7 @@ padding-bottom:20px;
 .dropcomplete {
      min-height:10px;
      max-height:20px;
-    min-width:240px;
+    min-width:200px;
     width:200px;
     background:lightgrey;
     position:absolute;
@@ -2669,19 +2669,17 @@ padding-bottom:20px;
 
 }
  .dropcomplete > div {
-    
  opacity:0;
-
-
-
 
     }
 
 
 
 .dropcomplete:hover {  
-
-    min-height:90px;
+    min-width:500px;
+    min-height:220px;
+    position:absolute;
+    left:200px;
 }
 
 .dropcomplete:hover > div{  
@@ -2740,5 +2738,9 @@ opacity:100;
 width:100%;
 }*/
 
-
+.ticketresolution {
+    margin:20px 40px;
+    min-height:80px;
+    min-width:85%;
+}
 
