@@ -2551,7 +2551,11 @@ margin:5px 0;
 }
 
 .ContratorRowContent {
-padding:2px;
+padding:0px;
+line-height:1.5;
+font-size:14px;
+
+text-align:left;
 }
 
 #NewContact {
@@ -2559,12 +2563,16 @@ background:#f2f2f2;
 
 }
 
-#NewContact div{
-background:#f2f2f2;
 
-}
 #tabs {
 background:#f2f2f2;
+}
+
+#outertabs {
+border:2px solid #f2f2f2;
+
+background:#f9f9f9;
+border-radius:10px;
 }
 .RPRInformationbox {
 min-height:120px;
@@ -2645,21 +2653,25 @@ margin:20px 0!important;
 }
 .textareatouterbox {
 margin-bottom:10px; 
-padding-bottom:20px;
+padding:20px !important;
 
 
 }
 
 .dropcomplete {
      min-height:10px;
-     max-height:20px;
+     max-height:25px;
     min-width:200px;
     width:200px;
     background:lightgrey;
     position:absolute;
     color:black;
     top:45px;
-    left:40%;
+   left:350px;
+  
+  
+
+
     -webkit-transition:width .5s !important;
      transition:width .5s !important;
 
@@ -2670,6 +2682,9 @@ padding-bottom:20px;
 }
  .dropcomplete > div {
  opacity:0;
+ visibility:hidden;
+
+
 
     }
 
@@ -2683,19 +2698,21 @@ padding-bottom:20px;
 }
 
 .dropcomplete:hover > div{  
-
+    visibility:visible;
 opacity:100;
+
+transition:visibility 0s linear 0.5s,opacity 0.5s linear;
 -webkit-transition-delay: .2s; /* Safari */
     transition-delay: .2s;
  -webkit-transition:opacity .5s ease-out .2s  ;
 }
 
 #remainingChar{
-    font-size:12px;
+    font-size:10px;
     color:red;
     position:absolute;
-    right:30px;
-    bottom:60px;
+    right:50px;
+    bottom:40px;
 }
 
 #handlerid 
@@ -2744,3 +2761,91 @@ width:100%;
     min-width:85%;
 }
 
+.boxinnerboxSC {
+min-height:70px;
+position:relative;
+top:10px;
+
+padding: 0px 0 0 10px;
+margin-bottom:0px;
+}
+
+.boxinnerboxSCBuilding {
+min-height:70px;
+position:relative;
+top:-10px;
+
+
+}
+
+#contractorbuildingid {
+color:#0071BC;
+margin:20px 0 0 0 !important;
+padding:0px 0 0 0 !important;
+
+}
+
+.ContratorRowContentHeader {
+    padding:10px 0 5px 0!important;
+border:1px solid rgba(0,0,0,0.09);
+background:#0071bc;
+color:white;
+}
+
+.settingfornote
+{
+    background:rgba(0,0,0,0.01);
+}
+
+.addingNotesettings {
+padding:0 0 0 40px !important;
+
+}
+
+.mainboxtabs {
+
+padding:20px !important;
+
+}
+
+.assignstaffbox {
+padding: 20px 0 0 0!important;
+
+
+}
+.assignstaffsettings {
+
+padding:0 !important;
+margin:0!important;
+}
+.assignstaffsettings >span {
+
+font-weight:100;
+color:black;
+font-size: 14px;
+text-align:left;
+}
+
+.margintop {
+max-height:50px !important;
+margin:20px 0 !important;
+}
+
+.buildingstaffsettinsrepairrequest {
+    position:relative;
+    top:-10px;
+}
+
+.mypin {
+    position:absolute;
+    top:-10px;
+    left:330px;
+    color:#142e42;
+    -webkit-transform:rotate(-45deg);
+
+}
+
+
+.textareatinnerbox {
+padding:0 40px 0 40px!important;
+}
