@@ -16,8 +16,8 @@ namespace Doormandondemand
     {
         public Tenant()
         {
-            this.RepairRequest = new HashSet<RepairRequest>();
             this.Requests = new HashSet<Requests>();
+            this.RepairRequest = new HashSet<RepairRequest>();
         }
     
         public string ID { get; set; }
@@ -31,7 +31,7 @@ namespace Doormandondemand
     
         public virtual Apartment Apartment { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual ICollection<RepairRequest> RepairRequest { get; set; }
         public virtual ICollection<Requests> Requests { get; set; }
+        public virtual ICollection<RepairRequest> RepairRequest { get; set; }
     }
 }

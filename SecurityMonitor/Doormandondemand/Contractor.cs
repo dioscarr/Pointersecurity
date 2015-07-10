@@ -14,6 +14,11 @@ namespace Doormandondemand
     
     public partial class Contractor
     {
+        public Contractor()
+        {
+            this.RepairRequest = new HashSet<RepairRequest>();
+        }
+    
         public string Id { get; set; }
         public string Email { get; set; }
         public string CompanyName { get; set; }
@@ -31,5 +36,6 @@ namespace Doormandondemand
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Buildings Buildings { get; set; }
+        public virtual ICollection<RepairRequest> RepairRequest { get; set; }
     }
 }

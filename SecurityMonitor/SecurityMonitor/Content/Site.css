@@ -649,8 +649,8 @@ height:800px;
   /* Hack to improve aliasing on mobile/tablet devices */
 }
 .hollow5:hover, .hollow1:focus, .hollow1:active {
-  background: lightgrey;
-  color:#019DBC;
+  background: lightgrey!important;
+  color:#019DBC!important;
 }
 
 .hollow6 {
@@ -999,15 +999,15 @@ z-index:10;
 {
     min-height:250px;
     background-color:#f7f7f7;  
-  -webkit-box-shadow: 1px 1px 2px #b7b7b7;
-  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
-   line-height: 54px;  
+  -webkit-box-shadow: 1px 1px 2px #b7b7b7 !important;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e !important;
+   line-height: 54px ;  
 }
 
 .boxheadassign
 {
     min-height:60px;
-    background-color:#f7f7f7;  
+    background-color:#f7f7f7!important;  
   -webkit-box-shadow: 1px 1px 2px #b7b7b7;
   -moz-box-shadow: 3px 3px 7px #b7b7b7e;
    line-height: 54px;  
@@ -2576,7 +2576,7 @@ border-radius:10px;
 }
 .RPRInformationbox {
 min-height:120px;
-padding:20px 20px;
+padding:30px 20px;
 
 }
 #tenotebutton {
@@ -2658,13 +2658,15 @@ padding:20px !important;
 
 }
 
-.dropcomplete {
+#dropcomplete {
      min-height:10px;
      max-height:25px;
     min-width:200px;
     width:200px;
-    background:lightgrey;
+    background:#eeeeee;
     position:absolute;
+    border-bottom-left-radius:5px;
+     border-bottom-right-radius:5px;
     color:black;
     top:45px;
    left:350px;
@@ -2680,7 +2682,7 @@ padding:20px !important;
        z-index:1;
 
 }
- .dropcomplete > div {
+ #dropcomplete > div {
  opacity:0;
  visibility:hidden;
 
@@ -2690,14 +2692,14 @@ padding:20px !important;
 
 
 
-.dropcomplete:hover {  
+#dropcomplete:target {  
     min-width:500px;
     min-height:220px;
     position:absolute;
     left:200px;
 }
 
-.dropcomplete:hover > div{  
+#dropcomplete:target > div{  
     visibility:visible;
 opacity:100;
 
@@ -2849,3 +2851,66 @@ margin:20px 0 !important;
 .textareatinnerbox {
 padding:0 40px 0 40px!important;
 }
+
+.buildingstaffmenue
+{
+ position:absolute;
+ top:22px;
+  left:300px;
+  z-index:30;
+ 
+}
+
+.buildingstaffmenue:hover
+{
+ color:#0071BC;
+ 
+}
+
+
+.buildingstaffmenue:hover ~ .textid
+{
+ color:#0071BC;
+ 
+} 
+
+
+/* Curl Top Right */
+.hvr-curl-top-right {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+.hvr-curl-top-right:before {
+  pointer-events: none;
+  position: absolute;
+  content: '';
+  height: 0;
+  width: 0;
+  top: 0;
+  right: 0;
+  background: white;
+  /* IE9 */
+  background: linear-gradient(225deg, white 45%, #aaaaaa 50%, #cccccc 56%, white 80%);
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.4);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: width, height;
+  transition-property: width, height;
+}
+.hvr-curl-top-right:hover:before, .hvr-curl-top-right:focus:before, .hvr-curl-top-right:active:before {
+  width: 25px;
+  height: 25px;
+}
+
+
+
+
+
+

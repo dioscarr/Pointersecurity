@@ -23,7 +23,8 @@ namespace SecurityMonitor.Models
         public string PPhone { get; set; }
         public string AssignToID { get; set; }
         public string AssignedFullName { get; set; }
-       
+        public string assignContractorID { get; set; }
+        public string ContractorFullName { get; set; }
 
     }
 }

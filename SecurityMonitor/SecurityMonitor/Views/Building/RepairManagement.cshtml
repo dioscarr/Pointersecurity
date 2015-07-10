@@ -88,8 +88,11 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 repairmanagementdescription  " data-bind="text:Description">
 
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  " data-bind="text:AssignedFullName">
-
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  nopadding" data-bind="if:AssignedFullName">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="text:AssignedFullName"></div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  nopadding" data-bind="if:ContractorFullName">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="text:ContractorFullName"></div>
             </div>
         </div>
     </div>
@@ -127,15 +130,15 @@
                     </h6>
 
 
-
-                    <div class="dropcomplete">
-                       <span> Close this ticket</span>
+                    <span ></span>
+                    <div id="dropcomplete"  onclick="location.href = '#dropcomplete'">
+                        <span class="hvr-buzz-out"> Close this ticket</span>
                         <div>
-                           
-                            <div><textarea class="form-control ticketresolution" placeholder="Enter a resolution (required)" ></textarea> </div>
+
+                            <div><textarea class="form-control ticketresolution" placeholder="Enter a resolution (required)"></textarea> </div>
                             <div>Are you sure ?</div>
                             <button class="btn btn-info input-sm">Close ticket</button>
-                            <button class="btn btn-info input-sm">Cancel</button>
+                            <a href="#noselection">Cancel</a>
                         </div>
 
                     </div>
@@ -209,6 +212,11 @@
                                     Select Building Staff
 
                                 </div>
+
+
+                                <span class="textid">Menu</span>
+
+
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:BSArray">
 
                                     <section style="margin:5px 0 5px 0;">
@@ -216,7 +224,7 @@
                                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
                                             <!--header starts-->
                                             <section class=" col-md-12 text-center clientboxrow ">
-                                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                <section class="hvr-underline-from-left  boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
                                                     <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 assignstaffbox ">
 
@@ -228,13 +236,15 @@
                                                                 <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 text-left assignstaffsettings ">
                                                                     Name: <span class=" sbs_font" data-bind="text:FullName"></span>
                                                                 </div>
-                                                                
-                                                               
+
+
                                                             </div>
-                                                           
-                                                            
+                                                            <div class="fa fa-th-large fa-4x buildingstaffmenue" data-bind="click:staffminimenu"></div>
+
+
+
                                                         </div>
-                                                        </div>
+                                                    </div>
                                                 </section>
                                             </section>
                                         </div>
@@ -271,7 +281,7 @@
                                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
                                             <!--header starts-->
                                             <section class=" col-md-12 text-center clientboxrow  " onclick="location.href = '#handlerid'" data-bind="click:assignCompany">
-                                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-from-left">
                                                     <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                                                         <!--logo-->
@@ -427,13 +437,13 @@
                             <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
                                 <!--header starts-->
                                 <section class=" col-md-12 text-center clientboxrow ">
-                                    <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
-                                        <div class=" boxname settingfornote col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                                    <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-reveal">
+                                        <div class=" boxname settingfornote col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding ContratorRowContentHeader margintop" style="min-height:20px; ">
                                                 <div class=" col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest   ">Tech's Note</div>
                                                 <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest  " data-bind="text:CreatedDate">Tech's Note</div>
                                                 <span class="fa fa-thumb-tack fa-2x mypin"></span>
-                                             </div>
+                                            </div>
                                             <textarea class="form-control" readonly="readonly" data-bind="text:Notes" style="min-height:100px; min-width:100%;"></textarea>
                                             <button class=" input-sm btn btn-info" data-bind="click:DeleteTechNote">
                                                 Delete Note
@@ -455,16 +465,21 @@
     </div>
 </div>
 
+
+
 @section scripts
 {
-
+<link href="~/Content/hover.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-2.1.3.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
     <script src="~/Scripts/knockout-3.1.0.js"></script>
     <script src="~/Scripts/TheLibrary/TimeJS.js"></script>
     <script type="text/javascript">
-        // alert("dss");
+       
+
+       
+
         $(function () {
 
             $('#NewContractor a').click(function (e) {
@@ -486,7 +501,13 @@
 
 
 
+
+
             });
+
+           
+
+          
 
 
             var viewModel = function () {
@@ -552,6 +573,13 @@
                 self.NewPassword = ko.observable(true);
                 self.NewComments = ko.observable();
                 self.NewCatName = ko.observable();
+
+                self.staffminimenu = function (data, event) {
+                    //alert(  event.currentTarget);  
+
+                }
+
+
 
                 self.ListStates = ko.observableArray();
 
@@ -972,14 +1000,16 @@
                                    self.BSArray.removeAll();
                                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
-
+                                  
                                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+                                
                                    for (var i = 0; i < TrkPkgs.length; i++) {
                                        self.BSArray.push({
                                            FullName: TrkPkgs[i].FullName,
                                            Tel: TrkPkgs[i].Phone,
                                            UserID: TrkPkgs[i].UserID,
-                                           BuildingID: TrkPkgs[i].UserID.BuildingID
+                                           BuildingID: TrkPkgs[i].UserID.BuildingID 
                                        });
                                    }
                                }
@@ -1124,14 +1154,27 @@
                            data: { UserID: self.UpdateAssignID(), RepairRequestID: self.selectedID(), Notes: self.UpdateNotes(), whichone: self.whichone() },
                            dataType: "json",
                            success: function (data) {
-                               LoadFirst();
+                               if (self.ClearorNot() == true) {
+                                   self.showhidehandler();
+                                   self.ClearorNot(false)
+                               }
+                               self.whichone();
                                AjaxBUaccess = true;
-                              
+                               self.isnotevisible(false);
+                               self.LoadComp();
                                self.displayStaff();
-                               self.ContactName(""),
-                                 self.ContactLastName("")
-                               self.isvisible(false);
+                               self.ContactName("");
+                               self.ContactLastName("");
                                self.TechNoteValue("");
+                               self.isvisible(false);
+
+
+
+
+                               LoadFirst();
+                              
+                              
+                               
                                //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
                                //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
@@ -1200,7 +1243,10 @@
                                     PEmail: TrkPkgs[i].PEmail,
                                     PPhone: TrkPkgs[i].PPhone,
                                     AssignToID: TrkPkgs[i].AssignToID,
-                                    AssignedFullName: TrkPkgs[i].AssignedFullName
+                                    AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                    assignContractorID: TrkPkgs[i].assignContractorID,
+                                    ContractorFullName: TrkPkgs[i].ContractorFullName
+                                    
 
                                 });
                             }

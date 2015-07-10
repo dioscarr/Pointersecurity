@@ -59,7 +59,6 @@ namespace Doormandondemand
         public virtual DbSet<PackageType> PackageType { get; set; }
         public virtual DbSet<PendingModules> PendingModules { get; set; }
         public virtual DbSet<PermissionMapRole> PermissionMapRole { get; set; }
-        public virtual DbSet<RepairRequest> RepairRequest { get; set; }
         public virtual DbSet<RepairRequestCategories> RepairRequestCategories { get; set; }
         public virtual DbSet<RepairRequestNote> RepairRequestNote { get; set; }
         public virtual DbSet<RepairUrgency> RepairUrgency { get; set; }
@@ -77,5 +76,6 @@ namespace Doormandondemand
         public virtual DbSet<UserActivityLog> UserActivityLog { get; set; }
         public virtual DbSet<Contractor> Contractor { get; set; }
         public virtual DbSet<RepairTechNote> RepairTechNote { get; set; }
+        public virtual DbSet<RepairRequest> RepairRequest { get; set; }
     }
 }

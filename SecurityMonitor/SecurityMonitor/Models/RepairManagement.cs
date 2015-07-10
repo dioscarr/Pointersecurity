@@ -45,7 +45,10 @@ namespace SecurityMonitor.Models
                       PEmail =c.Tenant.Username,
                       PPhone = c.Tenant.Phone,
                       AssignToID = c.BuildingUser.Id,
-                      AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName
+                      AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                      assignContractorID = c.AssignContractorID,
+                      ContractorFullName = c.Contractor.CompanyName
+
 
             }).ToList();
             return R;

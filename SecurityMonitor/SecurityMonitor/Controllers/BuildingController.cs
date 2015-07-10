@@ -1835,12 +1835,14 @@ namespace SecurityMonitor.Controllers
 
                RR.RepairRequestNoteID = RN.Id;
                RR.AssignID = UserID;
+               RR.AssignContractorID = null;
 
                db.RepairRequest.Attach(RR);
                var Entry = db.Entry(RR);
 
                Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
                Entry.Property(c => c.AssignID).IsModified = true;
+               Entry.Property(c => c.AssignContractorID).IsModified = true;
 
                db.SaveChanges();
 
@@ -1877,12 +1879,14 @@ namespace SecurityMonitor.Controllers
                db.SaveChanges();
 
                RR.RepairRequestNoteID = RN.Id;
-               RR.AssignID = UserID;
+               RR.AssignContractorID = UserID;
+               RR.AssignID = null;
 
                db.RepairRequest.Attach(RR);
                var Entry = db.Entry(RR);
 
                Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
+               Entry.Property(c => c.AssignContractorID).IsModified = true;
                Entry.Property(c => c.AssignID).IsModified = true;
 
                db.SaveChanges();
