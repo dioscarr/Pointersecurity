@@ -5,9 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using SecurityMonitor.Models;
 using Doormandondemand;
-
-
-
+using System.Drawing;
+using Root.Reports;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using PagedList.Mvc;
@@ -1813,6 +1812,12 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+
+        
+  
+
+
+
         [HttpPost]
        public JsonResult ApplyUpdatesRepairRequest(string UserID, int RepairRequestID, string Notes, bool whichone)
        {
@@ -1820,49 +1825,61 @@ namespace SecurityMonitor.Controllers
            if (whichone == true) //Building Staff========================================================================
            {
 
+               Report report = new Report(new PdfFormatter());
+               FontDef fd = new FontDef(report, "Helvetica");
+               FontProp fp = new FontPropMM(fd, 25);
+               fp.color =  Color.Blue;
+               Page page = new Page(report);
+               page.Add(0,80, new RepString(fp, "Hello World!"));
+               page.Add(0, 180, new RepString(fp, "This is a test"));
 
-               RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
+              
+               RT.ViewPDF (report, "HelloWorld.pdf");
 
-               RepairRequestNote RN = new RepairRequestNote
-               {
-                   DateCreated = DateTime.Now,
-                   Notes = Notes
 
-               };
 
-               db.RepairRequestNote.Add(RN);
-               db.SaveChanges();
+               //RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
 
-               RR.RepairRequestNoteID = RN.Id;
-               RR.AssignID = UserID;
-               RR.AssignContractorID = null;
+               //RepairRequestNote RN = new RepairRequestNote
+               //{
+               //    DateCreated = DateTime.Now,
+               //    Notes = Notes
 
-               db.RepairRequest.Attach(RR);
-               var Entry = db.Entry(RR);
+               //};
 
-               Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
-               Entry.Property(c => c.AssignID).IsModified = true;
-               Entry.Property(c => c.AssignContractorID).IsModified = true;
+               //db.RepairRequestNote.Add(RN);
+               //db.SaveChanges();
 
-               db.SaveChanges();
+               //RR.RepairRequestNoteID = RN.Id;
+               //RR.AssignID = UserID;
+               //RR.AssignContractorID = null;
 
-               var Worker = db.BuildingUser.Where(c => c.UserID == UserID).FirstOrDefault();
+               //db.RepairRequest.Attach(RR);
+               //var Entry = db.Entry(RR);
 
-               string string1 = "<div style='font-size:20px; colo:blue;'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
-               string string2 = "You have a new assignemt and the description is bellow:";
-               string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
-               string string4 = "The Decription of the request is: " + RR.ProblemDescription;
-               string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
-               string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
-               string string7 = "Find more information...";
+               //Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
+               //Entry.Property(c => c.AssignID).IsModified = true;
+               //Entry.Property(c => c.AssignContractorID).IsModified = true;
 
-               string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+               //db.SaveChanges();
 
-               Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
-               MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
-               msg.Subject = "New Assignment Notification";
-               msg.Body = x;
-               gmail.Send(msg);
+               //var Worker = db.BuildingUser.Where(c => c.UserID == UserID).FirstOrDefault();
+
+               //string string1 = "<div style='font-size:20px; colo:blue;'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
+               //string string2 = "You have a new assignemt and the description is bellow:";
+               //string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
+               //string string4 = "The Decription of the request is: " + RR.ProblemDescription;
+               //string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
+               //string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
+               //string string7 = "Find more information...";
+
+               //string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+
+               //Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+               //MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
+               //msg.Subject = "New Assignment Notification";
+               //msg.Body = x;
+               //gmail.Send(msg);
            }
            else if (whichone == false) //Company========================================================================================================
            {
