@@ -1899,8 +1899,16 @@ padding:0 100px 0 100px !important;
     padding-top:10px;
     background-color:white;
     border:1px solid lightgrey;
-    min-height:210px;
+    min-height:240px;
     max-height:220px;
+}
+
+.BuildingTopBoxesright{
+    padding-top:10px;
+    background-color:white;
+    border:1px solid lightgrey;
+    min-height:210px;
+    max-height:230px;
 }
 .requestinfobox {
 
