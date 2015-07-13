@@ -24,6 +24,7 @@ namespace SecurityMonitor.Workes
             client.EnableSsl = true;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.Credentials = new NetworkCredential(Username, Password);
+            client.UseDefaultCredentials = true;
             client.Send(msg);
            
         }
