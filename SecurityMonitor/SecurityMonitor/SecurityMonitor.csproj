@@ -59,6 +59,12 @@
       <HintPath>..\packages\FileHelpers-Stable.2.9.9\lib\4.0\Interop.Office.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.6\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.0\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -83,6 +89,9 @@
     </Reference>
     <Reference Include="MvcPaging">
       <HintPath>..\packages\MVC4.Paging.3.1.1\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcRazorToPdf">
+      <HintPath>..\packages\MvcRazorToPdf.1.0.2\lib\40\MvcRazorToPdf.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -291,6 +300,7 @@
     <Compile Include="Workes\FindRoute.cs" />
     <Compile Include="Workes\Gmail.cs" />
     <Compile Include="Workes\PasswordGenerator.cs" />
+    <Compile Include="Workes\pdfWorker.cs" />
     <Compile Include="Workes\RegisterUsers.cs" />
     <Compile Include="Workes\TenantWorker.cs" />
   </ItemGroup>
@@ -305,6 +315,7 @@
     <Content Include="Content\dhtmlxgantt\dhtmlxgantt_skyblue.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="ContractPDF\Receitp.htm" />
     <Content Include="Scripts\gviz-api.js" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\PagedList.css" />
