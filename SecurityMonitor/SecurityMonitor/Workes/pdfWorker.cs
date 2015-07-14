@@ -142,7 +142,7 @@ namespace SecurityMonitor.Workes
             doc.Open();
             doc.Add(table);
             doc.Close();
-            doc.Dispose();
+           // doc.Dispose();
  
             return "success";
         }

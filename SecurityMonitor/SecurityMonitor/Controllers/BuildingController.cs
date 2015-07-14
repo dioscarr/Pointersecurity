@@ -1883,7 +1883,7 @@ namespace SecurityMonitor.Controllers
 
 
 
-               Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+               Gmail gmail = new Gmail("pointerwebapp", "dmc10040");
                MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
                msg.Subject = "New Assignment Notification";
                msg.Body = x;
