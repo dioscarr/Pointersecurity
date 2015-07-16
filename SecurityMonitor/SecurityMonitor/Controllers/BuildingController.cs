@@ -1839,7 +1839,7 @@ namespace SecurityMonitor.Controllers
 
 
 
-               var result = pdfworker.CreateTable0(Server.MapPath("~/ContractPDF/"), Server.MapPath("~/img/"), Server.MapPath("~/fonts/"));
+              
 
 
                RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
@@ -1869,35 +1869,81 @@ namespace SecurityMonitor.Controllers
 
                var Worker = db.BuildingUser.Where(c => c.UserID == UserID).FirstOrDefault();
 
-               string string1 = "<div style='font-size:20px; colo:blue;'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
-               string string2 = "You have a new assignemt and the description is bellow:";
-               string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
-               string string4 = "The Decription of the request is: " + RR.ProblemDescription;
-               string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
-               string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
-               string string7 = "Find more information...";
+               //string string1 = "<div style='font-size:20px; colo:blue; display:bloc'>Hi " + Worker.FirstName + " " + Worker.LastName + ",</div> ";
+               //string string2 = "You have a new assignemt and the description is bellow:";
+               //string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
+               //string string4 = "The Decription of the request is: " + RR.ProblemDescription;
+               //string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
+               //string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
+               //string string7 = "Find more information...";
 
-               string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
+               //string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
 
+               string contenttobemail = " <div style='font-size:20px; display:block;  width:100%; background:#0071bc;  height:50px;  line-height:50px; padding:0 15px; border:1px solid lightgrey;   color:white;' >"+
+                Worker.FirstName + " " + Worker.LastName +"</div>"+
+   "<div style='   display:block;   width:100%;   margin:10px 0 10px 0;   padding:10px 15px;   background:#F0F0F0;   border:1px solid lightgrey;   '>     You have a new assignemt and the description is bellow:<br/>"+
+   " <hr/>"+
+   " <br/>"+
+   " <b> The Category of this Request is</b> "+
+   "<br/>"+
+   RR.RepairRequestCategories.Categories +
+   " <hr/>"+
+   " <br/>"+
+   "<b>The Urgency is:</b>"+
+   " <br/>" + RR.RepairUrgency.Urgency +
+   "<hr/>"+
+   " <br/>"+
+   " <b>The Decription of the request is:</b>"+
+   "<br/>"+
+  RR.ProblemDescription+
+   " <hr/>"+
+   "<br/>"+
+   "</div>"+
+   "<div style='font-size:20px; display:block; width:100%; background:#0071bc; height:50px;line-height:50px; padding:0 15px; border:1px solid lightgrey; color:white;' >For questions about this email Contact management at: " + RR.Buildings.BuildingPhone + "Find more information...  </div>";
 
+               
+               
 
-
+                
 
                Gmail gmail = new Gmail("pointerwebapp", "dmc10040");
                MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
                msg.Subject = "New Assignment Notification";
-               msg.Body = x;
+               msg.Body = contenttobemail;
+               msg.IsBodyHtml = true;
+
+
+               //new
+               PdfContractContent pdfContent = new PdfContractContent { 
+                 Address = RR.Buildings.Address,
+                 Category = RR.RepairRequestCategories.Categories,
+                 Priority = RR.RepairUrgency.Urgency,
+                 Status = RR.Status,
+                 Issued = RR.RequestedDate.Month.ToString() +"/"+ RR.RequestedDate.Day.ToString() +"/"+ RR.RequestedDate.Year.ToString(),
+                 primaryContact = RR.Tenant.FirstName + " " + RR.Tenant.LastName,
+                 PrimaryPhone = RR.Tenant.Phone,
+                 PrimaryEmail = RR.Tenant.Username,
+                 OfficeNotes = RR.RepairRequestNote.Notes,
+                 RequestNumber = "123987456654654",
+                 problem = RR.ProblemDescription,
+                 TenantInstruction = RR.Instructions_   
+               };
+               //new
+               var result = pdfworker.CreateTable1(Server.MapPath("~/ContractPDF/"), Server.MapPath("~/img/"), Server.MapPath("~/fonts/"), pdfContent);
+              
+
 
                Attachment attachment;
-               attachment = new Attachment(Server.MapPath("~/ContractPDF/Test.pdf"));
-               msg.Attachments.Add(attachment);
-
-
-
-
-
+               attachment = new Attachment(Server.MapPath("~/ContractPDF/newContractFile.pdf"));
+               msg.Attachments.Add(attachment);     
 
                gmail.Send(msg);
+               attachment.Dispose();//needs to be dispose because the process is use and cannot be open twice at the same time.
+               msg.Dispose();
+               
+               
+
+
            }
            else if (whichone == false) //Company========================================================================================================
            {

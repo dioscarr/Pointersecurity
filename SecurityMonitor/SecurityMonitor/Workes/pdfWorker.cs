@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
-using iTextSharp.text;
 using System.IO;
 using System.Drawing;
+using SecurityMonitor.Models;
 
 namespace SecurityMonitor.Workes
 {
@@ -146,6 +146,144 @@ namespace SecurityMonitor.Workes
  
             return "success";
         }
+
+
+
+        public string CreateTable1(string FilePath, string ImagePath, string fontpath, PdfContractContent pdfModel)
+        {
+
+            string oldFile =FilePath + "ContractSample.pdf";
+            string newFile = FilePath + "newContractFile.pdf";
+
+            // open the reader
+            PdfReader reader = new PdfReader(oldFile);
+            iTextSharp.text.Rectangle size = reader.GetPageSizeWithRotation(1);
+            Document document = new Document(size);
+
+            // open the writer
+            FileStream fs = new FileStream(newFile, FileMode.Create, FileAccess.Write);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+
+            // the pdf content
+            PdfContentByte cb = writer.DirectContent;
+
+            // select the font properties
+            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+            cb.SetColorFill(BaseColor.DARK_GRAY);
+            cb.SetFontAndSize(bf, 14);
+
+            string RequestNumber = pdfModel.RequestNumber;
+            string Address = pdfModel.Address;
+            string Category = pdfModel.Category;
+            string Priority = pdfModel.Priority;
+            string Status = pdfModel.Status;
+            string IssuedOn = pdfModel.Issued;
+
+            string MainContact = pdfModel.primaryContact;
+            string MainEmailAddress = pdfModel.PrimaryEmail;
+            string MainPhone = pdfModel.PrimaryPhone;
+
+            string Problem = pdfModel.problem;
+            string Instructions = pdfModel.TenantInstruction;
+            string OfficeNotes = pdfModel.OfficeNotes;
+
+  
+
+           // // write the text in the pdf content
+           // cb.BeginText();          
+           // // put the alignment and coordinates here
+           // cb.ShowTextAligned(0, RequestNumber, 700, 740, 0);
+
+            cb.BeginText();
+            
+            cb.ShowTextAligned(2, RequestNumber, 550, 648, 0);
+            cb.EndText();
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, Address, 48, 648, 0);
+            cb.EndText(); 
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, Category, 118, 578, 0);
+            cb.EndText();
+
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, Priority, 108, 561, 0);
+            cb.EndText();
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, Status, 100, 544, 0);
+            cb.EndText();
+            
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, IssuedOn, 120, 525, 0);                    
+            cb.EndText();
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, MainContact, 320, 560, 0);
+            cb.EndText();
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, MainEmailAddress, 363, 542, 0);
+            cb.EndText();
+
+            cb.BeginText();
+            cb.ShowTextAligned(0, MainPhone, 348, 526, 0);
+            cb.EndText();
+            
+            ColumnText ct = new ColumnText(cb);
+             ct.SetSimpleColumn(new Phrase(new Chunk(Problem, FontFactory.GetFont(FontFactory.HELVETICA, 14,iTextSharp.text.Font.NORMAL))),
+                     46, 465, 550, 30, 20, Element.ALIGN_LEFT | Element.ALIGN_TOP);
+             ct.Go();
+
+             ColumnText oinstruction = new ColumnText(cb);
+             oinstruction.SetSimpleColumn(new Phrase(new Chunk(OfficeNotes, FontFactory.GetFont(FontFactory.HELVETICA, 14, iTextSharp.text.Font.NORMAL))),
+                     46, 264, 550, 30, 20, Element.ALIGN_LEFT | Element.ALIGN_TOP);
+             oinstruction.Go();
+
+
+           
+            
+            
+
+            //cb.BeginText();
+          
+            //cb.ShowTextAligned(0, Problem, 100, 450, 0);
+            //cb.ShowTextAligned(0, Instructions, 100, 350, 0);
+            //cb.ShowTextAligned(0, OfficeNotes, 100, 250, 0);
+           
+            //cb.EndText();
+
+            //cb.BeginText();
+            //// put the alignment and coordinates here
+            //cb.ShowTextAligned(0, MainContact, 100, 540, 0);
+            //cb.ShowTextAligned(0, MainEmailAddress, 100, 500, 0);
+            //cb.ShowTextAligned(0, MainPhone, 100, 460, 0);
+            //cb.EndText();
+
+           
+
+
+            // create the new page and add it to the pdf
+            PdfImportedPage page = writer.GetImportedPage(reader, 1);
+            cb.AddTemplate(page, 0, 0);
+
+            // close the streams and voilá the file should be changed :)
+            document.Close();
+            fs.Close();
+            fs.Dispose();
+            writer.Close();
+            reader.Close();
+
+           
+
+            return "success";
+        }
+
+
 
 
 
