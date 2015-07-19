@@ -28,7 +28,7 @@ namespace SecurityMonitor.Models
         {
            
            var R = db.RepairRequest
-                .Where(r => r.BuildingID == buildingID)
+                .Where(r => r.BuildingID == buildingID && r.Status != "Close" ||r.BuildingID == buildingID && r.Status == "ReOpen")
                 .Select(c =>new RepairRequestmock{
                       RequestedDate = c.RequestedDate,
                       Description = c.ProblemDescription,                   
@@ -52,6 +52,52 @@ namespace SecurityMonitor.Models
 
             }).ToList();
             return R;
+        }
+
+
+        public List<RepairRequestmock> LoadAllCloseRequest(int buildingID)
+        {
+
+            var R = db.RepairRequest
+                 .Where(r => r.BuildingID == buildingID && r.Status=="Close")
+                 .Select(c => new RepairRequestmock
+                 {
+                     RequestedDate = c.RequestedDate,
+                     Description = c.ProblemDescription,
+                     Status = c.Status,
+                     ID = c.Id,
+                     RequestNumber = "04/23/2015",
+                     Category = c.RepairRequestCategories.Categories,
+                     PhotoUrl = c.PhotoUrl,
+                     Urgency = c.RepairUrgency.Urgency,
+                     CName = c.OtherContactName,
+                     CEmail = c.OtherContactEmail,
+                     CPhone = c.OtherContactPhone,
+                     PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                     PEmail = c.Tenant.Username,
+                     PPhone = c.Tenant.Phone,
+                     AssignToID = c.BuildingUser.Id,
+                     AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                     assignContractorID = c.AssignContractorID,
+                     ContractorFullName = c.Contractor.CompanyName
+
+
+                 }).ToList();
+            return R;
+        }
+
+        public string ReopenRepairTicket(int buildingID)
+        {
+
+            var model = db.RepairRequest.Find(buildingID);
+            model.Status = "ReOpen";
+            db.RepairRequest.Attach(model);
+            var Entry = db.Entry(model);
+            Entry.Property(c => c.Status).IsModified = true;
+            db.SaveChanges();
+
+            return "Sucessful";
+            
         }
     }
 }

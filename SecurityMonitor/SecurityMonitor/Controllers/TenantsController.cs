@@ -179,6 +179,7 @@ namespace SecurityMonitor.Controllers
             if(model!=null)
             {
                 model.AssignID = null;
+                model.AssignContractorID = null;
                 db.RepairRequest.Add(model);
                await db.SaveChangesAsync();
 

@@ -1427,6 +1427,13 @@ namespace SecurityMonitor.Controllers
 
             return View(r);
         }
+        public JsonResult ReopenRepairTicket(int RepairID)
+        {
+            RepairManagement r = new RepairManagement();
+            r.ReopenRepairTicket(RepairID);
+            var mydata = Json("");
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -1832,23 +1839,13 @@ namespace SecurityMonitor.Controllers
 
            if (whichone == true) //Building Staff========================================================================
            {
-
-
-
                pdfWorker pdfworker = new pdfWorker();
-
-
-
-              
-
-
                RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
 
                RepairRequestNote RN = new RepairRequestNote
                {
                    DateCreated = DateTime.Now,
                    Notes = Notes
-
                };
 
                db.RepairRequestNote.Add(RN);
@@ -1857,6 +1854,7 @@ namespace SecurityMonitor.Controllers
                RR.RepairRequestNoteID = RN.Id;
                RR.AssignID = UserID;
                RR.AssignContractorID = null;
+               RR.Status = "Assigned";
 
                db.RepairRequest.Attach(RR);
                var Entry = db.Entry(RR);
@@ -1864,6 +1862,7 @@ namespace SecurityMonitor.Controllers
                Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
                Entry.Property(c => c.AssignID).IsModified = true;
                Entry.Property(c => c.AssignContractorID).IsModified = true;
+               Entry.Property(c => c.Status).IsModified = true;
 
                db.SaveChanges();
 
@@ -1881,38 +1880,32 @@ namespace SecurityMonitor.Controllers
 
                string contenttobemail = " <div style='font-size:20px; display:block;  width:100%; background:#0071bc;  height:50px;  line-height:50px; padding:0 15px; border:1px solid lightgrey;   color:white;' >"+
                 Worker.FirstName + " " + Worker.LastName +"</div>"+
-   "<div style='   display:block;   width:100%;   margin:10px 0 10px 0;   padding:10px 15px;   background:#F0F0F0;   border:1px solid lightgrey;   '>     You have a new assignemt and the description is bellow:<br/>"+
-   " <hr/>"+
-   " <br/>"+
-   " <b> The Category of this Request is</b> "+
-   "<br/>"+
-   RR.RepairRequestCategories.Categories +
-   " <hr/>"+
-   " <br/>"+
-   "<b>The Urgency is:</b>"+
-   " <br/>" + RR.RepairUrgency.Urgency +
-   "<hr/>"+
-   " <br/>"+
-   " <b>The Decription of the request is:</b>"+
-   "<br/>"+
-  RR.ProblemDescription+
-   " <hr/>"+
-   "<br/>"+
-   "</div>"+
-   "<div style='font-size:20px; display:block; width:100%; background:#0071bc; height:50px;line-height:50px; padding:0 15px; border:1px solid lightgrey; color:white;' >For questions about this email Contact management at: " + RR.Buildings.BuildingPhone + "Find more information...  </div>";
-
-               
-               
-
-                
+                                   "<div style='   display:block;   width:100%;   margin:10px 0 10px 0;   padding:10px 15px;   background:#F0F0F0;   border:1px solid lightgrey;   '>     You have a new assignemt and the description is bellow:<br/>"+
+                                   " <hr/>"+
+                                   " <br/>"+
+                                   " <b> The Category of this Request is</b> "+
+                                   "<br/>"+
+                                   RR.RepairRequestCategories.Categories +
+                                   " <hr/>"+
+                                   " <br/>"+
+                                   "<b>The Urgency is:</b>"+
+                                   " <br/>" + RR.RepairUrgency.Urgency +
+                                   "<hr/>"+
+                                   " <br/>"+
+                                   " <b>The Decription of the request is:</b>"+
+                                   "<br/>"+
+                                  RR.ProblemDescription+
+                                   " <hr/>"+
+                                   "<br/>"+
+                                   "</div>"+
+                                   "<div style='font-size:20px; display:block; width:100%; background:#0071bc; height:50px;line-height:50px; padding:0 15px; border:1px solid lightgrey; color:white;' >For questions about this email Contact management at: " + RR.Buildings.BuildingPhone + "Find more information...  </div>";
 
                Gmail gmail = new Gmail("pointerwebapp", "dmc10040");
                MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
                msg.Subject = "New Assignment Notification";
                msg.Body = contenttobemail;
                msg.IsBodyHtml = true;
-
-
+               
                //new
                PdfContractContent pdfContent = new PdfContractContent { 
                  Address = RR.Buildings.Address,
@@ -1931,8 +1924,6 @@ namespace SecurityMonitor.Controllers
                //new
                var result = pdfworker.CreateTable1(Server.MapPath("~/ContractPDF/"), Server.MapPath("~/img/"), Server.MapPath("~/fonts/"), pdfContent);
               
-
-
                Attachment attachment;
                attachment = new Attachment(Server.MapPath("~/ContractPDF/newContractFile.pdf"));
                msg.Attachments.Add(attachment);     
@@ -1940,13 +1931,10 @@ namespace SecurityMonitor.Controllers
                gmail.Send(msg);
                attachment.Dispose();//needs to be dispose because the process is use and cannot be open twice at the same time.
                msg.Dispose();
-               
-               
-
-
            }
            else if (whichone == false) //Company========================================================================================================
            {
+               pdfWorker pdfworker = new pdfWorker();
                RepairRequest RR = db.RepairRequest.Find(RepairRequestID);
 
                RepairRequestNote RN = new RepairRequestNote
@@ -1962,6 +1950,7 @@ namespace SecurityMonitor.Controllers
                RR.RepairRequestNoteID = RN.Id;
                RR.AssignContractorID = UserID;
                RR.AssignID = null;
+               RR.Status = "Assigned";
 
                db.RepairRequest.Attach(RR);
                var Entry = db.Entry(RR);
@@ -1969,25 +1958,62 @@ namespace SecurityMonitor.Controllers
                Entry.Property(c => c.RepairRequestNoteID).IsModified = true;
                Entry.Property(c => c.AssignContractorID).IsModified = true;
                Entry.Property(c => c.AssignID).IsModified = true;
-
+               Entry.Property(c => c.Status).IsModified = true;
                db.SaveChanges();
 
                var Worker = db.Contractor.Where(c => c.Id == UserID).FirstOrDefault();
 
-               string string1 = "Hi " + Worker.CompanyName ;
-               string string2 = "You have a new assignemt and the description is bellow:";
-               string string3 = "The Category of this Request is " + RR.RepairRequestCategories.Categories;
-               string string4 = "The Decription of the request is: " + RR.ProblemDescription;
-               string string5 = "The Urgency is: " + RR.RepairUrgency.Urgency;
-               string string6 = "For questions about this email Contact management at: " + RR.Buildings.BuildingPhone;
-               string string7 = "Find more information...";
+               string contenttobemail = " <div style='font-size:20px; display:block;  width:100%; background:#0071bc;  height:50px;  line-height:50px; padding:0 15px; border:1px solid lightgrey;   color:white;' >" +
+                 Worker.CompanyName + "</div>" +
+                                        "<div style='   display:block;   width:100%;   margin:10px 0 10px 0;   padding:10px 15px;   background:#F0F0F0;   border:1px solid lightgrey;   '>     You have a new assignemt and the description is bellow:<br/>" +
+                                        " <hr/>" +
+                                        " <br/>" +
+                                        " <b> The Category of this Request is</b> " +
+                                        "<br/>" +
+                                        RR.RepairRequestCategories.Categories +
+                                        " <hr/>" +
+                                        " <br/>" +
+                                        "<b>The Urgency is:</b>" +
+                                        " <br/>" + RR.RepairUrgency.Urgency +
+                                        "<hr/>" +
+                                        " <br/>" +
+                                        " <b>The Decription of the request is:</b>" +
+                                        "<br/>" +
+                                       RR.ProblemDescription +
+                                        " <hr/>" +
+                                        "<br/>" +
+                                        "</div>" +
+                                        "<div style='font-size:20px; display:block; width:100%; background:#0071bc; height:50px;line-height:50px; padding:0 15px; border:1px solid lightgrey; color:white;' >For questions about this email Contact management at: " + RR.Buildings.BuildingPhone + "Find more information...  </div>";
 
-               string x = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n", string1, string2, string3, string4, string5, string6, string7);
-
+               
                Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
                MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
                msg.Subject = "New Assignment Notification";
-               msg.Body = x;
+               msg.Body = contenttobemail;
+
+               msg.IsBodyHtml = true;
+               //new
+               PdfContractContent pdfContent = new PdfContractContent
+               {
+                   Address = RR.Buildings.Address,
+                   Category = RR.RepairRequestCategories.Categories,
+                   Priority = RR.RepairUrgency.Urgency,
+                   Status = RR.Status,
+                   Issued = RR.RequestedDate.Month.ToString() + "/" + RR.RequestedDate.Day.ToString() + "/" + RR.RequestedDate.Year.ToString(),
+                   primaryContact = RR.Tenant.FirstName + " " + RR.Tenant.LastName,
+                   PrimaryPhone = RR.Tenant.Phone,
+                   PrimaryEmail = RR.Tenant.Username,
+                   OfficeNotes = RR.RepairRequestNote.Notes,
+                   RequestNumber = "123987456654654",
+                   problem = RR.ProblemDescription,
+                   TenantInstruction = RR.Instructions_
+               };
+               //new
+               var result = pdfworker.CreateTable1(Server.MapPath("~/ContractPDF/"), Server.MapPath("~/img/"), Server.MapPath("~/fonts/"), pdfContent);
+
+               Attachment attachment;
+               attachment = new Attachment(Server.MapPath("~/ContractPDF/newContractFile.pdf"));
+               msg.Attachments.Add(attachment); 
                gmail.Send(msg);
            
            }
@@ -1995,6 +2021,34 @@ namespace SecurityMonitor.Controllers
            var JSONdATA = Json("");
            return new JsonResult {Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
        }
+        [HttpPost]
+        public JsonResult CloseRepairTicket(int ID)
+        {
+            RepairRequest RR = db.RepairRequest.Find(ID);
+            db.RepairRequest.Attach(RR);
+            var Entry = db.Entry(RR);
+
+            RR.Status = "Close";
+            Entry.Property(c => c.Status).IsModified = true;
+            db.SaveChanges();
+
+            var JSONdATA = Json("");
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [AllowAnonymous]
+        public JsonResult LoadCloseRequests(int buildingID)
+        {
+
+            RepairManagement OBJRM = new RepairManagement();
+
+            var ListOfCloseRequests = OBJRM.LoadAllCloseRequest(buildingID);
+
+            var JSONdATA = Json(ListOfCloseRequests);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
 
         [HttpGet]
         public JsonResult LoadingAssignTo(string UserID)

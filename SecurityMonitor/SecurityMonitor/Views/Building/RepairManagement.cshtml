@@ -36,6 +36,9 @@
 </div>
 
 <div class="row ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <button type="button" class="btn btn-link pull-right" data-toggle="modal" data-target="#ClosedTickets" data-bind="click:loadclosedTickets">View Closed Ticket</button>
+    </div>
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementHeaderrows  ">
@@ -63,13 +66,12 @@
 </div>
 
 
-
 <!--this are the rows-->
 <div class="row " data-bind="foreach:RepairRequest">
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementrows hollow5 " data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
-            
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementrows hollow5 hvr-underline-from-center " data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
+
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1   " data-bind="text:RequestedDate">
 
             </div>
@@ -137,8 +139,8 @@
 
                             <div><textarea class="form-control ticketresolution" placeholder="Enter a resolution (required)"></textarea> </div>
                             <div>Are you sure ?</div>
-                            <button class="btn btn-info input-sm">Close ticket</button>
-                            <a href="#noselection">Cancel</a>
+                            <a data-bind=" attr:{href:'#noselection'},click: CompleteAssignment" id="closingrequest">Close ticket</a>
+                            <a href="#noselection"  id="cancelcolsingticket"  >Cancel</a>
                         </div>
 
                     </div>
@@ -177,7 +179,7 @@
                         <div class="displayinline handlerclass"> Handler: </div>
                         <div class="displayinline handlerclass" data-bind="text:ContactName"></div>
                         <span><button type="button" class="btn btn-link handlerclass" style=" color:white;" onclick="location.href = '#assignedbox'" data-bind="    click: removelink, visible: isvisible"> Remove</button></span>
-                        <span> <button type="button" class="btn btn-link handlerclass" style=" color:white;" data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button></span>
+                        <span> <button type="button" class="btn btn-link handlerclass hvr-buzz-out " style=" color:white;" data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button></span>
                     </div>
                 </div>
 
@@ -466,6 +468,66 @@
 </div>
 
 
+<!--view closewd tickets-->
+
+<div class="modal fade" id="ClosedTickets" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+           
+            <div class="modal-body lightgrey">
+                
+                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:CloseTickets ">
+
+                    <section style="margin:5px 0 5px 0;">
+                        <!--vCard starts-->
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                            <!--header starts-->
+                            <section class=" col-md-12 text-center clientboxrow  " @*onclick="location.href = '#handlerid'" data-bind="click:assignCompany"*@>
+                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-from-left">
+                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                        <!--logo-->
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  ">
+                                            <h4><span class=" ContratorRowContentHeader col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="text:PEmail"></span></h4>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding  boxinnerboxSCBuilding fa fa-building fa-5x" id="contractorbuildingid">
+
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  boxinnerboxSC">
+
+                                            <span data-bind="text:CName" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                            <span data-bind="text:Category" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                            <span data-bind="text:RequestNumber" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                            <button type="button" class="btn btn-link" data-bind="click:ReopenRepairTicket">Re-Open Ticket</button>
+
+
+
+                                    </div>
+                                </section>
+                            </section>
+                        </div>
+                    </section>
+
+
+
+                    @*<div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" >
+
+
+            </div>*@
+                </div>
+              
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 @section scripts
 {
@@ -481,6 +543,17 @@
        
 
         $(function () {
+
+
+
+
+
+            //$('#closingrequest').on("click", function () {
+                
+               
+            //    window.location.href = window.location.href + "#noselection";
+            //    $('.cancelcolsingticket').trigger('click');
+            //})
 
             $('#NewContractor a').click(function (e) {
                 e.preventDefault()
@@ -551,6 +624,104 @@
 
                 var self = this;
 
+
+             
+                self.CloseTickets = ko.observableArray();
+                self.loadclosedTickets = function () {
+                    $.ajax({
+                        type:"GET",
+                        url: "/building/LoadCloseRequests/",
+                        datatype: "json",
+                        data:{buildingID: @Model.buildingID},
+                        success: function(datareturn){
+                            //debugger;
+                            //alert(JSON.stringify(datareturn));
+                            self.CloseTickets.removeAll();
+                            var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+
+                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                                self.CloseTickets.push({
+                                    RequestedDate: ko.observable(RDate),
+                                    Assignto: ko.observableArray(items),
+                                    Description: TrkPkgs[i].Description,
+                                    ID: TrkPkgs[i].ID,
+                                    Status: TrkPkgs[i].Status,
+                                    RequestNumber: TrkPkgs[i].RequestNumber,
+                                    Category: TrkPkgs[i].Category,
+                                    PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                    Urgency: TrkPkgs[i].Urgency,
+                                    CName: TrkPkgs[i].CName,
+                                    CEmail: TrkPkgs[i].CEmail,
+                                    CPhone: TrkPkgs[i].CPhone,
+                                    PName: TrkPkgs[i].PName,
+                                    PEmail: TrkPkgs[i].PEmail,
+                                    PPhone: TrkPkgs[i].PPhone,
+                                    AssignToID: TrkPkgs[i].AssignToID,
+                                    AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                    assignContractorID: TrkPkgs[i].assignContractorID,
+                                    ContractorFullName: TrkPkgs[i].ContractorFullName 
+                                });
+                            }
+                        }
+
+                    
+                    });
+
+                };
+
+             
+
+                self.CompleteAssignment = function () {
+                    //code to call jsonresult
+                    $.ajax({
+                        type: "POST",
+                        url: "/building/CloseRepairTicket/",
+                        datatype: "json",
+                        data: { ID: self.selectedID() },
+                        success: function (returnresult)
+                        {
+                            
+                            self.whichone();
+                            AjaxBUaccess = true;
+                            self.isnotevisible(false);
+                            self.LoadComp();
+                            self.displayStaff();
+                            self.ContactName("");
+                            self.ContactLastName("");
+                            self.TechNoteValue("");
+                            self.isvisible(false);
+                            LoadFirst();
+                            
+                        }
+                    
+                    });
+                };
+
+
+                self.ReopenRepairTicket = function(data){
+                    var myvalue = ko.toJSON(data);
+                    var myjson = JSON.parse(myvalue);
+                    alert(myjson.ID);
+                    $.ajax({
+                        type:"POST",
+                        url:"/building/ReopenRepairTicket",
+                        datatype:"json",
+                        data:{RepairID:myjson.ID},
+                        success:function(datareturn){
+                            debugger;
+                            self.loadclosedTickets();
+                            LoadFirst();
+
+                        }
+
+                    
+                    });
+                };
+
+
                 LoadFirst();//load first
                 //Tech Note
                 var count = ["1", "2", "3", "4"];
@@ -574,10 +745,16 @@
                 self.NewComments = ko.observable();
                 self.NewCatName = ko.observable();
 
+
+
                 self.staffminimenu = function (data, event) {
                     //alert(  event.currentTarget);  
 
+                   
+                        
+                        
                 }
+
 
 
 
@@ -1167,10 +1344,6 @@
                                self.ContactLastName("");
                                self.TechNoteValue("");
                                self.isvisible(false);
-
-
-
-
                                LoadFirst();
                               
                               

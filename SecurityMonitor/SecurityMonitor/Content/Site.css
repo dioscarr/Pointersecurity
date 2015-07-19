@@ -2698,7 +2698,7 @@ padding:20px !important;
 
     }
 
-
+ 
 
 #dropcomplete:target {  
     min-width:500px;
@@ -2917,6 +2917,10 @@ padding:0 40px 0 40px!important;
   height: 25px;
 }
 
+.requestmanagementrows {
+
+background:white !important;
+}
 
 
 
