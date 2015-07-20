@@ -178,6 +178,32 @@ namespace SecurityMonitor.Controllers
         {
             if(model!=null)
             {
+                // RequestNumber Starts
+                var ourdate = DateTime.Today.Date.Month.ToString() + "/" + DateTime.Today.Date.Day.ToString() + "/" + DateTime.Today.Date.Year;
+                var rrc = db.repairrequestocount.OrderByDescending(c => c.Id).FirstOrDefault();
+                repairrequestocount count = new repairrequestocount();
+
+                if (rrc == null)
+                {
+                    count.Date = ourdate;
+                    db.repairrequestocount.Add(count);
+                }
+                else if (rrc.Date == ourdate && rrc != null)
+                {
+                    count.Date = ourdate;
+                    db.repairrequestocount.Add(count);
+                }
+                else if (rrc.Date != ourdate)
+                {
+                    db.Database.ExecuteSqlCommand("truncate table dbo.[repairrequestocount]");
+                    count.Date = ourdate;
+                    db.repairrequestocount.Add(count);
+                }
+                db.SaveChanges();
+                var requestNumber = DateTime.Today.Date.Month.ToString() + DateTime.Today.Date.Day.ToString() + DateTime.Today.Date.Year + "-" + count.Id;
+                //RequestNumber Ends
+
+                model.RequestNumber = requestNumber;
                 model.AssignID = null;
                 model.AssignContractorID = null;
                 db.RepairRequest.Add(model);
@@ -193,7 +219,7 @@ namespace SecurityMonitor.Controllers
                     ProblemDescription = c.ProblemDescription,
                     Status = c.Status,
                     ID = c.Id,
-                    RequestNumber = c.RepairRequestCategoriesID,
+                    RequestNumber = c.RequestNumber,
                     Category = c.RepairRequestCategories.Categories,
                     Instruction = c.Instructions_,
                     Urgency = c.RepairUrgency.Urgency,
@@ -225,7 +251,7 @@ namespace SecurityMonitor.Controllers
                          ProblemDescription = c.ProblemDescription,
                          Status = c.Status,
                          ID = c.Id,
-                         RequestNumber = c.RepairRequestCategoriesID,
+                         RequestNumber = c.RequestNumber,
                          Category = c.RepairRequestCategories.Categories,
                          Instruction = c.Instructions_,
                          Urgency = c.RepairUrgency.Urgency,
@@ -260,7 +286,7 @@ namespace SecurityMonitor.Controllers
                          ProblemDescription = c.ProblemDescription,
                          Status = c.Status,
                          ID = c.Id,
-                         RequestNumber = c.RepairRequestCategoriesID,
+                         RequestNumber = c.RequestNumber,
                          Category = c.RepairRequestCategories.Categories,
                          Instruction = c.Instructions_,
                          Urgency = c.RepairUrgency.Urgency,
@@ -335,7 +361,7 @@ namespace SecurityMonitor.Controllers
                     ProblemDescription = c.ProblemDescription,
                     Status = c.Status,
                     ID = c.Id,
-                    RequestNumber = c.RepairRequestCategoriesID,
+                    RequestNumber = c.RequestNumber,
                     Category = c.RepairRequestCategories.Categories,
                     Instruction = c.Instructions_,
                     Urgency = c.RepairUrgency.Urgency,

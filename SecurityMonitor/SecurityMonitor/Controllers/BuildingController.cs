@@ -1444,6 +1444,14 @@ namespace SecurityMonitor.Controllers
             var mydata = Json(BRR);
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        [HttpGet]
+        public JsonResult SearchbyRequestNumber(string filter, int BuildingID)
+        {
+            RepairManagement r = new RepairManagement();
+            var BRR = r.SearchByRequestNumber(filter, BuildingID);
+            var mydata = Json(BRR);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
 
 
@@ -1917,7 +1925,7 @@ namespace SecurityMonitor.Controllers
                  PrimaryPhone = RR.Tenant.Phone,
                  PrimaryEmail = RR.Tenant.Username,
                  OfficeNotes = RR.RepairRequestNote.Notes,
-                 RequestNumber = "123987456654654",
+                 RequestNumber =RR.RequestNumber,
                  problem = RR.ProblemDescription,
                  TenantInstruction = RR.Instructions_   
                };
@@ -2004,7 +2012,7 @@ namespace SecurityMonitor.Controllers
                    PrimaryPhone = RR.Tenant.Phone,
                    PrimaryEmail = RR.Tenant.Username,
                    OfficeNotes = RR.RepairRequestNote.Notes,
-                   RequestNumber = "123987456654654",
+                   RequestNumber =RR.RequestNumber,
                    problem = RR.ProblemDescription,
                    TenantInstruction = RR.Instructions_
                };
@@ -2039,6 +2047,7 @@ namespace SecurityMonitor.Controllers
         [AllowAnonymous]
         public JsonResult LoadCloseRequests(int buildingID)
         {
+           
 
             RepairManagement OBJRM = new RepairManagement();
 

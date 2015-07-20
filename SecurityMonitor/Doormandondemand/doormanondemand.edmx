@@ -436,6 +436,7 @@
           <Property Name="AssignID" Type="nvarchar" MaxLength="128" />
           <Property Name="RepairRequestNoteID" Type="int" />
           <Property Name="AssignContractorID" Type="nvarchar" MaxLength="128" />
+          <Property Name="RequestNumber" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -452,6 +453,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="repairrequestocount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="RepairTechNote">
           <Key>
@@ -1356,6 +1364,7 @@
           <EntitySet Name="RepairRequest" EntityType="Self.RepairRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairRequestCategories" EntityType="Self.RepairRequestCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairRequestNote" EntityType="Self.RepairRequestNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="repairrequestocount" EntityType="Self.repairrequestocount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairTechNote" EntityType="Self.RepairTechNote" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RepairUrgency" EntityType="Self.RepairUrgency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReqType" EntityType="Self.ReqType" Schema="dbo" store:Type="Tables" />
@@ -1867,6 +1876,7 @@
             <End Role="Contractor" EntitySet="Contractor" />
           </AssociationSet>
           <EntitySet Name="RepairTechNote" EntityType="PointerdbModel.RepairTechNote" />
+          <EntitySet Name="repairrequestocount" EntityType="PointerdbModel.repairrequestocount" />
           <EntitySet Name="RepairRequest" EntityType="PointerdbModel.RepairRequest" />
           <AssociationSet Name="FK_RepairRequest_Building" Association="PointerdbModel.FK_RepairRequest_Building">
             <End Role="Buildings" EntitySet="Buildings" />
@@ -3143,6 +3153,13 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="RepairRequest" Relationship="PointerdbModel.FK_RepairTechNote_RepairRequest" FromRole="RepairTechNote" ToRole="RepairRequest" />
         </EntityType>
+        <EntityType Name="repairrequestocount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="RepairRequest">
           <Key>
             <PropertyRef Name="Id" />
@@ -3166,6 +3183,7 @@
           <Property Name="AssignID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RepairRequestNoteID" Type="Int32" />
           <Property Name="AssignContractorID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RequestNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="RepairRequest" ToRole="Buildings" />
           <NavigationProperty Name="BuildingUser" Relationship="PointerdbModel.FK_RepairRequest_BuildingUser" FromRole="RepairRequest" ToRole="BuildingUser" />
           <NavigationProperty Name="Contractor" Relationship="PointerdbModel.FK_RepairRequest_Contractor" FromRole="RepairRequest" ToRole="Contractor" />
@@ -3886,9 +3904,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="repairrequestocount">
+            <EntityTypeMapping TypeName="PointerdbModel.repairrequestocount">
+              <MappingFragment StoreEntitySet="repairrequestocount">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RepairRequest">
             <EntityTypeMapping TypeName="PointerdbModel.RepairRequest">
               <MappingFragment StoreEntitySet="RepairRequest">
+                <ScalarProperty Name="RequestNumber" ColumnName="RequestNumber" />
                 <ScalarProperty Name="AssignContractorID" ColumnName="AssignContractorID" />
                 <ScalarProperty Name="RepairRequestNoteID" ColumnName="RepairRequestNoteID" />
                 <ScalarProperty Name="AssignID" ColumnName="AssignID" />

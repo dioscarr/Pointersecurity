@@ -179,6 +179,9 @@
     <Compile Include="RepairRequestNote.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>
+    <Compile Include="repairrequestocount.cs">
+      <DependentUpon>doormanondemand.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepairTechNote.cs">
       <DependentUpon>doormanondemand.tt</DependentUpon>
     </Compile>

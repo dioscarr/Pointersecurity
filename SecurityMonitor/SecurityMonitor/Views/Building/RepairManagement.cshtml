@@ -29,7 +29,7 @@
 
     <div class="box">
         <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." @*data-bind="value:Search, valueUpdate:'afterkeydown'"*@ />
+            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
 
         </div>
     </div>
@@ -52,10 +52,10 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
                 Urgency
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   " style="border-right:1px solid #808080;">
                 Request#
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 repairmanagementdescription  " style="border-right:1px solid #808080;">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  " style="border-right:1px solid #808080;">
                 Problem Description
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
@@ -84,10 +84,10 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:Urgency">
 
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:RequestNumber">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  " data-bind="text:RequestNumber">
 
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 repairmanagementdescription  " data-bind="text:Description">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  " data-bind="text:Description">
 
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  nopadding" data-bind="if:AssignedFullName">
@@ -496,8 +496,8 @@
                                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  boxinnerboxSC">
 
                                             <span data-bind="text:CName" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
-                                            <span data-bind="text:Category" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
-                                            <span data-bind="text:RequestNumber" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                            <span class="ContratorRowContent col-lg-3 col-md-3 col-sm-3 col-xs-3">Category:</span> <span data-bind="text:Category" class="ContratorRowContent col-lg-9 col-md-9 col-sm-9 col-xs-9 nopadding"></span>
+                                            <span class="ContratorRowContent col-lg-3 col-md-3 col-sm-3 col-xs-3"> Request#:</span> <span data-bind="text:RequestNumber" class="ContratorRowContent col-lg-9 col-md-9 col-sm-9 col-xs-9 nopadding"></span>
                                             <button type="button" class="btn btn-link" data-bind="click:ReopenRepairTicket">Re-Open Ticket</button>
 
 
@@ -538,9 +538,9 @@
     <script src="~/Scripts/knockout-3.1.0.js"></script>
     <script src="~/Scripts/TheLibrary/TimeJS.js"></script>
     <script type="text/javascript">
-       
 
-       
+
+
 
         $(function () {
 
@@ -549,8 +549,8 @@
 
 
             //$('#closingrequest').on("click", function () {
-                
-               
+
+
             //    window.location.href = window.location.href + "#noselection";
             //    $('.cancelcolsingticket').trigger('click');
             //})
@@ -578,9 +578,9 @@
 
             });
 
-           
 
-          
+
+
 
 
             var viewModel = function () {
@@ -624,8 +624,64 @@
 
                 var self = this;
 
+                self.Search = ko.observable();
 
-             
+
+                self.Search.subscribe(function(data)
+                {
+                    $.ajax({
+                        type:"GET",
+                        url:"/building/SearchbyRequestNumber",
+                        datatype:"json",
+                        data:{filter:data, BuildingID: @Model.buildingID},
+                        success:function(returndata){
+
+
+                            self.RepairRequest.removeAll();
+                            var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                                self.RepairRequest.push({
+                                    RequestedDate: ko.observable(RDate),
+                                    Assignto: ko.observableArray(items),
+                                    Description: TrkPkgs[i].Description,
+                                    ID: TrkPkgs[i].ID,
+                                    Status: TrkPkgs[i].Status,
+                                    RequestNumber: TrkPkgs[i].RequestNumber,
+                                    Category: TrkPkgs[i].Category,
+                                    PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                    Urgency: TrkPkgs[i].Urgency,
+                                    CName: TrkPkgs[i].CName,
+                                    CEmail: TrkPkgs[i].CEmail,
+                                    CPhone: TrkPkgs[i].CPhone,
+                                    PName: TrkPkgs[i].PName,
+                                    PEmail: TrkPkgs[i].PEmail,
+                                    PPhone: TrkPkgs[i].PPhone,
+                                    AssignToID: TrkPkgs[i].AssignToID,
+                                    AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                    assignContractorID: TrkPkgs[i].assignContractorID,
+                                    ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                                });
+                            }
+
+
+
+                        }
+
+                    });
+
+                }
+
+                );
+
+
                 self.CloseTickets = ko.observableArray();
                 self.loadclosedTickets = function () {
                     $.ajax({
@@ -662,17 +718,17 @@
                                     AssignToID: TrkPkgs[i].AssignToID,
                                     AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
                                     assignContractorID: TrkPkgs[i].assignContractorID,
-                                    ContractorFullName: TrkPkgs[i].ContractorFullName 
+                                    ContractorFullName: TrkPkgs[i].ContractorFullName
                                 });
                             }
                         }
 
-                    
+
                     });
 
                 };
 
-             
+
 
                 self.CompleteAssignment = function () {
                     //code to call jsonresult
@@ -683,7 +739,7 @@
                         data: { ID: self.selectedID() },
                         success: function (returnresult)
                         {
-                            
+
                             self.whichone();
                             AjaxBUaccess = true;
                             self.isnotevisible(false);
@@ -694,9 +750,9 @@
                             self.TechNoteValue("");
                             self.isvisible(false);
                             LoadFirst();
-                            
+
                         }
-                    
+
                     });
                 };
 
@@ -704,7 +760,7 @@
                 self.ReopenRepairTicket = function(data){
                     var myvalue = ko.toJSON(data);
                     var myjson = JSON.parse(myvalue);
-                    alert(myjson.ID);
+
                     $.ajax({
                         type:"POST",
                         url:"/building/ReopenRepairTicket",
@@ -717,7 +773,7 @@
 
                         }
 
-                    
+
                     });
                 };
 
@@ -748,11 +804,11 @@
 
 
                 self.staffminimenu = function (data, event) {
-                    //alert(  event.currentTarget);  
+                    //alert(  event.currentTarget);
 
-                   
-                        
-                        
+
+
+
                 }
 
 
@@ -792,7 +848,7 @@
                     }
                     console.log(input + " ");
                 });
-               
+
                 $.ajax({
                     type: "get",
                     url: "/building/LoadContractors/",
@@ -803,7 +859,7 @@
                         var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
                         var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                         for (var i = 0; i < TrkPkgs.length; i++) {
-                           
+
                             self.DisplayAllContractor.push(
                                 {
                                     ID: TrkPkgs[i].ID,
@@ -823,48 +879,48 @@
                                 });
                         }
                     }
-                        
+
                 });
 
 
 
                 self.LoadComp = function () {
-                $.ajax({
-                    type: "get",
-                    url: "/building/LoadContractors/",
-                    data: { BuildingID: '@Model.buildingID' },
-                    datatype: "json",
-                    success: function (returndata) {
-                        self.DisplayAllContractor.removeAll();
-                        var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
-                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                        for (var i = 0; i < TrkPkgs.length; i++) {
+                    $.ajax({
+                        type: "get",
+                        url: "/building/LoadContractors/",
+                        data: { BuildingID: '@Model.buildingID' },
+                        datatype: "json",
+                        success: function (returndata) {
+                            self.DisplayAllContractor.removeAll();
+                            var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
 
-                            self.DisplayAllContractor.push(
-                                {
-                                    ID: TrkPkgs[i].ID,
-                                    CompanyName: TrkPkgs[i].CompanyName,
-                                    Address: TrkPkgs[i].Address,
-                                    City: TrkPkgs[i].City,
-                                    State: TrkPkgs[i].State,
-                                    Zipcode: TrkPkgs[i].Zipcode,
-                                    Phone: TrkPkgs[i].Phone,
-                                    ContactName: TrkPkgs[i].ContactName,
-                                    ContactPhone: TrkPkgs[i].ContactPhone,
-                                    Comments: TrkPkgs[i].Comments,
-                                    Email: TrkPkgs[i].Email,
-                                    SendNewPassword: TrkPkgs[i].SendNewPassword,
-                                    Category: TrkPkgs[i].Category,
-                                    BuildingID: TrkPkgs[i].BuildingID
-                                });
+                                self.DisplayAllContractor.push(
+                                    {
+                                        ID: TrkPkgs[i].ID,
+                                        CompanyName: TrkPkgs[i].CompanyName,
+                                        Address: TrkPkgs[i].Address,
+                                        City: TrkPkgs[i].City,
+                                        State: TrkPkgs[i].State,
+                                        Zipcode: TrkPkgs[i].Zipcode,
+                                        Phone: TrkPkgs[i].Phone,
+                                        ContactName: TrkPkgs[i].ContactName,
+                                        ContactPhone: TrkPkgs[i].ContactPhone,
+                                        Comments: TrkPkgs[i].Comments,
+                                        Email: TrkPkgs[i].Email,
+                                        SendNewPassword: TrkPkgs[i].SendNewPassword,
+                                        Category: TrkPkgs[i].Category,
+                                        BuildingID: TrkPkgs[i].BuildingID
+                                    });
+                            }
                         }
-                    }
 
-                });
+                    });
                 }
-               
+
                 self.InsertContractor = function () {
-                   
+
                     $.ajax({
                         type: "POST",
                         url: '/building/InsertNewContractor/',
@@ -910,12 +966,12 @@
                             }
                         }
                     }).error(function (errordata) {
-                        alert(JSON.stringify(errordata));
+
                     });
                 }
 
 
-                
+
                 self.technotes = ko.observableArray();
                 self.technotetextarea = ko.observable(false);
                 self.TechNoteValue = ko.observable();
@@ -926,11 +982,11 @@
                 };
 
                 //self.remainingChar = ko.computed(function () {
-                
+
                 //    return self.TechNoteValue().length;
                 //});
 
-               
+
                 self.CloseTechNote = function () {
                     self.technotetextarea(false);
                     self.TechNoteValue("");
@@ -1006,7 +1062,7 @@
                         data:{    RepairRequestID: self.selectedID(), Notes: self.TechNoteValue () },
                         datatype: "json",
                         success: function (returnedData) {
-                           
+
                             self.technotes.removeAll();
                             var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
                             var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
@@ -1027,14 +1083,14 @@
                         }
 
                     })
-                    
+
 
                 };
 
-               
 
-            
-                
+
+
+
 
                 //this section belongs to the tabs
                 self.applySBS = ko.observable(false);
@@ -1042,7 +1098,7 @@
 
                 //self.AjaxBUaccess = ko.observable(true);
 
-                
+
                 //Building staff info
                 var via = [{ Name: 'Email', value: 'Email' }, { Name: 'Phone', value: 'Phone' }, { Name: 'Messenger', value: 'Messenger' }, { Name: 'Other', value: 'Other' }];
                 self.ViaDropDown = ko.observableArray(via);
@@ -1071,12 +1127,12 @@
                     self.showhidehandler();
                     self.displayStaff();
                     AjaxBUaccess = true;
-                  
+
                     var myvalue = ko.toJSON(data);
                     var myjson = JSON.parse(myvalue);
 
                     self.UpdateAssignID(myjson.ID)
-                   
+
                     self.whichone(false);
                     self.ContactName(myjson.CompanyName);
                     self.DisplayAllContractor.removeAll();
@@ -1109,7 +1165,7 @@
                 };
 
                 self.showhidehandler = function () {
-                    
+
                     $('.assignedbox').fadeToggle("slow");
                     self.ClearorNot(true);
                 }
@@ -1145,7 +1201,7 @@
                         self.showhidehandler();
                         self.ClearorNot(false)
                     }
-                   
+
                     self.whichone();
                     AjaxBUaccess = true;
                     self.isnotevisible(false);
@@ -1177,23 +1233,23 @@
                                    self.BSArray.removeAll();
                                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
-                                  
+
                                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 
-                                
+
                                    for (var i = 0; i < TrkPkgs.length; i++) {
                                        self.BSArray.push({
                                            FullName: TrkPkgs[i].FullName,
                                            Tel: TrkPkgs[i].Phone,
                                            UserID: TrkPkgs[i].UserID,
-                                           BuildingID: TrkPkgs[i].UserID.BuildingID 
+                                           BuildingID: TrkPkgs[i].UserID.BuildingID
                                        });
                                    }
                                }
                            });
                     };
                 };
-               
+
                 $.ajax(
                     {
                         type: "GET",
@@ -1259,11 +1315,11 @@
                         success: function (returndata) {
                             var mydata = JSON.stringify(returndata.Data);
                             var data1 = JSON.parse(mydata);
-                           // debugger;
-                           
+                            // debugger;
+
 
                             for (var i = 0; i < data1.length; i++){
-                            
+
                                 self.ListStates.push(data1[i].Text);
                             };
 
@@ -1322,7 +1378,7 @@
                 //----------------apply updates to save on db--------------------
                 self.ApplyUpdate = function () {
                     self.isnotevisible(false);
-                  //  alert(self.UpdateAssignID() + " " + self.selectedID() + " " + self.UpdateNotes())
+                    //  alert(self.UpdateAssignID() + " " + self.selectedID() + " " + self.UpdateNotes())
 
                     $.ajax(
                        {
@@ -1345,9 +1401,9 @@
                                self.TechNoteValue("");
                                self.isvisible(false);
                                LoadFirst();
-                              
-                              
-                               
+
+
+
                                //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
                                //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
@@ -1382,7 +1438,7 @@
                         });
                 };
                 function LoadFirst() {
-                  //  alert("I am First");
+                    //  alert("I am First");
                     $.ajaxSettings.traditional = true;
                     $.ajax({
                         type: "GET",
@@ -1419,7 +1475,7 @@
                                     AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
                                     assignContractorID: TrkPkgs[i].assignContractorID,
                                     ContractorFullName: TrkPkgs[i].ContractorFullName
-                                    
+
 
                                 });
                             }

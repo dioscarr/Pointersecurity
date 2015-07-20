@@ -34,7 +34,7 @@ namespace SecurityMonitor.Models
                       Description = c.ProblemDescription,                   
                       Status = c.Status,
                       ID = c.Id,
-                      RequestNumber="04/23/2015",
+                      RequestNumber=c.RequestNumber,
                       Category = c.RepairRequestCategories.Categories,
                       PhotoUrl = c.PhotoUrl,
                       Urgency = c.RepairUrgency.Urgency,
@@ -66,7 +66,7 @@ namespace SecurityMonitor.Models
                      Description = c.ProblemDescription,
                      Status = c.Status,
                      ID = c.Id,
-                     RequestNumber = "04/23/2015",
+                     RequestNumber = c.RequestNumber,
                      Category = c.RepairRequestCategories.Categories,
                      PhotoUrl = c.PhotoUrl,
                      Urgency = c.RepairUrgency.Urgency,
@@ -98,6 +98,36 @@ namespace SecurityMonitor.Models
 
             return "Sucessful";
             
+        }
+
+        public List<RepairRequestmock> SearchByRequestNumber(string filter, int BuildingID)
+        {
+           var R = db.RepairRequest
+                 .Where(r => r.BuildingID == BuildingID && r.RequestNumber.Contains(filter) && r.Status!="Close")
+                 .Select(c => new RepairRequestmock
+                 {
+                     RequestedDate = c.RequestedDate,
+                     Description = c.ProblemDescription,
+                     Status = c.Status,
+                     ID = c.Id,
+                     RequestNumber = c.RequestNumber,
+                     Category = c.RepairRequestCategories.Categories,
+                     PhotoUrl = c.PhotoUrl,
+                     Urgency = c.RepairUrgency.Urgency,
+                     CName = c.OtherContactName,
+                     CEmail = c.OtherContactEmail,
+                     CPhone = c.OtherContactPhone,
+                     PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                     PEmail = c.Tenant.Username,
+                     PPhone = c.Tenant.Phone,
+                     AssignToID = c.BuildingUser.Id,
+                     AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                     assignContractorID = c.AssignContractorID,
+                     ContractorFullName = c.Contractor.CompanyName
+
+
+                 }).ToList();
+            return R;
         }
     }
 }
