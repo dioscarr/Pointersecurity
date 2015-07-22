@@ -30,32 +30,56 @@
     <div class="box">
         <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
             <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
-
+            <br />
+            <hr />
+            <br />
         </div>
+       
     </div>
 </div>
 
-<div class="row ">
+<div class="row contentSquareRepairrquests">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <button type="button" class="btn btn-link pull-right" data-toggle="modal" data-target="#ClosedTickets" data-bind="click:loadclosedTickets">View Closed Ticket</button>
     </div>
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding sorttitles  ">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 hvr-underline-reveal " id="dateidtitle"  data-bind="click:RROrderByDate">
+                Sort By
+            </div>
+
+            <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1 hvr-underline-reveal  " id="Statusidtitle" data-bind="click:RRLoadRequestSortStatusASC">
+                Sort By
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  hvr-underline-reveal" id="Urgencyidtitle" data-bind="click:RRLoadRequestSortUrgencyASC">
+                Sort By
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   hvr-underline-reveal" id="Requestidtitle" data-bind="click:RRLoadRequestSortRequestNumberASC">
+                Sort By
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  "  data-bind="">
+               
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
+           
+            </div>
+        </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementHeaderrows  ">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1   " style="border-right:1px solid #808080;">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 hvr-underline-reveal " id="dateid" style="border-right:1px solid #808080;" data-bind="click:RROrderByDate">
                 Date
             </div>
 
-            <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
+            <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1 hvr-underline-reveal " id="Statusid" style="border-right:1px solid #808080;" data-bind="click:RRLoadRequestSortStatusASC">
                 Status
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " style="border-right:1px solid #808080;">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  hvr-underline-reveal" id="Urgencyid" style="border-right:1px solid #808080;" data-bind="click:RRLoadRequestSortUrgencyASC">
                 Urgency
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   " style="border-right:1px solid #808080;">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   hvr-underline-reveal" id="Requestid" style="border-right:1px solid #808080;" data-bind="click:RRLoadRequestSortRequestNumberASC">
                 Request#
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  " style="border-right:1px solid #808080;">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  " style="border-right:1px solid #808080;" data-bind="">
                 Problem Description
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
@@ -67,7 +91,7 @@
 
 
 <!--this are the rows-->
-<div class="row " data-bind="foreach:RepairRequest">
+<div class="row contentSquareRepairrquests" data-bind="foreach:RepairRequest ">
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementrows hollow5 hvr-underline-from-center " data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
@@ -122,7 +146,7 @@
 
 
 <!--Request Form-->
-<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade " id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class=" noppading">
@@ -139,7 +163,7 @@
 
                             <div><textarea class="form-control ticketresolution" placeholder="Enter a resolution (required)"></textarea> </div>
                             <div>Are you sure ?</div>
-                            <a data-bind=" attr:{href:'#noselection'},click: CompleteAssignment" id="closingrequest">Close ticket</a>
+                            <button class="btn btn-info" data-bind="click: CompleteAssignment" data-dismiss="modal"  id="closingrequest">Close ticket</button>
                             <a href="#noselection"  id="cancelcolsingticket"  >Cancel</a>
                         </div>
 
@@ -390,7 +414,7 @@
                 </div>
             <div class="modal-footer noppading ">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 footerrepairpopup">
-                    <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
+                    <button id="cancelid" type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
                     <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate">Apply Update</button>
                 </div>
              
@@ -437,17 +461,19 @@
                         <section style="margin:5px 0 5px 0;">
                             <!--vCard starts-->
                             <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                           
                                 <!--header starts-->
                                 <section class=" col-md-12 text-center clientboxrow ">
-                                    <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-reveal">
+                                    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding ContratorRowContentHeader margintop clicktoshoworhide " data-bind="attr:{'data-thisisakey':id}" style="min-height:20px; ">
+                                        <div class=" col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest   ">Tech's Note</div>
+                                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest  " data-bind="text:CreatedDate">Tech's Note</div>
+                                        <span class="fa fa-thumb-tack fa-2x mypin"></span>
+                                    </div> 
+                                    <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-reveal sectiontoshoworhide" data-bind="attr:{'data-dropdownkey':id }">
                                         <div class=" boxname settingfornote col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding ContratorRowContentHeader margintop" style="min-height:20px; ">
-                                                <div class=" col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest   ">Tech's Note</div>
-                                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest  " data-bind="text:CreatedDate">Tech's Note</div>
-                                                <span class="fa fa-thumb-tack fa-2x mypin"></span>
-                                            </div>
+
                                             <textarea class="form-control" readonly="readonly" data-bind="text:Notes" style="min-height:100px; min-width:100%;"></textarea>
-                                            <button class=" input-sm btn btn-info" data-bind="click:DeleteTechNote">
+                                            <button class=" input-sm btn btn-info" data-bind="click:DeleteTechNote"> 
                                                 Delete Note
                                             </button>
                                         </div>
@@ -473,8 +499,29 @@
 <div class="modal fade" id="ClosedTickets" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-           
+            <div class="">
+
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        Closed Repair Requests
+                    </h6>
+
+                </div>
+
+            </div>
             <div class="modal-body lightgrey">
+
+                <div class="row ">
+                    <div class="">
+                        <div class="container-5 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Searchclosedrequest, valueUpdate:'afterkeydown'" />
+                            <br />
+                            <hr />
+                            <br />
+                        </div>
+
+                    </div>
+                </div>
                 
                 <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:CloseTickets ">
 
@@ -542,313 +589,429 @@
 
 
 
-        $(function () {
+    $(function () {
 
+        $('#dateid').mouseover(function(){ $('#dateidtitle').css("Opacity","100"); }).mouseout(function(){$('#dateidtitle').css("Opacity","0");});
+        $('#Statusid').mouseover(function(){ $('#Statusidtitle').css("Opacity","100"); }).mouseout(function(){$('#Statusidtitle').css("Opacity","0");});
+        $('#Urgencyid').mouseover(function(){ $('#Urgencyidtitle').css("Opacity","100"); }).mouseout(function(){$('#Urgencyidtitle').css("Opacity","0");});
+        $('#Requestid').mouseover(function(){ $('#Requestidtitle').css("Opacity","100"); }).mouseout(function(){$('#Requestidtitle').css("Opacity","0");});
+      
 
+        
+       
 
+        $('#notebutton').on('click',function(){
+            $('.sectiontoshoworhide').slideUp();
+        });
 
+        $('body').on('click', ".clicktoshoworhide", function(){
 
-            //$('#closingrequest').on("click", function () {
+            var key= $(this).attr("data-thisisakey");
+            $('[data-dropdownkey='+key+']').slideToggle();
+        });
 
 
-            //    window.location.href = window.location.href + "#noselection";
-            //    $('.cancelcolsingticket').trigger('click');
-            //})
 
-            $('#NewContractor a').click(function (e) {
-                e.preventDefault()
-                $(this).tab('show')
-            });
 
-            $('#textareatechnote').keyup(function () {
-                var maxl = $(this).attr("maxlength") - 1;
-                var input = $(this).val().length;
 
-                var totalused = maxl + 1 - input;
-                if (input != 0) {
-                    $('#remainingChar').html('<span style="color:red; font-size:14px;" >'+totalused + '</span>');
+        $('#closingrequest').on("click", function (e) {
+            e.preventDefault();
+            window.location.href = window.location.href + "#noselection";
+            //alert('closed');
+            $('#myModal').trigger('click');
 
-                } else {
-                    $('#remainingChar').html("");
-                }
+            return false;
+        });
 
 
 
 
+        $('#NewContractor a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        });
 
-            });
+        $('#textareatechnote').keyup(function () {
+            var maxl = $(this).attr("maxlength") - 1;
+            var input = $(this).val().length;
 
+            var totalused = maxl + 1 - input;
+            if (input != 0) {
+                $('#remainingChar').html('<span style="color:red; font-size:14px;" >'+totalused + '</span>');
 
+            } else {
+                $('#remainingChar').html("");
+            }
 
 
 
 
-            var viewModel = function () {
-                // =====year=======
-                function YearC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return (dt.getFullYear());
-                }
-                // =====Month=======
-                function MonthC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return (dt.getMonth());
-                }
-                // =====Day=======
-                function DayC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return dt.getDate();
 
-                }
+        });
 
-                // =====Hour=======
-                function HoursC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value); l
-                    var dt = new Date(parseFloat(results[1]));
-                    return dt.getHours();
-                }
-                // =====Minutes=======
-                function MinutesC(value) {
-                    var pattern = /Date\(([^)]+)\)/;
-                    var results = pattern.exec(value);
-                    var dt = new Date(parseFloat(results[1]));
-                    return dt.getMinutes();
-                }
 
-                var self = this;
 
-                self.Search = ko.observable();
 
 
-                self.Search.subscribe(function(data)
-                {
-                    $.ajax({
-                        type:"GET",
-                        url:"/building/SearchbyRequestNumber",
-                        datatype:"json",
-                        data:{filter:data, BuildingID: @Model.buildingID},
-                        success:function(returndata){
 
+        var viewModel = function () {
+            // =====year=======
+            function YearC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return (dt.getFullYear());
+            }
+            // =====Month=======
+            function MonthC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return (dt.getMonth());
+            }
+            // =====Day=======
+            function DayC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getDate();
 
-                            self.RepairRequest.removeAll();
-                            var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+            }
 
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-
-
-                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
-
-                                self.RepairRequest.push({
-                                    RequestedDate: ko.observable(RDate),
-                                    Assignto: ko.observableArray(items),
-                                    Description: TrkPkgs[i].Description,
-                                    ID: TrkPkgs[i].ID,
-                                    Status: TrkPkgs[i].Status,
-                                    RequestNumber: TrkPkgs[i].RequestNumber,
-                                    Category: TrkPkgs[i].Category,
-                                    PhotoUrl: TrkPkgs[i].PhotoUrl,
-                                    Urgency: TrkPkgs[i].Urgency,
-                                    CName: TrkPkgs[i].CName,
-                                    CEmail: TrkPkgs[i].CEmail,
-                                    CPhone: TrkPkgs[i].CPhone,
-                                    PName: TrkPkgs[i].PName,
-                                    PEmail: TrkPkgs[i].PEmail,
-                                    PPhone: TrkPkgs[i].PPhone,
-                                    AssignToID: TrkPkgs[i].AssignToID,
-                                    AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
-                                    assignContractorID: TrkPkgs[i].assignContractorID,
-                                    ContractorFullName: TrkPkgs[i].ContractorFullName
-
-
-                                });
-                            }
-
-
-
-                        }
-
-                    });
-
-                }
-
-                );
-
-
-                self.CloseTickets = ko.observableArray();
-                self.loadclosedTickets = function () {
-                    $.ajax({
-                        type:"GET",
-                        url: "/building/LoadCloseRequests/",
-                        datatype: "json",
-                        data:{buildingID: @Model.buildingID},
-                        success: function(datareturn){
-                            //debugger;
-                            //alert(JSON.stringify(datareturn));
-                            self.CloseTickets.removeAll();
-                            var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-
-                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
-
-                                self.CloseTickets.push({
-                                    RequestedDate: ko.observable(RDate),
-                                    Assignto: ko.observableArray(items),
-                                    Description: TrkPkgs[i].Description,
-                                    ID: TrkPkgs[i].ID,
-                                    Status: TrkPkgs[i].Status,
-                                    RequestNumber: TrkPkgs[i].RequestNumber,
-                                    Category: TrkPkgs[i].Category,
-                                    PhotoUrl: TrkPkgs[i].PhotoUrl,
-                                    Urgency: TrkPkgs[i].Urgency,
-                                    CName: TrkPkgs[i].CName,
-                                    CEmail: TrkPkgs[i].CEmail,
-                                    CPhone: TrkPkgs[i].CPhone,
-                                    PName: TrkPkgs[i].PName,
-                                    PEmail: TrkPkgs[i].PEmail,
-                                    PPhone: TrkPkgs[i].PPhone,
-                                    AssignToID: TrkPkgs[i].AssignToID,
-                                    AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
-                                    assignContractorID: TrkPkgs[i].assignContractorID,
-                                    ContractorFullName: TrkPkgs[i].ContractorFullName
-                                });
-                            }
-                        }
-
-
-                    });
-
-                };
-
-
-
-                self.CompleteAssignment = function () {
-                    //code to call jsonresult
-                    $.ajax({
-                        type: "POST",
-                        url: "/building/CloseRepairTicket/",
-                        datatype: "json",
-                        data: { ID: self.selectedID() },
-                        success: function (returnresult)
-                        {
-
-                            self.whichone();
-                            AjaxBUaccess = true;
-                            self.isnotevisible(false);
-                            self.LoadComp();
-                            self.displayStaff();
-                            self.ContactName("");
-                            self.ContactLastName("");
-                            self.TechNoteValue("");
-                            self.isvisible(false);
-                            LoadFirst();
-
-                        }
-
-                    });
-                };
-
-
-                self.ReopenRepairTicket = function(data){
-                    var myvalue = ko.toJSON(data);
-                    var myjson = JSON.parse(myvalue);
-
-                    $.ajax({
-                        type:"POST",
-                        url:"/building/ReopenRepairTicket",
-                        datatype:"json",
-                        data:{RepairID:myjson.ID},
-                        success:function(datareturn){
-                            debugger;
-                            self.loadclosedTickets();
-                            LoadFirst();
-
-                        }
-
-
-                    });
-                };
-
-
-                LoadFirst();//load first
-                //Tech Note
-                var count = ["1", "2", "3", "4"];
-
-                var CompCat = ["Plumer", "Electric", "Carpentry"];
-
-                self.CompanyCat = ko.observableArray(CompCat);
-
-                self.ClearorNot = ko.observable(false);
-
-                self.NewEmail = ko.observable();
-                self.NewCompanyName = ko.observable();
-                self.NewAddress = ko.observable();
-                self.NewCity = ko.observable();
-                self.NewState = ko.observable();
-                self.NewZipcode = ko.observable();
-                self.NewMainPhone = ko.observable();
-                self.NewPName = ko.observable();
-                self.NewPPhone = ko.observable();
-                self.NewPassword = ko.observable(true);
-                self.NewComments = ko.observable();
-                self.NewCatName = ko.observable();
-
-
-
-                self.staffminimenu = function (data, event) {
-                    //alert(  event.currentTarget);
-
-
-
-
-                }
-
-
-
-
-                self.ListStates = ko.observableArray();
-
-                self.DisplayAllContractor = ko.observableArray();
-
-                self.NewEmail.subscribe(function (input) {
-                    var result = isValidEmailAddress(input);
-                    if (result == true) {
-                        $.ajax(
-                            {
-                                type: "GET",
-                                url: '/building/Searchforusername/',
-                                dataType: "json",
-                                data: { search: input },
-                                success: function (data) {
-
-                                    var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-                                    //alert(jsonresult);
-                                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                                    for (var i = 0; i < TrkPkgs.length; i++) {
-                                        if (TrkPkgs[i].Email == input) {
-                                            $('#validateemailid').html("<span>This email address is already in used");
-                                        }
-                                    }
-                                }
+            // =====Hour=======
+            function HoursC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value); l
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getHours();
+            }
+            // =====Minutes=======
+            function MinutesC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getMinutes();
+            }
+
+            var self = this;
+
+            self.RROrderByDate= function(){ LoadRequestByDateASC();}
+            self.RRLoadRequestSortStatusASC = function(){ LoadRequestSortStatusASC();};
+            self.RRLoadRequestSortUrgencyASC = function(){LoadRequestSortUrgencyASC();};
+            self.RRLoadRequestSortRequestNumberASC = function(){LoadRequestSortRequestNumberASC();};
+
+
+
+
+
+            self.Searchclosedrequest = ko.observable();
+
+            self.Searchclosedrequest.subscribe(function(datatyped){
+                $.ajax({
+                    type:"GET",
+                    url: "/building/LoadCloseRequestsbaseonsearch/",
+                    datatype: "json",
+                    data:{buildingID: @Model.buildingID, filterRequestNumber:datatyped},
+                    success: function(datareturn){
+                        //debugger;
+                        //alert(JSON.stringify(datareturn));
+                        self.CloseTickets.removeAll();
+                        var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.CloseTickets.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
                             });
+                        }
                     }
-                    else if (input == "") {
-                        $('#validateemailid').html("");
-                    }
-                    else {
-                        $('#validateemailid').html("<span>invalid Email Address!");
-                    }
-                    console.log(input + " ");
+
+
                 });
 
+            });
+
+            self.Search = ko.observable();
+
+
+            self.Search.subscribe(function(data)
+            {
+                $.ajax({
+                    type:"GET",
+                    url:"/building/SearchbyRequestNumber",
+                    datatype:"json",
+                    data:{filter:data, BuildingID: @Model.buildingID},
+                    success:function(returndata){
+
+
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+
+
+
+                    }
+
+                });
+
+            }
+
+            );
+
+
+            self.CloseTickets = ko.observableArray();
+            self.loadclosedTickets = function () {
+                $.ajax({
+                    type:"GET",
+                    url: "/building/LoadCloseRequests/",
+                    datatype: "json",
+                    data:{buildingID: @Model.buildingID},
+                    success: function(datareturn){
+                        //debugger;
+                        //alert(JSON.stringify(datareturn));
+                        self.CloseTickets.removeAll();
+                        var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.CloseTickets.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+                            });
+                        }
+                    }
+
+
+                });
+
+            };
+
+
+
+            self.CompleteAssignment = function () {
+                //code to call jsonresult
+                $.ajax({
+                    type: "POST",
+                    url: "/building/CloseRepairTicket/",
+                    datatype: "json",
+                    data: { ID: self.selectedID() },
+                    success: function (returnresult)
+                    {
+
+                        self.whichone();
+                        AjaxBUaccess = true;
+                        self.isnotevisible(false);
+                        self.LoadComp();
+                        self.displayStaff();
+                        self.ContactName("");
+                        self.ContactLastName("");
+                        self.TechNoteValue("");
+                        self.isvisible(false);
+                        LoadFirst();
+
+                    }
+
+                });
+            };
+
+
+            self.ReopenRepairTicket = function(data){
+                var myvalue = ko.toJSON(data);
+                var myjson = JSON.parse(myvalue);
+
+                $.ajax({
+                    type:"POST",
+                    url:"/building/ReopenRepairTicket",
+                    datatype:"json",
+                    data:{RepairID:myjson.ID},
+                    success:function(datareturn){
+                        debugger;
+                        self.loadclosedTickets();
+                        LoadFirst();
+
+                    }
+
+
+                });
+            };
+
+
+            LoadFirst();//load first
+            //Tech Note
+            var count = ["1", "2", "3", "4"];
+
+            var CompCat = ["Plumer", "Electric", "Carpentry"];
+
+            self.CompanyCat = ko.observableArray(CompCat);
+
+            self.ClearorNot = ko.observable(false);
+
+            self.NewEmail = ko.observable();
+            self.NewCompanyName = ko.observable();
+            self.NewAddress = ko.observable();
+            self.NewCity = ko.observable();
+            self.NewState = ko.observable();
+            self.NewZipcode = ko.observable();
+            self.NewMainPhone = ko.observable();
+            self.NewPName = ko.observable();
+            self.NewPPhone = ko.observable();
+            self.NewPassword = ko.observable(true);
+            self.NewComments = ko.observable();
+            self.NewCatName = ko.observable();
+
+
+
+            self.staffminimenu = function (data, event) {
+                //alert(  event.currentTarget);
+
+
+
+
+            }
+
+
+
+
+            self.ListStates = ko.observableArray();
+
+            self.DisplayAllContractor = ko.observableArray();
+
+            self.NewEmail.subscribe(function (input) {
+                var result = isValidEmailAddress(input);
+                if (result == true) {
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/Searchforusername/',
+                            dataType: "json",
+                            data: { search: input },
+                            success: function (data) {
+
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                //alert(jsonresult);
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+                                    if (TrkPkgs[i].Email == input) {
+                                        $('#validateemailid').html("<span>This email address is already in used");
+                                    }
+                                }
+                            }
+                        });
+                }
+                else if (input == "") {
+                    $('#validateemailid').html("");
+                }
+                else {
+                    $('#validateemailid').html("<span>invalid Email Address!");
+                }
+                console.log(input + " ");
+            });
+
+            $.ajax({
+                type: "get",
+                url: "/building/LoadContractors/",
+                data: { BuildingID: '@Model.buildingID' },
+                datatype: "json",
+                success: function (returndata) {
+                    self.DisplayAllContractor.removeAll();
+                    var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+
+                        self.DisplayAllContractor.push(
+                            {
+                                ID: TrkPkgs[i].ID,
+                                CompanyName: TrkPkgs[i].CompanyName,
+                                Address: TrkPkgs[i].Address,
+                                City: TrkPkgs[i].City,
+                                State: TrkPkgs[i].State,
+                                Zipcode: TrkPkgs[i].Zipcode,
+                                Phone: TrkPkgs[i].Phone,
+                                ContactName: TrkPkgs[i].ContactName,
+                                ContactPhone: TrkPkgs[i].ContactPhone,
+                                Comments: TrkPkgs[i].Comments,
+                                Email: TrkPkgs[i].Email,
+                                SendNewPassword: TrkPkgs[i].SendNewPassword,
+                                Category: TrkPkgs[i].Category,
+                                BuildingID: TrkPkgs[i].BuildingID
+                            });
+                    }
+                }
+
+            });
+
+
+
+            self.LoadComp = function () {
                 $.ajax({
                     type: "get",
                     url: "/building/LoadContractors/",
@@ -881,375 +1044,508 @@
                     }
 
                 });
+            }
 
+            self.InsertContractor = function () {
 
+                $.ajax({
+                    type: "POST",
+                    url: '/building/InsertNewContractor/',
+                    data: {
+                        Email: self.NewEmail(),
+                        CName: self.NewCompanyName(),
+                        CAddress: self.NewAddress(),
+                        CCity: self.NewCity(),
+                        CState: self.NewState(),
+                        CZipcode: self.NewZipcode(),
+                        CMainPhone: self.NewMainPhone(),
+                        PName: self.NewPName(),
+                        PPhone: self.NewPPhone(),
+                        SendNewPassword: self.NewPassword(),
+                        Comments: self.NewComments(),
+                        CatName: self.NewCatName(),
+                        BuildingID: '@Model.buildingID'
+                    },
+                    datatype: "json",
+                    success: function (returnData) {
+                        self.DisplayAllContractor.removeAll();
+                        var jsonresult = JSON.stringify(returnData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
 
-                self.LoadComp = function () {
-                    $.ajax({
-                        type: "get",
-                        url: "/building/LoadContractors/",
-                        data: { BuildingID: '@Model.buildingID' },
-                        datatype: "json",
-                        success: function (returndata) {
-                            self.DisplayAllContractor.removeAll();
-                            var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-
-                                self.DisplayAllContractor.push(
-                                    {
-                                        ID: TrkPkgs[i].ID,
-                                        CompanyName: TrkPkgs[i].CompanyName,
-                                        Address: TrkPkgs[i].Address,
-                                        City: TrkPkgs[i].City,
-                                        State: TrkPkgs[i].State,
-                                        Zipcode: TrkPkgs[i].Zipcode,
-                                        Phone: TrkPkgs[i].Phone,
-                                        ContactName: TrkPkgs[i].ContactName,
-                                        ContactPhone: TrkPkgs[i].ContactPhone,
-                                        Comments: TrkPkgs[i].Comments,
-                                        Email: TrkPkgs[i].Email,
-                                        SendNewPassword: TrkPkgs[i].SendNewPassword,
-                                        Category: TrkPkgs[i].Category,
-                                        BuildingID: TrkPkgs[i].BuildingID
-                                    });
-                            }
-                        }
-
-                    });
-                }
-
-                self.InsertContractor = function () {
-
-                    $.ajax({
-                        type: "POST",
-                        url: '/building/InsertNewContractor/',
-                        data: {
-                            Email: self.NewEmail(),
-                            CName: self.NewCompanyName(),
-                            CAddress: self.NewAddress(),
-                            CCity: self.NewCity(),
-                            CState: self.NewState(),
-                            CZipcode: self.NewZipcode(),
-                            CMainPhone: self.NewMainPhone(),
-                            PName: self.NewPName(),
-                            PPhone: self.NewPPhone(),
-                            SendNewPassword: self.NewPassword(),
-                            Comments: self.NewComments(),
-                            CatName: self.NewCatName(),
-                            BuildingID: '@Model.buildingID'
-                        },
-                        datatype: "json",
-                        success: function (returnData) {
-                            self.DisplayAllContractor.removeAll();
-                            var jsonresult = JSON.stringify(returnData.Data);// Json.stringify make an object into a json string
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-
-                                self.DisplayAllContractor.push(
-                                    {
-                                        ID: TrkPkgs[i].ID,
-                                        CompanyName: TrkPkgs[i].CompanyName,
-                                        Address: TrkPkgs[i].Address,
-                                        City: TrkPkgs[i].City,
-                                        State: TrkPkgs[i].State,
-                                        Zipcode: TrkPkgs[i].Zipcode,
-                                        Phone: TrkPkgs[i].Phone,
-                                        ContactName: TrkPkgs[i].ContactName,
-                                        ContactPhone: TrkPkgs[i].ContactPhone,
-                                        Comments: TrkPkgs[i].Comments,
-                                        Email: TrkPkgs[i].Email,
-                                        SendNewPassword: TrkPkgs[i].SendNewPassword,
-                                        Category: TrkPkgs[i].Category,
-                                        BuildingID: TrkPkgs[i].BuildingID
-                                    });
-                            }
-                        }
-                    }).error(function (errordata) {
-
-                    });
-                }
-
-
-
-                self.technotes = ko.observableArray();
-                self.technotetextarea = ko.observable(false);
-                self.TechNoteValue = ko.observable();
-                self.Technotecount = ko.observable();
-                self.AddTechNote = function () {
-
-                    self.technotetextarea(true);
-                };
-
-                //self.remainingChar = ko.computed(function () {
-
-                //    return self.TechNoteValue().length;
-                //});
-
-
-                self.CloseTechNote = function () {
-                    self.technotetextarea(false);
-                    self.TechNoteValue("");
-                };
-
-                //DeleteRepairTechNote
-
-                self.DeleteTechNote = function () {
-                    $.ajax({
-                        type: "get",
-                        url: "/building/DeleteRepairTechNote/",
-                        data: { RequestID: self.selectedID() },
-                        datatype: "json",
-                        success: function (returnedData) {
-
-                            self.technotes.removeAll();
-                            var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            self.Technotecount(TrkPkgs.length);
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-                                self.technotes.push({
-                                    Notes: TrkPkgs[i].Notes,
-                                    CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
-                                    id: TrkPkgs[i].id,
-                                    RepairRequestID: TrkPkgs[i].RepairRequestID
-
+                            self.DisplayAllContractor.push(
+                                {
+                                    ID: TrkPkgs[i].ID,
+                                    CompanyName: TrkPkgs[i].CompanyName,
+                                    Address: TrkPkgs[i].Address,
+                                    City: TrkPkgs[i].City,
+                                    State: TrkPkgs[i].State,
+                                    Zipcode: TrkPkgs[i].Zipcode,
+                                    Phone: TrkPkgs[i].Phone,
+                                    ContactName: TrkPkgs[i].ContactName,
+                                    ContactPhone: TrkPkgs[i].ContactPhone,
+                                    Comments: TrkPkgs[i].Comments,
+                                    Email: TrkPkgs[i].Email,
+                                    SendNewPassword: TrkPkgs[i].SendNewPassword,
+                                    Category: TrkPkgs[i].Category,
+                                    BuildingID: TrkPkgs[i].BuildingID
                                 });
+                        }
+                    }
+                }).error(function (errordata) {
 
-                            }
+                });
+            }
 
-                            self.TechNoteValue("");
+
+
+            self.technotes = ko.observableArray();
+            self.technotetextarea = ko.observable(false);
+            self.TechNoteValue = ko.observable();
+            self.Technotecount = ko.observable();
+            self.AddTechNote = function () {
+
+                self.technotetextarea(true);
+            };
+
+            //self.remainingChar = ko.computed(function () {
+
+            //    return self.TechNoteValue().length;
+            //});
+
+
+            self.CloseTechNote = function () {
+                self.technotetextarea(false);
+                self.TechNoteValue("");
+            };
+
+            //DeleteRepairTechNote
+
+            self.DeleteTechNote = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/building/DeleteRepairTechNote/",
+                    data: { RequestID: self.selectedID() },
+                    datatype: "json",
+                    success: function (returnedData) {
+
+                        self.technotes.removeAll();
+                        var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        self.Technotecount(TrkPkgs.length);
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.technotes.push({
+                                Notes: TrkPkgs[i].Notes,
+                                CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
+                                id: TrkPkgs[i].id,
+                                RepairRequestID: TrkPkgs[i].RepairRequestID
+
+                            });
+
                         }
 
-                    });
-
-                };
-
-                self.LoadTechNote = function () {
-                    $.ajax({
-                        type: "get",
-                        url: "/building/LoadRepairTechNotes/",
-                        data: { RequestID: self.selectedID() },
-                        datatype: "json",
-                        success: function (returnedData) {
-
-                            self.technotes.removeAll();
-                            var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            self.Technotecount(TrkPkgs.length);
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-                                self.technotes.push({
-                                    Notes: TrkPkgs[i].Notes,
-                                    CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
-                                    id: TrkPkgs[i].id,
-                                    RepairRequestID: TrkPkgs[i].RepairRequestID
-
-                                });
-
-                            }
-
-                            self.TechNoteValue("");
-                        }
-
-                    });
-
-
-                }
-
-                self.InsertTechNote = function () {
-                    $.ajax({
-                        type: "post",
-                        url: "/building/InsertRepairTechNote/",
-                        data:{    RepairRequestID: self.selectedID(), Notes: self.TechNoteValue () },
-                        datatype: "json",
-                        success: function (returnedData) {
-
-                            self.technotes.removeAll();
-                            var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            self.Technotecount(TrkPkgs.length);
-                            for (var i = 0; i < TrkPkgs.length; i++) {
-                                self.technotes.push({
-                                    Notes: TrkPkgs[i].Notes,
-                                    CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
-                                    id: TrkPkgs[i].id,
-                                    RepairRequestID: TrkPkgs[i].RepairRequestID
-
-                                });
-
-                            }
-
-                            self.TechNoteValue("");
-                            self.CloseTechNote();
-                        }
-
-                    })
-
-
-                };
-
-
-
-
-
-
-                //this section belongs to the tabs
-                self.applySBS = ko.observable(false);
-                self.applysc = ko.observable(false);
-
-                //self.AjaxBUaccess = ko.observable(true);
-
-
-                //Building staff info
-                var via = [{ Name: 'Email', value: 'Email' }, { Name: 'Phone', value: 'Phone' }, { Name: 'Messenger', value: 'Messenger' }, { Name: 'Other', value: 'Other' }];
-                self.ViaDropDown = ko.observableArray(via);
-                //self.ViaDropDown = ko.observableArray(via);
-
-                //var TempData = [{ Name: 'Dioscar', LastName: 'Rodriguez', Tel: '3476558974'},
-                //                { Name: 'Juan ', LastName: 'Smith', Tel: '7189548658' }];
-                self.BSArray = ko.observableArray();
-
-                self.holdvalues = ko.observable();
-
-                //alert(JSON.stringify(self.BSArray()));
-                //AssignTo
-                self.AssignTo = ko.observableArray();
-                self.isvisible = ko.observable(false);
-                self.ContactName = ko.observable();
-                self.ContactLastName = ko.observable();
-                self.ViaType = ko.observable("Email");
-
-                self.UpdateAssignID = ko.observable();
-                self.UpdateRequestID = ko.observable()
-                self.UpdateNotes = ko.observable("");
-                //Assign Company
-
-                self.assignCompany = function (data) {
-                    self.showhidehandler();
-                    self.displayStaff();
-                    AjaxBUaccess = true;
-
-                    var myvalue = ko.toJSON(data);
-                    var myjson = JSON.parse(myvalue);
-
-                    self.UpdateAssignID(myjson.ID)
-
-                    self.whichone(false);
-                    self.ContactName(myjson.CompanyName);
-                    self.DisplayAllContractor.removeAll();
-                    self.DisplayAllContractor.push(
-                                    {
-                                        ID: myjson.ID,
-                                        CompanyName: myjson.CompanyName,
-                                        Address: myjson.Address,
-                                        City: myjson.City,
-                                        State: myjson.State,
-                                        Zipcode: myjson.Zipcode,
-                                        Phone: myjson.Phone,
-                                        ContactName: myjson.ContactName,
-                                        ContactPhone: myjson.ContactPhone,
-                                        Comments: myjson.Comments,
-                                        Email: myjson.Email,
-                                        SendNewPassword: myjson.SendNewPassword,
-                                        Category: myjson.Category,
-                                        BuildingID: myjson.BuildingID
-                                    });
-                    self.isvisible(true);
-
-                };
-
-
-
-                self.txtVia = ko.observable();
-                self.ViaEmail = function (via) {
-                    self.txtVia(via);
-                };
-
-                self.showhidehandler = function () {
-
-                    $('.assignedbox').fadeToggle("slow");
-                    self.ClearorNot(true);
-                }
-
-                var AjaxBUaccess = true;
-                self.assigntofunction = function (data) {
-
-                    self.showhidehandler();
-                    self.LoadComp();
-                    var myvalue = ko.toJSON(data);
-                    var myjson = JSON.parse(myvalue);
-                    self.UpdateAssignID(myjson.UserID)
-                    self.whichone(true);
-
-                    self.ContactName(myjson.FullName);
-                    self.BSArray.removeAll();
-                    self.BSArray.push({
-                        FullName: myjson.FullName,
-                        Tel: myjson.Phone,
-                        UserID: myjson.UserID,
-                        BuildingID: myjson.UserID.BuildingID
-                    });
-                    AjaxBUaccess = false;
-                    self.isvisible(true);
-                    //alert(JSON.stringify(self.selectedAssignto()));
-
-                };
-
-                self.removelink = function () {
-                    //if the below statement is true thenhandler section will hide
-                    if (self.ClearorNot() == true)
-                    {
-                        self.showhidehandler();
-                        self.ClearorNot(false)
+                        self.TechNoteValue("");
                     }
 
-                    self.whichone();
-                    AjaxBUaccess = true;
-                    self.isnotevisible(false);
-                    self.LoadComp();
-                    self.displayStaff();
-                    self.ContactName("");
-                    self.ContactLastName("");
-                    self.TechNoteValue("");
-                    self.isvisible(false);
+                });
 
+            };
+
+            self.LoadTechNote = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/building/LoadRepairTechNotes/",
+                    data: { RequestID: self.selectedID() },
+                    datatype: "json",
+                    success: function (returnedData) {
+
+                        self.technotes.removeAll();
+                        var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        self.Technotecount(TrkPkgs.length);
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.technotes.push({
+                                Notes: TrkPkgs[i].Notes,
+                                CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
+                                id: TrkPkgs[i].id,
+                                RepairRequestID: TrkPkgs[i].RepairRequestID
+
+                            });
+
+                        }
+
+                        self.TechNoteValue("");
+                    }
+
+                });
+
+
+            }
+
+            self.InsertTechNote = function () {
+                $.ajax({
+                    type: "post",
+                    url: "/building/InsertRepairTechNote/",
+                    data:{    RepairRequestID: self.selectedID(), Notes: self.TechNoteValue () },
+                    datatype: "json",
+                    success: function (returnedData) {
+
+                        self.technotes.removeAll();
+                        var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        self.Technotecount(TrkPkgs.length);
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.technotes.push({
+                                Notes: TrkPkgs[i].Notes,
+                                CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
+                                id: TrkPkgs[i].id,
+                                RepairRequestID: TrkPkgs[i].RepairRequestID
+
+                            });
+
+                        }
+
+                        self.TechNoteValue("");
+                        self.CloseTechNote();
+                    }
+
+                })
+
+
+            };
+
+
+
+
+
+
+            //this section belongs to the tabs
+            self.applySBS = ko.observable(false);
+            self.applysc = ko.observable(false);
+
+            //self.AjaxBUaccess = ko.observable(true);
+
+
+            //Building staff info
+            var via = [{ Name: 'Email', value: 'Email' }, { Name: 'Phone', value: 'Phone' }, { Name: 'Messenger', value: 'Messenger' }, { Name: 'Other', value: 'Other' }];
+            self.ViaDropDown = ko.observableArray(via);
+            //self.ViaDropDown = ko.observableArray(via);
+
+            //var TempData = [{ Name: 'Dioscar', LastName: 'Rodriguez', Tel: '3476558974'},
+            //                { Name: 'Juan ', LastName: 'Smith', Tel: '7189548658' }];
+            self.BSArray = ko.observableArray();
+
+            self.holdvalues = ko.observable();
+
+            //alert(JSON.stringify(self.BSArray()));
+            //AssignTo
+            self.AssignTo = ko.observableArray();
+            self.isvisible = ko.observable(false);
+            self.ContactName = ko.observable();
+            self.ContactLastName = ko.observable();
+            self.ViaType = ko.observable("Email");
+
+            self.UpdateAssignID = ko.observable();
+            self.UpdateRequestID = ko.observable()
+            self.UpdateNotes = ko.observable("");
+            //Assign Company
+
+            self.assignCompany = function (data) {
+                self.showhidehandler();
+                self.displayStaff();
+                AjaxBUaccess = true;
+
+                var myvalue = ko.toJSON(data);
+                var myjson = JSON.parse(myvalue);
+
+                self.UpdateAssignID(myjson.ID)
+
+                self.whichone(false);
+                self.ContactName(myjson.CompanyName);
+                self.DisplayAllContractor.removeAll();
+                self.DisplayAllContractor.push(
+                                {
+                                    ID: myjson.ID,
+                                    CompanyName: myjson.CompanyName,
+                                    Address: myjson.Address,
+                                    City: myjson.City,
+                                    State: myjson.State,
+                                    Zipcode: myjson.Zipcode,
+                                    Phone: myjson.Phone,
+                                    ContactName: myjson.ContactName,
+                                    ContactPhone: myjson.ContactPhone,
+                                    Comments: myjson.Comments,
+                                    Email: myjson.Email,
+                                    SendNewPassword: myjson.SendNewPassword,
+                                    Category: myjson.Category,
+                                    BuildingID: myjson.BuildingID
+                                });
+                self.isvisible(true);
+
+            };
+
+
+
+            self.txtVia = ko.observable();
+            self.ViaEmail = function (via) {
+                self.txtVia(via);
+            };
+
+            self.showhidehandler = function () {
+
+                $('.assignedbox').fadeToggle("slow");
+                self.ClearorNot(true);
+            }
+
+            var AjaxBUaccess = true;
+            self.assigntofunction = function (data) {
+
+                self.showhidehandler();
+                self.LoadComp();
+                var myvalue = ko.toJSON(data);
+                var myjson = JSON.parse(myvalue);
+                self.UpdateAssignID(myjson.UserID)
+                self.whichone(true);
+
+                self.ContactName(myjson.FullName);
+                self.BSArray.removeAll();
+                self.BSArray.push({
+                    FullName: myjson.FullName,
+                    Tel: myjson.Phone,
+                    UserID: myjson.UserID,
+                    BuildingID: myjson.UserID.BuildingID
+                });
+                AjaxBUaccess = false;
+                self.isvisible(true);
+                //alert(JSON.stringify(self.selectedAssignto()));
+
+            };
+
+            self.removelink = function () {
+                //if the below statement is true thenhandler section will hide
+                if (self.ClearorNot() == true)
+                {
+                    self.showhidehandler();
+                    self.ClearorNot(false)
                 }
 
-                self.onChange = function (data, event) {
-                    var selectedText = event.currentTarget.selectedOptions[0].value;
-                    self.ViaType(selectedText);
-                    //console.log(selectedText);
-                    //alert(JSON.stringify(data));
-                };
-                self.displayStaff = function (data, event) {
-                    if (AjaxBUaccess == true) {
+                self.whichone();
+                AjaxBUaccess = true;
+                self.isnotevisible(false);
+                self.LoadComp();
+                self.displayStaff();
+                self.ContactName("");
+                self.ContactLastName("");
+                self.TechNoteValue("");
+                self.isvisible(false);
 
-                        $.ajax(
-                           {
-                               type: "GET",
-                               url: '/building/BuildingUsersList/',
-                               data: { buildingID: "@Model.buildingID" },
-                               dataType: "json",
-                               success: function (data) {
-                                   self.BSArray.removeAll();
-                                   var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+            }
+
+            self.onChange = function (data, event) {
+                var selectedText = event.currentTarget.selectedOptions[0].value;
+                self.ViaType(selectedText);
+                //console.log(selectedText);
+                //alert(JSON.stringify(data));
+            };
+            self.displayStaff = function (data, event) {
+                if (AjaxBUaccess == true) {
+
+                    $.ajax(
+                       {
+                           type: "GET",
+                           url: '/building/BuildingUsersList/',
+                           data: { buildingID: "@Model.buildingID" },
+                           dataType: "json",
+                           success: function (data) {
+                               self.BSArray.removeAll();
+                               var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
 
-                                   var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                               var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
 
 
-                                   for (var i = 0; i < TrkPkgs.length; i++) {
-                                       self.BSArray.push({
-                                           FullName: TrkPkgs[i].FullName,
-                                           Tel: TrkPkgs[i].Phone,
-                                           UserID: TrkPkgs[i].UserID,
-                                           BuildingID: TrkPkgs[i].UserID.BuildingID
-                                       });
-                                   }
+                               for (var i = 0; i < TrkPkgs.length; i++) {
+                                   self.BSArray.push({
+                                       FullName: TrkPkgs[i].FullName,
+                                       Tel: TrkPkgs[i].Phone,
+                                       UserID: TrkPkgs[i].UserID,
+                                       BuildingID: TrkPkgs[i].UserID.BuildingID
+                                   });
                                }
-                           });
-                    };
+                           }
+                       });
                 };
+            };
 
+            $.ajax(
+                {
+                    type: "GET",
+                    url: '/building/BuildingUsersList/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.BSArray.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.BSArray.push({
+                                FullName: TrkPkgs[i].FullName,
+                                Tel: TrkPkgs[i].Phone,
+                                UserID: TrkPkgs[i].UserID,
+                                BuildingID: TrkPkgs[i].UserID.BuildingID
+                            });
+                        }
+                    }
+                });
+
+            var items = ([{ Text: "Assign To New", Value: "1" }, { Text: "Assign To Existing", Value: "2" }, { Text: "Close Ticket", Value: "3" }]);
+
+            self.itemsoptions = ko.observableArray(items);
+            self.RepairRequest = ko.observableArray();
+            self.value_changed = ko.observable();
+            self.selectedRequestDate = ko.observable();
+            self.selectedAssignto = ko.observable();
+            self.selectedDescription = ko.observable();
+            self.selectedID = ko.observable();//------needed to update request -----
+            self.selectedStatus = ko.observable();
+            self.selectedRequestNumber = ko.observable();
+            self.selectedCategory = ko.observable();
+            self.selectedCName = ko.observable();
+            self.selectedCEmail = ko.observable();
+            self.selectedCphone = ko.observable();
+            self.selectedPName = ko.observable();
+            self.selectedPEmail = ko.observable();
+            self.selectedPPhone = ko.observable();
+            self.selectedPhotoURL = ko.observable();
+            self.selectedUrgency = ko.observable();
+
+            self.isnotevisible = ko.observable(false);
+
+            self.isnotevisibleclick = function () {
+                self.UpdateNotes("");
+                self.isnotevisible(true);
+
+            };
+
+            self.selectedRequestActivities = function () {
+
+            };
+
+            self.removeNotelink = function () { self.isnotevisible(false); };
+            self.selectedRequest = function (value, event) {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/building/States/",
+                    datatype: "json",
+                    success: function (returndata) {
+                        var mydata = JSON.stringify(returndata.Data);
+                        var data1 = JSON.parse(mydata);
+                        // debugger;
+
+
+                        for (var i = 0; i < data1.length; i++){
+
+                            self.ListStates.push(data1[i].Text);
+                        };
+
+
+
+                    }
+                });
+
+
+                var myvalue = ko.toJSON(value);
+                var myjson = JSON.parse(myvalue);
+                self.selectedRequestDate(myjson.RequestedDate);
+                self.selectedAssignto(myjson.RequestedDate);
+                self.selectedDescription(myjson.Description);
+                self.selectedID(myjson.ID);
+                self.selectedStatus(myjson.Status);
+                self.selectedRequestNumber(myjson.RequestNumber);
+                self.selectedPName(myjson.PName);
+                self.selectedPEmail(myjson.PEmail);
+                self.selectedPPhone(myjson.PPhone);
+                self.selectedUrgency(myjson.Urgency);
+                self.selectedCName(myjson.CName);
+                self.selectedCEmail(myjson.CEmail);
+                self.selectedCphone(myjson.Cphone);
+                self.selectedCategory(myjson.Category);
+
+                self.LoadTechNote();
+                self.CloseTechNote();
+
+                //true = staff || false =  Comapny
+                self.whichone = ko.observable();
+
+                if (myjson.AssignToID != null)
+                {
+                    $.ajax(
+                 {
+                     type: "GET",
+                     url: '/building/LoadingAssignTo/',
+                     data: { UserID: myjson.AssignToID },
+                     dataType: "json",
+                     success: function (data) {
+                         var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                         var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                         for (var i = 0; i < TrkPkgs.length; i++) {
+                             self.buildingUsers.push({
+                                 BuildingUserName: ko.observable("Fullname")
+                             });
+                         }
+                     }
+                 });
+
+                }
+                self.UpdateRequestID(myjson.ID);
+            };
+            //----------------apply updates to save on db--------------------
+            self.ApplyUpdate = function () {
+                self.isnotevisible(false);
+                //  alert(self.UpdateAssignID() + " " + self.selectedID() + " " + self.UpdateNotes())
+
+                $.ajax(
+                   {
+                       type: "POST",
+                       url: '/building/ApplyUpdatesRepairRequest/',
+                       data: { UserID: self.UpdateAssignID(), RepairRequestID: self.selectedID(), Notes: self.UpdateNotes(), whichone: self.whichone() },
+                       dataType: "json",
+                       success: function (data) {
+                           if (self.ClearorNot() == true) {
+                               self.showhidehandler();
+                               self.ClearorNot(false)
+                           }
+                           self.whichone();
+                           AjaxBUaccess = true;
+                           self.isnotevisible(false);
+                           self.LoadComp();
+                           self.displayStaff();
+                           self.ContactName("");
+                           self.ContactLastName("");
+                           self.TechNoteValue("");
+                           self.isvisible(false);
+                           LoadFirst();
+
+
+
+                           //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                           //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                           //for (var i = 0; i < TrkPkgs.length; i++) {
+                           //    self.buildingUsers.push({
+                           //        BuildingUserName: ko.observable("Fullname")
+                           //    });
+                           //}
+                       }
+                   });
+            };
+            //----------------End apply updates to save on db--------------------
+            self.buildingUsers = ko.observableArray();
+            self.ListBuildingUsers = function () {
+                $.ajaxSettings.traditional = true;
                 $.ajax(
                     {
                         type: "GET",
@@ -1257,233 +1553,257 @@
                         data: { buildingID: "@Model.buildingID" },
                         dataType: "json",
                         success: function (data) {
-                            self.BSArray.removeAll();
                             var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
                             var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
                             for (var i = 0; i < TrkPkgs.length; i++) {
-                                self.BSArray.push({
-                                    FullName: TrkPkgs[i].FullName,
-                                    Tel: TrkPkgs[i].Phone,
-                                    UserID: TrkPkgs[i].UserID,
-                                    BuildingID: TrkPkgs[i].UserID.BuildingID
+                                self.buildingUsers.push({
+                                    BuildingUserName: ko.observable("Fullname")
                                 });
                             }
                         }
                     });
+            };
+            function LoadFirst() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquest/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
-                var items = ([{ Text: "Assign To New", Value: "1" }, { Text: "Assign To Existing", Value: "2" }, { Text: "Close Ticket", Value: "3" }]);
-
-                self.itemsoptions = ko.observableArray(items);
-                self.RepairRequest = ko.observableArray();
-                self.value_changed = ko.observable();
-                self.selectedRequestDate = ko.observable();
-                self.selectedAssignto = ko.observable();
-                self.selectedDescription = ko.observable();
-                self.selectedID = ko.observable();//------needed to update request -----
-                self.selectedStatus = ko.observable();
-                self.selectedRequestNumber = ko.observable();
-                self.selectedCategory = ko.observable();
-                self.selectedCName = ko.observable();
-                self.selectedCEmail = ko.observable();
-                self.selectedCphone = ko.observable();
-                self.selectedPName = ko.observable();
-                self.selectedPEmail = ko.observable();
-                self.selectedPPhone = ko.observable();
-                self.selectedPhotoURL = ko.observable();
-                self.selectedUrgency = ko.observable();
-
-                self.isnotevisible = ko.observable(false);
-
-                self.isnotevisibleclick = function () {
-                    self.UpdateNotes("");
-                    self.isnotevisible(true);
-
-                };
-
-                self.selectedRequestActivities = function () {
-
-                };
-
-                self.removeNotelink = function () { self.isnotevisible(false); };
-                self.selectedRequest = function (value, event) {
-
-                    $.ajax({
-                        type: "GET",
-                        url: "/building/States/",
-                        datatype: "json",
-                        success: function (returndata) {
-                            var mydata = JSON.stringify(returndata.Data);
-                            var data1 = JSON.parse(mydata);
-                            // debugger;
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
 
 
-                            for (var i = 0; i < data1.length; i++){
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
 
-                                self.ListStates.push(data1[i].Text);
-                            };
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
 
 
-
+                            });
                         }
-                    });
-
-
-                    var myvalue = ko.toJSON(value);
-                    var myjson = JSON.parse(myvalue);
-                    self.selectedRequestDate(myjson.RequestedDate);
-                    self.selectedAssignto(myjson.RequestedDate);
-                    self.selectedDescription(myjson.Description);
-                    self.selectedID(myjson.ID);
-                    self.selectedStatus(myjson.Status);
-                    self.selectedRequestNumber(myjson.RequestNumber);
-                    self.selectedPName(myjson.PName);
-                    self.selectedPEmail(myjson.PEmail);
-                    self.selectedPPhone(myjson.PPhone);
-                    self.selectedUrgency(myjson.Urgency);
-                    self.selectedCName(myjson.CName);
-                    self.selectedCEmail(myjson.CEmail);
-                    self.selectedCphone(myjson.Cphone);
-                    self.selectedCategory(myjson.Category);
-
-                    self.LoadTechNote();
-                    self.CloseTechNote();
-
-                    //true = staff || false =  Comapny
-                    self.whichone = ko.observable();
-
-                    if (myjson.AssignToID != null)
-                    {
-                        $.ajax(
-                     {
-                         type: "GET",
-                         url: '/building/LoadingAssignTo/',
-                         data: { UserID: myjson.AssignToID },
-                         dataType: "json",
-                         success: function (data) {
-                             var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-
-                             var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                             for (var i = 0; i < TrkPkgs.length; i++) {
-                                 self.buildingUsers.push({
-                                     BuildingUserName: ko.observable("Fullname")
-                                 });
-                             }
-                         }
-                     });
-
                     }
-                    self.UpdateRequestID(myjson.ID);
-                };
-                //----------------apply updates to save on db--------------------
-                self.ApplyUpdate = function () {
-                    self.isnotevisible(false);
-                    //  alert(self.UpdateAssignID() + " " + self.selectedID() + " " + self.UpdateNotes())
+                });
 
-                    $.ajax(
-                       {
-                           type: "POST",
-                           url: '/building/ApplyUpdatesRepairRequest/',
-                           data: { UserID: self.UpdateAssignID(), RepairRequestID: self.selectedID(), Notes: self.UpdateNotes(), whichone: self.whichone() },
-                           dataType: "json",
-                           success: function (data) {
-                               if (self.ClearorNot() == true) {
-                                   self.showhidehandler();
-                                   self.ClearorNot(false)
-                               }
-                               self.whichone();
-                               AjaxBUaccess = true;
-                               self.isnotevisible(false);
-                               self.LoadComp();
-                               self.displayStaff();
-                               self.ContactName("");
-                               self.ContactLastName("");
-                               self.TechNoteValue("");
-                               self.isvisible(false);
-                               LoadFirst();
+            };
 
 
+            function LoadRequestByDateASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortByDateASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 
-                               //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-
-                               //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                               //for (var i = 0; i < TrkPkgs.length; i++) {
-                               //    self.buildingUsers.push({
-                               //        BuildingUserName: ko.observable("Fullname")
-                               //    });
-                               //}
-                           }
-                       });
-                };
-                //----------------End apply updates to save on db--------------------
-                self.buildingUsers = ko.observableArray();
-                self.ListBuildingUsers = function () {
-                    $.ajaxSettings.traditional = true;
-                    $.ajax(
-                        {
-                            type: "GET",
-                            url: '/building/BuildingUsersList/',
-                            data: { buildingID: "@Model.buildingID" },
-                            dataType: "json",
-                            success: function (data) {
-                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-
-                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                                for (var i = 0; i < TrkPkgs.length; i++) {
-                                    self.buildingUsers.push({
-                                        BuildingUserName: ko.observable("Fullname")
-                                    });
-                                }
-                            }
-                        });
-                };
-                function LoadFirst() {
-                    //  alert("I am First");
-                    $.ajaxSettings.traditional = true;
-                    $.ajax({
-                        type: "GET",
-                        url: '/building/BuildingRepairResquest/',
-                        data: { buildingID: "@Model.buildingID" },
-                        dataType: "json",
-                        success: function (data) {
-                            self.RepairRequest.removeAll();
-                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
-
-                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
-                            for (var i = 0; i < TrkPkgs.length; i++) {
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
 
 
-                                var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
 
-                                self.RepairRequest.push({
-                                    RequestedDate: ko.observable(RDate),
-                                    Assignto: ko.observableArray(items),
-                                    Description: TrkPkgs[i].Description,
-                                    ID: TrkPkgs[i].ID,
-                                    Status: TrkPkgs[i].Status,
-                                    RequestNumber: TrkPkgs[i].RequestNumber,
-                                    Category: TrkPkgs[i].Category,
-                                    PhotoUrl: TrkPkgs[i].PhotoUrl,
-                                    Urgency: TrkPkgs[i].Urgency,
-                                    CName: TrkPkgs[i].CName,
-                                    CEmail: TrkPkgs[i].CEmail,
-                                    CPhone: TrkPkgs[i].CPhone,
-                                    PName: TrkPkgs[i].PName,
-                                    PEmail: TrkPkgs[i].PEmail,
-                                    PPhone: TrkPkgs[i].PPhone,
-                                    AssignToID: TrkPkgs[i].AssignToID,
-                                    AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
-                                    assignContractorID: TrkPkgs[i].assignContractorID,
-                                    ContractorFullName: TrkPkgs[i].ContractorFullName
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
 
 
-                                });
-                            }
+                            });
                         }
-                    });
+                    }
+                });
 
-                };
+            };
 
+            function LoadRequestSortStatusASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortStatusASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+
+
+
+            function LoadRequestSortUrgencyASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortUrgencyASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+
+
+            function LoadRequestSortRequestNumberASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortRequestNumberASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
 
                 //when a selected value this will get the value related with the element
                 self.value_changed.subscribe(function (value) {

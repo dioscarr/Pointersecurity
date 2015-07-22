@@ -1444,6 +1444,46 @@ namespace SecurityMonitor.Controllers
             var mydata = Json(BRR);
             return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult BuildingRepairResquestSortByDateASC(int buildingID)
+        {
+            RepairManagement r = new RepairManagement();
+            var BRR = r.LoadAllRequestSortByDateASC(buildingID);
+            var mydata = Json(BRR);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult BuildingRepairResquestSortStatusASC(int buildingID)
+        {
+            RepairManagement r = new RepairManagement();
+            var BRR = r.LoadAllRequestSortStatusASC(buildingID);
+            var mydata = Json(BRR);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult BuildingRepairResquestSortUrgencyASC(int buildingID)
+        {
+            RepairManagement r = new RepairManagement();
+            var BRR = r.LoadAllRequestSortUrgencyASC(buildingID);
+            var mydata = Json(BRR);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult BuildingRepairResquestSortRequestNumberASC(int buildingID)
+        {
+            RepairManagement r = new RepairManagement();
+            var BRR = r.LoadAllRequestSortRequestNumberASC(buildingID);
+            var mydata = Json(BRR);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+       
+
+
         [HttpGet]
         public JsonResult SearchbyRequestNumber(string filter, int BuildingID)
         {
@@ -1993,8 +2033,8 @@ namespace SecurityMonitor.Controllers
                                         "</div>" +
                                         "<div style='font-size:20px; display:block; width:100%; background:#0071bc; height:50px;line-height:50px; padding:0 15px; border:1px solid lightgrey; color:white;' >For questions about this email Contact management at: " + RR.Buildings.BuildingPhone + "Find more information...  </div>";
 
-               
-               Gmail gmail = new Gmail("pointerwebapp", "Dmc10040!");
+
+               Gmail gmail = new Gmail("pointerwebapp", "dmc10040");
                MailMessage msg = new MailMessage("pointerwebapp@gmail.com", Worker.Email);
                msg.Subject = "New Assignment Notification";
                msg.Body = contenttobemail;
@@ -2023,6 +2063,7 @@ namespace SecurityMonitor.Controllers
                attachment = new Attachment(Server.MapPath("~/ContractPDF/newContractFile.pdf"));
                msg.Attachments.Add(attachment); 
                gmail.Send(msg);
+               attachment.Dispose();
            
            }
             
@@ -2041,6 +2082,22 @@ namespace SecurityMonitor.Controllers
             db.SaveChanges();
 
             var JSONdATA = Json("");
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+        
+
+            [AllowAnonymous]
+        public JsonResult LoadCloseRequestsbaseonsearch(int buildingID, string filterRequestNumber)
+        {
+           
+
+            RepairManagement OBJRM = new RepairManagement();
+
+            var ListOfCloseRequests = OBJRM.LoadCloseRequestsbaseonsearch(buildingID, filterRequestNumber);
+
+            var JSONdATA = Json(ListOfCloseRequests);
             return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 

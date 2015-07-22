@@ -54,6 +54,8 @@ namespace SecurityMonitor.Models
             return R;
         }
 
+       
+
 
         public List<RepairRequestmock> LoadAllCloseRequest(int buildingID)
         {
@@ -129,5 +131,167 @@ namespace SecurityMonitor.Models
                  }).ToList();
             return R;
         }
+         
+        public List<RepairRequestmock> LoadCloseRequestsbaseonsearch(int buildingID, string filterRequestNumber)
+        {
+            var R = db.RepairRequest
+                 .Where(r => r.BuildingID == buildingID && r.Status == "Close" && r.RequestNumber.Contains(filterRequestNumber))
+                 .Select(c => new RepairRequestmock
+                 {
+                     RequestedDate = c.RequestedDate,
+                     Description = c.ProblemDescription,
+                     Status = c.Status,
+                     ID = c.Id,
+                     RequestNumber = c.RequestNumber,
+                     Category = c.RepairRequestCategories.Categories,
+                     PhotoUrl = c.PhotoUrl,
+                     Urgency = c.RepairUrgency.Urgency,
+                     CName = c.OtherContactName,
+                     CEmail = c.OtherContactEmail,
+                     CPhone = c.OtherContactPhone,
+                     PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                     PEmail = c.Tenant.Username,
+                     PPhone = c.Tenant.Phone,
+                     AssignToID = c.BuildingUser.Id,
+                     AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                     assignContractorID = c.AssignContractorID,
+                     ContractorFullName = c.Contractor.CompanyName
+
+
+                 }).ToList();
+            return R;
+        }
+
+
+
+        public List<RepairRequestmock> LoadAllRequestSortStatusASC(int buildingID)
+        {
+            var R = db.RepairRequest
+                .Where(r => r.BuildingID == buildingID && r.Status != "Close" || r.BuildingID == buildingID && r.Status == "ReOpen")
+                .OrderBy(c=>c.Status)
+                .Select(c => new RepairRequestmock
+                {
+                    RequestedDate = c.RequestedDate,
+                    Description = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RequestNumber,
+                    Category = c.RepairRequestCategories.Categories,
+                    PhotoUrl = c.PhotoUrl,
+                    Urgency = c.RepairUrgency.Urgency,
+                    CName = c.OtherContactName,
+                    CEmail = c.OtherContactEmail,
+                    CPhone = c.OtherContactPhone,
+                    PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                    PEmail = c.Tenant.Username,
+                    PPhone = c.Tenant.Phone,
+                    AssignToID = c.BuildingUser.Id,
+                    AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                    assignContractorID = c.AssignContractorID,
+                    ContractorFullName = c.Contractor.CompanyName
+
+
+                }).ToList();
+            return R;
+        }
+
+
+
+        public List<RepairRequestmock> LoadAllRequestSortUrgencyASC(int buildingID)
+        {
+            var R = db.RepairRequest
+                .Where(r => r.BuildingID == buildingID && r.Status != "Close" || r.BuildingID == buildingID && r.Status == "ReOpen")
+                .OrderBy(c=>c.RepairUrgency.Urgency)
+                .Select(c => new RepairRequestmock
+                {
+                    RequestedDate = c.RequestedDate,
+                    Description = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RequestNumber,
+                    Category = c.RepairRequestCategories.Categories,
+                    PhotoUrl = c.PhotoUrl,
+                    Urgency = c.RepairUrgency.Urgency,
+                    CName = c.OtherContactName,
+                    CEmail = c.OtherContactEmail,
+                    CPhone = c.OtherContactPhone,
+                    PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                    PEmail = c.Tenant.Username,
+                    PPhone = c.Tenant.Phone,
+                    AssignToID = c.BuildingUser.Id,
+                    AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                    assignContractorID = c.AssignContractorID,
+                    ContractorFullName = c.Contractor.CompanyName
+
+
+                }).ToList();
+            return R;
+        }
+        public List<RepairRequestmock> LoadAllRequestSortByDateASC(int buildingID)
+        {
+            var R = db.RepairRequest
+                .Where(r => r.BuildingID == buildingID && r.Status != "Close" || r.BuildingID == buildingID && r.Status == "ReOpen")
+                .OrderBy(c=>c.RequestedDate)
+                .Select(c => new RepairRequestmock
+                {
+                    RequestedDate = c.RequestedDate,
+                    Description = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RequestNumber,
+                    Category = c.RepairRequestCategories.Categories,
+                    PhotoUrl = c.PhotoUrl,
+                    Urgency = c.RepairUrgency.Urgency,
+                    CName = c.OtherContactName,
+                    CEmail = c.OtherContactEmail,
+                    CPhone = c.OtherContactPhone,
+                    PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                    PEmail = c.Tenant.Username,
+                    PPhone = c.Tenant.Phone,
+                    AssignToID = c.BuildingUser.Id,
+                    AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                    assignContractorID = c.AssignContractorID,
+                    ContractorFullName = c.Contractor.CompanyName
+
+
+                }).ToList();
+            return R;
+        }
+        public List<RepairRequestmock> LoadAllRequestSortRequestNumberASC(int buildingID)
+        {
+            var R = db.RepairRequest
+                .Where(r => r.BuildingID == buildingID && r.Status != "Close" || r.BuildingID == buildingID && r.Status == "ReOpen")
+                .OrderBy(c=>c.RequestNumber)
+                .Select(c => new RepairRequestmock
+                {
+                    RequestedDate = c.RequestedDate,
+                    Description = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RequestNumber,
+                    Category = c.RepairRequestCategories.Categories,
+                    PhotoUrl = c.PhotoUrl,
+                    Urgency = c.RepairUrgency.Urgency,
+                    CName = c.OtherContactName,
+                    CEmail = c.OtherContactEmail,
+                    CPhone = c.OtherContactPhone,
+                    PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                    PEmail = c.Tenant.Username,
+                    PPhone = c.Tenant.Phone,
+                    AssignToID = c.BuildingUser.Id,
+                    AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                    assignContractorID = c.AssignContractorID,
+                    ContractorFullName = c.Contractor.CompanyName
+
+
+                }).ToList();
+            return R;
+        }
+
+
+       
+        
+
+
     }
 }
