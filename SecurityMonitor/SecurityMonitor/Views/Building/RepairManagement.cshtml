@@ -161,7 +161,7 @@
                         <span class="hvr-buzz-out"> Close this ticket</span>
                         <div>
 
-                            <div><textarea class="form-control ticketresolution" placeholder="Enter a resolution (required)"></textarea> </div>
+                            <div><textarea class="form-control ticketresolution" id="writebeforeclose" placeholder="Enter a resolution (required)"></textarea> </div>
                             <div>Are you sure ?</div>
                             <button class="btn btn-info" data-bind="click: CompleteAssignment" data-dismiss="modal"  id="closingrequest">Close ticket</button>
                             <a href="#noselection"  id="cancelcolsingticket"  >Cancel</a>
@@ -345,62 +345,62 @@
 
                             </div>
 
-                            <div class="tab-pane fade" id="NewContact">
+                            <div class="tab-pane fade" id="NewContact" data-bind="click:contractorformclicked">
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
                                     New Contractor
 
                                 </div>
 
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Mostly Focus on:</span><span><select class="form-control" data-bind="options:CompanyCat, value:NewCatName"></select></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><select class="form-control input-sm" data-bind="options:CompanyCat, value:NewCatName"></select></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company Email/UserName</span><span><input type="email" class="form-control" data-bind="value:NewEmail" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="email" placeholder="Company Email/UserName" class="form-control input-sm" data-bind="value:NewEmail" /></span>
                                     <div id="validateemailid"></div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company Name</span><span><input type="text" class="form-control" data-bind="value:NewCompanyName" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Name" class="form-control input-sm" data-bind="value:NewCompanyName" /></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company Address</span><span><input type="text" class="form-control" data-bind="value:NewAddress" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Address" class="form-control input-sm" data-bind="value:NewAddress" /></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company City</span><span><input type="text" class="form-control" data-bind="value:NewCity" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company City" class="form-control input-sm" data-bind="value:NewCity" /></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company State</span><span><select type="text" class="form-control" data-bind="options:ListStates,  value:NewState"></select></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><select type="text" placeholder="Company State" class="form-control input-sm" data-bind="options:ListStates,  value:NewState"></select></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company Zipcode</span><span><input type="text" class="form-control" data-bind="value:NewZipcode" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Zipcode" class="form-control input-sm" data-bind="value:NewZipcode" /></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Company Main Phone</span><span><input type="text" class="form-control" data-bind="value:NewMainPhone" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Main Phone" class="form-control input-sm" data-bind="value:NewMainPhone" /></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Primary Contact</span><span><input type="text" class="form-control" data-bind="value:NewPName" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" class="form-control input-sm" placeholder="Primary to Contact" data-bind="value:NewPName" /></span>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                    <span>Primary Phone</span><span><input type="text" class="form-control" data-bind="value:NewPPhone" /></span>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" class="form-control input-sm" placeholder="Primary Number" data-bind="value:NewPPhone" /></span>
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
-                                    <div class="col-lg-3 col-md-3 col-sm-12 col-sx-12 nopadding autogenaratedpwdrepair">
+                                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-sx-12 nopadding autogenaratedpwdrepair">
 
-                                        <span>
-                                            <input type="checkbox" id="ossm" name="ossm" class=" displayinline" data-bind="checked:NewPassword">
-                                            <label class=" displayinline" for="ossm">Generated Pwd:</label>
+                    <span>
+                        <input type="checkbox" id="ossm" name="ossm" class=" displayinline" data-bind="checked:NewPassword">
+                        <label class=" displayinline" for="ossm">Generated Pwd:</label>
 
-                                        </span>
-                                    </div>
+                    </span>
+                </div>
 
-                                </div>
+            </div>*@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <span><button type="button" class="btn btn-link">Add Comments</button> </span>
                                     <span><textarea class="form-control" style="min-width:100%;" data-bind="value:NewComments"></textarea></span>
                                     <button type="button" class="btn btn-link pull-right">Don't Add Comments</button>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <button type="button" class="btn btn-default" data-bind="click:InsertContractor">Save New Contractor</button>
+                                    <button type="button" class="btn btn-default" id="form-contracor" data-bind="click:InsertContractor">Save New Contractor</button>
                                 </div>
                             </div>
                         </div>
@@ -413,7 +413,7 @@
                     </div>
                 </div>
             <div class="modal-footer noppading ">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 footerrepairpopup">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 footerrepairpopup" data-bind="visible:cancelapply">
                     <button id="cancelid" type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
                     <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate">Apply Update</button>
                 </div>
@@ -596,9 +596,15 @@
         $('#Urgencyid').mouseover(function(){ $('#Urgencyidtitle').css("Opacity","100"); }).mouseout(function(){$('#Urgencyidtitle').css("Opacity","0");});
         $('#Requestid').mouseover(function(){ $('#Requestidtitle').css("Opacity","100"); }).mouseout(function(){$('#Requestidtitle').css("Opacity","0");});
       
-
+        $('#form-contracor').on('click',function(){
         
-       
+        
+        });
+        
+        $('#cancelcolsingticket').on('click',function(){            
+        
+            $('#writebeforeclose').val("");
+        });
 
         $('#notebutton').on('click',function(){
             $('.sectiontoshoworhide').slideUp();
@@ -610,22 +616,24 @@
             $('[data-dropdownkey='+key+']').slideToggle();
         });
 
-
-
-
-
         $('#closingrequest').on("click", function (e) {
             e.preventDefault();
-            window.location.href = window.location.href + "#noselection";
-            //alert('closed');
-            $('#myModal').trigger('click');
-
+            //alert($.trim($('#writebeforeclose').length));
+           
+            if ($('#writebeforeclose').val()!="")
+            {
+                window.location.href = window.location.href + "#noselection";
+                //alert('closed');
+                $('#myModal').trigger('click');
+                $('#writebeforeclose').val("");
+            
+            }
+            else{
+                alert("A resolution must be enter before closing this ticket");
+            
+            }
             return false;
         });
-
-
-
-
         $('#NewContractor a').click(function (e) {
             e.preventDefault()
             $(this).tab('show')
@@ -642,11 +650,6 @@
             } else {
                 $('#remainingChar').html("");
             }
-
-
-
-
-
         });
 
 
@@ -694,6 +697,15 @@
             }
 
             var self = this;
+
+
+            self.cancelapply = ko.observable(true);
+            self.contractorformclicked = function(){
+                self.cancelapply(false);
+            
+            }
+
+
 
             self.RROrderByDate= function(){ LoadRequestByDateASC();}
             self.RRLoadRequestSortStatusASC = function(){ LoadRequestSortStatusASC();};

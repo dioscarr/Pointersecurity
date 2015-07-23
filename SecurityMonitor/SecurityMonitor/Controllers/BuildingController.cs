@@ -1797,6 +1797,14 @@ namespace SecurityMonitor.Controllers
             
         }
 
+        public JsonResult RepairRequestCat()
+        {
+            var RRC = db.RepairRequestCategories.Select(c => new { Cat = c.Categories }).ToList();
+
+            var mydata = Json(RRC);
+            return new JsonResult { Data = mydata, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+        }
+
 
 
         [HttpGet]
@@ -1955,8 +1963,8 @@ namespace SecurityMonitor.Controllers
                msg.IsBodyHtml = true;
                
                //new
-               PdfContractContent pdfContent = new PdfContractContent { 
-                 Address = RR.Buildings.Address,
+               PdfContractContent pdfContent = new PdfContractContent {
+                   Address = RR.Buildings.Address + " " + RR.Tenant.Apartment.ApartmentNumber + " " + RR.Buildings.City +" " + RR.Buildings.State+" " + RR.Buildings.Zipcode,
                  Category = RR.RepairRequestCategories.Categories,
                  Priority = RR.RepairUrgency.Urgency,
                  Status = RR.Status,
@@ -2043,7 +2051,7 @@ namespace SecurityMonitor.Controllers
                //new
                PdfContractContent pdfContent = new PdfContractContent
                {
-                   Address = RR.Buildings.Address,
+                   Address = RR.Buildings.Address + " " + RR.Tenant.Apartment.ApartmentNumber + " " + RR.Buildings.City + " " + RR.Buildings.State + " " + RR.Buildings.Zipcode,
                    Category = RR.RepairRequestCategories.Categories,
                    Priority = RR.RepairUrgency.Urgency,
                    Status = RR.Status,
