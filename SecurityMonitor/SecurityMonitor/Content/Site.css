@@ -12,7 +12,8 @@
 
 }
 html{
-  height: 100%;
+  height: 100%!important;
+  min-height:100%!important;
 }
 
 body {
@@ -88,7 +89,20 @@ font-style:oblique;
 
 .mybk {
 
-background:#F5F5F5;
+
+
+     background-repeat: no-repeat;
+   max-height:100%!important;
+   height:100%!important;
+   min-height:100%!important; 
+background: rgba(0,113,188,1);
+background: -moz-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(80,82,92,1) 0%, rgba(25,82,117,1) 42%, rgba(47,80,99,1) 56%, rgba(93,90,102,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(0,113,188,1)), color-stop(0%, rgba(80,82,92,1)), color-stop(42%, rgba(25,82,117,1)), color-stop(56%, rgba(47,80,99,1)), color-stop(100%, rgba(93,90,102,1)));
+background: -webkit-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(80,82,92,1) 0%, rgba(25,82,117,1) 42%, rgba(47,80,99,1) 56%, rgba(93,90,102,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(80,82,92,1) 0%, rgba(25,82,117,1) 42%, rgba(47,80,99,1) 56%, rgba(93,90,102,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(80,82,92,1) 0%, rgba(25,82,117,1) 42%, rgba(47,80,99,1) 56%, rgba(93,90,102,1) 100%);
+background: linear-gradient(135deg, rgba(0,113,188,1) 0%, rgba(80,82,92,1) 0%, rgba(25,82,117,1) 42%, rgba(47,80,99,1) 56%, rgba(93,90,102,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0071bc', endColorstr='#5d5a66', GradientType=1 );
 }
 
 /************************************************* NAVEGATION ***********************************************/
@@ -1004,6 +1018,24 @@ z-index:10;
    line-height: 54px ;  
 }
 
+.boxheadHome-login
+{
+    min-height:250px;
+    
+    
+    background: rgba(0,113,188,1);
+    background: -moz-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(0,113,188,1) 11%, rgba(188,224,238,1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(0,113,188,1)), color-stop(11%, rgba(0,113,188,1)), color-stop(100%, rgba(188,224,238,1)));
+    background: -webkit-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(0,113,188,1) 11%, rgba(188,224,238,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(0,113,188,1) 11%, rgba(188,224,238,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(0,113,188,1) 0%, rgba(0,113,188,1) 11%, rgba(188,224,238,1) 100%);
+    background: linear-gradient(135deg, rgba(0,113,188,1) 0%, rgba(0,113,188,1) 11%, rgba(188,224,238,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0071bc', endColorstr='#bce0ee', GradientType=1 );
+
+
+   line-height: 54px ;  
+}
+
 .boxheadassign
 {
     /*min-height:60px;*/
@@ -1388,32 +1420,63 @@ font-size:22px;
 .repairheight {
 
 height:700px;
+padding:30px!important;
+
+
 }
 
 .requestlogbox {
-       min-height:100px;
+       min-height:50px;
+       margin-top:30px;
 }
 .Openrequestheader {
     
 }
 .OpenRequestCollunm {
     padding:20px 0;
+    color:white;
+}
+
+.OpenRequestCollunm-content {
+    padding:20px 0;
+    color:rgba(50, 50, 50, 0.75);
+    font-weight:100;
 }
 .OpenRequestRows {
-    border-top:1px solid lightgrey;
-    border-bottom:1px solid lightgrey;
+    /*border-top:1px solid lightgrey;*/
+    /*border-bottom:1px solid lightgrey;*/
 }
 
 .headingopenerequests {
 
-padding:20px 0;
+padding:0px 0;
+
+height:50px;
+}
+
+.backarrowrepairrequest {
+position:absolute;
+ top:20px; 
+ left:25px; 
+ font-size:20px;
+ font-weight:100;
+ color:white;
+
+}
+
+    .backarrowrepairrequest:hover {
+    color:#000000;
+    }
+
+.headingopenerequests-right {
+    margin-top:30px;
 }
 
 .displayinline {
 display:inline;
 }
 .OpenRequestsSettings {
-    padding-right:20px;
+    padding:20px!important;
 }
 #openrequesttitle {
     position:relative;
@@ -1425,6 +1488,7 @@ display:inline;
 
 body {
     padding-right: 0px !important;
+      height: 100%;
 }
 
 .repairrequestformheader {
@@ -1487,8 +1551,10 @@ modal-header {
 }
 
 .repairheading{
-
+    /*outline:1px solid red;*/
 background-color:#0071bc;
+ -webkit-box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.75) !important;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7 !important;
 }
 
 
@@ -1540,6 +1606,7 @@ padding-left:20px !important;
 .rformrowheight1 {
 
     height:60px;
+    margin-top:20px!important;
 
 }
 
@@ -2305,11 +2372,41 @@ p {
 #TenantTopSectionBox {
     min-height:200px;
     padding:40px 0 40px 0!important;
+   -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
 
+}
+
+.TenantTopSectionBox
+{
+    min-height:180px;
+     background-color:#0071BC!important;
+     padding:30px 0 30px 0px !important;
+        -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
 }
 
 #TenantmiddleSectionBox {
 min-height:500PX;
+
+}
+
+.tenantHeadingtext {
+    color:white;
+    font-size:30px;
+    padding:0 20px;
+}
+#tenant-text-left {
+position:relative;
+right:-20px;
+top:35px;
+
+}
+
+#tenant-text-rigt {
+position:relative;
+left:-20px;
+top:35px;
 
 }
 
@@ -2338,16 +2435,31 @@ line-height:25px;
 
 
 .headingsettingstenant {
-margin:10px 0 0 0!important;
-color:#0071BC;
+   
+margin:0px 0 0 0!important;
+padding:10px 0 10px 0;
+color:White;
+height:65px;
+line-height:50px;
 max-height:0px!important;
 
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#313035+0,28343b+100 */
+background:#0071BC;
+
+
+}
+
+#headingsettingstenant {
+       
+margin:0px 0 20px 0!important;
 }
 
 .headingsettingstenant4{
 margin:10px 0 0 0!important;
 color:#0071BC;
 max-height:65px!important;
+
+
 
 }
 
@@ -2975,4 +3087,65 @@ background:white;
 .formcontractors {
 padding:10px 10px !important;
 
+}
+
+#editid {
+position:absolute;
+top:10px;
+right:0px;
+}
+
+.openrequestssettings {
+    color:black;
+    background:rgba(0,0,0,0.09) !important;
+    border-color:rgba(0,0,0,0.09)!important;
+}
+
+.insiderBox {
+border:1px solid rgb(247,249,248);
+padding:15px!important;
+min-height:100%;
+background-color:white;
+ -webkit-box-shadow: 1px 1px 2px #b7b7b7;
+  -moz-box-shadow: 3px 3px 7px #b7b7b7e;
+}
+.modulestenantbox {
+background:white;
+}
+.tenantBuildinganoucementbottombox {
+min-height:100%;
+height:54px;   
+background:#0071BC;
+margin-top:5px;
+}
+#tenanttabs
+{
+    background:#0071bc!important;
+
+}
+
+.nav-tabs-tenant {
+
+      background:#0071bc!important;
+       border:none!important;
+       color:white!important;
+}
+
+.nav-tabs-tenant >li a {
+
+      background:#0071bc!important;
+      border:none!important;
+        color:white!important;
+        min-height:50px!important;
+    height:50px;
+
+}
+
+.hvr-underline-reveal {
+color:white!important;
+}
+
+.hvr-underline-reveal:target {
+background:rgba(50, 50, 50, 0.75) !important;
+height:10px !important;
 }

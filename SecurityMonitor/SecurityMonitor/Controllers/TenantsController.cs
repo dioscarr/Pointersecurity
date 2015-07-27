@@ -244,7 +244,7 @@ namespace SecurityMonitor.Controllers
         public async Task<JsonResult> loadRequest(string TenantID)
         {
             var repairRequest =await  db.RepairRequest
-                     .Where(c => c.TenantID == TenantID)
+                     .Where(c => c.TenantID == TenantID && c.Status!="Close")
                      .Select(c => new
                      {
                          RequestedDate = c.RequestedDate,
@@ -279,7 +279,7 @@ namespace SecurityMonitor.Controllers
         public async Task<JsonResult> loadRequestbysearch(string TenantID, string filter)
         {
             var repairRequest = await db.RepairRequest
-                     .Where(c=> c.TenantID == TenantID && c.ProblemDescription.Contains(filter))                   
+                     .Where(c => c.TenantID == TenantID && c.Status != "Close" && c.ProblemDescription.Contains(filter))                   
                      .Select(c => new
                      {
                          RequestedDate = c.RequestedDate,
@@ -354,7 +354,7 @@ namespace SecurityMonitor.Controllers
             }
 
             var repairRequest = await db.RepairRequest
-                .Where(c => c.TenantID == model.TenantID)
+                .Where(c => c.TenantID == model.TenantID && c.Status != "Close")
                 .Select(c => new
                 {
                     RequestedDate = c.RequestedDate,
@@ -380,8 +380,18 @@ namespace SecurityMonitor.Controllers
             return new JsonResult { Data = Jsonpackages, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-   
 
+         public JsonResult LoadCloseRequests(string TenantID)
+         {
+
+
+             RepairManagement OBJRM = new RepairManagement();
+
+             var ListOfCloseRequests = OBJRM.LoadAllCloseRequestTenant(TenantID);
+
+             var JSONdATA = Json(ListOfCloseRequests);
+             return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+         }
         
 
         

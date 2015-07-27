@@ -288,10 +288,38 @@ namespace SecurityMonitor.Models
             return R;
         }
 
+        public List<RepairRequestmock> LoadAllCloseRequestTenant(string TenantID)
+        {
 
+            var R = db.RepairRequest
+                .Where(r => r.Tenant.AspNetUsers.Id == TenantID && r.Status == "Close")
+                .OrderBy(c=>c.RequestNumber)
+                .Select(c => new RepairRequestmock
+                {
+                    RequestedDate = c.RequestedDate,
+                    Description = c.ProblemDescription,
+                    Status = c.Status,
+                    ID = c.Id,
+                    RequestNumber = c.RequestNumber,
+                    Category = c.RepairRequestCategories.Categories,
+                    PhotoUrl = c.PhotoUrl,
+                    Urgency = c.RepairUrgency.Urgency,
+                    CName = c.OtherContactName,
+                    CEmail = c.OtherContactEmail,
+                    CPhone = c.OtherContactPhone,
+                    PName = c.Tenant.FirstName + " " + c.Tenant.LastName,
+                    PEmail = c.Tenant.Username,
+                    PPhone = c.Tenant.Phone,
+                    AssignToID = c.BuildingUser.Id,
+                    AssignedFullName = c.BuildingUser.FirstName + " " + c.BuildingUser.LastName,
+                    assignContractorID = c.AssignContractorID,
+                    ContractorFullName = c.Contractor.CompanyName
+
+
+                }).ToList();
+            return R;
        
-        
 
-
+        }
     }
 }

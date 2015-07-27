@@ -10,9 +10,19 @@
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">New Request</h4>
+           
+                <div class="">
+
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            New Repair Request
+                        </h6>
+
+                    </div>
+
+              
+
+
             </div>
             <div class="modal-body lightgrey">
                 <div class="col-lg-12 col-md-12 ">
@@ -122,11 +132,22 @@
     <div class="modal-dialog modal-lg ">
         <div class="modal-content">
             <div class="modal-header nopadding " id="modalheaderpreviewid">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Mail Notification</h4>
-                    <span class="fa fa-edit fa-2x font_color_lightblue pull-right displayinline padding-right_20px hollow3" id="editid" data-bind="click:edit"></span>
+                <div class="">
+
+                    <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                            Additional Notes
+                        </h6>
+                        <span class="fa fa-edit fa-2x font_color_lightblue pull-right displayinline padding-right_20px hollow3" id="editid" data-bind="click:edit, visible:EditButtonVisibility"></span>
+
+                    </div>
+
                 </div>
+                
+                
+                
+                
+             
               
             </div>
             <div class="modal-body  mymodalclass ">
@@ -317,72 +338,150 @@
 
 
 <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+       
+    </div>
     <div class="col-lg-12 col-md-12 text-center  repairheading">
         <h1 style="color:white;"> Repair Page</h1>
+        <div class="glyphicon glyphicon-arrow-left  backarrowrepairrequest" id="backarrowid"> </div>
     </div>
+    
 </div>
+
+
+@*<div class="row ">
+
+    <div class="box">
+        <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 nopadding ">
+            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:KeydownSearh, valueUpdate:'afterkeydown'" />
+           
+            <hr />
+            <br />
+        </div>
+
+    </div>
+</div>*@
 
 <div class="row repairheight">
-    <div class="col-lg-12 col-md-12  instructionrepairbox">
-        <div class="col-lg-12 col-md-12  instructionrepair ">
-            <p>
-                The words requests and holds and reserves are interchangeable.
-                When you place a request, your name is put on a list of people
-                waiting for an item in the Library’s collection. When the item
-                becomes available for you, we notify you by telephone or email
-                to pick up the item, notify you and place the item on a bookmobile
-                for you, or mail the item to you.
-                The words requests and holds and reserves are interchangeable.
-                When you place a request, your name is put on a list of people
-                waiting for an item in the Library’s collection. When the item
-                becomes available for you, we notify you by telephone or email
-                to pick up the item, notify you and place the item on a bookmobile
-                for you, or mail the item to you.
-            </p>
-        </div>
-    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 insiderBox" >
+        <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 nopadding " id="searchboxtenantrepair" style="border-bottom:1px solid #e4e4e4;    ">
+            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:KeydownSearh, valueUpdate:'afterkeydown'" />
 
-
-
-    <div class="col-lg-12 col-md-12  requestlogbox nopadding">
-        <div class="col-lg-12 col-md-12 text-center  headingopenerequests " id="three-icon">
-            <h1 id="openrequesttitle" class="displayinline  ">Open Request</h1>
-            <button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>
-            <button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-3x"></button>
-            <button class="btn btn-link pull-right displayinline openrequestssettings fa fa-plus-circle fa-3x" id="hitme" data-toggle="modal" data-target="#myModal"></button>
+            <hr />
+            <br />
         </div>
 
-        <div class="col-lg-12 col-md-12 searchrepair ">
-            <div class="box">
-                <div class="container-4 ">
-                    <input type="search" id="search" class=" text-center input-sm" placeholder="Search for request" data-bind="value:KeydownSearh, valueUpdate:'afterkeydown'" />
-                    <button class="icon icon-search"><i class="fa fa-search"></i></button>
+
+
+        <div class="col-lg-12 col-md-12  requestlogbox nopadding">
+            <sdiv class="col-lg-6 col-md-6 text-right headingopenerequests " id="three-icon">
+
+
+            </sdiv>
+            <sdiv class="col-lg-6 col-md-6 text-center headingopenerequests headingopenerequests-right  " id="three-icon">
+
+                @*<button id="repairsearchloop" class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-search fa-3x"></button>*@
+                @*<button class="btn btn-link pull-right displayinline OpenRequestsSettings fa fa-cog fa-3x"></button>*@
+                <button class="btn btn-info x displayinline openrequestssettings " id="hitme" data-toggle="modal" data-target="#myModal">Add New Request</button>
+                <button class="btn btn-info x displayinline openrequestssettings " id="" data-toggle="modal" data-target="#ClosedTickets" data-bind="click:loadclosedTickets">View Closed Requests</button>
+            </sdiv>
+
+
+
+
+            <div class="col-lg-12 col-md-12  nopadding Openrequestheader blueDefault">
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Date</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Request#</span>
+                <span class="col-lg-6 text-center OpenRequestCollunm col-md-4 ">Repair Request</span>
+                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
+
+            </div>
+
+            <div class="nopadding col-lg-12 col-md-12  " data-bind="foreach:request ">
+                <div class="col-lg-12 col-md-12  nopadding OpenRequestRows requestsrow hollow5 " data-toggle="modal" data-target="#myModalpreviewrequest" data-bind="click:openinmodal, attr:{'data-rowkey':ID}">
+                    <span class="col-lg-2 text-center OpenRequestCollunm-content col-md-2 requestsrow  " data-bind=" text:rDate, attr:{'data-rowkey':ID}"></span>
+                    <span class="col-lg-2 text-center  OpenRequestCollunm-content col-md-2 requestsrow " data-bind="text:RequestNumber, attr:{'data-rowkey':ID}"></span>
+                    <span class="col-lg-6 text-left  OpenRequestCollunm-content col-md-4 requestsrow " data-bind="text:Description, attr:{'data-rowkey':ID}"></span>
+                    <span class="col-lg-2 text-center  OpenRequestCollunm-content col-md-2 requestsrow " data-bind="text:Status, attr:{'data-rowkey':ID}"></span>
+
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-12 col-md-12  nopadding Openrequestheader blueDefault">
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Date</span>
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Request#</span>
-            <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 ">Repair Request</span>
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
-            <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Edit</span>
-        </div>
 
-        <div class="nopadding col-lg-12 col-md-12  " data-bind="foreach:request ">
-            <div class="col-lg-12 col-md-12  nopadding OpenRequestRows requestsrow hollow5 " data-toggle="modal" data-target="#myModalpreviewrequest" data-bind="click:openinmodal, attr:{'data-rowkey':ID}">
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow  " data-bind=" text:rDate, attr:{'data-rowkey':ID}"></span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow " data-bind="text:RequestNumber, attr:{'data-rowkey':ID}"></span>
-                <span class="col-lg-4 text-center OpenRequestCollunm col-md-4 requestsrow " data-bind="text:Description, attr:{'data-rowkey':ID}"></span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow " data-bind="text:Status, attr:{'data-rowkey':ID}"></span>
-                <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 requestsrow ">o</span>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="ClosedTickets" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="">
+
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        Closed Repair Requests
+                    </h6>
+
+                </div>
+
+            </div>
+            <div class="modal-body ">
+
+              
+
+                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:CloseTickets ">
+
+                    <section style="margin:5px 0 5px 0;">
+                        <!--vCard starts-->
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                            <!--header starts-->
+                            <section class=" col-md-12 text-center clientboxrow  " @*onclick="location.href = '#handlerid'" data-bind="click:assignCompany"*@>
+                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-from-left">
+                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                        <!--logo-->
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  ">
+                                            <h4><span class=" ContratorRowContentHeader col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="text:PEmail"></span></h4>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding  boxinnerboxSCBuilding fa fa-building fa-5x" id="contractorbuildingid">
+
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  boxinnerboxSC">
+
+                                            <span data-bind="text:CName" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                            <span class="ContratorRowContent col-lg-3 col-md-3 col-sm-3 col-xs-3">Category:</span> <span data-bind="text:Category" class="ContratorRowContent col-lg-9 col-md-9 col-sm-9 col-xs-9 nopadding"></span>
+                                            <span class="ContratorRowContent col-lg-3 col-md-3 col-sm-3 col-xs-3"> Request#:</span> <span data-bind="text:RequestNumber" class="ContratorRowContent col-lg-9 col-md-9 col-sm-9 col-xs-9 nopadding"></span>
+                                            
+
+
+                                            </div>
+                                        </div>
+                                </section>
+                            </section>
+                        </div>
+                    </section>
+
+
+
+                    @*<div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" >
+
+
+                        </div>*@
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal" @*data-bind="click:removelink"*@>Close</button>
+
             </div>
         </div>
-
-
-
     </div>
 </div>
+
+
 
 @section scripts{
     <script src="~/Scripts/jquery-2.1.3.min.js"></script>
@@ -390,12 +489,20 @@
     <script src="~/Scripts/knockout-3.1.0.js"></script>
     <script src="~/Scripts/knockout.mapping-latest.js"></script>
     <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+
+
     <!--Reference the autogenerated SignalR hub script. -->
     <script src="~/signalr/hubs"></script>
 
 
     <script type="text/javascript">
-    $(function () {
+        $(function () {
+
+            $('#backarrowid').on('click', function(){
+                window.location.href="/tenants/TenantProfile?UserID=@Model.TenantID";
+            });
+
+
         $('#repairsearchloop').on("click", function () {
             $('.instructionrepairbox').fadeToggle();
             $('#three-icon').fadeToggle();
@@ -434,11 +541,11 @@
             $('#primaryid').toggleClass("btn-primary");
         });
 
-        $('#search').on('focusout', function () {
-            $('.instructionrepairbox').fadeToggle();
-            $('#three-icon').fadeToggle();
-            $('.searchrepair').slideToggle();
-        });
+        //$('#search').on('focusout', function () {
+        //    $('.instructionrepairbox').fadeToggle();
+        //    $('#three-icon').fadeToggle();
+        //    $('.searchrepair').slideToggle();
+        //});
 
 
 
@@ -675,6 +782,7 @@
                 self.letsee(false);
 
             };
+            self.EditButtonVisibility = ko.observable(false);
 
             self.openinmodal = function (item, event) {
                 var selected_values = JSON.stringify(item);
@@ -686,7 +794,7 @@
                 self.selectedCategory(selected.Category);
                 self.selectedPrimaryName(selected.PrimaryName);
                 self.selectedPrimaryPhone(selected.PrimaryPhone);
-                self.selectedPrimaryEmail(selected.PrimaryEmail);
+                self.selectedPrimaryEmail(selected.PrimaryEmail); 
                 self.selectedSecondaryName(selected.SecondaryName);
                 self.selectedSecondaryPhone(selected.SecondaryPhone);
                 self.selectedSecondaryEmail(selected.SecondaryEmail);
@@ -694,6 +802,16 @@
                 self.selectedUrgency(selected.Urgency);
                 self.selectedPermission(selected.Permision);
                 self.selectedimgUrl(selected.imgUrl);
+
+
+                if( self.selectedStatus()=="Pending")
+                {
+                    self.EditButtonVisibility(true);
+                
+                }
+                else{
+                    self.EditButtonVisibility(false);
+                }
             };
 
             self.KeydownSearh.subscribe(function (value) {
@@ -820,6 +938,51 @@
                 self.OtherContactName("");
                 self.OtherContactEmail("");
             });
+        };
+        self.CloseTickets = ko.observableArray();
+        self.loadclosedTickets = function () {
+            $.ajax({
+                type:"GET",
+                url: "/Tenants/LoadCloseRequests/",
+                datatype: "json",
+                data:{TenantID: "@Model.tenant.AspNetUsers.Id"},
+                success: function(datareturn){
+                    //debugger;
+                    //alert(JSON.stringify(datareturn));
+                    self.CloseTickets.removeAll();
+                    var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+
+                        var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                        self.CloseTickets.push({
+                            RequestedDate: ko.observable(RDate),
+                         
+                            Description: TrkPkgs[i].Description,
+                            ID: TrkPkgs[i].ID,
+                            Status: TrkPkgs[i].Status,
+                            RequestNumber: TrkPkgs[i].RequestNumber,
+                            Category: TrkPkgs[i].Category,
+                            PhotoUrl: TrkPkgs[i].PhotoUrl,
+                            Urgency: TrkPkgs[i].Urgency,
+                            CName: TrkPkgs[i].CName,
+                            CEmail: TrkPkgs[i].CEmail,
+                            CPhone: TrkPkgs[i].CPhone,
+                            PName: TrkPkgs[i].PName,
+                            PEmail: TrkPkgs[i].PEmail,
+                            PPhone: TrkPkgs[i].PPhone,
+                            AssignToID: TrkPkgs[i].AssignToID,
+                            AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                            assignContractorID: TrkPkgs[i].assignContractorID,
+                            ContractorFullName: TrkPkgs[i].ContractorFullName
+                        });
+                    }
+                }
+
+
+            });
+
         };
 
 
