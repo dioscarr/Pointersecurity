@@ -8,9 +8,6 @@
 
 
 
-
-
-
 <div class="row  tenantbox">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding TenantTopSectionBox " id="TenantTopSectionBox ">
        
@@ -18,7 +15,7 @@
             <div class="displayinline tenantHeadingtext" id="tenant-text-left">Welcome</div>
         </div>
         <div class="col-lg-2 col-md-2 text-center ">
-            <img src="~/img/person.gif" class="img-circle displayinline" id="Tenantimgid" />
+            <img src="~/Uploads/1912125_10154548105960058_3116917113812959310_n.jpg" class="img-circle displayinline" id="Tenantimgid" />
             </div>
             <div class="col-lg-5 col-md-5 text-left ">
                 <div class="displayinline tenantHeadingtext" id="tenant-text-rigt">@Model.tenant.FirstName @Model.tenant.LastName</div>
@@ -146,7 +143,7 @@
                 </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <section style="margin:10px 0 50px 0; ">
-                    <!--vCard starts-->
+                    <!--vCard starts--> 
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12   paddingBottom20px nopadding ">
                         <!--header starts-->
                         <section class=" col-md-12 text-center clientboxrow ">
@@ -160,7 +157,7 @@
 
                                     <ul class="nav nav-tabs nav-tabs-tenant" id="tabs" >
                                         <li role="presentation" class="active  " id="tenanttabs"><a href="#SC" data-toggle="tab" class="hvr-underline-reveal" role="tab">Notifications</a></li>
-                                        <li role="presentation"><a href="#SC1" data-toggle="tab">Building Anouncement</a></li>l
+                                        <li role="presentation"><a href="#SC1" data-toggle="tab">Building Anouncement</a></li>
                                        
                                     </ul>
 
@@ -169,15 +166,15 @@
                                     <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left" id="tenantBuildinganouncement">                                        
                                         <div class="tab-content">   
                                                                                
-                                                <div class="tab-pane active" id="SC">
-                                                    <hr class="nopadding" />
-                                                    <p class="Acouncementtenant"> <span>Ticket# <a href="#">7172015-5</a> has been assign to Pointer Web App</span></p>
-                                                    <hr class="nopadding" />
-                                                    <p class="AcouncementtenantHeat"> <span>Ticket# <a href="#">7172015-5</a> is now close. </span></p>
-                                                    <hr class="nopadding" />
-                                                    <p class="AcouncementtenantElevator"> <span>Ticket# <a href="#">7192015-5</a> has been assign to Electric</span></p>
-                                                   
-                                                </div>
+                                            <div class="tab-pane active scrollable" id="SC" data-bind="foreach:listofnotification ">
+                                                <hr class="nopadding" />
+                                                <p class="Acouncementtenant"><span>Ticket#:</span><a href="#" data-bind="text:TicketNumber"></a> <span data-bind="text:NotificationMessage"></span></p>
+                                                @*<hr class="nopadding" />
+                                                <p class="AcouncementtenantHeat"> <span>Ticket# <a href="#">7172015-5</a> is now close. </span></p>
+                                                <hr class="nopadding" />
+                                                <p class="AcouncementtenantElevator"> <span>Ticket# <a href="#">7192015-5</a> has been assign to Electric</span></p>*@
+
+                                            </div>
 
                                             <div class="tab-pane" id="SC1">
                                                 <hr class="nopadding" />
@@ -258,6 +255,39 @@
                 
                 }
             });
+
+
+            var viewmodel = function () {
+
+                var self = this;
+
+                loadnotification();
+                self.listofnotification = ko.observableArray();
+
+                function loadnotification() {
+                    $.ajax({
+                        type: "get",
+                        datatype: "json",
+                        url: "/Tenants/TenantNotification/",
+                        data: { TenantID: "@Model.tenant.AspNetUsers.Id" },
+                        success: function (returndata) {
+                            self.listofnotification.removeAll();
+                            var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+                            // debugger;
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                self.listofnotification.push({
+                                    TicketNumber: TrkPkgs[i].TicketNumber,
+                                    NotificationMessage: TrkPkgs[i].NotificationMessage
+                                  
+                                });
+                            }   
+                        }
+
+                    });
+                }
+            }
+            ko.applyBindings(viewmodel)
 
         })
 

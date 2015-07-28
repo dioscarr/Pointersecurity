@@ -290,6 +290,7 @@
     <Compile Include="Models\StaffmixPermissions.cs" />
     <Compile Include="Models\TenantFrontEnd.cs" />
     <Compile Include="Models\TenantIndexVM.cs" />
+    <Compile Include="Models\TenantNotification.cs" />
     <Compile Include="Models\TenantRepairRequestVM.cs" />
     <Compile Include="Models\TenantSearch.cs" />
     <Compile Include="Models\TenantVM.cs" />

@@ -437,6 +437,7 @@
           <Property Name="RepairRequestNoteID" Type="int" />
           <Property Name="AssignContractorID" Type="nvarchar" MaxLength="128" />
           <Property Name="RequestNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="TenantNotified" Type="bit" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -1096,7 +1097,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_Building">
-          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Buildings">
@@ -1108,7 +1111,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_BuildingUser">
-          <End Role="BuildingUser" Type="Self.BuildingUser" Multiplicity="0..1" />
+          <End Role="BuildingUser" Type="Self.BuildingUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BuildingUser">
@@ -1120,7 +1125,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_Contractor">
-          <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1" />
+          <End Role="Contractor" Type="Self.Contractor" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractor">
@@ -1132,7 +1139,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_RepairRequestNote">
-          <End Role="RepairRequestNote" Type="Self.RepairRequestNote" Multiplicity="0..1" />
+          <End Role="RepairRequestNote" Type="Self.RepairRequestNote" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairRequestNote">
@@ -1156,7 +1165,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairTechNote_RepairRequest">
-          <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="1" />
+          <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairTechNote" Type="Self.RepairTechNote" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairRequest">
@@ -1288,7 +1299,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RepairRequest_RepairRequests">
-          <End Role="RepairRequestCategories" Type="Self.RepairRequestCategories" Multiplicity="1" />
+          <End Role="RepairRequestCategories" Type="Self.RepairRequestCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairRequestCategories">
@@ -1300,7 +1313,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RepairRequest_Tenant">
-          <End Role="Tenant" Type="Self.Tenant" Multiplicity="1" />
+          <End Role="Tenant" Type="Self.Tenant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tenant">
@@ -1312,7 +1327,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RepairRequest_Urgency">
-          <End Role="RepairUrgency" Type="Self.RepairUrgency" Multiplicity="1" />
+          <End Role="RepairUrgency" Type="Self.RepairUrgency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RepairRequest" Type="Self.RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairUrgency">
@@ -3184,6 +3201,7 @@
           <Property Name="RepairRequestNoteID" Type="Int32" />
           <Property Name="AssignContractorID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RequestNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TenantNotified" Type="Boolean" />
           <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="RepairRequest" ToRole="Buildings" />
           <NavigationProperty Name="BuildingUser" Relationship="PointerdbModel.FK_RepairRequest_BuildingUser" FromRole="RepairRequest" ToRole="BuildingUser" />
           <NavigationProperty Name="Contractor" Relationship="PointerdbModel.FK_RepairRequest_Contractor" FromRole="RepairRequest" ToRole="Contractor" />
@@ -3194,7 +3212,9 @@
           <NavigationProperty Name="RepairUrgency" Relationship="PointerdbModel.RepairRequest_Urgency" FromRole="RepairRequest" ToRole="RepairUrgency" />
         </EntityType>
         <Association Name="FK_RepairRequest_Building">
-          <End Type="PointerdbModel.Buildings" Role="Buildings" Multiplicity="1" />
+          <End Type="PointerdbModel.Buildings" Role="Buildings" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Buildings">
@@ -3206,7 +3226,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_BuildingUser">
-          <End Type="PointerdbModel.BuildingUser" Role="BuildingUser" Multiplicity="0..1" />
+          <End Type="PointerdbModel.BuildingUser" Role="BuildingUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BuildingUser">
@@ -3218,7 +3240,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_Contractor">
-          <End Type="PointerdbModel.Contractor" Role="Contractor" Multiplicity="0..1" />
+          <End Type="PointerdbModel.Contractor" Role="Contractor" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Contractor">
@@ -3230,7 +3254,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairRequest_RepairRequestNote">
-          <End Type="PointerdbModel.RepairRequestNote" Role="RepairRequestNote" Multiplicity="0..1" />
+          <End Type="PointerdbModel.RepairRequestNote" Role="RepairRequestNote" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairRequestNote">
@@ -3242,7 +3268,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RepairTechNote_RepairRequest">
-          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="1" />
+          <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairTechNote" Role="RepairTechNote" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairRequest">
@@ -3254,7 +3282,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RepairRequest_RepairRequests">
-          <End Type="PointerdbModel.RepairRequestCategories" Role="RepairRequestCategories" Multiplicity="1" />
+          <End Type="PointerdbModel.RepairRequestCategories" Role="RepairRequestCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairRequestCategories">
@@ -3266,7 +3296,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RepairRequest_Tenant">
-          <End Type="PointerdbModel.Tenant" Role="Tenant" Multiplicity="1" />
+          <End Type="PointerdbModel.Tenant" Role="Tenant" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tenant">
@@ -3278,7 +3310,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="RepairRequest_Urgency">
-          <End Type="PointerdbModel.RepairUrgency" Role="RepairUrgency" Multiplicity="1" />
+          <End Type="PointerdbModel.RepairUrgency" Role="RepairUrgency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="PointerdbModel.RepairRequest" Role="RepairRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RepairUrgency">
@@ -3915,6 +3949,7 @@
           <EntitySetMapping Name="RepairRequest">
             <EntityTypeMapping TypeName="PointerdbModel.RepairRequest">
               <MappingFragment StoreEntitySet="RepairRequest">
+                <ScalarProperty Name="TenantNotified" ColumnName="TenantNotified" />
                 <ScalarProperty Name="RequestNumber" ColumnName="RequestNumber" />
                 <ScalarProperty Name="AssignContractorID" ColumnName="AssignContractorID" />
                 <ScalarProperty Name="RepairRequestNoteID" ColumnName="RepairRequestNoteID" />

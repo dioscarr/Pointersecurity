@@ -321,5 +321,20 @@ namespace SecurityMonitor.Models
        
 
         }
+
+       public List<TenantNotification>LoadNotification(string TenantID)
+        {
+            var R = db.RepairRequest
+                .Where(r => r.Tenant.AspNetUsers.Id == TenantID && r.Status == "Close" && r.TenantNotified == false || r.Tenant.AspNetUsers.Id == TenantID && r.Status == "Assigned" && r.TenantNotified == false)
+                .OrderByDescending(c => c.RequestedDate)
+                .Select(c => new TenantNotification
+                {
+                    RequestedDate = c.RequestedDate.Month +"/"+c.RequestedDate.Day +"/"+c.RequestedDate.Year,
+                   TicketNumber = c.RequestNumber,
+                   NotificationMessage ="has been "+ c.Status
+
+                }).ToList();
+            return R;
+        }
     }
 }

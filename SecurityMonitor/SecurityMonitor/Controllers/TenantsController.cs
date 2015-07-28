@@ -392,7 +392,18 @@ namespace SecurityMonitor.Controllers
              var JSONdATA = Json(ListOfCloseRequests);
              return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
          }
-        
+
+         public JsonResult TenantNotification(string TenantID)
+         {
+
+
+             RepairManagement OBJRM = new RepairManagement();
+
+             var ListOfCloseRequests = OBJRM.LoadNotification(TenantID);
+
+             var JSONdATA = Json(ListOfCloseRequests);
+             return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+         }
 
         
 

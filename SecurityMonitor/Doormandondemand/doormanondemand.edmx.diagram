@@ -107,7 +107,7 @@
         <AssociationConnector Association="PointerdbModel.FK_Contractor_Buildings" />
         <EntityTypeShape EntityType="PointerdbModel.RepairTechNote" Width="1.5" PointX="25.75" PointY="34.75" />
         <EntityTypeShape EntityType="PointerdbModel.repairrequestocount" Width="1.5" PointX="12.375" PointY="6.75" />
-        <EntityTypeShape EntityType="PointerdbModel.RepairRequest" Width="1.5" PointX="28" PointY="31.5" />
+        <EntityTypeShape EntityType="PointerdbModel.RepairRequest" Width="1.5" PointX="28" PointY="31.375" />
         <AssociationConnector Association="PointerdbModel.FK_RepairRequest_Building" />
         <AssociationConnector Association="PointerdbModel.FK_RepairRequest_BuildingUser" />
         <AssociationConnector Association="PointerdbModel.FK_RepairRequest_Contractor" />
@@ -116,7 +116,7 @@
         <AssociationConnector Association="PointerdbModel.RepairRequest_RepairRequests" />
         <AssociationConnector Association="PointerdbModel.RepairRequest_Tenant" />
         <AssociationConnector Association="PointerdbModel.RepairRequest_Urgency" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

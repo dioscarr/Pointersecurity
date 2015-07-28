@@ -663,7 +663,7 @@ height:800px;
   /* Hack to improve aliasing on mobile/tablet devices */
 }
 .hollow5:hover, .hollow1:focus, .hollow1:active {
-  background: lightgrey!important;
+  background: #80D8FF!important;
   color:#019DBC!important;
 }
 
@@ -1560,7 +1560,7 @@ background-color:#0071bc;
 
 .blueDefault {
       background-color:#0071bc;
-      border-bottom: 4px solid #116ba8;
+      /*border-bottom: 4px solid #116ba8;*/
 }
 
 .blueDefault_no_border {
@@ -3141,11 +3141,7 @@ margin-top:5px;
 
 }
 
-.hvr-underline-reveal {
-color:white!important;
-}
 
-.hvr-underline-reveal:target {
-background:rgba(50, 50, 50, 0.75) !important;
-height:10px !important;
+#SC {
+max-height:225px!important;
 }
