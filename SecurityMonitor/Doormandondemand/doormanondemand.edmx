@@ -438,6 +438,7 @@
           <Property Name="AssignContractorID" Type="nvarchar" MaxLength="128" />
           <Property Name="RequestNumber" Type="nvarchar" MaxLength="15" />
           <Property Name="TenantNotified" Type="bit" />
+          <Property Name="Resolution" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="RepairRequestCategories">
           <Key>
@@ -3202,6 +3203,7 @@
           <Property Name="AssignContractorID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RequestNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="TenantNotified" Type="Boolean" />
+          <Property Name="Resolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Buildings" Relationship="PointerdbModel.FK_RepairRequest_Building" FromRole="RepairRequest" ToRole="Buildings" />
           <NavigationProperty Name="BuildingUser" Relationship="PointerdbModel.FK_RepairRequest_BuildingUser" FromRole="RepairRequest" ToRole="BuildingUser" />
           <NavigationProperty Name="Contractor" Relationship="PointerdbModel.FK_RepairRequest_Contractor" FromRole="RepairRequest" ToRole="Contractor" />
@@ -3949,6 +3951,7 @@
           <EntitySetMapping Name="RepairRequest">
             <EntityTypeMapping TypeName="PointerdbModel.RepairRequest">
               <MappingFragment StoreEntitySet="RepairRequest">
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
                 <ScalarProperty Name="TenantNotified" ColumnName="TenantNotified" />
                 <ScalarProperty Name="RequestNumber" ColumnName="RequestNumber" />
                 <ScalarProperty Name="AssignContractorID" ColumnName="AssignContractorID" />

@@ -40,6 +40,7 @@ namespace Doormandondemand
         public string AssignContractorID { get; set; }
         public string RequestNumber { get; set; }
         public Nullable<bool> TenantNotified { get; set; }
+        public string Resolution { get; set; }
     
         public virtual Buildings Buildings { get; set; }
         public virtual BuildingUser BuildingUser { get; set; }

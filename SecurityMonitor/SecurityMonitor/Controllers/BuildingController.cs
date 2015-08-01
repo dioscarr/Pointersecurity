@@ -2079,13 +2079,17 @@ namespace SecurityMonitor.Controllers
            return new JsonResult {Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
        }
         [HttpPost]
-        public JsonResult CloseRepairTicket(int ID)
+        public JsonResult CloseRepairTicket(int ID, string ClosingComments)
         {
+           
             RepairRequest RR = db.RepairRequest.Find(ID);
+           
+           
             db.RepairRequest.Attach(RR);
             var Entry = db.Entry(RR);
-
+            RR.Resolution = ClosingComments;
             RR.Status = "Close";
+            Entry.Property(c => c.Resolution).IsModified = true;
             Entry.Property(c => c.Status).IsModified = true;
             db.SaveChanges();
 

@@ -161,7 +161,7 @@
                         <span class="hvr-buzz-out"> Close this ticket</span>
                         <div>
 
-                            <div><textarea class="form-control ticketresolution" id="writebeforeclose" placeholder="Enter a resolution (required)"></textarea> </div>
+                            <div><textarea class="form-control ticketresolution" id="writebeforeclose" placeholder="Enter a resolution (required)" data-bind="value:ClosingMessage"></textarea> </div>
                             <div>Are you sure ?</div>
                             <button class="btn btn-info" data-bind="click: CompleteAssignment" data-dismiss="modal"  id="closingrequest">Close ticket</button>
                             <a href="#noselection"  id="cancelcolsingticket"  >Cancel</a>
@@ -616,10 +616,16 @@
             $('[data-dropdownkey='+key+']').slideToggle();
         });
 
+        $('#writebeforeclose').on('click',function(){
+        
+            $(this).focus();
+        });
+
         $('#closingrequest').on("click", function (e) {
             e.preventDefault();
+
             //alert($.trim($('#writebeforeclose').length));
-           
+          
             if ($('#writebeforeclose').val()!="")
             {
                 window.location.href = window.location.href + "#noselection";
@@ -867,32 +873,47 @@
 
             };
 
-
-
+            self.ClosingMessage = ko.observable();
+           
+           
             self.CompleteAssignment = function () {
-                //code to call jsonresult
-                $.ajax({
-                    type: "POST",
-                    url: "/building/CloseRepairTicket/",
-                    datatype: "json",
-                    data: { ID: self.selectedID() },
-                    success: function (returnresult)
+
+
+
+                debugger;
+               
+                    if( self.ClosingMessage()!="")
                     {
+                        $.ajax({
+                            type: "POST",
+                            url: "/building/CloseRepairTicket/",
+                            datatype: "json",
+                            data: { ID: self.selectedID(), ClosingComments:self.ClosingMessage() },
+                            success: function (returnresult)
+                            {
 
-                        self.whichone();
-                        AjaxBUaccess = true;
-                        self.isnotevisible(false);
-                        self.LoadComp();
-                        self.displayStaff();
-                        self.ContactName("");
-                        self.ContactLastName("");
-                        self.TechNoteValue("");
-                        self.isvisible(false);
-                        LoadFirst();
+                                //self.whichone();
+                                AjaxBUaccess = true;
+                                self.isnotevisible(false);
+                                self.LoadComp();
+                                self.displayStaff();
+                                self.ContactName("");
+                                self.ContactLastName("");
+                                self.TechNoteValue("");
+                                self.isvisible(false);
+                                LoadFirst();
+                                self.ClosingMessage("");
 
+                            }
+
+                        });
+                
                     }
-
-                });
+            
+            
+             
+                
+               
             };
 
 
@@ -1340,8 +1361,8 @@
                     self.showhidehandler();
                     self.ClearorNot(false)
                 }
-
-                self.whichone();
+                self.ClosingMessage("");
+                //self.whichone();
                 AjaxBUaccess = true;
                 self.isnotevisible(false);
                 self.LoadComp();
@@ -1530,7 +1551,7 @@
                                self.showhidehandler();
                                self.ClearorNot(false)
                            }
-                           self.whichone();
+                           //self.whichone();
                            AjaxBUaccess = true;
                            self.isnotevisible(false);
                            self.LoadComp();
@@ -1585,6 +1606,7 @@
                     data: { buildingID: "@Model.buildingID" },
                     dataType: "json",
                     success: function (data) {
+                        self.ClosingMessage("");
                         self.RepairRequest.removeAll();
                         var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
 

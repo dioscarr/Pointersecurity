@@ -385,16 +385,11 @@
                 <button class="btn btn-info x displayinline openrequestssettings " id="hitme" data-toggle="modal" data-target="#myModal">Add New Request</button>
                 <button class="btn btn-info x displayinline openrequestssettings " id="" data-toggle="modal" data-target="#ClosedTickets" data-bind="click:loadclosedTickets">View Closed Requests</button>
             </sdiv>
-
-
-
-
             <div class="col-lg-12 col-md-12  nopadding Openrequestheader blueDefault">
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Date</span>
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Request#</span>
                 <span class="col-lg-6 text-center OpenRequestCollunm col-md-4 ">Repair Request</span>
                 <span class="col-lg-2 text-center OpenRequestCollunm col-md-2 ">Status</span>
-
             </div>
 
             <div class="nopadding col-lg-12 col-md-12  " data-bind="foreach:request ">
@@ -403,22 +398,15 @@
                     <span class="col-lg-2 text-center  OpenRequestCollunm-content col-md-2 requestsrow " data-bind="text:RequestNumber, attr:{'data-rowkey':ID}"></span>
                     <span class="col-lg-6 text-left  OpenRequestCollunm-content col-md-4 requestsrow " data-bind="text:Description, attr:{'data-rowkey':ID}"></span>
                     <span class="col-lg-2 text-center  OpenRequestCollunm-content col-md-2 requestsrow " data-bind="text:Status, attr:{'data-rowkey':ID}"></span>
-
                 </div>
             </div>
-
-
-
         </div>
     </div>
-
 </div>
-
 <div class="modal fade" id="ClosedTickets" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="">
-
                 <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
                     <h6 class="modal-title myModalLabel " style="color:white; ">
                         Closed Repair Requests
@@ -532,25 +520,11 @@
             $('#contactotherid').toggleClass("btn-primary");
         });
 
-
-
-
         $('#primaryid').on('click', function () {
             $('#primaryinfomation').slideToggle();
             $('#primaryid').toggleClass("btn-default");
             $('#primaryid').toggleClass("btn-primary");
         });
-
-        //$('#search').on('focusout', function () {
-        //    $('.instructionrepairbox').fadeToggle();
-        //    $('#three-icon').fadeToggle();
-        //    $('.searchrepair').slideToggle();
-        //});
-
-
-
-
-
 
     });
     $(function () {
