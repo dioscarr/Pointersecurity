@@ -4,123 +4,193 @@
 <head>
     <title></title>
 </head>
-<!--Main Container-->
-<div class=" myRow ">
-    <!--=================Page Title==================-->
-    <!--================Top Section=======================-->
-    <div class="col-md-12 col-sm-12 col-sx-12 ">
+<div class=" row">
+<div class="col-lg-12 col-md-12  repairrequestformheader text-center ">
+    <h6 class="modal-title myModalLabel " style="color:white; ">
+        Access Request Dasboard
+    </h6>
+
+</div>
+
+</div>
 
 
 
+<div class=" row">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 sidebarAccesscontroldashboard">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 SidebarDBSideMenu " >
+            @{
+                List<SelectListItem> options = new List<SelectListItem>();
+                options.Add(new SelectListItem { Text = "Category-Current", Value = "Category" });
+                options.Add(new SelectListItem { Text = "Tenant-Current", Value = "Tenant" });
+                options.Add(new SelectListItem { Text = "Next (7)Days", Value = "next7days" });
 
+            }
+            @Html.DropDownList("mydropdownlist", options, new { id = "mydropdownlist", @class = "form-control" })
+
+        </div>
 
     </div>
 
-    <div class="row " style=" height:10px;">        
-       
-    </div><!--Page title-->
-   
-    @*<div class="row" >
-        <!--left donout chart-->
-        <div class="col-md-4 col-sm-4 col-sx-4  " style="height:390px;  ">
-            <!--chart title-->
-            <div class="col-md-12 col-sm-12 col-sx-12  boxtitle text-center " style="padding-bottom:5px; ">
-                <h3 style="padding-top:15px;">Something 1</h3>
-            </div>
-            <!--chart Drawing-->
-            <div class="col-md-12 col-sm-12 col-sx-12   " style="background:white; height:250px; border:1px solid lightgrey;">
-               
-                    <canvas id="chartleft" class=" " height="200" width="200"></canvas>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 mainboxtabs nopadding ContentAccesscontrolDashboard">
+
+
+        <div class="col-lg-12 col-md-12 nopadding insideboxDashboard">
+            <!--tenant bar-->
+            <div class="col-lg-4 col-md-4 -blue insideboxDashboard">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB" id="tenantsearchoutsidebox">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB-inside container-6 hvr-underline-from-left">
+                        <input type="search" id="searchdb" placeholder="Type name, Verify Address" />
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB-inside-tenantresult  hvr-underline-from-left">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  fa fa-user fa-2x dbuser">
+                            <section class="dbaddressresult-pin">1745</section>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            Dioscar Rodriguez
+                            <section class="dbaddressresult">1411 Broadway 15th floor</section>
+                            <section class="dbaddressresult">New Yrok, N.Y. 10018</section>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB-inside-tenantresult hvr-underline-from-left ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  fa fa-user fa-2x dbuser">
+                            <section class="dbaddressresult-pin">6875</section>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            John Doe
+                            <section class="dbaddressresult">1412 Broadway 15th floor</section>
+                            <section class="dbaddressresult">New Yrok, N.Y. 10018</section>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB-inside-tenantresult hvr-underline-from-left ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  fa fa-user fa-2x dbuser">
+                            <section class="dbaddressresult-pin">4587</section>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            Samuel Jackson
+                            <section class="dbaddressresult">4530 Scott street 15th floor</section>
+                            <section class="dbaddressresult">floor New Yrok, N.Y. 10018</section>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB-inside-tenantresult hvr-underline-from-left ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  fa fa-user fa-2x dbuser">
+                            <section class="dbaddressresult-pin">2578</section>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            Smith Doe
+                            <section class="dbaddressresult">1412 Broadway 15th floor</section>
+                            <section class="dbaddressresult">New Yrok, N.Y. 10018</section>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB-inside-tenantresult hvr-underline-from-left ">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  fa fa-user fa-2x dbuser">
+                            <section class="dbaddressresult-pin">9547</section>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            Greg Doe
+                            <section class="dbaddressresult">1412 Broadway 15th floor</section>
+                            <section class="dbaddressresult">New Yrok, N.Y. 10018</section>
+                        </div>
+                    </div>
+                </div>
                 
+               
             </div>
-        </div>
+            <!--Empty-->
+            <div class="col-lg-8 col-md-8 insideboxDashboard">
+               
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  searchfortenantDB">
+                    <div class="col-lg-12 col-md-12  repairrequestformheader text-center ">
+                        <h6 class="modal-title myModalLabel " style="color:white; ">
+                           Access Control Calendar
+                        </h6>
 
-        
-
-        <!--left donout chart-->
-        <div class="col-md-8 " style="height:390px;  ">
-            <!--chart title-->
-            <div class="col-md-12 col-sm-12 col-sx-12  boxtitle text-center " style="padding-bottom:5px; ">
-                <h3 style="padding-top:15px;">Something 1</h3>
-            </div> 
-            <!--chart Drawing-->
-            <div class="col-md-12 col-sm-12 col-sx-12   " style="background:white; height:250px; border:1px solid lightgrey;">
-                <div class=" col-md-12 col-sm-12 col-sx-12  smallgraph  chartright">
-                    <canvas id="chartright" class="  " width="680" height="220"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-       
-       
-       
+        
 
-    </div>*@
+    </div>
+    <div class="col-lg-12 col-md-11 col-sm-12 col-xs-12 nopadding ">
+        <div class="col-lg-12 col-md-12  repairrequestformheader text-center ">
+            <h6 class="modal-title myModalLabel " style="color:white; ">
+                Access Request Dasboard
+            </h6>
 
-    <div class="row text-center boxtitle" style="border:1px solid lightgrey; height:50px;"><h3>Today's Request</h3></div>
-    <div class="row myRow shadow">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="height:50px;padding-top:10px;">
-            <h4> Filter Requests</h4>
         </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 " style="height:50px;padding-top:5px;">
-                @{
-                    List<SelectListItem> options = new List<SelectListItem>();
-                    options.Add(new SelectListItem { Text = "Category-Current", Value = "Category" });
-                    options.Add(new SelectListItem { Text = "Tenant-Current", Value = "Tenant" });
-                    options.Add(new SelectListItem { Text = "Next (7)Days", Value = "next7days" });
-
-                }
-                @Html.DropDownList("mydropdownlist", options,  new { id = "mydropdownlist", @class = "form-control" })
-
-            </div>
-
-
-
-            <div class="col-lg-12 col-md-11 col-sm-12 col-xs-12 ">
-                <div class="" id="RequestChart" style="height:500px; margin:10px;"></div>
-            </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  requestChartDashboard  ">
+            <div class="" id="RequestChart" style="height:250px; margin:10px;"></div>
         </div>
+    </div>
+
+
 </div>
-@section scripts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    @section scripts
 {
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
-<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+        
+<link href="~/Content/hover.css" rel="stylesheet" />
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery.signalR2.1.2.min.js"></script>
+        <script src="~/signalr/hubs"></script>
 
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-<script src="~/Scripts/Chart.min.js"></script>
+        <script src="~/Scripts/Chart.min.js"></script>
 
-<!--=====================google Chart API starts=======================================-->
+        <!--=====================google Chart API starts=======================================-->
 
-<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+        <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
             'version':'1','packages':['timeline'], }]}"></script>
 
 
 
-    <!--=====================google Chart API ends=======================================-->
-<script src="~/Scripts/date.js"></script>
+        <!--=====================google Chart API ends=======================================-->
+        <script src="~/Scripts/date.js"></script>
 
 
 
 
-    <script type="text/javascript">
-        $(document).ready(function (e) {
+        <script type="text/javascript">
+            $(document).ready(function (e) {
 
-            // Start the connection.
+                // Start the connection.
 
-            var notification = $.connection.notificationsHub;
+                var notification = $.connection.notificationsHub;
 
-            notification.client.broadcastNotification = function (name, message) {
-                alert(message);
-            };
+                notification.client.broadcastNotification = function (name, message) {
+                    alert(message);
+                };
 
-            $.connection.hub.start().done(function () {
-               
-            });
+                $.connection.hub.start().done(function () {
 
-            //============================ pie chart ===============================
-            
+                });
+
+                //============================ pie chart ===============================
+
                 //var data1 = [
                 //               {
                 //                   value: 50,
@@ -141,7 +211,7 @@
 
                 //]
                 //var myDoughnut = new Chart(document.getElementById("chartleft").getContext("2d")).Doughnut(data1);
-            
+
                 //var data3 = {
                 //    labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
                 //    datasets: [
@@ -170,160 +240,160 @@
                 //    maintainAspectRatio: true
                 //};
                 //var myBarChart = new Chart(document.getElementById("chartright").getContext("2d")).Bar(data3, options1);
-           
-           
-            //===========================Charts==============================
-            //=============================Google Chart===================================
-           // var url = @*'@Url.Action("getTodayRequests", "DashBoard")'*@;
-            //============google chart and ajax connection to Action===========
+
+
+                //===========================Charts==============================
+                //=============================Google Chart===================================
+                // var url = @*'@Url.Action("getTodayRequests", "DashBoard")'*@;
+                //============google chart and ajax connection to Action===========
 
 
 
-            $('#mydropdownlist').change(function () {
-               // alert($(this).val());
+                $('#mydropdownlist').change(function () {
+                    // alert($(this).val());
 
-                var url = '/Dashboard/getTodayRequests?sortby=' + $(this).val();
+                    var url = '/Dashboard/getTodayRequests?sortby=' + $(this).val();
+                    drawMyChart(url);
+                });
+                var url = '/Dashboard/getTodayRequests/';
+
+
                 drawMyChart(url);
-            });
-            var url = '/Dashboard/getTodayRequests/';
 
+                //this function will draw a chart
+                function drawMyChart(url) {
 
-            drawMyChart(url);
+                    setTimeout(function () {
+                        // Do something after 5 seconds
 
-            //this function will draw a chart
-            function drawMyChart(url){
+                        $.get(url, function (data) {
+                            //call function
+                            drawChart();
 
-            setTimeout(function () {
-                // Do something after 5 seconds
+                            //=====function drawChart========
+                            function drawChart() {
 
-                $.get(url, function (data) {
-                    //call function
-                    drawChart();
+                                var container = document.getElementById('RequestChart');// get the element by ID
+                                var chart = new google.visualization.Timeline(container); //create chart intance
 
-                    //=====function drawChart========
-                    function drawChart() {
+                                //=======create table======
+                                var dataTable = new google.visualization.DataTable();
+                                //=======Adding Column======
 
-                        var container = document.getElementById('RequestChart');// get the element by ID
-                        var chart = new google.visualization.Timeline(container); //create chart intance
+                                dataTable.addColumn({ type: 'string', id: 'Room' });
+                                dataTable.addColumn({ type: 'string', id: 'Name' });
+                                dataTable.addColumn({ type: 'date', id: 'Start' });
+                                dataTable.addColumn({ type: 'date', id: 'End' });
 
-                        //=======create table======
-                        var dataTable = new google.visualization.DataTable();
-                        //=======Adding Column======
-                        
-                        dataTable.addColumn({ type: 'string', id: 'Room' });
-                        dataTable.addColumn({ type: 'string', id: 'Name' });
-                        dataTable.addColumn({ type: 'date', id: 'Start' });
-                        dataTable.addColumn({ type: 'date', id: 'End' });
+                                // =====year=======
+                                function YearC(value) {
+                                    var pattern = /Date\(([^)]+)\)/;
+                                    var results = pattern.exec(value);
+                                    var dt = new Date(parseFloat(results[1]));
+                                    return (dt.getFullYear());
+                                }
+                                // =====Month=======
+                                function MonthC(value) {
+                                    var pattern = /Date\(([^)]+)\)/;
+                                    var results = pattern.exec(value);
+                                    var dt = new Date(parseFloat(results[1]));
+                                    return (dt.getMonth());
+                                }
+                                // =====Day=======
+                                function DayC(value) {
+                                    var pattern = /Date\(([^)]+)\)/;
+                                    var results = pattern.exec(value);
+                                    var dt = new Date(parseFloat(results[1]));
+                                    return dt.getDate();
 
-                        // =====year=======
-                        function YearC(value) {
-                            var pattern = /Date\(([^)]+)\)/;
-                            var results = pattern.exec(value);
-                            var dt = new Date(parseFloat(results[1]));
-                            return (dt.getFullYear());
-                        }
-                        // =====Month=======
-                        function MonthC(value) {
-                            var pattern = /Date\(([^)]+)\)/;
-                            var results = pattern.exec(value);
-                            var dt = new Date(parseFloat(results[1]));
-                            return (dt.getMonth());
-                        }
-                        // =====Day=======
-                        function DayC(value) {
-                            var pattern = /Date\(([^)]+)\)/;
-                            var results = pattern.exec(value);
-                            var dt = new Date(parseFloat(results[1]));
-                            return dt.getDate();
+                                }
 
-                        }
+                                // =====Hour=======
+                                function HoursC(value) {
+                                    var pattern = /Date\(([^)]+)\)/;
+                                    var results = pattern.exec(value);
+                                    var dt = new Date(parseFloat(results[1]));
+                                    return dt.getHours();
 
-                        // =====Hour=======
-                        function HoursC(value) {
-                            var pattern = /Date\(([^)]+)\)/;
-                            var results = pattern.exec(value);
-                            var dt = new Date(parseFloat(results[1]));
-                            return dt.getHours();
+                                }
+                                // =====Minutes=======
+                                function MinutesC(value) {
+                                    var pattern = /Date\(([^)]+)\)/;
+                                    var results = pattern.exec(value);
+                                    var dt = new Date(parseFloat(results[1]));
+                                    return dt.getMinutes();
 
-                        }
-                        // =====Minutes=======
-                        function MinutesC(value) {
-                            var pattern = /Date\(([^)]+)\)/;
-                            var results = pattern.exec(value);
-                            var dt = new Date(parseFloat(results[1]));
-                            return dt.getMinutes();
+                                }
 
-                        }
+                                //----------===============Loop=========
+                                for (var i = 0; i < data.length; i++) {
+                                    //===============Conerting Json Date==========
+                                    var FromDate = data[i].From;
+                                    var ToDate = data[i].To;
 
-                        //----------===============Loop=========
-                        for (var i = 0; i < data.length; i++) {
-                            //===============Conerting Json Date==========
-                            var FromDate = data[i].From;
-                            var ToDate = data[i].To;
+                                    //===============Conerting Json Date ends===========
+                                    //==========adding data to chart==========
+                                    dataTable.addRows(
+                                    [
+                                       [
 
-                            //===============Conerting Json Date ends===========
-                            //==========adding data to chart==========
-                            dataTable.addRows(
-                            [
-                               [
-                                  
-                                   data[i].Type,
-                                   data[i].Description,
-                                   new Date(parseInt(YearC(FromDate)),
-                                       MonthC(FromDate),
-                                       DayC(FromDate),
-                                       HoursC(FromDate),
-                                       MinutesC(FromDate),
-                                       0),
-                                   new Date(YearC(ToDate),
-                                       MonthC(ToDate),
-                                       DayC(ToDate),
-                                       HoursC(ToDate),
-                                       MinutesC(ToDate),
-                                       0)
-                               ]
-                            ]);
-                        }
-                        //---------===============end loop==========
+                                           data[i].Type,
+                                           data[i].Description,
+                                           new Date(parseInt(YearC(FromDate)),
+                                               MonthC(FromDate),
+                                               DayC(FromDate),
+                                               HoursC(FromDate),
+                                               MinutesC(FromDate),
+                                               0),
+                                           new Date(YearC(ToDate),
+                                               MonthC(ToDate),
+                                               DayC(ToDate),
+                                               HoursC(ToDate),
+                                               MinutesC(ToDate),
+                                               0)
+                                       ]
+                                    ]);
+                                }
+                                //---------===============end loop==========
 
-                        //==========chart Options==========
-                        var options = {
-                            timeline: { colorByRowLabel: true },
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            backgroundColor: '#00000',
-                            dateFormat: 'HH:mm MMMM dd, yyyy'
+                                //==========chart Options==========
+                                var options = {
+                                    timeline: { colorByRowLabel: true },
+                                    responsive: true,
+                                    maintainAspectRatio: true,
+                                    backgroundColor: '#00000',
+                                    dateFormat: 'HH:mm MMMM dd, yyyy'
 
-                        };
-                        //click event start
-                        google.visualization.events.addListener(chart, 'select', function () {
-                            var selection = chart.getSelection();
-                            if (selection && selection.length > 0) {
-                                var mydata = dataTable.getValue(selection[0].row, 0).split(" ");
-                                //alert(mydata[0]);
-                                //window.location.href = URL;
-                                //alert(dataTable.getValue(selection[0].row, 0) + ' clicked');
-                               // alert("Row #" + selection[0].row + ', column #' + selection[0].colorByRowLabel);
+                                };
+                                //click event start
+                                google.visualization.events.addListener(chart, 'select', function () {
+                                    var selection = chart.getSelection();
+                                    if (selection && selection.length > 0) {
+                                        var mydata = dataTable.getValue(selection[0].row, 0).split(" ");
+                                        //alert(mydata[0]);
+                                        //window.location.href = URL;
+                                        //alert(dataTable.getValue(selection[0].row, 0) + ' clicked');
+                                        // alert("Row #" + selection[0].row + ', column #' + selection[0].colorByRowLabel);
+                                    }
+                                });
+
+                                //click event ends
+
+                                chart.draw(dataTable, options);
+
                             }
+
                         });
 
-                        //click event ends
-                     
-                        chart.draw(dataTable, options);
-                        
-                    }
 
-                });
+                    }, 500);
 
 
-            }, 500);
+                }
+
+            });//ends windows.ready
 
 
-            }
-                      
-                });//ends windows.ready
 
-             
-
-    </script>
-}
+        </script>
+    }

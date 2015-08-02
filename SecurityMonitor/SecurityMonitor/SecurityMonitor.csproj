@@ -318,6 +318,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="ContractPDF\Receitp.htm" />
+    <Content Include="img\biometria.jpg" />
     <Content Include="Scripts\gviz-api.js" />
     <Content Include="Content\hover.css" />
     <Content Include="Content\PagedList.css" />
