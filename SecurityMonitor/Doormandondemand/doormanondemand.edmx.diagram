@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fc9900fb44084f79957ba78ac995152e" Name="Diagram1" ZoomLevel="54">
+      <Diagram DiagramId="fc9900fb44084f79957ba78ac995152e" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="PointerdbModel.ActiveManager" Width="1.5" PointX="12.75" PointY="24.125" />
         <EntityTypeShape EntityType="PointerdbModel.Apartment" Width="1.5" PointX="12.75" PointY="33.625" />
         <EntityTypeShape EntityType="PointerdbModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="7.875" />

@@ -3156,9 +3156,9 @@ box-shadow: 3px 2px 15px -5px rgba(125,125,125,1);
 
 
 .insideboxDashboard {
-     min-height:400px!important;
-     max-height:400px!important;
-       height:400px!important;
+     min-height:450px!important;
+     max-height:450px!important;
+       height:450px!important;
      
 
             /*outline:1px solid red;*/
@@ -3266,7 +3266,7 @@ box-shadow: 3px 2px 15px -5px rgba(125,125,125,1);
 
 .dbaddressresult {
 font-size:10px;
-color:rgba(48, 50, 50, 0.47);
+color:rgba(25,82,117,1);
 }
 .dbuser {
 padding: 5px 0 0 10px !important;
@@ -3275,4 +3275,16 @@ padding: 5px 0 0 10px !important;
     padding:4px 0 0 0;
 font-size:10px;
 color:black;
+}
+
+.fc-day-number {
+
+height:40px;
+}
+.fc-day-number:hover {
+    background:rgba(255, 211, 0, 0.56) !important;
+}
+
+.fc-content-skeleton > table > tbody{
+    display:none;
 }
