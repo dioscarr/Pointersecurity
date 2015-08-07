@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net;
 using SecurityMonitor;
 using System.Threading.Tasks;
+using SecurityMonitor.Workes;
 
 
 namespace SecurityMonitor.Controllers
@@ -379,6 +380,27 @@ namespace SecurityMonitor.Controllers
 
             return View(MPPT);
         }
+
+         [HttpGet]
+        public JsonResult LoadSelectedDate(string SelectedDate)
+        {
+            Calendarworkers CW = new Calendarworkers();
+            var returnDate = CW.loadSelectedRequests(SelectedDate);
+
+            var JSONdATA = Json(returnDate);
+            return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+         [HttpGet]
+         public JsonResult LoadCurrenttMonth()
+         {
+
+             Calendarworkers CW = new Calendarworkers();
+             var returnDate = CW.loadForTheMonth();
+
+             var JSONdATA = Json(returnDate);
+             return new JsonResult { Data = JSONdATA, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+         }
 
       
 

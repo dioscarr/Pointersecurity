@@ -286,6 +286,7 @@
     <Compile Include="Models\ReqTypeCount.cs" />
     <Compile Include="Models\RequestForTodayVM.cs" />
     <Compile Include="Models\RequestVM.cs" />
+    <Compile Include="Models\SelectedDateRequest.cs" />
     <Compile Include="Models\ShipmentVM.cs" />
     <Compile Include="Models\StaffmixPermissions.cs" />
     <Compile Include="Models\TenantFrontEnd.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Models\UserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Workes\Calendarworkers.cs" />
     <Compile Include="Workes\DeliveryWorker.cs" />
     <Compile Include="Workes\FindRoute.cs" />
     <Compile Include="Workes\Gmail.cs" />

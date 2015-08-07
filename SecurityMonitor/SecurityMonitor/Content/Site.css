@@ -3288,3 +3288,26 @@ height:40px;
 .fc-content-skeleton > table > tbody{
     display:none;
 }
+
+.Calendarrequesttotal {
+    color:blue; padding: 0 15px 0 15px;
+    font-size:12px;
+
+}
+
+.accesscontrolrows {
+padding: 10px 0 10px 0;
+
+border-bottom:1px solid #dddcdc;
+}
+
+.accesscontrolrows-header {
+    border-bottom:1px solid #dddcdc;
+}
+
+.ACRowsheader {
+   padding: 10px 0 10px 0;
+
+
+border-right:1px solid #dddcdc;
+}
