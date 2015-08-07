@@ -337,7 +337,32 @@
                     $(this).css('background-color', 'red');
                 });
                 
-                
+                for (var i = 1; i < 30; i++) {
+                    for (var i = 1; i < 30; i++) {
+                        var objDate = ["2015-08-10", "2015-08-02", "2015-08-03", "2015-08-04", "2015-08-15", "2015-08-06", "2015-08-20", "2015-08-25"];
+                        if (i < 10) {
+                            var j = "";
+                            j = "0" + i;
+                            var checkthisDate = $('[data-date="2015-08-' + j + '"]').attr("data-date");
+                            for (var m = 0; m < objDate.length; m++) {
+                                if (checkthisDate == objDate[m]) {
+                                    $('[data-date="2015-08-' + j + '"]')
+                                      .append("<br/><span class='Calendarrequesttotal'>8 Requests</span>");
+                                }
+                                else { }
+                            }
+                        }
+                        else {
+                            var checkthisDate = $('[data-date="2015-08-' + i + '"]').attr("data-date");
+                            for (var m = 0; m < objDate.length; m++) {
+                                if (checkthisDate == objDate[m]) {
+                                    $('[data-date="2015-08-' + i + '"]')
+                                .append("<br/><span class='Calendarrequesttotal'>8 Requests</span>");
+                                }
+                            }
+                        }
+                    }
+                }
                 //register code again
                 re_register();
                 function re_register() {
